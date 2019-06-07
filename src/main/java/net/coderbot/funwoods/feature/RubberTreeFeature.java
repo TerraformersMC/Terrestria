@@ -20,14 +20,11 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	private BlockState wood;
 	private BlockState leaves;
 
-	private boolean doBlockNotify;
-
-	public RubberTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, BlockState wood, BlockState leaves) {
+	public RubberTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
-		this.doBlockNotify = notify;
 
-		this.wood = wood;
-		this.leaves = leaves;
+		this.wood = tree.wood;
+		this.leaves = tree.leaves;
 	}
 
 	@Override
@@ -58,11 +55,11 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 		growBranches(blocks, world, new BlockPos.Mutable(origin), height, rand, boundingBox);
-		//growLeaves(blocks, world, origin, height, bareTrunkHeight, maxRadius, boundingBox);
 
 		return true;
 	}
 
+	// TODO: This is still the conifer tree code...
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
