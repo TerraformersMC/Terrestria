@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "funwoods",
+  "version": "${version}",
+
+  "name": "Funwoods",
+  "description": "Some assorted and interesting tree types",
+  "authors": [
+    "coderbot16"
+  ],
+  "contact": {
+    "sources": "https://github.com/coderbot16/Funwoods"
+  },
+
+  "license": "LGPL-3.0-only",
+  "icon": "assets/funwoods/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.coderbot.funwoods.Funwoods"
+    ]
+  },
+
+  "depends": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
+  }
+}
