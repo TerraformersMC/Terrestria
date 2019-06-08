@@ -43,14 +43,14 @@ public class FunwoodsItems {
 	}
 
 	public static class WoodItems {
-		BlockItem log;
-		BlockItem leaves;
-		BlockItem planks;
-		BlockItem slab;
-		BlockItem stairs;
-		BlockItem fence;
-		BlockItem fenceGate;
-		BlockItem door;
+		public BlockItem log;
+		public BlockItem leaves;
+		public BlockItem planks;
+		public BlockItem slab;
+		public BlockItem stairs;
+		public BlockItem fence;
+		public BlockItem fenceGate;
+		public BlockItem door;
 
 		private WoodItems() {}
 

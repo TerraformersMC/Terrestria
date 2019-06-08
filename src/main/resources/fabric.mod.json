@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "net.coderbot.funwoods.Funwoods"
+    ],
+    "client": [
+      "net.coderbot.funwoods.FunwoodsClient"
     ]
   },
 

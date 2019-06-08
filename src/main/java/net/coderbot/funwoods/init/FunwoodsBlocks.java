@@ -82,14 +82,14 @@ public class FunwoodsBlocks {
 	}
 
 	public static class WoodBlocks {
-		LogBlock log;
-		LeavesBlock leaves;
-		Block planks;
-		SlabBlock slab;
-		CustomStairsBlock stairs;
-		FenceBlock fence;
-		FenceGateBlock fenceGate;
-		CustomDoorBlock door;
+		public LogBlock log;
+		public LeavesBlock leaves;
+		public Block planks;
+		public SlabBlock slab;
+		public CustomStairsBlock stairs;
+		public FenceBlock fence;
+		public FenceGateBlock fenceGate;
+		public CustomDoorBlock door;
 
 		private WoodBlocks() {}
 

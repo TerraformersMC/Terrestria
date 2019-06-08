@@ -119,10 +119,8 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			double progress = dy * yScale;
 			double radius = maxRadius * radiusFactor(progress);
 
-			System.out.println("dy = "+dy+" radiusFactor = "+radiusFactor(dy * yScale)+" maxRadius = "+maxRadius+" radius = "+radius);
-
 			if(radius < 0) {
-				System.out.println("Bad radius! dy = "+dy+", radius = "+radius);
+				continue;
 			}
 
 			circle(pos, radius, position -> {
