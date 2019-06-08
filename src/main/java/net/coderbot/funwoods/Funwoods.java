@@ -1,5 +1,6 @@
 package net.coderbot.funwoods;
 
+import net.coderbot.funwoods.init.FunwoodsBiomes;
 import net.coderbot.funwoods.init.FunwoodsBlocks;
 import net.coderbot.funwoods.init.FunwoodsItems;
 import net.fabricmc.api.ModInitializer;
@@ -17,5 +18,6 @@ public class Funwoods implements ModInitializer {
 
 		FunwoodsBlocks.init();
 		FunwoodsItems.init();
+		FunwoodsBiomes.init();
 	}
 }
