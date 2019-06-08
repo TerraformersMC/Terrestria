@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "funwoods:block/bald_cypress_sapling"
+	},
+	"stage=1": {
+	  "model": "funwoods:block/bald_cypress_sapling"
+	}
+  }
+}

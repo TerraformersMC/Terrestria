@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "funwoods:block/japanese_maple_slab" },
+    "type=top": { "model": "funwoods:block/japanese_maple_slab_top" },
+    "type=double": { "model": "funwoods:block/japanese_maple_planks" }
+  }
+}

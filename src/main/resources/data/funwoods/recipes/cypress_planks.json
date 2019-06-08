@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+		  "tag": "funwoods:cypress_logs"
+		}
+	],
+	"result": {
+		"item": "funwoods:cypress_planks",
+		"count": 4
+	}
+}

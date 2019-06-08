@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "funwoods:block/sakura_sapling"
+	},
+	"stage=1": {
+	  "model": "funwoods:block/sakura_sapling"
+	}
+  }
+}

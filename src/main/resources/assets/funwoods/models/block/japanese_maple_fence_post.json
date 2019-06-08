@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/fence_post",
+    "textures": {
+        "texture": "funwoods:blocks/japanese_maple_planks"
+    }
+}

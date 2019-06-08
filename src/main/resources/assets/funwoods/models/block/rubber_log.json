@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+	"end": "funwoods:blocks/rubber_log_top",
+	"side": "funwoods:blocks/rubber_log"
+  }
+}

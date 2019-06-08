@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "funwoods:blocks/rainbow_eucalyptus_log",
+	"up": "funwoods:blocks/rainbow_eucalyptus_log_top_quarter",
+	"down": "funwoods:blocks/rainbow_eucalyptus_log_bottom_quarter",
+	"south": "funwoods:blocks/rainbow_eucalyptus_log_bark_left",
+	"west": "funwoods:blocks/rainbow_eucalyptus_log_bark_right",
+	"north": "funwoods:blocks/rainbow_eucalyptus_log_bare_right",
+	"east": "funwoods:blocks/rainbow_eucalyptus_log_bare_left"
+  }
+}

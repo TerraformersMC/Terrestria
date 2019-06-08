@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SPS",
+		"SPS"
+	],
+	"key": {
+		"P": {
+			"item": "funwoods:sakura_planks"
+		},
+		"S": {
+		    "item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "funwoods:sakura_fence_gate"
+	}
+}

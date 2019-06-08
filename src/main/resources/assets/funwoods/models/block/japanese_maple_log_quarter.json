@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "funwoods:blocks/japanese_maple_log",
+	"up": "funwoods:blocks/japanese_maple_log_top_quarter",
+	"down": "funwoods:blocks/japanese_maple_log_bottom_quarter",
+	"south": "funwoods:blocks/japanese_maple_log_bark_left",
+	"west": "funwoods:blocks/japanese_maple_log_bark_right",
+	"north": "funwoods:blocks/japanese_maple_log_bare_right",
+	"east": "funwoods:blocks/japanese_maple_log_bare_left"
+  }
+}

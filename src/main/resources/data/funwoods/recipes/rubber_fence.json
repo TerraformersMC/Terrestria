@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PSP",
+		"PSP"
+	],
+	"key": {
+		"P": {
+			"item": "funwoods:rubber_planks"
+		},
+		"S": {
+		    "item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "funwoods:rubber_fence",
+		"count": 3
+	}
+}

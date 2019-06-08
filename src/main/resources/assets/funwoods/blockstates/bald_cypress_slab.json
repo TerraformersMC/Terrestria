@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "funwoods:block/bald_cypress_slab" },
+    "type=top": { "model": "funwoods:block/bald_cypress_slab_top" },
+    "type=double": { "model": "funwoods:block/bald_cypress_planks" }
+  }
+}

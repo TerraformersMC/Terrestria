@@ -1,6 +1,10 @@
 {
   "variants": {
-	"stage=0": { "model": "funwoods:block/rubber_sapling" },
-	"stage=1": { "model": "funwoods:block/rubber_sapling" }
+	"stage=0": {
+	  "model": "funwoods:block/rubber_sapling"
+	},
+	"stage=1": {
+	  "model": "funwoods:block/rubber_sapling"
+	}
   }
 }

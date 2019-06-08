@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+	"cross": "funwoods:blocks/japanese_maple_sapling"
+  }
+}

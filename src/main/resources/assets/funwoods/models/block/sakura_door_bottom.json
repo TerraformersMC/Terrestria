@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+	"bottom": "funwoods:blocks/sakura_door_bottom",
+	"top": "funwoods:blocks/sakura_door_top"
+  }
+}

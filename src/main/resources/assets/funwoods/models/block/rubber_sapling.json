@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cross",
+  "parent": "block/cross",
   "textures": {
 	"cross": "funwoods:blocks/rubber_sapling"
   }

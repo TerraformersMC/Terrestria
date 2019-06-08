@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+	"cross": "funwoods:blocks/rainbow_eucalyptus_sapling"
+  }
+}

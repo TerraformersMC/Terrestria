@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PP",
+		"PP",
+		"PP"
+	],
+	"key": {
+		"P": {
+			"item": "funwoods:cypress_planks"
+		}
+	},
+	"result": {
+		"item": "funwoods:cypress_door",
+		"count": 3
+	}
+}

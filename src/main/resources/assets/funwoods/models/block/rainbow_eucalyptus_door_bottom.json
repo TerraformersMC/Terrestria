@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+	"bottom": "funwoods:blocks/rainbow_eucalyptus_door_bottom",
+	"top": "funwoods:blocks/rainbow_eucalyptus_door_top"
+  }
+}

@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SPS",
+		"SPS"
+	],
+	"key": {
+		"P": {
+			"item": "funwoods:cypress_planks"
+		},
+		"S": {
+		    "item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "funwoods:cypress_fence_gate"
+	}
+}

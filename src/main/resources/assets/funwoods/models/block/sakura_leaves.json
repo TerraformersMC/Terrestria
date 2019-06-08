@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+	"all": "funwoods:blocks/sakura_leaves"
+  }
+}

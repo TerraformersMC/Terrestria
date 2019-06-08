@@ -1,0 +1,7 @@
+{
+  "variants": {
+	"axis=x": { "model":  "funwoods:block/cypress_log", "x": 90, "y": 90 },
+	"axis=y": { "model":  "funwoods:block/cypress_log" },
+	"axis=z": { "model":  "funwoods:block/cypress_log", "x": 90 }
+  }
+}
