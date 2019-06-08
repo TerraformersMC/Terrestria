@@ -12,12 +12,12 @@ public class FunwoodsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ColorProviderRegistry.BLOCK.register(
 				(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor(),
-				FunwoodsBlocks.RUBBER.leaves
+				FunwoodsBlocks.RUBBER.leaves, FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES
 		);
 
 		ColorProviderRegistry.ITEM.register(
 				(item, layer) -> FoliageColors.getColor(0.5, 1.0),
-				FunwoodsItems.RUBBER.leaves
+				FunwoodsItems.RUBBER.leaves, FunwoodsItems.JAPANESE_MAPLE_SHRUB_LEAVES
 		);
 	}
 }

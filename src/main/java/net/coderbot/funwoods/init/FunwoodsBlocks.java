@@ -20,10 +20,13 @@ public class FunwoodsBlocks {
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
 
+	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
+
 	public static CustomSaplingBlock RUBBER_SAPLING;
 	public static CustomSaplingBlock CYPRESS_SAPLING;
 	public static CustomSaplingBlock BALD_CYPRESS_SAPLING;
 	public static CustomSaplingBlock JAPANESE_MAPLE_SAPLING;
+	public static CustomSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static CustomSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static CustomSaplingBlock SAKURA_SAPLING;
 
@@ -38,6 +41,8 @@ public class FunwoodsBlocks {
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple");
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus");
 		SAKURA = WoodBlocks.register("sakura");
+
+		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		RUBBER_SAPLING = register("rubber_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
@@ -59,6 +64,12 @@ public class FunwoodsBlocks {
 		);
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new CustomSaplingBlock (
+				new CustomSaplingGenerator (
+						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, JAPANESE_MAPLE.getBasicDefinition()))
+				)
+		);
+
+		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
 						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, JAPANESE_MAPLE.getBasicDefinition()))
 				)

@@ -64,5 +64,8 @@
   "block.funwoods.sakura_stairs": "Sakura Wood Stairs",
   "block.funwoods.sakura_fence": "Sakura Fence",
   "block.funwoods.sakura_fence_gate": "Sakura Fence Gate",
-  "block.funwoods.sakura_door": "Sakura Door"
+  "block.funwoods.sakura_door": "Sakura Door",
+
+  "block.funwoods.japanese_maple_shrub_sapling": "Japanese Maple Shrub Sapling",
+  "block.funwoods.japanese_maple_shrub_leaves": "Japanese Maple Shrub Leaves"
 }

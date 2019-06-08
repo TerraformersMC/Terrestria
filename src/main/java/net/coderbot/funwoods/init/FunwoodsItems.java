@@ -15,10 +15,13 @@ public class FunwoodsItems {
 	public static WoodItems RAINBOW_EUCALYPTUS;
 	public static WoodItems SAKURA;
 
+	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
+
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
 	public static BlockItem BALD_CYPRESS_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SAPLING;
+	public static BlockItem JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
 	public static BlockItem SAKURA_SAPLING;
 
@@ -30,10 +33,13 @@ public class FunwoodsItems {
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", FunwoodsBlocks.RAINBOW_EUCALYPTUS);
 		SAKURA = WoodItems.register("sakura", FunwoodsBlocks.SAKURA);
 
+		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
+
 		RUBBER_SAPLING = register("rubber_sapling", FunwoodsBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", FunwoodsBlocks.CYPRESS_SAPLING);
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", FunwoodsBlocks.BALD_CYPRESS_SAPLING);
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", FunwoodsBlocks.JAPANESE_MAPLE_SAPLING);
+		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", FunwoodsBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		SAKURA_SAPLING = register("sakura_sapling", FunwoodsBlocks.SAKURA_SAPLING);
 	}

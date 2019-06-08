@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "funwoods:block/japanese_maple_shrub_sapling"
+	},
+	"stage=1": {
+	  "model": "funwoods:block/japanese_maple_shrub_sapling"
+	}
+  }
+}
