@@ -2,15 +2,14 @@ package net.coderbot.terrestria.init;
 
 import net.coderbot.terrestria.biome.CypressForestBiome;
 import net.coderbot.terrestria.biome.JapaneseForestBiome;
+import net.coderbot.terrestria.biome.RainforestBiome;
 import net.coderbot.terrestria.block.SakuraLogBlock;
-import net.coderbot.terrestria.feature.CypressTreeFeature;
-import net.coderbot.terrestria.feature.JapaneseMapleTreeFeature;
-import net.coderbot.terrestria.feature.JapaneseTreeFeature;
-import net.coderbot.terrestria.feature.SakuraTreeFeature;
+import net.coderbot.terrestria.feature.*;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.JungleGroundBushFeature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
@@ -19,10 +18,12 @@ public class TerrestriaBiomes {
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
 	public static JungleGroundBushFeature JAPANESE_MAPLE_SHRUB;
+	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 
 	public static CypressForestBiome CYPRESS_FOREST;
 	public static JapaneseForestBiome SAKURA_FOREST;
 	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
+	public static RainforestBiome RAINFOREST;
 
 	public static void init() {
 		CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:cypress_tree",
@@ -45,10 +46,14 @@ public class TerrestriaBiomes {
 				new JungleGroundBushFeature(DefaultFeatureConfig::deserialize, TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState())
 		);
 
+		RAINBOW_EUCALYPTUS_TREE = Registry.register(Registry.FEATURE, "terrestria:rainbow_eucalyptus_tree",
+				new RainbowEucalyptusTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition())
+		);
+
 		CYPRESS_FOREST = Registry.register(Registry.BIOME, "terrestria:cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 						.depth(0.1F)
 						.scale(0.2F)
 						.temperature(0.7F)
@@ -64,7 +69,7 @@ public class TerrestriaBiomes {
 		SAKURA_FOREST = Registry.register(Registry.BIOME, "terrestria:sakura_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 						.depth(0.05F)
 						.scale(0.1F)
 						.temperature(0.8F)
@@ -80,7 +85,7 @@ public class TerrestriaBiomes {
 		JAPANESE_MAPLE_FOREST = Registry.register(Registry.BIOME, "terrestria:japanese_maple_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 						.depth(0.05F)
 						.scale(0.2F)
 						.temperature(0.8F)
@@ -94,5 +99,21 @@ public class TerrestriaBiomes {
 		));
 
 		DefaultBiomeFeatures.addForestGrass(JAPANESE_MAPLE_FOREST);
+
+		RAINFOREST = Registry.register(Registry.BIOME, "terrestria:rainforest", new RainforestBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
+						.depth(0.1F)
+						.scale(0.2F)
+						.temperature(0.95F)
+						.downfall(0.9F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				10,
+				RAINBOW_EUCALYPTUS_TREE,
+				Feature.FANCY_TREE
+		));
 	}
 }

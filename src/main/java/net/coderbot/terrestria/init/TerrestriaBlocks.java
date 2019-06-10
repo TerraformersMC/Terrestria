@@ -3,6 +3,7 @@ package net.coderbot.terrestria.init;
 import net.coderbot.terrestria.block.TransparentLeavesBlock;
 import net.coderbot.terrestria.block.*;
 import net.coderbot.terrestria.feature.CypressTreeFeature;
+import net.coderbot.terrestria.feature.RainbowEucalyptusTreeFeature;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.*;
@@ -68,16 +69,16 @@ public class TerrestriaBlocks {
 				new CustomSaplingGenerator (rand -> TerrestriaBiomes.JAPANESE_MAPLE_SHRUB)
 		));
 
-		// TODO: Rainbow Eucalyptus
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, RAINBOW_EUCALYPTUS.getBasicDefinition())
-				)
+				new CustomSaplingGenerator (rand -> TerrestriaBiomes.RAINBOW_EUCALYPTUS_TREE)
 		));
 
 		SAKURA_SAPLING = register("sakura_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator(rand -> TerrestriaBiomes.SAKURA_TREE)
 		));
+
+		// TODO: Flammability
+		// TODO: Wood, Stripped Logs, Stripped Wood
 	}
 
 	public static <T extends Block> T register(String name, T block) {
