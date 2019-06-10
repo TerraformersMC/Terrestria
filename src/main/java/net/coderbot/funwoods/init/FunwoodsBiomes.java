@@ -1,23 +1,28 @@
 package net.coderbot.funwoods.init;
 
 import net.coderbot.funwoods.biome.CypressForestBiome;
-import net.coderbot.funwoods.biome.SakuraForestBiome;
+import net.coderbot.funwoods.biome.JapaneseForestBiome;
 import net.coderbot.funwoods.block.SakuraLogBlock;
 import net.coderbot.funwoods.feature.CypressTreeFeature;
+import net.coderbot.funwoods.feature.JapaneseMapleTreeFeature;
+import net.coderbot.funwoods.feature.JapaneseTreeFeature;
 import net.coderbot.funwoods.feature.SakuraTreeFeature;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.JungleGroundBushFeature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class FunwoodsBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
-	public static SakuraTreeFeature SAKURA_TREE;
+	public static JapaneseTreeFeature SAKURA_TREE;
+	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
 	public static JungleGroundBushFeature JAPANESE_MAPLE_SHRUB;
 
 	public static CypressForestBiome CYPRESS_FOREST;
-	public static SakuraForestBiome SAKURA_FOREST;
+	public static JapaneseForestBiome SAKURA_FOREST;
+	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
 
 	public static void init() {
 		CYPRESS_TREE = Registry.register(Registry.FEATURE, "funwoods:cypress_tree",
@@ -29,6 +34,10 @@ public class FunwoodsBiomes {
 						FunwoodsBlocks.SAKURA.log.getDefaultState().with(SakuraLogBlock.HAS_LEAVES, true),
 						FunwoodsBlocks.SAKURA_LEAF_PILE.getDefaultState()
 				))
+		);
+
+		JAPANESE_MAPLE_TREE = Registry.register(Registry.FEATURE, "funwoods:japanese_maple_tree",
+				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, FunwoodsBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
 		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "funwoods:japanese_maple_shrub", new JungleGroundBushFeature(DefaultFeatureConfig::deserialize, FunwoodsBlocks.JAPANESE_MAPLE.log.getDefaultState(), FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()));
@@ -50,7 +59,7 @@ public class FunwoodsBiomes {
 				CYPRESS_TREE
 		));
 
-		SAKURA_FOREST = Registry.register(Registry.BIOME, 52, "funwoods:sakura_forest", new SakuraForestBiome(
+		SAKURA_FOREST = Registry.register(Registry.BIOME, 52, "funwoods:sakura_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
@@ -65,5 +74,23 @@ public class FunwoodsBiomes {
 				SAKURA_TREE,
 				JAPANESE_MAPLE_SHRUB
 		));
+
+		JAPANESE_MAPLE_FOREST = Registry.register(Registry.BIOME, 53, "funwoods:japanese_maple_forest", new JapaneseForestBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.depth(0.05F)
+						.scale(0.2F)
+						.temperature(0.8F)
+						.downfall(0.5F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				10,
+				JAPANESE_MAPLE_TREE,
+				JAPANESE_MAPLE_SHRUB
+		));
+
+		DefaultBiomeFeatures.addForestGrass(JAPANESE_MAPLE_FOREST);
 	}
 }

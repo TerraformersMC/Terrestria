@@ -1,11 +1,11 @@
 package net.coderbot.funwoods.init;
 
-import net.coderbot.funwoods.biome.TransparentLeavesBlock;
+import net.coderbot.funwoods.block.TransparentLeavesBlock;
 import net.coderbot.funwoods.block.*;
 import net.coderbot.funwoods.feature.CypressTreeFeature;
 import net.coderbot.funwoods.feature.RubberTreeFeature;
 import net.coderbot.funwoods.feature.TreeDefinition;
-import net.coderbot.funwoods.feature.SakuraTreeFeature;
+import net.coderbot.funwoods.feature.JapaneseTreeFeature;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -50,49 +50,39 @@ public class FunwoodsBlocks {
 
 		RUBBER_SAPLING = register("rubber_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
-						rand -> new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, RUBBER.getBasicDefinition()))
+						rand -> new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, RUBBER.getBasicDefinition())
 				)
-		);
+		));
 
 		CYPRESS_SAPLING = register("cypress_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, CYPRESS.getBasicDefinition()))
-				)
-		);
+				new CustomSaplingGenerator (rand -> FunwoodsBiomes.CYPRESS_TREE)
+		));
 
-		// TODO: These saplings need to be configured with proper tree generators
+		// TODO: Bald Cypress
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, BALD_CYPRESS.getBasicDefinition()))
+						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, BALD_CYPRESS.getBasicDefinition())
 				)
-		);
+		));
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, JAPANESE_MAPLE.getBasicDefinition()))
-				)
-		);
+				new CustomSaplingGenerator (rand -> FunwoodsBiomes.JAPANESE_MAPLE_TREE)
+		));
 
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, JAPANESE_MAPLE.getBasicDefinition()))
-				)
-		);
+				new CustomSaplingGenerator (rand -> FunwoodsBiomes.JAPANESE_MAPLE_SHRUB)
+		));
 
+		// TODO: Rainbow Eucalyptus
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, RAINBOW_EUCALYPTUS.getBasicDefinition()))
+						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, RAINBOW_EUCALYPTUS.getBasicDefinition())
 				)
-		);
+		));
 
 		SAKURA_SAPLING = register("sakura_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new SakuraTreeFeature(DefaultFeatureConfig::deserialize, true, SAKURA.getBasicDefinition().toSakura (
-								SAKURA.log.getDefaultState().with(SakuraLogBlock.HAS_LEAVES, true),
-								SAKURA_LEAF_PILE.getDefaultState()
-						)))
-				)
-		);
+				new CustomSaplingGenerator(rand -> FunwoodsBiomes.SAKURA_TREE)
+		));
 	}
 
 	public static <T extends Block> T register(String name, T block) {

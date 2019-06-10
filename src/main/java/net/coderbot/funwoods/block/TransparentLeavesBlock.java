@@ -1,4 +1,4 @@
-package net.coderbot.funwoods.biome;
+package net.coderbot.funwoods.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

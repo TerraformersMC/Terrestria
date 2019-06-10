@@ -22,10 +22,8 @@ public final class TreeDefinition {
 		}
 	}
 
-	public static class Sakura {
-		public BlockState wood;
+	public static class Sakura extends Basic {
 		public BlockState woodLeaves;
-		public BlockState leaves;
 		public BlockState leafPile;
 	}
 }

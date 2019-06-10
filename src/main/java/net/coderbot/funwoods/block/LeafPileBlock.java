@@ -5,6 +5,7 @@ import net.minecraft.block.BlockRenderLayer;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityContext;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
@@ -31,7 +32,9 @@ public class LeafPileBlock extends Block {
 
 	@SuppressWarnings("deprecation")
 	public boolean canPlaceAt(BlockState state, ViewableWorld world, BlockPos pos) {
-		return world.getBlockState(pos.down()).isOpaque();
+		BlockState down = world.getBlockState(pos.down());
+
+		return down.isOpaque() || down.getFluidState().getFluid().matches(FluidTags.WATER);
 	}
 
 	@Override
