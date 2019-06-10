@@ -16,6 +16,7 @@ public class FunwoodsItems {
 	public static WoodItems SAKURA;
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
+	public static BlockItem SAKURA_LEAF_PILE;
 
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
@@ -34,6 +35,7 @@ public class FunwoodsItems {
 		SAKURA = WoodItems.register("sakura", FunwoodsBlocks.SAKURA);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
+		SAKURA_LEAF_PILE = register("sakura_leaf_pile", FunwoodsBlocks.SAKURA_LEAF_PILE);
 
 		RUBBER_SAPLING = register("rubber_sapling", FunwoodsBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", FunwoodsBlocks.CYPRESS_SAPLING);

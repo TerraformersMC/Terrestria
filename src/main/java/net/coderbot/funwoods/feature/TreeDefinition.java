@@ -9,5 +9,23 @@ public final class TreeDefinition {
 	public static class Basic {
 		public BlockState wood;
 		public BlockState leaves;
+
+		public Sakura toSakura(BlockState woodLeaves, BlockState leafPile) {
+			Sakura sakura = new Sakura();
+
+			sakura.wood = wood;
+			sakura.leaves = leaves;
+			sakura.woodLeaves = woodLeaves;
+			sakura.leafPile = leafPile;
+
+			return sakura;
+		}
+	}
+
+	public static class Sakura {
+		public BlockState wood;
+		public BlockState woodLeaves;
+		public BlockState leaves;
+		public BlockState leafPile;
 	}
 }

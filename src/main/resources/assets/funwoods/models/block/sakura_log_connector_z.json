@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+	"particle": "funwoods:blocks/sakura_log",
+	"all": "funwoods:blocks/sakura_log_connector",
+	"face": "funwoods:blocks/sakura_log"
+  },
+  "elements": [
+	{
+	  "from": [ 3, 3, 0 ],
+	  "to": [ 13, 13, 3 ],
+	  "faces": {
+		"down":  { "texture": "#all", "uv": [10, 3, 0, 0] },
+		"up":    { "texture": "#all", "uv": [10, 3, 0, 0] },
+		"west": { "texture": "#all", "uv": [3, 10, 0, 0] },
+		"east":  { "texture": "#all", "uv": [3, 10, 0, 0] },
+		"north":  { "texture": "#face", "cullface": "north" }
+	  }
+	}
+  ]
+}

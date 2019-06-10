@@ -33,11 +33,12 @@ public class MixinSetBaseBiomesLayer {
 
 	static {
 		int CYPRESS_FOREST_ID = Registry.BIOME.getRawId(FunwoodsBiomes.CYPRESS_FOREST);
+		int SAKURA_FOREST_ID = Registry.BIOME.getRawId(FunwoodsBiomes.SAKURA_FOREST);
 
 		// TODO: rip every other biome
-		TEMPERATE_BIOMES = new int[] { CYPRESS_FOREST_ID };
-		SNOWY_BIOMES = new int[] { CYPRESS_FOREST_ID };
-		DRY_BIOMES = new int[] { CYPRESS_FOREST_ID };
-		COOL_BIOMES = new int[] { CYPRESS_FOREST_ID };
+		TEMPERATE_BIOMES = new int[] { CYPRESS_FOREST_ID, SAKURA_FOREST_ID };
+		SNOWY_BIOMES = new int[] { CYPRESS_FOREST_ID, SAKURA_FOREST_ID };
+		DRY_BIOMES = new int[] { CYPRESS_FOREST_ID, SAKURA_FOREST_ID };
+		COOL_BIOMES = new int[] { CYPRESS_FOREST_ID, SAKURA_FOREST_ID };
 	}
 }

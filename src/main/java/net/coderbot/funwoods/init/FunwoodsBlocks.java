@@ -1,12 +1,11 @@
 package net.coderbot.funwoods.init;
 
-import net.coderbot.funwoods.block.CustomDoorBlock;
-import net.coderbot.funwoods.block.CustomSaplingBlock;
-import net.coderbot.funwoods.block.CustomSaplingGenerator;
-import net.coderbot.funwoods.block.CustomStairsBlock;
+import net.coderbot.funwoods.biome.TransparentLeavesBlock;
+import net.coderbot.funwoods.block.*;
 import net.coderbot.funwoods.feature.CypressTreeFeature;
 import net.coderbot.funwoods.feature.RubberTreeFeature;
 import net.coderbot.funwoods.feature.TreeDefinition;
+import net.coderbot.funwoods.feature.SakuraTreeFeature;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -21,6 +20,7 @@ public class FunwoodsBlocks {
 	public static WoodBlocks SAKURA;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
+	public static LeafPileBlock SAKURA_LEAF_PILE;
 
 	public static CustomSaplingBlock RUBBER_SAPLING;
 	public static CustomSaplingBlock CYPRESS_SAPLING;
@@ -40,9 +40,13 @@ public class FunwoodsBlocks {
 		BALD_CYPRESS = WoodBlocks.register("bald_cypress");
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple");
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus");
-		SAKURA = WoodBlocks.register("sakura");
+
+		SAKURA = WoodBlocks.registerManufactured("sakura");
+		SAKURA.log = register("sakura_log", new SakuraLogBlock(Block.Settings.copy(Blocks.OAK_LOG)));
+		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+		SAKURA_LEAF_PILE = register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(Blocks.OAK_LEAVES).noCollision()));
 
 		RUBBER_SAPLING = register("rubber_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
@@ -83,7 +87,10 @@ public class FunwoodsBlocks {
 
 		SAKURA_SAPLING = register("sakura_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, SAKURA.getBasicDefinition()))
+						rand -> new SakuraTreeFeature(DefaultFeatureConfig::deserialize, true, SAKURA.getBasicDefinition().toSakura (
+								SAKURA.log.getDefaultState().with(SakuraLogBlock.HAS_LEAVES, true),
+								SAKURA_LEAF_PILE.getDefaultState()
+						)))
 				)
 		);
 	}
@@ -93,7 +100,7 @@ public class FunwoodsBlocks {
 	}
 
 	public static class WoodBlocks {
-		public LogBlock log;
+		public Block log;
 		public LeavesBlock leaves;
 		public Block planks;
 		public SlabBlock slab;
@@ -106,10 +113,17 @@ public class FunwoodsBlocks {
 
 		// TODO: Map colors
 		public static WoodBlocks register(String name) {
-			WoodBlocks blocks = new WoodBlocks();
+			WoodBlocks blocks = registerManufactured(name);
 
 			blocks.log = FunwoodsBlocks.register(name + "_log", new LogBlock(MaterialColor.SPRUCE, Block.Settings.copy(Blocks.OAK_LOG)));
 			blocks.leaves = FunwoodsBlocks.register(name + "_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+
+			return blocks;
+		}
+
+		public static WoodBlocks registerManufactured(String name) {
+			WoodBlocks blocks = new WoodBlocks();
+
 			blocks.planks = FunwoodsBlocks.register(name + "_planks", new Block(Block.Settings.copy(Blocks.OAK_PLANKS)));
 			blocks.slab = FunwoodsBlocks.register(name + "_slab", new SlabBlock(Block.Settings.copy(Blocks.OAK_SLAB)));
 			blocks.stairs = FunwoodsBlocks.register(name + "_stairs", new CustomStairsBlock(blocks.planks.getDefaultState(), Block.Settings.copy(Blocks.OAK_STAIRS)));
