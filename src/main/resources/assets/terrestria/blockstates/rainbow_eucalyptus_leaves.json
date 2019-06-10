@@ -1,0 +1,18 @@
+{
+  "variants": {
+	"distance=1,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=2,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=3,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=4,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=5,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=6,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=7,persistent=false": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=1,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=2,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=3,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=4,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=5,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=6,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" },
+	"distance=7,persistent=true": { "model": "terrestria:block/rainbow_eucalyptus_leaves" }
+  }
+}

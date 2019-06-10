@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "terrestria:block/sakura_slab" },
+    "type=top": { "model": "terrestria:block/sakura_slab_top" },
+    "type=double": { "model": "terrestria:block/sakura_planks" }
+  }
+}

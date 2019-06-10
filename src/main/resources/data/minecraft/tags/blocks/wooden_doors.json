@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_door",
-	"funwoods:cypress_door",
-	"funwoods:japanese_maple_door",
-	"funwoods:rainbow_eucalyptus_door",
-	"funwoods:sakura_door",
-	"funwoods:bald_cypress_door"
+	"terrestria:rubber_door",
+	"terrestria:cypress_door",
+	"terrestria:japanese_maple_door",
+	"terrestria:rainbow_eucalyptus_door",
+	"terrestria:sakura_door",
+	"terrestria:bald_cypress_door"
   ]
 }

@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "funwoods",
+  "id": "terrestria",
   "version": "${version}",
 
-  "name": "Funwoods",
+  "name": "Terrestria",
   "description": "Some assorted and interesting tree types",
   "authors": [
     "coderbot16"
   ],
   "contact": {
-    "sources": "https://github.com/coderbot16/Funwoods"
+    "sources": "https://github.com/coderbot16/Terrestria"
   },
 
   "license": "LGPL-3.0-only",
-  "icon": "assets/funwoods/icon.png",
+  "icon": "assets/terrestria/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.coderbot.funwoods.Funwoods"
+      "net.coderbot.terrestria.Terrestria"
     ],
     "client": [
-      "net.coderbot.funwoods.FunwoodsClient"
+      "net.coderbot.terrestria.TerrestriaClient"
     ]
   },
 
@@ -30,6 +30,6 @@
     "fabric": "*"
   },
   "mixins": [
-    "mixins.funwoods.json"
+    "mixins.terrestria.json"
   ]
 }

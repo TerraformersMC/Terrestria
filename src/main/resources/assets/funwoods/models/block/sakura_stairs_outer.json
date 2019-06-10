@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "funwoods:blocks/sakura_planks",
-        "top": "funwoods:blocks/sakura_planks",
-        "side": "funwoods:blocks/sakura_planks"
-    }
-}

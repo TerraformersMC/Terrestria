@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_planks",
-	"funwoods:cypress_planks",
-	"funwoods:japanese_maple_planks",
-	"funwoods:rainbow_eucalyptus_planks",
-	"funwoods:sakura_planks",
-	"funwoods:bald_cypress_planks"
+	"terrestria:rubber_planks",
+	"terrestria:cypress_planks",
+	"terrestria:japanese_maple_planks",
+	"terrestria:rainbow_eucalyptus_planks",
+	"terrestria:sakura_planks",
+	"terrestria:bald_cypress_planks"
   ]
 }

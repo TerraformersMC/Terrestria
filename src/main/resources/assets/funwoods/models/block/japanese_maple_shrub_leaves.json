@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/leaves",
-  "textures": {
-	"all": "funwoods:blocks/japanese_maple_shrub_leaves"
-  }
-}

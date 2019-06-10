@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "terrestria:block/rainbow_eucalyptus_sapling"
+	},
+	"stage=1": {
+	  "model": "terrestria:block/rainbow_eucalyptus_sapling"
+	}
+  }
+}

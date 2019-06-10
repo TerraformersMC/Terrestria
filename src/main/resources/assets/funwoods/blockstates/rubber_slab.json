@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "funwoods:block/rubber_slab" },
-    "type=top": { "model": "funwoods:block/rubber_slab_top" },
-    "type=double": { "model": "funwoods:block/rubber_planks" }
-  }
-}

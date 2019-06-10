@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+	"bottom": "terrestria:blocks/japanese_maple_door_bottom",
+	"top": "terrestria:blocks/japanese_maple_door_top"
+  }
+}

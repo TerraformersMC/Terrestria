@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-	"bottom": "funwoods:blocks/japanese_maple_planks",
-	"top": "funwoods:blocks/japanese_maple_planks",
-	"side": "funwoods:blocks/japanese_maple_planks"
-  }
-}

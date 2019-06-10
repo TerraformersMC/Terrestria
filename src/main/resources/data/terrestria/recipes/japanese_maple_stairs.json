@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P  ",
+		"PP ",
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:japanese_maple_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:japanese_maple_stairs",
+		"count": 4
+	}
+}

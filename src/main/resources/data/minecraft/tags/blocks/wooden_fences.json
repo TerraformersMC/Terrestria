@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_fence",
-	"funwoods:cypress_fence",
-	"funwoods:japanese_maple_fence",
-	"funwoods:rainbow_eucalyptus_fence",
-	"funwoods:sakura_fence",
-	"funwoods:bald_cypress_fence"
+	"terrestria:rubber_fence",
+	"terrestria:cypress_fence",
+	"terrestria:japanese_maple_fence",
+	"terrestria:rainbow_eucalyptus_fence",
+	"terrestria:sakura_fence",
+	"terrestria:bald_cypress_fence"
   ]
 }

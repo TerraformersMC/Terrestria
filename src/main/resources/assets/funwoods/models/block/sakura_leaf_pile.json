@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/carpet",
-  "textures": {
-	"wool": "funwoods:blocks/sakura_leaves",
-	"particle": "funwoods:blocks/sakura_leaves"
-  }
-}

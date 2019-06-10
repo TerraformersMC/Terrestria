@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+	"end": "terrestria:blocks/rainbow_eucalyptus_log_top",
+	"side": "terrestria:blocks/rainbow_eucalyptus_log"
+  }
+}

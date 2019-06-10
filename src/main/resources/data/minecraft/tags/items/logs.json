@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_log",
-	"funwoods:cypress_log",
-	"funwoods:japanese_maple_log",
-	"funwoods:rainbow_eucalyptus_log",
-	"funwoods:sakura_log",
-	"funwoods:bald_cypress_log"
+	"terrestria:rubber_log",
+	"terrestria:cypress_log",
+	"terrestria:japanese_maple_log",
+	"terrestria:rainbow_eucalyptus_log",
+	"terrestria:sakura_log",
+	"terrestria:bald_cypress_log"
   ]
 }

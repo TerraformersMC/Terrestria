@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:block/fence_inventory",
+    "textures": {
+        "texture": "terrestria:blocks/bald_cypress_planks"
+    }
+}

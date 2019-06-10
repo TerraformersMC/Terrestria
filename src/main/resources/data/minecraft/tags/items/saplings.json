@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_sapling",
-	"funwoods:cypress_sapling",
-	"funwoods:japanese_maple_sapling",
-	"funwoods:rainbow_eucalyptus_sapling",
-	"funwoods:sakura_sapling",
-	"funwoods:bald_cypress_sapling"
+	"terrestria:rubber_sapling",
+	"terrestria:cypress_sapling",
+	"terrestria:japanese_maple_sapling",
+	"terrestria:rainbow_eucalyptus_sapling",
+	"terrestria:sakura_sapling",
+	"terrestria:bald_cypress_sapling"
   ]
 }

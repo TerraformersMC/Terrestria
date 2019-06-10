@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+	"end": "terrestria:blocks/bald_cypress_log_top",
+	"side": "terrestria:blocks/bald_cypress_log"
+  }
+}

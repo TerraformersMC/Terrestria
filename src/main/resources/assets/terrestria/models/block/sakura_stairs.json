@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "terrestria:blocks/sakura_planks",
+        "top": "terrestria:blocks/sakura_planks",
+        "side": "terrestria:blocks/sakura_planks"
+    }
+}

@@ -1,10 +1,10 @@
 {
   "values": [
-	"funwoods:rubber_leaves",
-	"funwoods:cypress_leaves",
-	"funwoods:japanese_maple_leaves",
-	"funwoods:rainbow_eucalyptus_leaves",
-	"funwoods:sakura_leaves",
-	"funwoods:bald_cypress_leaves"
+	"terrestria:rubber_leaves",
+	"terrestria:cypress_leaves",
+	"terrestria:japanese_maple_leaves",
+	"terrestria:rainbow_eucalyptus_leaves",
+	"terrestria:sakura_leaves",
+	"terrestria:bald_cypress_leaves"
   ]
 }

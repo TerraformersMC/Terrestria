@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "terrestria:blocks/rainbow_eucalyptus_log",
+	"up": "terrestria:blocks/rainbow_eucalyptus_log_top_quarter",
+	"down": "terrestria:blocks/rainbow_eucalyptus_log_bottom_quarter",
+	"south": "terrestria:blocks/rainbow_eucalyptus_log_bark_left",
+	"west": "terrestria:blocks/rainbow_eucalyptus_log_bark_right",
+	"north": "terrestria:blocks/rainbow_eucalyptus_log_bare_right",
+	"east": "terrestria:blocks/rainbow_eucalyptus_log_bare_left"
+  }
+}

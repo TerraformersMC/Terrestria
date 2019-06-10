@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "funwoods:block/rainbow_eucalyptus_slab" },
-    "type=top": { "model": "funwoods:block/rainbow_eucalyptus_slab_top" },
-    "type=double": { "model": "funwoods:block/rainbow_eucalyptus_planks" }
-  }
-}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "terrestria:blocks/japanese_maple_log",
+	"up": "terrestria:blocks/japanese_maple_log_top_quarter",
+	"down": "terrestria:blocks/japanese_maple_log_bottom_quarter",
+	"south": "terrestria:blocks/japanese_maple_log_bark_left",
+	"west": "terrestria:blocks/japanese_maple_log_bark_right",
+	"north": "terrestria:blocks/japanese_maple_log_bare_right",
+	"east": "terrestria:blocks/japanese_maple_log_bare_left"
+  }
+}

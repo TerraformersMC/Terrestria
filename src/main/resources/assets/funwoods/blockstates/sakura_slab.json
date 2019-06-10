@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "type=bottom": { "model": "funwoods:block/sakura_slab" },
-    "type=top": { "model": "funwoods:block/sakura_slab_top" },
-    "type=double": { "model": "funwoods:block/sakura_planks" }
-  }
-}

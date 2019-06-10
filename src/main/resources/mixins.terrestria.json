@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "net.coderbot.terrestria.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [ "MixinSetBaseBiomesLayer" ],
+  "injectors": {
+	"defaultRequire": 1
+  }
+}

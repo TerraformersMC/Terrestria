@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "funwoods:blocks/cypress_planks",
-        "top": "funwoods:blocks/cypress_planks",
-        "side": "funwoods:blocks/cypress_planks"
-    }
-}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_bottom_rh",
-  "textures": {
-	"bottom": "funwoods:blocks/bald_cypress_door_bottom",
-	"top": "funwoods:blocks/bald_cypress_door_top"
-  }
-}

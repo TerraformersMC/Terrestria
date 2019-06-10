@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"tag": "terrestria:rubber_logs"
+		}
+	],
+	"result": {
+		"item": "terrestria:rubber_planks",
+		"count": 4
+	}
+}

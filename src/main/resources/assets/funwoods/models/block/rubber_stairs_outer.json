@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "funwoods:blocks/rubber_planks",
-        "top": "funwoods:blocks/rubber_planks",
-        "side": "funwoods:blocks/rubber_planks"
-    }
-}

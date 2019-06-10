@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PP",
+		"PP",
+		"PP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:rainbow_eucalyptus_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:rainbow_eucalyptus_door",
+		"count": 3
+	}
+}

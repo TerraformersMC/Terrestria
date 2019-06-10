@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-	"end": "funwoods:blocks/japanese_maple_log_top",
-	"side": "funwoods:blocks/japanese_maple_log"
-  }
-}

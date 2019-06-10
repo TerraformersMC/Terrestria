@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "terrestria:block/cypress_slab" },
+    "type=top": { "model": "terrestria:block/cypress_slab_top" },
+    "type=double": { "model": "terrestria:block/cypress_planks" }
+  }
+}

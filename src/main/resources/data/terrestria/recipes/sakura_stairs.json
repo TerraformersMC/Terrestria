@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P  ",
+		"PP ",
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:sakura_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:sakura_stairs",
+		"count": 4
+	}
+}

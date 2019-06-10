@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "type=bottom": { "model": "terrestria:block/japanese_maple_slab" },
+    "type=top": { "model": "terrestria:block/japanese_maple_slab_top" },
+    "type=double": { "model": "terrestria:block/japanese_maple_planks" }
+  }
+}

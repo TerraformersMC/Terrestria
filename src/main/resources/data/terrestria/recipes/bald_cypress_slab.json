@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:bald_cypress_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:bald_cypress_slab",
+		"count": 6
+	}
+}

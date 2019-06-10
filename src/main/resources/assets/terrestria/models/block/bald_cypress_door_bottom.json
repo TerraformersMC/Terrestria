@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+	"bottom": "terrestria:blocks/bald_cypress_door_bottom",
+	"top": "terrestria:blocks/bald_cypress_door_top"
+  }
+}

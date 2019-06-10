@@ -1,8 +1,0 @@
-{
-    "parent": "block/inner_stairs",
-    "textures": {
-        "bottom": "funwoods:blocks/rainbow_eucalyptus_planks",
-        "top": "funwoods:blocks/rainbow_eucalyptus_planks",
-        "side": "funwoods:blocks/rainbow_eucalyptus_planks"
-    }
-}

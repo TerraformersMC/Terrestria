@@ -1,7 +1,0 @@
-{
-  "variants": {
-	"axis=x": { "model":  "funwoods:block/rubber_log", "x": 90, "y": 90 },
-	"axis=y": { "model":  "funwoods:block/rubber_log" },
-	"axis=z": { "model":  "funwoods:block/rubber_log", "x": 90 }
-  }
-}
