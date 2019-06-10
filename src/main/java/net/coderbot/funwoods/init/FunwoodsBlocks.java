@@ -31,10 +31,6 @@ public class FunwoodsBlocks {
 	public static CustomSaplingBlock SAKURA_SAPLING;
 
 	public static void init() {
-		//TreeDefinition.Basic oak = new TreeDefinition.Basic();
-		//oak.leaves = Blocks.OAK_LEAVES.getDefaultState();
-		//oak.wood = Blocks.OAK_LOG.getDefaultState();
-
 		RUBBER = WoodBlocks.register("rubber");
 		CYPRESS = WoodBlocks.register("cypress");
 		BALD_CYPRESS = WoodBlocks.register("bald_cypress");

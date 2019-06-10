@@ -40,10 +40,12 @@ public class FunwoodsBiomes {
 				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, FunwoodsBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
-		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "funwoods:japanese_maple_shrub", new JungleGroundBushFeature(DefaultFeatureConfig::deserialize, FunwoodsBlocks.JAPANESE_MAPLE.log.getDefaultState(), FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()));
+		// TODO: Modify shrub to push Sakura leaf piles above it
+		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "funwoods:japanese_maple_shrub",
+				new JungleGroundBushFeature(DefaultFeatureConfig::deserialize, FunwoodsBlocks.JAPANESE_MAPLE.log.getDefaultState(), FunwoodsBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState())
+		);
 
-		// TODO: Numeric IDs
-		CYPRESS_FOREST = Registry.register(Registry.BIOME, 51, "funwoods:cypress_forest", new CypressForestBiome(
+		CYPRESS_FOREST = Registry.register(Registry.BIOME, "funwoods:cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
@@ -59,7 +61,7 @@ public class FunwoodsBiomes {
 				CYPRESS_TREE
 		));
 
-		SAKURA_FOREST = Registry.register(Registry.BIOME, 52, "funwoods:sakura_forest", new JapaneseForestBiome(
+		SAKURA_FOREST = Registry.register(Registry.BIOME, "funwoods:sakura_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
@@ -75,7 +77,7 @@ public class FunwoodsBiomes {
 				JAPANESE_MAPLE_SHRUB
 		));
 
-		JAPANESE_MAPLE_FOREST = Registry.register(Registry.BIOME, 53, "funwoods:japanese_maple_forest", new JapaneseForestBiome(
+		JAPANESE_MAPLE_FOREST = Registry.register(Registry.BIOME, "funwoods:japanese_maple_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
