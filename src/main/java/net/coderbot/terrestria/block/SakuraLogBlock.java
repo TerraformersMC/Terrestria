@@ -334,12 +334,12 @@ public class SakuraLogBlock extends Block {
 
 		boolean leaves = state.get(HAS_LEAVES);
 
-		boolean up = fromDirection == Direction.UP ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.DOWN), leaves): state.get(UP);
-		boolean down = fromDirection == Direction.DOWN ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.UP), leaves): state.get(DOWN);
-		boolean north = fromDirection == Direction.NORTH ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.SOUTH), leaves): state.get(NORTH);
-		boolean east = fromDirection == Direction.EAST ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.WEST), leaves): state.get(EAST);
-		boolean south = fromDirection == Direction.SOUTH ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.NORTH), leaves): state.get(SOUTH);
-		boolean west = fromDirection == Direction.WEST ? this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.EAST), leaves): state.get(WEST);
+		boolean up = fromDirection == Direction.UP && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.DOWN), leaves) || state.get(UP);
+		boolean down = fromDirection == Direction.DOWN && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.UP), leaves) || state.get(DOWN);
+		boolean north = fromDirection == Direction.NORTH && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.SOUTH), leaves) || state.get(NORTH);
+		boolean east = fromDirection == Direction.EAST && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.WEST), leaves) || state.get(EAST);
+		boolean south = fromDirection == Direction.SOUTH && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.NORTH), leaves) || state.get(SOUTH);
+		boolean west = fromDirection == Direction.WEST && this.shouldConnectTo(neighbor, Block.isSolidFullSquare(neighbor, world, neighborPos, Direction.EAST), leaves) || state.get(WEST);
 
 		return state
 				.with(UP, up)

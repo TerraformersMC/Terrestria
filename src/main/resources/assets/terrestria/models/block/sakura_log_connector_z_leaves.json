@@ -3,7 +3,8 @@
   "textures": {
 	"particle": "terrestria:blocks/sakura_log",
 	"all": "terrestria:blocks/sakura_log_connector",
-	"top": "terrestria:blocks/sakura_log_top"
+	"top": "terrestria:blocks/sakura_log_top",
+	"leaves": "terrestria:blocks/sakura_leaves_cutout"
   },
   "elements": [
 	{
@@ -15,6 +16,13 @@
 		"west": { "texture": "#all", "uv": [3, 10, 0, 0] },
 		"east":  { "texture": "#all", "uv": [3, 10, 0, 0] },
 		"north":  { "texture": "#top", "cullface": "north" }
+	  }
+	},
+	{
+	  "from": [ 0, 0, 0 ],
+	  "to": [ 16, 16, 16 ],
+	  "faces": {
+		"north": { "texture": "#leaves", "cullface": "north" }
 	  }
 	}
   ]
