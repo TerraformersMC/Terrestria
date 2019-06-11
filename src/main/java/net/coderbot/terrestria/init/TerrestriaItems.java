@@ -18,6 +18,8 @@ public class TerrestriaItems {
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static BlockItem SAKURA_LEAF_PILE;
 
+	public static BlockItem CATTAIL;
+
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
 	public static BlockItem BALD_CYPRESS_SAPLING;
@@ -36,6 +38,8 @@ public class TerrestriaItems {
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
 		SAKURA_LEAF_PILE = register("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
+
+		CATTAIL = register("cattail", TerrestriaBlocks.CATTAIL);
 
 		RUBBER_SAPLING = register("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);

@@ -1,0 +1,7 @@
+{
+    "parent": "block/seagrass",
+    "textures": {
+        "seagrass": "terrestria:blocks/tall_cattail_bottom",
+        "particle": "terrestria:blocks/tall_cattail_bottom"
+    }
+}

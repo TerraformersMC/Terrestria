@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "half=lower": { "model": "terrestria:block/tall_cattail_bottom" },
+        "half=upper": { "model": "terrestria:block/tall_cattail_top" }
+    }
+}

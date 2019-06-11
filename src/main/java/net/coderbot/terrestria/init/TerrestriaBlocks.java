@@ -3,7 +3,6 @@ package net.coderbot.terrestria.init;
 import net.coderbot.terrestria.block.TransparentLeavesBlock;
 import net.coderbot.terrestria.block.*;
 import net.coderbot.terrestria.feature.CypressTreeFeature;
-import net.coderbot.terrestria.feature.RainbowEucalyptusTreeFeature;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.*;
@@ -21,6 +20,9 @@ public class TerrestriaBlocks {
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeafPileBlock SAKURA_LEAF_PILE;
+
+	public static SeagrassBlock CATTAIL;
+	public static TallSeagrassBlock TALL_CATTAIL;
 
 	public static CustomSaplingBlock RUBBER_SAPLING;
 	public static CustomSaplingBlock CYPRESS_SAPLING;
@@ -43,6 +45,9 @@ public class TerrestriaBlocks {
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 		SAKURA_LEAF_PILE = register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(Blocks.OAK_LEAVES).noCollision()));
+
+		CATTAIL = register("cattail", new CustomSeagrassBlock(Block.Settings.copy(Blocks.SEAGRASS)));
+		TALL_CATTAIL = register("tall_cattail", new CustomTallSeagrassBlock(Block.Settings.copy(Blocks.SEAGRASS)));
 
 		RUBBER_SAPLING = register("rubber_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (

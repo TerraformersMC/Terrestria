@@ -2,6 +2,8 @@ package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SeagrassBlock;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
@@ -15,10 +17,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class RainbowEucalyptusTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Basic tree;
 
-	public RainbowEucalyptusTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	public MegaCanopyTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
 		this.tree = tree;
@@ -38,8 +40,25 @@ public class RainbowEucalyptusTreeFeature extends AbstractTreeFeature<DefaultFea
 
 		BlockPos below = origin.down();
 
-		if(!isNaturalDirtOrGrass(world, below)) {
-			return false;
+		int down = 0;
+		while(world.testBlockState(below, state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock)) {
+			below = below.down();
+			down++;
+		}
+
+		height += down * 3 / 2;
+		bareTrunkHeight += down * 3 / 2;
+
+		origin = below.up();
+
+		for(int dZ = 0; dZ < 2; dZ++) {
+			for(int dX = 0; dX < 2; dX++) {
+				below = origin.add(dX, -1, dZ);
+
+				if(!isNaturalDirtOrGrass(world, below)) {
+					return false;
+				}
+			}
 		}
 
 		if(!checkForObstructions(world, origin, height, bareTrunkHeight)) {
@@ -58,6 +77,12 @@ public class RainbowEucalyptusTreeFeature extends AbstractTreeFeature<DefaultFea
 		growBranches(blocks, world, pos, height - bareTrunkHeight, height / 2 - bareTrunkHeight, rand, boundingBox);
 
 		return true;
+	}
+
+	protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
+		return AbstractTreeFeature.canTreeReplace(world, pos) || world.testBlockState(pos,
+				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock
+		);
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight) {
