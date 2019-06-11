@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"LL",
+	"LL"
+  ],
+  "key": {
+	"L": {
+	  "item": "terrestria:bald_cypress_log"
+	}
+  },
+  "result": {
+	"item": "terrestria:bald_cypress_wood",
+	"count": 3
+  }
+}

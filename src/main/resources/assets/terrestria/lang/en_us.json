@@ -2,6 +2,7 @@
   "itemGroup.terrestria.items": "Terrestria",
   
   "block.terrestria.rubber_log": "Rubber Log",
+  "block.terrestria.rubber_wood": "Rubber Wood",
   "block.terrestria.rubber_log_quarter": "Rubber Log",
   "block.terrestria.rubber_sapling": "Rubber Sapling",
   "block.terrestria.rubber_leaves": "Rubber Leaves",
@@ -13,6 +14,7 @@
   "block.terrestria.rubber_door": "Rubber Door",
 
   "block.terrestria.cypress_log": "Cypress Log",
+  "block.terrestria.cypress_wood": "Cypress Wood",
   "block.terrestria.cypress_sapling": "Cypress Sapling",
   "block.terrestria.cypress_leaves": "Cypress Leaves",
   "block.terrestria.cypress_planks": "Cypress Wood Planks",
@@ -23,6 +25,7 @@
   "block.terrestria.cypress_door": "Cypress Door",
 
   "block.terrestria.bald_cypress_log": "Bald Cypress Log",
+  "block.terrestria.bald_cypress_wood": "Bald Cypress Wood",
   "block.terrestria.bald_cypress_log_quarter": "Bald Cypress Log",
   "block.terrestria.bald_cypress_sapling": "Bald Cypress Sapling",
   "block.terrestria.bald_cypress_leaves": "Bald Cypress Leaves",
@@ -35,7 +38,7 @@
   "block.terrestria.cattail": "Cattail",
 
   "block.terrestria.japanese_maple_log": "Japanese Maple Log",
-  "block.terrestria.japanese_maple_log_quarter": "Japanese Maple Log",
+  "block.terrestria.japanese_maple_wood": "Japanese Maple Wood",
   "block.terrestria.japanese_maple_sapling": "Japanese Maple Sapling",
   "block.terrestria.japanese_maple_leaves": "Japanese Maple Leaves",
   "block.terrestria.japanese_maple_planks": "Japanese Maple Wood Planks",
@@ -46,6 +49,7 @@
   "block.terrestria.japanese_maple_door": "Japanese Maple Door",
 
   "block.terrestria.rainbow_eucalyptus_log": "Rainbow Eucalyptus Log",
+  "block.terrestria.rainbow_eucalyptus_wood": "Rainbow Eucalyptus Wood",
   "block.terrestria.rainbow_eucalyptus_log_quarter": "Rainbow Eucalyptus Log",
   "block.terrestria.rainbow_eucalyptus_sapling": "Rainbow Eucalyptus Sapling",
   "block.terrestria.rainbow_eucalyptus_leaves": "Rainbow Eucalyptus Leaves",
@@ -57,7 +61,6 @@
   "block.terrestria.rainbow_eucalyptus_door": "Rainbow Eucalyptus Door",
 
   "block.terrestria.sakura_log": "Sakura Log",
-  "block.terrestria.sakura_log_quarter": "Sakura Log",
   "block.terrestria.sakura_sapling": "Sakura Sapling",
   "block.terrestria.sakura_leaves": "Sakura Leaves",
   "block.terrestria.sakura_leaf_pile": "Sakura Leaf Pile",

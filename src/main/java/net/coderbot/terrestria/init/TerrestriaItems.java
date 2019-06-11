@@ -37,7 +37,8 @@ public class TerrestriaItems {
 		BALD_CYPRESS = WoodItems.register("bald_cypress", TerrestriaBlocks.BALD_CYPRESS);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
+		SAKURA = WoodItems.registerWithoutBark("sakura", TerrestriaBlocks.SAKURA);
+		SAKURA.wood = SAKURA.log;
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
 		SAKURA_LEAF_PILE = register("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
@@ -62,6 +63,7 @@ public class TerrestriaItems {
 
 	public static class WoodItems {
 		public BlockItem log;
+		public BlockItem wood;
 		public BlockItem leaves;
 		public BlockItem planks;
 		public BlockItem slab;
@@ -73,6 +75,14 @@ public class TerrestriaItems {
 		private WoodItems() {}
 
 		public static WoodItems register(String name, TerrestriaBlocks.WoodBlocks blocks) {
+			WoodItems items = registerWithoutBark(name, blocks);
+
+			items.wood = TerrestriaItems.register(name + "_wood", blocks.wood);
+
+			return items;
+		}
+
+		public static WoodItems registerWithoutBark(String name, TerrestriaBlocks.WoodBlocks blocks) {
 			WoodItems items = new WoodItems();
 
 			items.log = TerrestriaItems.register(name + "_log", blocks.log);

@@ -2,7 +2,6 @@ package net.coderbot.terrestria.init;
 
 import net.coderbot.terrestria.block.TransparentLeavesBlock;
 import net.coderbot.terrestria.block.*;
-import net.coderbot.terrestria.feature.CypressTreeFeature;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.*;
@@ -44,6 +43,7 @@ public class TerrestriaBlocks {
 
 		SAKURA = WoodBlocks.registerManufactured("sakura");
 		SAKURA.log = register("sakura_log", new SakuraLogBlock(Block.Settings.copy(Blocks.OAK_LOG)));
+		SAKURA.wood = SAKURA.log;
 		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
@@ -95,7 +95,9 @@ public class TerrestriaBlocks {
 
 	public static class WoodBlocks {
 		public Block log;
+		public Block wood;
 		public LeavesBlock leaves;
+
 		public Block planks;
 		public SlabBlock slab;
 		public CustomStairsBlock stairs;
@@ -110,6 +112,7 @@ public class TerrestriaBlocks {
 			WoodBlocks blocks = registerManufactured(name);
 
 			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(MaterialColor.SPRUCE, Block.Settings.copy(Blocks.OAK_LOG)));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(MaterialColor.SPRUCE, Block.Settings.copy(Blocks.OAK_LOG)));
 			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 			return blocks;

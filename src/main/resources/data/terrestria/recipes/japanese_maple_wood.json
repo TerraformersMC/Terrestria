@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"LL",
+	"LL"
+  ],
+  "key": {
+	"L": {
+	  "item": "terrestria:japanese_maple_log"
+	}
+  },
+  "result": {
+	"item": "terrestria:japanese_maple_wood",
+	"count": 3
+  }
+}

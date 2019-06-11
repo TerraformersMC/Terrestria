@@ -7,6 +7,11 @@
 	"terrestria:rainbow_eucalyptus_log_quarter",
 	"terrestria:sakura_log",
 	"terrestria:bald_cypress_log",
-	"terrestria:bald_cypress_log_quarter"
+	"terrestria:bald_cypress_log_quarter",
+	"terrestria:rubber_wood",
+	"terrestria:cypress_wood",
+	"terrestria:japanese_maple_wood",
+	"terrestria:rainbow_eucalyptus_wood",
+	"terrestria:bald_cypress_wood"
   ]
 }
