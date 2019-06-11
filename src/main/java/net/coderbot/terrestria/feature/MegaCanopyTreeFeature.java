@@ -1,6 +1,7 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
+import net.coderbot.terrestria.block.QuarterLogBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.tag.FluidTags;
@@ -18,9 +19,9 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Basic tree;
+	private TreeDefinition.Mega tree;
 
-	public MegaCanopyTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	public MegaCanopyTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
 
 		this.tree = tree;
@@ -121,15 +122,18 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		for(int dZ = 0; dZ < 2; dZ++) {
-			for(int dX = 0; dX < 2; dX++) {
-				pos.set(x + dX, y, z + dZ);
+		for(int i = 0; i < height; i++) {
+			pos.set(x, y + i, z);
+			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
 
-				for(int i = 0; i < height; i++) {
-					setBlockState(blocks, world, pos, tree.wood, boundingBox);
-					pos.setOffset(Direction.UP);
-				}
-			}
+			pos.set(x + 1, y + i, z);
+			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), boundingBox);
+
+			pos.set(x, y + i, z + 1);
+			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), boundingBox);
+
+			pos.set(x + 1, y + i, z + 1);
+			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
 		}
 	}
 
@@ -152,7 +156,11 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 			pos.set(origin);
 			pos.add(alignX, startOffsetY, alignZ);
 
-			Shapes.line(pos, offset, position -> setBlockState(blocks, world, pos, tree.wood, boundingBox));
+			Shapes.line(pos, offset, position -> {
+				if(!world.testBlockState(position, candidate -> candidate.getBlock() instanceof QuarterLogBlock)) {
+					setBlockState(blocks, world, pos, tree.wood, boundingBox);
+				}
+			});
 
 			int maxRadius = Math.min(
 					Math.min(

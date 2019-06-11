@@ -53,11 +53,11 @@ public class TerrestriaBiomes {
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = Registry.register(Registry.FEATURE, "terrestria:rainbow_eucalyptus_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition())
+				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega(TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState()))
 		);
 
 		BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:bald_cypress_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition())
+				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega(TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState()))
 		);
 
 		CATTAIL = Registry.register(Registry.FEATURE, "terrestria:cattail",

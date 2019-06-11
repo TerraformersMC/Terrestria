@@ -4,7 +4,9 @@
 	"terrestria:cypress_log",
 	"terrestria:japanese_maple_log",
 	"terrestria:rainbow_eucalyptus_log",
+	"terrestria:rainbow_eucalyptus_log_quarter",
 	"terrestria:sakura_log",
-	"terrestria:bald_cypress_log"
+	"terrestria:bald_cypress_log",
+	"terrestria:bald_cypress_log_quarter"
   ]
 }

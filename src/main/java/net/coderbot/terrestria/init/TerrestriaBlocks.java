@@ -24,6 +24,9 @@ public class TerrestriaBlocks {
 	public static SeagrassBlock CATTAIL;
 	public static TallSeagrassBlock TALL_CATTAIL;
 
+	public static QuarterLogBlock BALD_CYPRESS_QUARTER_LOG;
+	public static QuarterLogBlock RAINBOW_EUCALYPTUS_QUARTER_LOG;
+
 	public static CustomSaplingBlock RUBBER_SAPLING;
 	public static CustomSaplingBlock CYPRESS_SAPLING;
 	public static CustomSaplingBlock BALD_CYPRESS_SAPLING;
@@ -49,6 +52,9 @@ public class TerrestriaBlocks {
 		CATTAIL = register("cattail", new CustomSeagrassBlock(Block.Settings.copy(Blocks.SEAGRASS)));
 		TALL_CATTAIL = register("tall_cattail", new CustomTallSeagrassBlock(Block.Settings.copy(Blocks.SEAGRASS)));
 
+		BALD_CYPRESS_QUARTER_LOG = register("bald_cypress_log_quarter", new QuarterLogBlock(Block.Settings.copy(Blocks.OAK_LOG)));
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", new QuarterLogBlock(Block.Settings.copy(Blocks.OAK_LOG)));
+
 		RUBBER_SAPLING = register("rubber_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator (
 						rand -> new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, RUBBER.getBasicDefinition())
@@ -59,11 +65,8 @@ public class TerrestriaBlocks {
 				new CustomSaplingGenerator (rand -> TerrestriaBiomes.CYPRESS_TREE)
 		));
 
-		// TODO: Bald Cypress
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new CustomSaplingBlock (
-				new CustomSaplingGenerator (
-						rand -> new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, BALD_CYPRESS.getBasicDefinition())
-				)
+				new CustomSaplingGenerator (rand -> TerrestriaBiomes.BALD_CYPRESS_TREE)
 		));
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new CustomSaplingBlock (
