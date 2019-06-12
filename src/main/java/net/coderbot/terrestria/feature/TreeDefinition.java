@@ -21,12 +21,13 @@ public final class TreeDefinition {
 			return sakura;
 		}
 
-		public Mega toMega(BlockState woodQuarter) {
+		public Mega toMega(BlockState woodQuarter, BlockState bark) {
 			Mega mega = new Mega();
 
 			mega.wood = wood;
 			mega.leaves = leaves;
 			mega.woodQuarter = woodQuarter;
+			mega.bark = bark;
 
 			return mega;
 		}
@@ -39,5 +40,6 @@ public final class TreeDefinition {
 
 	public static class Mega extends Basic {
 		public BlockState woodQuarter;
+		public BlockState bark;
 	}
 }

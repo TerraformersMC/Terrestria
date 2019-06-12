@@ -8,7 +8,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.JungleGroundBushFeature;
 import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
@@ -17,7 +16,7 @@ public class TerrestriaBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
-	public static JungleGroundBushFeature JAPANESE_MAPLE_SHRUB;
+	public static JapaneseMapleBushFeature JAPANESE_MAPLE_SHRUB;
 	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 
@@ -48,17 +47,26 @@ public class TerrestriaBiomes {
 				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
-		// TODO: Modify shrub to push Sakura leaf piles above it
+		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic();
+		shrubDefinition.wood = TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState();
+		shrubDefinition.leaves = TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState();
+
 		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "terrestria:japanese_maple_shrub",
-				new JungleGroundBushFeature(DefaultFeatureConfig::deserialize, TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState())
+				new JapaneseMapleBushFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = Registry.register(Registry.FEATURE, "terrestria:rainbow_eucalyptus_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega(TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState()))
+				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega (
+						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
+						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
+				))
 		);
 
 		BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:bald_cypress_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega(TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState()))
+				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega (
+						TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState(),
+						TerrestriaBlocks.BALD_CYPRESS.wood.getDefaultState()
+				))
 		);
 
 		CATTAIL = Registry.register(Registry.FEATURE, "terrestria:cattail",

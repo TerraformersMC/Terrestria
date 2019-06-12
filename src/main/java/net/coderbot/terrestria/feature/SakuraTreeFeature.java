@@ -34,7 +34,6 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 
 		Shapes.circle(origin, maxRadius, pos -> {
 			if(pos.getX() == x && pos.getZ() == z) {
-				// TODO: Consider replacing the center log with a leaf pile + log block?
 				return;
 			}
 

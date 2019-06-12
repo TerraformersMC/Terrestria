@@ -16,6 +16,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
+// TODO: These should be properly spawned and implemented. For the future.
 public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private BlockState wood;
 	private BlockState leaves;
@@ -32,12 +33,6 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		// Total trunk height
 		int height = rand.nextInt(4) + 8;
 
-		// How much "bare trunk" there will be.
-		int bareTrunkHeight = 1 + rand.nextInt(12);
-
-		// Maximum leaf radius.
-		int maxRadius = 2 + rand.nextInt(6);
-
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
@@ -48,7 +43,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			return false;
 		}
 
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxRadius)) {
+		if(!checkForObstructions(world, origin, height)) {
 			return false;
 		}
 
@@ -59,19 +54,12 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		return true;
 	}
 
-	// TODO: This is still the conifer tree code...
-	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
+	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int i = 0; i < bareTrunkHeight; i++) {
-			if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
-				return false;
-			}
-		}
-
-		for(int dY = bareTrunkHeight; dY < height; dY++) {
-			for(int dZ = -radius; dZ <= radius; dZ++) {
-				for(int dX = -radius; dX <= radius; dX++) {
+		for(int dY = 0; dY < height; dY++) {
+			for(int dZ = -1; dZ <= 1; dZ++) {
+				for(int dX = -1; dX <= 1; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 					
 					if(!canTreeReplace(world, pos)) {
@@ -153,7 +141,6 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 					break;
 				}
 
-				//if(random.nextInt(3) == 0 || (movedX == offsetX && movedZ == offsetZ))
 				setBlockState(blocks, world, pos, wood, boundingBox);
 
 				for(Direction direction: Direction.values()) {

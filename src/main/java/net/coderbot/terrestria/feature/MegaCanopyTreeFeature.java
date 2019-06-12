@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import net.coderbot.terrestria.block.QuarterLogBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
+import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -77,7 +78,8 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
 		growBranches(blocks, world, pos, height - bareTrunkHeight, height / 2 - bareTrunkHeight, rand, boundingBox);
 
-		// TODO: Roots
+		pos.set(origin).setOffset(Direction.DOWN, 2);
+		growRoots(blocks, world, pos, bareTrunkHeight + 2, rand, boundingBox);
 
 		return true;
 	}
@@ -191,6 +193,33 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 				pos.setOffset(Direction.UP);
 			}
+		}
+	}
+
+	private void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+
+		tryGrowRoot(blocks, world, pos.set(x - 1, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
+		tryGrowRoot(blocks, world, pos.set(x + 2, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
+		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z - 1), baseTrunkHeight, rand, boundingBox);
+		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, boundingBox);
+	}
+
+	private void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+		if(rand.nextInt(5) == 0) {
+			return;
+		}
+
+		int height = baseTrunkHeight + rand.nextInt(2) - 3;
+
+		for(int i = 0; i < height; i++) {
+			if(canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
+				setBlockState(blocks, world, bottom, tree.bark, boundingBox);
+			}
+
+			bottom.setOffset(Direction.UP);
 		}
 	}
 }
