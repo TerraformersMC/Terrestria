@@ -1,9 +1,6 @@
 package net.coderbot.terrestria.init;
 
-import net.coderbot.terrestria.biome.CypressForestBiome;
-import net.coderbot.terrestria.biome.CypressSwampBiome;
-import net.coderbot.terrestria.biome.JapaneseForestBiome;
-import net.coderbot.terrestria.biome.RainforestBiome;
+import net.coderbot.terrestria.biome.*;
 import net.coderbot.terrestria.block.SakuraLogBlock;
 import net.coderbot.terrestria.feature.*;
 import net.minecraft.util.registry.Registry;
@@ -14,6 +11,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.JungleGroundBushFeature;
 import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class TerrestriaBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
@@ -30,6 +28,9 @@ public class TerrestriaBiomes {
 	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
 	public static RainforestBiome RAINFOREST;
 	public static CypressSwampBiome CYPRESS_SWAMP;
+	public static CalderaBiome CALDERA;
+	public static CalderaBiome CALDERA_RIDGE;
+	public static CalderaBiome CALDERA_BEACH;
 
 	public static void init() {
 		CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:cypress_tree",
@@ -144,6 +145,45 @@ public class TerrestriaBiomes {
 				7,
 				BALD_CYPRESS_TREE,
 				Feature.SWAMP_TREE
+		));
+
+		CALDERA = Registry.register(Registry.BIOME, "terrestria:caldera", new CalderaBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(new CalderaBiome.CalderaSurfaceBuilder(TernarySurfaceConfig::deserialize), SurfaceBuilder.SAND_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.depth(1.5F)
+						.scale(0.05F)
+						.temperature(0.7F)
+						.downfall(0.7F)
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.parent(null)
+		));
+
+		CALDERA_RIDGE = Registry.register(Registry.BIOME, "terrestria:caldera_ridge", new CalderaBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.depth(4F)
+						.scale(0F)
+						.temperature(0F)
+						.downfall(1F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null)
+		));
+
+		CALDERA_BEACH = Registry.register(Registry.BIOME, "terrestria:caldera_beach", new CalderaBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(new CalderaBiome.CalderaSurfaceBuilder(TernarySurfaceConfig::deserialize), SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.depth(2.25F)
+						.scale(0F)
+						.temperature(0.7F)
+						.downfall(0.7F)
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.parent(null)
 		));
 	}
 }
