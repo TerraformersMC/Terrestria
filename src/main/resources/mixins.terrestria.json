@@ -2,7 +2,7 @@
   "required": true,
   "package": "net.coderbot.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [ "SetBaseBiomesLayerMixin", "AddEdgeBiomesLayerMixin", "EaseBiomeEdgeLayerMixin", "AddRiversLayerMixin" ],
+  "mixins": [ "EaseBiomeEdgeLayerMixin" ],
   "injectors": {
 	"defaultRequire": 1
   }

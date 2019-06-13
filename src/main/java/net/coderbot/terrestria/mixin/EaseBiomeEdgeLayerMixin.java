@@ -3,7 +3,6 @@ package net.coderbot.terrestria.mixin;
 import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.biome.layer.AddEdgeBiomesLayer;
 import net.minecraft.world.biome.layer.EaseBiomeEdgeLayer;
 import net.minecraft.world.biome.layer.LayerRandomnessSource;
 import org.spongepowered.asm.mixin.Mixin;

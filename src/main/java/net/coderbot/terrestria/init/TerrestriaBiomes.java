@@ -3,8 +3,13 @@ package net.coderbot.terrestria.init;
 import net.coderbot.terrestria.biome.*;
 import net.coderbot.terrestria.block.SakuraLogBlock;
 import net.coderbot.terrestria.feature.*;
+import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
+import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
+import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
+import net.fabricmc.fabric.impl.biomes.InternalBiomeData;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -193,5 +198,23 @@ public class TerrestriaBiomes {
 						.waterFogColor(0x24a0b0)
 						.parent(null)
 		));
+
+		// 33% of Jungles will be replaced by Rainforests
+		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 3);
+		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 3);
+
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 8.0);
+		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 8.0);
+		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 8.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 8.0);
+
+		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
+
+		OverworldBiomes.setRiverBiome(CALDERA, null);
+		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
+		OverworldBiomes.setRiverBiome(CALDERA_BEACH, null);
+
+		FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
+		FabricBiomes.addSpawnBiome(RAINFOREST);
 	}
 }
