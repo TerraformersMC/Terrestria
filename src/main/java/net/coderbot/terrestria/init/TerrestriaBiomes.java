@@ -6,13 +6,14 @@ import net.coderbot.terrestria.feature.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
-import net.fabricmc.fabric.impl.biomes.InternalBiomeData;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OakTreeFeature;
 import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
@@ -20,6 +21,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 public class TerrestriaBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
+	public static OakTreeFeature TALLER_BIRCH_TREE;
 
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
@@ -30,6 +32,7 @@ public class TerrestriaBiomes {
 	public static CattailFeature CATTAIL;
 
 	public static CypressForestBiome CYPRESS_FOREST;
+	public static CypressForestBiome CYPRESS_HILLS; // TODO
 	public static JapaneseForestBiome SAKURA_FOREST;
 	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
 	public static RainforestBiome RAINFOREST;
@@ -45,6 +48,10 @@ public class TerrestriaBiomes {
 
 		SMALL_BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:small_bald_cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition())
+		);
+
+		TALLER_BIRCH_TREE = Registry.register(Registry.FEATURE, "terrestria:taller_birch_tree",
+				new OakTreeFeature(DefaultFeatureConfig::deserialize, false, 8, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), false)
 		);
 
 		SAKURA_TREE = Registry.register(Registry.FEATURE, "terrestria:sakura_tree",
@@ -86,7 +93,7 @@ public class TerrestriaBiomes {
 
 		CYPRESS_FOREST = Registry.register(Registry.BIOME, "terrestria:cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
-						.configureSurfaceBuilder(/*new CypressForestBiome.CypressSurfaceBuilder(TernarySurfaceConfig::deserialize)*/SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 						.depth(0.1F)
 						.scale(0.2F)
@@ -97,7 +104,8 @@ public class TerrestriaBiomes {
 						.parent(null),
 				13,
 				CYPRESS_TREE,
-				SMALL_BALD_CYPRESS_TREE
+				SMALL_BALD_CYPRESS_TREE,
+				TALLER_BIRCH_TREE
 		));
 
 		SAKURA_FOREST = Registry.register(Registry.BIOME, "terrestria:sakura_forest", new JapaneseForestBiome(
@@ -205,18 +213,15 @@ public class TerrestriaBiomes {
 						.parent(null)
 		));
 
-		// 33% of Jungles will be replaced by Rainforests
+		// 33% of Jungles will be replaced by Rainforest biomes
+		// 33% of Mountains will be replaced with Caldera Ridges
 		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 3);
 		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 3);
 
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 80.0);
-		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 8.0);
-		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 8.0);
-		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 8.0);
-
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.COOL, 80.0);
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.DRY, 80.0);
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.SNOWY, 80.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0);
 
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 

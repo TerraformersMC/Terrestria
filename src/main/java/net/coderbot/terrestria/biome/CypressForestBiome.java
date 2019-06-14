@@ -10,7 +10,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 
 public class CypressForestBiome extends Biome {
-	public CypressForestBiome(Biome.Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2) {
+	public CypressForestBiome(Biome.Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2, Feature<DefaultFeatureConfig> tree3) {
 		super(settings);
 
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
@@ -31,11 +31,11 @@ public class CypressForestBiome extends Biome {
 				Biome.configureFeature(
 						Feature.RANDOM_SELECTOR,
 						new RandomFeatureConfig(
-								new Feature[]{ tree1 },
-								new FeatureConfig[]{ FeatureConfig.DEFAULT },
-								new float[]{ 0.5F },
+								new Feature[]{ tree2, tree3 },
+								new FeatureConfig[]{ FeatureConfig.DEFAULT, FeatureConfig.DEFAULT },
+								new float[]{ 0.3F, 0.3F },
 
-								tree2,
+								tree1,
 								FeatureConfig.DEFAULT
 						),
 						Decorator.COUNT_EXTRA_HEIGHTMAP,
