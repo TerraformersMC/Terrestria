@@ -215,8 +215,8 @@ public class TerrestriaBiomes {
 
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
-		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 3);
-		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 3);
+		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 0.33);
+		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33);
 
 		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
