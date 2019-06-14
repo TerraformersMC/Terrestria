@@ -55,6 +55,9 @@ public class CalderaBiome extends Biome {
 		this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.SLIME, 100, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.WITCH, 5, 1, 1));
+		this.addSpawn(EntityCategory.WATER_CREATURE, new SpawnEntry(EntityType.SQUID, 3, 1, 4));
+		this.addSpawn(EntityCategory.WATER_CREATURE, new SpawnEntry(EntityType.COD, 15, 3, 6));
+		this.addSpawn(EntityCategory.WATER_CREATURE, new SpawnEntry(EntityType.SALMON, 15, 1, 5));
 	}
 
 	public static class CalderaSurfaceBuilder extends DefaultSurfaceBuilder {
