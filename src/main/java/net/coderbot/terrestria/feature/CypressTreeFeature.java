@@ -29,13 +29,13 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		int height = rand.nextInt(6) + 12;
+		int height = rand.nextInt(10) + 8;
 
 		// How much "bare trunk" there will be. (1-3)
 		int bareTrunkHeight = 1 + rand.nextInt(2);
 
 		// Maximum leaf radius.
-		double maxRadius = 2.0 + rand.nextDouble();
+		double maxRadius = 1.5 + 2.0 * rand.nextDouble();
 
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;

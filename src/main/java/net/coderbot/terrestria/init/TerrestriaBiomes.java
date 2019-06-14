@@ -19,6 +19,8 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class TerrestriaBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
+	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
+
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
 	public static JapaneseMapleBushFeature JAPANESE_MAPLE_SHRUB;
@@ -39,6 +41,10 @@ public class TerrestriaBiomes {
 	public static void init() {
 		CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
+		);
+
+		SMALL_BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:small_bald_cypress_tree",
+				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition())
 		);
 
 		SAKURA_TREE = Registry.register(Registry.FEATURE, "terrestria:sakura_tree",
@@ -80,7 +86,7 @@ public class TerrestriaBiomes {
 
 		CYPRESS_FOREST = Registry.register(Registry.BIOME, "terrestria:cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
-						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.configureSurfaceBuilder(/*new CypressForestBiome.CypressSurfaceBuilder(TernarySurfaceConfig::deserialize)*/SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 						.depth(0.1F)
 						.scale(0.2F)
@@ -89,9 +95,9 @@ public class TerrestriaBiomes {
 						.waterColor(4159204)
 						.waterFogColor(329011)
 						.parent(null),
-				10,
+				13,
 				CYPRESS_TREE,
-				CYPRESS_TREE
+				SMALL_BALD_CYPRESS_TREE
 		));
 
 		SAKURA_FOREST = Registry.register(Registry.BIOME, "terrestria:sakura_forest", new JapaneseForestBiome(
@@ -203,10 +209,14 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 3);
 		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 3);
 
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 8.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 80.0);
 		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 8.0);
 		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 8.0);
 		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 8.0);
+
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.COOL, 80.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.DRY, 80.0);
+		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.SNOWY, 80.0);
 
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 
