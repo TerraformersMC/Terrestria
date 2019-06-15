@@ -3,6 +3,8 @@ package net.coderbot.terrestria.init;
 import net.coderbot.terrestria.biome.*;
 import net.coderbot.terrestria.block.SakuraLogBlock;
 import net.coderbot.terrestria.feature.*;
+import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
+import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
@@ -22,14 +24,17 @@ public class TerrestriaBiomes {
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
 	public static OakTreeFeature TALLER_BIRCH_TREE;
-
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
 	public static JapaneseMapleBushFeature JAPANESE_MAPLE_SHRUB;
 	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
-
 	public static CattailFeature CATTAIL;
+
+	public static BeachySurfaceBuilder CALDERA_SURFACE;
+	public static BeachySurfaceBuilder BASALT_SURFACE;
+	public static CliffySurfaceBuilder CLIFF_SURFACE;
+	public static TernarySurfaceConfig BASALT_CONFIG;
 
 	public static CypressForestBiome CYPRESS_FOREST;
 	public static CypressForestBiome CYPRESS_HILLS; // TODO
@@ -40,6 +45,9 @@ public class TerrestriaBiomes {
 	public static CalderaBiome CALDERA;
 	public static CalderaBiome CALDERA_RIDGE;
 	public static CalderaBiome CALDERA_BEACH;
+	public static VolcanicIslandBiome VOLCANIC_ISLAND;
+	public static VolcanicIslandBiome VOLCANIC_ISLAND_BEACH;
+	public static VolcanicIslandBiome VOLCANIC_ISLAND_SHORE;
 
 	public static void init() {
 		CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:cypress_tree",
@@ -89,6 +97,16 @@ public class TerrestriaBiomes {
 
 		CATTAIL = Registry.register(Registry.FEATURE, "terrestria:cattail",
 				new CattailFeature(SeagrassFeatureConfig::deserialize)
+		);
+
+		CALDERA_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, Blocks.SAND.getDefaultState()));
+		BASALT_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:basalt", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 63, TerrestriaBlocks.BASALT_SAND.getDefaultState()));
+		CLIFF_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:cliff", new CliffySurfaceBuilder(TernarySurfaceConfig::deserialize, 63));
+
+		BASALT_CONFIG = new TernarySurfaceConfig (
+				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
+				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
+				TerrestriaBlocks.BASALT_DIRT.getDefaultState()
 		);
 
 		CYPRESS_FOREST = Registry.register(Registry.BIOME, "terrestria:cypress_forest", new CypressForestBiome(
@@ -176,8 +194,8 @@ public class TerrestriaBiomes {
 
 		CALDERA = Registry.register(Registry.BIOME, "terrestria:caldera", new CalderaBiome(
 				new Biome.Settings()
-						.configureSurfaceBuilder(new CalderaBiome.CalderaSurfaceBuilder(TernarySurfaceConfig::deserialize), SurfaceBuilder.SAND_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.configureSurfaceBuilder(CALDERA_SURFACE, SurfaceBuilder.SAND_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
 						.depth(1.5F)
 						.scale(0.05F)
 						.temperature(0.7F)
@@ -190,7 +208,7 @@ public class TerrestriaBiomes {
 		CALDERA_RIDGE = Registry.register(Registry.BIOME, "terrestria:caldera_ridge", new CalderaBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
 						.depth(4F)
 						.scale(0F)
 						.temperature(0F)
@@ -202,8 +220,8 @@ public class TerrestriaBiomes {
 
 		CALDERA_BEACH = Registry.register(Registry.BIOME, "terrestria:caldera_beach", new CalderaBiome(
 				new Biome.Settings()
-						.configureSurfaceBuilder(new CalderaBiome.CalderaSurfaceBuilder(TernarySurfaceConfig::deserialize), SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
-						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+						.configureSurfaceBuilder(CALDERA_SURFACE, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 						.depth(2.25F)
 						.scale(0F)
 						.temperature(0.7F)
@@ -213,10 +231,51 @@ public class TerrestriaBiomes {
 						.parent(null)
 		));
 
+		VOLCANIC_ISLAND = Registry.register(Registry.BIOME, "terrestria:volcanic_island", new VolcanicIslandBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(CLIFF_SURFACE, BASALT_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
+						.depth(0.1F)
+						.scale(0.2F)
+						.temperature(0.9F)
+						.downfall(0.9F)
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.parent(null)
+		));
+
+		VOLCANIC_ISLAND_SHORE = Registry.register(Registry.BIOME, "terrestria:volcanic_island_shore", new VolcanicIslandBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(CLIFF_SURFACE, BASALT_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
+						.depth(0.05F)
+						.scale(0.05F)
+						.temperature(0.9F)
+						.downfall(0.9F)
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.parent(null)
+		));
+
+		VOLCANIC_ISLAND_BEACH = Registry.register(Registry.BIOME, "terrestria:volcanic_island_beach", new VolcanicIslandBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(BASALT_SURFACE, BASALT_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
+						.depth(0F)
+						.scale(0.05F)
+						.temperature(0.9F)
+						.downfall(0.9F)
+						.waterColor(0x54d3c0)
+						.waterFogColor(0x24a0b0)
+						.parent(null)
+		));
+
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
+		// 33% of Deep Oceans will be replaced with Volcanic Islands
 		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 0.33);
 		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33);
+		OverworldBiomes.addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND,0.33);
 
 		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
@@ -228,6 +287,12 @@ public class TerrestriaBiomes {
 		OverworldBiomes.setRiverBiome(CALDERA, null);
 		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
 		OverworldBiomes.setRiverBiome(CALDERA_BEACH, null);
+
+		OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, 1);
+		OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_BEACH, 1);
+		OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND, null);
+		OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_SHORE, null);
+		OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_BEACH, null);
 
 		FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
 		FabricBiomes.addSpawnBiome(RAINFOREST);

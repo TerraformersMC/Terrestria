@@ -33,6 +33,7 @@ public class TerrestriaItems {
 
 	public static BlockItem BASALT;
 	public static BlockItem BASALT_SAND;
+	public static BlockItem BASALT_DIRT;
 	public static BlockItem BASALT_GRASS_BLOCK;
 
 	public static void init() {
@@ -62,6 +63,7 @@ public class TerrestriaItems {
 
 		BASALT = register("basalt", TerrestriaBlocks.BASALT);
 		BASALT_SAND = register("basalt_sand", TerrestriaBlocks.BASALT_SAND);
+		BASALT_DIRT = register("basalt_dirt", TerrestriaBlocks.BASALT_DIRT);
 		BASALT_GRASS_BLOCK = register("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
 	}
 

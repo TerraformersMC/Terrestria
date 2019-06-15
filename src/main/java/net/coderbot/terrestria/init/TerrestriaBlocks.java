@@ -37,7 +37,7 @@ public class TerrestriaBlocks {
 
 	// Volcanic Island blocks
 	public static SandBlock BASALT_SAND;
-	//public static Block BASALT_DIRT;
+	public static Block BASALT_DIRT;
 	public static Block BASALT_GRASS_BLOCK;
 	public static Block BASALT;
 
@@ -102,7 +102,7 @@ public class TerrestriaBlocks {
 		));
 
 		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, Block.Settings.copy(Blocks.SAND)));
-		//BASALT_DIRT = register("basalt_dirt", new Block(Block.Settings.copy(Blocks.DIRT)));
+		BASALT_DIRT = register("basalt_dirt", new Block(Block.Settings.copy(Blocks.DIRT)));
 		BASALT_GRASS_BLOCK = register("basalt_grass_block", new BasaltGrassBlock(Block.Settings.copy(Blocks.GRASS_BLOCK)));
 		BASALT = register("basalt", new Block(Block.Settings.copy(Blocks.STONE)));
 

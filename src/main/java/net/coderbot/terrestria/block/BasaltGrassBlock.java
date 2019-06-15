@@ -36,7 +36,7 @@ public class BasaltGrassBlock extends GrassBlock {
 	public void onScheduledTick(BlockState state, World world, BlockPos pos, Random random) {
 		if (!world.isClient) {
 			if (!canSurvive(state, world, pos)) {
-				world.setBlockState(pos, TerrestriaBlocks.BASALT_SAND.getDefaultState());
+				world.setBlockState(pos, TerrestriaBlocks.BASALT_DIRT.getDefaultState());
 			} else if (world.getLightLevel(pos.up()) >= 4) {
 				if (world.getLightLevel(pos.up()) >= 9) {
 					BlockState defaultState = this.getDefaultState();
@@ -44,7 +44,7 @@ public class BasaltGrassBlock extends GrassBlock {
 					for(int int_1 = 0; int_1 < 4; ++int_1) {
 						BlockPos blockPos_2 = pos.add(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
 
-						if (world.getBlockState(blockPos_2).getBlock() == TerrestriaBlocks.BASALT_SAND && canSpread(defaultState, world, blockPos_2)) {
+						if (world.getBlockState(blockPos_2).getBlock() == TerrestriaBlocks.BASALT_DIRT && canSpread(defaultState, world, blockPos_2)) {
 							world.setBlockState(blockPos_2, defaultState.with(SNOWY, world.getBlockState(blockPos_2.up()).getBlock() == Blocks.SNOW));
 						}
 					}
