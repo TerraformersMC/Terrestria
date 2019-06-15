@@ -71,6 +71,10 @@
   "block.terrestria.sakura_fence_gate": "Sakura Fence Gate",
   "block.terrestria.sakura_door": "Sakura Door",
 
+  "block.terrestria.basalt": "Basalt",
+  "block.terrestria.basalt_grass_block": "Basalt Grass Block",
+  "block.terrestria.basalt_sand": "Basalt Sand",
+
   "block.terrestria.japanese_maple_shrub_sapling": "Japanese Maple Shrub Sapling",
   "block.terrestria.japanese_maple_shrub_leaves": "Japanese Maple Shrub Leaves"
 }

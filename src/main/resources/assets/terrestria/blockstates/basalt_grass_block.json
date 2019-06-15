@@ -1,0 +1,11 @@
+{
+  "variants": {
+	"snowy=false": [
+	  { "model": "terrestria:block/basalt_grass_block" },
+	  { "model": "terrestria:block/basalt_grass_block", "y": 90 },
+	  { "model": "terrestria:block/basalt_grass_block", "y": 180 },
+	  { "model": "terrestria:block/basalt_grass_block", "y": 270 }
+	],
+	"snowy=true":  { "model": "terrestria:block/basalt_grass_block_snow" }
+  }
+}

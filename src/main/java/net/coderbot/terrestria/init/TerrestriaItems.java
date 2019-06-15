@@ -31,6 +31,10 @@ public class TerrestriaItems {
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
 	public static BlockItem SAKURA_SAPLING;
 
+	public static BlockItem BASALT;
+	public static BlockItem BASALT_SAND;
+	public static BlockItem BASALT_GRASS_BLOCK;
+
 	public static void init() {
 		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
 		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
@@ -55,6 +59,10 @@ public class TerrestriaItems {
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		SAKURA_SAPLING = register("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
+
+		BASALT = register("basalt", TerrestriaBlocks.BASALT);
+		BASALT_SAND = register("basalt_sand", TerrestriaBlocks.BASALT_SAND);
+		BASALT_GRASS_BLOCK = register("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
 	}
 
 	private static BlockItem register(String name, Block block) {
