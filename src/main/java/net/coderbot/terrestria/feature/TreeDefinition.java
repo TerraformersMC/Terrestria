@@ -31,6 +31,16 @@ public final class TreeDefinition {
 
 			return mega;
 		}
+
+		public Palm toPalm(BlockState bark) {
+			Palm palm = new Palm();
+
+			palm.wood = wood;
+			palm.leaves = leaves;
+			palm.bark = bark;
+
+			return palm;
+		}
 	}
 
 	public static class Sakura extends Basic {
@@ -40,6 +50,10 @@ public final class TreeDefinition {
 
 	public static class Mega extends Basic {
 		public BlockState woodQuarter;
+		public BlockState bark;
+	}
+
+	public static class Palm extends Basic {
 		public BlockState bark;
 	}
 }

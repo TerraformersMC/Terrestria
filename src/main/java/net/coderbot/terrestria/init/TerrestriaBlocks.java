@@ -34,6 +34,7 @@ public class TerrestriaBlocks {
 	public static CustomSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static CustomSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static CustomSaplingBlock SAKURA_SAPLING;
+	public static CustomSaplingBlock PALM_SAPLING;
 
 	// Volcanic Island blocks
 	public static SandBlock BASALT_SAND;
@@ -99,6 +100,10 @@ public class TerrestriaBlocks {
 
 		SAKURA_SAPLING = register("sakura_sapling", new CustomSaplingBlock (
 				new CustomSaplingGenerator(rand -> TerrestriaBiomes.SAKURA_TREE)
+		));
+
+		PALM_SAPLING = register("palm_sapling", new CustomSaplingBlock (
+				new CustomSaplingGenerator(rand -> TerrestriaBiomes.PALM_TREE)
 		));
 
 		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, Block.Settings.copy(Blocks.SAND)));

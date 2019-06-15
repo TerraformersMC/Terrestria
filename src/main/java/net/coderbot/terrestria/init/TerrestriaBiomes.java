@@ -30,6 +30,7 @@ public class TerrestriaBiomes {
 	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
+	public static PalmTreeFeature PALM_TREE;
 
 	public static BeachySurfaceBuilder CALDERA_SURFACE;
 	public static BeachySurfaceBuilder BASALT_SURFACE;
@@ -99,8 +100,23 @@ public class TerrestriaBiomes {
 				new CattailFeature(SeagrassFeatureConfig::deserialize)
 		);
 
-		CALDERA_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, Blocks.SAND.getDefaultState()));
-		BASALT_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:basalt", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 63, TerrestriaBlocks.BASALT_SAND.getDefaultState()));
+		// TODO: Palm wood
+		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic();
+		palmDefinition.wood = Blocks.JUNGLE_LOG.getDefaultState();
+		palmDefinition.leaves = Blocks.JUNGLE_LEAVES.getDefaultState();
+
+		PALM_TREE = Registry.register(Registry.FEATURE, "terrestria:palm_tree",
+				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.toPalm(Blocks.JUNGLE_WOOD.getDefaultState()))
+		);
+
+		CALDERA_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
+
+		BASALT_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:basalt", new BeachySurfaceBuilder(
+				TernarySurfaceConfig::deserialize,
+				63,
+				v -> v > 1.0 ? TerrestriaBlocks.BASALT_SAND.getDefaultState() : Blocks.SAND.getDefaultState()
+		));
+
 		CLIFF_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:cliff", new CliffySurfaceBuilder(TernarySurfaceConfig::deserialize, 63));
 
 		BASALT_CONFIG = new TernarySurfaceConfig (
@@ -241,7 +257,10 @@ public class TerrestriaBiomes {
 						.downfall(0.9F)
 						.waterColor(0x54d3c0)
 						.waterFogColor(0x24a0b0)
-						.parent(null)
+						.parent(null),
+				5,
+				PALM_TREE,
+				PALM_TREE
 		));
 
 		VOLCANIC_ISLAND_SHORE = Registry.register(Registry.BIOME, "terrestria:volcanic_island_shore", new VolcanicIslandBiome(
@@ -254,7 +273,10 @@ public class TerrestriaBiomes {
 						.downfall(0.9F)
 						.waterColor(0x54d3c0)
 						.waterFogColor(0x24a0b0)
-						.parent(null)
+						.parent(null),
+				2,
+				PALM_TREE,
+				PALM_TREE
 		));
 
 		VOLCANIC_ISLAND_BEACH = Registry.register(Registry.BIOME, "terrestria:volcanic_island_beach", new VolcanicIslandBiome(
@@ -267,7 +289,10 @@ public class TerrestriaBiomes {
 						.downfall(0.9F)
 						.waterColor(0x54d3c0)
 						.waterFogColor(0x24a0b0)
-						.parent(null)
+						.parent(null),
+				2,
+				PALM_TREE,
+				PALM_TREE
 		));
 
 		// 33% of Jungles will be replaced by Rainforest biomes

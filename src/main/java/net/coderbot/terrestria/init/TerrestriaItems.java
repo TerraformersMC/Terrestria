@@ -30,6 +30,7 @@ public class TerrestriaItems {
 	public static BlockItem JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
 	public static BlockItem SAKURA_SAPLING;
+	public static BlockItem PALM_SAPLING;
 
 	public static BlockItem BASALT;
 	public static BlockItem BASALT_SAND;
@@ -60,6 +61,7 @@ public class TerrestriaItems {
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		SAKURA_SAPLING = register("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
+		PALM_SAPLING = register("palm_sapling", TerrestriaBlocks.PALM_SAPLING);
 
 		BASALT = register("basalt", TerrestriaBlocks.BASALT);
 		BASALT_SAND = register("basalt_sand", TerrestriaBlocks.BASALT_SAND);
