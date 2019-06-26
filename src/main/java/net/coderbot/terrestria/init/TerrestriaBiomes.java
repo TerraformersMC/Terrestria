@@ -39,7 +39,7 @@ public class TerrestriaBiomes {
 	public static TernarySurfaceConfig BASALT_CONFIG;
 
 	public static CypressForestBiome CYPRESS_FOREST;
-	public static CypressForestBiome CYPRESS_HILLS; // TODO
+	// a lpublic static CypressForestBiome CYPRESS_HILLS; // TODO
 	public static JapaneseForestBiome SAKURA_FOREST;
 	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
 	public static RainforestBiome RAINFOREST;

@@ -28,9 +28,7 @@ public class EaseBiomeEdgeLayerMixin {
 			info.setReturnValue(MOUNTAINS_ID);
 		}
 
-		if(center == VOLCANIC_ISLAND_ID) {
-			// TODO
-		} else if(hasNeighbor(neighbor1, neighbor2, neighbor3, neighbor4, VOLCANIC_ISLAND_ID)) {
+		if(center != VOLCANIC_ISLAND_ID && hasNeighbor(neighbor1, neighbor2, neighbor3, neighbor4, VOLCANIC_ISLAND_ID)) {
 			info.setReturnValue(VOLCANIC_ISLAND_SHORE_ID);
 		}
 	}
