@@ -31,6 +31,7 @@ public class TerrestriaBiomes {
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
+	public static VolcanoFeature VOLCANO;
 
 	public static BeachySurfaceBuilder CALDERA_SURFACE;
 	public static BeachySurfaceBuilder BASALT_SURFACE;
@@ -107,6 +108,10 @@ public class TerrestriaBiomes {
 
 		PALM_TREE = Registry.register(Registry.FEATURE, "terrestria:palm_tree",
 				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.toPalm(Blocks.JUNGLE_WOOD.getDefaultState()))
+		);
+
+		VOLCANO = Registry.register(Registry.FEATURE, "terrestria:volcano",
+				new VolcanoFeature(DefaultFeatureConfig::deserialize, false)
 		);
 
 		CALDERA_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -260,7 +265,8 @@ public class TerrestriaBiomes {
 						.parent(null),
 				5,
 				PALM_TREE,
-				PALM_TREE
+				PALM_TREE,
+				0.01F
 		));
 
 		VOLCANIC_ISLAND_SHORE = Registry.register(Registry.BIOME, "terrestria:volcanic_island_shore", new VolcanicIslandBiome(
@@ -276,7 +282,8 @@ public class TerrestriaBiomes {
 						.parent(null),
 				2,
 				PALM_TREE,
-				PALM_TREE
+				PALM_TREE,
+				0.005F
 		));
 
 		VOLCANIC_ISLAND_BEACH = Registry.register(Registry.BIOME, "terrestria:volcanic_island_beach", new VolcanicIslandBiome(
@@ -292,7 +299,8 @@ public class TerrestriaBiomes {
 						.parent(null),
 				2,
 				PALM_TREE,
-				PALM_TREE
+				PALM_TREE,
+				0
 		));
 
 		// 33% of Jungles will be replaced by Rainforest biomes
