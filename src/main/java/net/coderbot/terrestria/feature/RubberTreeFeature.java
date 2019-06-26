@@ -1,7 +1,6 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -18,14 +17,12 @@ import java.util.function.Function;
 
 // TODO: These should be properly spawned and implemented. For the future.
 public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private BlockState wood;
-	private BlockState leaves;
+	private TreeDefinition.Basic tree;
 
 	public RubberTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
-		this.wood = tree.wood;
-		this.leaves = tree.leaves;
+		this.tree = tree;
 	}
 
 	@Override
@@ -81,7 +78,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			for(int dx = 0; dx < 3; dx++) {
 				for(int dz = 0; dz < 3; dz++) {
 					pos.set(x + dx, pos.getY(), z + dz);
-					setBlockState(blocks, world, pos, wood, boundingBox);
+					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
 			}
 
@@ -91,7 +88,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		for(int dx = 0; dx < 3; dx++) {
 			for(int dz = 0; dz < 3; dz++) {
 				pos.set(x + dx, pos.getY(), z + dz);
-				setBlockState(blocks, world, pos, leaves, boundingBox);
+				setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 			}
 		}
 	}
@@ -141,14 +138,14 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 					break;
 				}
 
-				setBlockState(blocks, world, pos, wood, boundingBox);
+				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 
 				for(Direction direction: Direction.values()) {
 					pos.set(x + movedX, y + baseY + offsetY, z + movedZ);
 					pos.setOffset(direction);
 
 					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, leaves, boundingBox);
+						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 					}
 				}
 			}

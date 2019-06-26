@@ -1,7 +1,7 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import net.minecraft.block.BlockState;
+import io.github.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -16,14 +16,12 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private BlockState wood;
-	private BlockState leaves;
+	private TreeDefinition.Basic tree;
 
 	public CypressTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
-		this.wood = tree.wood;
-		this.leaves = tree.leaves;
+		this.tree = tree;
 	}
 
 	@Override
@@ -96,12 +94,12 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	// Grows the center trunk and top leaves of the tree.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < height; i++) {
-			setBlockState(blocks, world, pos, wood, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 
 		for(int i = 0; i < 4; i++) {
-			setBlockState(blocks, world, pos, leaves, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
@@ -124,7 +122,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 			Shapes.circle(pos, radius, position -> {
 				if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-					setBlockState(blocks, world, pos, leaves, boundingBox);
+					setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 				}
 			});
 		}

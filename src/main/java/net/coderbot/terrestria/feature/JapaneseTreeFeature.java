@@ -1,6 +1,7 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
+import io.github.terraformersmc.terraform.util.Shapes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -15,7 +16,7 @@ import java.util.function.Function;
 public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	protected TreeDefinition.Basic tree;
 
-	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
 		this.tree = tree;
@@ -95,14 +96,14 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 	// Grows the center trunk and top leaves of the tree.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < height; i++) {
-			setBlockState(blocks, world, pos, tree.wood, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
 		if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-			setBlockState(blocks, world, pos, tree.leaves, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 		}
 	}
 

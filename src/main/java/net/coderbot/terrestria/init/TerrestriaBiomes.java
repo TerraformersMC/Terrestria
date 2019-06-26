@@ -1,7 +1,8 @@
 package net.coderbot.terrestria.init;
 
+import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.biome.*;
-import net.coderbot.terrestria.block.SakuraLogBlock;
+import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import net.coderbot.terrestria.feature.*;
 import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
 import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
@@ -26,7 +27,7 @@ public class TerrestriaBiomes {
 	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static JapaneseTreeFeature SAKURA_TREE;
 	public static JapaneseTreeFeature JAPANESE_MAPLE_TREE;
-	public static JapaneseMapleBushFeature JAPANESE_MAPLE_SHRUB;
+	public static ShrubFeature JAPANESE_MAPLE_SHRUB;
 	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
@@ -39,7 +40,7 @@ public class TerrestriaBiomes {
 	public static TernarySurfaceConfig BASALT_CONFIG;
 
 	public static CypressForestBiome CYPRESS_FOREST;
-	// a lpublic static CypressForestBiome CYPRESS_HILLS; // TODO
+	// public static CypressForestBiome CYPRESS_HILLS; // TODO
 	public static JapaneseForestBiome SAKURA_FOREST;
 	public static JapaneseForestBiome JAPANESE_MAPLE_FOREST;
 	public static RainforestBiome RAINFOREST;
@@ -66,7 +67,7 @@ public class TerrestriaBiomes {
 
 		SAKURA_TREE = Registry.register(Registry.FEATURE, "terrestria:sakura_tree",
 				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura (
-						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SakuraLogBlock.HAS_LEAVES, true),
+						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
 						TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState()
 				))
 		);
@@ -75,12 +76,13 @@ public class TerrestriaBiomes {
 				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
-		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic();
-		shrubDefinition.wood = TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState();
-		shrubDefinition.leaves = TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState();
+		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic (
+				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
+				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
+		);
 
 		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "terrestria:japanese_maple_shrub",
-				new JapaneseMapleBushFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
+				new ShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = Registry.register(Registry.FEATURE, "terrestria:rainbow_eucalyptus_tree",
@@ -98,16 +100,17 @@ public class TerrestriaBiomes {
 		);
 
 		CATTAIL = Registry.register(Registry.FEATURE, "terrestria:cattail",
-				new CattailFeature(SeagrassFeatureConfig::deserialize)
+				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
 		);
 
-		// TODO: Palm wood
-		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic();
-		palmDefinition.wood = Blocks.JUNGLE_LOG.getDefaultState();
-		palmDefinition.leaves = Blocks.JUNGLE_LEAVES.getDefaultState();
+		// TODO: WithBark wood
+		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic (
+				Blocks.JUNGLE_LOG.getDefaultState(),
+				Blocks.JUNGLE_LEAVES.getDefaultState()
+		);
 
 		PALM_TREE = Registry.register(Registry.FEATURE, "terrestria:palm_tree",
-				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.toPalm(Blocks.JUNGLE_WOOD.getDefaultState()))
+				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
 		);
 
 		VOLCANO = Registry.register(Registry.FEATURE, "terrestria:volcano",

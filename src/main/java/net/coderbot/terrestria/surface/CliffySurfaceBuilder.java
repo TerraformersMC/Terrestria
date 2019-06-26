@@ -4,7 +4,6 @@ import com.mojang.datafixers.Dynamic;
 import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap;
@@ -12,13 +11,12 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.DefaultSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
-import org.lwjgl.system.CallbackI;
 
 import java.util.Random;
 import java.util.function.Function;
 
 public class CliffySurfaceBuilder extends DefaultSurfaceBuilder {
-	int seaLevel;
+	private int seaLevel;
 
 	public CliffySurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function, int seaLevel) {
 		super(function);

@@ -27,7 +27,7 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	protected void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
-			setBlockState(blocks, world, pos, tree.wood.with(LogBlock.AXIS, direction.getAxis()), boundingBox);
+			setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), boundingBox);
 		}
 
 		pos.setOffset(direction);

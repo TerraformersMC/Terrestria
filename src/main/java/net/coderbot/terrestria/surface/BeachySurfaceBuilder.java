@@ -26,7 +26,7 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 		this.sand = sand;
 	}
 
-	public void generateBeach(Chunk chunk, int x, int z, double noise, BlockState water) {
+	private void generateBeach(Chunk chunk, int x, int z, double noise, BlockState water) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(x & 15, seaLevel - 1, z & 15);
 		BlockState sandState = sand.apply(noise);
 
@@ -42,10 +42,7 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 
 				pos.setOffset(Direction.DOWN);
 			}
-		} else if(height > seaLevel + 2) {
-			//top = Blocks.GRASS_BLOCK.getDefaultState();
-			//filler = Blocks.DIRT.getDefaultState();
-		} else {
+		} else if(height <= seaLevel + 2) {
 			int solid = 0;
 
 			while(pos.getY() > 0) {

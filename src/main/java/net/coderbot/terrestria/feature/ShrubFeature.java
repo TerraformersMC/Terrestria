@@ -1,7 +1,7 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import net.coderbot.terrestria.block.LeafPileBlock;
+import io.github.terraformersmc.terraform.block.LeafPileBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;
@@ -13,10 +13,10 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class JapaneseMapleBushFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Basic tree;
 
-	public JapaneseMapleBushFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	public ShrubFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 		this.tree = tree;
 	}
@@ -26,7 +26,7 @@ public class JapaneseMapleBushFeature extends AbstractTreeFeature<DefaultFeature
 
 		if (isNaturalDirtOrGrass(world, pos)) {
 			pos = pos.up();
-			this.setBlockState(blocks, world, pos, this.tree.wood, boundingBox);
+			this.setBlockState(blocks, world, pos, this.tree.getLog(), boundingBox);
 
 			for(int y = pos.getY(); y <= pos.getY() + 2; ++y) {
 				int dY = y - pos.getY();
@@ -42,7 +42,7 @@ public class JapaneseMapleBushFeature extends AbstractTreeFeature<DefaultFeature
 							BlockPos candidate = new BlockPos(x, y, z);
 
 							if (isAirOrLeaves(world, candidate) || world.testBlockState(candidate, state -> state.getBlock() instanceof LeafPileBlock)) {
-								this.setBlockState(blocks, world, candidate, this.tree.leaves, boundingBox);
+								this.setBlockState(blocks, world, candidate, this.tree.getLeaves(), boundingBox);
 							}
 						}
 					}

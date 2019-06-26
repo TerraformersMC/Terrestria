@@ -2,13 +2,11 @@ package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
@@ -17,9 +15,9 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Palm tree;
+	private TreeDefinition.WithBark tree;
 
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Palm tree) {
+	public PalmTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.WithBark tree) {
 		super(function, notify);
 
 		this.tree = tree;
@@ -58,7 +56,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	// Grows the bent trunk of the tree.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random rand, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < 2; i++) {
-			setBlockState(blocks, world, pos, tree.wood, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 
@@ -69,7 +67,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 
 		for(int i = 2; i < height; i++) {
 			if(run++ == 3) {
-				setBlockState(blocks, world, pos, tree.bark, boundingBox);
+				setBlockState(blocks, world, pos, tree.getBark(), boundingBox);
 
 				if(rand.nextBoolean()) {
 					pos.setOffset(velocityX, 0, 0);
@@ -78,9 +76,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 				}
 				run = 0;
 
-				setBlockState(blocks, world, pos, tree.bark, boundingBox);
+				setBlockState(blocks, world, pos, tree.getBark(), boundingBox);
 			} else {
-				setBlockState(blocks, world, pos, tree.wood, boundingBox);
+				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			}
 
 			pos.setOffset(Direction.UP);
@@ -89,14 +87,14 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 
 	private void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
 		if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-			setBlockState(blocks, world, pos, tree.leaves, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 		}
 	}
 
 	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, MutableIntBoundingBox boundingBox) {
 		BlockPos center = pos.toImmutable();
 
-		setBlockState(blocks, world, pos, tree.wood, boundingBox);
+		setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 
 		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(0, 1, 0), boundingBox);
 		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(1, 1, 0), boundingBox);

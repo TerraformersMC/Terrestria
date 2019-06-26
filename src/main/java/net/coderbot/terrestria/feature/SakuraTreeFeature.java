@@ -1,7 +1,8 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import net.coderbot.terrestria.block.SakuraLogBlock;
+import io.github.terraformersmc.terraform.block.SmallLogBlock;
+import io.github.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.tag.FluidTags;
@@ -49,7 +50,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 
 			if(AbstractTreeFeature.isNaturalDirtOrGrass(world, top.down()) ||
 					world.testBlockState(top.down(), state -> state.getFluidState().getFluid().matches(FluidTags.WATER))) {
-				setBlockState(blocks, world, top, tree.leafPile, boundingBox);
+				setBlockState(blocks, world, top, tree.getLeafPile(), boundingBox);
 			}
 		});
 	}
@@ -58,29 +59,29 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 	protected void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < length; i++) {
 			pos.setOffset(direction);
-			setBlockState(blocks, world, pos, tree.wood, boundingBox);
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 		}
 	}
 
 	@Override
 	protected void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
 		for(BlockPos log: blocks) {
-			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SakuraLogBlock && tested.get(SakuraLogBlock.HAS_LEAVES));
+			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
 
-			Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SakuraLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
+			Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
 
 			setBlockState(
 					blocks,
 					world,
 					log,
-					tree.wood
-							.with(SakuraLogBlock.UP, world.testBlockState(log.up(), tester))
-							.with(SakuraLogBlock.DOWN, world.testBlockState(log.down(), tester))
-							.with(SakuraLogBlock.NORTH, world.testBlockState(log.north(), tester))
-							.with(SakuraLogBlock.EAST, world.testBlockState(log.east(), tester))
-							.with(SakuraLogBlock.SOUTH, world.testBlockState(log.south(), tester))
-							.with(SakuraLogBlock.WEST, world.testBlockState(log.west(), tester))
-							.with(SakuraLogBlock.HAS_LEAVES, leaves),
+					tree.getLog()
+							.with(SmallLogBlock.UP, world.testBlockState(log.up(), tester))
+							.with(SmallLogBlock.DOWN, world.testBlockState(log.down(), tester))
+							.with(SmallLogBlock.NORTH, world.testBlockState(log.north(), tester))
+							.with(SmallLogBlock.EAST, world.testBlockState(log.east(), tester))
+							.with(SmallLogBlock.SOUTH, world.testBlockState(log.south(), tester))
+							.with(SmallLogBlock.WEST, world.testBlockState(log.west(), tester))
+							.with(SmallLogBlock.HAS_LEAVES, leaves),
 					boundingBox
 			);
 		}
@@ -88,8 +89,8 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 
 	@Override
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
-		if(world.testBlockState(pos, candidate -> candidate.getBlock() instanceof SakuraLogBlock)) {
-			setBlockState(blocks, world, pos, tree.woodLeaves, boundingBox);
+		if(world.testBlockState(pos, candidate -> candidate.getBlock() instanceof SmallLogBlock)) {
+			setBlockState(blocks, world, pos, tree.getLogLeaves(), boundingBox);
 		} else {
 			super.tryPlaceLeaves(blocks, world, pos, boundingBox);
 		}

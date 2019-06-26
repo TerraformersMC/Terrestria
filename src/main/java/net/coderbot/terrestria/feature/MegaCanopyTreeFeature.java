@@ -1,7 +1,8 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import net.coderbot.terrestria.block.QuarterLogBlock;
+import io.github.terraformersmc.terraform.block.QuarterLogBlock;
+import io.github.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;
@@ -128,16 +129,16 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 		for(int i = 0; i < height; i++) {
 			pos.set(x, y + i, z);
-			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
+			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
 
 			pos.set(x + 1, y + i, z);
-			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), boundingBox);
+			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), boundingBox);
 
 			pos.set(x, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), boundingBox);
+			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), boundingBox);
 
 			pos.set(x + 1, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.woodQuarter.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
+			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
 		}
 	}
 
@@ -162,7 +163,7 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 			Shapes.line(pos, offset, position -> {
 				if(!world.testBlockState(position, candidate -> candidate.getBlock() instanceof QuarterLogBlock)) {
-					setBlockState(blocks, world, pos, tree.wood, boundingBox);
+					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
 			});
 
@@ -187,7 +188,7 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 				Shapes.circle(pos, layerRadius, position -> {
 					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.leaves, boundingBox);
+						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 					}
 				});
 
@@ -216,7 +217,7 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 		for(int i = 0; i < height; i++) {
 			if(canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				setBlockState(blocks, world, bottom, tree.bark, boundingBox);
+				setBlockState(blocks, world, bottom, tree.getBark(), boundingBox);
 			}
 
 			bottom.setOffset(Direction.UP);
