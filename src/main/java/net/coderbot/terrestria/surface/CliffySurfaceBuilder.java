@@ -62,7 +62,7 @@ public class CliffySurfaceBuilder extends DefaultSurfaceBuilder {
 
 			chunk.setBlockState(pos, TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(), false);
 		} else {
-			TerrestriaBiomes.BASALT_SURFACE.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, seaLevel);
+			TerrestriaBiomes.BASALT_SURFACE.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, unknown5);
 		}
 	}
 }
