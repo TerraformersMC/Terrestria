@@ -8,6 +8,8 @@ import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 
+// This class is an entrypoint
+@SuppressWarnings("unused")
 public class TerrestriaClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {

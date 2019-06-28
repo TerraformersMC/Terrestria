@@ -11,6 +11,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
+// This class exports public block constants, these fields have to be public
+@SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
 	public static WoodBlocks RUBBER;
 	public static WoodBlocks CYPRESS;

@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 
 public class VolcanicIslandBiome extends CalderaBiome {
-	public VolcanicIslandBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2, float volcanoChance) {
+	public VolcanicIslandBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2) {
 		super(settings);
 
 		this.addFeature(

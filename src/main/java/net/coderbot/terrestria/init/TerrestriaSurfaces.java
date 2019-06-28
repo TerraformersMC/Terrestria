@@ -9,6 +9,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
+// This class exports public surface constants, these fields have to be public
+@SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
 	public static BeachySurfaceBuilder CALDERA_SURFACE;
 	public static BeachySurfaceBuilder BASALT_SURFACE;

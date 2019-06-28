@@ -1,6 +1,6 @@
 package net.coderbot.terrestria.biome;
 
-import net.coderbot.terrestria.init.TerrestriaBiomes;
+import net.coderbot.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -52,7 +52,7 @@ public class CypressSwampBiome extends Biome {
 
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Biome.configureFeature (
-						TerrestriaBiomes.CATTAIL,
+						TerrestriaFeatures.CATTAIL,
 						new SeagrassFeatureConfig(80, 0.3D),
 						Decorator.TOP_SOLID_HEIGHTMAP,
 						DecoratorConfig.DEFAULT

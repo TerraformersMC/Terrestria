@@ -30,7 +30,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private int centerX;
 	private int centerZ;
 
-	public VolcanoGenerator(Random random, int centerX, int centerZ, Biome biome) {
+	VolcanoGenerator(Random random, int centerX, int centerZ, Biome biome) {
 		super(TerrestriaFeatures.VOLCANO_PIECE, 0);
 		this.setOrientation(null);
 

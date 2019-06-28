@@ -1,8 +1,8 @@
 package net.coderbot.terrestria.surface;
 
 import com.mojang.datafixers.Dynamic;
-import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
+import net.coderbot.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -62,7 +62,7 @@ public class CliffySurfaceBuilder extends DefaultSurfaceBuilder {
 
 			chunk.setBlockState(pos, TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(), false);
 		} else {
-			TerrestriaBiomes.BASALT_SURFACE.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, unknown5);
+			TerrestriaSurfaces.BASALT_SURFACE.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, unknown5);
 		}
 	}
 }

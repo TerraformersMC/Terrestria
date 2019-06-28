@@ -7,6 +7,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+// This class exports public item constants, these fields have to be public
+@SuppressWarnings("WeakerAccess")
 public class TerrestriaItems {
 	public static WoodItems RUBBER;
 	public static WoodItems CYPRESS;

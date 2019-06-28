@@ -4,6 +4,8 @@ import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
 
+// This class exports public utilities, these methods should be public
+@SuppressWarnings("WeakerAccess")
 public class SimpleRadiusNoise {
 	private final long seed;
 	private final double[] noise;

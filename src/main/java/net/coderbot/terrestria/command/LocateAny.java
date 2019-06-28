@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.Feature;
  * Extended version of /locate to locate any structure
  */
 public class LocateAny {
-    private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.locate.failed", new Object[0]));
+    private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.locate.failed"));
 
 	public static void register() {
 		CommandRegistry.INSTANCE.register(false, dispatcher -> {
@@ -35,9 +35,9 @@ public class LocateAny {
             throw FAILED_EXCEPTION.create();
         } else {
             int blockDistance = MathHelper.floor(getDistance(position.getX(), position.getZ(), found.getX(), found.getZ()));
-            Component component_1 = Components.bracketed(new TranslatableComponent("chat.coordinates", found.getX(), "~", found.getZ())).modifyStyle((style_1) -> {
-                style_1.setColor(ChatFormat.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + found.getX() + " ~ " + found.getZ())).setHoverEvent(new HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, new TranslatableComponent("chat.coordinates.tooltip", new Object[0])));
-            });
+            Component component_1 = Components.bracketed(new TranslatableComponent("chat.coordinates", found.getX(), "~", found.getZ())).modifyStyle((style_1) ->
+                style_1.setColor(ChatFormat.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + found.getX() + " ~ " + found.getZ())).setHoverEvent(new HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, new TranslatableComponent("chat.coordinates.tooltip")))
+            );
             source.sendFeedback(new TranslatableComponent("commands.locate.success", structure, component_1, blockDistance), false);
             return blockDistance;
         }

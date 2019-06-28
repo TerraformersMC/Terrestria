@@ -2,6 +2,7 @@ package net.coderbot.terrestria.feature;
 
 import net.minecraft.block.BlockState;
 
+
 public final class TreeDefinition {
 	// wrapper class kthxbye
 	private TreeDefinition() {}
@@ -36,6 +37,8 @@ public final class TreeDefinition {
 		}
 	}
 
+	// This class exports public utilities / constants, these methods should be public
+	@SuppressWarnings("WeakerAccess")
 	public static class Sakura extends Basic {
 		private BlockState logLeaves;
 		private BlockState leafPile;
@@ -56,6 +59,8 @@ public final class TreeDefinition {
 		}
 	}
 
+	// This class exports public utilities / constants, these methods should be public
+	@SuppressWarnings("WeakerAccess")
 	public static class WithBark extends Basic {
 		private BlockState bark;
 
@@ -70,6 +75,8 @@ public final class TreeDefinition {
 		}
 	}
 
+	// This class exports public utilities / constants, these methods should be public
+	@SuppressWarnings("WeakerAccess")
 	public static class Mega extends WithBark {
 		private BlockState logQuarter;
 

@@ -7,11 +7,9 @@ import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
@@ -20,11 +18,11 @@ import java.util.function.Function;
 
 public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 	//
-	public static final int VOLCANO_SPACING = 6;
+	private static final int VOLCANO_SPACING = 6;
 
 	// How many chunks should be in between each volcano at least
-	public static final int VOLCANO_SEPARATION = 3;
-	public static final int SEED_MODIFIER = 0x0401C480;
+	private static final int VOLCANO_SEPARATION = 3;
+	private static final int SEED_MODIFIER = 0x0401C480;
 
 	public VolcanoStructureFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function) {
 		super(function);
@@ -83,7 +81,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 	}
 
 	public static class VolcanoStructureStart extends StructureStart {
-		public VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
+		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
 			super(feature, chunkX, chunkZ, biome, boundingBox, references, baseSeed);
 		}
 

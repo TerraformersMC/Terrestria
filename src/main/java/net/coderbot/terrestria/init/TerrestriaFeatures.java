@@ -10,11 +10,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OakTreeFeature;
-import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.*;
 
+// This class exports public feature constants, these fields have to be public
+@SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
@@ -102,5 +105,15 @@ public class TerrestriaFeatures {
 
 	public static <T extends Feature> T register(String name, T feature) {
 		return Registry.register(Registry.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
+	}
+
+	public static void addVolcanoStarts(Biome... biomes) {
+		for(Biome biome: biomes) {
+			biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, new DefaultFeatureConfig());
+		}
+	}
+
+	public static void addVolcanoStructure(Biome biome) {
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 }

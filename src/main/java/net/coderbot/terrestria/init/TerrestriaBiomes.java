@@ -6,17 +6,19 @@ import net.coderbot.terrestria.biome.extensions.OverworldBiomesExt;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
+import java.util.function.Consumer;
+
+// This class exports public biome constants, these fields have to be public
+@SuppressWarnings("WeakerAccess")
 public class TerrestriaBiomes {
 	public static CypressForestBiome CYPRESS_FOREST;
 	// public static CypressForestBiome CYPRESS_HILLS; // TODO
@@ -167,8 +169,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				5,
 				TerrestriaFeatures.PALM_TREE,
-				TerrestriaFeatures.PALM_TREE,
-				0.01F
+				TerrestriaFeatures.PALM_TREE
 		));
 
 		VOLCANIC_ISLAND_SHORE = register("volcanic_island_shore", new VolcanicIslandBiome(
@@ -184,8 +185,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				2,
 				TerrestriaFeatures.PALM_TREE,
-				TerrestriaFeatures.PALM_TREE,
-				0.005F
+				TerrestriaFeatures.PALM_TREE
 		));
 
 		VOLCANIC_ISLAND_BEACH = register("volcanic_island_beach", new VolcanicIslandBiome(
@@ -201,11 +201,19 @@ public class TerrestriaBiomes {
 						.parent(null),
 				2,
 				TerrestriaFeatures.PALM_TREE,
-				TerrestriaFeatures.PALM_TREE,
-				0
+				TerrestriaFeatures.PALM_TREE
 		));
 
-		addVolcanoStarts(VOLCANIC_ISLAND, VOLCANIC_ISLAND_SHORE, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
+		TerrestriaFeatures.addVolcanoStarts (
+				VOLCANIC_ISLAND,
+				VOLCANIC_ISLAND_SHORE,
+				Biomes.DEEP_OCEAN,
+				Biomes.DEEP_COLD_OCEAN,
+				Biomes.DEEP_LUKEWARM_OCEAN,
+				Biomes.DEEP_WARM_OCEAN
+		);
+
+		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
 
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
@@ -245,13 +253,8 @@ public class TerrestriaBiomes {
 		return Registry.register(Registry.BIOME, new Identifier(Terrestria.MOD_ID, name), biome);
 	}
 
-	public static void addVolcanoStarts(Biome... biomes) {
-		for(Biome biome: biomes) {
-			biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, new DefaultFeatureConfig());
-		}
-	}
-
-	public static void addVolcanoStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
+	private static void forEveryBiome(Consumer<Biome> biomes) {
+		Registry.BIOME.forEach(biomes);
+		RegistryEntryAddedCallback.event(Registry.BIOME).register((rawId, id, biome) -> biomes.accept(biome));
 	}
 }
