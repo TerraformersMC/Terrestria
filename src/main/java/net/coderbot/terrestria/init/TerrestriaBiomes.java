@@ -5,20 +5,23 @@ import net.coderbot.terrestria.biome.*;
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import net.coderbot.terrestria.biome.extensions.OverworldBiomesExt;
 import net.coderbot.terrestria.feature.*;
+import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;
+import net.coderbot.terrestria.feature.volcano.VolcanoStructureFeature;
 import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
 import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.block.Blocks;
+import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OakTreeFeature;
-import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
@@ -33,7 +36,10 @@ public class TerrestriaBiomes {
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
-	public static VolcanoFeature VOLCANO;
+
+
+	public static VolcanoStructureFeature VOLCANO_STRUCTURE;
+	public static StructurePieceType VOLCANO_PIECE;
 
 	public static BeachySurfaceBuilder CALDERA_SURFACE;
 	public static BeachySurfaceBuilder BASALT_SURFACE;
@@ -114,9 +120,13 @@ public class TerrestriaBiomes {
 				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
 		);
 
-		VOLCANO = Registry.register(Registry.FEATURE, "terrestria:volcano",
-				new VolcanoFeature(DefaultFeatureConfig::deserialize, false)
+		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, "terrestria:volcano",
+				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
+
+		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
+
+		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, "terrestria:volcano", VolcanoGenerator::new);
 
 		CALDERA_SURFACE = Registry.register(Registry.SURFACE_BUILDER, "terrestria:caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
 
@@ -307,6 +317,8 @@ public class TerrestriaBiomes {
 				0
 		));
 
+		addVolcanoStarts(VOLCANIC_ISLAND, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
+
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
 		// 33% of Deep Oceans will be replaced with Volcanic Islands
@@ -337,5 +349,15 @@ public class TerrestriaBiomes {
 
 		FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
 		FabricBiomes.addSpawnBiome(RAINFOREST);
+	}
+
+	public static void addVolcanoStarts(Biome... biomes) {
+		for(Biome biome: biomes) {
+			biome.addStructureFeature(TerrestriaBiomes.VOLCANO_STRUCTURE, new DefaultFeatureConfig());
+		}
+	}
+
+	public static void addVolcanoStructure(Biome biome) {
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaBiomes.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 }

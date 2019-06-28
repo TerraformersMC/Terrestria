@@ -1,9 +1,7 @@
 package net.coderbot.terrestria.biome;
 
-import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -29,16 +27,6 @@ public class VolcanicIslandBiome extends CalderaBiome {
 						),
 						Decorator.COUNT_EXTRA_HEIGHTMAP,
 						new CountExtraChanceDecoratorConfig(trees, 0.1F, 1)
-				)
-		);
-
-		this.addFeature(
-				GenerationStep.Feature.LOCAL_MODIFICATIONS,
-				Biome.configureFeature(
-						TerrestriaBiomes.VOLCANO,
-						new DefaultFeatureConfig(),
-						Decorator.COUNT_CHANCE_HEIGHTMAP,
-						new CountChanceDecoratorConfig(1, volcanoChance)
 				)
 		);
 	}

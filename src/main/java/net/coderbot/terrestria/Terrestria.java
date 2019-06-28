@@ -1,13 +1,16 @@
 package net.coderbot.terrestria;
 
+import net.coderbot.terrestria.command.LocateAny;
 import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
 import net.coderbot.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class Terrestria implements ModInitializer {
 	public static ItemGroup ITEM_GROUP;
@@ -19,5 +22,10 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
 		TerrestriaBiomes.init();
+
+		LocateAny.register();
+
+		Registry.BIOME.forEach(TerrestriaBiomes::addVolcanoStructure);
+		RegistryEntryAddedCallback.event(Registry.BIOME).register((rawId, id, biome) -> TerrestriaBiomes.addVolcanoStructure(biome));
 	}
 }
