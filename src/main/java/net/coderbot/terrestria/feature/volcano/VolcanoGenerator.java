@@ -4,10 +4,12 @@ import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -57,10 +59,10 @@ public class VolcanoGenerator extends StructurePiece {
 
 		if(height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if(underwater) {
+		} else if(biome.getCategory() == Biome.Category.OCEAN) {
 			radius = random.nextInt(height / 2) + height / 2;
 		} else {
-			radius = random.nextInt(height) + height / 2;
+			radius = random.nextInt(height * 3 / 4) + height / 2;
 		}
 
 		lavaHeight = (int)(height * shape(0.2));
@@ -76,8 +78,8 @@ public class VolcanoGenerator extends StructurePiece {
 	public VolcanoGenerator(StructureManager manager, CompoundTag tag) {
 		super(TerrestriaBiomes.VOLCANO_PIECE, tag);
 
-		radiusNoise = new SimpleRadiusNoise(16, tag.getLong("VR"), 0.75, 0.5);
-		vegetationNoise = new SimpleRadiusNoise(16, tag.getLong("VV"), 0.25, 0.5);
+		radiusNoise = new SimpleRadiusNoise(16, tag.getLong("VRN"), 0.75, 0.5);
+		vegetationNoise = new SimpleRadiusNoise(16, tag.getLong("VVN"), 0.25, 0.5);
 
 		height = tag.getInt("VH");
 		radius = tag.getInt("VR");
@@ -92,8 +94,8 @@ public class VolcanoGenerator extends StructurePiece {
 
 	@Override
 	protected void toNbt(CompoundTag tag) {
-		tag.putLong("VR", radiusNoise.getSeed());
-		tag.putLong("VV", vegetationNoise.getSeed());
+		tag.putLong("VRN", radiusNoise.getSeed());
+		tag.putLong("VVN", vegetationNoise.getSeed());
 		tag.putInt("VH", height);
 		tag.putInt("VR", radius);
 		tag.putInt("VL", lavaHeight);
@@ -147,7 +149,7 @@ public class VolcanoGenerator extends StructurePiece {
 				int columnHeight = (int)(shape(scaled) * height);
 				BlockState top = TerrestriaBlocks.BASALT.getDefaultState();
 
-				if(columnHeight <= 0) {
+				if(columnHeight + baseY <= 0) {
 					continue;
 				}
 
@@ -168,23 +170,34 @@ public class VolcanoGenerator extends StructurePiece {
 					}
 				}
 
-				for(int dY = -16; dY < columnHeight - 1; dY++) {
+				int startY = world.getTop(Heightmap.Type.OCEAN_FLOOR_WG, x, z) - baseY;
+
+				for(int dY = startY; dY < columnHeight - 1; dY++) {
 					pos.set(x, baseY + dY, z);
 
-					if(dY > -4 || world.getBlockState(pos).isAir()) {
+					if(world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) {
 						world.setBlockState(pos, TerrestriaBlocks.BASALT.getDefaultState(), 2);
 					}
 				}
 
-				if(columnHeight > 0) {
-					pos.set(x, baseY + columnHeight, z);
+				pos.set(x, baseY + columnHeight, z);
 
-					if(!world.getBlockState(pos).isAir()) {
-						top = TerrestriaBlocks.BASALT.getDefaultState();
-					}
+				boolean lava = false;
+				if(baseY < 60 || !world.getBlockState(pos).isAir()) {
+					top = TerrestriaBlocks.BASALT.getDefaultState();
+				} else if(scaled > 0.25 && scaled < 0.35 && random.nextInt(320) == 0) {
+					top = Blocks.LAVA.getDefaultState();
+					lava = true;
+				}
 
-					pos.setOffset(Direction.DOWN);
+				pos.setOffset(Direction.DOWN);
+
+				if(world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) {
 					world.setBlockState(pos, top, 2);
+
+					if(lava) {
+						world.getFluidTickScheduler().schedule(pos, world.getFluidState(pos).getFluid(), 0);
+					}
 				}
 
 				if(scaled <= 0.3) {
@@ -219,7 +232,9 @@ public class VolcanoGenerator extends StructurePiece {
 
 	// Models the caldera shape of the volcano.
 	private static double shape(double scaled) {
-		scaled = MathHelper.clamp(scaled, 0.0, 1.0);
+		// must be at least 0
+		scaled = Math.max(scaled, 0.0);
+
 		double curve = curve(1.0 - scaled);
 
 		if(scaled <= 0.3) {
@@ -231,9 +246,12 @@ public class VolcanoGenerator extends StructurePiece {
 
 	// Models an S-curve.
 	private static double curve(double progress) {
-		progress = MathHelper.clamp(progress, 0.0, 1.0);
+		// can't be greater than 1
+		progress = Math.min(progress, 1.0);
 
-		if(progress <= 0.5) {
+		if(progress < 0.1) {
+			return 2 * (progress - 0.1);
+		} else if(progress <= 0.5) {
 			return 2 * progress * progress;
 		} else {
 			double progressUntil = 1.0 - progress;

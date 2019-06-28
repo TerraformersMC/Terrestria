@@ -19,7 +19,7 @@ import java.util.function.Function;
 
 public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 	//
-	public static final int VOLCANO_SPACING = 8;
+	public static final int VOLCANO_SPACING = 12;
 
 	// How many chunks should be in between each volcano at least
 	public static final int VOLCANO_SEPARATION = 4;
