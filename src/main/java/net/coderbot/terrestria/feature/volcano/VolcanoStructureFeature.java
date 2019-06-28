@@ -1,6 +1,7 @@
 package net.coderbot.terrestria.feature.volcano;
 
 import com.mojang.datafixers.Dynamic;
+import net.coderbot.terrestria.init.TerrestriaBiomes;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockPos;
@@ -19,10 +20,10 @@ import java.util.function.Function;
 
 public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 	//
-	public static final int VOLCANO_SPACING = 12;
+	public static final int VOLCANO_SPACING = 6;
 
 	// How many chunks should be in between each volcano at least
-	public static final int VOLCANO_SEPARATION = 4;
+	public static final int VOLCANO_SEPARATION = 3;
 	public static final int SEED_MODIFIER = 0x0401C480;
 
 	public VolcanoStructureFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function) {
@@ -57,6 +58,12 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		if (chunkX == start.x && chunkZ == start.z) {
 			Biome biome = generator.getBiomeSource().getBiome(new BlockPos(chunkX * 16 + 9, 0, chunkZ * 16 + 9));
 
+			if(biome.getCategory() == Biome.Category.OCEAN && random.nextInt(4) != 0) {
+				return false;
+			} else if(biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE && random.nextInt(2) != 0) {
+				return false;
+			}
+
 			return generator.hasStructure(biome, this);
 		}
 
@@ -72,7 +79,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 	}
 
 	public int getRadius() {
-		return 16; // TODO
+		return 12;
 	}
 
 	public BlockPos locateStructure(World world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, BlockPos pos, int distance, boolean mustExist) {

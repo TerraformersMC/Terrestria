@@ -39,7 +39,6 @@ public class VolcanoGenerator extends StructurePiece {
 		radiusNoise = new SimpleRadiusNoise(16, random.nextLong(), 0.75, 0.5);
 		vegetationNoise = new SimpleRadiusNoise(16, random.nextLong(), 0.25, 0.5);
 
-
 		if(biome == Biomes.DEEP_OCEAN || biome == Biomes.DEEP_COLD_OCEAN || biome == Biomes.DEEP_LUKEWARM_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) {
 
 			if(random.nextInt(5) == 0) {
@@ -49,8 +48,8 @@ public class VolcanoGenerator extends StructurePiece {
 			}
 
 			baseY = 30;
-		} else if(biome.getCategory() == Biome.Category.OCEAN) {
-			height = 32 + random.nextInt(32);
+		} else if(biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE) {
+			height = 48 + random.nextInt(32);
 			baseY = 45;
 		} else {
 			height = 32 + random.nextInt(64);
@@ -59,8 +58,8 @@ public class VolcanoGenerator extends StructurePiece {
 
 		if(height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if(biome.getCategory() == Biome.Category.OCEAN) {
-			radius = random.nextInt(height / 2) + height / 2;
+		} else if(biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE) {
+			radius = random.nextInt(height / 3) + height / 4;
 		} else {
 			radius = random.nextInt(height * 3 / 4) + height / 2;
 		}
@@ -122,6 +121,8 @@ public class VolcanoGenerator extends StructurePiece {
 				int dX = x - centerX;
 				int dZ = z - centerZ;
 
+				// The center of the volcano is a lava tube, arranged in a plus sign shape.
+
 				if(dZ == 0 && (dX >= -1 && dX <= 1) || dX ==0 && (dZ >= -1 && dZ <= 1)) {
 					for(int dY = -lavaTubeLength; dY < lavaHeight; dY++) {
 						pos.set(x, baseY + dY, z);
@@ -139,6 +140,8 @@ public class VolcanoGenerator extends StructurePiece {
 					continue;
 				}
 
+				// Otherwise, proceed with normal generation. Sample the necessary values.
+
 				double dist = Math.sqrt(dZ*dZ + dX*dX);
 				double angle = positionToAngle(dist, dX, dZ);
 
@@ -149,15 +152,21 @@ public class VolcanoGenerator extends StructurePiece {
 				int columnHeight = (int)(shape(scaled) * height);
 				BlockState top = TerrestriaBlocks.BASALT.getDefaultState();
 
+				// Below bedrock, skip.
+
 				if(columnHeight + baseY <= 0) {
 					continue;
 				}
+
+				// Add column height variance, for some random noise in the volcano shape.
 
 				if(scaled > 0.2 && scaled < 0.35) {
 					columnHeight += random.nextInt(2);
 				} else if(scaled >= 0.35 && scaled <= 0.8 && random.nextInt(4) == 0) {
 					columnHeight += 1;
 				}
+
+				// Set the vegetation / surface block to be used if the conditions are right.
 
 				if(scaled > 0.3) {
 					double scaledHeight = (double)(columnHeight) / (double)(lavaHeight);
@@ -170,6 +179,8 @@ public class VolcanoGenerator extends StructurePiece {
 					}
 				}
 
+				// Place the basalt column to the specified height.
+
 				int startY = world.getTop(Heightmap.Type.OCEAN_FLOOR_WG, x, z) - baseY;
 
 				for(int dY = startY; dY < columnHeight - 1; dY++) {
@@ -180,15 +191,28 @@ public class VolcanoGenerator extends StructurePiece {
 					}
 				}
 
-				pos.set(x, baseY + columnHeight, z);
+				// Some complex top block logic:
+				// If the volcano is within the ocean, revert the top block to basalt. However, underwater volcanoes
+				// have some magma on the sides, this is the one override.
+				// Otherwise, if around the top areas of the volcano, place a few lava blocks to flow down the mountain.
 
+				pos.set(x, baseY + columnHeight, z);
 				boolean lava = false;
+
 				if(baseY < 60 || !world.getBlockState(pos).isAir()) {
-					top = TerrestriaBlocks.BASALT.getDefaultState();
-				} else if(scaled > 0.25 && scaled < 0.35 && random.nextInt(320) == 0) {
-					top = Blocks.LAVA.getDefaultState();
-					lava = true;
+					if(underwater  && random.nextInt(80) == 0) {
+						top = Blocks.MAGMA_BLOCK.getDefaultState();
+					} else {
+						top = TerrestriaBlocks.BASALT.getDefaultState();
+					}
+				} else if(scaled > 0.25 && scaled < 0.35) {
+					if(!underwater  && random.nextInt(320) == 0) {
+						top = Blocks.LAVA.getDefaultState();
+						lava = true;
+					}
 				}
+
+				// Finally, actually set the top block. If lava, it needs a fluid tick update to get going.
 
 				pos.setOffset(Direction.DOWN);
 
@@ -200,12 +224,15 @@ public class VolcanoGenerator extends StructurePiece {
 					}
 				}
 
+				// If within the top caldera, set lava / magma / obsidian based on whether this is an underwater volcano or not.
+				// Effectively, fill the caldera with lava up to the lavaHeight height.
+
 				if(scaled <= 0.3) {
 					for(int dY = columnHeight; dY < lavaHeight; dY++) {
 						pos.set(x, baseY + dY, z);
 
 						if(underwater && dY == lavaHeight - 1) {
-							BlockState state = random.nextInt(4) == 0 ? Blocks.MAGMA_BLOCK.getDefaultState() : Blocks.OBSIDIAN.getDefaultState();
+							BlockState state = random.nextInt(6) == 0 ? Blocks.MAGMA_BLOCK.getDefaultState() : Blocks.OBSIDIAN.getDefaultState();
 
 							world.setBlockState(pos, state, 2);
 						} else {

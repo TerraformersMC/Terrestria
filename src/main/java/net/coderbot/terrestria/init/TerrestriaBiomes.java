@@ -317,14 +317,14 @@ public class TerrestriaBiomes {
 				0
 		));
 
-		addVolcanoStarts(VOLCANIC_ISLAND, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
+		addVolcanoStarts(VOLCANIC_ISLAND, VOLCANIC_ISLAND_SHORE, Biomes.DEEP_OCEAN, Biomes.DEEP_COLD_OCEAN, Biomes.DEEP_LUKEWARM_OCEAN, Biomes.DEEP_WARM_OCEAN);
 
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
-		// 33% of Deep Oceans will be replaced with Volcanic Islands
+		// 10% of Deep Oceans will be replaced with Volcanic Islands
 		OverworldBiomes.addBiomeVariant(Biomes.JUNGLE, RAINFOREST, 0.33);
 		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33);
-		OverworldBiomes.addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND,0.33);
+		OverworldBiomes.addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE,0.10);
 
 		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
@@ -334,8 +334,10 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 
 		OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, Biomes.MOUNTAINS);
-		OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_SHORE);
 		OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
+
+		OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
+		OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
 
 		OverworldBiomes.setRiverBiome(CALDERA, null);
 		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
