@@ -82,20 +82,12 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return 12;
 	}
 
-	public BlockPos locateStructure(World world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, BlockPos pos, int distance, boolean mustExist) {
-		System.out.println("Locate Structure: "+world+" "+generator+" "+pos+" "+distance+" "+mustExist);
-
-		return super.locateStructure(world, generator, pos, distance, mustExist);
-	}
-
 	public static class VolcanoStructureStart extends StructureStart {
 		public VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
 			super(feature, chunkX, chunkZ, biome, boundingBox, references, baseSeed);
 		}
 
 		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {
-			System.out.println("Initialized at "+chunkX*16+" "+chunkZ*16+" in biome "+biome);
-
 			VolcanoGenerator volcano = new VolcanoGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
 
 			this.children.add(volcano);

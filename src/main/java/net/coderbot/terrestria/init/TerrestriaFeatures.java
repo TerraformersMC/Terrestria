@@ -2,11 +2,13 @@ package net.coderbot.terrestria.init;
 
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
+import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.*;
 import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;
 import net.coderbot.terrestria.feature.volcano.VolcanoStructureFeature;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -29,26 +31,26 @@ public class TerrestriaFeatures {
 	public static StructurePieceType VOLCANO_PIECE;
 
 	public static void init() {
-		CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:cypress_tree",
+		CYPRESS_TREE = register("cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
 		);
 
-		SMALL_BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:small_bald_cypress_tree",
+		SMALL_BALD_CYPRESS_TREE = register("small_bald_cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition())
 		);
 
-		TALLER_BIRCH_TREE = Registry.register(Registry.FEATURE, "terrestria:taller_birch_tree",
+		TALLER_BIRCH_TREE = register("taller_birch_tree",
 				new OakTreeFeature(DefaultFeatureConfig::deserialize, false, 8, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), false)
 		);
 
-		SAKURA_TREE = Registry.register(Registry.FEATURE, "terrestria:sakura_tree",
+		SAKURA_TREE = register("sakura_tree",
 				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura (
 						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
 						TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState()
 				))
 		);
 
-		JAPANESE_MAPLE_TREE = Registry.register(Registry.FEATURE, "terrestria:japanese_maple_tree",
+		JAPANESE_MAPLE_TREE = register("japanese_maple_tree",
 				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
@@ -57,25 +59,25 @@ public class TerrestriaFeatures {
 				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
 		);
 
-		JAPANESE_MAPLE_SHRUB = Registry.register(Registry.FEATURE, "terrestria:japanese_maple_shrub",
+		JAPANESE_MAPLE_SHRUB = register("japanese_maple_shrub",
 				new ShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
 		);
 
-		RAINBOW_EUCALYPTUS_TREE = Registry.register(Registry.FEATURE, "terrestria:rainbow_eucalyptus_tree",
+		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
 				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega (
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
 				))
 		);
 
-		BALD_CYPRESS_TREE = Registry.register(Registry.FEATURE, "terrestria:bald_cypress_tree",
+		BALD_CYPRESS_TREE = register("bald_cypress_tree",
 				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega (
 						TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.BALD_CYPRESS.wood.getDefaultState()
 				))
 		);
 
-		CATTAIL = Registry.register(Registry.FEATURE, "terrestria:cattail",
+		CATTAIL = register("cattail",
 				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
 		);
 
@@ -85,16 +87,20 @@ public class TerrestriaFeatures {
 				Blocks.JUNGLE_LEAVES.getDefaultState()
 		);
 
-		PALM_TREE = Registry.register(Registry.FEATURE, "terrestria:palm_tree",
+		PALM_TREE = register("palm_tree",
 				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
 		);
 
-		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, "terrestria:volcano",
+		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "volcano"),
 				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
 		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
 
-		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, "terrestria:volcano", VolcanoGenerator::new);
+		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
+	}
+
+	public static <T extends Feature> T register(String name, T feature) {
+		return Registry.register(Registry.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
 	}
 }

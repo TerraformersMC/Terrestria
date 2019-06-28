@@ -1,10 +1,12 @@
 package net.coderbot.terrestria.init;
 
+import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.biome.*;
 import net.coderbot.terrestria.biome.extensions.OverworldBiomesExt;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -30,7 +32,7 @@ public class TerrestriaBiomes {
 	public static VolcanicIslandBiome VOLCANIC_ISLAND_SHORE;
 
 	public static void init() {
-		CYPRESS_FOREST = Registry.register(Registry.BIOME, "terrestria:cypress_forest", new CypressForestBiome(
+		CYPRESS_FOREST = register("cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
@@ -47,7 +49,7 @@ public class TerrestriaBiomes {
 				TerrestriaFeatures.TALLER_BIRCH_TREE
 		));
 
-		SAKURA_FOREST = Registry.register(Registry.BIOME, "terrestria:sakura_forest", new JapaneseForestBiome(
+		SAKURA_FOREST = register("sakura_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
@@ -63,7 +65,7 @@ public class TerrestriaBiomes {
 				TerrestriaFeatures.JAPANESE_MAPLE_SHRUB
 		));
 
-		JAPANESE_MAPLE_FOREST = Registry.register(Registry.BIOME, "terrestria:japanese_maple_forest", new JapaneseForestBiome(
+		JAPANESE_MAPLE_FOREST = register("japanese_maple_forest", new JapaneseForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
@@ -81,7 +83,7 @@ public class TerrestriaBiomes {
 
 		DefaultBiomeFeatures.addForestGrass(JAPANESE_MAPLE_FOREST);
 
-		RAINFOREST = Registry.register(Registry.BIOME, "terrestria:rainforest", new RainforestBiome(
+		RAINFOREST = register("rainforest", new RainforestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
@@ -97,7 +99,7 @@ public class TerrestriaBiomes {
 				Feature.FANCY_TREE
 		));
 
-		CYPRESS_SWAMP = Registry.register(Registry.BIOME, "terrestria:cypress_swamp", new CypressSwampBiome(
+		CYPRESS_SWAMP = register("cypress_swamp", new CypressSwampBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
@@ -113,7 +115,7 @@ public class TerrestriaBiomes {
 				Feature.SWAMP_TREE
 		));
 
-		CALDERA = Registry.register(Registry.BIOME, "terrestria:caldera", new CalderaBiome(
+		CALDERA = register("caldera", new CalderaBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.SAND_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
@@ -126,7 +128,7 @@ public class TerrestriaBiomes {
 						.parent(null)
 		));
 
-		CALDERA_RIDGE = Registry.register(Registry.BIOME, "terrestria:caldera_ridge", new CalderaBiome(
+		CALDERA_RIDGE = register("caldera_ridge", new CalderaBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
@@ -139,7 +141,7 @@ public class TerrestriaBiomes {
 						.parent(null)
 		));
 
-		CALDERA_BEACH = Registry.register(Registry.BIOME, "terrestria:caldera_beach", new CalderaBiome(
+		CALDERA_BEACH = register("caldera_beach", new CalderaBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
@@ -152,7 +154,7 @@ public class TerrestriaBiomes {
 						.parent(null)
 		));
 
-		VOLCANIC_ISLAND = Registry.register(Registry.BIOME, "terrestria:volcanic_island", new VolcanicIslandBiome(
+		VOLCANIC_ISLAND = register("volcanic_island", new VolcanicIslandBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(TerrestriaSurfaces.CLIFF_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
@@ -169,7 +171,7 @@ public class TerrestriaBiomes {
 				0.01F
 		));
 
-		VOLCANIC_ISLAND_SHORE = Registry.register(Registry.BIOME, "terrestria:volcanic_island_shore", new VolcanicIslandBiome(
+		VOLCANIC_ISLAND_SHORE = register("volcanic_island_shore", new VolcanicIslandBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(TerrestriaSurfaces.CLIFF_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
@@ -186,7 +188,7 @@ public class TerrestriaBiomes {
 				0.005F
 		));
 
-		VOLCANIC_ISLAND_BEACH = Registry.register(Registry.BIOME, "terrestria:volcanic_island_beach", new VolcanicIslandBiome(
+		VOLCANIC_ISLAND_BEACH = register("volcanic_island_beach", new VolcanicIslandBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
 						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
@@ -237,6 +239,10 @@ public class TerrestriaBiomes {
 
 		FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
 		FabricBiomes.addSpawnBiome(RAINFOREST);
+	}
+
+	public static <T extends Biome> T register(String name, T biome) {
+		return Registry.register(Registry.BIOME, new Identifier(Terrestria.MOD_ID, name), biome);
 	}
 
 	public static void addVolcanoStarts(Biome... biomes) {

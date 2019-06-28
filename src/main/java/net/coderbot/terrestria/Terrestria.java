@@ -11,11 +11,12 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class Terrestria implements ModInitializer {
+	public static final String MOD_ID = "terrestria";
 	public static ItemGroup ITEM_GROUP;
 
 	@Override
 	public void onInitialize() {
-		ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("terrestria", "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
+		ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
 
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();

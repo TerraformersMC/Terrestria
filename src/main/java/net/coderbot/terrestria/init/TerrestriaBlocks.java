@@ -2,6 +2,7 @@ package net.coderbot.terrestria.init;
 
 import io.github.terraformersmc.terraform.block.*;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -116,7 +117,7 @@ public class TerrestriaBlocks {
 	}
 
 	public static <T extends Block> T register(String name, T block) {
-		return Registry.register(Registry.BLOCK, new Identifier("terrestria", name), block);
+		return Registry.register(Registry.BLOCK, new Identifier(Terrestria.MOD_ID, name), block);
 	}
 
 	public static class WoodBlocks {
