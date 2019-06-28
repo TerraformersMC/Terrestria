@@ -23,6 +23,10 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		this.tree = tree;
 	}
 
+	public PalmTreeFeature sapling() {
+		return new PalmTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height

@@ -28,6 +28,10 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 		this.tree = tree;
 	}
 
+	public SakuraTreeFeature sapling() {
+		return new SakuraTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	@Override
 	protected void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
 		int x = origin.getX();

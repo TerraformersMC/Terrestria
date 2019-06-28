@@ -21,6 +21,10 @@ public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		this.tree = tree;
 	}
 
+	public ShrubFeature sapling() {
+		return new ShrubFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos pos, MutableIntBoundingBox boundingBox) {
 		pos = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos).down();
 

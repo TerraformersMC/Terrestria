@@ -1,9 +1,7 @@
 package net.coderbot.terrestria;
 
 import net.coderbot.terrestria.command.LocateAny;
-import net.coderbot.terrestria.init.TerrestriaBiomes;
-import net.coderbot.terrestria.init.TerrestriaBlocks;
-import net.coderbot.terrestria.init.TerrestriaItems;
+import net.coderbot.terrestria.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
@@ -21,6 +19,8 @@ public class Terrestria implements ModInitializer {
 
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
+		TerrestriaFeatures.init();
+		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
 
 		LocateAny.register();

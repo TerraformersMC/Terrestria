@@ -18,6 +18,10 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 		super(function, notify, tree);
 	}
 
+	public JapaneseMapleTreeFeature sapling() {
+		return new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	@Override
 	protected void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);

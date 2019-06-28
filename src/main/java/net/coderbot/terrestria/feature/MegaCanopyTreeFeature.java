@@ -29,6 +29,10 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 		this.tree = tree;
 	}
 
+	public MegaCanopyTreeFeature sapling() {
+		return new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height

@@ -25,6 +25,10 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		this.tree = tree;
 	}
 
+	public RubberTreeFeature sapling() {
+		return new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	}
+
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height

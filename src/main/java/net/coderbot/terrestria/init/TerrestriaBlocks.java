@@ -80,31 +80,31 @@ public class TerrestriaBlocks {
 		));
 
 		CYPRESS_SAPLING = register("cypress_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaBiomes.CYPRESS_TREE)
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.CYPRESS_TREE.sapling())
 		));
 
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaBiomes.BALD_CYPRESS_TREE)
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling())
 		));
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaBiomes.JAPANESE_MAPLE_TREE)
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE.sapling())
 		));
 
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaBiomes.JAPANESE_MAPLE_SHRUB)
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.JAPANESE_MAPLE_SHRUB.sapling())
 		));
 
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaBiomes.RAINBOW_EUCALYPTUS_TREE)
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.sapling())
 		));
 
 		SAKURA_SAPLING = register("sakura_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator(() -> TerrestriaBiomes.SAKURA_TREE)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAKURA_TREE.sapling())
 		));
 
 		PALM_SAPLING = register("palm_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator(() -> TerrestriaBiomes.PALM_TREE)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.PALM_TREE.sapling())
 		));
 
 		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, Block.Settings.copy(Blocks.SAND)));
