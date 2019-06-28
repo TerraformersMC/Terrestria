@@ -52,9 +52,9 @@ public class TerrestriaBlocks {
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", MaterialColor.RED, flammable);
 
 		SAKURA = WoodBlocks.registerManufactured("sakura", flammable);
-		SAKURA.log = register("sakura_log", new SmallLogBlock(Block.Settings.copy(Blocks.OAK_LOG)));
-		SAKURA.wood = SAKURA.log;
 		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+		SAKURA.log = register("sakura_log", new SmallLogBlock(SAKURA.leaves, Block.Settings.copy(Blocks.OAK_LOG)));
+		SAKURA.wood = SAKURA.log;
 		SAKURA.addTreeFireInfo(flammable);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
