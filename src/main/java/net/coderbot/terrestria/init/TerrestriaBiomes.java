@@ -3,6 +3,7 @@ package net.coderbot.terrestria.init;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.biome.*;
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
+import net.coderbot.terrestria.biome.extensions.OverworldBiomesExt;
 import net.coderbot.terrestria.feature.*;
 import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
 import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
@@ -319,6 +320,10 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0);
 
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
+
+		OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, Biomes.MOUNTAINS);
+		OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_SHORE);
+		OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
 
 		OverworldBiomes.setRiverBiome(CALDERA, null);
 		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
