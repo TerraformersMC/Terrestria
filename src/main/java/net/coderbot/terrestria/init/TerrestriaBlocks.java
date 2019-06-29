@@ -4,10 +4,9 @@ import io.github.terraformersmc.terraform.block.*;
 import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import net.coderbot.terrestria.Terrestria;
-import net.coderbot.terrestria.feature.ConiferTreeFeature;
-import net.coderbot.terrestria.feature.MegaConiferTreeFeature;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
@@ -57,22 +56,22 @@ public class TerrestriaBlocks {
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
 
-		REDWOOD = WoodBlocks.registerExtendedLeaves("redwood", MaterialColor.BROWN, flammable);
-		HEMLOCK = WoodBlocks.registerExtendedLeaves("hemlock", MaterialColor.BROWN, flammable);
-		RUBBER = WoodBlocks.register("rubber", MaterialColor.BROWN, flammable);
-		CYPRESS = WoodBlocks.register("cypress", MaterialColor.LIGHT_GRAY, flammable);
-		BALD_CYPRESS = WoodBlocks.register("bald_cypress", MaterialColor.LIGHT_GRAY, flammable);
-		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", MaterialColor.RED, flammable);
-		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", MaterialColor.RED, flammable);
+		REDWOOD = WoodBlocks.registerExtendedLeaves("redwood", WoodColors.REDWOOD, flammable);
+		HEMLOCK = WoodBlocks.registerExtendedLeaves("hemlock", WoodColors.HEMLOCK, flammable);
+		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
+		CYPRESS = WoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
+		BALD_CYPRESS = WoodBlocks.register("bald_cypress", WoodColors.CYPRESS, flammable);
+		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
+		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 
-		SAKURA = WoodBlocks.registerManufactured("sakura", flammable);
-		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
-		SAKURA.log = register("sakura_log", new SmallLogBlock(SAKURA.leaves, Block.Settings.copy(Blocks.OAK_LOG)));
+		SAKURA = WoodBlocks.registerManufactured("sakura", WoodColors.SAKURA, flammable);
+		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(WoodColors.SAKURA.leaves).build()));
+		SAKURA.log = register("sakura_log", new SmallLogBlock(SAKURA.leaves, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.bark).build()));
 		SAKURA.wood = SAKURA.log;
 		SAKURA.addTreeFireInfo(flammable);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
-		SAKURA_LEAF_PILE = register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(Blocks.OAK_LEAVES).noCollision()));
+		SAKURA_LEAF_PILE = register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(SAKURA.leaves).noCollision()));
 
 		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
 		flammable.add(SAKURA_LEAF_PILE, 30, 60);
@@ -80,14 +79,10 @@ public class TerrestriaBlocks {
 		TALL_CATTAIL = register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
 		CATTAIL = register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
 
-		// TODO: Map colors
-		REDWOOD_QUARTER_LOG = register("redwood_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
-		HEMLOCK_QUARTER_LOG = register("hemlock_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
-		BALD_CYPRESS_QUARTER_LOG = register("bald_cypress_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
-
-		flammable.add(BALD_CYPRESS_QUARTER_LOG, 5, 5);
-		flammable.add(RAINBOW_EUCALYPTUS_QUARTER_LOG, 5, 5);
+		REDWOOD_QUARTER_LOG = REDWOOD.registerQuarterLog(flammable);
+		HEMLOCK_QUARTER_LOG = HEMLOCK.registerQuarterLog(flammable);
+		BALD_CYPRESS_QUARTER_LOG = BALD_CYPRESS.registerQuarterLog(flammable);
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerQuarterLog(flammable);
 
 		// Saplings
 
@@ -141,10 +136,10 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, Block.Settings.copy(Blocks.SAND)));
-		BASALT_DIRT = register("basalt_dirt", new Block(Block.Settings.copy(Blocks.DIRT)));
+		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).build()));
+		BASALT_DIRT = register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).build()));
 		BASALT_GRASS_BLOCK = register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, Block.Settings.copy(Blocks.GRASS_BLOCK)));
-		BASALT = register("basalt", new Block(Block.Settings.copy(Blocks.STONE)));
+		BASALT = register("basalt", new Block(FabricBlockSettings.copy(Blocks.STONE).materialColor(MaterialColor.BLACK).build()));
 
 		// TODO: Stripped Logs, Stripped Wood
 	}
@@ -153,7 +148,56 @@ public class TerrestriaBlocks {
 		return Registry.register(Registry.BLOCK, new Identifier(Terrestria.MOD_ID, name), block);
 	}
 
+	public static class WoodColors {
+		public MaterialColor bark;
+		public MaterialColor planks;
+		public MaterialColor leaves = MaterialColor.FOLIAGE;
+
+		public static final WoodColors REDWOOD;
+		public static final WoodColors HEMLOCK;
+		public static final WoodColors RUBBER;
+		public static final WoodColors CYPRESS;
+		public static final WoodColors JAPANESE_MAPLE;
+		public static final WoodColors RAINBOW_EUCALYPTUS;
+		public static final WoodColors SAKURA;
+
+		static {
+			REDWOOD = new WoodColors();
+			REDWOOD.bark = MaterialColor.RED_TERRACOTTA;
+			REDWOOD.planks = MaterialColor.WOOD;
+
+			HEMLOCK = new WoodColors();
+			HEMLOCK.bark = MaterialColor.BROWN;
+			HEMLOCK.planks = MaterialColor.WOOD;
+
+			RUBBER = new WoodColors();
+			RUBBER.bark = MaterialColor.WHITE_TERRACOTTA;
+			RUBBER.planks = MaterialColor.SAND;
+
+			CYPRESS = new WoodColors();
+			CYPRESS.bark = MaterialColor.WHITE_TERRACOTTA;
+			CYPRESS.planks = MaterialColor.LIGHT_GRAY;
+
+			JAPANESE_MAPLE = new WoodColors();
+			JAPANESE_MAPLE.bark = MaterialColor.BROWN;
+			JAPANESE_MAPLE.planks = MaterialColor.MAGENTA_TERRACOTTA;
+			JAPANESE_MAPLE.leaves = MaterialColor.RED;
+
+			RAINBOW_EUCALYPTUS = new WoodColors();
+			RAINBOW_EUCALYPTUS.bark = MaterialColor.BLUE;
+			RAINBOW_EUCALYPTUS.planks = MaterialColor.LAPIS;
+
+			SAKURA = new WoodColors();
+			SAKURA.bark = MaterialColor.SPRUCE;
+			SAKURA.planks = MaterialColor.BROWN;
+			SAKURA.leaves = MaterialColor.PINK;
+		}
+	}
+
 	public static class WoodBlocks {
+		private String name;
+		private WoodColors colors;
+
 		public Block log;
 		public Block wood;
 		public Block leaves;
@@ -167,44 +211,53 @@ public class TerrestriaBlocks {
 
 		private WoodBlocks() {}
 
-		// TODO: Map colors
-		public static WoodBlocks register(String name, MaterialColor wood, FlammableBlockRegistry registry) {
-			WoodBlocks blocks = registerManufactured(name, registry);
+		public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
+			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
-			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
-			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
-			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
-
-			blocks.addTreeFireInfo(registry);
-
-			return blocks;
-		}
-
-		public static WoodBlocks registerExtendedLeaves(String name, MaterialColor wood, FlammableBlockRegistry registry) {
-			WoodBlocks blocks = registerManufactured(name, registry);
-
-			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
-			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
-			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new ExtendedLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 
 			blocks.addTreeFireInfo(registry);
 
 			return blocks;
 		}
 
-		public static WoodBlocks registerManufactured(String name, FlammableBlockRegistry registry) {
+		public static WoodBlocks registerExtendedLeaves(String name, WoodColors colors, FlammableBlockRegistry registry) {
+			WoodBlocks blocks = registerManufactured(name, colors, registry);
+
+			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new ExtendedLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
+
+			blocks.addTreeFireInfo(registry);
+
+			return blocks;
+		}
+
+		public static WoodBlocks registerManufactured(String name, WoodColors colors, FlammableBlockRegistry registry) {
 			WoodBlocks blocks = new WoodBlocks();
+			blocks.name = name;
+			blocks.colors = colors;
 
-			blocks.planks = TerrestriaBlocks.register(name + "_planks", new Block(Block.Settings.copy(Blocks.OAK_PLANKS)));
-			blocks.slab = TerrestriaBlocks.register(name + "_slab", new SlabBlock(Block.Settings.copy(Blocks.OAK_SLAB)));
-			blocks.stairs = TerrestriaBlocks.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, Block.Settings.copy(Blocks.OAK_STAIRS)));
-			blocks.fence = TerrestriaBlocks.register(name + "_fence", new FenceBlock(Block.Settings.copy(Blocks.OAK_FENCE)));
-			blocks.fenceGate = TerrestriaBlocks.register(name + "_fence_gate", new FenceGateBlock(Block.Settings.copy(Blocks.OAK_FENCE_GATE)));
-			blocks.door = TerrestriaBlocks.register(name + "_door", new TerraformDoorBlock(Block.Settings.copy(Blocks.OAK_FENCE_GATE)));
+			blocks.planks = TerrestriaBlocks.register(name + "_planks", new Block(FabricBlockSettings.copy(Blocks.OAK_PLANKS).materialColor(colors.planks).build()));
+			blocks.slab = TerrestriaBlocks.register(name + "_slab", new SlabBlock(FabricBlockSettings.copy(Blocks.OAK_SLAB).materialColor(colors.planks).build()));
+			blocks.stairs = TerrestriaBlocks.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, FabricBlockSettings.copy(Blocks.OAK_STAIRS).materialColor(colors.planks).build()));
+			blocks.fence = TerrestriaBlocks.register(name + "_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE).materialColor(colors.planks).build()));
+			blocks.fenceGate = TerrestriaBlocks.register(name + "_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
+			blocks.door = TerrestriaBlocks.register(name + "_door", new TerraformDoorBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
 
 			blocks.addManufacturedFireInfo(registry);
 
 			return blocks;
+		}
+
+		public QuarterLogBlock registerQuarterLog(FlammableBlockRegistry registry) {
+			QuarterLogBlock quarterLog =  TerrestriaBlocks.register(name + "_log_quarter", new QuarterLogBlock(colors.planks, Block.Settings.copy(log)));
+
+			registry.add(quarterLog, 5, 5);
+
+			return quarterLog;
 		}
 
 		public void addTreeFireInfo(FlammableBlockRegistry registry) {
