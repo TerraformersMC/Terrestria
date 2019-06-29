@@ -107,8 +107,6 @@ public class VolcanoGenerator extends StructurePiece {
 		tag.putInt("CZ", centerZ);
 	}
 
-	// TODO: Flowing spouts
-
 	@Override
 	public boolean generate(IWorld world, Random random, MutableIntBoundingBox boundingBox, ChunkPos chunkPos) {
 		if(boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {

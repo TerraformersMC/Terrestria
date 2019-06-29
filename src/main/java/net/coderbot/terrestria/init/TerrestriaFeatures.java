@@ -30,6 +30,7 @@ public class TerrestriaFeatures {
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
 	public static ShrubFeature JAPANESE_MAPLE_SHRUB;
 	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
+	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
@@ -99,6 +100,14 @@ public class TerrestriaFeatures {
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
 				))
+		);
+
+		SMALL_RAINBOW_EUCALYPTUS_TREE = register("small_rainbow_eucalyptus_tree",
+				new JungleTreeFeature(DefaultFeatureConfig::deserialize, false, 5,
+						TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
+						TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState(),
+						true
+				)
 		);
 
 		BALD_CYPRESS_TREE = register("bald_cypress_tree",

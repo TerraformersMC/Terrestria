@@ -12,6 +12,7 @@ import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.JungleTreeFeature;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -107,11 +108,17 @@ public class TerrestriaBlocks {
 		));
 
 		CYPRESS_SAPLING = register("cypress_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaFeatures.CYPRESS_TREE.sapling())
+				new TerraformLargeSaplingGenerator (
+						() -> TerrestriaFeatures.CYPRESS_TREE.sapling(),
+						() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling()
+				)
 		));
 
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling())
+				new TerraformLargeSaplingGenerator (
+						() -> TerrestriaFeatures.SMALL_BALD_CYPRESS_TREE.sapling(),
+						() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling()
+				)
 		));
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new TerraformSaplingBlock (
@@ -123,7 +130,14 @@ public class TerrestriaBlocks {
 		));
 
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock (
-				new TerraformSaplingGenerator (() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.sapling())
+				new TerraformLargeSaplingGenerator (
+						() -> new JungleTreeFeature(DefaultFeatureConfig::deserialize, true, 5,
+								TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
+								TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState(),
+								true
+						),
+						() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.sapling()
+				)
 		));
 
 		SAKURA_SAPLING = register("sakura_sapling", new TerraformSaplingBlock (
