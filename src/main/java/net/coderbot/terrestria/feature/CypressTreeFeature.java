@@ -30,26 +30,23 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
-		// Total trunk height
-		int height = rand.nextInt(10) + 8;
-
-		// How much "bare trunk" there will be. (1-3)
-		int bareTrunkHeight = 1 + rand.nextInt(2);
+		// Total tree height
+		int height = rand.nextInt(5) + 12;
 
 		// Maximum leaf radius.
-		double maxRadius = 1.5 + 2.0 * rand.nextDouble();
+		double maxRadius = 1.25 + 2 * rand.nextDouble();
 
+		//If the tree can pass the max build height
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
 
 		BlockPos below = origin.down();
-
 		if(!isNaturalDirtOrGrass(world, below)) {
 			return false;
 		}
 
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, (int)Math.ceil(maxRadius))) {
+		if(!checkForObstructions(world, origin, height, (int)Math.ceil(maxRadius))) {
 			return false;
 		}
 
@@ -57,22 +54,16 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
-		growLeaves(blocks, world, pos, height - bareTrunkHeight, maxRadius, boundingBox);
+		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		growLeaves(blocks, world, pos, height, maxRadius, boundingBox);
 
 		return true;
 	}
 
-	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
+	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int i = 0; i < bareTrunkHeight; i++) {
-			if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
-				return false;
-			}
-		}
-
-		for(int dY = bareTrunkHeight; dY < height; dY++) {
+		for(int dY = origin.getY(); dY < height; dY++) {
 			for(int dZ = -radius; dZ <= radius; dZ++) {
 				for(int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
@@ -95,15 +86,10 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		return true;
 	}
 
-	// Grows the center trunk and top leaves of the tree.
+	// Grows the center trunk.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < height; i++) {
+		for(int i = 0; i < (height * .6) ; i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-			pos.setOffset(Direction.UP);
-		}
-
-		for(int i = 0; i < 4; i++) {
-			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
@@ -112,13 +98,12 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
-		double yScale = 16.0 / (height + 2);
+		double radius;
 
-		for(int dy = 0; dy < height + 4; dy++) {
+		for(int dy = 0; dy < height; dy++) {
 			pos.set(x, y + dy, z);
 
-			double progress = dy * yScale;
-			double radius = maxRadius * radiusFactor(progress);
+			radius = maxRadius * radiusFactor(dy, height);
 
 			if(radius < 0) {
 				continue;
@@ -133,11 +118,10 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	}
 
 	// Provides the factor to the radius, where x is a double from 0.0 to 1.0 that represents the progress along the trunk.
-	private double radiusFactor(double x) {
-		double x2 = x*x;
-		double x3 = x2*x;
+	private double radiusFactor(double x, double height) {
+		x = x / height;
 
 		// A 3rd-degree polynomial approximating the shape of a cypress tree - increasing rapidly, and then tapering off.
-		return 0.00142 * x3 - 0.0517 * x2 + 0.5085 * x - 0.4611;
+		return 6.25 * Math.pow(x, 3) - 12.5 * Math.pow(x, 2) + 6.25 * x;
 	}
 }
