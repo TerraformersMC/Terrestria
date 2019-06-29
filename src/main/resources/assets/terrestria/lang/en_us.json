@@ -115,5 +115,22 @@
   "item.terrestria.log_turner.tooltip.line4": "it already matches, it will then",
   "item.terrestria.log_turner.tooltip.line5": "rotate the bark side clockwise",
   "item.terrestria.log_turner.tooltip.line6": "When used while sneaking, it will",
-  "item.terrestria.log_turner.tooltip.line7": "cycle the axis and bark side"
+  "item.terrestria.log_turner.tooltip.line7": "cycle the axis and bark side",
+
+  "biome.terrestria.redwood_forest": "Redwood Forest",
+  "biome.terrestria.lush_redwood_forest": "Lush Redwood Forest",
+  "biome.terrestria.temperate_rainforest": "Temperate Rainforest",
+  "biome.terrestria.snowy_rainforest": "Snowy Rainforest",
+  "biome.terrestria.alpine": "Alpine",
+  "biome.terrestria.cypress_forest": "Cypress Forest",
+  "biome.terrestria.sakura_forest": "Sakura Forest",
+  "biome.terrestria.japanese_maple_forest": "Japanese Maple Forest",
+  "biome.terrestria.rainforest": "Rainforest",
+  "biome.terrestria.cypress_swamp": "Cypress Swamp",
+  "biome.terrestria.caldera": "Caldera",
+  "biome.terrestria.caldera_ridge": "Caldera Ridge",
+  "biome.terrestria.caldera_beach": "Caldera Beach",
+  "biome.terrestria.volcanic_island": "Volcanic Island",
+  "biome.terrestria.volcanic_island_beach": "Volcanic Island Beach",
+  "biome.terrestria.volcanic_island_shore": "Volcanic Island Shore"
 }
