@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "terrestria:blocks/redwood_log",
+	"up": "terrestria:blocks/redwood_log_top_quarter",
+	"down": "terrestria:blocks/redwood_log_bottom_quarter",
+	"south": "terrestria:blocks/redwood_log_bark_left",
+	"west": "terrestria:blocks/redwood_log_bark_right",
+	"north": "terrestria:blocks/redwood_log_bare_right",
+	"east": "terrestria:blocks/redwood_log_bare_left"
+  }
+}

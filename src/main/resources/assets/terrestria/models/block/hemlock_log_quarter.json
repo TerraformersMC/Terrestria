@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+	"particle": "terrestria:blocks/hemlock_log",
+	"up": "terrestria:blocks/hemlock_log_top_quarter",
+	"down": "terrestria:blocks/hemlock_log_bottom_quarter",
+	"south": "terrestria:blocks/hemlock_log_bark_left",
+	"west": "terrestria:blocks/hemlock_log_bark_right",
+	"north": "terrestria:blocks/hemlock_log_bare_right",
+	"east": "terrestria:blocks/hemlock_log_bare_left"
+  }
+}

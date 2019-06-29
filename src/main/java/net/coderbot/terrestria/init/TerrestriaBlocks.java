@@ -1,8 +1,11 @@
 package net.coderbot.terrestria.init;
 
 import io.github.terraformersmc.terraform.block.*;
+import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import net.coderbot.terrestria.Terrestria;
+import net.coderbot.terrestria.feature.ConiferTreeFeature;
+import net.coderbot.terrestria.feature.MegaConiferTreeFeature;
 import net.coderbot.terrestria.feature.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -14,6 +17,8 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
+	public static WoodBlocks REDWOOD;
+	public static WoodBlocks HEMLOCK;
 	public static WoodBlocks RUBBER;
 	public static WoodBlocks CYPRESS;
 	public static WoodBlocks BALD_CYPRESS;
@@ -27,9 +32,13 @@ public class TerrestriaBlocks {
 	public static SeagrassBlock CATTAIL;
 	public static TallSeagrassBlock TALL_CATTAIL;
 
+	public static QuarterLogBlock REDWOOD_QUARTER_LOG;
+	public static QuarterLogBlock HEMLOCK_QUARTER_LOG;
 	public static QuarterLogBlock BALD_CYPRESS_QUARTER_LOG;
 	public static QuarterLogBlock RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static TerraformSaplingBlock REDWOOD_SAPLING;
+	public static TerraformSaplingBlock HEMLOCK_SAPLING;
 	public static TerraformSaplingBlock RUBBER_SAPLING;
 	public static TerraformSaplingBlock CYPRESS_SAPLING;
 	public static TerraformSaplingBlock BALD_CYPRESS_SAPLING;
@@ -48,6 +57,8 @@ public class TerrestriaBlocks {
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
 
+		REDWOOD = WoodBlocks.registerExtendedLeaves("redwood", MaterialColor.BROWN, flammable);
+		HEMLOCK = WoodBlocks.registerExtendedLeaves("hemlock", MaterialColor.BROWN, flammable);
 		RUBBER = WoodBlocks.register("rubber", MaterialColor.BROWN, flammable);
 		CYPRESS = WoodBlocks.register("cypress", MaterialColor.LIGHT_GRAY, flammable);
 		BALD_CYPRESS = WoodBlocks.register("bald_cypress", MaterialColor.LIGHT_GRAY, flammable);
@@ -70,11 +81,29 @@ public class TerrestriaBlocks {
 		CATTAIL = register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
 
 		// TODO: Map colors
+		REDWOOD_QUARTER_LOG = register("redwood_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
+		HEMLOCK_QUARTER_LOG = register("hemlock_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
 		BALD_CYPRESS_QUARTER_LOG = register("bald_cypress_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
 		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", new QuarterLogBlock(MaterialColor.BROWN, Block.Settings.copy(Blocks.OAK_LOG)));
 
 		flammable.add(BALD_CYPRESS_QUARTER_LOG, 5, 5);
 		flammable.add(RAINBOW_EUCALYPTUS_QUARTER_LOG, 5, 5);
+
+		// Saplings
+
+		REDWOOD_SAPLING = register("redwood_sapling", new TerraformSaplingBlock(
+			new TerraformLargeSaplingGenerator(
+					() -> TerrestriaFeatures.REDWOOD_TREE.sapling(),
+					() -> TerrestriaFeatures.MEGA_REDWOOD_TREE.sapling()
+			)
+		));
+
+		HEMLOCK_SAPLING = register("hemlock_sapling", new TerraformSaplingBlock(
+				new TerraformLargeSaplingGenerator(
+						() -> TerrestriaFeatures.HEMLOCK_TREE.sapling(),
+						() -> TerrestriaFeatures.MEGA_HEMLOCK_TREE.sapling()
+				)
+		));
 
 		RUBBER_SAPLING = register("rubber_sapling", new TerraformSaplingBlock(
 				new TerraformSaplingGenerator(
@@ -110,6 +139,8 @@ public class TerrestriaBlocks {
 				new TerraformSaplingGenerator(() -> TerrestriaFeatures.PALM_TREE.sapling())
 		));
 
+		// Volcanic Island Blocks
+
 		BASALT_SAND = register("basalt_sand", new SandBlock(0x202020, Block.Settings.copy(Blocks.SAND)));
 		BASALT_DIRT = register("basalt_dirt", new Block(Block.Settings.copy(Blocks.DIRT)));
 		BASALT_GRASS_BLOCK = register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, Block.Settings.copy(Blocks.GRASS_BLOCK)));
@@ -125,7 +156,7 @@ public class TerrestriaBlocks {
 	public static class WoodBlocks {
 		public Block log;
 		public Block wood;
-		public LeavesBlock leaves;
+		public Block leaves;
 
 		public Block planks;
 		public SlabBlock slab;
@@ -143,6 +174,18 @@ public class TerrestriaBlocks {
 			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
 			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
 			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+
+			blocks.addTreeFireInfo(registry);
+
+			return blocks;
+		}
+
+		public static WoodBlocks registerExtendedLeaves(String name, MaterialColor wood, FlammableBlockRegistry registry) {
+			WoodBlocks blocks = registerManufactured(name, registry);
+
+			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(wood, Block.Settings.copy(Blocks.OAK_LOG)));
+			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new ExtendedLeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 			blocks.addTreeFireInfo(registry);
 

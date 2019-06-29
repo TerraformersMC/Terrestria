@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "terrestria:block/redwood_sapling"
+	},
+	"stage=1": {
+	  "model": "terrestria:block/redwood_sapling"
+	}
+  }
+}

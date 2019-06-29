@@ -2,11 +2,14 @@ package net.coderbot.terrestria;
 
 import net.coderbot.terrestria.command.LocateAny;
 import net.coderbot.terrestria.init.*;
+import net.coderbot.terrestria.item.LogTurnerItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class Terrestria implements ModInitializer {
 	public static final String MOD_ID = "terrestria";
@@ -22,6 +25,7 @@ public class Terrestria implements ModInitializer {
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
 
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().itemGroup(ITEM_GROUP)));
 		LocateAny.register();
 	}
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom",
+  "textures": {
+	"bottom": "terrestria:blocks/redwood_door_bottom",
+	"top": "terrestria:blocks/redwood_door_top"
+  }
+}

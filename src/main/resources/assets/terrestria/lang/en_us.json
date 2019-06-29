@@ -1,6 +1,30 @@
 {
   "itemGroup.terrestria.items": "Terrestria",
-  
+
+  "block.terrestria.redwood_log": "Redwood Log",
+  "block.terrestria.redwood_wood": "Redwood Wood",
+  "block.terrestria.redwood_log_quarter": "Redwood Log",
+  "block.terrestria.redwood_sapling": "Redwood Sapling",
+  "block.terrestria.redwood_leaves": "Redwood Leaves",
+  "block.terrestria.redwood_planks": "Redwood Wood Planks",
+  "block.terrestria.redwood_slab": "Redwood Wood Slab",
+  "block.terrestria.redwood_stairs": "Redwood Wood Stairs",
+  "block.terrestria.redwood_fence": "Redwood Fence",
+  "block.terrestria.redwood_fence_gate": "Redwood Fence Gate",
+  "block.terrestria.redwood_door": "Redwood Door",
+
+  "block.terrestria.hemlock_log": "Hemlock Log",
+  "block.terrestria.hemlock_wood": "Hemlock Wood",
+  "block.terrestria.hemlock_log_quarter": "Hemlock Log",
+  "block.terrestria.hemlock_sapling": "Hemlock Sapling",
+  "block.terrestria.hemlock_leaves": "Hemlock Leaves",
+  "block.terrestria.hemlock_planks": "Hemlock Wood Planks",
+  "block.terrestria.hemlock_slab": "Hemlock Wood Slab",
+  "block.terrestria.hemlock_stairs": "Hemlock Wood Stairs",
+  "block.terrestria.hemlock_fence": "Hemlock Fence",
+  "block.terrestria.hemlock_fence_gate": "Hemlock Fence Gate",
+  "block.terrestria.hemlock_door": "Hemlock Door",
+
   "block.terrestria.rubber_log": "Rubber Log",
   "block.terrestria.rubber_wood": "Rubber Wood",
   "block.terrestria.rubber_log_quarter": "Rubber Log",
@@ -76,5 +100,15 @@
   "block.terrestria.basalt_sand": "Basalt Sand",
 
   "block.terrestria.japanese_maple_shrub_sapling": "Japanese Maple Shrub Sapling",
-  "block.terrestria.japanese_maple_shrub_leaves": "Japanese Maple Shrub Leaves"
+  "block.terrestria.japanese_maple_shrub_leaves": "Japanese Maple Shrub Leaves",
+
+  "item.terrestria.log_turner": "Log Turner",
+  "item.terrestria.log_turner.tooltip.line0": "Use on a log to instantly set",
+  "item.terrestria.log_turner.tooltip.line1": "its axis to the side you clicked",
+  "item.terrestria.log_turner.tooltip.line2": "When used on a quarter log, it",
+  "item.terrestria.log_turner.tooltip.line3": "will try to set the axis, and if",
+  "item.terrestria.log_turner.tooltip.line4": "it already matches, it will then",
+  "item.terrestria.log_turner.tooltip.line5": "rotate the bark side clockwise",
+  "item.terrestria.log_turner.tooltip.line6": "When used while sneaking, it will",
+  "item.terrestria.log_turner.tooltip.line7": "cycle the axis and bark side"
 }

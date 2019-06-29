@@ -7,11 +7,15 @@ import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
@@ -20,6 +24,11 @@ import java.util.function.Consumer;
 // This class exports public biome constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBiomes {
+	public static ConiferousBiome REDWOOD_FOREST;
+	public static ConiferousBiome LUSH_REDWOOD_FOREST;
+	public static ConiferousBiome TEMPERATE_RAINFOREST;
+	public static ConiferousBiome SNOWY_RAINFOREST;
+	public static AlpineBiome ALPINE;
 	public static CypressForestBiome CYPRESS_FOREST;
 	// public static CypressForestBiome CYPRESS_HILLS; // TODO
 	public static JapaneseForestBiome SAKURA_FOREST;
@@ -34,6 +43,115 @@ public class TerrestriaBiomes {
 	public static VolcanicIslandBiome VOLCANIC_ISLAND_SHORE;
 
 	public static void init() {
+		REDWOOD_FOREST = register("redwood_forest", new ConiferousBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.depth(1.2F)
+						.scale(0.3F)
+						.temperature(1.1F)
+						.downfall(1.4F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				7,
+				TerrestriaFeatures.MEGA_REDWOOD_TREE,
+				TerrestriaFeatures.MEGA_REDWOOD_TREE
+		));
+
+		LUSH_REDWOOD_FOREST = register("lush_redwood_forest", new ConiferousBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.depth(1.2F)
+						.scale(0.3F)
+						.temperature(1.1F)
+						.downfall(1.4F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				8,
+				TerrestriaFeatures.MEGA_REDWOOD_TREE,
+				TerrestriaFeatures.HEMLOCK_TREE
+		));
+
+		DefaultBiomeFeatures.addDefaultFlowers(LUSH_REDWOOD_FOREST);
+
+		TEMPERATE_RAINFOREST = register("temperate_rainforest", new ConiferousBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+						.depth(0.95F)
+						.scale(0.55F)
+						.temperature(0.6F)
+						.downfall(0.9F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				17,
+				TerrestriaFeatures.MEGA_HEMLOCK_TREE,
+				TerrestriaFeatures.HEMLOCK_TREE
+		));
+
+		TEMPERATE_RAINFOREST.addFeature(
+				GenerationStep.Feature.VEGETAL_DECORATION,
+				Biome.configureFeature(Feature.GRASS,
+						new GrassFeatureConfig(Blocks.FERN.getDefaultState()),
+						Decorator.COUNT_HEIGHTMAP_DOUBLE,
+						new CountDecoratorConfig(12)
+				)
+		);
+
+		TEMPERATE_RAINFOREST.addFeature(
+				GenerationStep.Feature.VEGETAL_DECORATION,
+				Biome.configureFeature(Feature.GRASS,
+						new GrassFeatureConfig(Blocks.GRASS.getDefaultState()),
+						Decorator.COUNT_HEIGHTMAP_DOUBLE,
+						new CountDecoratorConfig(4)
+				)
+		);
+
+		SNOWY_RAINFOREST = register("snowy_rainforest", new ConiferousBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.TAIGA)
+						.depth(0.95F)
+						.scale(0.55F)
+						.temperature(-0.5F)
+						.downfall(1.3F)
+						.waterColor(4020182)
+						.waterFogColor(329011)
+						.parent(null),
+				17,
+				TerrestriaFeatures.MEGA_HEMLOCK_TREE,
+				TerrestriaFeatures.HEMLOCK_TREE
+		));
+
+		SNOWY_RAINFOREST.addFeature(
+				GenerationStep.Feature.VEGETAL_DECORATION,
+				Biome.configureFeature(Feature.GRASS,
+						new GrassFeatureConfig(Blocks.GRASS.getDefaultState()),
+						Decorator.COUNT_HEIGHTMAP_DOUBLE,
+						new CountDecoratorConfig(4)
+				)
+		);
+
+		ALPINE = register("alpine", new AlpineBiome(
+				new Biome.Settings()
+						.configureSurfaceBuilder(SurfaceBuilder.MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
+						.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.EXTREME_HILLS)
+						.depth(1.7F)
+						.scale(0.4F)
+						.temperature(0.0F)
+						.downfall(0.1F)
+						.waterColor(4159204)
+						.waterFogColor(329011)
+						.parent(null),
+				1,
+				TerrestriaFeatures.REDWOOD_TREE,
+				TerrestriaFeatures.HEMLOCK_TREE
+		));
+
 		CYPRESS_FOREST = register("cypress_forest", new CypressForestBiome(
 				new Biome.Settings()
 						.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -226,6 +344,11 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addBaseBiome(TEMPERATE_RAINFOREST, OverworldClimate.COOL, 1.0);
+		OverworldBiomes.addBaseBiome(SNOWY_RAINFOREST, OverworldClimate.SNOWY, 2.0);
+		OverworldBiomes.addBaseBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
 
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 
@@ -247,6 +370,9 @@ public class TerrestriaBiomes {
 
 		FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
 		FabricBiomes.addSpawnBiome(RAINFOREST);
+		FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
+		FabricBiomes.addSpawnBiome(LUSH_REDWOOD_FOREST);
+		FabricBiomes.addSpawnBiome(TEMPERATE_RAINFOREST);
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {

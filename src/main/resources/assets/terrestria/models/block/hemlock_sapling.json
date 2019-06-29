@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+	"cross": "terrestria:blocks/hemlock_sapling"
+  }
+}

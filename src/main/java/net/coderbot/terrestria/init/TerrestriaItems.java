@@ -10,6 +10,8 @@ import net.minecraft.util.registry.Registry;
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaItems {
+	public static WoodItems REDWOOD;
+	public static WoodItems HEMLOCK;
 	public static WoodItems RUBBER;
 	public static WoodItems CYPRESS;
 	public static WoodItems BALD_CYPRESS;
@@ -22,9 +24,13 @@ public class TerrestriaItems {
 
 	public static BlockItem CATTAIL;
 
+	public static BlockItem REDWOOD_QUARTER_LOG;
+	public static BlockItem HEMLOCK_QUARTER_LOG;
 	public static BlockItem BALD_CYPRESS_QUARTER_LOG;
 	public static BlockItem RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static BlockItem REDWOOD_SAPLING;
+	public static BlockItem HEMLOCK_SAPLING;
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
 	public static BlockItem BALD_CYPRESS_SAPLING;
@@ -40,6 +46,8 @@ public class TerrestriaItems {
 	public static BlockItem BASALT_GRASS_BLOCK;
 
 	public static void init() {
+		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
+		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
 		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
 		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
 		BALD_CYPRESS = WoodItems.register("bald_cypress", TerrestriaBlocks.BALD_CYPRESS);
@@ -53,9 +61,13 @@ public class TerrestriaItems {
 
 		CATTAIL = register("cattail", TerrestriaBlocks.CATTAIL);
 
+		REDWOOD_QUARTER_LOG = register("redwood_log_quarter", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
+		HEMLOCK_QUARTER_LOG = register("hemlock_log_quarter", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
 		BALD_CYPRESS_QUARTER_LOG = register("bald_cypress_log_quarter", TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG);
 		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
+		REDWOOD_SAPLING = register("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
+		HEMLOCK_SAPLING = register("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
 		RUBBER_SAPLING = register("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", TerrestriaBlocks.BALD_CYPRESS_SAPLING);

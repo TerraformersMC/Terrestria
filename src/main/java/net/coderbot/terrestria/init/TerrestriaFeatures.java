@@ -19,6 +19,10 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
+	public static ConiferTreeFeature REDWOOD_TREE;
+	public static MegaConiferTreeFeature MEGA_REDWOOD_TREE;
+	public static ConiferTreeFeature HEMLOCK_TREE;
+	public static MegaConiferTreeFeature MEGA_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
 	public static OakTreeFeature TALLER_BIRCH_TREE;
@@ -34,6 +38,30 @@ public class TerrestriaFeatures {
 	public static StructurePieceType VOLCANO_PIECE;
 
 	public static void init() {
+		REDWOOD_TREE = register("redwood_tree",
+				new ConiferTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+		);
+
+		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
+				new MegaConiferTreeFeature (
+						DefaultFeatureConfig::deserialize,
+						true,
+						TerrestriaBlocks.REDWOOD.getBasicDefinition().toMega(TerrestriaBlocks.REDWOOD_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.REDWOOD.wood.getDefaultState())
+				)
+		);
+
+		HEMLOCK_TREE = register("hemlock_tree",
+				new ConiferTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
+		);
+
+		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
+				new MegaConiferTreeFeature (
+						DefaultFeatureConfig::deserialize,
+						true,
+						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
+				)
+		);
+
 		CYPRESS_TREE = register("cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
 		);
@@ -103,7 +131,7 @@ public class TerrestriaFeatures {
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 	}
 
-	public static <T extends Feature> T register(String name, T feature) {
+	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
 		return Registry.register(Registry.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
 	}
 

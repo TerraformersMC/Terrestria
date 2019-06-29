@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+	"bottom": "terrestria:blocks/redwood_planks",
+	"top": "terrestria:blocks/redwood_planks",
+	"side": "terrestria:blocks/redwood_planks"
+  }
+}
