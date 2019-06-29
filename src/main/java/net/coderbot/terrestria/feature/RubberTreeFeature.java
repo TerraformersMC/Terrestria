@@ -32,7 +32,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		int height = rand.nextInt(4) + 8;
+		int height = rand.nextInt(4) + 12;
 
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
@@ -73,24 +73,18 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		return true;
 	}
 
-	// Grows a 3x3 trunk of the specified height, centered on the position.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		int x = pos.getX() - 1;
-		int z = pos.getZ() - 1;
+		int x = pos.getX();
+		int z = pos.getZ();
 
 		for(int i = 0; i < height; i++) {
-			for(int dx = 0; dx < 3; dx++) {
-				for(int dz = 0; dz < 3; dz++) {
-					pos.set(x + dx, pos.getY(), z + dz);
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-				}
-			}
-
+			pos.set(x, pos.getY(), z);
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 
-		for(int dx = 0; dx < 3; dx++) {
-			for(int dz = 0; dz < 3; dz++) {
+		for(int dx = 0; dx < 5; dx++) {
+			for(int dz = 0; dz < 5; dz++) {
 				pos.set(x + dx, pos.getY(), z + dz);
 				setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 			}
@@ -102,8 +96,8 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		for(int branch = 0; branch < 32; branch++) {
-			int baseY = random.nextInt(height - 4) + 4;
+		for(int branch = 0; branch < 16; branch++) {
+			int baseY = random.nextInt(height - 2) + 4;
 
 			float length = random.nextFloat() * 7 + 2;
 			float angle = random.nextFloat() * (float)Math.PI * 2;
@@ -132,7 +126,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 
 				int offsetY = (int)(Math.sqrt(movedX*movedX + movedZ * movedZ) * 0.4);
 
-				if(movedX > 6 || movedX < -6 || movedZ > 6 || movedZ < -6) {
+				if(movedX > 2 || movedX < -2 || movedZ > 2 || movedZ < -2) {
 					continue;
 				}
 
