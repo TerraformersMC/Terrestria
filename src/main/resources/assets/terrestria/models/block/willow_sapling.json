@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+	"cross": "terrestria:blocks/willow_sapling"
+  }
+}

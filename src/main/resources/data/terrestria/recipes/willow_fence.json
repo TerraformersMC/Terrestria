@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PSP",
+		"PSP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:willow_planks"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "terrestria:willow_fence",
+		"count": 3
+	}
+}

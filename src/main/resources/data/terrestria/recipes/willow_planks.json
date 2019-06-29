@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+		  "tag": "terrestria:willow_logs"
+		}
+	],
+	"result": {
+		"item": "terrestria:willow_planks",
+		"count": 4
+	}
+}

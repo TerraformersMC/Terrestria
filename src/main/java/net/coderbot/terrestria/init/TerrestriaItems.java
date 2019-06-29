@@ -14,6 +14,7 @@ public class TerrestriaItems {
 	public static WoodItems HEMLOCK;
 	public static WoodItems RUBBER;
 	public static WoodItems CYPRESS;
+	public static WoodItems WILLOW;
 	public static WoodItems BALD_CYPRESS;
 	public static WoodItems JAPANESE_MAPLE;
 	public static WoodItems RAINBOW_EUCALYPTUS;
@@ -33,6 +34,7 @@ public class TerrestriaItems {
 	public static BlockItem HEMLOCK_SAPLING;
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
+	public static BlockItem WILLOW_SAPLING;
 	public static BlockItem BALD_CYPRESS_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SHRUB_SAPLING;
@@ -50,6 +52,7 @@ public class TerrestriaItems {
 		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
 		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
 		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
+		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
 		BALD_CYPRESS = WoodItems.register("bald_cypress", TerrestriaBlocks.BALD_CYPRESS);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
@@ -70,6 +73,7 @@ public class TerrestriaItems {
 		HEMLOCK_SAPLING = register("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
 		RUBBER_SAPLING = register("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
+		WILLOW_SAPLING = register("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", TerrestriaBlocks.BALD_CYPRESS_SAPLING);
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);

@@ -21,6 +21,7 @@ public class TerrestriaBlocks {
 	public static WoodBlocks HEMLOCK;
 	public static WoodBlocks RUBBER;
 	public static WoodBlocks CYPRESS;
+	public static WoodBlocks WILLOW;
 	public static WoodBlocks BALD_CYPRESS;
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
@@ -41,6 +42,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock HEMLOCK_SAPLING;
 	public static TerraformSaplingBlock RUBBER_SAPLING;
 	public static TerraformSaplingBlock CYPRESS_SAPLING;
+	public static TerraformSaplingBlock WILLOW_SAPLING;
 	public static TerraformSaplingBlock BALD_CYPRESS_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
@@ -61,6 +63,7 @@ public class TerrestriaBlocks {
 		HEMLOCK = WoodBlocks.registerExtendedLeaves("hemlock", MaterialColor.BROWN, flammable);
 		RUBBER = WoodBlocks.register("rubber", MaterialColor.BROWN, flammable);
 		CYPRESS = WoodBlocks.register("cypress", MaterialColor.LIGHT_GRAY, flammable);
+		WILLOW = WoodBlocks.register("willow", MaterialColor.BROWN, flammable);
 		BALD_CYPRESS = WoodBlocks.register("bald_cypress", MaterialColor.LIGHT_GRAY, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", MaterialColor.RED, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", MaterialColor.RED, flammable);
@@ -113,6 +116,10 @@ public class TerrestriaBlocks {
 
 		CYPRESS_SAPLING = register("cypress_sapling", new TerraformSaplingBlock (
 				new TerraformSaplingGenerator (() -> TerrestriaFeatures.CYPRESS_TREE.sapling())
+		));
+
+		WILLOW_SAPLING = register("willow_sapling", new TerraformSaplingBlock (
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.WILLOW_TREE.sapling())
 		));
 
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new TerraformSaplingBlock (
