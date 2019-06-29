@@ -67,7 +67,6 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 	protected void generate(Random random, Chunk chunk, Biome biome, int x, int z, int unknown3, double noise, BlockState stone, BlockState water, BlockState top, BlockState filler, BlockState underwater, int unknown5) {
 		generateBeach(chunk, x, z, noise, water);
 
-		// Sea Level = 100
 		super.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, unknown5);
 	}
 }

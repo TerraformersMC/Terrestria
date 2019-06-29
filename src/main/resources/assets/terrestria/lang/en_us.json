@@ -59,7 +59,6 @@
   "block.terrestria.bald_cypress_fence": "Bald Cypress Fence",
   "block.terrestria.bald_cypress_fence_gate": "Bald Cypress Fence Gate",
   "block.terrestria.bald_cypress_door": "Bald Cypress Door",
-  "block.terrestria.cattail": "Cattail",
 
   "block.terrestria.japanese_maple_log": "Japanese Maple Log",
   "block.terrestria.japanese_maple_wood": "Japanese Maple Wood",
@@ -94,6 +93,11 @@
   "block.terrestria.sakura_fence": "Sakura Fence",
   "block.terrestria.sakura_fence_gate": "Sakura Fence Gate",
   "block.terrestria.sakura_door": "Sakura Door",
+
+  "block.terrestria.palm_sapling": "Palm Sapling",
+
+  "block.terrestria.cattail": "Cattail",
+  "block.terrestria.tall_cattail": "Tall Cattail",
 
   "block.terrestria.basalt": "Basalt",
   "block.terrestria.basalt_grass_block": "Basalt Grass Block",
