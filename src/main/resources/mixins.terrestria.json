@@ -1,9 +1,0 @@
-{
-  "required": true,
-  "package": "net.coderbot.terrestria.mixin",
-  "compatibilityLevel": "JAVA_8",
-  "mixins": [ "EaseBiomeEdgeLayerMixin" ],
-  "injectors": {
-	"defaultRequire": 1
-  }
-}

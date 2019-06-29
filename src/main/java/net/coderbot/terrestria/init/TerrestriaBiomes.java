@@ -1,8 +1,8 @@
 package net.coderbot.terrestria.init;
 
+import io.github.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.biome.*;
-import net.coderbot.terrestria.biome.extensions.OverworldBiomesExt;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
