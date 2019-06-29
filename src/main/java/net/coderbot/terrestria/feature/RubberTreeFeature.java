@@ -82,13 +82,6 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
-
-		for(int dx = 0; dx < 5; dx++) {
-			for(int dz = 0; dz < 5; dz++) {
-				pos.set(x + dx, pos.getY(), z + dz);
-				setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
-			}
-		}
 	}
 
 	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random random, MutableIntBoundingBox boundingBox) {
