@@ -122,6 +122,6 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		x = x / height;
 
 		// A 3rd-degree polynomial approximating the shape of a cypress tree - increasing rapidly, and then tapering off.
-		return 6.25 * Math.pow(x, 3) - 12.5 * Math.pow(x, 2) + 6.25 * x;
+		return 6.25 * (x*x*x) - 12.5 * (x*x) + 6.25 * x;
 	}
 }

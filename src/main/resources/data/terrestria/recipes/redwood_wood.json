@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"LL",
+	"LL"
+  ],
+  "key": {
+	"L": {
+	  "item": "terrestria:redwood_log"
+	}
+  },
+  "result": {
+	"item": "terrestria:redwood_wood",
+	"count": 3
+  }
+}

@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:hemlock_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:hemlock_slab",
+		"count": 6
+	}
+}

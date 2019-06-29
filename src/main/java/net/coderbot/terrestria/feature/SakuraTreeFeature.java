@@ -21,11 +21,13 @@ import java.util.function.Predicate;
 
 public class SakuraTreeFeature extends JapaneseTreeFeature {
 	private TreeDefinition.Sakura tree;
+	private boolean worldgen;
 
 	public SakuraTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Sakura tree) {
 		super(function, notify, tree);
 
 		this.tree = tree;
+		this.worldgen = !notify;
 	}
 
 	public SakuraTreeFeature sapling() {
@@ -46,7 +48,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 				return;
 			}
 
-			BlockPos top = world.getTopPosition(Heightmap.Type.WORLD_SURFACE_WG, pos);
+			BlockPos top = world.getTopPosition(worldgen ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.WORLD_SURFACE, pos);
 
 			if(!AbstractTreeFeature.isAirOrLeaves(world, top)) {
 				return;

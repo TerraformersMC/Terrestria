@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PP",
+		"PP",
+		"PP"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:redwood_planks"
+		}
+	},
+	"result": {
+		"item": "terrestria:redwood_door",
+		"count": 3
+	}
+}
