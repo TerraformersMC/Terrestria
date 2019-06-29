@@ -1,5 +1,7 @@
 {
   "values": [
+	"terrestria:redwood_door",
+	"terrestria:hemlock_door",
 	"terrestria:rubber_door",
 	"terrestria:cypress_door",
 	"terrestria:japanese_maple_door",
