@@ -2,6 +2,7 @@ package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -9,6 +10,7 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import io.github.terraformersmc.terraform.util.*;
 
 import java.util.Random;
 import java.util.Set;
@@ -32,10 +34,10 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
         int height = rand.nextInt(5) + 6;
 
         // Maximum leaf radius.
-        double maxRadius = 5 + 2 * rand.nextDouble();
+        double maxRadius = 5 + 3 * rand.nextDouble();
 
         //Minimum leaf radius
-        double minRadius = 2.25 + 2 * rand.nextDouble();
+        double minRadius = 1.25 + 2 * rand.nextDouble();
 
         //If the tree can pass the max build height
         if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
@@ -55,9 +57,11 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 
         //Grow the trunk
         growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
+        growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, height/3)), (int)(minRadius +0.5), boundingBox);
+        growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, (height/2)+1)), (int)(minRadius*radiusFactor(height/2, height) +0.5), boundingBox);
         //Grow the leaves
         BlockPos.Mutable pos = new BlockPos.Mutable(origin);
-        growLeaves(blocks, world, pos, height, maxRadius, minRadius, boundingBox);
+        growLeaves(blocks, world, pos, height, maxRadius, minRadius, boundingBox, rand);
 
         return true;
     }
@@ -69,9 +73,51 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
             setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
             pos.setOffset(Direction.UP);
         }
+        //Make sure there are leaf blocks on the top of the tree
+        Shapes.circle(pos, 1.5, position -> {
+            if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+                setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+            }
+        });
     }
 
-    private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, double minRadius, MutableIntBoundingBox boundingBox) {
+    private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int minRadius, MutableIntBoundingBox boundingBox) {
+        //save original origin for use in z branch
+        BlockPos origin = pos.toImmutable();
+        pos.setOffset(Direction.WEST, minRadius);
+        for(int x = -minRadius; x < minRadius; x++) {
+            if (canTreeReplace(world, pos)) {
+                setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.WEST.getAxis()), boundingBox);
+            }
+            pos.setOffset(Direction.EAST);
+        }
+        pos.set(origin);
+        pos.setOffset(Direction.NORTH, minRadius);
+        for(int y = -minRadius; y < minRadius; y++) {
+            if (canTreeReplace(world, pos)) {
+                setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.NORTH.getAxis()), boundingBox);
+            }
+            pos.setOffset(Direction.SOUTH);
+        }
+        //reset the branches
+        pos.set(origin);
+    }
+
+    private void growDanglyBit(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox, Random random) {
+        int randHolder;
+        //33% chance of a dangly bit generating.
+        if (random.nextInt(3) == 1) {
+            //length of the bit
+            randHolder = random.nextInt(3);
+            for (int d = 0; d < randHolder; d++) {
+                pos.setOffset(Direction.DOWN);
+                setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+            }
+            pos.setOffset(Direction.UP, randHolder);
+        }
+    }
+
+    private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, double minRadius, MutableIntBoundingBox boundingBox, Random rand) {
         int x = pos.getX();
         int y = pos.getY();
         int z = pos.getZ();
@@ -80,7 +126,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 
         for(int dy = 0; dy < height; dy++) {
 
-            //if the leaves aren't 1/2 way up the trunk
+            //if the leaves aren't 1/3 way up the trunk
             if (dy < (height/3)) {
                 continue;
             }
@@ -95,9 +141,13 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
                 continue;
             }
 
-            io.github.terraformersmc.terraform.util.Shapes.canopyCircle(pos, radius, innerRadius, position -> {
+            int finalDy = dy;
+            Shapes.canopyCircle(pos, radius, innerRadius, position -> {
                 if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
                     setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+                    if (finalDy == (height/3)) {
+                        growDanglyBit(blocks, world, pos, height, boundingBox, rand);
+                    }
                 }
             });
         }
