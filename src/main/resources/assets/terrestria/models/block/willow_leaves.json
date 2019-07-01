@@ -1,6 +1,22 @@
 {
-  "parent": "minecraft:block/leaves",
+  "parent": "minecraft:block/block",
   "textures": {
-	"all": "terrestria:blocks/willow_leaves"
-  }
+    "particle": "terrestria:blocks/willow_leaves",
+    "ends": "terrestria:blocks/willow_leaves_top",
+    "sides": "terrestria:blocks/willow_leaves"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#ends", "tintindex": 0, "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#ends", "tintindex": 0, "cullface": "up" },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#sides", "tintindex": 0, "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#sides", "tintindex": 0, "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#sides", "tintindex": 0, "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#sides", "tintindex": 0, "cullface": "east" }
+      }
+    }
+  ]
 }
