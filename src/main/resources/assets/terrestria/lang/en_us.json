@@ -48,6 +48,17 @@
   "block.terrestria.cypress_fence_gate": "Cypress Fence Gate",
   "block.terrestria.cypress_door": "Cypress Door",
 
+  "block.terrestria.willow_log": "Willow Log",
+  "block.terrestria.willow_wood": "Willow Wood",
+  "block.terrestria.willow_sapling": "Willow Sapling",
+  "block.terrestria.willow_leaves": "Willow Leaves",
+  "block.terrestria.willow_planks": "Willow Wood Planks",
+  "block.terrestria.willow_slab": "Willow Wood Slab",
+  "block.terrestria.willow_stairs": "Willow Wood Stairs",
+  "block.terrestria.willow_fence": "Willow Fence",
+  "block.terrestria.willow_fence_gate": "Willow Fence Gate",
+  "block.terrestria.willow_door": "Willow Door",
+
   "block.terrestria.bald_cypress_log": "Bald Cypress Log",
   "block.terrestria.bald_cypress_wood": "Bald Cypress Wood",
   "block.terrestria.bald_cypress_log_quarter": "Bald Cypress Log",

@@ -24,6 +24,7 @@ public class TerrestriaFeatures {
 	public static ConiferTreeFeature HEMLOCK_TREE;
 	public static MegaConiferTreeFeature MEGA_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
+	public static WillowTreeFeature WILLOW_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
 	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
@@ -65,6 +66,10 @@ public class TerrestriaFeatures {
 
 		CYPRESS_TREE = register("cypress_tree",
 				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
+		);
+
+		WILLOW_TREE = register("willow_tree",
+				new WillowTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.WILLOW.getBasicDefinition())
 		);
 
 		SMALL_BALD_CYPRESS_TREE = register("small_bald_cypress_tree",
