@@ -86,7 +86,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
         BlockPos origin = pos.toImmutable();
         pos.setOffset(Direction.WEST, minRadius);
         for(int x = -minRadius; x < minRadius; x++) {
-            if (canTreeReplace(world, pos)) {
+            if (isAirOrLeaves(world, pos)) {
                 setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.WEST.getAxis()), boundingBox);
             }
             pos.setOffset(Direction.EAST);
@@ -94,7 +94,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
         pos.set(origin);
         pos.setOffset(Direction.NORTH, minRadius);
         for(int y = -minRadius; y < minRadius; y++) {
-            if (canTreeReplace(world, pos)) {
+            if (isAirOrLeaves(world, pos)) {
                 setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.NORTH.getAxis()), boundingBox);
             }
             pos.setOffset(Direction.SOUTH);
