@@ -1,7 +1,8 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.util.Shapes;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

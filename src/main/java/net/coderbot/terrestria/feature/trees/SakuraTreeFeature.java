@@ -1,8 +1,12 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.util.Shapes;
+import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.trees.components.Branches;
+import net.coderbot.terrestria.feature.trees.components.SmallLogs;
+import net.coderbot.terrestria.feature.trees.templates.JapaneseTreeFeature;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.tag.FluidTags;
@@ -19,7 +23,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class SakuraTreeFeature extends JapaneseTreeFeature {
+public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs, Branches {
 	private TreeDefinition.Sakura tree;
 	private boolean worldgen;
 
@@ -35,7 +39,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	protected void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
 		int x = origin.getX();
 		int z = origin.getZ();
 
@@ -62,7 +66,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	protected void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
+	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < length; i++) {
 			pos.setOffset(direction);
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
@@ -70,7 +74,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	protected void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
 		for(BlockPos log: blocks) {
 			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
 

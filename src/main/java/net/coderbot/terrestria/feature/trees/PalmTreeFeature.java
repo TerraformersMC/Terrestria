@@ -1,6 +1,7 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.coderbot.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;

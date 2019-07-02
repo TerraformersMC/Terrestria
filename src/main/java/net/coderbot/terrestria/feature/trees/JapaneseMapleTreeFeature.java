@@ -1,6 +1,8 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
+import net.coderbot.terrestria.feature.trees.templates.JapaneseTreeFeature;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
@@ -23,12 +25,12 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	protected void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
 	}
 
 	@Override
-	protected void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
+	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
 		for(int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
 			setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), boundingBox);
@@ -39,5 +41,5 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	protected void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {}
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) { }
 }

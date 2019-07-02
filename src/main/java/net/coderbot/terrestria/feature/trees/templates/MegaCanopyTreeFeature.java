@@ -1,8 +1,9 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
 import io.github.terraformersmc.terraform.util.Shapes;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;

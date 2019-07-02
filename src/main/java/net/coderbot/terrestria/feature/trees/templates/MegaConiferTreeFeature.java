@@ -1,8 +1,9 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;

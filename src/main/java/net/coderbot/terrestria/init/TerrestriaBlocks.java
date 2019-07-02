@@ -4,7 +4,7 @@ import io.github.terraformersmc.terraform.block.*;
 import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import net.coderbot.terrestria.Terrestria;
-import net.coderbot.terrestria.feature.RubberTreeFeature;
+import net.coderbot.terrestria.feature.trees.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
