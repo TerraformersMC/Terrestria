@@ -340,15 +340,15 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33);
 		OverworldBiomes.addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE,0.10);
 
-		OverworldBiomes.addBaseBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
-		OverworldBiomes.addBaseBiome(TEMPERATE_RAINFOREST, OverworldClimate.COOL, 1.0);
-		OverworldBiomes.addBaseBiome(SNOWY_RAINFOREST, OverworldClimate.SNOWY, 2.0);
-		OverworldBiomes.addBaseBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
+		OverworldBiomes.addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
+		OverworldBiomes.addContinentalBiome(TEMPERATE_RAINFOREST, OverworldClimate.COOL, 1.0);
+		OverworldBiomes.addContinentalBiome(SNOWY_RAINFOREST, OverworldClimate.SNOWY, 2.0);
+		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
 
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 
