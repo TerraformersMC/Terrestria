@@ -21,6 +21,7 @@ public class TerrestriaBlocks {
 	public static WoodBlocks HEMLOCK;
 	public static WoodBlocks RUBBER;
 	public static WoodBlocks CYPRESS;
+	public static WoodBlocks WILLOW;
 	public static WoodBlocks BALD_CYPRESS;
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
@@ -41,6 +42,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock HEMLOCK_SAPLING;
 	public static TerraformSaplingBlock RUBBER_SAPLING;
 	public static TerraformSaplingBlock CYPRESS_SAPLING;
+	public static TerraformSaplingBlock WILLOW_SAPLING;
 	public static TerraformSaplingBlock BALD_CYPRESS_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
@@ -61,6 +63,7 @@ public class TerrestriaBlocks {
 		HEMLOCK = WoodBlocks.registerExtendedLeaves("hemlock", WoodColors.HEMLOCK, flammable);
 		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
 		CYPRESS = WoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
+		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
 		BALD_CYPRESS = WoodBlocks.register("bald_cypress", WoodColors.CYPRESS, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
@@ -112,6 +115,10 @@ public class TerrestriaBlocks {
 						() -> TerrestriaFeatures.CYPRESS_TREE.sapling(),
 						() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling()
 				)
+		));
+
+		WILLOW_SAPLING = register("willow_sapling", new TerraformSaplingBlock (
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.WILLOW_TREE.sapling())
 		));
 
 		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new TerraformSaplingBlock (
@@ -171,6 +178,7 @@ public class TerrestriaBlocks {
 		public static final WoodColors HEMLOCK;
 		public static final WoodColors RUBBER;
 		public static final WoodColors CYPRESS;
+		public static final WoodColors WILLOW;
 		public static final WoodColors JAPANESE_MAPLE;
 		public static final WoodColors RAINBOW_EUCALYPTUS;
 		public static final WoodColors SAKURA;
@@ -191,6 +199,11 @@ public class TerrestriaBlocks {
 			CYPRESS = new WoodColors();
 			CYPRESS.bark = MaterialColor.WHITE_TERRACOTTA;
 			CYPRESS.planks = MaterialColor.LIGHT_GRAY;
+
+			WILLOW = new WoodColors();
+			WILLOW.bark = MaterialColor.WHITE_TERRACOTTA;
+			WILLOW.planks = MaterialColor.GRAY;
+			WILLOW.leaves = MaterialColor.LIGHT_GRAY;
 
 			JAPANESE_MAPLE = new WoodColors();
 			JAPANESE_MAPLE.bark = MaterialColor.BROWN;
