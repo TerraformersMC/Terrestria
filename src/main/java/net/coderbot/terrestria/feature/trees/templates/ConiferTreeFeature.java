@@ -65,48 +65,9 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		//Set the block below the trunk to dirt (because vanilla does it)
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height+bareTrunkHeight, boundingBox);
-		growBranches(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxRadius, shrinkAmount, layers, boundingBox);
 		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxRadius, shrinkAmount, layers, boundingBox);
 
 		return true;
-	}
-
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int maxRadius, double shrinkAmount, int layers, MutableIntBoundingBox boundingBox) {
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		int layerHeight = (height/layers);
-		int majorBranchLength = maxRadius - 2; //don't ask why, but this number just works for some reason
-		int minotBranchLength = (int)((majorBranchLength / 2.0)); //half of the major branch length
-
-		for (int layer = 0; layer < layers; layer++) {
-			pos.set(x, y + (layer*layerHeight), z);
-			majorBranchLength = (int) (majorBranchLength - (layer * (shrinkAmount/3)));
-			for (int maBr = 0; maBr < majorBranchLength; maBr++) {
-				BlockPos origin = pos.toImmutable();
-				pos.setOffset(Direction.WEST, majorBranchLength);
-				for(int xb = -majorBranchLength; xb <= majorBranchLength; xb++) {
-					if (isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.WEST.getAxis()), boundingBox);
-					}
-					pos.setOffset(Direction.EAST);
-				}
-				pos.set(origin);
-				pos.setOffset(Direction.NORTH, majorBranchLength);
-				for(int yb = -majorBranchLength; yb <= majorBranchLength; yb++) {
-					if (isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.NORTH.getAxis()), boundingBox);
-					}
-					pos.setOffset(Direction.SOUTH);
-				}
-				//reset the branches
-				pos.set(origin);
-			}
-
-			if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-			}
-		}
 	}
 
 	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int maxRadius, double shrinkAmmount, int layers, MutableIntBoundingBox boundingBox) {
@@ -117,6 +78,9 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		int leafLayerHeight = 2*(height/layers);
 
 		for (int layer = 0; layer < layers; layer++) {
+			if (layer == (layers-1)) { //Limit the top layer to not be too pointy
+				leafLayerHeight = layerHeight;
+			}
 			for(int currentHeight = 0; currentHeight < leafLayerHeight; currentHeight++) {
 
 				pos.set(x, y + (layer*layerHeight) + currentHeight, z);
@@ -158,7 +122,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	}
 
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < height; i++) {
+		for(int i = 0; i < (height*0.83); i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
