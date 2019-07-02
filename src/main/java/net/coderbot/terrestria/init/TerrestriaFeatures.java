@@ -4,9 +4,9 @@ import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.*;
-import net.coderbot.terrestria.feature.trees.templates.NewConiferTreeFeature;
-import net.coderbot.terrestria.feature.trees.templates.MegaCanopyTreeFeature;
-import net.coderbot.terrestria.feature.trees.templates.MegaConiferTreeFeature;
+import net.coderbot.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
+import net.coderbot.terrestria.feature.trees.templates.ConiferTreeFeatureMega;
+import net.coderbot.terrestria.feature.trees.templates.RedwoodTreeFeatureMega;
 import net.coderbot.terrestria.feature.trees.templates.ShrubFeature;
 import net.coderbot.terrestria.feature.trees.*;
 import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;
@@ -25,19 +25,19 @@ import net.minecraft.world.gen.feature.*;
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
 	public static RedwoodTreeFeature REDWOOD_TREE;
-	public static MegaConiferTreeFeature MEGA_REDWOOD_TREE;
+	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
 	public static HemlockTreeFeature HEMLOCK_TREE;
-	public static MegaConiferTreeFeature MEGA_HEMLOCK_TREE;
+	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
 	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
 	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
-	public static ShrubFeature JAPANESE_MAPLE_SHRUB;
-	public static MegaCanopyTreeFeature RAINBOW_EUCALYPTUS_TREE;
+	public static JapaneseMapleShrubFeature JAPANESE_MAPLE_SHRUB;
+	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
-	public static MegaCanopyTreeFeature BALD_CYPRESS_TREE;
+	public static CanopyTreeFeatureMega BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
 
@@ -50,7 +50,7 @@ public class TerrestriaFeatures {
 		);
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
-				new MegaConiferTreeFeature (
+				new RedwoodTreeFeatureMega(
 						DefaultFeatureConfig::deserialize,
 						true,
 						TerrestriaBlocks.REDWOOD.getBasicDefinition().toMega(TerrestriaBlocks.REDWOOD_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.REDWOOD.wood.getDefaultState())
@@ -62,7 +62,7 @@ public class TerrestriaFeatures {
 		);
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
-				new MegaConiferTreeFeature (
+				new HemlockTreeFeatureMega(
 						DefaultFeatureConfig::deserialize,
 						true,
 						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
@@ -102,11 +102,11 @@ public class TerrestriaFeatures {
 		);
 
 		JAPANESE_MAPLE_SHRUB = register("japanese_maple_shrub",
-				new ShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
+				new JapaneseMapleShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega (
+				new RainbowEucalyptusTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega (
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
 				))
@@ -121,7 +121,7 @@ public class TerrestriaFeatures {
 		);
 
 		BALD_CYPRESS_TREE = register("bald_cypress_tree",
-				new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega (
+				new CanopyTreeFeatureMega(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega (
 						TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.BALD_CYPRESS.wood.getDefaultState()
 				))

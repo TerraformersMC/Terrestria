@@ -18,7 +18,7 @@ public class RedwoodTreeFeature extends ConiferTreeFeature {
         return 12 + rand.nextInt(12);
     }
 
-    //For use in NewConiferTreeFeature
+    //For use in ConiferTreeFeatureNew
     /*
     @Override
     public int getLeafLayers(Random rand) {

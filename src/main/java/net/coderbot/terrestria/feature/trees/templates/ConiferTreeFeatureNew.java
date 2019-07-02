@@ -16,7 +16,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class NewConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Basic tree;
 	private int height;
 	private int bareTrunkHeight;
@@ -24,14 +24,14 @@ public class NewConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 	private int leafLayers;
 	private double shrinkAmount;
 
-	public NewConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	public ConiferTreeFeatureNew(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
 		this.tree = tree;
 	}
 
-	public NewConiferTreeFeature sapling() {
-		return new NewConiferTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	public ConiferTreeFeatureNew sapling() {
+		return new ConiferTreeFeatureNew(DefaultFeatureConfig::deserialize, true, tree);
 	}
 
 	@Override
