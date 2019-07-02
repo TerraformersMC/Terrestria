@@ -5,10 +5,26 @@ import net.coderbot.terrestria.feature.TreeDefinition;
 import net.coderbot.terrestria.feature.trees.templates.ConiferTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
+import java.util.Random;
 import java.util.function.Function;
 
 public class RedwoodTreeFeature extends ConiferTreeFeature {
     public RedwoodTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
         super(function, notify, tree);
+    }
+
+    @Override
+    public int getBareTrunkHeight(Random rand) {
+        return 12 + rand.nextInt(12);
+    }
+
+    @Override
+    public int getLeafLayers(Random rand) {
+        return rand.nextInt(3) + 6;
+    }
+
+    @Override
+    public int getMaxLeafRadius(Random rand) {
+        return 5 + rand.nextInt(3);
     }
 }

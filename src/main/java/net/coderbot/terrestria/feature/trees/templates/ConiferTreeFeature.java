@@ -4,7 +4,6 @@ import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.util.Shapes;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -19,6 +18,11 @@ import java.util.function.Function;
 
 public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Basic tree;
+	private int height;
+	private int bareTrunkHeight;
+	private int maxLeafRadius;
+	private int leafLayers;
+	private double shrinkAmount;
 
 	public ConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
@@ -32,20 +36,11 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
-		// Total leaf height
-		int height = rand.nextInt(12) + 32;
-
-		// How much "bare trunk" there will be below the leaves.
-		int bareTrunkHeight = 8 + rand.nextInt(12);
-
-		// Maximum leaf radius.
-		int maxRadius = 6 + rand.nextInt(4);
-
-		//Number of layers of leaves
-		int layers = rand.nextInt(4) + 4;
-
-		//The number blocks that a layer will shrink in radius per step.
-		double shrinkAmount = 1.0; //1.0 for 1 block
+		height = getLeafHeight(rand);
+		bareTrunkHeight = getBareTrunkHeight(rand);
+		maxLeafRadius = getMaxLeafRadius(rand);
+		leafLayers = getLeafLayers(rand);
+		shrinkAmount = getShrinkAmount();
 
 		//If the tree doesn't have enough room with it's current height before build limit
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
@@ -58,14 +53,14 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		}
 
 		//If there is room for the tree
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxRadius)) {
+		if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxLeafRadius)) {
 			return false;
 		}
 
 		//Set the block below the trunk to dirt (because vanilla does it)
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height+bareTrunkHeight, boundingBox);
-		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxRadius, shrinkAmount, layers, boundingBox);
+		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, boundingBox);
 
 		return true;
 	}
@@ -150,5 +145,25 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		}
 
 		return true;
+	}
+
+	public int getLeafHeight(Random rand) {
+		return rand.nextInt(12) + 32;
+	}
+
+	public int getBareTrunkHeight(Random rand) {
+		return 8 + rand.nextInt(12);
+	}
+
+	public int getMaxLeafRadius(Random rand) {
+		return 6 + rand.nextInt(4);
+	}
+
+	public int getLeafLayers(Random rand) {
+		return rand.nextInt(4) + 4;
+	}
+
+	public double getShrinkAmount() {
+		return 1.0; //1.0 for 1 block
 	}
 }
