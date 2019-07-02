@@ -1,7 +1,6 @@
 package net.coderbot.terrestria.feature;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -31,13 +30,13 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		int height = rand.nextInt(8) + 24;
+		int height = rand.nextInt(12) + 32;
 
 		// How much "bare trunk" there will be.
-		int bareTrunkHeight = 1 + rand.nextInt(12);
+		int bareTrunkHeight = 8 + rand.nextInt(12);
 
 		// Maximum leaf radius.
-		int maxRadius = 2 + rand.nextInt(6);
+		int maxRadius = 14 + rand.nextInt(8);
 
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
@@ -55,9 +54,79 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
-		growLeaves(blocks, world, origin, height, bareTrunkHeight, maxRadius, boundingBox);
+		
+
+		BlockPos.Mutable pos;
+		//Small lil frill at the bottom
+		pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, height/4);
+		growLeaves(blocks, world, pos, height/2, bareTrunkHeight, maxRadius/3, boundingBox);
+
+		//big boi on bottom
+		pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, (height/4)+3);
+		growLeaves(blocks, world, pos, height/2, bareTrunkHeight, maxRadius, boundingBox);
+
+		//medium boi
+		pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, height/2);
+		growLeaves(blocks, world, pos, height/2, bareTrunkHeight, maxRadius - (maxRadius / 3), boundingBox);
+
+		//smol boi on the tip
+		pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, height/3);
+		growLeaves(blocks, world, pos, height/2, bareTrunkHeight, maxRadius/2, boundingBox);
 
 		return true;
+	}
+
+	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int bareTrunkHeight, int maxRadius, MutableIntBoundingBox boundingBox) {
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		double radius;
+		double innerRadius;
+
+		for(int dy = 0; dy < height; dy++) {
+
+			pos.set(x, y + dy, z);
+
+			radius = maxRadius * radiusFactor(dy + bareTrunkHeight, height + bareTrunkHeight);
+			innerRadius = (maxRadius/3.0) * radiusFactor(dy + bareTrunkHeight, height + bareTrunkHeight);
+			if (innerRadius < 0) {
+				innerRadius = 0;
+			}
+
+			if(radius < 0) {
+				continue;
+			}
+
+			io.github.terraformersmc.terraform.util.Shapes.canopyCircle(pos, radius, innerRadius, position -> {
+				if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+					setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+				}
+			});
+		}
+	}
+
+	private double radiusFactor(double x, double height) {
+		//makes the polynomial apply to values from 0-the height
+		x = x / height;
+
+		// A 3rd-degree polynomial approximating the shape of a Conifer tree. from 0-1
+		return -0.6 * (x*x*x) + 1.96 * (x*x) - 2.37 * x + 1;
+	}
+
+	private double innerRadiusFactor(double x, double height) {
+		//makes the polynomial apply to values from 0-the height
+		x = x / height;
+
+		// A 3rd-degree polynomial approximating the inner shape of a Conifer tree. from 0-1
+		return -3.24 * (x*x*x) + .25 * (x*x) - 2.98 * x + 1;
+	}
+
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+		for(int i = 0; i < height; i++) {
+			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+
+			pos.setOffset(Direction.UP);
+		}
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
@@ -73,7 +142,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			for(int dZ = -radius; dZ <= radius; dZ++) {
 				for(int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
-					
+
 					if(!canTreeReplace(world, pos)) {
 						return false;
 					}
@@ -82,54 +151,5 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		}
 
 		return true;
-	}
-
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, MutableIntBoundingBox boundingBox) {
-		int radius = 0;
-		int radiusTarget = 1;
-		boolean topCone = true;
-
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
-
-		for(int dY = height; dY >= bareTrunkHeight; dY--) {
-			for(int dZ = -radius; dZ <= radius; dZ++) {
-				for(int dX = -radius; dX <= radius; dX++) {
-					int aZ = Math.abs(dZ);
-					int aX = Math.abs(dX);
-
-					if(radius > 0 && aZ == radius && aX == radius) {
-						// Cull corners
-						continue;
-					}
-
-					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
-
-					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), boundingBox);
-					}
-				}
-			}
-
-			radius += 1;
-
-			if(radius > radiusTarget) {
-				if(topCone) {
-					radius = 0;
-					radiusTarget = Math.min(2, maxRadius);
-					topCone = false;
-				} else {
-					radius = 1;
-					radiusTarget = Math.min(radiusTarget + 1, maxRadius);
-				}
-			}
-		}
-	}
-
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < height; i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-
-			pos.setOffset(Direction.UP);
-		}
 	}
 }
