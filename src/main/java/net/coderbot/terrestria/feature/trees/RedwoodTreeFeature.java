@@ -18,10 +18,13 @@ public class RedwoodTreeFeature extends ConiferTreeFeature {
         return 12 + rand.nextInt(12);
     }
 
+    //For use in NewConiferTreeFeature
+    /*
     @Override
     public int getLeafLayers(Random rand) {
         return rand.nextInt(3) + 6;
     }
+     */
 
     @Override
     public int getMaxLeafRadius(Random rand) {

@@ -1,7 +1,7 @@
 package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.terraformersmc.terraform.util.Shapes;
+import io.github.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -17,153 +17,131 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Basic tree;
-	private int height;
-	private int bareTrunkHeight;
-	private int maxLeafRadius;
-	private int leafLayers;
-	private double shrinkAmount;
+    private TreeDefinition.Basic tree;
+    private int height;
+    private int bareTrunkHeight;
+    private int maxLeafRadius;
 
-	public ConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
+    public ConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+        super(function, notify);
 
-		this.tree = tree;
-	}
+        this.tree = tree;
+    }
 
-	public ConiferTreeFeature sapling() {
-		return new ConiferTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
-	}
+    public ConiferTreeFeature sapling() {
+        return new ConiferTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+    }
 
-	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
-		height = getLeafHeight(rand);
-		bareTrunkHeight = getBareTrunkHeight(rand);
-		maxLeafRadius = getMaxLeafRadius(rand);
-		leafLayers = getLeafLayers(rand);
-		shrinkAmount = getShrinkAmount();
+    @Override
+    public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 
-		//If the tree doesn't have enough room with it's current height before build limit
-		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
-			return false;
-		}
+        height = getLeafHeight(rand);
+        bareTrunkHeight = getBareTrunkHeight(rand);
+        maxLeafRadius = getMaxLeafRadius(rand);
 
-		//If the ground below the sapling is good enough for a tree
-		if(!isNaturalDirtOrGrass(world, origin.down())) {
-			return false;
-		}
+        if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
+            return false;
+        }
 
-		//If there is room for the tree
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxLeafRadius)) {
-			return false;
-		}
+        BlockPos below = origin.down();
 
-		//Set the block below the trunk to dirt (because vanilla does it)
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height+bareTrunkHeight, boundingBox);
-		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, boundingBox);
+        if(!isNaturalDirtOrGrass(world, below)) {
+            return false;
+        }
 
-		return true;
-	}
+        if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxLeafRadius)) {
+            return false;
+        }
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int maxRadius, double shrinkAmmount, int layers, MutableIntBoundingBox boundingBox) {
-		int x = pos.getX();
-		int y = pos.getY();
-		int z = pos.getZ();
-		int layerHeight = (height/layers);
-		int leafLayerHeight = 2*(height/layers);
+        setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+        growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
+        growLeaves(blocks, world, origin, height, bareTrunkHeight, maxLeafRadius, boundingBox);
 
-		for (int layer = 0; layer < layers; layer++) {
-			if (layer == (layers-1)) { //Limit the top layer to not be too pointy
-				leafLayerHeight = layerHeight;
-			}
-			for(int currentHeight = 0; currentHeight < leafLayerHeight; currentHeight++) {
+        return true;
+    }
 
-				pos.set(x, y + (layer*layerHeight) + currentHeight, z);
+    private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
+        BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-				Shapes.canopyCircle(pos,
-						outerRadius(maxRadius - (layer * shrinkAmmount), currentHeight, leafLayerHeight),
-						innerRadius(maxRadius - (layer * shrinkAmmount), currentHeight, layerHeight),
-						position -> {
-					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
-					}
-				});
-			}
-		}
-	}
+        for(int i = 0; i < bareTrunkHeight; i++) {
+            if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+                return false;
+            }
+        }
 
-	/**
-	 * @param maxRadius the maximum radius for the leaves to generate
-	 * @param currentHeight the progress from 0 to the height that the leaves have generated (the x value of the polynomial)
-	 * @param height the target height for the leaf layer
-	 * @return the radius of the outside leaf layer at it's current y-height
-	 */
-	private double outerRadius(double maxRadius, double currentHeight, double height) {
-		double x = currentHeight / height;
-		// A 3rd-degree polynomial approximating the shape of a Conifer tree. from 0-1
-		return maxRadius * ((-0.6 * (x*x*x) + 1.96 * (x*x) - 2.37 * x) + 1);
-	}
+        for(int dY = bareTrunkHeight; dY < height; dY++) {
+            for(int dZ = -radius; dZ <= radius; dZ++) {
+                for(int dX = -radius; dX <= radius; dX++) {
+                    pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-	/**
-	 * @param maxRadius the maximum radius for the leaves to generate
-	 * @param currentHeight the progress from 0 to the height that the leaves have generated (the x value of the polynomial)
-	 * @param height the target height for the leaf layer
-	 * @return the radius of the inner leaf layer at it's current y-height
-	 */
-	private double innerRadius(double maxRadius, double currentHeight, double height) {
-		double x = currentHeight / height;
-		x = maxRadius * ((-3.24 * (x*x*x) + .25 * (x*x) - 2.98 * x) + 1) - 2.5;
-		return x < 0 ? 0 : x;
-	}
+                    if(!canTreeReplace(world, pos)) {
+                        return false;
+                    }
+                }
+            }
+        }
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < (height*0.83); i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-			pos.setOffset(Direction.UP);
-		}
-	}
+        return true;
+    }
 
-	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+    private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, MutableIntBoundingBox boundingBox) {
+        int radius = 0;
+        int radiusTarget = 1;
+        boolean topCone = true;
 
-		for(int i = 0; i < bareTrunkHeight; i++) {
-			if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
-				return false;
-			}
-		}
+        BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int dY = bareTrunkHeight; dY < height; dY++) {
-			for(int dZ = -radius; dZ <= radius; dZ++) {
-				for(int dX = -radius; dX <= radius; dX++) {
-					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
+        for(int dY = height; dY >= bareTrunkHeight; dY--) {
+            for(int dZ = -radius; dZ <= radius; dZ++) {
+                for(int dX = -radius; dX <= radius; dX++) {
+                    int aZ = Math.abs(dZ);
+                    int aX = Math.abs(dX);
 
-					if(!canTreeReplace(world, pos)) {
-						return false;
-					}
-				}
-			}
-		}
+                    if(radius > 0 && aZ == radius && aX == radius) {
+                        // Cull corners
+                        continue;
+                    }
 
-		return true;
-	}
+                    pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-	public int getLeafHeight(Random rand) {
-		return rand.nextInt(12) + 32;
-	}
+                    if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+                        setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), boundingBox);
+                    }
+                }
+            }
 
-	public int getBareTrunkHeight(Random rand) {
-		return 8 + rand.nextInt(12);
-	}
+            radius += 1;
 
-	public int getMaxLeafRadius(Random rand) {
-		return 6 + rand.nextInt(4);
-	}
+            if(radius > radiusTarget) {
+                if(topCone) {
+                    radius = 0;
+                    radiusTarget = Math.min(2, maxRadius);
+                    topCone = false;
+                } else {
+                    radius = 1;
+                    radiusTarget = Math.min(radiusTarget + 1, maxRadius);
+                }
+            }
+        }
+    }
 
-	public int getLeafLayers(Random rand) {
-		return rand.nextInt(4) + 4;
-	}
+    private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+        for(int i = 0; i < height; i++) {
+            setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 
-	public double getShrinkAmount() {
-		return 1.0; //1.0 for 1 block
-	}
+            pos.setOffset(Direction.UP);
+        }
+    }
+
+    public int getLeafHeight(Random rand) {
+        return rand.nextInt(8) + 24;
+    }
+
+    public int getBareTrunkHeight(Random rand) {
+        return 1 + rand.nextInt(12);
+    }
+
+    public int getMaxLeafRadius(Random rand) {
+        return 2 + rand.nextInt(6);
+    }
 }

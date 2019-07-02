@@ -4,7 +4,7 @@ import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.*;
-import net.coderbot.terrestria.feature.trees.templates.ConiferTreeFeature;
+import net.coderbot.terrestria.feature.trees.templates.NewConiferTreeFeature;
 import net.coderbot.terrestria.feature.trees.templates.MegaCanopyTreeFeature;
 import net.coderbot.terrestria.feature.trees.templates.MegaConiferTreeFeature;
 import net.coderbot.terrestria.feature.trees.templates.ShrubFeature;
@@ -24,9 +24,9 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
-	public static ConiferTreeFeature REDWOOD_TREE;
+	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static MegaConiferTreeFeature MEGA_REDWOOD_TREE;
-	public static ConiferTreeFeature HEMLOCK_TREE;
+	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static MegaConiferTreeFeature MEGA_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
