@@ -165,7 +165,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				13,
 				TerrestriaFeatures.CYPRESS_TREE,
-				TerrestriaFeatures.SMALL_BALD_CYPRESS_TREE,
+				TerrestriaFeatures.CYPRESS_TREE,
 				TerrestriaFeatures.TALLER_BIRCH_TREE
 		));
 
@@ -231,7 +231,7 @@ public class TerrestriaBiomes {
 						.waterFogColor(329011)
 						.parent(null),
 				7,
-				TerrestriaFeatures.BALD_CYPRESS_TREE,
+				TerrestriaFeatures.MEGA_CYPRESS_TREE,
 				Feature.SWAMP_TREE
 		));
 
@@ -373,6 +373,7 @@ public class TerrestriaBiomes {
 		FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
 		FabricBiomes.addSpawnBiome(LUSH_REDWOOD_FOREST);
 		FabricBiomes.addSpawnBiome(TEMPERATE_RAINFOREST);
+		 */
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {

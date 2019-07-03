@@ -15,7 +15,6 @@ public class TerrestriaItems {
 	public static WoodItems RUBBER;
 	public static WoodItems CYPRESS;
 	public static WoodItems WILLOW;
-	public static WoodItems BALD_CYPRESS;
 	public static WoodItems JAPANESE_MAPLE;
 	public static WoodItems RAINBOW_EUCALYPTUS;
 	public static WoodItems SAKURA;
@@ -27,7 +26,7 @@ public class TerrestriaItems {
 
 	public static BlockItem REDWOOD_QUARTER_LOG;
 	public static BlockItem HEMLOCK_QUARTER_LOG;
-	public static BlockItem BALD_CYPRESS_QUARTER_LOG;
+	public static BlockItem CYPRESS_QUARTER_LOG;
 	public static BlockItem RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
 	public static BlockItem REDWOOD_SAPLING;
@@ -35,7 +34,6 @@ public class TerrestriaItems {
 	public static BlockItem RUBBER_SAPLING;
 	public static BlockItem CYPRESS_SAPLING;
 	public static BlockItem WILLOW_SAPLING;
-	public static BlockItem BALD_CYPRESS_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
@@ -53,7 +51,6 @@ public class TerrestriaItems {
 		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
 		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
 		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
-		BALD_CYPRESS = WoodItems.register("bald_cypress", TerrestriaBlocks.BALD_CYPRESS);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 		SAKURA = WoodItems.registerWithoutBark("sakura", TerrestriaBlocks.SAKURA);
@@ -66,7 +63,7 @@ public class TerrestriaItems {
 
 		REDWOOD_QUARTER_LOG = register("redwood_log_quarter", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
 		HEMLOCK_QUARTER_LOG = register("hemlock_log_quarter", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
-		BALD_CYPRESS_QUARTER_LOG = register("bald_cypress_log_quarter", TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG);
+		CYPRESS_QUARTER_LOG = register("cypress_log_quarter", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
 		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
 		REDWOOD_SAPLING = register("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
@@ -74,7 +71,6 @@ public class TerrestriaItems {
 		RUBBER_SAPLING = register("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
 		CYPRESS_SAPLING = register("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
 		WILLOW_SAPLING = register("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
-		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", TerrestriaBlocks.BALD_CYPRESS_SAPLING);
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);

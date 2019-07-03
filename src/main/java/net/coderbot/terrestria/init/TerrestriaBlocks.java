@@ -22,7 +22,6 @@ public class TerrestriaBlocks {
 	public static WoodBlocks RUBBER;
 	public static WoodBlocks CYPRESS;
 	public static WoodBlocks WILLOW;
-	public static WoodBlocks BALD_CYPRESS;
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
@@ -35,7 +34,7 @@ public class TerrestriaBlocks {
 
 	public static QuarterLogBlock REDWOOD_QUARTER_LOG;
 	public static QuarterLogBlock HEMLOCK_QUARTER_LOG;
-	public static QuarterLogBlock BALD_CYPRESS_QUARTER_LOG;
+	public static QuarterLogBlock CYPRESS_QUARTER_LOG;
 	public static QuarterLogBlock RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
 	public static TerraformSaplingBlock REDWOOD_SAPLING;
@@ -43,7 +42,6 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock RUBBER_SAPLING;
 	public static TerraformSaplingBlock CYPRESS_SAPLING;
 	public static TerraformSaplingBlock WILLOW_SAPLING;
-	public static TerraformSaplingBlock BALD_CYPRESS_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
@@ -64,7 +62,6 @@ public class TerrestriaBlocks {
 		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
 		CYPRESS = WoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
 		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
-		BALD_CYPRESS = WoodBlocks.register("bald_cypress", WoodColors.CYPRESS, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 
@@ -85,7 +82,7 @@ public class TerrestriaBlocks {
 
 		REDWOOD_QUARTER_LOG = REDWOOD.registerQuarterLog(flammable);
 		HEMLOCK_QUARTER_LOG = HEMLOCK.registerQuarterLog(flammable);
-		BALD_CYPRESS_QUARTER_LOG = BALD_CYPRESS.registerQuarterLog(flammable);
+		CYPRESS_QUARTER_LOG = CYPRESS.registerQuarterLog(flammable);
 		RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerQuarterLog(flammable);
 
 		// Saplings
@@ -113,19 +110,12 @@ public class TerrestriaBlocks {
 		CYPRESS_SAPLING = register("cypress_sapling", new TerraformSaplingBlock (
 				new TerraformLargeSaplingGenerator (
 						() -> TerrestriaFeatures.CYPRESS_TREE.sapling(),
-						() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling()
+						() -> TerrestriaFeatures.CYPRESS_TREE.sapling()
 				)
 		));
 
 		WILLOW_SAPLING = register("willow_sapling", new TerraformSaplingBlock (
 				new TerraformSaplingGenerator (() -> TerrestriaFeatures.WILLOW_TREE.sapling())
-		));
-
-		BALD_CYPRESS_SAPLING = register("bald_cypress_sapling", new TerraformSaplingBlock (
-				new TerraformLargeSaplingGenerator (
-						() -> TerrestriaFeatures.SMALL_BALD_CYPRESS_TREE.sapling(),
-						() -> TerrestriaFeatures.BALD_CYPRESS_TREE.sapling()
-				)
 		));
 
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", new TerraformSaplingBlock (

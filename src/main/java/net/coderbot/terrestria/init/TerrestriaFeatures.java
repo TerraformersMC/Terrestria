@@ -29,15 +29,14 @@ public class TerrestriaFeatures {
 	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
+	public static CypressTreeFeatureMega MEGA_CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
-	public static CypressTreeFeature SMALL_BALD_CYPRESS_TREE;
 	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
 	public static JapaneseMapleShrubFeature JAPANESE_MAPLE_SHRUB;
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
-	public static CanopyTreeFeatureMega BALD_CYPRESS_TREE;
 	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
 
@@ -63,22 +62,24 @@ public class TerrestriaFeatures {
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
 				new HemlockTreeFeatureMega(
-						DefaultFeatureConfig::deserialize,
-						true,
+						DefaultFeatureConfig::deserialize, true,
 						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
 				)
 		);
 
 		CYPRESS_TREE = register("cypress_tree",
-				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
+				new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.CYPRESS.getBasicDefinition())
+		);
+
+		MEGA_CYPRESS_TREE = register("mega_cypress_tree",
+				new CypressTreeFeatureMega(
+						DefaultFeatureConfig::deserialize, true,
+						TerrestriaBlocks.CYPRESS.getBasicDefinition().toMega(TerrestriaBlocks.CYPRESS_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.CYPRESS.wood.getDefaultState())
+				)
 		);
 
 		WILLOW_TREE = register("willow_tree",
 				new WillowTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.WILLOW.getBasicDefinition())
-		);
-
-		SMALL_BALD_CYPRESS_TREE = register("small_bald_cypress_tree",
-				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition())
 		);
 
 		TALLER_BIRCH_TREE = register("taller_birch_tree",
@@ -118,13 +119,6 @@ public class TerrestriaFeatures {
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState(),
 						true
 				)
-		);
-
-		BALD_CYPRESS_TREE = register("bald_cypress_tree",
-				new CanopyTreeFeatureMega(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.BALD_CYPRESS.getBasicDefinition().toMega (
-						TerrestriaBlocks.BALD_CYPRESS_QUARTER_LOG.getDefaultState(),
-						TerrestriaBlocks.BALD_CYPRESS.wood.getDefaultState()
-				))
 		);
 
 		CATTAIL = register("cattail",
