@@ -165,7 +165,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				13,
 				TerrestriaFeatures.CYPRESS_TREE,
-				TerrestriaFeatures.SMALL_BALD_CYPRESS_TREE,
+				TerrestriaFeatures.CYPRESS_TREE,
 				TerrestriaFeatures.TALLER_BIRCH_TREE
 		));
 
@@ -231,7 +231,7 @@ public class TerrestriaBiomes {
 						.waterFogColor(329011)
 						.parent(null),
 				7,
-				TerrestriaFeatures.BALD_CYPRESS_TREE,
+				TerrestriaFeatures.MEGA_CYPRESS_TREE,
 				Feature.SWAMP_TREE
 		));
 

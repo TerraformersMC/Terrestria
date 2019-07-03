@@ -1,6 +1,0 @@
-{
-  "parent": "block/cross",
-  "textures": {
-	"cross": "terrestria:blocks/bald_cypress_sapling"
-  }
-}

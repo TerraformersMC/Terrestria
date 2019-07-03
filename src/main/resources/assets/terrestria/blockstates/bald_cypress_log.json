@@ -1,7 +1,0 @@
-{
-  "variants": {
-	"axis=x": { "model":  "terrestria:block/bald_cypress_log", "x": 90, "y": 90 },
-	"axis=y": { "model":  "terrestria:block/bald_cypress_log" },
-	"axis=z": { "model":  "terrestria:block/bald_cypress_log", "x": 90 }
-  }
-}
