@@ -1,8 +1,9 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
 import io.github.terraformersmc.terraform.util.Shapes;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;
@@ -20,26 +21,28 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Mega tree;
+	private int height;
+	private int bareTrunkHeight;
 
-	public MegaCanopyTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
+	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
 
 		this.tree = tree;
 	}
 
-	public MegaCanopyTreeFeature sapling() {
-		return new MegaCanopyTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	public CanopyTreeFeatureMega sapling() {
+		return new CanopyTreeFeatureMega(DefaultFeatureConfig::deserialize, true, tree);
 	}
 
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		int height = rand.nextInt(8) + 19;
+		height = getHeight(rand);
 
 		// How much "bare trunk" there will be. (2-3)
-		int bareTrunkHeight = 2 + rand.nextInt(2);
+		bareTrunkHeight = getBareTrunkHeight(rand);
 
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
@@ -226,5 +229,13 @@ public class MegaCanopyTreeFeature extends AbstractTreeFeature<DefaultFeatureCon
 
 			bottom.setOffset(Direction.UP);
 		}
+	}
+
+	public int getHeight(Random rand) {
+		return rand.nextInt(8) + 19;
+	}
+
+	public int getBareTrunkHeight(Random rand) {
+		return 2 + rand.nextInt(2);
 	}
 }

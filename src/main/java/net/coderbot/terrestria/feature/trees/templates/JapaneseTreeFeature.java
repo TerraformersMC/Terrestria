@@ -1,7 +1,11 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.util.Shapes;
+import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.trees.components.Branches;
+import net.coderbot.terrestria.feature.trees.components.GroundClutter;
+import net.coderbot.terrestria.feature.trees.components.SmallLogs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -13,10 +17,10 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.*;
 import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements GroundClutter, Branches, SmallLogs {
 	protected TreeDefinition.Basic tree;
 
-	JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
 
 		this.tree = tree;
@@ -62,10 +66,6 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 
 		return true;
 	}
-
-	protected abstract void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox);
-	protected abstract void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox);
-	protected abstract void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox);
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);

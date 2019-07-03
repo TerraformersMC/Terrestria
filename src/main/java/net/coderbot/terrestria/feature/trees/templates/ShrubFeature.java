@@ -1,7 +1,8 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.LeafPileBlock;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.Heightmap;

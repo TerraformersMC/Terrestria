@@ -1,8 +1,9 @@
-package net.coderbot.terrestria.feature;
+package net.coderbot.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -15,19 +16,19 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class MegaConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Mega tree;
 
 	private static final int EXTRA_LEAVES_HEIGHT = 2;
 
-	public MegaConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
+	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
 
 		this.tree = tree;
 	}
 
-	public MegaConiferTreeFeature sapling() {
-		return new MegaConiferTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	public ConiferTreeFeatureMega sapling() {
+		return new ConiferTreeFeatureMega(DefaultFeatureConfig::deserialize, true, tree);
 	}
 
 	@Override
