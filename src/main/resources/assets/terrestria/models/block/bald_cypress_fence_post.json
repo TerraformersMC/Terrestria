@@ -1,6 +1,0 @@
-{
-    "parent": "minecraft:block/fence_post",
-    "textures": {
-        "texture": "terrestria:blocks/bald_cypress_planks"
-    }
-}

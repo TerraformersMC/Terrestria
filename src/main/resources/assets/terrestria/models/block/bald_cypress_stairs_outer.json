@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "terrestria:blocks/bald_cypress_planks",
-        "top": "terrestria:blocks/bald_cypress_planks",
-        "side": "terrestria:blocks/bald_cypress_planks"
-    }
-}
