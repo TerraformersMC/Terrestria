@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-	"layer0": "terrestria:items/bald_cypress_door"
-  }
-}
