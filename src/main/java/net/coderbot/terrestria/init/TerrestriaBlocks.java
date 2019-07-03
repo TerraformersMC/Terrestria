@@ -110,7 +110,7 @@ public class TerrestriaBlocks {
 		CYPRESS_SAPLING = register("cypress_sapling", new TerraformSaplingBlock (
 				new TerraformLargeSaplingGenerator (
 						() -> TerrestriaFeatures.CYPRESS_TREE.sapling(),
-						() -> TerrestriaFeatures.CYPRESS_TREE.sapling()
+						() -> TerrestriaFeatures.MEGA_CYPRESS_TREE.sapling()
 				)
 		));
 

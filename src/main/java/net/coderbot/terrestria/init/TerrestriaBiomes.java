@@ -373,7 +373,6 @@ public class TerrestriaBiomes {
 		FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
 		FabricBiomes.addSpawnBiome(LUSH_REDWOOD_FOREST);
 		FabricBiomes.addSpawnBiome(TEMPERATE_RAINFOREST);
-		 */
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {
