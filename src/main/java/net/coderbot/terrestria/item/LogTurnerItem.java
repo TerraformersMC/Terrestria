@@ -79,10 +79,10 @@ public class LogTurnerItem extends Item {
 	}
 
 	private static Direction.Axis cycleAxis(Direction.Axis axis) {
-		switch(axis.getName()) {
-			case "x": return Direction.Axis.valueOf("x");
-			case "y": return Direction.Axis.valueOf("y");
-			default: return Direction.Axis.valueOf("x");
+		switch(axis) {
+			case field_11048: return Direction.Axis.field_11052;
+			case field_11052: return Direction.Axis.field_11051;
+			default: return Direction.Axis.field_11048;
 		}
 	}
 
