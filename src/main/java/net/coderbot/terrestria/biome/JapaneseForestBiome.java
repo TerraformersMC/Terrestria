@@ -10,7 +10,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 
 public class JapaneseForestBiome extends Biome {
-	public JapaneseForestBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2) {
+	public JapaneseForestBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2, Feature<DefaultFeatureConfig> tree3) {
 		super(settings);
 
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
@@ -29,9 +29,9 @@ public class JapaneseForestBiome extends Biome {
 				Biome.configureFeature(
 						Feature.RANDOM_SELECTOR,
 						new RandomFeatureConfig(
-								new Feature[]{ tree2 },
-								new FeatureConfig[]{ FeatureConfig.DEFAULT },
-								new float[]{ 0.3F },
+								new Feature[]{ tree2, tree3 },
+								new FeatureConfig[]{ FeatureConfig.DEFAULT, FeatureConfig.DEFAULT },
+								new float[]{ 0.35F, 0.3F },
 
 								tree1,
 								FeatureConfig.DEFAULT
