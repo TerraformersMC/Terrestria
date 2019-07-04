@@ -1,6 +1,7 @@
 # Terrestria
 
-Terrestria is an upcoming biomes mod for Fabric targeting Minecraft 1.14.2 and above, inspired by parts of ExtrabiomesXL. 
+Terrestria is an upcoming biomes mod for Fabric targeting Minecraft 1.14.2 and above, inspired by ExtrabiomesXL for
+1.4.7 and 1.7.10 as well as certain aspects of RedPower World from 1.4.7.
 
 It features the following 8 biomes currently:
 
