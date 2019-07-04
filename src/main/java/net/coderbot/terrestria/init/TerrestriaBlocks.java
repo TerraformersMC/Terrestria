@@ -27,6 +27,7 @@ public class TerrestriaBlocks {
 	public static WoodBlocks SAKURA;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
+	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
 	public static LeafPileBlock SAKURA_LEAF_PILE;
 
 	public static SeagrassBlock CATTAIL;
@@ -44,6 +45,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock WILLOW_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
+	public static TerraformSaplingBlock DARK_JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock PALM_SAPLING;
@@ -72,6 +74,11 @@ public class TerrestriaBlocks {
 		SAKURA.addTreeFireInfo(flammable);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
+
+		DARK_JAPANESE_MAPLE_LEAVES = register("dark_japanese_maple_leaves",
+				new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(MaterialColor.RED_TERRACOTTA).build())
+		);
+
 		SAKURA_LEAF_PILE = register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(SAKURA.leaves).noCollision()));
 
 		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
@@ -124,6 +131,10 @@ public class TerrestriaBlocks {
 
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", new TerraformSaplingBlock (
 				new TerraformSaplingGenerator (() -> TerrestriaFeatures.JAPANESE_MAPLE_SHRUB.sapling())
+		));
+
+		DARK_JAPANESE_MAPLE_SAPLING = register("dark_japanese_maple_sapling", new TerraformSaplingBlock (
+				new TerraformSaplingGenerator (() -> TerrestriaFeatures.DARK_JAPANESE_MAPLE_TREE.sapling())
 		));
 
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock (

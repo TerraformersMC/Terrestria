@@ -1,0 +1,10 @@
+{
+  "variants": {
+	"stage=0": {
+	  "model": "terrestria:block/dark_japanese_maple_sapling"
+	},
+	"stage=1": {
+	  "model": "terrestria:block/dark_japanese_maple_sapling"
+	}
+  }
+}

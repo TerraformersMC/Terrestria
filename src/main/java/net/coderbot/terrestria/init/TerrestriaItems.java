@@ -20,6 +20,7 @@ public class TerrestriaItems {
 	public static WoodItems SAKURA;
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
+	public static BlockItem DARK_JAPANESE_MAPLE_LEAVES;
 	public static BlockItem SAKURA_LEAF_PILE;
 
 	public static BlockItem CATTAIL;
@@ -36,6 +37,7 @@ public class TerrestriaItems {
 	public static BlockItem WILLOW_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SAPLING;
 	public static BlockItem JAPANESE_MAPLE_SHRUB_SAPLING;
+	public static BlockItem DARK_JAPANESE_MAPLE_SAPLING;
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
 	public static BlockItem SAKURA_SAPLING;
 	public static BlockItem PALM_SAPLING;
@@ -57,6 +59,7 @@ public class TerrestriaItems {
 		SAKURA.wood = SAKURA.log;
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
+		DARK_JAPANESE_MAPLE_LEAVES = register("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
 		SAKURA_LEAF_PILE = register("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
 
 		CATTAIL = register("cattail", TerrestriaBlocks.CATTAIL);
@@ -73,6 +76,7 @@ public class TerrestriaItems {
 		WILLOW_SAPLING = register("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
 		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
 		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
+		DARK_JAPANESE_MAPLE_SAPLING = register("dark_japanese_maple_sapling", TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		SAKURA_SAPLING = register("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
 		PALM_SAPLING = register("palm_sapling", TerrestriaBlocks.PALM_SAPLING);

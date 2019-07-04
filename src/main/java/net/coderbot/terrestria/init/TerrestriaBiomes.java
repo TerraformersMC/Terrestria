@@ -182,6 +182,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				10,
 				TerrestriaFeatures.SAKURA_TREE,
+				TerrestriaFeatures.SAKURA_TREE,
 				TerrestriaFeatures.JAPANESE_MAPLE_SHRUB
 		));
 
@@ -198,6 +199,7 @@ public class TerrestriaBiomes {
 						.parent(null),
 				10,
 				TerrestriaFeatures.JAPANESE_MAPLE_TREE,
+				TerrestriaFeatures.DARK_JAPANESE_MAPLE_TREE,
 				TerrestriaFeatures.JAPANESE_MAPLE_SHRUB
 		));
 

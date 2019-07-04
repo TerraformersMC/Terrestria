@@ -35,6 +35,7 @@ public class TerrestriaFeatures {
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
 	public static JapaneseMapleShrubFeature JAPANESE_MAPLE_SHRUB;
+	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static CattailFeature CATTAIL;
@@ -104,6 +105,15 @@ public class TerrestriaFeatures {
 
 		JAPANESE_MAPLE_SHRUB = register("japanese_maple_shrub",
 				new JapaneseMapleShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
+		);
+
+		TreeDefinition.Basic darkJapaneseMapleTreeDefinition = new TreeDefinition.Basic (
+				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
+				TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
+		);
+
+		DARK_JAPANESE_MAPLE_TREE = register("dark_japanese_maple_tree",
+				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, darkJapaneseMapleTreeDefinition)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
