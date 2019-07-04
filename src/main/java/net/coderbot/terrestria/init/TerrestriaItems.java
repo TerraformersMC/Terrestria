@@ -84,7 +84,7 @@ public class TerrestriaItems {
 	}
 
 	private static BlockItem register(String name, Block block) {
-		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new BlockItem(block, new Item.Settings().itemGroup(Terrestria.ITEM_GROUP)));
+		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new BlockItem(block, new Item.Settings().group(Terrestria.ITEM_GROUP)));
 	}
 
 	public static class WoodItems {

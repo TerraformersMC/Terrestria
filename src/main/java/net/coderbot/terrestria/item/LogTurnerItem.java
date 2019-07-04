@@ -4,17 +4,17 @@ import io.github.terraformersmc.terraform.block.QuarterLogBlock;
 import net.coderbot.terrestria.Terrestria;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.ChatFormat;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.Style;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -60,7 +60,7 @@ public class LogTurnerItem extends Item {
 				return ActionResult.SUCCESS;
 			}
 		} else {
-			Direction.Axis newAxis = context.getFacing().getAxis();
+			Direction.Axis newAxis = context.getPlayerFacing().getAxis();
 
 			if(currentAxis != newAxis) {
 				world.setBlockState(pos, state.with(PillarBlock.AXIS, newAxis));
@@ -79,10 +79,10 @@ public class LogTurnerItem extends Item {
 	}
 
 	private static Direction.Axis cycleAxis(Direction.Axis axis) {
-		switch(axis) {
-			case X: return Direction.Axis.Y;
-			case Y: return Direction.Axis.Z;
-			default: return Direction.Axis.X;
+		switch(axis.getName()) {
+			case "x": return Direction.Axis.valueOf("x");
+			case "y": return Direction.Axis.valueOf("y");
+			default: return Direction.Axis.valueOf("x");
 		}
 	}
 
@@ -96,11 +96,11 @@ public class LogTurnerItem extends Item {
 	}
 
 	@Environment(EnvType.CLIENT)
-	public void buildTooltip(ItemStack stack, World world, List<Component> tooltip, TooltipContext context) {
-		super.buildTooltip(stack, world, tooltip, context);
+	public void buildTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+		super.appendTooltip(stack, world, tooltip, context);
 
 		for(int i = 0; i < 8; i++) {
-			tooltip.add(new TranslatableComponent("item." + Terrestria.MOD_ID + ".log_turner.tooltip.line" + i).setStyle(new Style().setColor(ChatFormat.GRAY)));
+			tooltip.add(new TranslatableText("item." + Terrestria.MOD_ID + ".log_turner.tooltip.line" + i).setStyle(new Style().setColor(Formatting.GRAY)));
 		}
 	}
 }

@@ -4,10 +4,10 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.fabricmc.fabric.api.registry.CommandRegistry;
-import net.minecraft.ChatFormat;
-import net.minecraft.network.chat.*;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.*;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.gen.feature.Feature;
@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.Feature;
  * Extended version of /locate to locate any structure
  */
 public class LocateAny {
-    private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableComponent("commands.locate.failed"));
+    private static final SimpleCommandExceptionType FAILED_EXCEPTION = new SimpleCommandExceptionType(new TranslatableText("commands.locate.failed"));
 
 	public static void register() {
 		CommandRegistry.INSTANCE.register(false, dispatcher -> {
@@ -35,10 +35,10 @@ public class LocateAny {
             throw FAILED_EXCEPTION.create();
         } else {
             int blockDistance = MathHelper.floor(getDistance(position.getX(), position.getZ(), found.getX(), found.getZ()));
-            Component component_1 = Components.bracketed(new TranslatableComponent("chat.coordinates", found.getX(), "~", found.getZ())).modifyStyle((style_1) ->
-                style_1.setColor(ChatFormat.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + found.getX() + " ~ " + found.getZ())).setHoverEvent(new HoverEvent(net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT, new TranslatableComponent("chat.coordinates.tooltip")))
+            Text component_1 = Texts.bracketed(new TranslatableText("chat.coordinates", found.getX(), "~", found.getZ())).styled((style_1) ->
+                style_1.setColor(Formatting.GREEN).setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/tp @s " + found.getX() + " ~ " + found.getZ())).setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText("chat.coordinates.tooltip")))
             );
-            source.sendFeedback(new TranslatableComponent("commands.locate.success", structure, component_1, blockDistance), false);
+            source.sendFeedback(new TranslatableText("commands.locate.success", structure, component_1, blockDistance), false);
             return blockDistance;
         }
 	}

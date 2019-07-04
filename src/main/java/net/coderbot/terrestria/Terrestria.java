@@ -25,7 +25,7 @@ public class Terrestria implements ModInitializer {
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
 
-		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().itemGroup(ITEM_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(ITEM_GROUP)));
 		LocateAny.register();
 	}
 }
