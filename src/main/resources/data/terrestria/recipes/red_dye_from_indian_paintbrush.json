@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "red_dye",
+  "ingredients": [
+    {
+      "item": "terrestria:indian_paintbrush"
+    }
+  ],
+  "result": {
+    "item": "minecraft:red_dye"
+  }
+}

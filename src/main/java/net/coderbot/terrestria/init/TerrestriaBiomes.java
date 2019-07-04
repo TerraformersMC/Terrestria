@@ -333,6 +333,9 @@ public class TerrestriaBiomes {
 				Biomes.DEEP_WARM_OCEAN
 		);
 
+		TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND);
+		TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND_SHORE);
+
 		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
 
 		// 33% of Jungles will be replaced by Rainforest biomes

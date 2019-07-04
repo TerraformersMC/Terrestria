@@ -4,11 +4,13 @@ import io.github.terraformersmc.terraform.block.*;
 import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import net.coderbot.terrestria.Terrestria;
+import net.coderbot.terrestria.block.BasaltFlowerBlock;
 import net.coderbot.terrestria.feature.trees.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -55,6 +57,10 @@ public class TerrestriaBlocks {
 	public static Block BASALT_DIRT;
 	public static Block BASALT_GRASS_BLOCK;
 	public static Block BASALT;
+	public static PlantBlock INDIAN_PAINTBRUSH;
+	public static PlantBlock MONSTERAS;
+	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
+	public static FlowerPotBlock POTTED_MONSTERAS;
 
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
@@ -163,6 +169,11 @@ public class TerrestriaBlocks {
 		BASALT_GRASS_BLOCK = register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, Block.Settings.copy(Blocks.GRASS_BLOCK)));
 		BASALT = register("basalt", new Block(FabricBlockSettings.copy(Blocks.STONE).materialColor(MaterialColor.BLACK).build()));
 
+		INDIAN_PAINTBRUSH = register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 6, Block.Settings.copy(Blocks.POPPY)));
+		MONSTERAS = register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
+
+		POTTED_INDIAN_PAINTBRUSH = register("potted_indian_paintbrush", new FlowerPotBlock(INDIAN_PAINTBRUSH, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_MONSTERAS = register("potted_monsteras", new FlowerPotBlock(MONSTERAS, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		// TODO: Stripped Logs, Stripped Wood
 	}
 
