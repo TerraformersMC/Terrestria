@@ -1,6 +1,17 @@
 {
   "values": [
 	"terrestria:potted_indian_paintbrush",
-	"terrestria:potted_monsteras"
+	"terrestria:potted_monsteras",
+    "terrestria:potted_redwood_sapling",
+    "terrestria:potted_hemlock_sapling",
+    "terrestria:potted_rubber_sapling",
+    "terrestria:potted_cypress_sapling",
+    "terrestria:potted_willow_sapling",
+    "terrestria:potted_japanese_maple_sapling",
+    "terrestria:potted_rainbow_eucalyptus_sapling",
+    "terrestria:potted_japanese_maple_shrub_sapling",
+    "terrestria:potted_dark_japanese_maple_sapling",
+    "terrestria:potted_sakura_sapling",
+    "terrestria:potted_palm_sapling"
   ]
 }

@@ -108,11 +108,24 @@
   "block.terrestria.basalt_dirt": "Basalt Dirt",
   "block.terrestria.indian_paintbrush": "Indian Paintbrush",
   "block.terrestria.monsteras": "Monsteras",
+
   "block.terrestria.potted_indian_paintbrush": "Potted Indian Paintbrush",
   "block.terrestria.potted_monsteras": "Potted Monsteras",
 
   "block.terrestria.japanese_maple_shrub_sapling": "Japanese Maple Shrub Sapling",
   "block.terrestria.japanese_maple_shrub_leaves": "Japanese Maple Shrub Leaves",
+
+  "block.terrestria.potted_redwood_sapling": "Potted Redwood Sapling",
+  "block.terrestria.potted_hemlock_sapling": "Potted Hemlock Sapling",
+  "block.terrestria.potted_rubber_sapling": "Potted Rubber Sapling",
+  "block.terrestria.potted_cypress_sapling": "Potted Cypress Sapling",
+  "block.terrestria.potted_willow_sapling": "Potted Willow Sapling",
+  "block.terrestria.potted_japanese_maple_sapling": "Potted Japanese Maple Sapling",
+  "block.terrestria.potted_dark_japanese_maple_sapling": "Potted Dark Japanese Maple Sapling",
+  "block.terrestria.potted_rainbow_eucalyptus_sapling": "Potted Rainbow Eucalyptus Sapling",
+  "block.terrestria.potted_sakura_sapling": "Potted Sakura Sapling",
+  "block.terrestria.potted_palm_sapling": "Potted Palm Sapling",
+  "block.terrestria.potted_japanese_maple_shrub_sapling": "Potted Japanese Maple Shrub Sapling",
 
   "item.terrestria.log_turner": "Log Turner",
   "item.terrestria.log_turner.tooltip.line0": "Use on a log to instantly set",

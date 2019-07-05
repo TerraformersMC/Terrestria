@@ -52,6 +52,18 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock PALM_SAPLING;
 
+	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
+	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
+	public static FlowerPotBlock POTTED_RUBBER_SAPLING;
+	public static FlowerPotBlock POTTED_CYPRESS_SAPLING;
+	public static FlowerPotBlock POTTED_WILLOW_SAPLING;
+	public static FlowerPotBlock POTTED_JAPANESE_MAPLE_SAPLING;
+	public static FlowerPotBlock POTTED_JAPANESE_MAPLE_SHRUB_SAPLING;
+	public static FlowerPotBlock POTTED_DARK_JAPANESE_MAPLE_SAPLING;
+	public static FlowerPotBlock POTTED_RAINBOW_EUCALYPTUS_SAPLING;
+	public static FlowerPotBlock POTTED_SAKURA_SAPLING;
+	public static FlowerPotBlock POTTED_PALM_SAPLING;
+
 	// Volcanic Island blocks
 	public static SandBlock BASALT_SAND;
 	public static Block BASALT_DIRT;
@@ -174,6 +186,18 @@ public class TerrestriaBlocks {
 
 		POTTED_INDIAN_PAINTBRUSH = register("potted_indian_paintbrush", new FlowerPotBlock(INDIAN_PAINTBRUSH, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_MONSTERAS = register("potted_monsteras", new FlowerPotBlock(MONSTERAS, Block.Settings.copy(Blocks.POTTED_POPPY)));
+
+		POTTED_REDWOOD_SAPLING = register("potted_redwood_sapling", new FlowerPotBlock(REDWOOD_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_HEMLOCK_SAPLING = register("potted_hemlock_sapling", new FlowerPotBlock(HEMLOCK_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_RUBBER_SAPLING = register("potted_rubber_sapling", new FlowerPotBlock(RUBBER_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_CYPRESS_SAPLING = register("potted_cypress_sapling", new FlowerPotBlock(CYPRESS_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_WILLOW_SAPLING = register("potted_willow_sapling", new FlowerPotBlock(WILLOW_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_JAPANESE_MAPLE_SAPLING = register("potted_japanese_maple_sapling", new FlowerPotBlock(JAPANESE_MAPLE_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_JAPANESE_MAPLE_SHRUB_SAPLING = register("potted_japanese_maple_shrub_sapling", new FlowerPotBlock(JAPANESE_MAPLE_SHRUB_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_DARK_JAPANESE_MAPLE_SAPLING = register("potted_dark_japanese_maple_sapling", new FlowerPotBlock(DARK_JAPANESE_MAPLE_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_RAINBOW_EUCALYPTUS_SAPLING = register("potted_rainbow_eucalyptus_sapling", new FlowerPotBlock(RAINBOW_EUCALYPTUS_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_SAKURA_SAPLING = register("potted_sakura_sapling", new FlowerPotBlock(SAKURA_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_PALM_SAPLING = register("potted_palm_sapling", new FlowerPotBlock(PALM_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		// TODO: Stripped Logs, Stripped Wood
 	}
 
