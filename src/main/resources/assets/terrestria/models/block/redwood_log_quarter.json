@@ -1,9 +1,9 @@
 {
   "parent": "terrestria:block/quarter_log",
   "textures": {
-    "particle": "terrestria:blocks/redwood_log",
-    "ends": "terrestria:blocks/redwood_log_quarter",
-	"sides": "terrestria:blocks/redwood_log",
-	"insides": "terrestria:blocks/redwood_log_bare"
+    "particle": "terrestria:block/redwood_log",
+    "ends": "terrestria:block/redwood_log_quarter",
+	"sides": "terrestria:block/redwood_log",
+	"insides": "terrestria:block/redwood_log_bare"
   }
 }

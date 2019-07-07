@@ -1,10 +1,10 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-	"particle": "terrestria:blocks/sakura_log",
-	"all": "terrestria:blocks/sakura_log",
-	"top": "terrestria:blocks/sakura_log_top",
-	"leaves": "terrestria:blocks/sakura_leaves_cutout"
+	"particle": "terrestria:block/sakura_log",
+	"all": "terrestria:block/sakura_log",
+	"top": "terrestria:block/sakura_log_top",
+	"leaves": "terrestria:block/sakura_leaves_cutout"
   },
   "elements": [
 	{

@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-	"cross": "terrestria:blocks/japanese_maple_shrub_sapling"
+	"cross": "terrestria:block/japanese_maple_shrub_sapling"
   }
 }

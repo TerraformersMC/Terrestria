@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "terrestria:blocks/willow_leaves",
-    "ends": "terrestria:blocks/willow_leaves_top",
-    "sides": "terrestria:blocks/willow_leaves"
+    "particle": "terrestria:block/willow_leaves",
+    "ends": "terrestria:block/willow_leaves_top",
+    "sides": "terrestria:block/willow_leaves"
   },
   "elements": [
     {

@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:block/fence_inventory",
     "textures": {
-        "texture": "terrestria:blocks/willow_planks"
+        "texture": "terrestria:block/willow_planks"
     }
 }

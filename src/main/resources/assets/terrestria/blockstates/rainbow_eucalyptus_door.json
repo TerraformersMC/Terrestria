@@ -2,8 +2,8 @@
   "forge_marker": 1,
   "defaults": {
 	"textures": {
-	  "bottom": "terrestria:blocks/rainbow_eucalyptus_door_bottom",
-	  "top": "terrestria:blocks/rainbow_eucalyptus_door_top"
+	  "bottom": "terrestria:block/rainbow_eucalyptus_door_bottom",
+	  "top": "terrestria:block/rainbow_eucalyptus_door_top"
 	}
   },
   "variants": {

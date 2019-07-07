@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-	"cross": "terrestria:blocks/sakura_sapling"
+	"cross": "terrestria:block/sakura_sapling"
   }
 }

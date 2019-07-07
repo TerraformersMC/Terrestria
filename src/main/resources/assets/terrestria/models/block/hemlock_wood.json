@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:blocks/hemlock_log"
+	"all": "terrestria:block/hemlock_log"
   }
 }

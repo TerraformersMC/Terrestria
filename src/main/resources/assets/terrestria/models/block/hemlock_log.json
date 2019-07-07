@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-	"end": "terrestria:blocks/hemlock_log_top",
-	"side": "terrestria:blocks/hemlock_log"
+	"end": "terrestria:block/hemlock_log_top",
+	"side": "terrestria:block/hemlock_log"
   }
 }

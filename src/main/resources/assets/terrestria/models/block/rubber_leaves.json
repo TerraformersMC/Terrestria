@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-	"all": "terrestria:blocks/rubber_leaves"
+	"all": "terrestria:block/rubber_leaves"
   }
 }

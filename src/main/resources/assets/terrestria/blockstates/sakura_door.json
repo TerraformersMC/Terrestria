@@ -2,8 +2,8 @@
   "forge_marker": 1,
   "defaults": {
 	"textures": {
-	  "bottom": "terrestria:blocks/sakura_door_bottom",
-	  "top": "terrestria:blocks/sakura_door_top"
+	  "bottom": "terrestria:block/sakura_door_bottom",
+	  "top": "terrestria:block/sakura_door_top"
 	}
   },
   "variants": {

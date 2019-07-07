@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:block/fence_post",
     "textures": {
-        "texture": "terrestria:blocks/rubber_planks"
+        "texture": "terrestria:block/rubber_planks"
     }
 }

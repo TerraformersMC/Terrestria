@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:blocks/rainbow_eucalyptus_log"
+	"all": "terrestria:block/rainbow_eucalyptus_log"
   }
 }

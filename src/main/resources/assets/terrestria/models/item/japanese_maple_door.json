@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-	"layer0": "terrestria:items/japanese_maple_door"
+	"layer0": "terrestria:item/japanese_maple_door"
   }
 }

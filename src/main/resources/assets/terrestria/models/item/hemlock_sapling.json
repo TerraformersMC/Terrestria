@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-	"layer0": "terrestria:blocks/hemlock_sapling"
+	"layer0": "terrestria:block/hemlock_sapling"
   }
 }

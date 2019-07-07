@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/door_top",
   "textures": {
-	"bottom": "terrestria:blocks/rainbow_eucalyptus_door_bottom",
-	"top": "terrestria:blocks/rainbow_eucalyptus_door_top"
+	"bottom": "terrestria:block/rainbow_eucalyptus_door_bottom",
+	"top": "terrestria:block/rainbow_eucalyptus_door_top"
   }
 }

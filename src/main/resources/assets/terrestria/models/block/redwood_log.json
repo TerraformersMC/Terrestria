@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-	"end": "terrestria:blocks/redwood_log_top",
-	"side": "terrestria:blocks/redwood_log"
+	"end": "terrestria:block/redwood_log_top",
+	"side": "terrestria:block/redwood_log"
   }
 }
