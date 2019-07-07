@@ -1,11 +1,4 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-	"textures": {
-	  "bottom": "terrestria:block/redwood_door_bottom",
-	  "top": "terrestria:block/redwood_door_top"
-	}
-  },
   "variants": {
 	"facing=east,half=lower,hinge=left,open=false":  { "model": "terrestria:block/redwood_door_bottom" },
 	"facing=south,half=lower,hinge=left,open=false": { "model": "terrestria:block/redwood_door_bottom", "y": 90 },
