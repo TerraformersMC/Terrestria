@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "wooden_button",
+  "ingredients": [
+    {
+      "item": "terrestria:japanese_maple_planks"
+    }
+  ],
+  "result": {
+    "item": "terrestria:japanese_maple_button"
+  }
+}

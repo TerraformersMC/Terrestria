@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "terrestria:block/japanese_maple_pressure_plate" },
+    "powered=true": { "model": "terrestria:block/japanese_maple_pressure_plate_down" }
+  }
+}
