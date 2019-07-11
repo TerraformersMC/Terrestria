@@ -271,6 +271,8 @@ public class TerrestriaBlocks {
 		public FenceBlock fence;
 		public FenceGateBlock fenceGate;
 		public TerraformDoorBlock door;
+		public TerraformButtonBlock button;
+		public TerraformPressurePlateBlock pressurePlate;
 
 		private WoodBlocks() {}
 
@@ -309,6 +311,8 @@ public class TerrestriaBlocks {
 			blocks.fence = TerrestriaBlocks.register(name + "_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE).materialColor(colors.planks).build()));
 			blocks.fenceGate = TerrestriaBlocks.register(name + "_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
 			blocks.door = TerrestriaBlocks.register(name + "_door", new TerraformDoorBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
+			blocks.button = TerrestriaBlocks.register(name + "_button", new TerraformButtonBlock(FabricBlockSettings.copy(Blocks.OAK_BUTTON).materialColor(colors.planks).build()));
+			blocks.pressurePlate = TerrestriaBlocks.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).materialColor(colors.planks).build()));
 
 			blocks.addManufacturedFireInfo(registry);
 
