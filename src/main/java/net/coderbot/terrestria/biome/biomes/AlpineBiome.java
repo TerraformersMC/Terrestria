@@ -1,4 +1,4 @@
-package net.coderbot.terrestria.biome;
+package net.coderbot.terrestria.biome.biomes;
 
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
@@ -9,12 +9,10 @@ import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
 
-public class JapaneseForestBiome extends Biome {
-	public JapaneseForestBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2, Feature<DefaultFeatureConfig> tree3) {
+public class AlpineBiome extends Biome {
+	public AlpineBiome(Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2) {
 		super(settings);
-
 		this.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL));
-		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
 		this.addStructureFeature(Feature.STRONGHOLD, FeatureConfig.DEFAULT);
 
 		DefaultBiomeFeatures.addLandCarvers(this);
@@ -23,17 +21,18 @@ public class JapaneseForestBiome extends Biome {
 		DefaultBiomeFeatures.addDungeons(this);
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
+		DefaultBiomeFeatures.addDefaultDisks(this);
 
 		this.addFeature(
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				Biome.configureFeature(
 						Feature.RANDOM_SELECTOR,
 						new RandomFeatureConfig(
-								new Feature[]{ tree2, tree3 },
-								new FeatureConfig[]{ FeatureConfig.DEFAULT, FeatureConfig.DEFAULT },
-								new float[]{ 0.35F, 0.3F },
+								new Feature[]{ tree1 },
+								new FeatureConfig[]{ FeatureConfig.DEFAULT },
+								new float[]{ 0.5F },
 
-								tree1,
+								tree2,
 								FeatureConfig.DEFAULT
 						),
 						Decorator.COUNT_EXTRA_HEIGHTMAP,
@@ -44,13 +43,15 @@ public class JapaneseForestBiome extends Biome {
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
+		DefaultBiomeFeatures.addEmeraldOre(this);
+		DefaultBiomeFeatures.addInfestedStone(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
 
 		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.SHEEP, 12, 4, 4));
 		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.PIG, 10, 4, 4));
 		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.CHICKEN, 10, 4, 4));
 		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.COW, 8, 4, 4));
-		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.WOLF, 5, 4, 4));
+		this.addSpawn(EntityCategory.CREATURE, new SpawnEntry(EntityType.LLAMA, 5, 4, 6));
 		this.addSpawn(EntityCategory.AMBIENT, new SpawnEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.SPIDER, 100, 4, 4));
 		this.addSpawn(EntityCategory.MONSTER, new SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));

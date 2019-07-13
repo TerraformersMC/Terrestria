@@ -23,6 +23,7 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 	private int maxLeafRadius;
 	private int leafLayers;
 	private double shrinkAmount;
+	private int trunkRadius;
 
 	public ConiferTreeFeatureNew(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
 		super(function, notify);
@@ -41,6 +42,7 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 		maxLeafRadius = getMaxLeafRadius(rand);
 		leafLayers = getLeafLayers(rand);
 		shrinkAmount = getShrinkAmount();
+		trunkRadius = getMaxTrunkRadius(rand);
 
 		//If the tree doesn't have enough room with it's current height before build limit
 		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
@@ -59,7 +61,7 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 
 		//Set the block below the trunk to dirt (because vanilla does it)
 		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height+bareTrunkHeight, boundingBox);
+		growTrunk(blocks, world, new BlockPos.Mutable(origin), height+bareTrunkHeight, trunkRadius, boundingBox, rand);
 		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, boundingBox);
 
 		return true;
@@ -116,7 +118,7 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 		return x < 0 ? 0 : x;
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	public void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkRadius, MutableIntBoundingBox boundingBox, Random rand) {
 		for(int i = 0; i < (height*0.83); i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
@@ -165,5 +167,9 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 
 	public double getShrinkAmount() {
 		return 1.0; //1.0 for 1 block
+	}
+
+	public int getMaxTrunkRadius(Random rand) {
+		return 1;
 	}
 }

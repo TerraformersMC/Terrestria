@@ -1,4 +1,4 @@
-package net.coderbot.terrestria.biome;
+package net.coderbot.terrestria.biome.biomes;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;

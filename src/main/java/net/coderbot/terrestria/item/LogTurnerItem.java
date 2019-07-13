@@ -80,12 +80,12 @@ public class LogTurnerItem extends Item {
 
 	private static Direction.Axis cycleAxis(Direction.Axis axis) {
 		switch (axis) {
-			case X:
-				return Direction.Axis.X;
-			case Y:
-				return Direction.Axis.Y;
+			case field_11048:
+				return Direction.Axis.field_11048;
+			case field_11052:
+				return Direction.Axis.field_11052;
 			default:
-				return Direction.Axis.Z;
+				return Direction.Axis.field_11051;
 		}
 	}
 

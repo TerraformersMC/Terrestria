@@ -1,4 +1,4 @@
-package net.coderbot.terrestria.biome;
+package net.coderbot.terrestria.biome.biomes;
 
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
