@@ -41,13 +41,7 @@ public class VolcanoGenerator extends StructurePiece {
 		vegetationNoise = new SimpleRadiusNoise(16, random.nextLong(), 0.25, 0.5);
 
 		if(biome == Biomes.DEEP_OCEAN || biome == Biomes.DEEP_COLD_OCEAN || biome == Biomes.DEEP_LUKEWARM_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) {
-
-			if(random.nextInt(5) == 0) {
-				height = 50 + random.nextInt(20);
-			} else {
-				height = 20 + random.nextInt(20);
-			}
-
+			height = 20 + random.nextInt(20);
 			baseY = 30;
 		} else if(biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE) {
 			height = 48 + random.nextInt(32);
