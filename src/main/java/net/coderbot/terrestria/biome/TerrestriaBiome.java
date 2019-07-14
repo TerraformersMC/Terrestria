@@ -106,7 +106,7 @@ public class TerrestriaBiome extends Biome {
                     }
                     allTrees[treeIndex] = tree.getKey();
                     allTreeConfigs[treeIndex] = FeatureConfig.DEFAULT;
-                    allTreeWeights[treeIndex] = (float) (tree.getValue() / totalTreesPerChunk);
+                    allTreeWeights[treeIndex] = (float)tree.getValue() / totalTreesPerChunk;
                     treeIndex++;
                 }
 
