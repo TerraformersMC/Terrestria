@@ -1,15 +1,20 @@
 package net.coderbot.terrestria.biome;
 
+import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.TerrestriaFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 public class TerrestriaBiome extends Biome {
 
@@ -31,6 +36,7 @@ public class TerrestriaBiome extends Biome {
         private Biome.Settings biomeSettings;
         private ArrayList<DefaultFeature> defaultFeatures;
         private ArrayList<TerrestriaFeature> features;
+        private Map<StructureFeature, FeatureConfig> structureFeatures;
         private ConfiguredSurfaceBuilder surfaceBuilder;
         private Biome.Precipitation precipitation;
         private Biome.Category category;
@@ -50,6 +56,9 @@ public class TerrestriaBiome extends Biome {
             TerrestriaBiome.biome = new TerrestriaBiome(this.biomeSettings, this.spawnEntries);
             for (DefaultFeature defaultFeature : defaultFeatures) {
                 buildDefaultFeature(defaultFeature);
+            }
+            for (StructureFeature structure : structureFeatures.keySet()) {
+                TerrestriaBiome.biome.addStructureFeature(structure, structureFeatures.get(structure));
             }
             for (TerrestriaFeature feature : features) {
                 TerrestriaBiome.biome.addFeature(feature.getStep(), feature.getFeature());
@@ -117,19 +126,34 @@ public class TerrestriaBiome extends Biome {
             return this;
         }
 
+        public TerrestriaBiome.Builder addStructureFeature(StructureFeature feature) {
+            this.addStructureFeature(feature, FeatureConfig.DEFAULT);
+            return this;
+        }
+
+        public TerrestriaBiome.Builder addStructureFeature(StructureFeature feature, FeatureConfig config) {
+            this.structureFeatures.put(feature, config);
+            return this;
+        }
+
+        public TerrestriaBiome.Builder addStructureFeatures(StructureFeature... defaultStructureFeatures) {
+            for (StructureFeature feature : defaultStructureFeatures) {
+                this.structureFeatures.put(feature, FeatureConfig.DEFAULT);
+            }
+            return this;
+        }
+
         public TerrestriaBiome.Builder addDefaultFeature(DefaultFeature feature) {
             defaultFeatures.add(feature);
             return this;
         }
 
         public TerrestriaBiome.Builder addDefaultFeatures(DefaultFeature... features) {
-            for (DefaultFeature feature : features) {
-                defaultFeatures.add(feature);
-            }
+            defaultFeatures.addAll(Arrays.asList(features));
             return this;
         }
 
-        public TerrestriaBiome.Builder buildDefaultFeature(DefaultFeature feature) {
+        void buildDefaultFeature(DefaultFeature feature) {
             switch (feature) {
                 case LAND_CARVERS:
                     DefaultBiomeFeatures.addLandCarvers(TerrestriaBiome.biome);
@@ -268,7 +292,6 @@ public class TerrestriaBiome extends Biome {
                 case FROZEN_TOP_LAYER:
                     DefaultBiomeFeatures.addFrozenTopLayer(TerrestriaBiome.biome);
             }
-            return this;
         }
     }
 

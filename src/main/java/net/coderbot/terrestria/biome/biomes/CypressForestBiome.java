@@ -15,7 +15,11 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import static net.coderbot.terrestria.biome.TerrestriaBiome.DefaultFeature.*;
 
 public class CypressForestBiome extends Biome {
-	
+
+	protected CypressForestBiome(Settings biome$Settings_1) {
+		super(biome$Settings_1);
+	}
+
 	public static Biome get() {
 		return TerrestriaBiome.builder()
 				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -43,6 +47,8 @@ public class CypressForestBiome extends Biome {
 								Decorator.COUNT_EXTRA_HEIGHTMAP,
 								new CountExtraChanceDecoratorConfig(13, 0.1F, 1)
 						))
+				.addStructureFeature(Feature.STRONGHOLD)
+                .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SHEEP, 12, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PIG, 10, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.CHICKEN, 10, 4, 4))
@@ -59,7 +65,8 @@ public class CypressForestBiome extends Biome {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1))
 				.build();
 	}
-	
+
+	/*
 	public CypressForestBiome(Biome.Settings settings, int trees, Feature<DefaultFeatureConfig> tree1, Feature<DefaultFeatureConfig> tree2, Feature<DefaultFeatureConfig> tree3) {
 		super(settings);
 
@@ -115,4 +122,6 @@ public class CypressForestBiome extends Biome {
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityCategory.MONSTER, new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 	}
+
+	 */
 }
