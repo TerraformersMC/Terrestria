@@ -16,6 +16,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class TerrestriaBiome extends Biome {
@@ -36,11 +37,11 @@ public class TerrestriaBiome extends Biome {
     public static final class Builder {
 
         private Biome.Settings biomeSettings;
-        private ArrayList<DefaultFeature> defaultFeatures;
-        private ArrayList<TerrestriaFeature> features;
-        private Map<StructureFeature, FeatureConfig> structureFeatures;
-        private Map<Feature, Integer> treeFeatures;
-        private Map<BlockState, Integer> plantFeatures;
+        private ArrayList<DefaultFeature> defaultFeatures = new ArrayList<>();
+        private ArrayList<TerrestriaFeature> features = new ArrayList<>();
+        private Map<StructureFeature, FeatureConfig> structureFeatures = new HashMap<>();
+        private Map<Feature, Integer> treeFeatures = new HashMap<>();
+        private Map<BlockState, Integer> plantFeatures = new HashMap<>();
         private ConfiguredSurfaceBuilder surfaceBuilder;
         private Biome.Precipitation precipitation;
         private Biome.Category category;
@@ -50,7 +51,7 @@ public class TerrestriaBiome extends Biome {
         private float downfall;
         private int waterColor;
         private int waterFogColor;
-        private ArrayList<Biome.SpawnEntry> spawnEntries;
+        private ArrayList<Biome.SpawnEntry> spawnEntries = new ArrayList<>();
 
         public Biome build() {
             //Create the biome settings from the builder options
@@ -225,140 +226,208 @@ public class TerrestriaBiome extends Biome {
             switch (feature) {
                 case LAND_CARVERS:
                     DefaultBiomeFeatures.addLandCarvers(TerrestriaBiome.biome);
+                    break;
                 case OCEAN_CARVERS:
                     DefaultBiomeFeatures.addOceanCarvers(TerrestriaBiome.biome);
+                    break;
                 case STRUCTURES:
                     DefaultBiomeFeatures.addDefaultStructures(TerrestriaBiome.biome);
+                    break;
                 case LAKES:
                     DefaultBiomeFeatures.addDefaultLakes(TerrestriaBiome.biome);
+                    break;
                 case DESERT_LAKES:
                     DefaultBiomeFeatures.addDesertLakes(TerrestriaBiome.biome);
+                    break;
                 case DUNGEONS:
                     DefaultBiomeFeatures.addDungeons(TerrestriaBiome.biome);
+                    break;
                 case MINEABLES:
                     DefaultBiomeFeatures.addMineables(TerrestriaBiome.biome);
+                    break;
                 case ORES:
                     DefaultBiomeFeatures.addDefaultOres(TerrestriaBiome.biome);
+                    break;
                 case EXTRA_GOLD:
                     DefaultBiomeFeatures.addExtraGoldOre(TerrestriaBiome.biome);
+                    break;
                 case EMERALD_ORE:
                     DefaultBiomeFeatures.addEmeraldOre(TerrestriaBiome.biome);
+                    break;
                 case INFECTED_STONE:
                     DefaultBiomeFeatures.addInfestedStone(TerrestriaBiome.biome);
+                    break;
                 case DISKS:
                     DefaultBiomeFeatures.addDefaultDisks(TerrestriaBiome.biome);
+                    break;
                 case CLAY:
                     DefaultBiomeFeatures.addClay(TerrestriaBiome.biome);
+                    break;
                 case MOSSY_ROCKS:
                     DefaultBiomeFeatures.addMossyRocks(TerrestriaBiome.biome);
+                    break;
                 case LARGE_FERNS:
                     DefaultBiomeFeatures.addLargeFerns(TerrestriaBiome.biome);
+                    break;
                 case SWEET_BERRY_BUSHES:
                     DefaultBiomeFeatures.addSweetBerryBushes(TerrestriaBiome.biome);
+                    break;
                 case SWEET_BERRY_BUSHES_SNOWY:
                     DefaultBiomeFeatures.addSweetBerryBushesSnowy(TerrestriaBiome.biome);
+                    break;
                 case BAMBOO:
                     DefaultBiomeFeatures.addBamboo(TerrestriaBiome.biome);
+                    break;
                 case BAMBOO_JUNGLE_TREES:
                     DefaultBiomeFeatures.addBambooJungleTrees(TerrestriaBiome.biome);
+                    break;
                 case TAIGA_TREES:
                     DefaultBiomeFeatures.addTaigaTrees(TerrestriaBiome.biome);
+                    break;
                 case WATER_BIOME_OAK_TREES:
                     DefaultBiomeFeatures.addWaterBiomeOakTrees(TerrestriaBiome.biome);
+                    break;
                 case BIRCH_TREES:
                     DefaultBiomeFeatures.addBirchTrees(TerrestriaBiome.biome);
+                    break;
                 case FOREST_TREES:
                     DefaultBiomeFeatures.addForestTrees(TerrestriaBiome.biome);
+                    break;
                 case TALL_BIRCH_TREES:
                     DefaultBiomeFeatures.addTallBirchTrees(TerrestriaBiome.biome);
+                    break;
                 case SAVANNAH_TREES:
                     DefaultBiomeFeatures.addSavannaTrees(TerrestriaBiome.biome);
+                    break;
                 case EXTRA_SAVANNA_TREES:
                     DefaultBiomeFeatures.addExtraSavannaTrees(TerrestriaBiome.biome);
+                    break;
                 case MOUNTAIN_TREES:
                     DefaultBiomeFeatures.addMountainTrees(TerrestriaBiome.biome);
+                    break;
                 case EXTRA_MOUNTAIN_TREES:
                     DefaultBiomeFeatures.addExtraMountainTrees(TerrestriaBiome.biome);
+                    break;
                 case JUNGLE_TREES:
                     DefaultBiomeFeatures.addJungleTrees(TerrestriaBiome.biome);
+                    break;
                 case JUNGLE_EDGE_TREES:
                     DefaultBiomeFeatures.addJungleEdgeTrees(TerrestriaBiome.biome);
+                    break;
                 case BADLANDS_PLATEAU_TREES:
                     DefaultBiomeFeatures.addBadlandsPlateauTrees(TerrestriaBiome.biome);
+                    break;
                 case SNOWY_SPRUCE_TREES:
                     DefaultBiomeFeatures.addSnowySpruceTrees(TerrestriaBiome.biome);
+                    break;
                 case GIANT_SPRUCE_TAIGA_TREES:
                     DefaultBiomeFeatures.addGiantSpruceTaigaTrees(TerrestriaBiome.biome);
+                    break;
                 case MEGA_SPRUCE_TAIGA_TREES:
                     DefaultBiomeFeatures.addGiantTreeTaigaTrees(TerrestriaBiome.biome);
+                    break;
                 case JUNGLE_GRASS:
                     DefaultBiomeFeatures.addJungleGrass(TerrestriaBiome.biome);
+                    break;
                 case SAVANNA_TALL_GRASS:
                     DefaultBiomeFeatures.addSavannaTallGrass(TerrestriaBiome.biome);
+                    break;
                 case SHATTERED_SAVANNAH_TALL_GRASS:
                     DefaultBiomeFeatures.addShatteredSavannaGrass(TerrestriaBiome.biome);
+                    break;
                 case SAVANNAH_GRASS:
                     DefaultBiomeFeatures.addSavannaGrass(TerrestriaBiome.biome);
+                    break;
                 case BADLANDS_GRASS:
                     DefaultBiomeFeatures.addBadlandsGrass(TerrestriaBiome.biome);
+                    break;
                 case FOREST_FLOWERS:
                     DefaultBiomeFeatures.addForestFlowers(TerrestriaBiome.biome);
+                    break;
                 case FOREST_GRASS:
                     DefaultBiomeFeatures.addForestGrass(TerrestriaBiome.biome);
+                    break;
                 case SWAMP_FEATURES:
                     DefaultBiomeFeatures.addSwampFeatures(TerrestriaBiome.biome);
+                    break;
                 case MUSHROOM_FIELDS_FEATURES:
                     DefaultBiomeFeatures.addMushroomFieldsFeatures(TerrestriaBiome.biome);
+                    break;
                 case PLAINS_FEATURES:
                     DefaultBiomeFeatures.addPlainsFeatures(TerrestriaBiome.biome);
+                    break;
                 case DESERT_DEAD_BUSHES:
                     DefaultBiomeFeatures.addDesertDeadBushes(TerrestriaBiome.biome);
+                    break;
                 case GIANT_TAIGA_GRASS:
                     DefaultBiomeFeatures.addGiantTaigaGrass(TerrestriaBiome.biome);
+                    break;
                 case DEFAULT_FLOWERS:
                     DefaultBiomeFeatures.addDefaultFlowers(TerrestriaBiome.biome);
+                    break;
                 case EXTRA_DEFAULT_FLOWERS:
                     DefaultBiomeFeatures.addExtraDefaultFlowers(TerrestriaBiome.biome);
+                    break;
                 case DEFAULT_GRASS:
                     DefaultBiomeFeatures.addDefaultGrass(TerrestriaBiome.biome);
+                    break;
                 case TAIGA_GRASS:
                     DefaultBiomeFeatures.addTaigaGrass(TerrestriaBiome.biome);
+                    break;
                 case PLANS_TALL_GRASS:
                     DefaultBiomeFeatures.addPlainsTallGrass(TerrestriaBiome.biome);
+                    break;
                 case DEFAULT_MUSHROOMS:
                     DefaultBiomeFeatures.addDefaultMushrooms(TerrestriaBiome.biome);
+                    break;
                 case DEFAULT_VEGETATION:
                     DefaultBiomeFeatures.addDefaultVegetation(TerrestriaBiome.biome);
+                    break;
                 case BADLANDS_VEGETATION:
                     DefaultBiomeFeatures.addBadlandsVegetation(TerrestriaBiome.biome);
+                    break;
                 case JUNGLE_VEGETATION:
                     DefaultBiomeFeatures.addJungleVegetation(TerrestriaBiome.biome);
+                    break;
                 case DESERT_VEGETATION:
                     DefaultBiomeFeatures.addDesertVegetation(TerrestriaBiome.biome);
+                    break;
                 case SWAMP_VEGETATION:
                     DefaultBiomeFeatures.addSwampVegetation(TerrestriaBiome.biome);
+                    break;
                 case DESSERT_FEATURES:
                     DefaultBiomeFeatures.addDesertFeatures(TerrestriaBiome.biome);
+                    break;
                 case FOSSILS:
                     DefaultBiomeFeatures.addFossils(TerrestriaBiome.biome);
+                    break;
                 case KELP:
                     DefaultBiomeFeatures.addKelp(TerrestriaBiome.biome);
+                    break;
                 case SEAGRASS_ON_STONE:
                     DefaultBiomeFeatures.addSeagrassOnStone(TerrestriaBiome.biome);
+                    break;
                 case SEAGRASS:
                     DefaultBiomeFeatures.addSeagrass(TerrestriaBiome.biome);
+                    break;
                 case MORE_SEAGRASS:
                     DefaultBiomeFeatures.addMoreSeagrass(TerrestriaBiome.biome);
+                    break;
                 case LESS_KELP:
                     DefaultBiomeFeatures.addLessKelp(TerrestriaBiome.biome);
+                    break;
                 case SPRINGS:
                     DefaultBiomeFeatures.addSprings(TerrestriaBiome.biome);
+                    break;
                 case ICEBERGS:
                     DefaultBiomeFeatures.addIcebergs(TerrestriaBiome.biome);
+                    break;
                 case BLUE_ICE:
                     DefaultBiomeFeatures.addBlueIce(TerrestriaBiome.biome);
+                    break;
                 case FROZEN_TOP_LAYER:
                     DefaultBiomeFeatures.addFrozenTopLayer(TerrestriaBiome.biome);
+                    break;
             }
         }
     }
