@@ -29,10 +29,10 @@ public class CypressForestBiome extends Biome {
 				.waterFogColor(329011)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-                .addTreeFeature(TerrestriaFeatures.CYPRESS_TREE, 9)
-                .addTreeFeature(TerrestriaFeatures.TALLER_BIRCH_TREE, 4)
+				.addTreeFeature(TerrestriaFeatures.CYPRESS_TREE, 9)
+				.addTreeFeature(TerrestriaFeatures.TALLER_BIRCH_TREE, 4)
 				.addStructureFeature(Feature.STRONGHOLD)
-                .addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SHEEP, 12, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PIG, 10, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.CHICKEN, 10, 4, 4))
