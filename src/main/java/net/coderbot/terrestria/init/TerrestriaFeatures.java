@@ -166,7 +166,7 @@ public class TerrestriaFeatures {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 
-	public static void addVolcanicFoliage(Biome biome) {
+	public static void addVolcanicFoliageOld(Biome biome) {
 		biome.addFeature(
 				GenerationStep.Feature.VEGETAL_DECORATION,
 				Biome.configureFeature(Feature.GRASS,

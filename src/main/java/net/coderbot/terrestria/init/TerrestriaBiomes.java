@@ -337,8 +337,8 @@ public class TerrestriaBiomes {
                 Biomes.DEEP_WARM_OCEAN
         );
 
-        TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND);
-        TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND_SHORE);
+        //TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND);
+        //TerrestriaFeatures.addVolcanicFoliage(VOLCANIC_ISLAND_SHORE);
 
         forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
 

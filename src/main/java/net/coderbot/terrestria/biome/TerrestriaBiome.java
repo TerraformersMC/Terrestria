@@ -1,13 +1,15 @@
 package net.coderbot.terrestria.biome;
 
-import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.TerrestriaFeature;
+import net.coderbot.terrestria.init.TerrestriaFeatures;
+import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
@@ -37,6 +39,8 @@ public class TerrestriaBiome extends Biome {
         private ArrayList<DefaultFeature> defaultFeatures;
         private ArrayList<TerrestriaFeature> features;
         private Map<StructureFeature, FeatureConfig> structureFeatures;
+        private Map<Feature, Integer> treeFeatures;
+        private Map<BlockState, Integer> plantFeatures;
         private ConfiguredSurfaceBuilder surfaceBuilder;
         private Biome.Precipitation precipitation;
         private Biome.Category category;
@@ -49,20 +53,74 @@ public class TerrestriaBiome extends Biome {
         private ArrayList<Biome.SpawnEntry> spawnEntries;
 
         public Biome build() {
+            //Create the biome settings from the builder options
             biomeSettings = new Biome.Settings().parent(null).category(category).depth(depth).scale(scale)
                     .precipitation(precipitation).temperature(temperature).downfall(downfall).waterColor(waterColor)
                     .waterFogColor(waterFogColor)
                     .configureSurfaceBuilder(this.surfaceBuilder.surfaceBuilder, this.surfaceBuilder.config); // more
+            //Add SpawnEntries
             TerrestriaBiome.biome = new TerrestriaBiome(this.biomeSettings, this.spawnEntries);
+            //Add any minecraft (default) features
             for (DefaultFeature defaultFeature : defaultFeatures) {
                 buildDefaultFeature(defaultFeature);
             }
-            for (StructureFeature structure : structureFeatures.keySet()) {
-                TerrestriaBiome.biome.addStructureFeature(structure, structureFeatures.get(structure));
+            //Add structures
+            for (Map.Entry<StructureFeature, FeatureConfig> structure : structureFeatures.entrySet()) {
+                TerrestriaBiome.biome.addStructureFeature(structure.getKey(), structure.getValue());
             }
+            //Add custom features that dont fit in the templates
             for (TerrestriaFeature feature : features) {
                 TerrestriaBiome.biome.addFeature(feature.getStep(), feature.getFeature());
             }
+            //Add Plant decoration features
+            for (Map.Entry<BlockState, Integer> plant : plantFeatures.entrySet()) {
+                TerrestriaBiome.biome.addFeature(
+                        GenerationStep.Feature.VEGETAL_DECORATION,
+                        Biome.configureFeature(Feature.GRASS, new GrassFeatureConfig(plant.getKey()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(plant.getValue())));
+            }
+
+            //Tree Feature stuff
+            //Get the total weight of all the trees and find the primary one
+            int totalTreesPerChunk = 0;
+            int currentMaxWeight = 0;
+            Feature[] allTrees = new Feature[treeFeatures.size() -1];
+            FeatureConfig[] allTreeConfigs = new FeatureConfig[treeFeatures.size() -1];
+            float[] allTreeWeights = new float[treeFeatures.size() -1];
+            Feature primaryTree = Feature.NORMAL_TREE;
+            //Get the info we need from the trees as a whole to be able to define them individually
+            for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
+                if (tree.getValue() > currentMaxWeight) {
+                    primaryTree = tree.getKey();
+                    currentMaxWeight = tree.getValue();
+                }
+                totalTreesPerChunk += tree.getValue();
+            }
+            //Define each tree individually
+            int treeIndex = 0;
+            for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
+                if (tree.getKey().equals(primaryTree)) {
+                    continue;
+                }
+                allTrees[treeIndex] = tree.getKey();
+                allTreeConfigs[treeIndex] = FeatureConfig.DEFAULT;
+                allTreeWeights[treeIndex] = (float) (tree.getValue() / totalTreesPerChunk);
+                treeIndex++;
+            }
+
+            //Create the trees feature
+            TerrestriaBiome.biome.addFeature(
+                    GenerationStep.Feature.VEGETAL_DECORATION,
+                    Biome.configureFeature(Feature.RANDOM_SELECTOR,
+                            new RandomFeatureConfig(
+                                    allTrees, allTreeConfigs, allTreeWeights,
+                                    primaryTree, FeatureConfig.DEFAULT
+                            ),
+                            Decorator.COUNT_EXTRA_HEIGHTMAP,
+                            new CountExtraChanceDecoratorConfig(totalTreesPerChunk, 0.1F, 1)
+                    )
+            );
+
+
             return TerrestriaBiome.biome;
         }
 
@@ -76,7 +134,17 @@ public class TerrestriaBiome extends Biome {
             return this;
         }
 
-        public TerrestriaBiome.Builder addTerrestriaFeature(GenerationStep.Feature step, ConfiguredFeature feature) {
+        public TerrestriaBiome.Builder addTreeFeature(Feature feature, int numPerChunk) {
+            this.treeFeatures.put(feature, numPerChunk);
+            return this;
+        }
+
+        public TerrestriaBiome.Builder addGrassFeature(BlockState blockState, int count) {
+            this.plantFeatures.put(blockState, count);
+            return this;
+        }
+
+        public TerrestriaBiome.Builder addCustomFeature(GenerationStep.Feature step, ConfiguredFeature feature) {
             this.features.add(new TerrestriaFeature(step, feature));
             return this;
         }
