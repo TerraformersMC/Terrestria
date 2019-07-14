@@ -82,45 +82,47 @@ public class TerrestriaBiome extends Biome {
             }
 
             //Tree Feature stuff
-            //Get the total weight of all the trees and find the primary one
-            int totalTreesPerChunk = 0;
-            int currentMaxWeight = 0;
-            Feature[] allTrees = new Feature[treeFeatures.size() -1];
-            FeatureConfig[] allTreeConfigs = new FeatureConfig[treeFeatures.size() -1];
-            float[] allTreeWeights = new float[treeFeatures.size() -1];
-            Feature primaryTree = Feature.NORMAL_TREE;
-            //Get the info we need from the trees as a whole to be able to define them individually
-            for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
-                if (tree.getValue() > currentMaxWeight) {
-                    primaryTree = tree.getKey();
-                    currentMaxWeight = tree.getValue();
+            if (treeFeatures.size() > 0) {
+                //Get the total weight of all the trees and find the primary one
+                int totalTreesPerChunk = 0;
+                int currentMaxWeight = 0;
+                Feature[] allTrees = new Feature[treeFeatures.size() -1];
+                FeatureConfig[] allTreeConfigs = new FeatureConfig[treeFeatures.size() -1];
+                float[] allTreeWeights = new float[treeFeatures.size() -1];
+                Feature primaryTree = Feature.NORMAL_TREE;
+                //Get the info we need from the trees as a whole to be able to define them individually
+                for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
+                    if (tree.getValue() > currentMaxWeight) {
+                        primaryTree = tree.getKey();
+                        currentMaxWeight = tree.getValue();
+                    }
+                    totalTreesPerChunk += tree.getValue();
                 }
-                totalTreesPerChunk += tree.getValue();
-            }
-            //Define each tree individually
-            int treeIndex = 0;
-            for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
-                if (tree.getKey().equals(primaryTree)) {
-                    continue;
+                //Define each tree individually
+                int treeIndex = 0;
+                for (Map.Entry<Feature, Integer> tree : treeFeatures.entrySet()) {
+                    if (tree.getKey().equals(primaryTree)) {
+                        continue;
+                    }
+                    allTrees[treeIndex] = tree.getKey();
+                    allTreeConfigs[treeIndex] = FeatureConfig.DEFAULT;
+                    allTreeWeights[treeIndex] = (float) (tree.getValue() / totalTreesPerChunk);
+                    treeIndex++;
                 }
-                allTrees[treeIndex] = tree.getKey();
-                allTreeConfigs[treeIndex] = FeatureConfig.DEFAULT;
-                allTreeWeights[treeIndex] = (float) (tree.getValue() / totalTreesPerChunk);
-                treeIndex++;
-            }
 
-            //Create the trees feature
-            TerrestriaBiome.biome.addFeature(
-                    GenerationStep.Feature.VEGETAL_DECORATION,
-                    Biome.configureFeature(Feature.RANDOM_SELECTOR,
-                            new RandomFeatureConfig(
-                                    allTrees, allTreeConfigs, allTreeWeights,
-                                    primaryTree, FeatureConfig.DEFAULT
-                            ),
-                            Decorator.COUNT_EXTRA_HEIGHTMAP,
-                            new CountExtraChanceDecoratorConfig(totalTreesPerChunk, 0.1F, 1)
-                    )
-            );
+                //Create the trees feature
+                TerrestriaBiome.biome.addFeature(
+                        GenerationStep.Feature.VEGETAL_DECORATION,
+                        Biome.configureFeature(Feature.RANDOM_SELECTOR,
+                                new RandomFeatureConfig(
+                                        allTrees, allTreeConfigs, allTreeWeights,
+                                        primaryTree, FeatureConfig.DEFAULT
+                                ),
+                                Decorator.COUNT_EXTRA_HEIGHTMAP,
+                                new CountExtraChanceDecoratorConfig(totalTreesPerChunk, 0.1F, 1)
+                        )
+                );
+            }
 
 
             return TerrestriaBiome.biome;
@@ -228,7 +230,6 @@ public class TerrestriaBiome extends Biome {
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.PIG, 10, 4, 4))
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.CHICKEN, 10, 4, 4))
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.COW, 8, 4, 4))
-                .addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8))
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4))
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.ZOMBIE, 95, 4, 4))
