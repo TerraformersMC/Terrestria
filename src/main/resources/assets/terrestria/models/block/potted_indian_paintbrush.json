@@ -1,6 +1,6 @@
 {
   "parent": "block/flower_pot_cross",
   "textures": {
-    "plant": "terrestria:blocks/indian_paintbrush"
+    "plant": "terrestria:block/indian_paintbrush"
   }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/door_top_rh",
   "textures": {
-	"bottom": "terrestria:blocks/hemlock_door_bottom",
-	"top": "terrestria:blocks/hemlock_door_top"
+	"bottom": "terrestria:block/hemlock_door_bottom",
+	"top": "terrestria:block/hemlock_door_top"
   }
 }

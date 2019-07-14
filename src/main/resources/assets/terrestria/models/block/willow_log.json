@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-	"end": "terrestria:blocks/willow_log_top",
-	"side": "terrestria:blocks/willow_log"
+	"end": "terrestria:block/willow_log_top",
+	"side": "terrestria:block/willow_log"
   }
 }

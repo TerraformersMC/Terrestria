@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-	"all": "terrestria:blocks/hemlock_leaves"
+	"all": "terrestria:block/hemlock_leaves"
   }
 }

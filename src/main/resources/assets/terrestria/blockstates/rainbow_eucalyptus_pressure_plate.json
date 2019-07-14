@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "powered=false": { "model": "terrestria:block/rainbow_eucalyptus_pressure_plate" },
+    "powered=true": { "model": "terrestria:block/rainbow_eucalyptus_pressure_plate_down" }
+  }
+}

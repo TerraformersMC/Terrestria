@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-    "cross": "terrestria:blocks/indian_paintbrush"
+    "cross": "terrestria:block/indian_paintbrush"
   }
 }

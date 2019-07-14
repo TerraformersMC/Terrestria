@@ -105,6 +105,8 @@ public class TerrestriaItems {
 		public BlockItem fence;
 		public BlockItem fenceGate;
 		public BlockItem door;
+		public BlockItem button;
+		public BlockItem pressurePlate;
 
 		private WoodItems() {}
 
@@ -127,7 +129,8 @@ public class TerrestriaItems {
 			items.fence = TerrestriaItems.register(name + "_fence", blocks.fence);
 			items.fenceGate = TerrestriaItems.register(name + "_fence_gate", blocks.fenceGate);
 			items.door = TerrestriaItems.register(name + "_door", blocks.door);
-
+			items.button = TerrestriaItems.register(name + "_button", blocks.button);
+			items.pressurePlate = TerrestriaItems.register(name + "_pressure_plate", blocks.pressurePlate);
 
 			return items;
 		}

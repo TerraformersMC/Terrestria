@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_fence_gate_open",
   "textures": {
-	"texture": "terrestria:blocks/sakura_planks"
+	"texture": "terrestria:block/sakura_planks"
   }
 }

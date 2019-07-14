@@ -1,6 +1,6 @@
 {
     "parent": "minecraft:block/fence_side",
     "textures": {
-        "texture": "terrestria:blocks/sakura_planks"
+        "texture": "terrestria:block/sakura_planks"
     }
 }

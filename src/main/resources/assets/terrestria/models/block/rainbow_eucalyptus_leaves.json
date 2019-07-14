@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-	"all": "terrestria:blocks/rainbow_eucalyptus_leaves"
+	"all": "terrestria:block/rainbow_eucalyptus_leaves"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:blocks/rubber_planks"
+	"all": "terrestria:block/rubber_planks"
   }
 }

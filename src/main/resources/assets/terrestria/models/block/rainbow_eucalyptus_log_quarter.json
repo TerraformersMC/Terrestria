@@ -1,9 +1,9 @@
 {
   "parent": "terrestria:block/quarter_log",
   "textures": {
-    "particle": "terrestria:blocks/rainbow_eucalyptus_log",
-    "ends": "terrestria:blocks/rainbow_eucalyptus_log_quarter",
-	"sides": "terrestria:blocks/rainbow_eucalyptus_log",
-	"insides": "terrestria:blocks/rainbow_eucalyptus_log_bare"
+    "particle": "terrestria:block/rainbow_eucalyptus_log",
+    "ends": "terrestria:block/rainbow_eucalyptus_log_quarter",
+	"sides": "terrestria:block/rainbow_eucalyptus_log",
+	"insides": "terrestria:block/rainbow_eucalyptus_log_bare"
   }
 }

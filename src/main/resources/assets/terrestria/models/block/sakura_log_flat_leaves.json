@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-	"particle": "terrestria:blocks/sakura_log",
-	"all": "terrestria:blocks/sakura_log",
-	"leaves": "terrestria:blocks/sakura_leaves"
+	"particle": "terrestria:block/sakura_log",
+	"all": "terrestria:block/sakura_log",
+	"leaves": "terrestria:block/sakura_leaves"
   },
   "elements": [
 	{

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:blocks/cypress_log"
+	"all": "terrestria:block/cypress_log"
   }
 }

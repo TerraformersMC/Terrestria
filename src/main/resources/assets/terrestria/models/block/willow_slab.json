@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab",
   "textures": {
-	"bottom": "terrestria:blocks/willow_planks",
-	"top": "terrestria:blocks/willow_planks",
-	"side": "terrestria:blocks/willow_planks"
+	"bottom": "terrestria:block/willow_planks",
+	"top": "terrestria:block/willow_planks",
+	"side": "terrestria:block/willow_planks"
   }
 }

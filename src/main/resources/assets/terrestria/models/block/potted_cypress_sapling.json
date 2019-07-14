@@ -1,6 +1,6 @@
 {
   "parent": "block/flower_pot_cross",
   "textures": {
-    "plant": "terrestria:blocks/cypress_sapling"
+    "plant": "terrestria:block/cypress_sapling"
   }
 }

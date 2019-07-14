@@ -1,8 +1,8 @@
 {
     "parent": "block/outer_stairs",
     "textures": {
-        "bottom": "terrestria:blocks/rubber_planks",
-        "top": "terrestria:blocks/rubber_planks",
-        "side": "terrestria:blocks/rubber_planks"
+        "bottom": "terrestria:block/rubber_planks",
+        "top": "terrestria:block/rubber_planks",
+        "side": "terrestria:block/rubber_planks"
     }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-	"layer0": "terrestria:items/log_turner"
+	"layer0": "terrestria:item/log_turner"
   }
 }

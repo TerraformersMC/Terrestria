@@ -1,6 +1,6 @@
 {
   "parent": "block/cross",
   "textures": {
-	"cross": "terrestria:blocks/rubber_sapling"
+	"cross": "terrestria:block/rubber_sapling"
   }
 }

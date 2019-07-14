@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-	"layer0": "terrestria:items/willow_door"
+	"layer0": "terrestria:item/willow_door"
   }
 }

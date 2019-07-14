@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-	"all": "terrestria:blocks/japanese_maple_leaves_green"
+	"all": "terrestria:block/japanese_maple_leaves_green"
   }
 }
