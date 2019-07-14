@@ -150,7 +150,7 @@ public class TerrestriaFeatures {
 				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
-		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
+		Feature.STRUCTURES.put("Volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 	}
