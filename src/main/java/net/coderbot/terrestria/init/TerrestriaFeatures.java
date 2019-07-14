@@ -165,24 +165,4 @@ public class TerrestriaFeatures {
 	public static void addVolcanoStructure(Biome biome) {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
-
-	public static void addVolcanicFoliageOld(Biome biome) {
-		biome.addFeature(
-				GenerationStep.Feature.VEGETAL_DECORATION,
-				Biome.configureFeature(Feature.GRASS,
-						new GrassFeatureConfig(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState()),
-						Decorator.COUNT_HEIGHTMAP_DOUBLE,
-						new CountDecoratorConfig(1)
-				)
-		);
-
-		biome.addFeature(
-				GenerationStep.Feature.VEGETAL_DECORATION,
-				Biome.configureFeature(Feature.GRASS,
-						new GrassFeatureConfig(TerrestriaBlocks.MONSTERAS.getDefaultState()),
-						Decorator.COUNT_HEIGHTMAP_DOUBLE,
-						new CountDecoratorConfig(4)
-				)
-		);
-	}
 }
