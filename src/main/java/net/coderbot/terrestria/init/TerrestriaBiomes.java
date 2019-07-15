@@ -639,8 +639,8 @@ public class TerrestriaBiomes {
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.ICY)
 				.depth(3.7F)
 				.scale(0.3F)
-				.temperature(0.9F)
-				.downfall(0.9F)
+				.temperature(-0.5F)
+				.downfall(0.1F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_VEGETATION,
