@@ -122,6 +122,7 @@ public class TerrestriaBiome extends Biome {
 		private Map<Feature<DefaultFeatureConfig>, Integer> treeFeatures = new HashMap<>();
 		private Map<Feature<DefaultFeatureConfig>, Integer> rareTreeFeatures = new HashMap<>();
 		private Map<BlockState, Integer> plantFeatures = new HashMap<>();
+		private Map<BlockState, Integer> doublePlantFeatures = new HashMap<>();
 		private ConfiguredSurfaceBuilder surfaceBuilder;
 		private Biome.Precipitation precipitation;
 		private Biome.Category category;
@@ -212,6 +213,14 @@ public class TerrestriaBiome extends Biome {
 						Biome.configureFeature(Feature.GRASS, new GrassFeatureConfig(plant.getKey()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(plant.getValue())));
 			}
 
+			// Add Double Plant decoration features
+			//TODO make work
+			for (Map.Entry<BlockState, Integer> doublePlant : plantFeatures.entrySet()) {
+				TerrestriaBiome.biome.addFeature(
+						GenerationStep.Feature.VEGETAL_DECORATION,
+						Biome.configureFeature(Feature.DOUBLE_PLANT, new DoublePlantFeatureConfig(doublePlant.getKey()), Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(doublePlant.getValue())));
+			}
+
 
 			return TerrestriaBiome.biome;
 		}
@@ -238,6 +247,11 @@ public class TerrestriaBiome extends Biome {
 
 		public TerrestriaBiome.Builder addGrassFeature(BlockState blockState, int count) {
 			this.plantFeatures.put(blockState, count);
+			return this;
+		}
+
+		public TerrestriaBiome.Builder addDoubleGrassFeature(BlockState blockState, int count) {
+			this.doublePlantFeatures.put(blockState, count);
 			return this;
 		}
 

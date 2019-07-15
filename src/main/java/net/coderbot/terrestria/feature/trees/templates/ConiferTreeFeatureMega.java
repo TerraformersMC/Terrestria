@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
 import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.trees.components.Roots;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -16,9 +17,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> implements Roots {
 	private static final int EXTRA_LEAVES_HEIGHT = 2;
 	private TreeDefinition.Mega tree;
+	private int height;
+	private int bareTrunkHeight;
 
 	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
@@ -33,10 +36,10 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		int height = rand.nextInt(16) + 32;
+		int height = getHeight(rand);
 
 		// How much "bare trunk" there will be.
-		int bareTrunkHeight = 1 + rand.nextInt(12);
+		int bareTrunkHeight = getBareTrunkHeight(rand);
 
 		// Maximum leaf radius.
 		// Note: Old EBXL had a maximum radius of 10, but unfortunately that would cause cascading world generation.
@@ -71,6 +74,7 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 
 		growLeaves(blocks, world, origin, height, bareTrunkHeight, maxRadius, boundingBox);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
+		growRoots(blocks, world, new BlockPos.Mutable(origin), bareTrunkHeight + 2, rand, boundingBox);
 
 		return true;
 	}
@@ -164,5 +168,23 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 			pos.set(x + 1, y + i, z + 1);
 			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
 		}
+	}
+
+	public int getHeight(Random rand) {
+		return rand.nextInt(16) + 32;
+	}
+
+	public int getBareTrunkHeight(Random rand) {
+		return 1 + rand.nextInt(12);
+	}
+
+	@Override
+	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+
+	}
+
+	@Override
+	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+
 	}
 }

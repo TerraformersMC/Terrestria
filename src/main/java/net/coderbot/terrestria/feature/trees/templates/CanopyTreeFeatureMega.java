@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import io.github.terraformersmc.terraform.block.QuarterLogBlock;
 import io.github.terraformersmc.terraform.util.Shapes;
 import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.trees.components.Roots;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;
@@ -21,7 +22,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> implements Roots {
 	private TreeDefinition.Mega tree;
 
 	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
@@ -202,7 +203,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		}
 	}
 
-	private void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -213,7 +214,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, boundingBox);
 	}
 
-	private void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
 		if (rand.nextInt(5) == 0) {
 			return;
 		}
