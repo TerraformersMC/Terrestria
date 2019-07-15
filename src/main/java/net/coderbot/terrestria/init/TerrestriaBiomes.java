@@ -31,8 +31,10 @@ import static net.coderbot.terrestria.biome.TerrestriaBiome.DefaultFeature.*;
 public class TerrestriaBiomes {
 	public static Biome REDWOOD_FOREST;
 	public static Biome REDWOOD_FOREST_EDGE;
+	public static Biome REDWOOD_CLEARING;
 	public static Biome LUSH_REDWOOD_FOREST;
 	public static Biome LUSH_REDWOOD_FOREST_EDGE;
+	public static Biome LUSH_REDWOOD_CLEARING;
 	public static Biome HEMLOCK_RAINFOREST;
 	public static Biome HEMLOCK_CLEARING;
 	public static Biome SNOWY_HEMLOCK_FOREST;
@@ -57,7 +59,7 @@ public class TerrestriaBiomes {
 	public static void init() {
 
 		REDWOOD_FOREST = register("redwood_forest", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(1.2F)
 				.scale(0.3F)
@@ -80,7 +82,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		REDWOOD_FOREST_EDGE = register("redwood_forest_edge", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(0.5F)
 				.scale(0.3F)
@@ -93,6 +95,28 @@ public class TerrestriaBiomes {
 						FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 3)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
+				.build());
+
+		REDWOOD_CLEARING = register("redwood_clearing", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
+				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.depth(1.2F)
+				.scale(0.3F)
+				.temperature(0.9F)
+				.downfall(0.9F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
+						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
+						FROZEN_TOP_LAYER)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG, 2)
+				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
@@ -145,6 +169,32 @@ public class TerrestriaBiomes {
 				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 2)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
+				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
+				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
+				.build());
+
+		LUSH_REDWOOD_CLEARING = register("lush_redwood_clearing", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.depth(1.2F)
+				.scale(0.3F)
+				.temperature(0.9F)
+				.downfall(0.9F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
+						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
+						FROZEN_TOP_LAYER, DEFAULT_FLOWERS)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG, 1)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 1)
+				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
+				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 2)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
 				.addStructureFeature(Feature.STRONGHOLD)
@@ -613,6 +663,8 @@ public class TerrestriaBiomes {
 		OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
 		OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
 
+		OverworldBiomes.addHillsBiome(REDWOOD_FOREST, REDWOOD_CLEARING, 1.0);
+		OverworldBiomes.addHillsBiome(LUSH_REDWOOD_FOREST, LUSH_REDWOOD_CLEARING, 1.0);
 		OverworldBiomes.addHillsBiome(CYPRESS_FOREST, WOODED_CYPRESS_HILLS, 1.0);
 		OverworldBiomes.addHillsBiome(HEMLOCK_RAINFOREST, HEMLOCK_CLEARING, 1.0);
 		OverworldBiomes.addHillsBiome(SNOWY_HEMLOCK_FOREST, SNOWY_HEMLOCK_CLEARING, 1.0);
