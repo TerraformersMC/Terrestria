@@ -56,6 +56,7 @@ public class TerrestriaBiomes {
 	public static Biome VOLCANIC_ISLAND;
 	public static Biome VOLCANIC_ISLAND_BEACH;
 	public static Biome VOLCANIC_ISLAND_SHORE;
+	public static Biome ALPS;
 
 	public static void init() {
 
@@ -632,6 +633,22 @@ public class TerrestriaBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
 				.build());
+		
+		ALPS = register("alps", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, TerrestriaSurfaces.ALPS_CONFIG)
+				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.ICY)
+				.depth(3.7F)
+				.scale(0.3F)
+				.temperature(0.9F)
+				.downfall(0.9F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_VEGETATION,
+						SPRINGS, FROZEN_TOP_LAYER)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.build());
 
 		TerrestriaFeatures.addVolcanoStarts(
 				VOLCANIC_ISLAND,
@@ -660,7 +677,11 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0);
 		OverworldBiomes.addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0);
 		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
-
+		
+		OverworldBiomes.addHillsBiome(ALPINE, ALPINE, 1);
+		OverworldBiomes.addHillsBiome(ALPINE, ALPS, 1);
+		OverworldBiomes.setRiverBiome(ALPS, null);
+		
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 		OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1);
 		OverworldBiomes.addEdgeBiome(LUSH_REDWOOD_FOREST, LUSH_REDWOOD_FOREST_EDGE, 1);
