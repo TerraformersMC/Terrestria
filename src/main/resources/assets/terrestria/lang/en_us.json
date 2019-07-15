@@ -14,6 +14,7 @@
   "block.terrestria.redwood_door": "Redwood Door",
   "block.terrestria.redwood_pressure_plate": "Redwood Pressure Plate",
   "block.terrestria.redwood_button": "Redwood Button",
+  "block.terrestria.redwood_sign": "Redwood Sign",
 
   "block.terrestria.hemlock_log": "Hemlock Log",
   "block.terrestria.hemlock_wood": "Hemlock Wood",
@@ -28,6 +29,7 @@
   "block.terrestria.hemlock_door": "Hemlock Door",
   "block.terrestria.hemlock_pressure_plate": "Hemlock Pressure Plate",
   "block.terrestria.hemlock_button": "Hemlock Button",
+  "block.terrestria.hemlock_sign": "Hemlock Sign",
 
   "block.terrestria.rubber_log": "Rubber Log",
   "block.terrestria.rubber_wood": "Rubber Wood",
@@ -42,6 +44,7 @@
   "block.terrestria.rubber_door": "Rubber Wood Door",
   "block.terrestria.rubber_pressure_plate": "Rubber Wood Pressure Plate",
   "block.terrestria.rubber_button": "Rubber Wood Button",
+  "block.terrestria.rubber_sign": "Rubber Wood Sign",
 
   "block.terrestria.cypress_log": "Cypress Log",
   "block.terrestria.cypress_wood": "Cypress Wood",
@@ -56,6 +59,7 @@
   "block.terrestria.cypress_door": "Cypress Door",
   "block.terrestria.cypress_pressure_plate": "Cypress Pressure Plate",
   "block.terrestria.cypress_button": "Cypress Button",
+  "block.terrestria.cypress_sign": "Cypress Sign",
 
   "block.terrestria.willow_log": "Willow Log",
   "block.terrestria.willow_wood": "Willow Wood",
@@ -69,6 +73,7 @@
   "block.terrestria.willow_door": "Willow Door",
   "block.terrestria.willow_pressure_plate": "Willow Pressure Plate",
   "block.terrestria.willow_button": "Willow Button",
+  "block.terrestria.willow_sign": "Willow Sign",
 
   "block.terrestria.japanese_maple_log": "Japanese Maple Log",
   "block.terrestria.japanese_maple_wood": "Japanese Maple Wood",
@@ -82,6 +87,7 @@
   "block.terrestria.japanese_maple_door": "Japanese Maple Door",
   "block.terrestria.japanese_maple_pressure_plate": "Japanese Maple Pressure Plate",
   "block.terrestria.japanese_maple_button": "Japanese Maple Button",
+  "block.terrestria.japanese_maple_sign": "Japanese Maple Sign",
 
   "block.terrestria.dark_japanese_maple_leaves": "Dark Japanese Maple Leaves",
   "block.terrestria.dark_japanese_maple_sapling": "Dark Japanese Maple Sapling",
@@ -99,6 +105,7 @@
   "block.terrestria.rainbow_eucalyptus_door": "Rainbow Eucalyptus Door",
   "block.terrestria.rainbow_eucalyptus_pressure_plate": "Rainbow Eucalyptus Pressure Plate",
   "block.terrestria.rainbow_eucalyptus_button": "Rainbow Eucalyptus Button",
+  "block.terrestria.rainbow_eucalyptus_sign": "Rainbow Eucalyptus Sign",
 
   "block.terrestria.sakura_log": "Sakura Log",
   "block.terrestria.sakura_sapling": "Sakura Sapling",
@@ -112,6 +119,7 @@
   "block.terrestria.sakura_door": "Sakura Door",
   "block.terrestria.sakura_pressure_plate": "Sakura Pressure Plate",
   "block.terrestria.sakura_button": "Sakura Button",
+  "block.terrestria.sakura_sign": "Sakura Sign",
 
   "block.terrestria.palm_sapling": "Palm Sapling",
 

@@ -4,6 +4,7 @@ import net.coderbot.terrestria.Terrestria;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.SignItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -95,6 +96,10 @@ public class TerrestriaItems {
 		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new BlockItem(block, new Item.Settings().group(Terrestria.ITEM_GROUP)));
 	}
 
+	private static SignItem registerSign(String name, Block standing, Block wall) {
+		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new SignItem(new Item.Settings().group(Terrestria.ITEM_GROUP), standing, wall));
+	}
+
 	public static class WoodItems {
 		public BlockItem log;
 		public BlockItem wood;
@@ -107,6 +112,7 @@ public class TerrestriaItems {
 		public BlockItem door;
 		public BlockItem button;
 		public BlockItem pressurePlate;
+		public SignItem sign;
 
 		private WoodItems() {
 		}
@@ -132,6 +138,7 @@ public class TerrestriaItems {
 			items.door = TerrestriaItems.register(name + "_door", blocks.door);
 			items.button = TerrestriaItems.register(name + "_button", blocks.button);
 			items.pressurePlate = TerrestriaItems.register(name + "_pressure_plate", blocks.pressurePlate);
+			items.sign = TerrestriaItems.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
 
 			return items;
 		}
