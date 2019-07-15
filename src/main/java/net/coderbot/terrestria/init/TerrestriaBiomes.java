@@ -262,8 +262,10 @@ public class TerrestriaBiomes {
 				.waterFogColor(329011)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, EMERALD_ORE, INFECTED_STONE, FROZEN_TOP_LAYER)
-				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
+				.addRareTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 3)
+				.addRareTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 3)
+				.addRareTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 3)
+				.addRareTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 3)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
