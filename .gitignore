@@ -20,6 +20,10 @@ bin/
 .classpath
 .project
 
+# eclipse
+
+*.launch
+
 # fabric
 
 run/

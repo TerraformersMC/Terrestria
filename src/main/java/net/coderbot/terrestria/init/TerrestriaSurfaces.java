@@ -17,6 +17,7 @@ public class TerrestriaSurfaces {
 	public static BeachySurfaceBuilder BASALT_SURFACE;
 	public static CliffySurfaceBuilder CLIFF_SURFACE;
 	public static TernarySurfaceConfig BASALT_CONFIG;
+	public static TernarySurfaceConfig ALPS_CONFIG;
 
 	public static void init() {
 		CALDERA_SURFACE = register("caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -33,6 +34,12 @@ public class TerrestriaSurfaces {
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState()
+		);
+		
+		ALPS_CONFIG = new TernarySurfaceConfig(
+				Blocks.SNOW_BLOCK.getDefaultState(),
+				Blocks.SNOW_BLOCK.getDefaultState(),
+				Blocks.STONE.getDefaultState()
 		);
 	}
 
