@@ -15,7 +15,7 @@ public class RedwoodTreeFeature extends ConiferTreeFeature {
 
     @Override
     public int getBareTrunkHeight(Random rand) {
-        return 12 + rand.nextInt(12);
+        return 12 + rand.nextInt(8);
     }
 
     //For use in ConiferTreeFeatureNew

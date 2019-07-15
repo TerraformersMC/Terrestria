@@ -26,17 +26,15 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 		this.sand = sand;
 	}
 
-	private void generateBeach(Chunk chunk, int x, int z, double noise, BlockState water) {
+	private void generateBeach(Chunk chunk, int x, int z, double noise, BlockState water, int height) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(x & 15, seaLevel - 1, z & 15);
 		BlockState sandState = sand.apply(noise);
-
-		int height = chunk.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get(pos.getX(), pos.getZ()) - 1;
 
 		if(height >= seaLevel && height <= seaLevel + 1) {
 			pos.set(pos.getX(), height, pos.getZ());
 
 			while(pos.getY() > seaLevel - 3) {
-				if(chunk.getBlockState(pos).getBlock() == Blocks.STONE) {
+				if(!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
 					chunk.setBlockState(pos, sandState, false);
 				}
 
@@ -51,7 +49,7 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 					solid = 0;
 				} else {
 					if(solid < 3) {
-						if(chunk.getBlockState(pos).getBlock() == Blocks.STONE) {
+						if(!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
 							chunk.setBlockState(pos, sandState, false);
 						}
 					}
@@ -65,8 +63,10 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 	}
 
 	protected void generate(Random random, Chunk chunk, Biome biome, int x, int z, int unknown3, double noise, BlockState stone, BlockState water, BlockState top, BlockState filler, BlockState underwater, int unknown5) {
-		generateBeach(chunk, x, z, noise, water);
-
 		super.generate(random, chunk, biome, x, z, unknown3, noise, stone, water, top, filler, underwater, unknown5);
+
+		int height = chunk.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get(x & 15, z & 15) - 1;
+
+		generateBeach(chunk, x, z, noise, water, height);
 	}
 }

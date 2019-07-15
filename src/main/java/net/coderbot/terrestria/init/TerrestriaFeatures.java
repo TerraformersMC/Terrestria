@@ -3,12 +3,9 @@ package net.coderbot.terrestria.init;
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.Terrestria;
-import net.coderbot.terrestria.feature.*;
-import net.coderbot.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
-import net.coderbot.terrestria.feature.trees.templates.ConiferTreeFeatureMega;
-import net.coderbot.terrestria.feature.trees.templates.RedwoodTreeFeatureMega;
-import net.coderbot.terrestria.feature.trees.templates.ShrubFeature;
+import net.coderbot.terrestria.feature.TreeDefinition;
 import net.coderbot.terrestria.feature.trees.*;
+import net.coderbot.terrestria.feature.trees.RedwoodTreeFeatureMega;
 import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;
 import net.coderbot.terrestria.feature.volcano.VolcanoStructureFeature;
 import net.minecraft.block.Blocks;
@@ -17,7 +14,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.*;
@@ -167,25 +163,5 @@ public class TerrestriaFeatures {
 
 	public static void addVolcanoStructure(Biome biome) {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
-	}
-
-	public static void addVolcanicFoliage(Biome biome) {
-		biome.addFeature(
-				GenerationStep.Feature.VEGETAL_DECORATION,
-				Biome.configureFeature(Feature.GRASS,
-						new GrassFeatureConfig(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState()),
-						Decorator.COUNT_HEIGHTMAP_DOUBLE,
-						new CountDecoratorConfig(1)
-				)
-		);
-
-		biome.addFeature(
-				GenerationStep.Feature.VEGETAL_DECORATION,
-				Biome.configureFeature(Feature.GRASS,
-						new GrassFeatureConfig(TerrestriaBlocks.MONSTERAS.getDefaultState()),
-						Decorator.COUNT_HEIGHTMAP_DOUBLE,
-						new CountDecoratorConfig(4)
-				)
-		);
 	}
 }
