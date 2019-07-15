@@ -94,7 +94,7 @@ public class TerrestriaBiomes {
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
 						FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 3)
-				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
+				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
@@ -168,7 +168,7 @@ public class TerrestriaBiomes {
 				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 2)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 2)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
 				.addStructureFeature(Feature.STRONGHOLD)

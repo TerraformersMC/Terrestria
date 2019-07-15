@@ -2,6 +2,7 @@ package net.coderbot.terrestria.feature.detail;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -62,6 +63,14 @@ public class FallenLogFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 			pos.setOffset(direction);
 
 			setBlockState(blocks, world, pos, log.with(LogBlock.AXIS, axis), boundingBox);
+
+			pos.setOffset(Direction.DOWN);
+
+			if(isNaturalDirtOrGrass(world, pos)) {
+				setBlockState(blocks, world, pos, Blocks.DIRT.getDefaultState(), boundingBox);
+			}
+
+			pos.setOffset(Direction.UP);
 		}
 
 		return true;
