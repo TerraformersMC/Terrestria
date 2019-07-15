@@ -94,7 +94,7 @@ public class TerrestriaBiomes {
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
                 .build());
 
-        TEMPERATE_RAINFOREST = register("temerate_rainforest", TerrestriaBiome.builder()
+        TEMPERATE_RAINFOREST = register("temperate_rainforest", TerrestriaBiome.builder()
                 .configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
                 .depth(0.95F)
@@ -105,7 +105,7 @@ public class TerrestriaBiomes {
                 .waterFogColor(329011)
                 .addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
                         TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
-                .addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 8)
+                .addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE, 8)
                 .addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 8)
                 .addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
                 .addGrassFeature(Blocks.FERN.getDefaultState(), 12)
@@ -128,7 +128,7 @@ public class TerrestriaBiomes {
                 .waterFogColor(329011)
                 .addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
                         TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
-                .addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 8)
+                .addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE, 8)
                 .addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 8)
                 .addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
                 .addStructureFeature(Feature.STRONGHOLD)
@@ -258,7 +258,7 @@ public class TerrestriaBiomes {
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
                 .build());
 
-        CALDERA = register("caledra", TerrestriaBiome.builder()
+        CALDERA = register("caldera", TerrestriaBiome.builder()
                 .configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.SAND_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
                 .depth(1.5F)
@@ -277,7 +277,7 @@ public class TerrestriaBiomes {
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
                 .build());
 
-        CALDERA_RIDGE = register("caledra_ridge", TerrestriaBiome.builder()
+        CALDERA_RIDGE = register("caldera_ridge", TerrestriaBiome.builder()
                 .configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
                 .depth(4F)
@@ -296,7 +296,7 @@ public class TerrestriaBiomes {
                 .addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
                 .build());
 
-        CALDERA_BEACH = register("caledra_beach", TerrestriaBiome.builder()
+        CALDERA_BEACH = register("caldera_beach", TerrestriaBiome.builder()
                 .configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
                 .precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
                 .depth(2.25F)
