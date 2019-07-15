@@ -24,8 +24,10 @@ import net.minecraft.world.gen.feature.*;
 public class TerrestriaFeatures {
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
+	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
 	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
+	public static HemlockTreeFeatureTiny TINY_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CypressTreeFeatureMega MEGA_CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
@@ -47,35 +49,43 @@ public class TerrestriaFeatures {
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree",
-				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
 		);
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
 				new RedwoodTreeFeatureMega(
 						DefaultFeatureConfig::deserialize,
-						true,
+						false,
 						TerrestriaBlocks.REDWOOD.getBasicDefinition().toMega(TerrestriaBlocks.REDWOOD_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.REDWOOD.wood.getDefaultState())
 				)
 		);
 
+		TINY_REDWOOD_TREE = register("tiny_redwood_tree",
+				new RedwoodTreeFeatureTiny(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+		);
+
 		HEMLOCK_TREE = register("hemlock_tree",
-				new HemlockTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
+				new HemlockTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
 		);
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
 				new HemlockTreeFeatureMega(
-						DefaultFeatureConfig::deserialize, true,
+						DefaultFeatureConfig::deserialize, false,
 						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
 				)
 		);
 
+		TINY_HEMLOCK_TREE = register("tiny_hemlock_tree",
+				new HemlockTreeFeatureTiny(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
+		);
+
 		CYPRESS_TREE = register("cypress_tree",
-				new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, TerrestriaBlocks.CYPRESS.getBasicDefinition())
+				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
 		);
 
 		MEGA_CYPRESS_TREE = register("mega_cypress_tree",
 				new CypressTreeFeatureMega(
-						DefaultFeatureConfig::deserialize, true,
+						DefaultFeatureConfig::deserialize, false,
 						TerrestriaBlocks.CYPRESS.getBasicDefinition().toMega(TerrestriaBlocks.CYPRESS_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.CYPRESS.wood.getDefaultState())
 				)
 		);
