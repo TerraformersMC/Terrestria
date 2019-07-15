@@ -1,7 +1,6 @@
 package net.coderbot.terrestria.biome;
 
 import net.coderbot.terrestria.feature.TerrestriaFeature;
-import net.coderbot.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -217,7 +216,7 @@ public class TerrestriaBiome extends Biome {
 			return this;
 		}
 
-		public TerrestriaBiome.Builder addDefaultSpawnEntires() {
+		public TerrestriaBiome.Builder addDefaultSpawnEntries() {
 			this.addSpawnEntry(new Biome.SpawnEntry(EntityType.SHEEP, 12, 4, 4))
 					.addSpawnEntry(new Biome.SpawnEntry(EntityType.PIG, 10, 4, 4))
 					.addSpawnEntry(new Biome.SpawnEntry(EntityType.CHICKEN, 10, 4, 4))
@@ -505,7 +504,7 @@ public class TerrestriaBiome extends Biome {
 		DESSERT_FEATURES("desert_features"),
 		FOSSILS("fossils"),
 		KELP("kelp"),
-		SEAGRASS_ON_STONE("segrass_on_stone"),
+		SEAGRASS_ON_STONE("seagrass_on_stone"),
 		SEAGRASS("seagrass"),
 		MORE_SEAGRASS("more_seagrass"),
 		LESS_KELP("less_kelp"),
