@@ -6,9 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -122,6 +120,7 @@ public class TerrestriaBiome extends Biome {
 		private ArrayList<TerrestriaFeature> features = new ArrayList<>();
 		private Map<StructureFeature, FeatureConfig> structureFeatures = new HashMap<>();
 		private Map<Feature<DefaultFeatureConfig>, Integer> treeFeatures = new HashMap<>();
+		private Map<Feature<DefaultFeatureConfig>, Integer> rareTreeFeatures = new HashMap<>();
 		private Map<BlockState, Integer> plantFeatures = new HashMap<>();
 		private ConfiguredSurfaceBuilder surfaceBuilder;
 		private Biome.Precipitation precipitation;
@@ -179,6 +178,23 @@ public class TerrestriaBiome extends Biome {
 				}
 			}
 
+			// Rare tree features
+
+			for (Map.Entry<Feature<DefaultFeatureConfig>, Integer> tree : rareTreeFeatures.entrySet()) {
+				Feature<DefaultFeatureConfig> feature = tree.getKey();
+				int chance = tree.getValue();
+
+				TerrestriaBiome.biome.addFeature(
+						GenerationStep.Feature.VEGETAL_DECORATION,
+						Biome.configureFeature(
+								feature,
+								FeatureConfig.DEFAULT,
+								Decorator.CHANCE_HEIGHTMAP,
+								new ChanceDecoratorConfig(chance)
+						)
+				);
+			}
+
 			// Add any minecraft (default) features
 			for (DefaultFeature defaultFeature : defaultFeatures) {
 				buildDefaultFeature(defaultFeature);
@@ -212,6 +228,11 @@ public class TerrestriaBiome extends Biome {
 
 		public TerrestriaBiome.Builder addTreeFeature(Feature<DefaultFeatureConfig> feature, int numPerChunk) {
 			this.treeFeatures.put(feature, numPerChunk);
+			return this;
+		}
+
+		public TerrestriaBiome.Builder addRareTreeFeature(Feature<DefaultFeatureConfig> feature, int chance) {
+			this.rareTreeFeatures.put(feature, chance);
 			return this;
 		}
 
