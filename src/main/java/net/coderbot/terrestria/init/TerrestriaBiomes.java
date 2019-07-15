@@ -376,8 +376,8 @@ public class TerrestriaBiomes {
 				.scale(0F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
+				.waterColor(0x2c7f32)
+				.waterFogColor(0x053305)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
 						DEFAULT_MUSHROOMS, SWAMP_VEGETATION, SPRINGS, SEAGRASS, FOSSILS, FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.MEGA_CYPRESS_TREE, 2)
