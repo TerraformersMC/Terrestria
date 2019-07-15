@@ -122,6 +122,7 @@ public class TerrestriaBiome extends Biome {
 		private Map<Feature<DefaultFeatureConfig>, Integer> treeFeatures = new HashMap<>();
 		private Map<Feature<DefaultFeatureConfig>, Integer> rareTreeFeatures = new HashMap<>();
 		private Map<BlockState, Integer> plantFeatures = new HashMap<>();
+		private Map<BlockState, Integer> doublePlantFeatures = new HashMap<>();
 		private ConfiguredSurfaceBuilder surfaceBuilder;
 		private Biome.Precipitation precipitation;
 		private Biome.Category category;
@@ -196,20 +197,31 @@ public class TerrestriaBiome extends Biome {
 			}
 
 			// Add any minecraft (default) features
+
 			for (DefaultFeature defaultFeature : defaultFeatures) {
 				buildDefaultFeature(defaultFeature);
 			}
 
 			// Add custom features that don't fit in the templates
+
 			for (TerrestriaFeature feature : features) {
 				TerrestriaBiome.biome.addFeature(feature.getStep(), feature.getFeature());
 			}
 
 			// Add Plant decoration features
+
 			for (Map.Entry<BlockState, Integer> plant : plantFeatures.entrySet()) {
 				TerrestriaBiome.biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
 						Biome.configureFeature(Feature.GRASS, new GrassFeatureConfig(plant.getKey()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(plant.getValue())));
+			}
+
+			// Add Double Plant decoration features
+
+			for (Map.Entry<BlockState, Integer> doublePlant : doublePlantFeatures.entrySet()) {
+				TerrestriaBiome.biome.addFeature(
+						GenerationStep.Feature.VEGETAL_DECORATION,
+						Biome.configureFeature(Feature.DOUBLE_PLANT, new DoublePlantFeatureConfig(doublePlant.getKey()), Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(doublePlant.getValue())));
 			}
 
 
@@ -238,6 +250,11 @@ public class TerrestriaBiome extends Biome {
 
 		public TerrestriaBiome.Builder addGrassFeature(BlockState blockState, int count) {
 			this.plantFeatures.put(blockState, count);
+			return this;
+		}
+
+		public TerrestriaBiome.Builder addDoubleGrassFeature(BlockState blockState, int count) {
+			this.doublePlantFeatures.put(blockState, count);
 			return this;
 		}
 

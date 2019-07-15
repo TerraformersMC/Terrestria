@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -72,7 +73,10 @@ public class TerrestriaBiomes {
 						FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE, 7)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG, 3)
-				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
+				.addRareTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
+				.addGrassFeature(Blocks.FERN.getDefaultState(), 4)
+				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 7)
+				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 7)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
@@ -95,6 +99,8 @@ public class TerrestriaBiomes {
 						FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 3)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
+				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
+				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
@@ -117,6 +123,8 @@ public class TerrestriaBiomes {
 						FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG, 2)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 2)
+				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
+				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
