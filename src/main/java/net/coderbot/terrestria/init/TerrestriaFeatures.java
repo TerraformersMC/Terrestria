@@ -4,6 +4,7 @@ import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.detail.FallenLogFeature;
 import net.coderbot.terrestria.feature.trees.*;
 import net.coderbot.terrestria.feature.trees.RedwoodTreeFeatureMega;
 import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;
@@ -35,8 +36,11 @@ public class TerrestriaFeatures {
 	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
-	public static CattailFeature CATTAIL;
 	public static PalmTreeFeature PALM_TREE;
+
+	public static CattailFeature CATTAIL;
+	public static FallenLogFeature FALLEN_REDWOOD_LOG;
+	public static FallenLogFeature FALLEN_HEMLOCK_LOG;
 
 	public static VolcanoStructureFeature VOLCANO_STRUCTURE;
 	public static StructurePieceType VOLCANO_PIECE;
@@ -128,10 +132,6 @@ public class TerrestriaFeatures {
 				)
 		);
 
-		CATTAIL = register("cattail",
-				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
-		);
-
 		// TODO: palm wood
 		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic(
 				Blocks.JUNGLE_LOG.getDefaultState(),
@@ -140,6 +140,18 @@ public class TerrestriaFeatures {
 
 		PALM_TREE = register("palm_tree",
 				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
+		);
+
+		CATTAIL = register("cattail",
+				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
+		);
+
+		FALLEN_REDWOOD_LOG = register("fallen_redwood_log",
+				new FallenLogFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.log.getDefaultState())
+		);
+
+		FALLEN_HEMLOCK_LOG = register("fallen_hemlock_log",
+				new FallenLogFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.log.getDefaultState())
 		);
 
 		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "volcano"),
