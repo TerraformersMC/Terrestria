@@ -37,17 +37,17 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 		// Maximum leaf radius.
 		double maxRadius = 4.0 + 2.5 * rand.nextDouble();
 
-		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
+		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
 
 		BlockPos below = origin.down();
 
-		if(!isNaturalDirtOrGrass(world, below)) {
+		if (!isNaturalDirtOrGrass(world, below)) {
 			return false;
 		}
 
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, (int)Math.ceil(maxRadius))) {
+		if (!checkForObstructions(world, origin, height, bareTrunkHeight, (int) Math.ceil(maxRadius))) {
 			return false;
 		}
 
@@ -70,20 +70,20 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int i = 0; i < bareTrunkHeight; i++) {
-			if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+		for (int i = 0; i < bareTrunkHeight; i++) {
+			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
 				return false;
 			}
 		}
 
-		for(int dY = bareTrunkHeight; dY < height + 1; dY++) {
-			int radius = maxRadius * (int)Math.ceil(Math.cos((dY - bareTrunkHeight) * 1.3 / height));
+		for (int dY = bareTrunkHeight; dY < height + 1; dY++) {
+			int radius = maxRadius * (int) Math.ceil(Math.cos((dY - bareTrunkHeight) * 1.3 / height));
 
-			for(int dZ = -radius; dZ <= radius; dZ++) {
-				for(int dX = -radius; dX <= radius; dX++) {
+			for (int dZ = -radius; dZ <= radius; dZ++) {
+				for (int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(!canTreeReplace(world, pos)) {
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
@@ -95,14 +95,14 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 
 	// Grows the center trunk and top leaves of the tree.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < height; i++) {
+		for (int i = 0; i < height; i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
-		if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+		if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 		}
 	}
@@ -118,16 +118,16 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 		Collections.shuffle(directionSet);
 		Iterator<Direction> directions = directionSet.iterator();
 
-		for(int layer = 0; layer < 2; layer++) {
+		for (int layer = 0; layer < 2; layer++) {
 			int chance = 2 + layer * 5;
 			double radius = maxRadius * Math.cos(layer * 1.3 / height);
 			double innerRadius = Math.max(radius, 2) - 2;
 
-			for(int i = 0; i < 2; i++) {
+			for (int i = 0; i < 2; i++) {
 				pos.set(x, y + layer, z);
 
 				Direction direction = directions.next();
-				placeBranch(blocks, world, pos, (int)Math.ceil(innerRadius), direction, boundingBox);
+				placeBranch(blocks, world, pos, (int) Math.ceil(innerRadius), direction, boundingBox);
 
 				pos.setOffset(direction);
 				tryPlaceLeaves(blocks, world, pos, boundingBox);
@@ -135,37 +135,45 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 
 			pos.set(x, y + layer, z);
 			Shapes.canopyCircle(pos, radius, innerRadius,
-				(position) -> {
-					if(rand.nextInt(chance) == 0 && pos.getX() != origin.getX() && pos.getZ() != origin.getZ()) {
-						return;
-					}
+					(position) -> {
+						if (rand.nextInt(chance) == 0 && pos.getX() != origin.getX() && pos.getZ() != origin.getZ()) {
+							return;
+						}
 
-					tryPlaceLeaves(blocks, world, pos, boundingBox);
-				}
+						tryPlaceLeaves(blocks, world, pos, boundingBox);
+					}
 			);
 		}
 
-		for(int layer = 2; layer < height + 1; layer++) {
+		for (int layer = 2; layer < height + 1; layer++) {
 			double radius = maxRadius * Math.cos(layer * 1.3 / height);
-			double innerRadius = maxRadius * Math.max(Math.cos(layer * (Math.PI / 4.0) / height + (Math.PI/3.0)), 0);
+			double innerRadius = maxRadius * Math.max(Math.cos(layer * (Math.PI / 4.0) / height + (Math.PI / 3.0)), 0);
 
-			if(layer < height) {
+			if (layer < height) {
 				Direction direction;
 
-				switch(rand.nextInt(4)) {
-					case 0: direction = Direction.EAST; break;
-					case 1: direction = Direction.WEST; break;
-					case 2: direction = Direction.SOUTH; break;
-					default: direction = Direction.NORTH; break;
+				switch (rand.nextInt(4)) {
+					case 0:
+						direction = Direction.EAST;
+						break;
+					case 1:
+						direction = Direction.WEST;
+						break;
+					case 2:
+						direction = Direction.SOUTH;
+						break;
+					default:
+						direction = Direction.NORTH;
+						break;
 				}
 
 				pos.set(x, y + layer, z);
-				placeBranch(blocks, world, pos, (int)Math.ceil(innerRadius), direction, boundingBox);
+				placeBranch(blocks, world, pos, (int) Math.ceil(innerRadius), direction, boundingBox);
 			}
 
 			pos.set(x, y + layer, z);
 			Shapes.canopyCircle(pos, radius, innerRadius,
-				(position) -> tryPlaceLeaves(blocks, world, pos, boundingBox)
+					(position) -> tryPlaceLeaves(blocks, world, pos, boundingBox)
 			);
 		}
 	}

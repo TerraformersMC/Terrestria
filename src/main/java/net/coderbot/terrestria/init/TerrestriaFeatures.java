@@ -85,7 +85,7 @@ public class TerrestriaFeatures {
 		);
 
 		SAKURA_TREE = register("sakura_tree",
-				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura (
+				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura(
 						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
 						TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState()
 				))
@@ -95,7 +95,7 @@ public class TerrestriaFeatures {
 				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
 		);
 
-		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic (
+		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic(
 				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
 				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
 		);
@@ -104,7 +104,7 @@ public class TerrestriaFeatures {
 				new JapaneseMapleShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
 		);
 
-		TreeDefinition.Basic darkJapaneseMapleTreeDefinition = new TreeDefinition.Basic (
+		TreeDefinition.Basic darkJapaneseMapleTreeDefinition = new TreeDefinition.Basic(
 				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
 				TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
 		);
@@ -114,7 +114,7 @@ public class TerrestriaFeatures {
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
-				new RainbowEucalyptusTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega (
+				new RainbowEucalyptusTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega(
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
 				))
@@ -133,7 +133,7 @@ public class TerrestriaFeatures {
 		);
 
 		// TODO: palm wood
-		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic (
+		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic(
 				Blocks.JUNGLE_LOG.getDefaultState(),
 				Blocks.JUNGLE_LEAVES.getDefaultState()
 		);
@@ -156,7 +156,7 @@ public class TerrestriaFeatures {
 	}
 
 	public static void addVolcanoStarts(Biome... biomes) {
-		for(Biome biome: biomes) {
+		for (Biome biome : biomes) {
 			biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, new DefaultFeatureConfig());
 		}
 	}

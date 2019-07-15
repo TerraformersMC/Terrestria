@@ -38,16 +38,16 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		double maxRadius = 1.25 + 2 * rand.nextDouble();
 
 		//If the tree can pass the max build height
-		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
+		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
 
 		BlockPos below = origin.down();
-		if(!isNaturalDirtOrGrass(world, below)) {
+		if (!isNaturalDirtOrGrass(world, below)) {
 			return false;
 		}
 
-		if(!checkForObstructions(world, origin, height, (int)Math.ceil(maxRadius))) {
+		if (!checkForObstructions(world, origin, height, (int) Math.ceil(maxRadius))) {
 			return false;
 		}
 
@@ -64,12 +64,12 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int dY = origin.getY(); dY < height; dY++) {
-			for(int dZ = -radius; dZ <= radius; dZ++) {
-				for(int dX = -radius; dX <= radius; dX++) {
+		for (int dY = origin.getY(); dY < height; dY++) {
+			for (int dZ = -radius; dZ <= radius; dZ++) {
+				for (int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(!canTreeReplace(world, pos)) {
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
@@ -78,8 +78,8 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 		pos.set(origin.getX(), origin.getY() + height, origin.getZ());
 
-		for(int i = 0; i < 4; i++) {
-			if(!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+		for (int i = 0; i < 4; i++) {
+			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
 				return false;
 			}
 		}
@@ -89,7 +89,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 	// Grows the center trunk.
 	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < (height * .6) ; i++) {
+		for (int i = 0; i < (height * .6); i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
@@ -101,17 +101,17 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		int z = pos.getZ();
 		double radius;
 
-		for(int dy = 0; dy < height; dy++) {
+		for (int dy = 0; dy < height; dy++) {
 			pos.set(x, y + dy, z);
 
 			radius = maxRadius * radiusFactor(dy, height);
 
-			if(radius < 0) {
+			if (radius < 0) {
 				continue;
 			}
 
 			Shapes.circle(pos, radius, position -> {
-				if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+				if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 					setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 				}
 			});
@@ -123,6 +123,6 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		x = x / height;
 
 		// A 3rd-degree polynomial approximating the shape of a cypress tree - increasing rapidly, and then tapering off.
-		return 6.25 * (x*x*x) - 12.5 * (x*x) + 6.25 * x;
+		return 6.25 * (x * x * x) - 12.5 * (x * x) + 6.25 * x;
 	}
 }

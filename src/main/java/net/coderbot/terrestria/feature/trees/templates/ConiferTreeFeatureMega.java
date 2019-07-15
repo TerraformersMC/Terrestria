@@ -17,9 +17,8 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Mega tree;
-
 	private static final int EXTRA_LEAVES_HEIGHT = 2;
+	private TreeDefinition.Mega tree;
 
 	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
@@ -44,26 +43,26 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 		// Hey, the trees are pretty massive already.
 		int maxRadius = 2 + rand.nextInt(6);
 
-		if(origin.getY() + height + 1 + EXTRA_LEAVES_HEIGHT > 256 || origin.getY() < 1) {
+		if (origin.getY() + height + 1 + EXTRA_LEAVES_HEIGHT > 256 || origin.getY() < 1) {
 			return false;
 		}
 
-		for(int dZ = 0; dZ < 2; dZ++) {
-			for(int dX = 0; dX < 2; dX++) {
+		for (int dZ = 0; dZ < 2; dZ++) {
+			for (int dX = 0; dX < 2; dX++) {
 				BlockPos below = origin.add(dX, -1, dZ);
 
-				if(!isNaturalDirtOrGrass(world, below)) {
+				if (!isNaturalDirtOrGrass(world, below)) {
 					return false;
 				}
 			}
 		}
 
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight, maxRadius)) {
+		if (!checkForObstructions(world, origin, height, bareTrunkHeight, maxRadius)) {
 			return false;
 		}
 
-		for(int dZ = 0; dZ < 2; dZ++) {
-			for(int dX = 0; dX < 2; dX++) {
+		for (int dZ = 0; dZ < 2; dZ++) {
+			for (int dX = 0; dX < 2; dX++) {
 				BlockPos below = origin.add(dX, -1, dZ);
 
 				setBlockState(blocks, world, below, Blocks.DIRT.getDefaultState(), boundingBox);
@@ -79,24 +78,24 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int i = 0; i < bareTrunkHeight; i++) {
+		for (int i = 0; i < bareTrunkHeight; i++) {
 			boolean canReplaceAll =
 					canTreeReplace(world, pos.set(origin.getX(), origin.getY() + i, origin.getZ())) &&
-					canTreeReplace(world, pos.set(origin.getX() + 1, origin.getY() + i, origin.getZ())) &&
-					canTreeReplace(world, pos.set(origin.getX(), origin.getY() + i, origin.getZ() + 1)) &&
-					canTreeReplace(world, pos.set(origin.getX() + 1, origin.getY() + i, origin.getZ() + 1));
+							canTreeReplace(world, pos.set(origin.getX() + 1, origin.getY() + i, origin.getZ())) &&
+							canTreeReplace(world, pos.set(origin.getX(), origin.getY() + i, origin.getZ() + 1)) &&
+							canTreeReplace(world, pos.set(origin.getX() + 1, origin.getY() + i, origin.getZ() + 1));
 
-			if(!canReplaceAll) {
+			if (!canReplaceAll) {
 				return false;
 			}
 		}
 
-		for(int dY = bareTrunkHeight; dY < height + EXTRA_LEAVES_HEIGHT; dY++) {
-			for(int dZ = -radius; dZ <= radius + 1; dZ++) {
-				for(int dX = -radius; dX <= radius + 1; dX++) {
+		for (int dY = bareTrunkHeight; dY < height + EXTRA_LEAVES_HEIGHT; dY++) {
+			for (int dZ = -radius; dZ <= radius + 1; dZ++) {
+				for (int dX = -radius; dX <= radius + 1; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(!canTreeReplace(world, pos)) {
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
@@ -113,20 +112,20 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int dY = height + EXTRA_LEAVES_HEIGHT; dY >= bareTrunkHeight; dY--) {
-			for(int dZ = -radius; dZ <= radius + 1; dZ++) {
-				for(int dX = -radius; dX <= radius + 1; dX++) {
+		for (int dY = height + EXTRA_LEAVES_HEIGHT; dY >= bareTrunkHeight; dY--) {
+			for (int dZ = -radius; dZ <= radius + 1; dZ++) {
+				for (int dX = -radius; dX <= radius + 1; dX++) {
 					int aZ = dZ < 1 ? -dZ : dZ - 1;
 					int aX = dX < 1 ? -dX : dX - 1;
 
-					if(radius > 0 && aZ == radius && aX == radius) {
+					if (radius > 0 && aZ == radius && aX == radius) {
 						// Cull corners
 						continue;
 					}
 
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), boundingBox);
 					}
 				}
@@ -134,8 +133,8 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 
 			radius += 1;
 
-			if(radius > radiusTarget) {
-				if(topCone) {
+			if (radius > radiusTarget) {
+				if (topCone) {
 					radius = 0;
 					radiusTarget = Math.min(2, maxRadius);
 					topCone = false;
@@ -152,7 +151,7 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		for(int i = 0; i < height; i++) {
+		for (int i = 0; i < height; i++) {
 			pos.set(x, y + i, z);
 			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
 

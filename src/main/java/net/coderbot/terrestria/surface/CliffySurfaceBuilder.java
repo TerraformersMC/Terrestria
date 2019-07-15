@@ -29,7 +29,7 @@ public class CliffySurfaceBuilder extends DefaultSurfaceBuilder {
 		z &= 15;
 		int height = chunk.getHeightmap(Heightmap.Type.WORLD_SURFACE_WG).get(x, z) - 1;
 
-		if(noise > 0.5D && height > seaLevel + 1 && height < seaLevel + 12) {
+		if (noise > 0.5D && height > seaLevel + 1 && height < seaLevel + 12) {
 			if (height > seaLevel + 5) {
 				height = seaLevel + 5;
 			}
@@ -38,24 +38,24 @@ public class CliffySurfaceBuilder extends DefaultSurfaceBuilder {
 
 			int basaltLayers = 3;
 
-			if(noise > 1.0D) {
+			if (noise > 1.0D) {
 				basaltLayers += 1;
 			}
 
-			if(noise > 1.5D) {
+			if (noise > 1.5D) {
 				basaltLayers += 1;
 			}
 
-			if(height >= seaLevel + 7) {
+			if (height >= seaLevel + 7) {
 				basaltLayers += (seaLevel + 5 - height) / 2;
 			}
 
-			for(int i = 0; i < basaltLayers; i++) {
+			for (int i = 0; i < basaltLayers; i++) {
 				chunk.setBlockState(pos, TerrestriaBlocks.BASALT.getDefaultState(), false);
 				pos.setOffset(Direction.UP);
 			}
 
-			for(int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {
 				chunk.setBlockState(pos, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), false);
 				pos.setOffset(Direction.UP);
 			}

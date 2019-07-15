@@ -108,7 +108,8 @@ public class TerrestriaItems {
 		public BlockItem button;
 		public BlockItem pressurePlate;
 
-		private WoodItems() {}
+		private WoodItems() {
+		}
 
 		public static WoodItems register(String name, TerrestriaBlocks.WoodBlocks blocks) {
 			WoodItems items = registerWithoutBark(name, blocks);

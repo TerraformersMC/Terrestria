@@ -29,7 +29,7 @@ public class TerrestriaSurfaces {
 
 		CLIFF_SURFACE = register("cliff", new CliffySurfaceBuilder(TernarySurfaceConfig::deserialize, 63));
 
-		BASALT_CONFIG = new TernarySurfaceConfig (
+		BASALT_CONFIG = new TernarySurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState()

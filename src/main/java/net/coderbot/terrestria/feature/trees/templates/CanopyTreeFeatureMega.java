@@ -23,13 +23,17 @@ import java.util.function.Function;
 
 public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Mega tree;
-	private int height;
-	private int bareTrunkHeight;
 
 	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
 		super(function, notify);
 
 		this.tree = tree;
+	}
+
+	protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
+		return AbstractTreeFeature.canTreeReplace(world, pos) || world.testBlockState(pos,
+				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock
+		);
 	}
 
 	public CanopyTreeFeatureMega sapling() {
@@ -39,19 +43,19 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total trunk height
-		height = getHeight(rand);
+		int height = getHeight(rand);
 
 		// How much "bare trunk" there will be. (2-3)
-		bareTrunkHeight = getBareTrunkHeight(rand);
+		int bareTrunkHeight = getBareTrunkHeight(rand);
 
-		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
+		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
 
 		BlockPos below = origin.down();
 
 		int down = 0;
-		while(world.testBlockState(below, state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock)) {
+		while (world.testBlockState(below, state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock)) {
 			below = below.down();
 			down++;
 		}
@@ -61,22 +65,22 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 		origin = below.up();
 
-		for(int dZ = 0; dZ < 2; dZ++) {
-			for(int dX = 0; dX < 2; dX++) {
+		for (int dZ = 0; dZ < 2; dZ++) {
+			for (int dX = 0; dX < 2; dX++) {
 				below = origin.add(dX, -1, dZ);
 
-				if(!isNaturalDirtOrGrass(world, below)) {
+				if (!isNaturalDirtOrGrass(world, below)) {
 					return false;
 				}
 			}
 		}
 
-		if(!checkForObstructions(world, origin, height, bareTrunkHeight)) {
+		if (!checkForObstructions(world, origin, height, bareTrunkHeight)) {
 			return false;
 		}
 
-		for(int dZ = 0; dZ < 2; dZ++) {
-			for(int dX = 0; dX < 2; dX++) {
+		for (int dZ = 0; dZ < 2; dZ++) {
+			for (int dX = 0; dX < 2; dX++) {
 				setBlockState(blocks, world, origin.add(dX, -1, dZ), Blocks.DIRT.getDefaultState(), boundingBox);
 			}
 		}
@@ -92,34 +96,28 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		return true;
 	}
 
-	protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
-		return AbstractTreeFeature.canTreeReplace(world, pos) || world.testBlockState(pos,
-				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock
-		);
-	}
-
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int dY = 0; dY < bareTrunkHeight; dY++) {
-			for(int dZ = 0; dZ < 2; dZ++) {
-				for(int dX = 0; dX < 2; dX++) {
+		for (int dY = 0; dY < bareTrunkHeight; dY++) {
+			for (int dZ = 0; dZ < 2; dZ++) {
+				for (int dX = 0; dX < 2; dX++) {
 
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(!canTreeReplace(world, pos)) {
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
 			}
 		}
 
-		for(int dY = bareTrunkHeight; dY < height + 1; dY++) {
-			for(int dZ = -7; dZ < 8; dZ++) {
-				for(int dX = -7; dX < 8; dX++) {
+		for (int dY = bareTrunkHeight; dY < height + 1; dY++) {
+			for (int dZ = -7; dZ < 8; dZ++) {
+				for (int dX = -7; dX < 8; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
-					if(!canTreeReplace(world, pos)) {
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
@@ -134,7 +132,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		for(int i = 0; i < height; i++) {
+		for (int i = 0; i < height; i++) {
 			pos.set(x, y + i, z);
 			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
 
@@ -155,7 +153,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		int[] offset = new int[3];
 		BlockPos origin = pos.toImmutable();
 
-		for(int branch = 0; branch < branches; branch++) {
+		for (int branch = 0; branch < branches; branch++) {
 			int startOffsetY = rand.nextInt(height);
 
 			offset[Shapes.X] = MathHelper.clamp(rand.nextInt(13) - 6, -5, 5);
@@ -169,7 +167,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 			pos.add(alignX, startOffsetY, alignZ);
 
 			Shapes.line(pos, offset, position -> {
-				if(!world.testBlockState(position, candidate -> candidate.getBlock() instanceof QuarterLogBlock)) {
+				if (!world.testBlockState(position, candidate -> candidate.getBlock() instanceof QuarterLogBlock)) {
 					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
 			});
@@ -188,13 +186,13 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 			pos.setOffset(Direction.DOWN);
 
-			for(int i = -1; i <= 1; i++) {
+			for (int i = -1; i <= 1; i++) {
 				pos.set(x, pos.getY(), z);
 
-				int layerRadius = (int)Math.floor(radius * Math.cos(i * Math.PI / 6));
+				int layerRadius = (int) Math.floor(radius * Math.cos(i * Math.PI / 6));
 
 				Shapes.circle(pos, layerRadius, position -> {
-					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 					}
 				});
@@ -216,14 +214,14 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 	}
 
 	private void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
-		if(rand.nextInt(5) == 0) {
+		if (rand.nextInt(5) == 0) {
 			return;
 		}
 
 		int height = baseTrunkHeight + rand.nextInt(2) - 3;
 
-		for(int i = 0; i < height; i++) {
-			if(canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
+		for (int i = 0; i < height; i++) {
+			if (canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
 				setBlockState(blocks, world, bottom, tree.getBark(), boundingBox);
 			}
 

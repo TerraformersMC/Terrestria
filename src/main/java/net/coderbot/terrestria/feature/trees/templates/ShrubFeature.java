@@ -33,14 +33,14 @@ public class ShrubFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 			pos = pos.up();
 			this.setBlockState(blocks, world, pos, this.tree.getLog(), boundingBox);
 
-			for(int y = pos.getY(); y <= pos.getY() + 2; ++y) {
+			for (int y = pos.getY(); y <= pos.getY() + 2; ++y) {
 				int dY = y - pos.getY();
 				int radius = 2 - dY;
 
-				for(int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
+				for (int x = pos.getX() - radius; x <= pos.getX() + radius; ++x) {
 					int dX = x - pos.getX();
 
-					for(int z = pos.getZ() - radius; z <= pos.getZ() + radius; ++z) {
+					for (int z = pos.getZ() - radius; z <= pos.getZ() + radius; ++z) {
 						int dZ = z - pos.getZ();
 
 						if (Math.abs(dX) != radius || Math.abs(dZ) != radius || rand.nextInt(2) != 0) {

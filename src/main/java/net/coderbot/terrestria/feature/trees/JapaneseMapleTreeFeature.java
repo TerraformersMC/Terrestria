@@ -31,7 +31,7 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 
 	@Override
 	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
-		for(int i = 0; i < length - 1; i++) {
+		for (int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
 			setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), boundingBox);
 		}
@@ -41,5 +41,6 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) { }
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+	}
 }

@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.function.Function;
 
 public class CypressTreeFeatureMega extends CanopyTreeFeatureMega {
-    public CypressTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
-        super(function, notify, tree);
-    }
+	public CypressTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
+		super(function, notify, tree);
+	}
 }

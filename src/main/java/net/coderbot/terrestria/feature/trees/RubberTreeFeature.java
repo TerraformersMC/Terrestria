@@ -35,17 +35,17 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		// Total trunk height
 		int height = rand.nextInt(4) + 12;
 
-		if(origin.getY() + height + 1 > 256 || origin.getY() < 1) {
+		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
 
 		BlockPos below = origin.down();
 
-		if(!isNaturalDirtOrGrass(world, below)) {
+		if (!isNaturalDirtOrGrass(world, below)) {
 			return false;
 		}
 
-		if(!checkForObstructions(world, origin, height)) {
+		if (!checkForObstructions(world, origin, height)) {
 			return false;
 		}
 
@@ -59,12 +59,12 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for(int dY = 0; dY < height; dY++) {
-			for(int dZ = -1; dZ <= 1; dZ++) {
-				for(int dX = -1; dX <= 1; dX++) {
+		for (int dY = 0; dY < height; dY++) {
+			for (int dZ = -1; dZ <= 1; dZ++) {
+				for (int dX = -1; dX <= 1; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
-					
-					if(!canTreeReplace(world, pos)) {
+
+					if (!canTreeReplace(world, pos)) {
 						return false;
 					}
 				}
@@ -78,7 +78,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		int x = pos.getX();
 		int z = pos.getZ();
 
-		for(int i = 0; i < height; i++) {
+		for (int i = 0; i < height; i++) {
 			pos.set(x, pos.getY(), z);
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
@@ -90,14 +90,14 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		for(int branch = 0; branch < 16; branch++) {
+		for (int branch = 0; branch < 16; branch++) {
 			int baseY = random.nextInt(height - 2) + 4;
 
 			float length = random.nextFloat() * 7 + 2;
-			float angle = random.nextFloat() * (float)Math.PI * 2;
+			float angle = random.nextFloat() * (float) Math.PI * 2;
 
-			int offsetX = (int)(MathHelper.cos(angle) * length);
-			int offsetZ = (int)(MathHelper.sin(angle) * length);
+			int offsetX = (int) (MathHelper.cos(angle) * length);
+			int offsetZ = (int) (MathHelper.sin(angle) * length);
 
 			int moveX = offsetX > 0 ? 1 : -1;
 			int moveZ = offsetZ > 0 ? 1 : -1;
@@ -111,32 +111,32 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			float stepX = 1.0F / absX;
 			float stepZ = 1.0F / absZ;
 
-			for(int movement = 0; movement < absX + absZ; movement++) {
-				if(Math.abs(movedX * stepX) < Math.abs(movedZ * stepZ) && Math.abs(movedX) < absX) {
+			for (int movement = 0; movement < absX + absZ; movement++) {
+				if (Math.abs(movedX * stepX) < Math.abs(movedZ * stepZ) && Math.abs(movedX) < absX) {
 					movedX += moveX;
 				} else {
 					movedZ += moveZ;
 				}
 
-				int offsetY = (int)(Math.sqrt(movedX*movedX + movedZ * movedZ) * 0.4);
+				int offsetY = (int) (Math.sqrt(movedX * movedX + movedZ * movedZ) * 0.4);
 
-				if(movedX > 2 || movedX < -2 || movedZ > 2 || movedZ < -2) {
+				if (movedX > 2 || movedX < -2 || movedZ > 2 || movedZ < -2) {
 					continue;
 				}
 
 				pos.set(x + movedX, y + baseY + offsetY, z + movedZ);
 
-				if(!canTreeReplace(world, pos)) {
+				if (!canTreeReplace(world, pos)) {
 					break;
 				}
 
 				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 
-				for(Direction direction: Direction.values()) {
+				for (Direction direction : Direction.values()) {
 					pos.set(x + movedX, y + baseY + offsetY, z + movedZ);
 					pos.setOffset(direction);
 
-					if(AbstractTreeFeature.isAirOrLeaves(world, pos)) {
+					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 					}
 				}

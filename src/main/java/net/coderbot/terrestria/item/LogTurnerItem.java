@@ -26,6 +26,30 @@ public class LogTurnerItem extends Item {
 		super(settings);
 	}
 
+	private static Direction.Axis cycleAxis(Direction.Axis axis) {
+		switch (axis) {
+			case X:
+				return Direction.Axis.X;
+			case Y:
+				return Direction.Axis.Y;
+			default:
+				return Direction.Axis.Z;
+		}
+	}
+
+	private static QuarterLogBlock.BarkSide cycleBarkSide(QuarterLogBlock.BarkSide side) {
+		switch (side) {
+			case SOUTHWEST:
+				return QuarterLogBlock.BarkSide.NORTHWEST;
+			case NORTHWEST:
+				return QuarterLogBlock.BarkSide.NORTHEAST;
+			case NORTHEAST:
+				return QuarterLogBlock.BarkSide.SOUTHEAST;
+			default:
+				return QuarterLogBlock.BarkSide.SOUTHWEST;
+		}
+	}
+
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		BlockPos pos = context.getBlockPos();
 		World world = context.getWorld();
@@ -49,8 +73,8 @@ public class LogTurnerItem extends Item {
 				}
 
 				world.setBlockState(pos, state
-					.with(PillarBlock.AXIS, newAxis)
-					.with(QuarterLogBlock.BARK_SIDE, cycled)
+						.with(PillarBlock.AXIS, newAxis)
+						.with(QuarterLogBlock.BARK_SIDE, cycled)
 				);
 
 				return ActionResult.SUCCESS;
@@ -75,30 +99,6 @@ public class LogTurnerItem extends Item {
 			return ActionResult.SUCCESS;
 		} else {
 			return ActionResult.PASS;
-		}
-	}
-
-	private static Direction.Axis cycleAxis(Direction.Axis axis) {
-		switch (axis) {
-			case X:
-				return Direction.Axis.X;
-			case Y:
-				return Direction.Axis.Y;
-			default:
-				return Direction.Axis.Z;
-		}
-	}
-
-	private static QuarterLogBlock.BarkSide cycleBarkSide(QuarterLogBlock.BarkSide side) {
-		switch (side) {
-			case SOUTHWEST:
-				return QuarterLogBlock.BarkSide.NORTHWEST;
-			case NORTHWEST:
-				return QuarterLogBlock.BarkSide.NORTHEAST;
-			case NORTHEAST:
-				return QuarterLogBlock.BarkSide.SOUTHEAST;
-			default:
-				return QuarterLogBlock.BarkSide.SOUTHWEST;
 		}
 	}
 

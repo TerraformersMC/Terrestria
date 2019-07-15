@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.function.Function;
 
 public class RainbowEucalyptusTreeFeature extends CanopyTreeFeatureMega {
-    public RainbowEucalyptusTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
-        super(function, notify, tree);
-    }
+	public RainbowEucalyptusTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
+		super(function, notify, tree);
+	}
 }

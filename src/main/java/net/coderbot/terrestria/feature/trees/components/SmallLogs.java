@@ -7,5 +7,5 @@ import net.minecraft.world.ModifiableTestableWorld;
 import java.util.Set;
 
 public interface SmallLogs {
-    void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox);
+	void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox);
 }

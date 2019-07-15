@@ -34,6 +34,87 @@ public class TerrestriaBiome extends Biome {
 		return new Builder();
 	}
 
+	public enum DefaultFeature {
+		LAND_CARVERS("land_carvers"),
+		OCEAN_CARVERS("ocean_carvers"),
+		STRUCTURES("structures"),
+		LAKES("lakes"),
+		DESERT_LAKES("desert_lakes"),
+		DUNGEONS("dungeons"),
+		MINEABLES("mineables"),
+		ORES("ores"),
+		EXTRA_GOLD("extra_gold"),
+		EMERALD_ORE("emerald_ore"),
+		INFECTED_STONE("infected_stone"),
+		DISKS("disks"),
+		CLAY("clay"),
+		MOSSY_ROCKS("mossy_rocks"),
+		LARGE_FERNS("large_ferns"),
+		SWEET_BERRY_BUSHES("sweet_berry_bushes"),
+		SWEET_BERRY_BUSHES_SNOWY("sweet_berry_bushes_snowy"),
+		BAMBOO("bamboo"),
+		BAMBOO_JUNGLE_TREES("bamboo jungle trees"),
+		TAIGA_TREES("taiga_trees"),
+		WATER_BIOME_OAK_TREES("water_biome_oak_trees"),
+		BIRCH_TREES("birch_trees"),
+		FOREST_TREES("forest_trees"),
+		TALL_BIRCH_TREES("tall_birch_trees"),
+		SAVANNAH_TREES("savannah_trees"),
+		EXTRA_SAVANNA_TREES("extra_savannah_trees"),
+		MOUNTAIN_TREES("mountain_trees"),
+		EXTRA_MOUNTAIN_TREES("extra_mountain_trees"),
+		JUNGLE_TREES("jungle_trees"),
+		JUNGLE_EDGE_TREES("jungle_edge_trees"),
+		BADLANDS_PLATEAU_TREES("badlands_plateau_trees"),
+		SNOWY_SPRUCE_TREES("snowy_spruce_trees"),
+		GIANT_SPRUCE_TAIGA_TREES("giant_spruce_taiga_trees"),
+		MEGA_SPRUCE_TAIGA_TREES("mega_spruce_taiga_trees"),
+		JUNGLE_GRASS("jungle_grass"),
+		SAVANNA_TALL_GRASS("savanna_tall_grass"),
+		SHATTERED_SAVANNAH_TALL_GRASS("shattered_savannah_tall_grass"),
+		SAVANNAH_GRASS("savannah_grass"),
+		BADLANDS_GRASS("badlands_grass"),
+		FOREST_FLOWERS("forrest_flowers"),
+		FOREST_GRASS("forrest_grass"),
+		SWAMP_FEATURES("swamp_features"),
+		MUSHROOM_FIELDS_FEATURES("mushroom_fields_features"),
+		PLAINS_FEATURES("plains_features"),
+		DESERT_DEAD_BUSHES("desert_dead_bushes"),
+		GIANT_TAIGA_GRASS("giant_taiga_grass"),
+		DEFAULT_FLOWERS("default_flowers"),
+		EXTRA_DEFAULT_FLOWERS("extra_default_flowers"),
+		DEFAULT_GRASS("default_grass"),
+		TAIGA_GRASS("taiga_grass"),
+		PLANS_TALL_GRASS("plains_tall_grass"),
+		DEFAULT_MUSHROOMS("default_mushrooms"),
+		DEFAULT_VEGETATION("default_vegetation"),
+		BADLANDS_VEGETATION("badlands_vegetation"),
+		JUNGLE_VEGETATION("jungle_vegetation"),
+		DESERT_VEGETATION("desert_vegetation"),
+		SWAMP_VEGETATION("swamp_vegetation"),
+		DESSERT_FEATURES("desert_features"),
+		FOSSILS("fossils"),
+		KELP("kelp"),
+		SEAGRASS_ON_STONE("seagrass_on_stone"),
+		SEAGRASS("seagrass"),
+		MORE_SEAGRASS("more_seagrass"),
+		LESS_KELP("less_kelp"),
+		SPRINGS("springs"),
+		ICEBERGS("icebergs"),
+		BLUE_ICE("blue_ice"),
+		FROZEN_TOP_LAYER("frozen_top_layer");
+
+		private final String name;
+
+		DefaultFeature(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return this.name;
+		}
+	}
+
 	public static final class Builder {
 
 		private Biome.Settings biomeSettings;
@@ -74,7 +155,7 @@ public class TerrestriaBiome extends Biome {
 				// Determine the total tree count
 
 				int totalTreesPerChunk = 0;
-				for(Integer count: treeFeatures.values()) {
+				for (Integer count : treeFeatures.values()) {
 					totalTreesPerChunk += count;
 				}
 
@@ -84,7 +165,7 @@ public class TerrestriaBiome extends Biome {
 					Feature<DefaultFeatureConfig> feature = tree.getKey();
 					int count = tree.getValue();
 
-					float weight = (float)count / totalTreesPerChunk;
+					float weight = (float) count / totalTreesPerChunk;
 
 					TerrestriaBiome.biome.addFeature(
 							GenerationStep.Feature.VEGETAL_DECORATION,
@@ -440,87 +521,6 @@ public class TerrestriaBiome extends Biome {
 					DefaultBiomeFeatures.addFrozenTopLayer(TerrestriaBiome.biome);
 					break;
 			}
-		}
-	}
-
-	public enum DefaultFeature {
-		LAND_CARVERS("land_carvers"),
-		OCEAN_CARVERS("ocean_carvers"),
-		STRUCTURES("structures"),
-		LAKES("lakes"),
-		DESERT_LAKES("desert_lakes"),
-		DUNGEONS("dungeons"),
-		MINEABLES("mineables"),
-		ORES("ores"),
-		EXTRA_GOLD("extra_gold"),
-		EMERALD_ORE("emerald_ore"),
-		INFECTED_STONE("infected_stone"),
-		DISKS("disks"),
-		CLAY("clay"),
-		MOSSY_ROCKS("mossy_rocks"),
-		LARGE_FERNS("large_ferns"),
-		SWEET_BERRY_BUSHES("sweet_berry_bushes"),
-		SWEET_BERRY_BUSHES_SNOWY("sweet_berry_bushes_snowy"),
-		BAMBOO("bamboo"),
-		BAMBOO_JUNGLE_TREES("bamboo jungle trees"),
-		TAIGA_TREES("taiga_trees"),
-		WATER_BIOME_OAK_TREES("water_biome_oak_trees"),
-		BIRCH_TREES("birch_trees"),
-		FOREST_TREES("forest_trees"),
-		TALL_BIRCH_TREES("tall_birch_trees"),
-		SAVANNAH_TREES("savannah_trees"),
-		EXTRA_SAVANNA_TREES("extra_savannah_trees"),
-		MOUNTAIN_TREES("mountain_trees"),
-		EXTRA_MOUNTAIN_TREES("extra_mountain_trees"),
-		JUNGLE_TREES("jungle_trees"),
-		JUNGLE_EDGE_TREES("jungle_edge_trees"),
-		BADLANDS_PLATEAU_TREES("badlands_plateau_trees"),
-		SNOWY_SPRUCE_TREES("snowy_spruce_trees"),
-		GIANT_SPRUCE_TAIGA_TREES("giant_spruce_taiga_trees"),
-		MEGA_SPRUCE_TAIGA_TREES("mega_spruce_taiga_trees"),
-		JUNGLE_GRASS("jungle_grass"),
-		SAVANNA_TALL_GRASS("savanna_tall_grass"),
-		SHATTERED_SAVANNAH_TALL_GRASS("shattered_savannah_tall_grass"),
-		SAVANNAH_GRASS("savannah_grass"),
-		BADLANDS_GRASS("badlands_grass"),
-		FOREST_FLOWERS("forrest_flowers"),
-		FOREST_GRASS("forrest_grass"),
-		SWAMP_FEATURES("swamp_features"),
-		MUSHROOM_FIELDS_FEATURES("mushroom_fields_features"),
-		PLAINS_FEATURES("plains_features"),
-		DESERT_DEAD_BUSHES("desert_dead_bushes"),
-		GIANT_TAIGA_GRASS("giant_taiga_grass"),
-		DEFAULT_FLOWERS("default_flowers"),
-		EXTRA_DEFAULT_FLOWERS("extra_default_flowers"),
-		DEFAULT_GRASS("default_grass"),
-		TAIGA_GRASS("taiga_grass"),
-		PLANS_TALL_GRASS("plains_tall_grass"),
-		DEFAULT_MUSHROOMS("default_mushrooms"),
-		DEFAULT_VEGETATION("default_vegetation"),
-		BADLANDS_VEGETATION("badlands_vegetation"),
-		JUNGLE_VEGETATION("jungle_vegetation"),
-		DESERT_VEGETATION("desert_vegetation"),
-		SWAMP_VEGETATION("swamp_vegetation"),
-		DESSERT_FEATURES("desert_features"),
-		FOSSILS("fossils"),
-		KELP("kelp"),
-		SEAGRASS_ON_STONE("seagrass_on_stone"),
-		SEAGRASS("seagrass"),
-		MORE_SEAGRASS("more_seagrass"),
-		LESS_KELP("less_kelp"),
-		SPRINGS("springs"),
-		ICEBERGS("icebergs"),
-		BLUE_ICE("blue_ice"),
-		FROZEN_TOP_LAYER("frozen_top_layer");
-
-		private final String name;
-
-		DefaultFeature(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return this.name;
 		}
 	}
 }

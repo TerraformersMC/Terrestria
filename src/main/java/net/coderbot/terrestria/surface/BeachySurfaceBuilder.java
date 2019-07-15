@@ -30,26 +30,26 @@ public class BeachySurfaceBuilder extends DefaultSurfaceBuilder {
 		BlockPos.Mutable pos = new BlockPos.Mutable(x & 15, seaLevel - 1, z & 15);
 		BlockState sandState = sand.apply(noise);
 
-		if(height >= seaLevel && height <= seaLevel + 1) {
+		if (height >= seaLevel && height <= seaLevel + 1) {
 			pos.set(pos.getX(), height, pos.getZ());
 
-			while(pos.getY() > seaLevel - 3) {
-				if(!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
+			while (pos.getY() > seaLevel - 3) {
+				if (!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
 					chunk.setBlockState(pos, sandState, false);
 				}
 
 				pos.setOffset(Direction.DOWN);
 			}
-		} else if(height <= seaLevel + 2) {
+		} else if (height <= seaLevel + 2) {
 			int solid = 0;
 
-			while(pos.getY() > 0) {
-				if(chunk.getBlockState(pos).isAir()) {
+			while (pos.getY() > 0) {
+				if (chunk.getBlockState(pos).isAir()) {
 					chunk.setBlockState(pos, water, false);
 					solid = 0;
 				} else {
-					if(solid < 3) {
-						if(!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
+					if (solid < 3) {
+						if (!chunk.getBlockState(pos).isAir() && chunk.getFluidState(pos).isEmpty()) {
 							chunk.setBlockState(pos, sandState, false);
 						}
 					}

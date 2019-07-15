@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.function.Function;
 
 public class HemlockTreeFeature extends ConiferTreeFeature {
-    public HemlockTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-        super(function, notify, tree);
-    }
+	public HemlockTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+		super(function, notify, tree);
+	}
 }

@@ -5,7 +5,8 @@ import net.minecraft.block.BlockState;
 
 public final class TreeDefinition {
 	// wrapper class kthxbye
-	private TreeDefinition() {}
+	private TreeDefinition() {
+	}
 
 	public static class Basic {
 		private BlockState log;

@@ -39,7 +39,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		int finalChunkX = chunkX / VOLCANO_SPACING;
 		int finalChunkZ = chunkZ / VOLCANO_SPACING;
 
-		((ChunkRandom)random_1).setStructureSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
+		((ChunkRandom) random_1).setStructureSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
 
 		// Get random position within grid area
 		finalChunkX *= VOLCANO_SPACING;
@@ -56,9 +56,9 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		if (chunkX == start.x && chunkZ == start.z) {
 			Biome biome = generator.getBiomeSource().getBiome(new BlockPos(chunkX * 16 + 9, 0, chunkZ * 16 + 9));
 
-			if(biome.getCategory() == Biome.Category.OCEAN && random.nextInt(4) != 0) {
+			if (biome.getCategory() == Biome.Category.OCEAN && random.nextInt(4) != 0) {
 				return false;
-			} else if(biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE && random.nextInt(2) != 0) {
+			} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE && random.nextInt(2) != 0) {
 				return false;
 			}
 

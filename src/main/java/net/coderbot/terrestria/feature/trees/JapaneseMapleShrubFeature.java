@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.function.Function;
 
 public class JapaneseMapleShrubFeature extends ShrubFeature {
-    public JapaneseMapleShrubFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-        super(function, notify, tree);
-    }
+	public JapaneseMapleShrubFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
+		super(function, notify, tree);
+	}
 }
