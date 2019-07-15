@@ -1,7 +1,8 @@
-package net.coderbot.terrestria.feature.trees.templates;
+package net.coderbot.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import net.coderbot.terrestria.feature.TreeDefinition;
+import net.coderbot.terrestria.feature.trees.templates.ConiferTreeFeatureMega;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 import java.util.function.Function;
