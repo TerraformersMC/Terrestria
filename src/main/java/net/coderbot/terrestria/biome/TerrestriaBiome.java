@@ -197,16 +197,19 @@ public class TerrestriaBiome extends Biome {
 			}
 
 			// Add any minecraft (default) features
+
 			for (DefaultFeature defaultFeature : defaultFeatures) {
 				buildDefaultFeature(defaultFeature);
 			}
 
 			// Add custom features that don't fit in the templates
+
 			for (TerrestriaFeature feature : features) {
 				TerrestriaBiome.biome.addFeature(feature.getStep(), feature.getFeature());
 			}
 
 			// Add Plant decoration features
+
 			for (Map.Entry<BlockState, Integer> plant : plantFeatures.entrySet()) {
 				TerrestriaBiome.biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
@@ -214,8 +217,8 @@ public class TerrestriaBiome extends Biome {
 			}
 
 			// Add Double Plant decoration features
-			//TODO make work
-			for (Map.Entry<BlockState, Integer> doublePlant : plantFeatures.entrySet()) {
+
+			for (Map.Entry<BlockState, Integer> doublePlant : doublePlantFeatures.entrySet()) {
 				TerrestriaBiome.biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
 						Biome.configureFeature(Feature.DOUBLE_PLANT, new DoublePlantFeatureConfig(doublePlant.getKey()), Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(doublePlant.getValue())));
