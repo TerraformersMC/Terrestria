@@ -5,7 +5,6 @@ import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.block.BasaltFlowerBlock;
-import net.coderbot.terrestria.feature.trees.RubberTreeFeature;
 import net.coderbot.terrestria.feature.TreeDefinition;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -128,7 +127,7 @@ public class TerrestriaBlocks {
 
 		RUBBER_SAPLING = register("rubber_sapling", new TerraformSaplingBlock(
 				new TerraformSaplingGenerator(
-						() -> new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, RUBBER.getBasicDefinition())
+						() -> TerrestriaFeatures.RUBBER_TREE.sapling()
 				)
 		));
 
