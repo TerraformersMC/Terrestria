@@ -7,7 +7,6 @@ import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
@@ -370,18 +369,18 @@ public class TerrestriaBiomes {
 				.build());
 
 		CYPRESS_SWAMP = register("cypress_swamp", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configuredSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
-				.depth(-0.3F)
-				.scale(0F)
+				.depth(-0.25F)
+				.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
+				.waterColor(0x2c7f32)
+				.waterFogColor(0x053305)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
-						DEFAULT_MUSHROOMS, SWAMP_VEGETATION, SPRINGS, SEAGRASS, FOSSILS, FROZEN_TOP_LAYER)
+						DEFAULT_MUSHROOMS, SWAMP_VEGETATION, SPRINGS, SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_FEATURES)
 				.addTreeFeature(TerrestriaFeatures.MEGA_CYPRESS_TREE, 2)
-				.addTreeFeature(Feature.SWAMP_TREE, 5)
+				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE, 3)
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
 						TerrestriaFeatures.CATTAIL, new SeagrassFeatureConfig(80, 0.3D),
 						Decorator.TOP_SOLID_HEIGHTMAP, DecoratorConfig.DEFAULT))
@@ -471,8 +470,8 @@ public class TerrestriaBiomes {
 		RAINBOW_RAINFOREST = register("rainbow_rainforest", TerrestriaBiome.builder()
 				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
-				.depth(0.70F)
-				.scale(0.35F)
+				.depth(0F)
+				.scale(0.4F)
 				.temperature(0.95F)
 				.downfall(0.9F)
 				.waterColor(4159204)
@@ -484,6 +483,7 @@ public class TerrestriaBiomes {
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE, 5)
 				.addTreeFeature(Feature.FANCY_TREE, 5)
+				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE, 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
@@ -505,6 +505,7 @@ public class TerrestriaBiomes {
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE, 5)
 				.addTreeFeature(Feature.FANCY_TREE, 5)
+				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE, 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))

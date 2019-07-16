@@ -39,6 +39,7 @@ public class TerrestriaFeatures {
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature PALM_TREE;
+	public static RubberTreeFeature RUBBER_TREE;
 
 	public static CattailFeature CATTAIL;
 	public static FallenLogFeature FALLEN_REDWOOD_LOG;
@@ -150,6 +151,10 @@ public class TerrestriaFeatures {
 
 		PALM_TREE = register("palm_tree",
 				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
+		);
+
+		RUBBER_TREE = register("rubber_tree",
+				new RubberTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RUBBER.getBasicDefinition())
 		);
 
 		CATTAIL = register("cattail",
