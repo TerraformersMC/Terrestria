@@ -1,8 +1,10 @@
 package net.coderbot.terrestria.init;
 
+import io.github.terraformersmc.terraform.surface.BeachSurfaceBuilder;
+import io.github.terraformersmc.terraform.surface.CliffSurfaceBuilder;
+import io.github.terraformersmc.terraform.surface.CliffSurfaceConfig;
+import io.github.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import net.coderbot.terrestria.Terrestria;
-import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
-import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -13,29 +15,33 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
-	public static BeachySurfaceBuilder CALDERA_SURFACE;
-	public static BeachySurfaceBuilder BASALT_SURFACE;
-	public static CliffySurfaceBuilder CLIFF_SURFACE;
-	public static TernarySurfaceConfig BASALT_CONFIG;
+	public static FloodingBeachSurfaceBuilder CALDERA;
+	public static BeachSurfaceBuilder BASALT_BEACH;
+	public static BeachSurfaceBuilder BEACH;
+	public static CliffSurfaceBuilder CLIFF;
+	public static CliffSurfaceConfig BASALT_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 
 	public static void init() {
-		CALDERA_SURFACE = register("caldera", new BeachySurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
+		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
 
-		BASALT_SURFACE = register("basalt", new BeachySurfaceBuilder(
+		BASALT_BEACH = register("basalt_beach", new BeachSurfaceBuilder(
 				TernarySurfaceConfig::deserialize,
-				63,
+				62,
 				v -> v > 1.0 ? TerrestriaBlocks.BASALT_SAND.getDefaultState() : Blocks.SAND.getDefaultState()
 		));
 
-		CLIFF_SURFACE = register("cliff", new CliffySurfaceBuilder(TernarySurfaceConfig::deserialize, 63));
+		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 62, v -> Blocks.SAND.getDefaultState()));
 
-		BASALT_CONFIG = new TernarySurfaceConfig(
+		CLIFF = register("cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+
+		BASALT_CONFIG = new CliffSurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
-				TerrestriaBlocks.BASALT_DIRT.getDefaultState()
+				Blocks.SAND.getDefaultState(),
+				TerrestriaBlocks.BASALT.getDefaultState()
 		);
-		
+
 		ALPS_CONFIG = new TernarySurfaceConfig(
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.SNOW_BLOCK.getDefaultState(),

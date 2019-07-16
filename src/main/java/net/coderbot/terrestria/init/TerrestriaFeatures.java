@@ -2,9 +2,9 @@ package net.coderbot.terrestria.init;
 
 import io.github.terraformersmc.terraform.block.SmallLogBlock;
 import io.github.terraformersmc.terraform.feature.CattailFeature;
+import io.github.terraformersmc.terraform.feature.FallenLogFeature;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.feature.TreeDefinition;
-import net.coderbot.terrestria.feature.detail.FallenLogFeature;
 import net.coderbot.terrestria.feature.trees.*;
 import net.coderbot.terrestria.feature.trees.RedwoodTreeFeatureMega;
 import net.coderbot.terrestria.feature.volcano.VolcanoGenerator;

@@ -511,7 +511,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		CALDERA = register("caldera", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
 				.depth(1.5F)
 				.scale(0.05F)
@@ -549,7 +549,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		CALDERA_BEACH = register("caldera_beach", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA_SURFACE, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.depth(2.25F)
 				.scale(0F)
@@ -569,7 +569,7 @@ public class TerrestriaBiomes {
 
 
 		VOLCANIC_ISLAND = register("volcanic_island", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
@@ -591,7 +591,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		VOLCANIC_ISLAND_SHORE = register("volcanic_island_shore", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.depth(0.05F)
 				.scale(0.05F)
@@ -613,7 +613,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		VOLCANIC_ISLAND_BEACH = register("volcanic_island_beach", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.BASALT_SURFACE, TerrestriaSurfaces.BASALT_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.depth(0F)
 				.scale(0.05F)
