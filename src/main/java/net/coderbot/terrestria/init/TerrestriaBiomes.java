@@ -702,11 +702,7 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0);
 		OverworldBiomes.addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0);
-		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
-		
-		OverworldBiomes.addHillsBiome(ALPINE, ALPINE, 1);
-		OverworldBiomes.addHillsBiome(ALPINE, ALPS, 1);
-		OverworldBiomes.setRiverBiome(ALPS, null);
+		OverworldBiomes.addContinentalBiome(ALPS, OverworldClimate.SNOWY, 1.0);
 		
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 		OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1);
@@ -727,7 +723,9 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addHillsBiome(JAPANESE_MAPLE_FOREST, WOODED_JAPANESE_MAPLE_HILLS, 1.0);
 		OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_MOUNTAINS, 1.0);
 		OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_LAKE, 0.6);
+		OverworldBiomes.addHillsBiome(ALPS, ALPINE, 1);
 
+		OverworldBiomes.setRiverBiome(ALPS, null);
 		OverworldBiomes.setRiverBiome(ALPINE, null);
 		OverworldBiomes.setRiverBiome(CALDERA, null);
 		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
