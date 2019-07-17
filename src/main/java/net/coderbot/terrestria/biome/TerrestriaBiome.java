@@ -83,7 +83,7 @@ public class TerrestriaBiome extends Biome {
 		EXTRA_DEFAULT_FLOWERS("extra_default_flowers"),
 		DEFAULT_GRASS("default_grass"),
 		TAIGA_GRASS("taiga_grass"),
-		PLANS_TALL_GRASS("plains_tall_grass"),
+		PLAINS_TALL_GRASS("plains_tall_grass"),
 		DEFAULT_MUSHROOMS("default_mushrooms"),
 		DEFAULT_VEGETATION("default_vegetation"),
 		BADLANDS_VEGETATION("badlands_vegetation"),
@@ -504,7 +504,7 @@ public class TerrestriaBiome extends Biome {
 				case TAIGA_GRASS:
 					DefaultBiomeFeatures.addTaigaGrass(TerrestriaBiome.biome);
 					break;
-				case PLANS_TALL_GRASS:
+				case PLAINS_TALL_GRASS:
 					DefaultBiomeFeatures.addPlainsTallGrass(TerrestriaBiome.biome);
 					break;
 				case DEFAULT_MUSHROOMS:

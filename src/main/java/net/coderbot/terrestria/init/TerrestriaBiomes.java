@@ -46,6 +46,8 @@ public class TerrestriaBiomes {
 	public static Biome WOODED_SAKURA_HILLS;
 	public static Biome JAPANESE_MAPLE_FOREST;
 	public static Biome WOODED_JAPANESE_MAPLE_HILLS;
+	public static Biome DENSE_WOODLANDS;
+	public static Biome DENSE_WOODLANDS_EDGE;
 	public static Biome RAINBOW_RAINFOREST;
 	public static Biome RAINBOW_RAINFOREST_MOUNTAINS;
 	public static Biome RAINBOW_RAINFOREST_LAKE;
@@ -468,6 +470,40 @@ public class TerrestriaBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
+		DENSE_WOODLANDS = register("dense_woodlands", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.depth(0.125F)
+				.scale(0.05F)
+				.temperature(0.9F)
+				.downfall(0.3F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
+						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
+				.addTreeFeature(Feature.FANCY_TREE, 7)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.build());
+
+		DENSE_WOODLANDS_EDGE = register("dense_woodlands_edge", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.depth(0.125F)
+				.scale(0.05F)
+				.temperature(0.9F)
+				.downfall(0.3F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
+						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
+				.addTreeFeature(Feature.FANCY_TREE, 3)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.build());
+
 		RAINBOW_RAINFOREST = register("rainbow_rainforest", TerrestriaBiome.builder()
 				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
@@ -701,6 +737,7 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0);
 		OverworldBiomes.addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0);
 		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
+		OverworldBiomes.addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0);
 		
 		OverworldBiomes.addHillsBiome(ALPINE, ALPINE, 1);
 		OverworldBiomes.addHillsBiome(ALPINE, ALPS, 1);
@@ -709,6 +746,7 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
 		OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1);
 		OverworldBiomes.addEdgeBiome(LUSH_REDWOOD_FOREST, LUSH_REDWOOD_FOREST_EDGE, 1);
+		OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1);
 
 		OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, Biomes.MOUNTAINS);
 		OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
