@@ -19,7 +19,7 @@ public class GlacierSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 	protected final BlockState pICE = Blocks.PACKED_ICE.getDefaultState();
 	protected final BlockState bICE = Blocks.BLUE_ICE.getDefaultState();
 	
-	private SimplexNoiseSampler noiseGenerator;
+	private static SimplexNoiseSampler noiseGenerator;
 	private long currentSeed = 0L;
 	private DoubleFunction<TernarySurfaceConfig> configProvider;
 	
@@ -30,57 +30,75 @@ public class GlacierSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig>
 		configProvider = config;
 	}
 	
-	private BlockState getChunkBlock(Chunk chunk, int difference, int worldHeight, BlockPos pos) {
-		return (pos.getY() < 63 || difference == 0 || pos.getY() + 1 > worldHeight) ? chunk.getBlockState(pos) : chunk.getBlockState(pos.up());
-	}
-	
 	@Override
 	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int worldHeight, double noiseVal, BlockState var9, BlockState var10, int var11, long seed, TernarySurfaceConfig configToIgnore) {
 		TernarySurfaceConfig config = configProvider.apply(noiseVal);
 		
 		if (noiseGenerator == null || seed != currentSeed) {
 			noiseGenerator = new SimplexNoiseSampler(new Random(seed));
+			currentSeed = seed;
 		}
-		double noise = noiseGenerator.sample((double) x / 100D, (double) z / 100D);
+		double noise = noiseGenerator.sample((double) x / 260D, (double) z / 260D);
 		int glacierDifference = (int) ((noise > 0.22D && noise < 0.3D) ? (1171875 * Math.pow(noise - 0.26, 4)) - 3 : 0);
+		//System.out.println(String.valueOf(noise) + " -> " + String.valueOf(glacierDifference));
 		
 		int localX = x & 15;
 		int localZ = z & 15;
 		
-		BlockState top = config.getTopMaterial();
-		BlockState under = config.getUnderMaterial();
-		BlockState underwater = config.getUnderwaterMaterial();
+		int height = getHeightAtPos(chunk, localX, localZ);
 		
-		int tempYLevel = 0;
+		if (glacierDifference != 0) {
+			height -= 2;
+		}
+		
+		BlockPos.Mutable pos = new BlockPos.Mutable(localX, 255, localZ);
 		
 		for (int y = worldHeight; y >= 0; --y)
 		{
-			BlockPos pos = new BlockPos(localX, y, localZ);
-			BlockState chunkBlock = getChunkBlock(chunk, glacierDifference, worldHeight, pos);
+			pos.setY(y);
+			BlockState toSet = STONE;
 			
-			if (chunkBlock == STONE) {
-				BlockState toSet = STONE;
-				
-				if (y < 255) {
-					BlockState up = getChunkBlock(chunk, glacierDifference, worldHeight, pos.up());
-					if (up == AIR) {
-						toSet = glacierDifference > 0 ? pICE: top;
-						tempYLevel = y - 1;
-					} else if (up == WATER) {
-						toSet = underwater;
-					} else if (y < 253) {
-						if (getChunkBlock(chunk, glacierDifference, worldHeight, pos.up(3)) == AIR) {
-							toSet = glacierDifference >= (tempYLevel - y) ? bICE : under;
+			if (y <= height) {
+				if (y - height >= glacierDifference) {
+					System.out.print(x);
+					System.out.print(":");
+					System.out.println(z);
+					System.out.println();
+					toSet = (y - height == -1) ? bICE : pICE;
+				} else {
+					if (y < 255) {
+						BlockState upState = chunk.getBlockState(pos.up());
+						if (upState == AIR) {
+							toSet = config.getTopMaterial();
+						} else if (upState == WATER) {
+							toSet = config.getUnderwaterMaterial();
+						} else {
+							if (y < 253) {
+								if (chunk.getBlockState(pos.up(3)) == AIR || chunk.getBlockState(pos.up(2)) == AIR) {
+									toSet = config.getUnderMaterial();
+								}
+							}
 						}
 					}
 				}
-
-				chunk.setBlockState(pos, toSet, false);
-
 			} else {
-				chunk.setBlockState(pos, chunkBlock, false);
+				toSet = y < 63 ? WATER : AIR;
+			}
+			
+			chunk.setBlockState(pos, toSet, false);
+		}
+	}
+	
+	private static int getHeightAtPos(Chunk chunk, int x, int z) {
+		BlockPos.Mutable pos = new BlockPos.Mutable(x, 255, z);
+		for (int i = 255; i > 0; ++i) {
+			pos.setY(i);
+			BlockState state = chunk.getBlockState(pos);
+			if (state != AIR) {
+				return i;
 			}
 		}
+		return 0;
 	}
 
 }
