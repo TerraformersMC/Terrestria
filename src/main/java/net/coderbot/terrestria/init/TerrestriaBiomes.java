@@ -48,6 +48,7 @@ public class TerrestriaBiomes {
 	public static Biome WOODED_JAPANESE_MAPLE_HILLS;
 	public static Biome RAINBOW_RAINFOREST;
 	public static Biome RAINBOW_RAINFOREST_MOUNTAINS;
+	public static Biome RAINBOW_RAINFOREST_LAKE;
 	public static Biome CYPRESS_SWAMP;
 	public static Biome CALDERA;
 	public static Biome CALDERA_RIDGE;
@@ -470,7 +471,7 @@ public class TerrestriaBiomes {
 		RAINBOW_RAINFOREST = register("rainbow_rainforest", TerrestriaBiome.builder()
 				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
-				.depth(0F)
+				.depth(0.4F)
 				.scale(0.4F)
 				.temperature(0.95F)
 				.downfall(0.9F)
@@ -494,6 +495,28 @@ public class TerrestriaBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.depth(1.0F)
 				.scale(0.5F)
+				.temperature(0.95F)
+				.downfall(0.9F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+						JUNGLE_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, JUNGLE_VEGETATION, FROZEN_TOP_LAYER)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.JUNGLE_TEMPLE)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE, 5)
+				.addTreeFeature(Feature.FANCY_TREE, 5)
+				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE, 3)
+				.addDefaultSpawnEntries()
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
+				.build());
+
+		RAINBOW_RAINFOREST_LAKE = register("rainbow_rainforest_lake", TerrestriaBiome.builder()
+				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
+				.depth(-0.2F)
+				.scale(0.0F)
 				.temperature(0.95F)
 				.downfall(0.9F)
 				.waterColor(4159204)
@@ -701,6 +724,7 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addHillsBiome(SAKURA_FOREST, WOODED_SAKURA_HILLS, 1.0);
 		OverworldBiomes.addHillsBiome(JAPANESE_MAPLE_FOREST, WOODED_JAPANESE_MAPLE_HILLS, 1.0);
 		OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_MOUNTAINS, 1.0);
+		OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_LAKE, 0.6);
 
 		OverworldBiomes.setRiverBiome(CALDERA, null);
 		OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
