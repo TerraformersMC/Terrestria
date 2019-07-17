@@ -3,6 +3,7 @@ package net.coderbot.terrestria.init;
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.surface.BeachySurfaceBuilder;
 import net.coderbot.terrestria.surface.CliffySurfaceBuilder;
+import net.coderbot.terrestria.surface.GlacierSurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -16,6 +17,8 @@ public class TerrestriaSurfaces {
 	public static BeachySurfaceBuilder CALDERA_SURFACE;
 	public static BeachySurfaceBuilder BASALT_SURFACE;
 	public static CliffySurfaceBuilder CLIFF_SURFACE;
+	public static GlacierSurfaceBuilder ALPS_GLACIER_SURFACE;
+	public static GlacierSurfaceBuilder MOUNTAIN_GLACIER_SURFACE;
 	public static TernarySurfaceConfig BASALT_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 
@@ -29,17 +32,20 @@ public class TerrestriaSurfaces {
 		));
 
 		CLIFF_SURFACE = register("cliff", new CliffySurfaceBuilder(TernarySurfaceConfig::deserialize, 63));
-
-		BASALT_CONFIG = new TernarySurfaceConfig(
-				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
-				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
-				TerrestriaBlocks.BASALT_DIRT.getDefaultState()
-		);
 		
 		ALPS_CONFIG = new TernarySurfaceConfig(
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.STONE.getDefaultState()
+		);
+		
+		ALPS_GLACIER_SURFACE = register("alps_glacier", new GlacierSurfaceBuilder((noise) -> ALPS_CONFIG));
+		MOUNTAIN_GLACIER_SURFACE = register("mountain_glacier", new GlacierSurfaceBuilder((noise) -> noise > 1.0 ? SurfaceBuilder.STONE_CONFIG : SurfaceBuilder.GRASS_CONFIG));
+		
+		BASALT_CONFIG = new TernarySurfaceConfig(
+				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
+				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
+				TerrestriaBlocks.BASALT_DIRT.getDefaultState()
 		);
 	}
 

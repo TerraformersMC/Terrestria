@@ -311,7 +311,7 @@ public class TerrestriaBiomes {
 				.build());
 
 		ALPINE = register("alpine", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.MOUNTAIN_GLACIER_SURFACE, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.EXTREME_HILLS)
 				.depth(1.7F)
 				.scale(0.4F)
@@ -635,7 +635,7 @@ public class TerrestriaBiomes {
 				.build());
 		
 		ALPS = register("alps", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, TerrestriaSurfaces.ALPS_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.ALPS_GLACIER_SURFACE, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.ICY)
 				.depth(3.7F)
 				.scale(0.3F)
@@ -676,7 +676,7 @@ public class TerrestriaBiomes {
 		OverworldBiomes.addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0);
 		OverworldBiomes.addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0);
 		OverworldBiomes.addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0);
-		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.SNOWY, 1.0);
+		OverworldBiomes.addContinentalBiome(ALPINE, OverworldClimate.COOL, 1.0);
 		
 		OverworldBiomes.addHillsBiome(ALPINE, ALPINE, 1);
 		OverworldBiomes.addHillsBiome(ALPINE, ALPS, 1);
