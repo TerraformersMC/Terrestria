@@ -113,6 +113,8 @@ public class TerrestriaItems {
 		public BlockItem button;
 		public BlockItem pressurePlate;
 		public SignItem sign;
+		public BlockItem strippedLog;
+		public BlockItem strippedWood;
 
 		private WoodItems() {
 		}
@@ -121,6 +123,7 @@ public class TerrestriaItems {
 			WoodItems items = registerWithoutBark(name, blocks);
 
 			items.wood = TerrestriaItems.register(name + "_wood", blocks.wood);
+			items.strippedWood = TerrestriaItems.register("stripped_" + name + "_wood", blocks.strippedWood);
 
 			return items;
 		}
@@ -139,6 +142,7 @@ public class TerrestriaItems {
 			items.button = TerrestriaItems.register(name + "_button", blocks.button);
 			items.pressurePlate = TerrestriaItems.register(name + "_pressure_plate", blocks.pressurePlate);
 			items.sign = TerrestriaItems.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
+			items.strippedLog = TerrestriaItems.register("stripped_" + name + "_log", blocks.strippedLog);
 
 			return items;
 		}
