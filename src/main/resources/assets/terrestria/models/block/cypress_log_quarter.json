@@ -1,9 +1,0 @@
-{
-  "parent": "terrestria:block/quarter_log",
-  "textures": {
-    "particle": "terrestria:block/cypress_log",
-    "ends": "terrestria:block/cypress_log_quarter",
-	"sides": "terrestria:block/cypress_log",
-	"insides": "terrestria:block/cypress_log_bare"
-  }
-}

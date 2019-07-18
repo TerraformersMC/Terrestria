@@ -67,10 +67,10 @@ public class TerrestriaItems {
 
 		CATTAIL = register("cattail", TerrestriaBlocks.CATTAIL);
 
-		REDWOOD_QUARTER_LOG = register("redwood_log_quarter", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
-		HEMLOCK_QUARTER_LOG = register("hemlock_log_quarter", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
-		CYPRESS_QUARTER_LOG = register("cypress_log_quarter", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_log_quarter", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
+		REDWOOD_QUARTER_LOG = register("redwood_quarter_log", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
+		HEMLOCK_QUARTER_LOG = register("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
+		CYPRESS_QUARTER_LOG = register("cypress_quarter_log", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
 		REDWOOD_SAPLING = register("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
 		HEMLOCK_SAPLING = register("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);

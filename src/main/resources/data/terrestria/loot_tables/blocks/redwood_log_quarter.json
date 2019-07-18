@@ -6,7 +6,7 @@
 	  "entries": [
 		{
 		  "type": "minecraft:item",
-		  "name": "terrestria:redwood_log_quarter"
+		  "name": "terrestria:redwood_quarter_log"
 		}
 	  ],
 	  "conditions": [

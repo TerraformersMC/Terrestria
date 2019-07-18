@@ -6,7 +6,7 @@
 	  "entries": [
 		{
 		  "type": "minecraft:item",
-		  "name": "terrestria:rainbow_eucalyptus_log_quarter"
+		  "name": "terrestria:rainbow_eucalyptus_quarter_log"
 		}
 	  ],
 	  "conditions": [

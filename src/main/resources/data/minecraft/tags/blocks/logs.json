@@ -1,16 +1,16 @@
 {
   "values": [
 	"terrestria:redwood_log",
-	"terrestria:redwood_log_quarter",
+	"terrestria:redwood_quarter_log",
 	"terrestria:hemlock_log",
-	"terrestria:hemlock_log_quarter",
+	"terrestria:hemlock_quarter_log",
 	"terrestria:rubber_log",
 	"terrestria:cypress_log",
 	"terrestria:japanese_maple_log",
 	"terrestria:rainbow_eucalyptus_log",
-	"terrestria:rainbow_eucalyptus_log_quarter",
+	"terrestria:rainbow_eucalyptus_quarter_log",
 	"terrestria:sakura_log",
-	"terrestria:cypress_log_quarter",
+	"terrestria:cypress_quarter_log",
 	"terrestria:willow_log",
 
 	"terrestria:redwood_wood",

@@ -1,0 +1,9 @@
+{
+  "parent": "terrestria:block/quarter_log",
+  "textures": {
+    "particle": "terrestria:block/stripped_hemlock_log",
+    "ends": "terrestria:block/stripped_hemlock_quarter_log",
+	"sides": "terrestria:block/stripped_hemlock_log",
+	"insides": "terrestria:block/stripped_hemlock_log_bare"
+  }
+}
