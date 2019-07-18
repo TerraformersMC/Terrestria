@@ -30,6 +30,10 @@ public class TerrestriaItems {
 	public static BlockItem HEMLOCK_QUARTER_LOG;
 	public static BlockItem CYPRESS_QUARTER_LOG;
 	public static BlockItem RAINBOW_EUCALYPTUS_QUARTER_LOG;
+	public static BlockItem STRIPPED_REDWOOD_QUARTER_LOG;
+	public static BlockItem STRIPPED_HEMLOCK_QUARTER_LOG;
+	public static BlockItem STRIPPED_CYPRESS_QUARTER_LOG;
+	public static BlockItem STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
 	public static BlockItem REDWOOD_SAPLING;
 	public static BlockItem HEMLOCK_SAPLING;
@@ -71,6 +75,11 @@ public class TerrestriaItems {
 		HEMLOCK_QUARTER_LOG = register("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
 		CYPRESS_QUARTER_LOG = register("cypress_quarter_log", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
 		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
+
+		STRIPPED_REDWOOD_QUARTER_LOG = register("stripped_redwood_quarter_log", TerrestriaBlocks.STRIPPED_REDWOOD_QUARTER_LOG);
+		STRIPPED_HEMLOCK_QUARTER_LOG = register("stripped_hemlock_quarter_log", TerrestriaBlocks.STRIPPED_HEMLOCK_QUARTER_LOG);
+		STRIPPED_CYPRESS_QUARTER_LOG = register("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
+		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = register("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
 		REDWOOD_SAPLING = register("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
 		HEMLOCK_SAPLING = register("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
