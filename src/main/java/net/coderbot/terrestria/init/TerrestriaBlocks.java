@@ -15,6 +15,8 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.JungleTreeFeature;
 
+import java.util.function.Supplier;
+
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
@@ -90,8 +92,8 @@ public class TerrestriaBlocks {
 
 		SAKURA = WoodBlocks.registerManufactured("sakura", WoodColors.SAKURA, flammable);
 		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(WoodColors.SAKURA.leaves).build()));
-		SAKURA.log = register("sakura_log", new SmallLogBlock(SAKURA.leaves, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.bark).build()));
-		SAKURA.strippedLog = register("stripped_sakura_log", new SmallLogBlock(SAKURA.leaves, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.planks).build()));
+		SAKURA.log = register("sakura_log", new SmallLogBlock(SAKURA.leaves, () -> SAKURA.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.bark).build()));
+		SAKURA.strippedLog = register("stripped_sakura_log", new SmallLogBlock(SAKURA.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.planks).build()));
 		SAKURA.wood = SAKURA.log;
 		SAKURA.strippedWood = SAKURA.strippedLog;
 		SAKURA.addTreeFireInfo(flammable);
@@ -110,10 +112,10 @@ public class TerrestriaBlocks {
 		TALL_CATTAIL = register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
 		CATTAIL = register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
 
-		REDWOOD_QUARTER_LOG = REDWOOD.registerQuarterLog(flammable);
-		HEMLOCK_QUARTER_LOG = HEMLOCK.registerQuarterLog(flammable);
-		CYPRESS_QUARTER_LOG = CYPRESS.registerQuarterLog(flammable);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerQuarterLog(flammable);
+		REDWOOD_QUARTER_LOG = REDWOOD.registerQuarterLog(() -> STRIPPED_REDWOOD_QUARTER_LOG, flammable);
+		HEMLOCK_QUARTER_LOG = HEMLOCK.registerQuarterLog(() -> STRIPPED_HEMLOCK_QUARTER_LOG, flammable);
+		CYPRESS_QUARTER_LOG = CYPRESS.registerQuarterLog(() -> STRIPPED_CYPRESS_QUARTER_LOG, flammable);
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerQuarterLog(() -> STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG, flammable);
 		STRIPPED_REDWOOD_QUARTER_LOG = REDWOOD.registerStrippedQuarterLog(flammable);
 		STRIPPED_HEMLOCK_QUARTER_LOG = HEMLOCK.registerStrippedQuarterLog(flammable);
 		STRIPPED_CYPRESS_QUARTER_LOG = CYPRESS.registerStrippedQuarterLog(flammable);
@@ -291,8 +293,8 @@ public class TerrestriaBlocks {
 		public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
 			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
-			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
-			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.log = TerrestriaBlocks.register(name + "_log", new StrippableLogBlock(() -> blocks.strippedLog, colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
 			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 			blocks.strippedLog = TerrestriaBlocks.register("stripped_" + name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
 			blocks.strippedWood = TerrestriaBlocks.register("stripped_" + name + "_wood", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
@@ -305,8 +307,8 @@ public class TerrestriaBlocks {
 		public static WoodBlocks registerExtendedLeaves(String name, WoodColors colors, FlammableBlockRegistry registry) {
 			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
-			blocks.log = TerrestriaBlocks.register(name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
-			blocks.wood = TerrestriaBlocks.register(name + "_wood", new LogBlock(colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.log = TerrestriaBlocks.register(name + "_log", new StrippableLogBlock(() -> blocks.strippedLog, colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = TerrestriaBlocks.register(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
 			blocks.leaves = TerrestriaBlocks.register(name + "_leaves", new ExtendedLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 			blocks.strippedLog = TerrestriaBlocks.register("stripped_" + name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
 			blocks.strippedWood = TerrestriaBlocks.register("stripped_" + name + "_wood", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
@@ -340,8 +342,8 @@ public class TerrestriaBlocks {
 			return blocks;
 		}
 
-		public QuarterLogBlock registerQuarterLog(FlammableBlockRegistry registry) {
-			QuarterLogBlock quarterLog = TerrestriaBlocks.register(name + "_quarter_log", new QuarterLogBlock(colors.planks, Block.Settings.copy(log)));
+		public QuarterLogBlock registerQuarterLog(Supplier<Block> stripped, FlammableBlockRegistry registry) {
+			QuarterLogBlock quarterLog = TerrestriaBlocks.register(name + "_quarter_log", new QuarterLogBlock(stripped, colors.planks, Block.Settings.copy(log)));
 
 			registry.add(quarterLog, 5, 5);
 
@@ -349,7 +351,7 @@ public class TerrestriaBlocks {
 		}
 
 		public QuarterLogBlock registerStrippedQuarterLog(FlammableBlockRegistry registry) {
-			QuarterLogBlock quarterLog = TerrestriaBlocks.register("stripped_" + name + "_quarter_log", new QuarterLogBlock(colors.planks, Block.Settings.copy(strippedLog)));
+			QuarterLogBlock quarterLog = TerrestriaBlocks.register("stripped_" + name + "_quarter_log", new QuarterLogBlock(null, colors.planks, Block.Settings.copy(strippedLog)));
 
 			registry.add(quarterLog, 5, 5);
 
