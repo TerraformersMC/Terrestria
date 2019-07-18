@@ -2,6 +2,9 @@
   "values": [
 	"terrestria:rainbow_eucalyptus_log",
 	"terrestria:rainbow_eucalyptus_wood",
-	"terrestria:rainbow_eucalyptus_quarter_log"
+	"terrestria:rainbow_eucalyptus_quarter_log",
+	"terrestria:stripped_rainbow_eucalyptus_log",
+	"terrestria:stripped_rainbow_eucalyptus_wood",
+	"terrestria:stripped_rainbow_eucalyptus_quarter_log"
   ]
 }

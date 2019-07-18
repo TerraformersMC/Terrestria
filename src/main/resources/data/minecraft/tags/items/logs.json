@@ -6,11 +6,11 @@
 	"terrestria:hemlock_quarter_log",
 	"terrestria:rubber_log",
 	"terrestria:cypress_log",
-	"terrestria:cypress_quarter_log",
 	"terrestria:japanese_maple_log",
 	"terrestria:rainbow_eucalyptus_log",
 	"terrestria:rainbow_eucalyptus_quarter_log",
 	"terrestria:sakura_log",
+	"terrestria:cypress_quarter_log",
 	"terrestria:willow_log",
 
 	"terrestria:redwood_wood",
@@ -19,6 +19,27 @@
 	"terrestria:cypress_wood",
 	"terrestria:japanese_maple_wood",
 	"terrestria:rainbow_eucalyptus_wood",
-	"terrestria:willow_wood"
+	"terrestria:willow_wood",
+
+	"terrestria:stripped_redwood_log",
+	"terrestria:stripped_redwood_quarter_log",
+	"terrestria:stripped_hemlock_log",
+	"terrestria:stripped_hemlock_quarter_log",
+	"terrestria:stripped_rubber_log",
+	"terrestria:stripped_cypress_log",
+	"terrestria:stripped_japanese_maple_log",
+	"terrestria:stripped_rainbow_eucalyptus_log",
+	"terrestria:stripped_rainbow_eucalyptus_quarter_log",
+	"terrestria:stripped_sakura_log",
+	"terrestria:stripped_cypress_quarter_log",
+	"terrestria:stripped_willow_log",
+
+	"terrestria:stripped_redwood_wood",
+	"terrestria:stripped_hemlock_wood",
+	"terrestria:stripped_rubber_wood",
+	"terrestria:stripped_cypress_wood",
+	"terrestria:stripped_japanese_maple_wood",
+	"terrestria:stripped_rainbow_eucalyptus_wood",
+	"terrestria:stripped_willow_wood"
   ]
 }
