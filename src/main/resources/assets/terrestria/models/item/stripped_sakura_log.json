@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/stripped_block",
+  "parent": "minecraft:block/block",
   "textures": {
     "particle": "terrestria:block/stripped_sakura_log",
     "all": "terrestria:block/stripped_sakura_log"
