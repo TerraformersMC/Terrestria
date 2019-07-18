@@ -2,6 +2,9 @@
   "values": [
 	"terrestria:hemlock_log",
 	"terrestria:hemlock_wood",
-	"terrestria:hemlock_quarter_log"
+	"terrestria:hemlock_quarter_log",
+	"terrestria:stripped_hemlock_log",
+	"terrestria:stripped_hemlock_wood",
+	"terrestria:stripped_hemlock_quarter_log"
   ]
 }
