@@ -31,7 +31,6 @@ public class TerrestriaBlocks {
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
-	public static WoodBlocks PALM;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;

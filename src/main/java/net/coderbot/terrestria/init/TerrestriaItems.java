@@ -15,7 +15,6 @@ public class TerrestriaItems {
 	public static WoodItems JAPANESE_MAPLE;
 	public static WoodItems RAINBOW_EUCALYPTUS;
 	public static WoodItems SAKURA;
-	public static WoodItems PALM;
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static BlockItem DARK_JAPANESE_MAPLE_LEAVES;
@@ -59,7 +58,7 @@ public class TerrestriaItems {
 		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.registerWithoutBark("sakura", TerrestriaBlocks.SAKURA);
+		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
 		SAKURA.wood = SAKURA.log;
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);

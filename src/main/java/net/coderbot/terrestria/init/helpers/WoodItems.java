@@ -25,17 +25,6 @@ public class WoodItems {
 	}
 
 	public static WoodItems register(String name, WoodBlocks blocks) {
-		WoodItems items = registerWithoutBark(name, blocks);
-
-		items.wood = TerrestriaRegistry.registerBlockItem(name + "_wood", blocks.wood);
-		items.strippedWood = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_wood", blocks.strippedWood);
-
-		return items;
-	}
-
-	//Used for sakura since it uses small logs
-	//This is kinda dumb, should be modularized a bit better.
-	public static WoodItems registerWithoutBark(String name, WoodBlocks blocks) {
 		WoodItems items = new WoodItems();
 
 		items.log = TerrestriaRegistry.registerBlockItem(name + "_log", blocks.log);
@@ -51,6 +40,13 @@ public class WoodItems {
 		items.trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
 		items.sign = TerrestriaRegistry.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
 		items.strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);
+
+		if (blocks.log != blocks.wood) {
+			items.wood = TerrestriaRegistry.registerBlockItem(name + "_wood", blocks.wood);
+		}
+		if (blocks.strippedLog != blocks.strippedWood) {
+			items.strippedWood = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_wood", blocks.strippedWood);
+		}
 
 		return items;
 	}
