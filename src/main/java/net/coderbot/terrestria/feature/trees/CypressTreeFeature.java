@@ -35,7 +35,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		int height = rand.nextInt(5) + 12;
 
 		// Maximum leaf radius.
-		double maxRadius = 1.25 + 2 * rand.nextDouble();
+		double maxRadius = 1.5 + 1.5 * rand.nextDouble();
 
 		//If the tree can pass the max build height
 		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
