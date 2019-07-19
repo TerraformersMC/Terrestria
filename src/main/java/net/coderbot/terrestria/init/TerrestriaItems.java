@@ -122,6 +122,7 @@ public class TerrestriaItems {
 		public BlockItem button;
 		public BlockItem pressurePlate;
 		public SignItem sign;
+		public BlockItem trapdoor;
 		public BlockItem strippedLog;
 		public BlockItem strippedWood;
 
@@ -150,6 +151,7 @@ public class TerrestriaItems {
 			items.door = TerrestriaItems.register(name + "_door", blocks.door);
 			items.button = TerrestriaItems.register(name + "_button", blocks.button);
 			items.pressurePlate = TerrestriaItems.register(name + "_pressure_plate", blocks.pressurePlate);
+			items.trapdoor = TerrestriaItems.register(name + "_trapdoor", blocks.trapdoor);
 			items.sign = TerrestriaItems.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
 			items.strippedLog = TerrestriaItems.register("stripped_" + name + "_log", blocks.strippedLog);
 
