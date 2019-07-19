@@ -59,10 +59,10 @@ public class WoodBlocks {
 			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
 			blocks.log = TerrestriaRegistry.registerBlock(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
-			blocks.wood = TerrestriaRegistry.registerBlock(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = blocks.log; //no need for a wood type
 			blocks.leaves = TerrestriaRegistry.registerBlock(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 			blocks.strippedLog = TerrestriaRegistry.registerBlock("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
-			blocks.strippedWood = blocks.strippedLog;
+			blocks.strippedWood = blocks.strippedLog; //no need for a stripped wood type
 
 			blocks.addTreeFireInfo(registry);
 
