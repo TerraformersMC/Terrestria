@@ -1,12 +1,8 @@
 package net.coderbot.terrestria.init;
 
-import net.coderbot.terrestria.Terrestria;
-import net.minecraft.block.Block;
+import net.coderbot.terrestria.init.helpers.TerrestriaRegistry;
+import net.coderbot.terrestria.init.helpers.WoodItems;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.SignItem;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -67,97 +63,39 @@ public class TerrestriaItems {
 		SAKURA = WoodItems.registerWithoutBark("sakura", TerrestriaBlocks.SAKURA);
 		SAKURA.wood = SAKURA.log;
 
-		JAPANESE_MAPLE_SHRUB_LEAVES = register("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
-		DARK_JAPANESE_MAPLE_LEAVES = register("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
-		SAKURA_LEAF_PILE = register("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
+		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
+		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
+		SAKURA_LEAF_PILE = TerrestriaRegistry.registerBlockItem("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
 
-		CATTAIL = register("cattail", TerrestriaBlocks.CATTAIL);
+		CATTAIL = TerrestriaRegistry.registerBlockItem("cattail", TerrestriaBlocks.CATTAIL);
 
-		REDWOOD_QUARTER_LOG = register("redwood_quarter_log", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
-		HEMLOCK_QUARTER_LOG = register("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
-		CYPRESS_QUARTER_LOG = register("cypress_quarter_log", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = register("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
+		REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("redwood_quarter_log", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
+		HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
+		CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("cypress_quarter_log", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
-		STRIPPED_REDWOOD_QUARTER_LOG = register("stripped_redwood_quarter_log", TerrestriaBlocks.STRIPPED_REDWOOD_QUARTER_LOG);
-		STRIPPED_HEMLOCK_QUARTER_LOG = register("stripped_hemlock_quarter_log", TerrestriaBlocks.STRIPPED_HEMLOCK_QUARTER_LOG);
-		STRIPPED_CYPRESS_QUARTER_LOG = register("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
-		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = register("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
+		STRIPPED_REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_redwood_quarter_log", TerrestriaBlocks.STRIPPED_REDWOOD_QUARTER_LOG);
+		STRIPPED_HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_hemlock_quarter_log", TerrestriaBlocks.STRIPPED_HEMLOCK_QUARTER_LOG);
+		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
+		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
-		REDWOOD_SAPLING = register("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
-		HEMLOCK_SAPLING = register("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
-		RUBBER_SAPLING = register("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
-		CYPRESS_SAPLING = register("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
-		WILLOW_SAPLING = register("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
-		JAPANESE_MAPLE_SAPLING = register("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
-		JAPANESE_MAPLE_SHRUB_SAPLING = register("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
-		DARK_JAPANESE_MAPLE_SAPLING = register("dark_japanese_maple_sapling", TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
-		RAINBOW_EUCALYPTUS_SAPLING = register("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
-		SAKURA_SAPLING = register("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
-		PALM_SAPLING = register("palm_sapling", TerrestriaBlocks.PALM_SAPLING);
+		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
+		HEMLOCK_SAPLING = TerrestriaRegistry.registerBlockItem("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
+		RUBBER_SAPLING = TerrestriaRegistry.registerBlockItem("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
+		CYPRESS_SAPLING = TerrestriaRegistry.registerBlockItem("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
+		WILLOW_SAPLING = TerrestriaRegistry.registerBlockItem("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
+		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
+		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
+		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_sapling", TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
+		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
+		SAKURA_SAPLING = TerrestriaRegistry.registerBlockItem("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
+		PALM_SAPLING = TerrestriaRegistry.registerBlockItem("palm_sapling", TerrestriaBlocks.PALM_SAPLING);
 
-		BASALT = register("basalt", TerrestriaBlocks.BASALT);
-		BASALT_SAND = register("basalt_sand", TerrestriaBlocks.BASALT_SAND);
-		BASALT_DIRT = register("basalt_dirt", TerrestriaBlocks.BASALT_DIRT);
-		BASALT_GRASS_BLOCK = register("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
-		INDIAN_PAINTBRUSH = register("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
-		MONSTERAS = register("monsteras", TerrestriaBlocks.MONSTERAS);
-	}
-
-	private static BlockItem register(String name, Block block) {
-		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new BlockItem(block, new Item.Settings().group(Terrestria.ITEM_GROUP)));
-	}
-
-	private static SignItem registerSign(String name, Block standing, Block wall) {
-		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new SignItem(new Item.Settings().group(Terrestria.ITEM_GROUP), standing, wall));
-	}
-
-	public static class WoodItems {
-		public BlockItem log;
-		public BlockItem wood;
-		public BlockItem leaves;
-		public BlockItem planks;
-		public BlockItem slab;
-		public BlockItem stairs;
-		public BlockItem fence;
-		public BlockItem fenceGate;
-		public BlockItem door;
-		public BlockItem button;
-		public BlockItem pressurePlate;
-		public SignItem sign;
-		public BlockItem trapdoor;
-		public BlockItem strippedLog;
-		public BlockItem strippedWood;
-
-		private WoodItems() {
-		}
-
-		public static WoodItems register(String name, TerrestriaBlocks.WoodBlocks blocks) {
-			WoodItems items = registerWithoutBark(name, blocks);
-
-			items.wood = TerrestriaItems.register(name + "_wood", blocks.wood);
-			items.strippedWood = TerrestriaItems.register("stripped_" + name + "_wood", blocks.strippedWood);
-
-			return items;
-		}
-
-		public static WoodItems registerWithoutBark(String name, TerrestriaBlocks.WoodBlocks blocks) {
-			WoodItems items = new WoodItems();
-
-			items.log = TerrestriaItems.register(name + "_log", blocks.log);
-			items.leaves = TerrestriaItems.register(name + "_leaves", blocks.leaves);
-			items.planks = TerrestriaItems.register(name + "_planks", blocks.planks);
-			items.slab = TerrestriaItems.register(name + "_slab", blocks.slab);
-			items.stairs = TerrestriaItems.register(name + "_stairs", blocks.stairs);
-			items.fence = TerrestriaItems.register(name + "_fence", blocks.fence);
-			items.fenceGate = TerrestriaItems.register(name + "_fence_gate", blocks.fenceGate);
-			items.door = TerrestriaItems.register(name + "_door", blocks.door);
-			items.button = TerrestriaItems.register(name + "_button", blocks.button);
-			items.pressurePlate = TerrestriaItems.register(name + "_pressure_plate", blocks.pressurePlate);
-			items.trapdoor = TerrestriaItems.register(name + "_trapdoor", blocks.trapdoor);
-			items.sign = TerrestriaItems.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
-			items.strippedLog = TerrestriaItems.register("stripped_" + name + "_log", blocks.strippedLog);
-
-			return items;
-		}
+		BASALT = TerrestriaRegistry.registerBlockItem("basalt", TerrestriaBlocks.BASALT);
+		BASALT_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BASALT_SAND);
+		BASALT_DIRT = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.BASALT_DIRT);
+		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
+		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
+		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
 	}
 }
