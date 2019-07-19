@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:japanese_maple_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:japanese_maple_trapdoor",
+    "count": 2
+  }
+}

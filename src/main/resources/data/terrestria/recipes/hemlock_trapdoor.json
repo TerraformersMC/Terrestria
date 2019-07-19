@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_trapdoor",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:hemlock_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:hemlock_trapdoor",
+    "count": 2
+  }
+}
