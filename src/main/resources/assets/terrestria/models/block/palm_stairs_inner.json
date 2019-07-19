@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "terrestria:block/palm_planks",
+        "top": "terrestria:block/palm_planks",
+        "side": "terrestria:block/palm_planks"
+    }
+}

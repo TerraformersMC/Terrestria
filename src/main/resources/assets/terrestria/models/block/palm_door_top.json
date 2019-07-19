@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top",
+  "textures": {
+	"bottom": "terrestria:block/palm_door_bottom",
+	"top": "terrestria:block/palm_door_top"
+  }
+}

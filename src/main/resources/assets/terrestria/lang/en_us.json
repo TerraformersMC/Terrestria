@@ -112,6 +112,23 @@
   "block.terrestria.dark_japanese_maple_leaves": "Dark Japanese Maple Leaves",
   "block.terrestria.dark_japanese_maple_sapling": "Dark Japanese Maple Sapling",
 
+  "block.terrestria.palm_log": "Palm Log",
+  "block.terrestria.palm_wood": "Palm Wood",
+  "block.terrestria.palm_sapling": "Palm Sapling",
+  "block.terrestria.palm_leaves": "Palm Leaves",
+  "block.terrestria.palm_planks": "Palm Wood Planks",
+  "block.terrestria.palm_slab": "Palm Wood Slab",
+  "block.terrestria.palm_stairs": "Palm Wood Stairs",
+  "block.terrestria.palm_fence": "Palm Fence",
+  "block.terrestria.palm_fence_gate": "Palm Fence Gate",
+  "block.terrestria.palm_door": "Palm Door",
+  "block.terrestria.palm_pressure_plate": "Palm Pressure Plate",
+  "block.terrestria.palm_button": "Palm Button",
+  "block.terrestria.palm_sign": "Palm Sign",
+  "block.terrestria.palm_trapdoor": "Palm Trapdoor",
+  "block.terrestria.stripped_palm_wood": "Stripped Palm Wood",
+  "block.terrestria.stripped_palm_log": "Stripped Palm Log",
+
   "block.terrestria.rainbow_eucalyptus_log": "Rainbow Eucalyptus Log",
   "block.terrestria.rainbow_eucalyptus_wood": "Rainbow Eucalyptus Wood",
   "block.terrestria.rainbow_eucalyptus_quarter_log": "Rainbow Eucalyptus Log",
@@ -147,8 +164,6 @@
   "block.terrestria.sakura_trapdoor": "Sakura Trapdoor",
   "block.terrestria.stripped_sakura_wood": "Stripped Sakura Wood",
   "block.terrestria.stripped_sakura_log": "Stripped Sakura Log",
-
-  "block.terrestria.palm_sapling": "Palm Sapling",
 
   "block.terrestria.cattail": "Cattail",
   "block.terrestria.tall_cattail": "Tall Cattail",

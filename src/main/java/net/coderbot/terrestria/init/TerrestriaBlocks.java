@@ -28,6 +28,7 @@ public class TerrestriaBlocks {
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
+	public static WoodBlocks PALM;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
@@ -89,6 +90,7 @@ public class TerrestriaBlocks {
 		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
+		PALM = WoodBlocks.register("palm", WoodColors.CYPRESS, flammable);
 
 		SAKURA = WoodBlocks.registerManufactured("sakura", WoodColors.SAKURA, flammable);
 		SAKURA.leaves = register("sakura_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(WoodColors.SAKURA.leaves).build()));
