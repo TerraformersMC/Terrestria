@@ -94,14 +94,7 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 		PALM = WoodBlocks.register("palm", WoodColors.CYPRESS, flammable);
-
-		SAKURA = WoodBlocks.registerManufactured("sakura", WoodColors.SAKURA, flammable);
-		SAKURA.leaves = TerrestriaRegistry.registerBlock("sakura_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(WoodColors.SAKURA.leaves).build()));
-		SAKURA.log = TerrestriaRegistry.registerBlock("sakura_log", new SmallLogBlock(SAKURA.leaves, () -> SAKURA.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.bark).build()));
-		SAKURA.strippedLog = TerrestriaRegistry.registerBlock("stripped_sakura_log", new SmallLogBlock(SAKURA.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(WoodColors.SAKURA.planks).build()));
-		SAKURA.wood = SAKURA.log;
-		SAKURA.strippedWood = SAKURA.strippedLog;
-		SAKURA.addTreeFireInfo(flammable);
+		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlock("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 

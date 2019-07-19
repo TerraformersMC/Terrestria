@@ -32,10 +32,6 @@ public class WoodBlocks {
 
 	public WoodBlocks() {}
 
-	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
-		return register(name, colors, registry, false);
-	}
-
 	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry, boolean useExtendedLeaves) {
 		WoodBlocks blocks = registerManufactured(name, colors, registry);
 
@@ -52,6 +48,28 @@ public class WoodBlocks {
 		blocks.addTreeFireInfo(registry);
 
 		return blocks;
+	}
+
+	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
+		return register(name, colors, registry, false);
+	}
+
+	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry, LogSize size) {
+		if (size.equals(LogSize.SMALL)) {
+			WoodBlocks blocks = registerManufactured(name, colors, registry);
+
+			blocks.log = TerrestriaRegistry.registerBlock(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = TerrestriaRegistry.registerBlock(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.leaves = TerrestriaRegistry.registerBlock(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
+			blocks.strippedLog = TerrestriaRegistry.registerBlock("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
+			blocks.strippedWood = blocks.strippedLog;
+
+			blocks.addTreeFireInfo(registry);
+
+			return blocks;
+		} else {
+			return register(name, colors, registry, false);
+		}
 	}
 
 	public static WoodBlocks registerManufactured(String name, WoodColors colors, FlammableBlockRegistry registry) {
@@ -120,5 +138,20 @@ public class WoodBlocks {
 
 	public TreeDefinition.Basic getBasicDefinition() {
 		return new TreeDefinition.Basic(this.log.getDefaultState(), this.leaves.getDefaultState());
+	}
+
+	public enum LogSize {
+		LARGE("large"),
+		SMALL("small");
+
+		private final String name;
+
+		LogSize(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return this.name;
+		}
 	}
 }
