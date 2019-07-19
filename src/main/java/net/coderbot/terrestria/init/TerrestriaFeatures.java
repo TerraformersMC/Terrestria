@@ -146,7 +146,7 @@ public class TerrestriaFeatures {
 		// TODO: palm wood
 		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic(
 				Blocks.JUNGLE_LOG.getDefaultState(),
-				Blocks.JUNGLE_LEAVES.getDefaultState()
+				TerrestriaBlocks.PALM.leaves.getDefaultState()
 		);
 
 		PALM_TREE = register("palm_tree",
