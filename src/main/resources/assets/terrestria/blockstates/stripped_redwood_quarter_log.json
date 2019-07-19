@@ -1,0 +1,16 @@
+{
+  "variants": {
+	"axis=x,bark_side=southwest": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 90, "y": 270 },
+	"axis=x,bark_side=northwest": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 90, "y": 90 },
+	"axis=x,bark_side=northeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 270, "y": 90 },
+	"axis=x,bark_side=southeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 270, "y": 270 },
+	"axis=y,bark_side=southwest": { "model":  "terrestria:block/stripped_redwood_quarter_log" },
+	"axis=y,bark_side=northwest": { "model":  "terrestria:block/stripped_redwood_quarter_log", "y": 90 },
+	"axis=y,bark_side=northeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "y": 180 },
+	"axis=y,bark_side=southeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "y": 270 },
+	"axis=z,bark_side=southwest": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 90 },
+	"axis=z,bark_side=northwest": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 270 },
+	"axis=z,bark_side=northeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 270, "y": 180 },
+	"axis=z,bark_side=southeast": { "model":  "terrestria:block/stripped_redwood_quarter_log", "x": 90, "y": 180 }
+  }
+}

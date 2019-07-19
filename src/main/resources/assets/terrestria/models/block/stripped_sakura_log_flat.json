@@ -1,0 +1,7 @@
+{
+  "parent": "terrestria:block/sakura_log_flat",
+  "textures": {
+	"particle": "terrestria:block/stripped_sakura_log",
+	"all": "terrestria:block/stripped_sakura_log"
+  }
+}
