@@ -93,7 +93,6 @@ public class TerrestriaBlocks {
 		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
-		PALM = WoodBlocks.register("palm", WoodColors.CYPRESS, flammable);
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlock("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));

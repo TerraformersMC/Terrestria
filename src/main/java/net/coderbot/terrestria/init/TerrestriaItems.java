@@ -59,7 +59,6 @@ public class TerrestriaItems {
 		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		PALM = WoodItems.register("palm", TerrestriaBlocks.PALM);
 		SAKURA = WoodItems.registerWithoutBark("sakura", TerrestriaBlocks.SAKURA);
 		SAKURA.wood = SAKURA.log;
 
