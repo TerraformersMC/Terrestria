@@ -26,9 +26,7 @@ TODO: Coming soon.
 
 ### Licensing
 
-Terrestria is free software; the code and most assets and data in Terrestria are licensed under the GNU LGPLv3 license, however the textures
-(found in src/main/assets/terrestria/textures/) are licensed under the CC-BY-SA 3.0 as they are derived from
-[ExtrabiomesXL](https://github.com/ExtrabiomesXL/ExtrabiomesXL) textures. In other words, Terrestria may be
+Terrestria is free software; the code and most assets and data in Terrestria are licensed under the GNU LGPLv3 license. In other words, Terrestria may be
 freely distributed in combination with an attibution notice (such as a mod list entry) as well as a way to access
 this source code (for modpack developers, a link to the Curse or GitHub page; for fork authors, by providing access
 to the modified code).
