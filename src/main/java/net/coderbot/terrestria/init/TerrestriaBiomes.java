@@ -14,12 +14,10 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import java.util.function.Consumer;
@@ -381,15 +379,23 @@ public class TerrestriaBiomes {
 				.waterColor(0x2c7f32)
 				.waterFogColor(0x053305)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
-						DEFAULT_MUSHROOMS, SWAMP_VEGETATION, SPRINGS, SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_FEATURES)
+						DEFAULT_MUSHROOMS, SPRINGS, SEAGRASS, MORE_SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
+						DESERT_VEGETATION)
 				.addTreeFeature(TerrestriaFeatures.MEGA_CYPRESS_TREE, 2)
 				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE, 3)
+				.addTreeFeature(TerrestriaFeatures.WILLOW_TREE, 1)
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
 						TerrestriaFeatures.CATTAIL, new SeagrassFeatureConfig(80, 0.3D),
 						Decorator.TOP_SOLID_HEIGHTMAP, DecoratorConfig.DEFAULT))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
+						Feature.WATERLILY, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(32)))
+				.addGrassFeature(Blocks.GRASS.getDefaultState(), 2)
+				.addGrassFeature(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
+				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 1)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 8, 2, 4))
 				.build());
 
 		SAKURA_FOREST = register("sakura_forest", TerrestriaBiome.builder()

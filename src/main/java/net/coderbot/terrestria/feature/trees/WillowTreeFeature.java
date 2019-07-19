@@ -32,7 +32,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	@Override
 	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total tree height
-		int height = rand.nextInt(5) + 6;
+		int height = rand.nextInt(3) + 8;
 
 		// Maximum leaf radius.
 		double maxRadius = 5 + 3 * rand.nextDouble();
@@ -58,8 +58,8 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 
 		//Grow the trunk
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
-		growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, height / 3)), (int) (minRadius + 0.5), boundingBox);
-		growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, (height / 2) + 1)), (int) (minRadius * radiusFactor(height / 2, height) + 0.5), boundingBox);
+		growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, height / 3)), (int) maxRadius - 1, boundingBox);
+		growBranches(blocks, world, new BlockPos.Mutable(origin.offset(Direction.UP, (height / 2) + 1)), (int) (maxRadius * radiusFactor(height / 2, height)), boundingBox);
 		//Grow the leaves
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 		growLeaves(blocks, world, pos, height, maxRadius, minRadius, boundingBox, rand);
@@ -82,19 +82,20 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		});
 	}
 
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int minRadius, MutableIntBoundingBox boundingBox) {
+	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int maxRadius, MutableIntBoundingBox boundingBox) {
 		//save original origin for use in z branch
 		BlockPos origin = pos.toImmutable();
-		pos.setOffset(Direction.WEST, minRadius);
-		for (int x = -minRadius; x <= minRadius; x++) {
+		int branchLength = maxRadius - 2;
+		pos.setOffset(Direction.WEST, branchLength);
+		for (int x = -branchLength; x <= branchLength; x++) {
 			if (isAirOrLeaves(world, pos)) {
 				setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.WEST.getAxis()), boundingBox);
 			}
 			pos.setOffset(Direction.EAST);
 		}
 		pos.set(origin);
-		pos.setOffset(Direction.NORTH, minRadius);
-		for (int y = -minRadius; y <= minRadius; y++) {
+		pos.setOffset(Direction.NORTH, branchLength);
+		for (int y = -branchLength; y <= branchLength; y++) {
 			if (isAirOrLeaves(world, pos)) {
 				setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, Direction.NORTH.getAxis()), boundingBox);
 			}
