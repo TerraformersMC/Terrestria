@@ -282,6 +282,7 @@ public class TerrestriaBlocks {
 		public TerraformPressurePlateBlock pressurePlate;
 		public TerraformSignBlock sign;
 		public TerraformWallSignBlock wallSign;
+		public TerraformTrapdoorBlock trapdoor;
 		public Block strippedLog;
 		public Block strippedWood;
 		private String name;
@@ -331,6 +332,7 @@ public class TerrestriaBlocks {
 			blocks.door = TerrestriaBlocks.register(name + "_door", new TerraformDoorBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
 			blocks.button = TerrestriaBlocks.register(name + "_button", new TerraformButtonBlock(FabricBlockSettings.copy(Blocks.OAK_BUTTON).materialColor(colors.planks).build()));
 			blocks.pressurePlate = TerrestriaBlocks.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).materialColor(colors.planks).build()));
+			blocks.trapdoor = TerrestriaBlocks.register(name + "_trapdoor", new TerraformTrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).materialColor(colors.planks).build()));
 
 			Identifier signTexture = new Identifier(Terrestria.MOD_ID, "textures/entity/signs/" + name + ".png");
 
