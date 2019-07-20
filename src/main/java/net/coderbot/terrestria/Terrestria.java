@@ -1,6 +1,7 @@
 package net.coderbot.terrestria;
 
 import net.coderbot.terrestria.command.LocateAny;
+import net.coderbot.terrestria.config.BiomeConfigHandler;
 import net.coderbot.terrestria.init.*;
 import net.coderbot.terrestria.item.LogTurnerItem;
 import net.fabricmc.api.ModInitializer;
@@ -18,6 +19,8 @@ public class Terrestria implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
+
+		new BiomeConfigHandler();
 
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
