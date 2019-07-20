@@ -2,8 +2,6 @@ package net.coderbot.terrestria.init.helpers;
 
 import net.minecraft.block.MaterialColor;
 
-//This is also doo doo, should be done in line with the block's registry
-//or better yet calculated from the texture
 public class WoodColors {
 	public static final WoodColors REDWOOD;
 	public static final WoodColors HEMLOCK;

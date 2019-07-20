@@ -38,7 +38,7 @@ public class WoodItems {
 		items.button = TerrestriaRegistry.registerBlockItem(name + "_button", blocks.button);
 		items.pressurePlate = TerrestriaRegistry.registerBlockItem(name + "_pressure_plate", blocks.pressurePlate);
 		items.trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
-		items.sign = TerrestriaRegistry.registerSign(name + "_sign", blocks.sign, blocks.wallSign);
+		items.sign = TerrestriaRegistry.registerSignItem(name + "_sign", blocks.sign, blocks.wallSign);
 		items.strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);
 
 		if (blocks.log != blocks.wood) {
