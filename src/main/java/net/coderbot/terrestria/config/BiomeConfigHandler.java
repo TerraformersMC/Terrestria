@@ -2,80 +2,61 @@ package net.coderbot.terrestria.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.fabricmc.loader.FabricLoader;
+import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.*;
+import java.util.HashMap;
 
 public class BiomeConfigHandler {
 
-	private static String CONFIG_PATH;
 	private static File CONFIG_FILE;
-	private static BiomeConfigHandler biomeConfigHandler;
-	private static BiomeConfig config;
 	private static final short CURRENT_BIOME_CONFIG_VERSION = 1;
+	private static BiomeConfig CONFIG;
 
-	public BiomeConfigHandler() {
-		biomeConfigHandler = this;
-		CONFIG_PATH = FabricLoader.INSTANCE.getConfigDirectory() + File.separator + "terrestria" + File.separator;
-		CONFIG_FILE = new File(CONFIG_PATH + "biomes.json");
+	private BiomeConfigHandler() {}
 
-		System.out.println("TERRESTRIA CONFIG:" + CONFIG_PATH);
-
-		File configDir = new File(CONFIG_PATH);
-		if (!configDir.exists()) {
-			configDir.mkdir();
+	public static BiomeConfig getBiomeConfig() {
+		if(CONFIG != null) {
+			return CONFIG;
 		}
 
-		if (!loadConfig()) {
-			createNewConfig();
+		CONFIG = new BiomeConfig(CURRENT_BIOME_CONFIG_VERSION, false, new HashMap<>());
+
+		File configDirectory = new File(FabricLoader.getInstance().getConfigDirectory(), "terrestria");
+		CONFIG_FILE = new File(configDirectory, "biomes.json");
+
+		if (!configDirectory.exists()) {
+			configDirectory.mkdir();
 		}
+
+		loadConfig();
+
+		return CONFIG;
 	}
 
-	private static boolean loadConfig() {
+	private static void loadConfig() {
 		try {
 			if (CONFIG_FILE.exists()) {
 				Gson gson = new Gson();
 				BufferedReader br = new BufferedReader(new FileReader(CONFIG_FILE));
 
-				BiomeConfig config = gson.fromJson(br, BiomeConfig.class);
-				store(config);
-				return true;
-			} else {
-				return false;
+				CONFIG = gson.fromJson(br, BiomeConfig.class);
 			}
 		} catch (FileNotFoundException e) {
+			System.err.println("Couldn't load Terrestria config file");
 			e.printStackTrace();
-			return false;
 		}
 	}
 
-	private void createNewConfig() {
-		BiomeConfig config = new BiomeConfig();
-
-		config.setVersion(CURRENT_BIOME_CONFIG_VERSION);
-
-		config.addNode("cypress_forest", new BiomeConfigNode(true, 1.0f, 0.33f));
-
-		store(config);
-		save();
-	}
-
-	private static void save() {
+	public static void save() {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		String jsonString = gson.toJson(config);
+		String jsonString = gson.toJson(CONFIG);
+
 		try (FileWriter fileWriter = new FileWriter(CONFIG_FILE)) {
 			fileWriter.write(jsonString);
 		}  catch (IOException e) {
+			System.err.println("Couldn't save Terrestria config file");
 			e.printStackTrace();
 		}
-
-	}
-
-	private static void store(BiomeConfig cf) {
-		config = cf;
-	}
-
-	public static BiomeConfig getConfig() {
-		return config;
 	}
 }

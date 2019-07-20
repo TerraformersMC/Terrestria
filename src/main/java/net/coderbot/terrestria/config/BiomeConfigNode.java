@@ -3,38 +3,58 @@ package net.coderbot.terrestria.config;
 public class BiomeConfigNode {
 
 	private boolean enable;
-	private float weight;
-	private float variantChance;
 
-	public BiomeConfigNode(boolean enable, float weight, float variantChance) {
+	public BiomeConfigNode(boolean enable) {
 		this.enable = enable;
-		this. weight = weight;
-		this.variantChance = variantChance;
 	}
 
 	public BiomeConfigNode() {}
 
-	public boolean isEnable() {
+	public boolean isEnabled() {
 		return enable;
 	}
 
-	public void setEnable(boolean enable) {
+	public void setEnabled(boolean enable) {
 		this.enable = enable;
 	}
+	
+	public static class Variant extends BiomeConfigNode {
+		private float chance;
 
-	public float getWeight() {
-		return weight;
+		public Variant(boolean enable, float chance) {
+			super(enable);
+			
+			this.chance = chance;
+		}
+
+		public Variant() {}
+
+		public float getVariantChance() {
+			return chance;
+		}
+
+		public void setVariantChance(float chance) {
+			this.chance = chance;
+		}
 	}
 
-	public void setWeight(float weight) {
-		this.weight = weight;
-	}
+	public static class Continental extends BiomeConfigNode {
+		private float weight;
 
-	public float getVariantChance() {
-		return variantChance;
-	}
+		public Continental(boolean enable, float weight, float chance) {
+			super(enable);
+			
+			this. weight = weight;
+		}
 
-	public void setVariantChance(float variantChance) {
-		this.variantChance = variantChance;
+		public Continental() {}
+
+		public float getWeight() {
+			return weight;
+		}
+
+		public void setWeight(float weight) {
+			this.weight = weight;
+		}
 	}
 }
