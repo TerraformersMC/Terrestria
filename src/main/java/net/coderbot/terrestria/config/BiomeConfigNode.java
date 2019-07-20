@@ -19,9 +19,9 @@ public class BiomeConfigNode {
 	}
 	
 	public static class Variant extends BiomeConfigNode {
-		private float chance;
+		private double chance;
 
-		public Variant(boolean enable, float chance) {
+		public Variant(boolean enable, double chance) {
 			super(enable);
 			
 			this.chance = chance;
@@ -29,19 +29,19 @@ public class BiomeConfigNode {
 
 		public Variant() {}
 
-		public float getVariantChance() {
+		public double getVariantChance() {
 			return chance;
 		}
 
-		public void setVariantChance(float chance) {
+		public void setVariantChance(double chance) {
 			this.chance = chance;
 		}
 	}
 
 	public static class Continental extends BiomeConfigNode {
-		private float weight;
+		private double weight;
 
-		public Continental(boolean enable, float weight, float chance) {
+		public Continental(boolean enable, double weight) {
 			super(enable);
 			
 			this. weight = weight;
@@ -49,11 +49,11 @@ public class BiomeConfigNode {
 
 		public Continental() {}
 
-		public float getWeight() {
+		public double getWeight() {
 			return weight;
 		}
 
-		public void setWeight(float weight) {
+		public void setWeight(double weight) {
 			this.weight = weight;
 		}
 	}

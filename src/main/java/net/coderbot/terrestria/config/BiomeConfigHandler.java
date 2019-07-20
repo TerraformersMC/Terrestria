@@ -20,7 +20,7 @@ public class BiomeConfigHandler {
 			return CONFIG;
 		}
 
-		CONFIG = new BiomeConfig(CURRENT_BIOME_CONFIG_VERSION, false, new HashMap<>());
+		CONFIG = new BiomeConfig(CURRENT_BIOME_CONFIG_VERSION, false);
 
 		File configDirectory = new File(FabricLoader.getInstance().getConfigDirectory(), "terrestria");
 		CONFIG_FILE = new File(configDirectory, "biomes.json");

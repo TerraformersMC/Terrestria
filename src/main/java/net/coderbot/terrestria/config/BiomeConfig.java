@@ -7,14 +7,14 @@ public class BiomeConfig {
 
 	private short version;
 	private boolean freeze;
-	private Map<String, BiomeConfigNode> biomes = new HashMap<>();
+	private Map<String, BiomeConfigNode.Continental> continental = new HashMap<>();
+	private Map<String, BiomeConfigNode.Variant> variants = new HashMap<>();
 
 	public BiomeConfig() {}
 
-	public BiomeConfig(short version, boolean freeze, Map<String, BiomeConfigNode> biomes) {
+	public BiomeConfig(short version, boolean freeze) {
 		this.version = version;
 		this.freeze = freeze;
-		this.biomes = biomes;
 	}
 
 	public short getVersion() {
@@ -25,15 +25,15 @@ public class BiomeConfig {
 		this.version = version;
 	}
 
-	public boolean isFrozen(boolean freeze) {
+	public boolean isFrozen() {
 		return freeze;
 	}
 
-	public Map<String, BiomeConfigNode> getBiomes() {
-		return biomes;
+	public BiomeConfigNode.Continental continental(String name, BiomeConfigNode.Continental defaultNode) {
+		return this.continental.computeIfAbsent(name, name_ -> defaultNode);
 	}
 
-	public BiomeConfigNode node(String name, BiomeConfigNode defaultNode) {
-		return this.biomes.putIfAbsent(name, defaultNode);
+	public BiomeConfigNode.Variant variant(String name, BiomeConfigNode.Variant defaultNode) {
+		return this.variants.computeIfAbsent(name, name_ -> defaultNode);
 	}
 }
