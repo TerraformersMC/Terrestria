@@ -2,10 +2,9 @@ package net.coderbot.terrestria.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.coderbot.terrestria.Terrestria;
+import net.fabricmc.loader.FabricLoader;
 
 import java.io.*;
-import java.net.URISyntaxException;
 
 public class BiomeConfigHandler {
 
@@ -17,11 +16,7 @@ public class BiomeConfigHandler {
 
 	public BiomeConfigHandler() {
 		biomeConfigHandler = this;
-		try {
-			CONFIG_PATH = new File(Terrestria.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath() + File.separator + "config" + File.separator;
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		CONFIG_PATH = FabricLoader.INSTANCE.getConfigDirectory() + File.separator + "terrestria" + File.separator;
 		CONFIG_FILE = new File(CONFIG_PATH + "biomes.json");
 
 		System.out.println("TERRESTRIA CONFIG:" + CONFIG_PATH);
