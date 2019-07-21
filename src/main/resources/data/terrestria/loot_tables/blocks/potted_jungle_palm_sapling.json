@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terrestria:palm_sapling"
+          "name": "terrestria:jungle_palm_sapling"
         }
       ],
       "conditions": [

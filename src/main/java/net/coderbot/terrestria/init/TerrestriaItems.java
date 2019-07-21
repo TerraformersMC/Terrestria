@@ -18,6 +18,7 @@ public class TerrestriaItems {
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static BlockItem DARK_JAPANESE_MAPLE_LEAVES;
+	public static BlockItem JUNGLE_PALM_LEAVES;
 	public static BlockItem SAKURA_LEAF_PILE;
 
 	public static BlockItem CATTAIL;
@@ -41,7 +42,7 @@ public class TerrestriaItems {
 	public static BlockItem DARK_JAPANESE_MAPLE_SAPLING;
 	public static BlockItem RAINBOW_EUCALYPTUS_SAPLING;
 	public static BlockItem SAKURA_SAPLING;
-	public static BlockItem PALM_SAPLING;
+	public static BlockItem JUNGLE_PALM_SAPLING;
 
 	public static BlockItem BASALT;
 	public static BlockItem BASALT_SAND;
@@ -63,6 +64,7 @@ public class TerrestriaItems {
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
+		JUNGLE_PALM_LEAVES = TerrestriaRegistry.registerBlockItem("jungle_palm_leaves", TerrestriaBlocks.JUNGLE_PALM_LEAVES);
 		SAKURA_LEAF_PILE = TerrestriaRegistry.registerBlockItem("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
 
 		CATTAIL = TerrestriaRegistry.registerBlockItem("cattail", TerrestriaBlocks.CATTAIL);
@@ -87,7 +89,7 @@ public class TerrestriaItems {
 		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_sapling", TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
 		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		SAKURA_SAPLING = TerrestriaRegistry.registerBlockItem("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
-		PALM_SAPLING = TerrestriaRegistry.registerBlockItem("palm_sapling", TerrestriaBlocks.PALM_SAPLING);
+		JUNGLE_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("jungle_palm_sapling", TerrestriaBlocks.JUNGLE_PALM_SAPLING);
 
 		BASALT = TerrestriaRegistry.registerBlockItem("basalt", TerrestriaBlocks.BASALT);
 		BASALT_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BASALT_SAND);

@@ -38,7 +38,7 @@ public class TerrestriaFeatures {
 	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
-	public static PalmTreeFeature PALM_TREE;
+	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
 
 	public static CattailFeature CATTAIL;
@@ -143,14 +143,13 @@ public class TerrestriaFeatures {
 				)
 		);
 
-		// TODO: palm wood
-		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic(
+		TreeDefinition.Basic junglePalm = new TreeDefinition.Basic(
 				Blocks.JUNGLE_LOG.getDefaultState(),
-				Blocks.JUNGLE_LEAVES.getDefaultState()
+				TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()
 		);
 
-		PALM_TREE = register("palm_tree",
-				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
+		JUNGLE_PALM_TREE = register("jungle_palm_tree",
+				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, junglePalm.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
 		);
 
 		RUBBER_TREE = register("rubber_tree",

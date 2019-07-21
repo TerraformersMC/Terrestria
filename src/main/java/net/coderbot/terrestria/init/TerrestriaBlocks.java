@@ -28,6 +28,7 @@ public class TerrestriaBlocks {
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
+	public static LeavesBlock JUNGLE_PALM_LEAVES;
 	public static LeafPileBlock SAKURA_LEAF_PILE;
 
 	public static SeagrassBlock CATTAIL;
@@ -52,10 +53,11 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock DARK_JAPANESE_MAPLE_SAPLING;
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static TerraformSaplingBlock SAKURA_SAPLING;
-	public static TerraformSaplingBlock PALM_SAPLING;
+	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
+	public static FlowerPotBlock POTTED_JUNGLE_PALM_SAPLING;
 	public static FlowerPotBlock POTTED_RUBBER_SAPLING;
 	public static FlowerPotBlock POTTED_CYPRESS_SAPLING;
 	public static FlowerPotBlock POTTED_WILLOW_SAPLING;
@@ -64,7 +66,6 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_DARK_JAPANESE_MAPLE_SAPLING;
 	public static FlowerPotBlock POTTED_RAINBOW_EUCALYPTUS_SAPLING;
 	public static FlowerPotBlock POTTED_SAKURA_SAPLING;
-	public static FlowerPotBlock POTTED_PALM_SAPLING;
 
 	// Volcanic Island blocks
 	public static SandBlock BASALT_SAND;
@@ -93,6 +94,8 @@ public class TerrestriaBlocks {
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",
 				new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(MaterialColor.RED_TERRACOTTA).build())
 		);
+
+		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(SAKURA.leaves).noCollision()));
 
@@ -171,8 +174,8 @@ public class TerrestriaBlocks {
 				new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAKURA_TREE.sapling())
 		));
 
-		PALM_SAPLING = TerrestriaRegistry.register("palm_sapling", new TerraformSaplingBlock(
-				new TerraformSaplingGenerator(() -> TerrestriaFeatures.PALM_TREE.sapling())
+		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new TerraformSaplingBlock(
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE.sapling())
 		));
 
 		// Volcanic Island Blocks
@@ -198,6 +201,6 @@ public class TerrestriaBlocks {
 		POTTED_DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("potted_dark_japanese_maple_sapling", new FlowerPotBlock(DARK_JAPANESE_MAPLE_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("potted_rainbow_eucalyptus_sapling", new FlowerPotBlock(RAINBOW_EUCALYPTUS_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_SAKURA_SAPLING = TerrestriaRegistry.register("potted_sakura_sapling", new FlowerPotBlock(SAKURA_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
-		POTTED_PALM_SAPLING = TerrestriaRegistry.register("potted_palm_sapling", new FlowerPotBlock(PALM_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("potted_jungle_palm_sapling", new FlowerPotBlock(JUNGLE_PALM_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 	}
 }

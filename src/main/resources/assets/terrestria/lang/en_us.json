@@ -39,6 +39,9 @@
   "block.terrestria.stripped_hemlock_log": "Stripped Hemlock Log",
   "block.terrestria.stripped_hemlock_quarter_log": "Stripped Hemlock Log",
 
+  "block.terrestria.jungle_palm_sapling": "Jungle Palm Sapling",
+  "block.terrestria.jungle_palm_leaves": "Jungle Palm Leaves",
+
   "block.terrestria.rubber_log": "Rubber Log",
   "block.terrestria.rubber_wood": "Rubber Wood",
   "block.terrestria.rubber_sapling": "Rubber Sapling",
@@ -148,8 +151,6 @@
   "block.terrestria.stripped_sakura_wood": "Stripped Sakura Wood",
   "block.terrestria.stripped_sakura_log": "Stripped Sakura Log",
 
-  "block.terrestria.palm_sapling": "Palm Sapling",
-
   "block.terrestria.cattail": "Cattail",
   "block.terrestria.tall_cattail": "Tall Cattail",
 
@@ -175,7 +176,7 @@
   "block.terrestria.potted_dark_japanese_maple_sapling": "Potted Dark Japanese Maple Sapling",
   "block.terrestria.potted_rainbow_eucalyptus_sapling": "Potted Rainbow Eucalyptus Sapling",
   "block.terrestria.potted_sakura_sapling": "Potted Sakura Sapling",
-  "block.terrestria.potted_palm_sapling": "Potted Palm Sapling",
+  "block.terrestria.potted_jungle_palm_sapling": "Potted Jungle Palm Sapling",
   "block.terrestria.potted_japanese_maple_shrub_sapling": "Potted Japanese Maple Shrub Sapling",
 
   "item.terrestria.log_turner": "Log Turner",

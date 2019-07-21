@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+	"all": "terrestria:block/jungle_palm_leaves"
+  }
+}
