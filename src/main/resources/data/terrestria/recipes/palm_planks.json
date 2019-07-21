@@ -1,0 +1,12 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+		  "tag": "terrestria:palm_logs"
+		}
+	],
+	"result": {
+		"item": "terrestria:palm_planks",
+		"count": 4
+	}
+}

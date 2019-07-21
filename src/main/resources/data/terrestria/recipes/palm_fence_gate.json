@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"SPS",
+		"SPS"
+	],
+	"key": {
+		"P": {
+			"item": "terrestria:palm_planks"
+		},
+		"S": {
+		    "item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "terrestria:palm_fence_gate"
+	}
+}
