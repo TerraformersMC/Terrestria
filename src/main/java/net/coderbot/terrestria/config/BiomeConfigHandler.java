@@ -10,7 +10,6 @@ import java.util.HashMap;
 public class BiomeConfigHandler {
 
 	private static File CONFIG_FILE;
-	private static final short CURRENT_BIOME_CONFIG_VERSION = 1;
 	private static BiomeConfig CONFIG;
 
 	private BiomeConfigHandler() {}
@@ -20,7 +19,7 @@ public class BiomeConfigHandler {
 			return CONFIG;
 		}
 
-		CONFIG = new BiomeConfig(CURRENT_BIOME_CONFIG_VERSION, false);
+		CONFIG = new BiomeConfig( false);
 
 		File configDirectory = new File(FabricLoader.getInstance().getConfigDirectory(), "terrestria");
 		CONFIG_FILE = new File(configDirectory, "biomes.json");

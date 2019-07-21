@@ -5,24 +5,14 @@ import java.util.Map;
 
 public class BiomeConfig {
 
-	private short version;
 	private boolean freeze;
 	private Map<String, BiomeConfigNode.Continental> continental = new HashMap<>();
 	private Map<String, BiomeConfigNode.Variant> variants = new HashMap<>();
 
 	public BiomeConfig() {}
 
-	public BiomeConfig(short version, boolean freeze) {
-		this.version = version;
+	public BiomeConfig(boolean freeze) {
 		this.freeze = freeze;
-	}
-
-	public short getVersion() {
-		return version;
-	}
-
-	public void setVersion(short version) {
-		this.version = version;
 	}
 
 	public boolean isFrozen() {
