@@ -145,12 +145,12 @@ public class TerrestriaFeatures {
 
 		// TODO: palm wood
 		TreeDefinition.Basic palmDefinition = new TreeDefinition.Basic(
-				Blocks.JUNGLE_LOG.getDefaultState(),
-				Blocks.JUNGLE_LEAVES.getDefaultState()
+				TerrestriaBlocks.PALM.log.getDefaultState(),
+				TerrestriaBlocks.PALM.leaves.getDefaultState()
 		);
 
 		PALM_TREE = register("palm_tree",
-				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
+				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, palmDefinition.withBark(TerrestriaBlocks.PALM.wood.getDefaultState()))
 		);
 
 		RUBBER_TREE = register("rubber_tree",
