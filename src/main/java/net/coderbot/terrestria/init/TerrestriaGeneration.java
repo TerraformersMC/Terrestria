@@ -33,16 +33,16 @@ public class TerrestriaGeneration {
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config);
 
 		if(ALPS != null) {
-			OverworldBiomes.addHillsBiome(ALPS, ALPINE, 1);
+			OverworldBiomes.addHillsBiome(ALPS, CALDERA_FOOTHILLS, 1);
 			OverworldBiomes.setRiverBiome(ALPS, null);
 		}
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
-			OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, ALPINE);
+			OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
 			OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
 
-			OverworldBiomes.setRiverBiome(ALPINE, null);
+			OverworldBiomes.setRiverBiome(CALDERA_FOOTHILLS, null);
 			OverworldBiomes.setRiverBiome(CALDERA, null);
 			OverworldBiomes.setRiverBiome(CALDERA_BEACH, null);
 			OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);

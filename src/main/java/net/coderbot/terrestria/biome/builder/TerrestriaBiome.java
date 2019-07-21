@@ -1,4 +1,4 @@
-package net.coderbot.terrestria.biome;
+package net.coderbot.terrestria.biome.builder;
 
 import net.coderbot.terrestria.feature.TerrestriaFeature;
 import net.minecraft.block.BlockState;
