@@ -54,7 +54,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 
 			BlockPos top = world.getTopPosition(worldGen ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.WORLD_SURFACE, pos);
 
-			if (!AbstractTreeFeature.isAirOrLeaves(world, top)) {
+			if (!AbstractTreeFeature.isAir(world, top)) {
 				return;
 			}
 
