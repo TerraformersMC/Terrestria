@@ -2,27 +2,14 @@ package net.coderbot.terrestria.init;
 
 import net.coderbot.terrestria.Terrestria;
 import net.coderbot.terrestria.biome.*;
-import net.coderbot.terrestria.biome.builder.TerrestriaBiome;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import java.util.function.Consumer;
 
-import static net.coderbot.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
-
-// This class exports public biome constants, these fields have to be public
-@SuppressWarnings("WeakerAccess")
 public class TerrestriaBiomes {
 	public static Biome ALPS;
 	public static Biome CALDERA;
