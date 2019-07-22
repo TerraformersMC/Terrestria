@@ -196,6 +196,7 @@ public class VolcanoGenerator extends StructurePiece {
 					for (int dY = -chamberDY; dY <= chamberDY; dY++) {
 						pos.set(x, chamberMiddle + dY, z);
 						world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
+						world.getFluidTickScheduler().schedule(pos, world.getFluidState(pos).getFluid(), 0);
 					}
 				} else if (chamberShape > -0.1) {
 					pos.set(x, chamberMiddle, z);
@@ -310,7 +311,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				pos.setOffset(Direction.DOWN);
 
-				if (world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) {
+				if ((world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) && startY < columnHeight) {
 					world.setBlockState(pos, top, 2);
 
 					if (lava) {
