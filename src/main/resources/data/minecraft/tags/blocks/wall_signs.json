@@ -1,5 +1,12 @@
 {
   "values": [
+    "minecraft:oak_wall_sign",
+    "minecraft:spruce_wall_sign",
+    "minecraft:birch_wall_sign",
+    "minecraft:acacia_wall_sign",
+    "minecraft:jungle_wall_sign",
+    "minecraft:dark_oak_wall_sign",
+
     "terrestria:redwood_wall_sign",
     "terrestria:hemlock_wall_sign",
     "terrestria:rubber_wall_sign",

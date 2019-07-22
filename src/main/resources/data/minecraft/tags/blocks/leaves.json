@@ -1,5 +1,12 @@
 {
   "values": [
+	"minecraft:jungle_leaves",
+	"minecraft:oak_leaves",
+	"minecraft:spruce_leaves",
+	"minecraft:dark_oak_leaves",
+	"minecraft:acacia_leaves",
+	"minecraft:birch_leaves",
+
 	"terrestria:redwood_leaves",
 	"terrestria:hemlock_leaves",
 	"terrestria:rubber_leaves",

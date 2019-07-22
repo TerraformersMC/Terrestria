@@ -1,5 +1,11 @@
 {
   "values": [
+	"minecraft:dirt",
+	"minecraft:grass_block",
+	"minecraft:podzol",
+	"minecraft:coarse_dirt",
+	"minecraft:mycelium",
+
 	"terrestria:basalt_grass_block",
 	"terrestria:basalt_dirt"
   ]

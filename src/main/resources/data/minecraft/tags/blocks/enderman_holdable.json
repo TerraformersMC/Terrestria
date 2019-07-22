@@ -1,5 +1,24 @@
 {
   "values": [
+	"#minecraft:small_flowers",
+	"minecraft:grass_block",
+	"minecraft:dirt",
+	"minecraft:coarse_dirt",
+	"minecraft:podzol",
+	"minecraft:sand",
+	"minecraft:red_sand",
+	"minecraft:gravel",
+	"minecraft:brown_mushroom",
+	"minecraft:red_mushroom",
+	"minecraft:tnt",
+	"minecraft:cactus",
+	"minecraft:clay",
+	"minecraft:pumpkin",
+	"minecraft:carved_pumpkin",
+	"minecraft:melon",
+	"minecraft:mycelium",
+	"minecraft:netherrack",
+
 	"terrestria:basalt_grass_block",
 	"terrestria:basalt_dirt",
 	"terrestria:basalt_sand"

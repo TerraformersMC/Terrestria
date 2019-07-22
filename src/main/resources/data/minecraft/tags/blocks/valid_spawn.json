@@ -1,5 +1,8 @@
 {
   "values": [
+	"minecraft:grass_block",
+	"minecraft:podzol",
+
 	"terrestria:basalt_grass_block"
   ]
 }
