@@ -19,8 +19,8 @@ We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.
 
 ### Links
 
-Terraformers Website: coming soon!
-Terraformers Discord: https://discord.gg/jEGF5fb
+ - Terraformers Website: coming soon!
+ - Terraformers Discord: https://discord.gg/jEGF5fb
 
 ### Credits
 
