@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "net.coderbot.terrestria.mixin",
+  "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
 	"MixinAnimalEntity"

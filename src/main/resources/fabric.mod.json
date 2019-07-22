@@ -21,16 +21,17 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.coderbot.terrestria.Terrestria"
+      "com.terraformersmc.terrestria.Terrestria"
     ],
     "client": [
-      "net.coderbot.terrestria.TerrestriaClient"
+      "com.terraformersmc.terrestria.TerrestriaClient"
     ]
   },
 
   "depends": {
     "fabricloader": ">=0.4.0",
-    "fabric": "*"
+    "fabric": "*",
+    "terraform": ">=0.1.0"
   },
   "mixins": [
     "mixins.terrestria.json"
