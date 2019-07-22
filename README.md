@@ -1,9 +1,11 @@
-# Terrestria
+![Terrestria Header Image](https://i.gyazo.com/8390f9a4300614e3e5ea4a6c54f8f80a.png)
+
+## About Terrestria
 
 Terrestria aims to be the next up-and-coming biomes mod for target versions of minecraft 1.14.x and above.
 We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.10 most recently, and we were also affeced by the RedPower World mod from Minecraft 1.4.7. We remastered the biomes to fit with the modern minecraft style.
 
-### Biomes:
+### Biomes
  - [Caldera](https://github.com/TerraformersMC/Terrestria/wiki/Caldera)
  - [Cypress Forest](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Forest)
  - [Cypress Swamp](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Swamp)
@@ -13,7 +15,7 @@ We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.
  - [Lush Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Redwood-Forest)
  - [Rainbow Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Rainbow-Rainforest)
  - [Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Redwood-Forest)
- - [Sakura Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
+ - [Sakura Forest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
  - [Snowy Hemlock Forest](https://github.com/TerraformersMC/Terrestria/wiki/Snowy-Hemlock-Forest)
  - [Volcanic Island](https://github.com/TerraformersMC/Terrestria/wiki/Volcanic-Island)
 
