@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.coderbot.terrestria.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"MixinAnimalEntity"
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  }
+}
