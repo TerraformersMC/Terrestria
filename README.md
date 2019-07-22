@@ -20,14 +20,14 @@ We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.
 ### Links
 
 Terraformers Website: coming soon!
-Terraformers Discord: https://discord.gg/jEGF5fb
+Terraformers Discord: tba!
 
 ### Credits
 
-coderbot   - Coderbot is Terrestria's project lead, and lead developer
-NeusFear   - Terrestria's artist, and a developer
-Valoeghese - Developer
-Prospector - Terraform Developer and advisor
+ - coderbot: Coderbot is Terrestria's project lead, and lead developer
+ - NeusFear: Terrestria's artist, and a developer
+ - Valoeghese: Developer
+ - Prospector: Terraform Developer and advisor
 
 ### Licensing
 
