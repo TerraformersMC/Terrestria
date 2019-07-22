@@ -13,7 +13,7 @@ We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.
  - [Lush Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Redwood-Forest)
  - [Rainbow Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Rainbow-Rainforest)
  - [Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Redwood-Forest)
- - [Sakura Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
+ - [Sakura Forest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
  - [Snowy Hemlock Forest](https://github.com/TerraformersMC/Terrestria/wiki/Snowy-Hemlock-Forest)
  - [Volcanic Island](https://github.com/TerraformersMC/Terrestria/wiki/Volcanic-Island)
 
