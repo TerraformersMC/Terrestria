@@ -1,11 +1,11 @@
 ![Terrestria Header Image](https://i.gyazo.com/f1e44b6f520202a86471f42337cb612a.png)
 
-## About Terrestria:
+## About Terrestria
 
 Terrestria aims to be the next up-and-coming biomes mod for target versions of minecraft 1.14.x and above.
 We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.10 most recently, and we were also affeced by the RedPower World mod from Minecraft 1.4.7. We remastered the biomes to fit with the modern minecraft style.
 
-### Biomes:
+### Biomes
  - [Caldera](https://github.com/TerraformersMC/Terrestria/wiki/Caldera)
  - [Cypress Forest](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Forest)
  - [Cypress Swamp](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Swamp)
