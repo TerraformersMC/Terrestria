@@ -2,8 +2,15 @@
 
 ## About Terrestria
 
-Terrestria aims to be the next up-and-coming biomes mod for target versions of minecraft 1.14.x and above.
-We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.10 most recently, and we were also affeced by the RedPower World mod from Minecraft 1.4.7. We remastered the biomes to fit with the modern minecraft style.
+Terrestria is a detailed and vibrant biomes mod for Minecraft 1.14.4 and above running on the Fabric mod loader.
+Terrestria enhances gameplay through the addition of 12 major biomes supported by 17 component biomes, 8 new wood types, 
+as well as a healthy selection of foliage - providing a refreshing new selection of terrain.
+
+The goal of Terrestria is to be *the* most polished and visually appealing biomes mod available for Minecraft 1.14,
+and to this end there has been intense focus on selecting, detailing, and refining the biomes until they
+look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount
+of biomes and then populating them with large amounts of detail and component biomes. This overall results in a
+more cohesive experience compared to existing biome mods.
 
 ### Biomes
  - [Caldera](https://github.com/TerraformersMC/Terrestria/wiki/Caldera)
@@ -26,10 +33,10 @@ We took great inspiration from the ExtrabiomesXL mod released for Minecraft 1.7.
 
 ### Credits
 
- - coderbot: Coderbot is Terrestria's project lead, and lead developer
- - NeusFear: Terrestria's artist, and a developer
+ - coderbot: Project lead and lead developer
+ - NeusFear: Artist and developer
  - Valoeghese: Developer
- - Prospector: Terraform Developer and advisor
+ - Prospector: TerraformersMC organizer, Terraform Developer, and adviser
 
 ### Licensing
 
