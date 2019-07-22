@@ -18,7 +18,6 @@ public class TerrestriaGeneration {
 		// 33% of Mountains will be replaced with Caldera Ridges
 		// 10% of Deep Oceans will be replaced with Volcanic Islands
 
-		addContinentalBiome(ALPS, OverworldClimate.SNOWY, 1.0, "alps", config);
 		addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33, "caldera", config);
 		addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0, "cypress_forest", config);
 		addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0, "cypress_swamp", config);
@@ -31,11 +30,6 @@ public class TerrestriaGeneration {
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config);
-
-		if(ALPS != null) {
-			OverworldBiomes.addHillsBiome(ALPS, CALDERA_FOOTHILLS, 1);
-			OverworldBiomes.setRiverBiome(ALPS, null);
-		}
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);

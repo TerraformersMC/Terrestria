@@ -11,7 +11,6 @@ import net.minecraft.world.biome.Biomes;
 import java.util.function.Consumer;
 
 public class TerrestriaBiomes {
-	public static Biome ALPS;
 	public static Biome CALDERA;
 	public static Biome CALDERA_BEACH;
 	public static Biome CALDERA_FOOTHILLS;
@@ -44,7 +43,6 @@ public class TerrestriaBiomes {
 
 	public static void init() {
 
-		AlpsBiomes.register();
 		CalderaBiomes.register();
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
