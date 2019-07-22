@@ -1,4 +1,4 @@
-![Terrestria Header Image](https://i.gyazo.com/8390f9a4300614e3e5ea4a6c54f8f80a.png)
+![Terrestria Header Image](https://i.gyazo.com/c1f9e08c4ab1a6fb2b307be9a0110bd1.png)
 
 ## About Terrestria
 
