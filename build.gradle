@@ -29,10 +29,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modCompile "com.terraformersmc:terraform:1.0.0+build.29"
+	modCompile "com.terraformersmc:terraform:1.0.0+build.30"
 	modCompile "io.github.prospector.modmenu:ModMenu:1.6.3-95"
 
-	include "com.terraformersmc:terraform:1.0.0+build.29"
+	include "com.terraformersmc:terraform:1.0.0+build.30"
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
