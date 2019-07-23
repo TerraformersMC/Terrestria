@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.terraformersmc.terrestria.feature.TreeDefinition;
-import io.github.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;

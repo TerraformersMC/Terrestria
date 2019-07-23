@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
-import io.github.terraformersmc.terraform.util.Shapes;
+import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

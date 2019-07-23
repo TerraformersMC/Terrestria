@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
-import io.github.terraformersmc.terraform.util.Shapes;
+import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.GroundClutter;

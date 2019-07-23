@@ -1,10 +1,10 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import io.github.terraformersmc.terraform.surface.BeachSurfaceBuilder;
-import io.github.terraformersmc.terraform.surface.CliffSurfaceBuilder;
-import io.github.terraformersmc.terraform.surface.CliffSurfaceConfig;
-import io.github.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
+import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
+import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
+import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
+import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

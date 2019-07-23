@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.item;
 
-import io.github.terraformersmc.terraform.block.QuarterLogBlock;
+import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -2,8 +2,8 @@ package com.terraformersmc.terrestria.feature.volcano;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import io.github.terraformersmc.terraform.noise.OpenSimplexNoise;
-import io.github.terraformersmc.terraform.noise.SimpleRadialNoise;
+import com.terraformersmc.terraform.noise.OpenSimplexNoise;
+import com.terraformersmc.terraform.noise.SimpleRadialNoise;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

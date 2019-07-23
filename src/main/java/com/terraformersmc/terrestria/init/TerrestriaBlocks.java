@@ -1,9 +1,9 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
-import io.github.terraformersmc.terraform.block.*;
-import io.github.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
-import io.github.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
+import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodColors;

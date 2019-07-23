@@ -11,7 +11,7 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import io.github.terraformersmc.terraform.util.*;
+import com.terraformersmc.terraform.util.*;
 
 import java.util.Random;
 import java.util.Set;
