@@ -33,20 +33,20 @@ public class VolcanicIslandBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
 		);
 
-		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", TerrestriaBiome.builder()
+		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template.builder()
 				.category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
 				.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE, 5)
 				.build());
 
-		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", TerrestriaBiome.builder()
+		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
 				.depth(0.05F)
 				.scale(0.05F)
 				.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE, 2)
 				.build());
 
-		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", TerrestriaBiome.builder()
+		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
 				.depth(0F)
 				.scale(0.05F)
