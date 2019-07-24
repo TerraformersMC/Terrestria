@@ -14,7 +14,20 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class CalderaBiomes {
 	public static void register() {
-		TerrestriaBiomes.CALDERA = TerrestriaBiomes.register("caldera", TerrestriaBiome.builder()
+		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+				.waterColor(0x54d3c0)
+				.waterFogColor(0x24a0b0)
+				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
+						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
+				.addStructureFeature(Feature.STRONGHOLD)
+				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addDefaultSpawnEntries()
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
+				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
+		);
+
+		TerrestriaBiomes.CALDERA = TerrestriaBiomes.register("caldera", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
 				.depth(1.5F)
@@ -23,33 +36,15 @@ public class CalderaBiomes {
 				.downfall(0.7F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
-						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
 				.build());
 
-		TerrestriaBiomes.CALDERA_BEACH = TerrestriaBiomes.register("caldera_beach", TerrestriaBiome.builder()
+		TerrestriaBiomes.CALDERA_BEACH = TerrestriaBiomes.register("caldera_beach", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.depth(2.25F)
 				.scale(0F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.waterColor(0x54d3c0)
-				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
-						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
 				.build());
 
 		TerrestriaBiomes.CALDERA_FOOTHILLS = TerrestriaBiomes.register("caldera_foothills", TerrestriaBiome.builder()
@@ -61,15 +56,10 @@ public class CalderaBiomes {
 				.downfall(0.1F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_MUSHROOMS,
-						DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.EMERALD_ORE, DefaultFeature.INFECTED_STONE, DefaultFeature.FROZEN_TOP_LAYER)
 				.addRareTreeFeature(TerrestriaFeatures.REDWOOD_TREE, 2)
 				.addRareTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 2)
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
@@ -82,16 +72,8 @@ public class CalderaBiomes {
 				.downfall(1F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
-						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addTreeFeature(TerrestriaFeatures.TINY_REDWOOD_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
 				.build());
 	}
 }

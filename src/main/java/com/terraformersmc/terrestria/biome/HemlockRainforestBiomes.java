@@ -16,20 +16,15 @@ import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_
 
 public class HemlockRainforestBiomes {
 	public static void register() {
-		TerrestriaBiomes.HEMLOCK_CLEARING = TerrestriaBiomes.register("hemlock_clearing", TerrestriaBiome.builder()
+		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
-				.depth(0.95F)
-				.scale(0.2F)
 				.temperature(0.6F)
 				.downfall(0.9F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
-				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 2)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
 				.addStructureFeature(Feature.STRONGHOLD)
@@ -38,31 +33,23 @@ public class HemlockRainforestBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
+		);
+
+		TerrestriaBiomes.HEMLOCK_CLEARING = TerrestriaBiomes.register("hemlock_clearing", template.builder()
+				.depth(0.95F)
+				.scale(0.2F)
+				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 2)
 				.build());
 
-		TerrestriaBiomes.HEMLOCK_RAINFOREST = TerrestriaBiomes.register("hemlock_rainforest", TerrestriaBiome.builder()
-				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+		TerrestriaBiomes.HEMLOCK_RAINFOREST = TerrestriaBiomes.register("hemlock_rainforest", template.builder()
 				.depth(0.95F)
 				.scale(0.55F)
-				.temperature(0.6F)
-				.downfall(0.9F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
-						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE, 8)
 				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 8)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 4)
 				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
-				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
-				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
 				.build());
 	}
 }

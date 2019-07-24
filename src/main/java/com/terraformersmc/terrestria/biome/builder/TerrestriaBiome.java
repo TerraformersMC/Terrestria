@@ -20,6 +20,7 @@ public class TerrestriaBiome extends Biome {
 
 	private TerrestriaBiome(Biome.Settings biomeSettings, ArrayList<SpawnEntry> spawns) {
 		super(biomeSettings);
+
 		for (SpawnEntry entry : spawns) {
 			this.addSpawn(entry.type.getCategory(), entry);
 		}
@@ -29,16 +30,21 @@ public class TerrestriaBiome extends Biome {
 		return new Builder();
 	}
 
+	public static TerrestriaBiome.Frozen freeze(TerrestriaBiome.Builder builder) {
+		return new Frozen(builder);
+	}
+
 	public static final class Builder extends BuilderBiomeSettings {
 
 		private ArrayList<DefaultFeature> defaultFeatures = new ArrayList<>();
 		private ArrayList<TerrestriaFeature> features = new ArrayList<>();
-		private Map<StructureFeature, FeatureConfig> structureFeatures = new HashMap<>();
+		private Map<StructureFeature<FeatureConfig>, FeatureConfig> structureFeatures = new HashMap<>();
 		private Map<Feature<DefaultFeatureConfig>, Integer> treeFeatures = new HashMap<>();
 		private Map<Feature<DefaultFeatureConfig>, Integer> rareTreeFeatures = new HashMap<>();
 		private Map<BlockState, Integer> plantFeatures = new HashMap<>();
 		private Map<BlockState, Integer> doublePlantFeatures = new HashMap<>();
 		private ArrayList<Biome.SpawnEntry> spawnEntries = new ArrayList<>();
+		private boolean template = false;
 		// NOTE: Make sure to add any additional fields to the Frozen copy code down below!
 
 		Builder() {
@@ -47,12 +53,29 @@ public class TerrestriaBiome extends Biome {
 			parent(null);
 		}
 
+		Builder(Builder existing) {
+			super(existing);
+
+			this.defaultFeatures.addAll(existing.defaultFeatures);
+			this.features.addAll(existing.features);
+			this.structureFeatures.putAll(existing.structureFeatures);
+			this.treeFeatures.putAll(existing.treeFeatures);
+			this.rareTreeFeatures.putAll(existing.rareTreeFeatures);
+			this.plantFeatures.putAll(existing.plantFeatures);
+			this.doublePlantFeatures.putAll(existing.doublePlantFeatures);
+			this.spawnEntries.addAll(existing.spawnEntries);
+		}
+
 		public Biome build() {
+			if(template) {
+				throw new IllegalStateException("Tried to call build() on a frozen Builder instance!");
+			}
+
 			// Add SpawnEntries
 			TerrestriaBiome biome = new TerrestriaBiome(this, this.spawnEntries);
 
 			// Add structures
-			for (Map.Entry<StructureFeature, FeatureConfig> structure : structureFeatures.entrySet()) {
+			for (Map.Entry<StructureFeature<FeatureConfig>, FeatureConfig> structure : structureFeatures.entrySet()) {
 				biome.addStructureFeature(structure.getKey(), structure.getValue());
 			}
 
@@ -252,7 +275,7 @@ public class TerrestriaBiome extends Biome {
 			return this;
 		}
 
-		public TerrestriaBiome.Builder addStructureFeatures(StructureFeature... defaultStructureFeatures) {
+		public TerrestriaBiome.Builder addStructureFeatures(StructureFeature<DefaultFeatureConfig>... defaultStructureFeatures) {
 			for (StructureFeature feature : defaultStructureFeatures) {
 				this.structureFeatures.put(feature, FeatureConfig.DEFAULT);
 			}
@@ -292,6 +315,10 @@ public class TerrestriaBiome extends Biome {
 
 		Frozen(Builder builder) {
 			this.builder = builder;
+		}
+
+		public Builder builder() {
+			return new Builder(this.builder);
 		}
 	}
 }
