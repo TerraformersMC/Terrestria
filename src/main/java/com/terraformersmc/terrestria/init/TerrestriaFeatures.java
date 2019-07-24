@@ -204,12 +204,6 @@ public class TerrestriaFeatures {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 
-	public static void addCanyonCliffStarts(Biome... biomes) {
-		for (Biome biome : biomes) {
-			biome.addStructureFeature(TerrestriaFeatures.CANYON_CLIFF_STRUCTURE, new DefaultFeatureConfig());
-		}
-	}
-
 	public static void addCanyonCliffStructure(Biome biome) {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.CANYON_CLIFF_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}

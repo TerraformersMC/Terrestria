@@ -69,8 +69,6 @@ public class TerrestriaBiomes {
 		);
 
 		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
-
-		TerrestriaFeatures.addCanyonCliffStarts(CANYON_CLIFFS);
 		forEveryBiome(TerrestriaFeatures::addCanyonCliffStructure);
 	}
 

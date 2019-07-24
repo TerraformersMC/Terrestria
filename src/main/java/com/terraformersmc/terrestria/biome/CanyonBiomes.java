@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
@@ -25,6 +26,7 @@ public class CanyonBiomes {
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
+				.addStructureFeature(TerrestriaFeatures.CANYON_CLIFF_STRUCTURE)
 				.addDefaultSpawnEntries()
 				.build());
 
