@@ -15,6 +15,8 @@ public class TerrestriaBiomes {
 	public static Biome CALDERA_BEACH;
 	public static Biome CALDERA_FOOTHILLS;
 	public static Biome CALDERA_RIDGE;
+	public static Biome CANYON_CLIFFS;
+	public static Biome CANYON;
 	public static Biome CYPRESS_FOREST;
 	public static Biome CYPRESS_SWAMP;
 	public static Biome DENSE_WOODLANDS;
@@ -44,6 +46,7 @@ public class TerrestriaBiomes {
 	public static void init() {
 
 		CalderaBiomes.register();
+		CanyonBiomes.register();
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
 		DenseWoodlandsBiomes.register();
@@ -66,6 +69,9 @@ public class TerrestriaBiomes {
 		);
 
 		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
+
+		TerrestriaFeatures.addCanyonCliffStarts(CANYON_CLIFFS);
+		forEveryBiome(TerrestriaFeatures::addCanyonCliffStructure);
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {

@@ -11,10 +11,12 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 
+import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
+
 public class VolcanicIslandBiomes {
 	public static void register() {
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.BASALT_CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
@@ -22,8 +24,8 @@ public class VolcanicIslandBiomes {
 				.downfall(0.9F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(TerrestriaBiome.DefaultFeature.LAND_CARVERS, TerrestriaBiome.DefaultFeature.STRUCTURES, TerrestriaBiome.DefaultFeature.LAKES, TerrestriaBiome.DefaultFeature.DUNGEONS, TerrestriaBiome.DefaultFeature.MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
-						TerrestriaBiome.DefaultFeature.DEFAULT_GRASS, TerrestriaBiome.DefaultFeature.DEFAULT_MUSHROOMS, TerrestriaBiome.DefaultFeature.DEFAULT_VEGETATION, TerrestriaBiome.DefaultFeature.SPRINGS, TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
+						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
@@ -36,7 +38,7 @@ public class VolcanicIslandBiomes {
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
+				.configuredSurfaceBuilder(TerrestriaSurfaces.BASALT_CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.depth(0.05F)
 				.scale(0.05F)
@@ -44,8 +46,8 @@ public class VolcanicIslandBiomes {
 				.downfall(0.9F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(TerrestriaBiome.DefaultFeature.LAND_CARVERS, TerrestriaBiome.DefaultFeature.STRUCTURES, TerrestriaBiome.DefaultFeature.LAKES, TerrestriaBiome.DefaultFeature.DUNGEONS, TerrestriaBiome.DefaultFeature.MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
-						TerrestriaBiome.DefaultFeature.DEFAULT_GRASS, TerrestriaBiome.DefaultFeature.DEFAULT_MUSHROOMS, TerrestriaBiome.DefaultFeature.DEFAULT_VEGETATION, TerrestriaBiome.DefaultFeature.SPRINGS, TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
+						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
@@ -66,8 +68,8 @@ public class VolcanicIslandBiomes {
 				.downfall(0.9F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(TerrestriaBiome.DefaultFeature.LAND_CARVERS, TerrestriaBiome.DefaultFeature.STRUCTURES, TerrestriaBiome.DefaultFeature.LAKES, TerrestriaBiome.DefaultFeature.DUNGEONS, TerrestriaBiome.DefaultFeature.MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
-						TerrestriaBiome.DefaultFeature.DEFAULT_GRASS, TerrestriaBiome.DefaultFeature.DEFAULT_MUSHROOMS, TerrestriaBiome.DefaultFeature.DEFAULT_VEGETATION, TerrestriaBiome.DefaultFeature.SPRINGS, TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS, TerrestriaBiome.DefaultFeature.DEFAULT_FLOWERS,
+						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)

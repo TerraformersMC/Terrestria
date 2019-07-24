@@ -18,8 +18,10 @@ public class TerrestriaSurfaces {
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
-	public static CliffSurfaceBuilder CLIFF;
+	public static CliffSurfaceBuilder BASALT_CLIFF;
+	public static CliffSurfaceBuilder SANDSTONE_CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
+	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 
 	public static void init() {
@@ -33,13 +35,22 @@ public class TerrestriaSurfaces {
 
 		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 62, v -> Blocks.SAND.getDefaultState()));
 
-		CLIFF = register("cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+
+		SANDSTONE_CLIFF = register("sandstone_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
 				Blocks.SAND.getDefaultState(),
 				TerrestriaBlocks.BASALT.getDefaultState()
+		);
+
+		SANDSTONE_CONFIG = new CliffSurfaceConfig(
+				Blocks.SAND.getDefaultState(),
+				Blocks.TERRACOTTA.getDefaultState(),
+				Blocks.SAND.getDefaultState(),
+				Blocks.SMOOTH_SANDSTONE.getDefaultState()
 		);
 
 		ALPS_CONFIG = new TernarySurfaceConfig(
