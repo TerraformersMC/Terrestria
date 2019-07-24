@@ -14,7 +14,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class CalderaBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
 				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,

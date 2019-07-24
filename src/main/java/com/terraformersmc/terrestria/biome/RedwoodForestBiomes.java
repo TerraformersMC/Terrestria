@@ -16,7 +16,7 @@ import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_
 
 public class RedwoodForestBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.9F)

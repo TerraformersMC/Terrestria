@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
 
 public class LushRedwoodForestBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(1.2F)

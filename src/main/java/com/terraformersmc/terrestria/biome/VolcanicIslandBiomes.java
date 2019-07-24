@@ -14,7 +14,7 @@ import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 
 public class VolcanicIslandBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)

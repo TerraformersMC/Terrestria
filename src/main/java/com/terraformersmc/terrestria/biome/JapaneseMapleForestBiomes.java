@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FOREST_
 
 public class JapaneseMapleForestBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.8F)

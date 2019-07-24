@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.biome.builder;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.*;
 import net.minecraft.world.gen.feature.*;
@@ -30,8 +29,8 @@ public class TerrestriaBiome extends Biome {
 		return new Builder();
 	}
 
-	public static TerrestriaBiome.Frozen freeze(TerrestriaBiome.Builder builder) {
-		return new Frozen(builder);
+	public static Template template(TerrestriaBiome.Builder builder) {
+		return new Template(builder);
 	}
 
 	public static final class Builder extends BuilderBiomeSettings {
@@ -45,7 +44,6 @@ public class TerrestriaBiome extends Biome {
 		private Map<BlockState, Integer> doublePlantFeatures = new HashMap<>();
 		private ArrayList<Biome.SpawnEntry> spawnEntries = new ArrayList<>();
 		private boolean template = false;
-		// NOTE: Make sure to add any additional fields to the Frozen copy code down below!
 
 		Builder() {
 			super();
@@ -310,11 +308,12 @@ public class TerrestriaBiome extends Biome {
 		}
 	}
 
-	public static final class Frozen {
+	public static final class Template {
 		private final Builder builder;
 
-		Frozen(Builder builder) {
+		Template(Builder builder) {
 			this.builder = builder;
+			builder.template = true;
 		}
 
 		public Builder builder() {

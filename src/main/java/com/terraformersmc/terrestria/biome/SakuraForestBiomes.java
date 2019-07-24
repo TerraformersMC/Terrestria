@@ -13,7 +13,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class SakuraForestBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.8F)

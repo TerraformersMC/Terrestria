@@ -14,7 +14,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class SnowyHemlockRainforestBiomes {
 	public static void register() {
-		TerrestriaBiome.Frozen template = TerrestriaBiome.freeze(TerrestriaBiome.builder()
+		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.TAIGA)
 				.depth(0.95F)
