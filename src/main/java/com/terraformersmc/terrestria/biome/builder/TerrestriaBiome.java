@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.biome.builder;
 
-import com.terraformersmc.terrestria.feature.TerrestriaFeature;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -19,8 +18,6 @@ import java.util.Map;
 
 public class TerrestriaBiome extends Biome {
 
-	private static Biome biome;
-
 	private TerrestriaBiome(Biome.Settings biomeSettings, ArrayList<SpawnEntry> spawns) {
 		super(biomeSettings);
 		for (SpawnEntry entry : spawns) {
@@ -32,90 +29,8 @@ public class TerrestriaBiome extends Biome {
 		return new Builder();
 	}
 
-	public enum DefaultFeature {
-		LAND_CARVERS("land_carvers"),
-		OCEAN_CARVERS("ocean_carvers"),
-		STRUCTURES("structures"),
-		LAKES("lakes"),
-		DESERT_LAKES("desert_lakes"),
-		DUNGEONS("dungeons"),
-		MINEABLES("mineables"),
-		ORES("ores"),
-		EXTRA_GOLD("extra_gold"),
-		EMERALD_ORE("emerald_ore"),
-		INFECTED_STONE("infected_stone"),
-		DISKS("disks"),
-		CLAY("clay"),
-		MOSSY_ROCKS("mossy_rocks"),
-		LARGE_FERNS("large_ferns"),
-		SWEET_BERRY_BUSHES("sweet_berry_bushes"),
-		SWEET_BERRY_BUSHES_SNOWY("sweet_berry_bushes_snowy"),
-		BAMBOO("bamboo"),
-		BAMBOO_JUNGLE_TREES("bamboo jungle trees"),
-		TAIGA_TREES("taiga_trees"),
-		WATER_BIOME_OAK_TREES("water_biome_oak_trees"),
-		BIRCH_TREES("birch_trees"),
-		FOREST_TREES("forest_trees"),
-		TALL_BIRCH_TREES("tall_birch_trees"),
-		SAVANNAH_TREES("savannah_trees"),
-		EXTRA_SAVANNA_TREES("extra_savannah_trees"),
-		MOUNTAIN_TREES("mountain_trees"),
-		EXTRA_MOUNTAIN_TREES("extra_mountain_trees"),
-		JUNGLE_TREES("jungle_trees"),
-		JUNGLE_EDGE_TREES("jungle_edge_trees"),
-		BADLANDS_PLATEAU_TREES("badlands_plateau_trees"),
-		SNOWY_SPRUCE_TREES("snowy_spruce_trees"),
-		GIANT_SPRUCE_TAIGA_TREES("giant_spruce_taiga_trees"),
-		MEGA_SPRUCE_TAIGA_TREES("mega_spruce_taiga_trees"),
-		JUNGLE_GRASS("jungle_grass"),
-		SAVANNA_TALL_GRASS("savanna_tall_grass"),
-		SHATTERED_SAVANNAH_TALL_GRASS("shattered_savannah_tall_grass"),
-		SAVANNAH_GRASS("savannah_grass"),
-		BADLANDS_GRASS("badlands_grass"),
-		FOREST_FLOWERS("forrest_flowers"),
-		FOREST_GRASS("forrest_grass"),
-		SWAMP_FEATURES("swamp_features"),
-		MUSHROOM_FIELDS_FEATURES("mushroom_fields_features"),
-		PLAINS_FEATURES("plains_features"),
-		DESERT_DEAD_BUSHES("desert_dead_bushes"),
-		GIANT_TAIGA_GRASS("giant_taiga_grass"),
-		DEFAULT_FLOWERS("default_flowers"),
-		EXTRA_DEFAULT_FLOWERS("extra_default_flowers"),
-		DEFAULT_GRASS("default_grass"),
-		TAIGA_GRASS("taiga_grass"),
-		PLAINS_TALL_GRASS("plains_tall_grass"),
-		DEFAULT_MUSHROOMS("default_mushrooms"),
-		DEFAULT_VEGETATION("default_vegetation"),
-		BADLANDS_VEGETATION("badlands_vegetation"),
-		JUNGLE_VEGETATION("jungle_vegetation"),
-		DESERT_VEGETATION("desert_vegetation"),
-		SWAMP_VEGETATION("swamp_vegetation"),
-		DESSERT_FEATURES("desert_features"),
-		FOSSILS("fossils"),
-		KELP("kelp"),
-		SEAGRASS_ON_STONE("seagrass_on_stone"),
-		SEAGRASS("seagrass"),
-		MORE_SEAGRASS("more_seagrass"),
-		LESS_KELP("less_kelp"),
-		SPRINGS("springs"),
-		ICEBERGS("icebergs"),
-		BLUE_ICE("blue_ice"),
-		FROZEN_TOP_LAYER("frozen_top_layer");
+	public static final class Builder extends BuilderBiomeSettings {
 
-		private final String name;
-
-		DefaultFeature(String name) {
-			this.name = name;
-		}
-
-		public String getName() {
-			return this.name;
-		}
-	}
-
-	public static final class Builder {
-
-		private Biome.Settings biomeSettings;
 		private ArrayList<DefaultFeature> defaultFeatures = new ArrayList<>();
 		private ArrayList<TerrestriaFeature> features = new ArrayList<>();
 		private Map<StructureFeature, FeatureConfig> structureFeatures = new HashMap<>();
@@ -123,30 +38,22 @@ public class TerrestriaBiome extends Biome {
 		private Map<Feature<DefaultFeatureConfig>, Integer> rareTreeFeatures = new HashMap<>();
 		private Map<BlockState, Integer> plantFeatures = new HashMap<>();
 		private Map<BlockState, Integer> doublePlantFeatures = new HashMap<>();
-		private ConfiguredSurfaceBuilder surfaceBuilder;
-		private Biome.Precipitation precipitation;
-		private Biome.Category category;
-		private float depth;
-		private float scale;
-		private float temperature;
-		private float downfall;
-		private int waterColor;
-		private int waterFogColor;
 		private ArrayList<Biome.SpawnEntry> spawnEntries = new ArrayList<>();
+		// NOTE: Make sure to add any additional fields to the Frozen copy code down below!
+
+		Builder() {
+			super();
+
+			parent(null);
+		}
 
 		public Biome build() {
-			// Create the biome settings from the builder options
-			biomeSettings = new Biome.Settings().parent(null).category(category).depth(depth).scale(scale)
-					.precipitation(precipitation).temperature(temperature).downfall(downfall).waterColor(waterColor)
-					.waterFogColor(waterFogColor)
-					.configureSurfaceBuilder(this.surfaceBuilder.surfaceBuilder, this.surfaceBuilder.config); // more
-
 			// Add SpawnEntries
-			TerrestriaBiome.biome = new TerrestriaBiome(this.biomeSettings, this.spawnEntries);
+			TerrestriaBiome biome = new TerrestriaBiome(this, this.spawnEntries);
 
 			// Add structures
 			for (Map.Entry<StructureFeature, FeatureConfig> structure : structureFeatures.entrySet()) {
-				TerrestriaBiome.biome.addStructureFeature(structure.getKey(), structure.getValue());
+				biome.addStructureFeature(structure.getKey(), structure.getValue());
 			}
 
 			// Tree Feature stuff
@@ -167,7 +74,7 @@ public class TerrestriaBiome extends Biome {
 
 					float weight = (float) count / totalTreesPerChunk;
 
-					TerrestriaBiome.biome.addFeature(
+					biome.addFeature(
 							GenerationStep.Feature.VEGETAL_DECORATION,
 							Biome.configureFeature(
 									feature,
@@ -185,7 +92,7 @@ public class TerrestriaBiome extends Biome {
 				Feature<DefaultFeatureConfig> feature = tree.getKey();
 				int chance = tree.getValue();
 
-				TerrestriaBiome.biome.addFeature(
+				biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
 						Biome.configureFeature(
 								feature,
@@ -199,19 +106,19 @@ public class TerrestriaBiome extends Biome {
 			// Add any minecraft (default) features
 
 			for (DefaultFeature defaultFeature : defaultFeatures) {
-				buildDefaultFeature(defaultFeature);
+				defaultFeature.add(biome);
 			}
 
 			// Add custom features that don't fit in the templates
 
 			for (TerrestriaFeature feature : features) {
-				TerrestriaBiome.biome.addFeature(feature.getStep(), feature.getFeature());
+				biome.addFeature(feature.getStep(), feature.getFeature());
 			}
 
 			// Add Plant decoration features
 
 			for (Map.Entry<BlockState, Integer> plant : plantFeatures.entrySet()) {
-				TerrestriaBiome.biome.addFeature(
+				biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
 						Biome.configureFeature(Feature.GRASS, new GrassFeatureConfig(plant.getKey()), Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(plant.getValue())));
 			}
@@ -219,25 +126,92 @@ public class TerrestriaBiome extends Biome {
 			// Add Double Plant decoration features
 
 			for (Map.Entry<BlockState, Integer> doublePlant : doublePlantFeatures.entrySet()) {
-				TerrestriaBiome.biome.addFeature(
+				biome.addFeature(
 						GenerationStep.Feature.VEGETAL_DECORATION,
 						Biome.configureFeature(Feature.DOUBLE_PLANT, new DoublePlantFeatureConfig(doublePlant.getKey()), Decorator.COUNT_HEIGHTMAP_32, new CountDecoratorConfig(doublePlant.getValue())));
 			}
 
 
-			return TerrestriaBiome.biome;
+			return biome;
 		}
 
-		public TerrestriaBiome.Builder settings(Biome.Settings settings) {
-			this.biomeSettings = settings;
+		@Override
+		public <SC extends SurfaceConfig> Builder configureSurfaceBuilder(SurfaceBuilder<SC> builder, SC config) {
+			super.configureSurfaceBuilder(builder, config);
+
 			return this;
 		}
 
-		public <SC extends SurfaceConfig> TerrestriaBiome.Builder configuredSurfaceBuilder(SurfaceBuilder<SC> surfaceBuilder, SC surfaceConfig) {
-			this.surfaceBuilder = new ConfiguredSurfaceBuilder<>(surfaceBuilder, surfaceConfig);
+		@Override
+		public Builder surfaceBuilder(ConfiguredSurfaceBuilder<?> surfaceBuilder) {
+			super.surfaceBuilder(surfaceBuilder);
+
 			return this;
 		}
 
+		@Override
+		public Builder precipitation(Biome.Precipitation precipitation) {
+			super.precipitation(precipitation);
+
+			return this;
+		}
+
+		@Override
+		public Builder category(Biome.Category category) {
+			super.category(category);
+
+			return this;
+		}
+
+		@Override
+		public Builder depth(float depth) {
+			super.depth(depth);
+
+			return this;
+		}
+
+		@Override
+		public Builder scale(float scale) {
+			super.scale(scale);
+
+			return this;
+		}
+
+		@Override
+		public Builder temperature(float temperature) {
+			super.temperature(temperature);
+
+			return this;
+		}
+
+		@Override
+		public Builder downfall(float downfall) {
+			super.downfall(downfall);
+
+			return this;
+		}
+
+		@Override
+		public Builder waterColor(int color) {
+			super.waterColor(color);
+
+			return this;
+		}
+
+		@Override
+		public Builder waterFogColor(int color) {
+			super.waterFogColor(color);
+
+			return this;
+		}
+
+		@Override
+		public Builder parent(String parent) {
+			super.parent(parent);
+
+			return this;
+		}
+		
 		public TerrestriaBiome.Builder addTreeFeature(Feature<DefaultFeatureConfig> feature, int numPerChunk) {
 			this.treeFeatures.put(feature, numPerChunk);
 			return this;
@@ -260,46 +234,6 @@ public class TerrestriaBiome extends Biome {
 
 		public TerrestriaBiome.Builder addCustomFeature(GenerationStep.Feature step, ConfiguredFeature feature) {
 			this.features.add(new TerrestriaFeature(step, feature));
-			return this;
-		}
-
-		public TerrestriaBiome.Builder precipitation(Biome.Precipitation precipitation) {
-			this.precipitation = precipitation;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder category(Biome.Category category) {
-			this.category = category;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder depth(float depth) {
-			this.depth = depth;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder scale(float scale) {
-			this.scale = scale;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder temperature(float temperature) {
-			this.temperature = temperature;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder downfall(float downfall) {
-			this.downfall = downfall;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder waterColor(int waterColor) {
-			this.waterColor = waterColor;
-			return this;
-		}
-
-		public TerrestriaBiome.Builder waterFogColor(int waterFogColor) {
-			this.waterFogColor = waterFogColor;
 			return this;
 		}
 
@@ -351,214 +285,13 @@ public class TerrestriaBiome extends Biome {
 					.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 			return this;
 		}
+	}
 
-		void buildDefaultFeature(DefaultFeature feature) {
-			switch (feature) {
-				case LAND_CARVERS:
-					DefaultBiomeFeatures.addLandCarvers(TerrestriaBiome.biome);
-					break;
-				case OCEAN_CARVERS:
-					DefaultBiomeFeatures.addOceanCarvers(TerrestriaBiome.biome);
-					break;
-				case STRUCTURES:
-					DefaultBiomeFeatures.addDefaultStructures(TerrestriaBiome.biome);
-					break;
-				case LAKES:
-					DefaultBiomeFeatures.addDefaultLakes(TerrestriaBiome.biome);
-					break;
-				case DESERT_LAKES:
-					DefaultBiomeFeatures.addDesertLakes(TerrestriaBiome.biome);
-					break;
-				case DUNGEONS:
-					DefaultBiomeFeatures.addDungeons(TerrestriaBiome.biome);
-					break;
-				case MINEABLES:
-					DefaultBiomeFeatures.addMineables(TerrestriaBiome.biome);
-					break;
-				case ORES:
-					DefaultBiomeFeatures.addDefaultOres(TerrestriaBiome.biome);
-					break;
-				case EXTRA_GOLD:
-					DefaultBiomeFeatures.addExtraGoldOre(TerrestriaBiome.biome);
-					break;
-				case EMERALD_ORE:
-					DefaultBiomeFeatures.addEmeraldOre(TerrestriaBiome.biome);
-					break;
-				case INFECTED_STONE:
-					DefaultBiomeFeatures.addInfestedStone(TerrestriaBiome.biome);
-					break;
-				case DISKS:
-					DefaultBiomeFeatures.addDefaultDisks(TerrestriaBiome.biome);
-					break;
-				case CLAY:
-					DefaultBiomeFeatures.addClay(TerrestriaBiome.biome);
-					break;
-				case MOSSY_ROCKS:
-					DefaultBiomeFeatures.addMossyRocks(TerrestriaBiome.biome);
-					break;
-				case LARGE_FERNS:
-					DefaultBiomeFeatures.addLargeFerns(TerrestriaBiome.biome);
-					break;
-				case SWEET_BERRY_BUSHES:
-					DefaultBiomeFeatures.addSweetBerryBushes(TerrestriaBiome.biome);
-					break;
-				case SWEET_BERRY_BUSHES_SNOWY:
-					DefaultBiomeFeatures.addSweetBerryBushesSnowy(TerrestriaBiome.biome);
-					break;
-				case BAMBOO:
-					DefaultBiomeFeatures.addBamboo(TerrestriaBiome.biome);
-					break;
-				case BAMBOO_JUNGLE_TREES:
-					DefaultBiomeFeatures.addBambooJungleTrees(TerrestriaBiome.biome);
-					break;
-				case TAIGA_TREES:
-					DefaultBiomeFeatures.addTaigaTrees(TerrestriaBiome.biome);
-					break;
-				case WATER_BIOME_OAK_TREES:
-					DefaultBiomeFeatures.addWaterBiomeOakTrees(TerrestriaBiome.biome);
-					break;
-				case BIRCH_TREES:
-					DefaultBiomeFeatures.addBirchTrees(TerrestriaBiome.biome);
-					break;
-				case FOREST_TREES:
-					DefaultBiomeFeatures.addForestTrees(TerrestriaBiome.biome);
-					break;
-				case TALL_BIRCH_TREES:
-					DefaultBiomeFeatures.addTallBirchTrees(TerrestriaBiome.biome);
-					break;
-				case SAVANNAH_TREES:
-					DefaultBiomeFeatures.addSavannaTrees(TerrestriaBiome.biome);
-					break;
-				case EXTRA_SAVANNA_TREES:
-					DefaultBiomeFeatures.addExtraSavannaTrees(TerrestriaBiome.biome);
-					break;
-				case MOUNTAIN_TREES:
-					DefaultBiomeFeatures.addMountainTrees(TerrestriaBiome.biome);
-					break;
-				case EXTRA_MOUNTAIN_TREES:
-					DefaultBiomeFeatures.addExtraMountainTrees(TerrestriaBiome.biome);
-					break;
-				case JUNGLE_TREES:
-					DefaultBiomeFeatures.addJungleTrees(TerrestriaBiome.biome);
-					break;
-				case JUNGLE_EDGE_TREES:
-					DefaultBiomeFeatures.addJungleEdgeTrees(TerrestriaBiome.biome);
-					break;
-				case BADLANDS_PLATEAU_TREES:
-					DefaultBiomeFeatures.addBadlandsPlateauTrees(TerrestriaBiome.biome);
-					break;
-				case SNOWY_SPRUCE_TREES:
-					DefaultBiomeFeatures.addSnowySpruceTrees(TerrestriaBiome.biome);
-					break;
-				case GIANT_SPRUCE_TAIGA_TREES:
-					DefaultBiomeFeatures.addGiantSpruceTaigaTrees(TerrestriaBiome.biome);
-					break;
-				case MEGA_SPRUCE_TAIGA_TREES:
-					DefaultBiomeFeatures.addGiantTreeTaigaTrees(TerrestriaBiome.biome);
-					break;
-				case JUNGLE_GRASS:
-					DefaultBiomeFeatures.addJungleGrass(TerrestriaBiome.biome);
-					break;
-				case SAVANNA_TALL_GRASS:
-					DefaultBiomeFeatures.addSavannaTallGrass(TerrestriaBiome.biome);
-					break;
-				case SHATTERED_SAVANNAH_TALL_GRASS:
-					DefaultBiomeFeatures.addShatteredSavannaGrass(TerrestriaBiome.biome);
-					break;
-				case SAVANNAH_GRASS:
-					DefaultBiomeFeatures.addSavannaGrass(TerrestriaBiome.biome);
-					break;
-				case BADLANDS_GRASS:
-					DefaultBiomeFeatures.addBadlandsGrass(TerrestriaBiome.biome);
-					break;
-				case FOREST_FLOWERS:
-					DefaultBiomeFeatures.addForestFlowers(TerrestriaBiome.biome);
-					break;
-				case FOREST_GRASS:
-					DefaultBiomeFeatures.addForestGrass(TerrestriaBiome.biome);
-					break;
-				case SWAMP_FEATURES:
-					DefaultBiomeFeatures.addSwampFeatures(TerrestriaBiome.biome);
-					break;
-				case MUSHROOM_FIELDS_FEATURES:
-					DefaultBiomeFeatures.addMushroomFieldsFeatures(TerrestriaBiome.biome);
-					break;
-				case PLAINS_FEATURES:
-					DefaultBiomeFeatures.addPlainsFeatures(TerrestriaBiome.biome);
-					break;
-				case DESERT_DEAD_BUSHES:
-					DefaultBiomeFeatures.addDesertDeadBushes(TerrestriaBiome.biome);
-					break;
-				case GIANT_TAIGA_GRASS:
-					DefaultBiomeFeatures.addGiantTaigaGrass(TerrestriaBiome.biome);
-					break;
-				case DEFAULT_FLOWERS:
-					DefaultBiomeFeatures.addDefaultFlowers(TerrestriaBiome.biome);
-					break;
-				case EXTRA_DEFAULT_FLOWERS:
-					DefaultBiomeFeatures.addExtraDefaultFlowers(TerrestriaBiome.biome);
-					break;
-				case DEFAULT_GRASS:
-					DefaultBiomeFeatures.addDefaultGrass(TerrestriaBiome.biome);
-					break;
-				case TAIGA_GRASS:
-					DefaultBiomeFeatures.addTaigaGrass(TerrestriaBiome.biome);
-					break;
-				case PLAINS_TALL_GRASS:
-					DefaultBiomeFeatures.addPlainsTallGrass(TerrestriaBiome.biome);
-					break;
-				case DEFAULT_MUSHROOMS:
-					DefaultBiomeFeatures.addDefaultMushrooms(TerrestriaBiome.biome);
-					break;
-				case DEFAULT_VEGETATION:
-					DefaultBiomeFeatures.addDefaultVegetation(TerrestriaBiome.biome);
-					break;
-				case BADLANDS_VEGETATION:
-					DefaultBiomeFeatures.addBadlandsVegetation(TerrestriaBiome.biome);
-					break;
-				case JUNGLE_VEGETATION:
-					DefaultBiomeFeatures.addJungleVegetation(TerrestriaBiome.biome);
-					break;
-				case DESERT_VEGETATION:
-					DefaultBiomeFeatures.addDesertVegetation(TerrestriaBiome.biome);
-					break;
-				case SWAMP_VEGETATION:
-					DefaultBiomeFeatures.addSwampVegetation(TerrestriaBiome.biome);
-					break;
-				case DESSERT_FEATURES:
-					DefaultBiomeFeatures.addDesertFeatures(TerrestriaBiome.biome);
-					break;
-				case FOSSILS:
-					DefaultBiomeFeatures.addFossils(TerrestriaBiome.biome);
-					break;
-				case KELP:
-					DefaultBiomeFeatures.addKelp(TerrestriaBiome.biome);
-					break;
-				case SEAGRASS_ON_STONE:
-					DefaultBiomeFeatures.addSeagrassOnStone(TerrestriaBiome.biome);
-					break;
-				case SEAGRASS:
-					DefaultBiomeFeatures.addSeagrass(TerrestriaBiome.biome);
-					break;
-				case MORE_SEAGRASS:
-					DefaultBiomeFeatures.addMoreSeagrass(TerrestriaBiome.biome);
-					break;
-				case LESS_KELP:
-					DefaultBiomeFeatures.addLessKelp(TerrestriaBiome.biome);
-					break;
-				case SPRINGS:
-					DefaultBiomeFeatures.addSprings(TerrestriaBiome.biome);
-					break;
-				case ICEBERGS:
-					DefaultBiomeFeatures.addIcebergs(TerrestriaBiome.biome);
-					break;
-				case BLUE_ICE:
-					DefaultBiomeFeatures.addBlueIce(TerrestriaBiome.biome);
-					break;
-				case FROZEN_TOP_LAYER:
-					DefaultBiomeFeatures.addFrozenTopLayer(TerrestriaBiome.biome);
-					break;
-			}
+	public static final class Frozen {
+		private final Builder builder;
+
+		Frozen(Builder builder) {
+			this.builder = builder;
 		}
 	}
 }

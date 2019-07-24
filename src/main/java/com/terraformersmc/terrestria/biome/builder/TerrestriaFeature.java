@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature;
+package com.terraformersmc.terrestria.biome.builder;
 
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
