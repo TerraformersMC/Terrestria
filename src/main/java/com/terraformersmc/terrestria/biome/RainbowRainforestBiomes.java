@@ -10,13 +10,13 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_TOP_LAYER;
 
 public class RainbowRainforestBiomes {
 	public static void register() {
 		TerrestriaBiomes.RAINBOW_RAINFOREST = TerrestriaBiomes.register("rainbow_rainforest", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.depth(0.4F)
 				.scale(0.4F)
@@ -38,7 +38,7 @@ public class RainbowRainforestBiomes {
 				.build());
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS = TerrestriaBiomes.register("rainbow_rainforest_mountains", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.depth(1.0F)
 				.scale(0.5F)
@@ -60,7 +60,7 @@ public class RainbowRainforestBiomes {
 				.build());
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST_LAKE = TerrestriaBiomes.register("rainbow_rainforest_lake", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.depth(-0.2F)
 				.scale(0.0F)

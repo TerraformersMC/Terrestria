@@ -10,13 +10,13 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_TOP_LAYER;
 
 public class CypressForestBiomes {
 	public static void register() {
 		TerrestriaBiomes.CYPRESS_FOREST = TerrestriaBiomes.register("cypress_forest", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.depth(0.1F)
 				.scale(0.2F)
@@ -35,7 +35,7 @@ public class CypressForestBiomes {
 				.build());
 
 		TerrestriaBiomes.WOODED_CYPRESS_HILLS = TerrestriaBiomes.register("wooded_cypress_hills", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.depth(0.45F)
 				.scale(0.3F)

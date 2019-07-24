@@ -11,13 +11,13 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_TOP_LAYER;
 
 public class RedwoodForestBiomes {
 	public static void register() {
 		TerrestriaBiomes.REDWOOD_FOREST = TerrestriaBiomes.register("redwood_forest", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(1.2F)
 				.scale(0.3F)
@@ -43,7 +43,7 @@ public class RedwoodForestBiomes {
 				.build());
 
 		TerrestriaBiomes.REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("redwood_forest_edge", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(0.5F)
 				.scale(0.3F)
@@ -67,7 +67,7 @@ public class RedwoodForestBiomes {
 				.build());
 
 		TerrestriaBiomes.REDWOOD_CLEARING = TerrestriaBiomes.register("redwood_clearing", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.depth(1.2F)
 				.scale(0.3F)

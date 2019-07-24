@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
+import com.terraformersmc.terrestria.biome.builder.DefaultFeature;
 import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
@@ -14,7 +15,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 public class SnowyHemlockRainforestBiomes {
 	public static void register() {
 		TerrestriaBiomes.SNOWY_HEMLOCK_FOREST = TerrestriaBiomes.register("snowy_hemlock_forest", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.TAIGA)
 				.depth(0.95F)
 				.scale(0.55F)
@@ -22,8 +23,8 @@ public class SnowyHemlockRainforestBiomes {
 				.downfall(1.0F)
 				.waterColor(4020182)
 				.waterFogColor(329011)
-				.addDefaultFeatures(TerrestriaBiome.DefaultFeature.LAND_CARVERS, TerrestriaBiome.DefaultFeature.STRUCTURES, TerrestriaBiome.DefaultFeature.LAKES, TerrestriaBiome.DefaultFeature.DUNGEONS, TerrestriaBiome.DefaultFeature.LARGE_FERNS, TerrestriaBiome.DefaultFeature.MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS,
-						TerrestriaBiome.DefaultFeature.TAIGA_GRASS, TerrestriaBiome.DefaultFeature.DEFAULT_MUSHROOMS, TerrestriaBiome.DefaultFeature.DEFAULT_VEGETATION, TerrestriaBiome.DefaultFeature.SPRINGS, TerrestriaBiome.DefaultFeature.SWEET_BERRY_BUSHES_SNOWY, TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.LARGE_FERNS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS,
+						DefaultFeature.TAIGA_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.SWEET_BERRY_BUSHES_SNOWY, DefaultFeature.FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE, 8)
 				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 8)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 4)
@@ -38,7 +39,7 @@ public class SnowyHemlockRainforestBiomes {
 				.build());
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING = TerrestriaBiomes.register("snowy_hemlock_clearing", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.TAIGA)
 				.depth(0.95F)
 				.scale(0.55F)
@@ -46,8 +47,8 @@ public class SnowyHemlockRainforestBiomes {
 				.downfall(1.0F)
 				.waterColor(4020182)
 				.waterFogColor(329011)
-				.addDefaultFeatures(TerrestriaBiome.DefaultFeature.LAND_CARVERS, TerrestriaBiome.DefaultFeature.STRUCTURES, TerrestriaBiome.DefaultFeature.LAKES, TerrestriaBiome.DefaultFeature.DUNGEONS, TerrestriaBiome.DefaultFeature.LARGE_FERNS, TerrestriaBiome.DefaultFeature.MINEABLES, TerrestriaBiome.DefaultFeature.ORES, TerrestriaBiome.DefaultFeature.DISKS,
-						TerrestriaBiome.DefaultFeature.TAIGA_GRASS, TerrestriaBiome.DefaultFeature.DEFAULT_MUSHROOMS, TerrestriaBiome.DefaultFeature.DEFAULT_VEGETATION, TerrestriaBiome.DefaultFeature.SPRINGS, TerrestriaBiome.DefaultFeature.SWEET_BERRY_BUSHES_SNOWY, TerrestriaBiome.DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.LARGE_FERNS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS,
+						DefaultFeature.TAIGA_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.SWEET_BERRY_BUSHES_SNOWY, DefaultFeature.FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 2)

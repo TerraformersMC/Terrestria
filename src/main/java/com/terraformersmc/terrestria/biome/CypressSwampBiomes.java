@@ -13,13 +13,13 @@ import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.*;
-import static com.terraformersmc.terrestria.biome.builder.TerrestriaBiome.DefaultFeature.DESERT_VEGETATION;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.DESERT_VEGETATION;
 
 public class CypressSwampBiomes {
 	public static void register() {
 		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", TerrestriaBiome.builder()
-				.configuredSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
+				.configureSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
 				.depth(-0.25F)
 				.scale(0.05F)
