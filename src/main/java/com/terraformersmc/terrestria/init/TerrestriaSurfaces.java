@@ -1,10 +1,12 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
+import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.CanyonSurfaceConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -19,9 +21,9 @@ public class TerrestriaSurfaces {
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
 	public static CliffSurfaceBuilder BASALT_CLIFF;
-	public static CliffSurfaceBuilder SANDSTONE_CLIFF;
+	public static CanyonSurfaceBuilder SANDSTONE_CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
-	public static CliffSurfaceConfig SANDSTONE_CONFIG;
+	public static CanyonSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 
 	public static void init() {
@@ -37,7 +39,7 @@ public class TerrestriaSurfaces {
 
 		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
 
-		SANDSTONE_CLIFF = register("sandstone_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
+		SANDSTONE_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CanyonSurfaceConfig::deserialize, 62, BEACH));
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
@@ -46,7 +48,7 @@ public class TerrestriaSurfaces {
 				TerrestriaBlocks.BASALT.getDefaultState()
 		);
 
-		SANDSTONE_CONFIG = new CliffSurfaceConfig(
+		SANDSTONE_CONFIG = new CanyonSurfaceConfig(
 				Blocks.SAND.getDefaultState(),
 				Blocks.TERRACOTTA.getDefaultState(),
 				Blocks.SAND.getDefaultState(),

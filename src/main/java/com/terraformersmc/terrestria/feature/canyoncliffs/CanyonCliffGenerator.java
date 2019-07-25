@@ -113,10 +113,16 @@ public class CanyonCliffGenerator extends StructurePiece {
 
 	private boolean shape(double height, double distance, int x, int z) {
 		if (radius < 13) {
-			return radiusBloob(height, distance);
-		} else if (radius > 30) {
-			if (height < 67) {
+			if (height > 45) {
 				return radiusUniform(height, distance);
+			} else {
+				return detailDome(height, distance);
+			}
+		} else if (radius > 24) {
+			if (height < 67) {
+				return radiusBloob(height, distance);
+			} else {
+				return shapeArch(height, distance, x, z);
 			}
 		}
 		return radiusPerlin(height, distance, x, z);
@@ -133,10 +139,10 @@ public class CanyonCliffGenerator extends StructurePiece {
 		//Find the perpendicular distance from the current 2d coordinate from a 2d line generated from the first and second indexes of the seed
 		double a = centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2); // allows for a negative number, just use one of the center cords for ease
 		double distLine = Math.abs((a * (x - centerX)) + z - centerZ) / Math.sqrt((a * a) + 1);
-		return distVertex > radius - 5 && distVertex < radius && distLine < 5; //((distance * distance) / 5)
+		return distVertex > radius - 5 && distVertex < radius && distLine < 2 + ((maxHeight - h) / 6);
 	}
 
-	private boolean detailDome(double h, double distance, int x, int z) {
+	private boolean detailDome(double h, double distance) {
 		return -((maxHeight * 4.7) / (radius * radius)) * h + 10 > distance;
 	}
 
