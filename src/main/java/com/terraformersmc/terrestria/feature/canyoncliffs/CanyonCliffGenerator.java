@@ -18,12 +18,11 @@ import java.util.Random;
 public class CanyonCliffGenerator extends StructurePiece {
 
 	private static final int SHAPE_NOISE_ZOOM = 10;
-	private static final int TOP_NOISE_ZOOM = 6;
-	private static final int VERTICAL_NOISE_ZOOM = 18;
+	private static final int TOP_NOISE_ZOOM = 15;
+	private static final int VERTICAL_NOISE_ZOOM = 8;
 	private static final int MATERIAL_NOISE_ZOOM = 7;
 
 	private int seed;
-	private int shapeType;
 
 	private Perlin shapeNoise;
 	private Perlin topNoise;
@@ -43,7 +42,6 @@ public class CanyonCliffGenerator extends StructurePiece {
 		this.centerX = centerX;
 		this.centerZ = centerZ;
 		seed = random.nextInt(10000);
-		shapeType = random.nextInt(2);
 		shapeNoise = new Perlin(SHAPE_NOISE_ZOOM, seed);
 		topNoise = new Perlin(TOP_NOISE_ZOOM, seed);
 		verticalNoise = new Perlin(VERTICAL_NOISE_ZOOM, seed);
@@ -59,7 +57,6 @@ public class CanyonCliffGenerator extends StructurePiece {
 	public CanyonCliffGenerator(StructureManager manager, CompoundTag tag) {
 		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, tag);
 		seed = tag.getInt("S");
-		shapeType = tag.getInt("CS");
 		shapeNoise = new Perlin(SHAPE_NOISE_ZOOM, tag.getInt("SN"));
 		topNoise = new Perlin(TOP_NOISE_ZOOM, tag.getInt("TN"));
 		verticalNoise = new Perlin(VERTICAL_NOISE_ZOOM, tag.getInt("VN"));
@@ -74,7 +71,6 @@ public class CanyonCliffGenerator extends StructurePiece {
 	@Override
 	protected void toNbt(CompoundTag tag) {
 		tag.putInt("S", seed);
-		tag.putInt("CS", shapeType);
 		tag.putInt("SN", shapeNoise.getSeed());
 		tag.putInt("TN", topNoise.getSeed());
 		tag.putInt("VN", verticalNoise.getSeed());
@@ -104,12 +100,10 @@ public class CanyonCliffGenerator extends StructurePiece {
 				dZ = z - centerZ;
 				dist = Math.sqrt((dZ * dZ) + (dX * dX));
 
-				if (fitsShape(x, z, dist)) {
-					for (int h = 0; h < maxHeight; h++) {
-						if (radiusBloob(h) > dist) {
-							pos.set(x, yStart + h, z);
-							world.setBlockState(pos, getStateAtY(h, x, z), 2);
-						}
+				for (int h = 0; h < maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8); h++) {
+					if (shape((double) h, dist, x, z)) {
+						pos.set(x, yStart + h, z);
+						world.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
 				}
 			}
@@ -117,29 +111,31 @@ public class CanyonCliffGenerator extends StructurePiece {
 		return true;
 	}
 
-	private double shape(int h) {
-		switch (shapeType) {
-			case 1:
-				return radiusPerlin(h);
-			case 2:
-				return radiusUniform(h);
-			default:
-				return radiusBloob(h);
+	private boolean shape(double height, double distance, int x, int z) {
+		if (radius < 13) {
+			return radiusBloob(height, distance);
+		} else if (radius > 30) {
+			if (height < 67) {
+				return radiusUniform(height, distance);
+			}
 		}
+		return radiusPerlin(height, distance, x, z);
 	}
 
-	private double radiusPerlin(int h) {
-		return radius - (verticalNoise.getNoiseLevelAtPosition(h,1) * 3) + (radius / 1.25);
+	private boolean radiusPerlin(double h, double distance, int x, int z) {
+		if (maxHeight - weightedHeight(shapeNoise.getNoiseLevelAtPosition(x, z), distance) * (maxHeight / 12.0) < h) {
+			return true;
+		}
+		return false;
 	}
 
-	private double radiusUniform(int h) {
-		return radius - (verticalNoise.getNoiseLevelAtPosition(h,1) * 4);
+	private boolean radiusUniform(double h, double distance) {
+		return radius - (verticalNoise.getNoiseLevelAtPosition((int)h + seed * 1440,seed) * 6) > distance;
 	}
 
-	//Bloob shape (idk what to call it lol)
-	private double radiusBloob(int h) {
+	private boolean radiusBloob(double h, double distance) {
 		h = h / maxHeight;
-		return radius * ((2 * (h*h)) - (h*h*h) - h + 0.95);
+		return (radius * (3.9 * (h * h) - (1.5 * (h * h * h)) - (2.6 * h) + 0.95)) - (verticalNoise.getNoiseLevelAtPosition((int) h, seed) * 8) > distance;
 	}
 
 	//Decides the 2d shape bounds of the feature
