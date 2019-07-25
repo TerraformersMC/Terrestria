@@ -17,7 +17,7 @@ public class CanyonBiomes {
 				.configuredSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
 				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 				.depth(0.0F)
-				.scale(0.4F)
+				.scale(0.2F)
 				.temperature(0.9F)
 				.downfall(0.1F)
 				.waterColor(0x4da5e3)
