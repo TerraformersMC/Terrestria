@@ -16,7 +16,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-// TODO: These should be properly spawned and implemented. For the future.
 public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private TreeDefinition.Basic tree;
 
