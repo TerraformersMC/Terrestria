@@ -123,10 +123,7 @@ public class CanyonCliffGenerator extends StructurePiece {
 	}
 
 	private boolean radiusPerlin(double h, double distance, int x, int z) {
-		if (maxHeight - weightedHeight(shapeNoise.getNoiseLevelAtPosition(x, z), distance) * (maxHeight / 12.0) < h) {
-			return true;
-		}
-		return false;
+		return maxHeight - weightedHeight(shapeNoise.getNoiseLevelAtPosition(x, z), distance) * (maxHeight / 12.0) < h;
 	}
 
 	private boolean radiusUniform(double h, double distance) {
