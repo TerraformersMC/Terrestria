@@ -101,7 +101,7 @@ public class CanyonCliffGenerator extends StructurePiece {
 				dist = Math.sqrt((dZ * dZ) + (dX * dX));
 
 				for (int h = 0; h < maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8); h++) {
-					if (shape((double) h, dist, x, z)) {
+					if (shapeArch((double) h, dist, x, z)) {
 						pos.set(x, yStart + h, z);
 						world.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
@@ -120,6 +120,24 @@ public class CanyonCliffGenerator extends StructurePiece {
 			}
 		}
 		return radiusPerlin(height, distance, x, z);
+	}
+
+	public int getNthDigit(int number, int n) {
+		return (int) ((number / Math.pow(10, n - 1)) % 10);
+	}
+
+	//Generates a dome
+	private boolean shapeArch(double h, double distance, int x, int z) {
+		//Find the distance from the vertex of the dome
+		double distVertex = Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)));
+		//Find the perpendicular distance from the current 2d coordinate from a 2d line generated from the first and second indexes of the seed
+		double a = centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2); // allows for a negative number, just use one of the center cords for ease
+		double distLine = Math.abs((a * (x - centerX)) + z - centerZ) / Math.sqrt((a * a) + 1);
+		return distVertex > radius - 5 && distVertex < radius && distLine < 5; //((distance * distance) / 5)
+	}
+
+	private boolean detailDome(double h, double distance, int x, int z) {
+		return -((maxHeight * 4.7) / (radius * radius)) * h + 10 > distance;
 	}
 
 	private boolean radiusPerlin(double h, double distance, int x, int z) {
