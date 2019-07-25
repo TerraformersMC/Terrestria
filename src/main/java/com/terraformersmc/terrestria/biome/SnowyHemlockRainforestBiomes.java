@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terrestria.biome.builder.DefaultFeature;
-import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
@@ -12,9 +11,11 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
+import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+
 public class SnowyHemlockRainforestBiomes {
 	public static void register() {
-		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.TAIGA)
 				.depth(0.95F)
@@ -23,8 +24,8 @@ public class SnowyHemlockRainforestBiomes {
 				.downfall(1.0F)
 				.waterColor(4020182)
 				.waterFogColor(329011)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.LARGE_FERNS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS,
-						DefaultFeature.TAIGA_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.SWEET_BERRY_BUSHES_SNOWY, DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
+						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))

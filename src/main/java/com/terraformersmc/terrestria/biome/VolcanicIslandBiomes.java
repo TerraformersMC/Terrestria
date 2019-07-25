@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terrestria.biome.builder.DefaultFeature;
-import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
@@ -12,17 +11,19 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 
+import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+
 public class VolcanicIslandBiomes {
 	public static void register() {
-		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
-						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
 				.addGrassFeature(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
 				.addStructureFeature(Feature.STRONGHOLD)

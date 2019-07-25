@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
@@ -11,12 +11,11 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.*;
-import static com.terraformersmc.terrestria.biome.builder.DefaultFeature.FROZEN_TOP_LAYER;
+import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
 public class HemlockRainforestBiomes {
 	public static void register() {
-		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.6F)

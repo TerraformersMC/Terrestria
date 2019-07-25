@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terrestria.biome.builder.DefaultFeature;
-import com.terraformersmc.terrestria.biome.builder.TerrestriaBiome;
+import com.terraformersmc.terraform.biome.builder.DefaultFeature;
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
@@ -12,13 +12,15 @@ import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
+import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+
 public class CalderaBiomes {
 	public static void register() {
-		TerrestriaBiome.Template template = TerrestriaBiome.template(TerrestriaBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(DefaultFeature.LAND_CARVERS, DefaultFeature.STRUCTURES, DefaultFeature.LAKES, DefaultFeature.DUNGEONS, DefaultFeature.MINEABLES, DefaultFeature.ORES, DefaultFeature.DISKS, DefaultFeature.DEFAULT_FLOWERS,
-						DefaultFeature.DEFAULT_GRASS, DefaultFeature.DEFAULT_MUSHROOMS, DefaultFeature.DEFAULT_VEGETATION, DefaultFeature.SPRINGS, DefaultFeature.FROZEN_TOP_LAYER)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
 				.addDefaultSpawnEntries()
@@ -47,7 +49,7 @@ public class CalderaBiomes {
 				.downfall(0.7F)
 				.build());
 
-		TerrestriaBiomes.CALDERA_FOOTHILLS = TerrestriaBiomes.register("caldera_foothills", TerrestriaBiome.builder()
+		TerrestriaBiomes.CALDERA_FOOTHILLS = TerrestriaBiomes.register("caldera_foothills", TerraformBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.EXTREME_HILLS)
 				.depth(1.7F)
@@ -63,7 +65,7 @@ public class CalderaBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
-		TerrestriaBiomes.CALDERA_RIDGE = TerrestriaBiomes.register("caldera_ridge", TerrestriaBiome.builder()
+		TerrestriaBiomes.CALDERA_RIDGE = TerrestriaBiomes.register("caldera_ridge", TerraformBiome.builder()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.EXTREME_HILLS)
 				.depth(4F)
