@@ -35,5 +35,9 @@
   },
   "mixins": [
     "mixins.terrestria.json"
-  ]
+  ],
+
+  "custom": {
+    "extrapieces:piecepack": "extrapieces.terrestria.json"
+  }
 }
