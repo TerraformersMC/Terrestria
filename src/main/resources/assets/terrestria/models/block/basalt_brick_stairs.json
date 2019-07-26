@@ -1,0 +1,8 @@
+{
+    "parent": "block/stairs",
+    "textures": {
+        "bottom": "terrestria:block/basalt_bricks",
+        "top": "terrestria:block/basalt_bricks",
+        "side": "terrestria:block/basalt_bricks"
+    }
+}

@@ -15,7 +15,7 @@ public class StoneBlocks {
 	public StoneVariantBlocks bricks;
 	public StoneVariantBlocks mossyBricks;
 
-	public TerraformButtonBlock button;
+	public TerraformButtonBlock button; // TODO: Stone button sounds
 	public TerraformPressurePlateBlock pressurePlate; // TODO: Stone pressure plate behavior!
 	public Block chiseledBricks;
 	public Block crackedBricks;
