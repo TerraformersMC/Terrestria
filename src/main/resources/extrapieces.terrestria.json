@@ -238,29 +238,5 @@
       "extrapieces:fence": "terrestria:sakura_fence",
       "extrapieces:fence_gate": "terrestria:sakura_fence_gate"
     }
-  },
-  "basalt": {
-    "base": "terrestria:basalt",
-    "vanilla_pieces": {
-      "extrapieces:stairs": "terrestria:basalt_stairs",
-      "extrapieces:slab": "terrestria:basalt_slab",
-      "extrapieces:wall": "terrestria:basalt_wall"
-    }
-  },
-  "basalt_cobblestone": {
-    "base": "terrestria:basalt_cobblestone",
-    "vanilla_pieces": {
-      "extrapieces:stairs": "terrestria:basalt_cobblestone_stairs",
-      "extrapieces:slab": "terrestria:basalt_cobblestone_slab",
-      "extrapieces:wall": "terrestria:basalt_cobblestone_wall"
-    }
-  },
-  "basalt_brick": {
-    "base": "terrestria:basalt_bricks",
-    "vanilla_pieces": {
-      "extrapieces:stairs": "terrestria:basalt_brick_stairs",
-      "extrapieces:slab": "terrestria:basalt_brick_slab",
-      "extrapieces:wall": "terrestria:basalt_brick_wall"
-    }
   }
 }
