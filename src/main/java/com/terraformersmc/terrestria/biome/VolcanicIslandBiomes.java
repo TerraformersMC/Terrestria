@@ -16,7 +16,7 @@ import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 public class VolcanicIslandBiomes {
 	public static void register() {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
-				.configureSurfaceBuilder(TerrestriaSurfaces.CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
+				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)
 				.downfall(0.9F)
