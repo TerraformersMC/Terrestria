@@ -18,7 +18,6 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
 	private static final Perlin PERLIN = new Perlin(14, 346987);
-	private double pNoise;
 
 	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CanyonSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
 		super(function);
@@ -34,43 +33,44 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 		if (noise > 0.1D && vHeight > seaLevel) {
 
 			//User perlin noise for height after we test for generation
-			pNoise = PERLIN.getNoiseLevelAtPosition(x, z) * 30.0;
+			double sNoise = PERLIN.getNoiseLevelAtPosition(x, z) * 30.0;
+			double tNoise = PERLIN.getNoiseLevelAtPosition(x + 242, z + 138) * 3;
 
 			int height = 1;
 
 			//Generates canyon steps
-			if (pNoise > 3) {
+			if (sNoise > 3) {
 				height += 2;
 			}
-			if (pNoise > 5) {
+			if (sNoise > 5) {
+				height += 3;
+			}
+			if (sNoise > 9) {
 				height += 4;
 			}
-			if (pNoise > 9) {
+			if (sNoise > 14) {
+				height += 4;
+			}
+			if (sNoise > 20) {
+				height += 5;
+			}
+			if (sNoise > 27) {
 				height += 6;
-			}
-			if (pNoise > 14) {
-				height += 8;
-			}
-			if (pNoise > 20) {
-				height += 12;
-			}
-			if (pNoise > 27) {
-				height += 14;
 			}
 
 			BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
 
 			//Determine the number of cliff blocks to use
-			int cliffLayers = 3;
+			int cliffLayers = (int) (tNoise + 0.5);
 
-			if (height > 10) {
+			if (height > 5) {
 				cliffLayers += 1;
 			}
-			if (height > 20) {
-				cliffLayers += pNoise > 10 ?  3 : 1;
+			if (height > 10) {
+				cliffLayers += sNoise > 10 ?  3 : 1;
 			}
-			if (height > 30) {
-				cliffLayers += pNoise > 20 ?  4 : 2;
+			if (height > 15) {
+				cliffLayers += sNoise > 20 ?  4 : 2;
 			}
 
 			//Start placing the cliff material
@@ -86,7 +86,10 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 			}
 
 			//Place the top Material
-			chunk.setBlockState(pos, config.getTopMaterial(), false);
+			for (int i = 0; i < PERLIN.getNoiseLevelAtPosition(x + 678, z + 567) * 2.5; i++) {
+				chunk.setBlockState(pos, config.getTopMaterial(), false);
+				pos.setOffset(Direction.UP);
+			}
 		} else {
 			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
 		}
