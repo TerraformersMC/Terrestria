@@ -17,6 +17,8 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
+	private static final Perlin PERLIN = new Perlin(14, 346987);
+	private double pNoise;
 
 	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CanyonSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
 		super(function);
@@ -27,37 +29,33 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
 	@Override
 	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CanyonSurfaceConfig config) {
-		x &= 15;
-		z &= 15;
-
-		vHeight -= 1;
 
 		//This gives the canyons valleys.
-		if (noise > 0.24D && vHeight > seaLevel + 1 && vHeight < seaLevel + 55) {
+		if (noise > 0.1D && vHeight > seaLevel) {
 
 			//User perlin noise for height after we test for generation
-			double pNoise = (int) new Perlin(6).getNoiseLevelAtPosition(x, z) * 30;
+			pNoise = PERLIN.getNoiseLevelAtPosition(x, z) * 30.0;
 
-			int height = vHeight - 1;
+			int height = 1;
 
 			//Generates canyon steps
-			if (pNoise > seaLevel + 3) {
-				height = seaLevel + 3;
+			if (pNoise > 3) {
+				height += 2;
 			}
-			if (pNoise > seaLevel + 5) {
-				height = seaLevel + 5;
+			if (pNoise > 5) {
+				height += 4;
 			}
-			if (pNoise > seaLevel + 9) {
-				height = seaLevel + 9;
+			if (pNoise > 9) {
+				height += 6;
 			}
-			if (pNoise > seaLevel + 14) {
-				height = seaLevel + 14;
+			if (pNoise > 14) {
+				height += 8;
 			}
-			if (pNoise > seaLevel + 20) {
-				height = seaLevel + 20;
+			if (pNoise > 20) {
+				height += 12;
 			}
-			if (pNoise > seaLevel + 27) {
-				height = seaLevel + 27;
+			if (pNoise > 27) {
+				height += 14;
 			}
 
 			BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
@@ -65,14 +63,14 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 			//Determine the number of cliff blocks to use
 			int cliffLayers = 3;
 
-			if (pNoise > 1.0D) {
-				cliffLayers += rand.nextInt(2);
+			if (height > 10) {
+				cliffLayers += 1;
 			}
-			if (pNoise > 1.4D) {
-				cliffLayers += height > seaLevel + 10 ?  3 : 1;
+			if (height > 20) {
+				cliffLayers += pNoise > 10 ?  3 : 1;
 			}
-			if (pNoise > 1.6D) {
-				cliffLayers += height > seaLevel + 20 ?  4 : 2;
+			if (height > 30) {
+				cliffLayers += pNoise > 20 ?  4 : 2;
 			}
 
 			//Start placing the cliff material

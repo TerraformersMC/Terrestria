@@ -2,8 +2,8 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
-import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonCliffGenerator;
-import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonCliffStructureFeature;
+import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonArchGenerator;
+import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
 import com.terraformersmc.terrestria.feature.trees.*;
@@ -50,7 +50,7 @@ public class TerrestriaFeatures {
 	public static VolcanoStructureFeature VOLCANO_STRUCTURE;
 	public static StructurePieceType VOLCANO_PIECE;
 
-	public static CanyonCliffStructureFeature CANYON_CLIFF_STRUCTURE;
+	public static CanyonArchStructureFeature CANYON_ARCH_STRUCTURE;
 	public static StructurePieceType CANYON_CLIFF_PIECE;
 
 	public static void init() {
@@ -181,13 +181,13 @@ public class TerrestriaFeatures {
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 
-		CANYON_CLIFF_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"),
-				new CanyonCliffStructureFeature(DefaultFeatureConfig::deserialize)
+		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"),
+				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
-		Feature.STRUCTURES.put("canyon_cliff", CANYON_CLIFF_STRUCTURE);
+		Feature.STRUCTURES.put("canyon_cliff", CANYON_ARCH_STRUCTURE);
 
-		CANYON_CLIFF_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"), CanyonCliffGenerator::new);
+		CANYON_CLIFF_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"), CanyonArchGenerator::new);
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
@@ -205,6 +205,6 @@ public class TerrestriaFeatures {
 	}
 
 	public static void addCanyonCliffStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.CANYON_CLIFF_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 }

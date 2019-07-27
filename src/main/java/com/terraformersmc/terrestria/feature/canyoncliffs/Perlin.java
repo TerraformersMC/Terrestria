@@ -54,7 +54,7 @@ public class Perlin {
 		return rand.nextDouble();
 	}
 
-	private class Vector2i {
+	private static class Vector2i {
 		private int x;
 		private int y;
 

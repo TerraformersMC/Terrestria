@@ -15,7 +15,7 @@ import net.minecraft.world.biome.Biome;
 
 import java.util.Random;
 
-public class CanyonCliffGenerator extends StructurePiece {
+public class CanyonArchGenerator extends StructurePiece {
 
 	private static final int SHAPE_NOISE_ZOOM = 10;
 	private static final int TOP_NOISE_ZOOM = 15;
@@ -36,7 +36,7 @@ public class CanyonCliffGenerator extends StructurePiece {
 	private int centerX;
 	private int centerZ;
 
-	CanyonCliffGenerator(Random random, int centerX, int centerZ, Biome biome) {
+	CanyonArchGenerator(Random random, int centerX, int centerZ, Biome biome) {
 		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, 0);
 		this.setOrientation(null);
 		this.centerX = centerX;
@@ -54,7 +54,7 @@ public class CanyonCliffGenerator extends StructurePiece {
 		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, 30, centerZ - radiusBound, centerX + radiusBound, 30 + maxHeight, centerZ + radiusBound);
 	}
 
-	public CanyonCliffGenerator(StructureManager manager, CompoundTag tag) {
+	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
 		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, tag);
 		seed = tag.getInt("S");
 		shapeNoise = new Perlin(SHAPE_NOISE_ZOOM, tag.getInt("SN"));
@@ -89,19 +89,11 @@ public class CanyonCliffGenerator extends StructurePiece {
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
-		int dX;
-		int dZ;
-		double dist;
 
 		for (int z = boundingBox.minZ; z <= boundingBox.maxZ; z++) {
 			for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
-
-				dX = x - centerX;
-				dZ = z - centerZ;
-				dist = Math.sqrt((dZ * dZ) + (dX * dX));
-
 				for (int h = 0; h < maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8); h++) {
-					if (shapeArch((double) h, dist, x, z)) {
+					if (shapeArch((double) h, x, z)) {
 						pos.set(x, yStart + h, z);
 						world.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
@@ -111,63 +103,29 @@ public class CanyonCliffGenerator extends StructurePiece {
 		return true;
 	}
 
-	private boolean shape(double height, double distance, int x, int z) {
-		if (radius < 13) {
-			if (height > 45) {
-				return radiusUniform(height, distance);
-			} else {
-				return detailDome(height, distance);
-			}
-		} else if (radius > 24) {
-			if (height < 67) {
-				return radiusBloob(height, distance);
-			} else {
-				return shapeArch(height, distance, x, z);
-			}
-		}
-		return radiusPerlin(height, distance, x, z);
-	}
-
 	public int getNthDigit(int number, int n) {
 		return (int) ((number / Math.pow(10, n - 1)) % 10);
 	}
 
-	//Generates a dome
-	private boolean shapeArch(double h, double distance, int x, int z) {
-		//Find the distance from the vertex of the dome
+	/*
+	private boolean shapeArch(double h, int x, int z) {
+		//Find the distance from the vertex
 		double distVertex = Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)));
 		//Find the perpendicular distance from the current 2d coordinate from a 2d line generated from the first and second indexes of the seed
 		double a = centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2); // allows for a negative number, just use one of the center cords for ease
 		double distLine = Math.abs((a * (x - centerX)) + z - centerZ) / Math.sqrt((a * a) + 1);
 		return distVertex > radius - 5 && distVertex < radius && distLine < 2 + ((maxHeight - h) / 6);
 	}
+	 */
 
-	private boolean detailDome(double h, double distance) {
-		return -((maxHeight * 4.7) / (radius * radius)) * h + 10 > distance;
+	private boolean shapeArch(double h, int x, int z) {
+		return (Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)))) > radius - 5 &&
+				(Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)))) < radius &&
+				(Math.abs(((centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2)) * (x - centerX)) + z - centerZ) / Math.sqrt((getNthDigit(seed, 2) * getNthDigit(seed, 2)) + 1))
+						< 2 + ((maxHeight - h) / 6);
 	}
 
-	private boolean radiusPerlin(double h, double distance, int x, int z) {
-		return maxHeight - weightedHeight(shapeNoise.getNoiseLevelAtPosition(x, z), distance) * (maxHeight / 12.0) < h;
-	}
-
-	private boolean radiusUniform(double h, double distance) {
-		return radius - (verticalNoise.getNoiseLevelAtPosition((int)h + seed * 1440,seed) * 6) > distance;
-	}
-
-	private boolean radiusBloob(double h, double distance) {
-		h = h / maxHeight;
-		return (radius * (3.9 * (h * h) - (1.5 * (h * h * h)) - (2.6 * h) + 0.95)) - (verticalNoise.getNoiseLevelAtPosition((int) h, seed) * 8) > distance;
-	}
-
-	//Decides the 2d shape bounds of the feature
-	private boolean fitsShape(int x, int z, double distance) {
-		return weightedHeight(shapeNoise.getNoiseLevelAtPosition(x, z), distance) > (maxHeight * 0.2);
-	}
-
-	private double weightedHeight(double noiseHeight, double distance) {
-		return noiseHeight * (maxHeight * Math.cos((3.14 * distance) / (radius * 2)));
-	}
-
+	//Generates the stone layers
 	private BlockState getStateAtY(int height, int x, int z) {
 		if (materialNoise.getNoiseLevelAtPosition(x + (height / 6 * seed), z - (height / 6 * seed)) * 3 > height % 6) {
 			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
