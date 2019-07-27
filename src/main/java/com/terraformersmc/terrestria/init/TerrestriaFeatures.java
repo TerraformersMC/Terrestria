@@ -2,8 +2,8 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
-import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonArchGenerator;
-import com.terraformersmc.terrestria.feature.canyoncliffs.CanyonArchStructureFeature;
+import com.terraformersmc.terrestria.feature.canyon.CanyonArchGenerator;
+import com.terraformersmc.terrestria.feature.canyon.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
 import com.terraformersmc.terrestria.feature.trees.*;

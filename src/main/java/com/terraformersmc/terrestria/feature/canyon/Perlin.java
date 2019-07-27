@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.canyoncliffs;
+package com.terraformersmc.terrestria.feature.canyon;
 
 import java.util.Random;
 

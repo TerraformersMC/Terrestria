@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.canyoncliffs;
+package com.terraformersmc.terrestria.feature.canyon;
 
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.structure.StructureManager;
