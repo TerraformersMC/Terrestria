@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
-import com.terraformersmc.terrestria.config.BiomeConfig;
-import com.terraformersmc.terrestria.config.BiomeConfigNode;
+import com.terraformersmc.terraform.config.BiomeConfig;
+import com.terraformersmc.terraform.config.BiomeConfigNode;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;

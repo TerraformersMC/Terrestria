@@ -1,5 +1,7 @@
 ![Terrestria Header Image](https://i.gyazo.com/c1f9e08c4ab1a6fb2b307be9a0110bd1.png)
 
+**Terrestria is built for the Fabric mod loader! It will not work on Forge.**
+
 ## About Terrestria
 
 Terrestria is a detailed and vibrant biomes mod for Minecraft 1.14.4 and above running on the Fabric mod loader.
@@ -44,3 +46,11 @@ Terrestria is free software licensed under the GNU LGPLv3 license. To simplify (
 freely distributed in combination with an attribution notice (such as a mod list entry, a way to access this source code 
 (for modpack developers, a link to the Curse or GitHub page; for fork authors, by providing access to the modified code),
 and finally a notice that Terrestria carries the LGPL v3 license, which can be included in the mod list.
+
+### Want more?
+
+Check out Terrestria's sister mod, [Traverse](https://www.curseforge.com/minecraft/mc-mods/traverse):
+
+[![Traverse](https://i.imgur.com/9yLH37E.png)](https://www.curseforge.com/minecraft/mc-mods/traverse)
+
+Traverse works well alongside Terrestria if you are looking for a set of biomes that are closer to the Vanilla+ ideal. Traverse has a lot of unique, colorful biomes that embrace the simple vanilla aesthetic instead of trying to overshadow it.
