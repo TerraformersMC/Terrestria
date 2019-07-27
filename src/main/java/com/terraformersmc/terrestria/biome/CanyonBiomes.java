@@ -14,37 +14,28 @@ import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 public class CanyonBiomes {
 
 	public static void register() {
-		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", TerraformBiome.builder()
-				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
-				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
-				.depth(0.0F)
-				.scale(0.2F)
-				.temperature(0.9F)
-				.downfall(0.1F)
-				.waterColor(0x4da5e3)
-				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DESERT_DEAD_BUSHES,
-						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
-				.addDefaultSpawnEntries()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
+			.depth(0.2F)
+			.scale(0.2F)
+			.temperature(0.9F)
+			.downfall(0.1F)
+			.waterColor(0x4da5e3)
+			.waterFogColor(0x24a0b0)
+			.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DESERT_DEAD_BUSHES,
+				DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, FROZEN_TOP_LAYER)
+			.addStructureFeature(Feature.STRONGHOLD)
+			.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
+			.addDefaultSpawnEntries()
+		);
+
+		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template.builder()
+				.configureSurfaceBuilder(TerrestriaSurfaces.CANYON_CLIFF, TerrestriaSurfaces.SANDSTONE_CLIFF_CONFIG)
 				.build());
 
-		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon", TerraformBiome.builder()
+		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
-				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
-				.depth(0.0F)
-				.scale(0.2F)
-				.temperature(0.9F)
-				.downfall(0.1F)
-				.waterColor(0x4da5e3)
-				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DESERT_DEAD_BUSHES,
-						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
 				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
-				.addDefaultSpawnEntries()
 				.build());
 	}
 }

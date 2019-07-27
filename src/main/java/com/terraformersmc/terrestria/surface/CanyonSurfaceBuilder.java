@@ -91,6 +91,8 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 				pos.setOffset(Direction.UP);
 			}
 		} else {
+			//In the future make this dig down instead
+			//This will break some stuff like water flowing down so it may need an edge biome first
 			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
 		}
 	}
