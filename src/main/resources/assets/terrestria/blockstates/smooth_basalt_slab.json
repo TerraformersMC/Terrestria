@@ -2,6 +2,6 @@
   "variants": {
     "type=bottom": { "model": "terrestria:block/smooth_basalt_slab" },
     "type=top": { "model": "terrestria:block/smooth_basalt_slab_top" },
-    "type=double": { "model": "terrestria:block/smooth_basalt" }
+    "type=double": { "model": "terrestria:block/smooth_basalt_double_slab" }
   }
 }

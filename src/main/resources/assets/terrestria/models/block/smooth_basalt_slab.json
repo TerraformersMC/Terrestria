@@ -3,6 +3,6 @@
   "textures": {
 	"bottom": "terrestria:block/smooth_basalt",
 	"top": "terrestria:block/smooth_basalt",
-	"side": "terrestria:block/smooth_basalt"
+	"side": "terrestria:block/smooth_basalt_slab_side"
   }
 }
