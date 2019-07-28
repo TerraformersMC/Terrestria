@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/mossy_basalt_bricks" }
+    "": {
+      "model": "terrestria:block/mossy_basalt_bricks"
+    }
   }
 }

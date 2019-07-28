@@ -1,8 +1,8 @@
 {
-    "parent": "block/stairs",
-    "textures": {
-        "bottom": "terrestria:block/basalt_cobblestone",
-        "top": "terrestria:block/basalt_cobblestone",
-        "side": "terrestria:block/basalt_cobblestone"
-    }
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "terrestria:block/basalt_cobblestone",
+    "top": "terrestria:block/basalt_cobblestone",
+    "side": "terrestria:block/basalt_cobblestone"
+  }
 }

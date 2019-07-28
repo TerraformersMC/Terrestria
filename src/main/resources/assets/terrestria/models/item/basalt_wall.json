@@ -1,6 +1,6 @@
 {
-    "parent": "block/wall_inventory",
-    "textures": {
-        "wall": "terrestria:block/basalt"
-    }
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "terrestria:block/basalt"
+  }
 }

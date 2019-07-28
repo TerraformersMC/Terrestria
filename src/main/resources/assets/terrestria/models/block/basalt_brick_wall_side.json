@@ -1,6 +1,6 @@
 {
-    "parent": "block/template_wall_side",
-    "textures": {
-        "wall": "terrestria:block/basalt_bricks"
-    }
+  "parent": "block/template_wall_side",
+  "textures": {
+    "wall": "terrestria:block/basalt_bricks"
+  }
 }

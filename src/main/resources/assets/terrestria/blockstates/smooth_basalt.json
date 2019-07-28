@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/smooth_basalt" }
+    "": {
+      "model": "terrestria:block/smooth_basalt"
+    }
   }
 }

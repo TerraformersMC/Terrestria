@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/button_inventory",
-    "textures": {
-        "texture": "terrestria:block/basalt"
-    }
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "terrestria:block/basalt"
+  }
 }
