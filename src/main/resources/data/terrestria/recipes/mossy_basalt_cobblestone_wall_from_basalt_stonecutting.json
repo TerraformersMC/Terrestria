@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "terrestria:mossy_basalt_cobblestone"
+  },
+  "result": "terrestria:mossy_basalt_cobblestone_wall",
+  "count": 1
+}
