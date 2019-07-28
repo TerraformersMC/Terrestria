@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/button_pressed",
-    "textures": {
-        "texture": "terrestria:block/willow_planks"
-    }
+  "parent": "minecraft:block/button_pressed",
+  "textures": {
+    "texture": "terrestria:block/willow_planks"
+  }
 }

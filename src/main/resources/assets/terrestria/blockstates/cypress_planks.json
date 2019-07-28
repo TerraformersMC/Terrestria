@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/cypress_planks" }
+    "": {
+      "model": "terrestria:block/cypress_planks"
+    }
   }
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/cypress_sign" }
+    "": {
+      "model": "terrestria:block/cypress_sign"
+    }
   }
 }

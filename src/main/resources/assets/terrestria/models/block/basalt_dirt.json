@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:block/basalt_dirt"
+    "all": "terrestria:block/basalt_dirt"
   }
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/potted_japanese_maple_sapling" }
+    "": {
+      "model": "terrestria:block/potted_japanese_maple_sapling"
+    }
   }
 }

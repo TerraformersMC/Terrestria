@@ -3,7 +3,7 @@
   "textures": {
     "particle": "terrestria:block/redwood_log",
     "ends": "terrestria:block/redwood_quarter_log",
-	"sides": "terrestria:block/redwood_log",
-	"insides": "terrestria:block/redwood_log_bare"
+    "sides": "terrestria:block/redwood_log",
+    "insides": "terrestria:block/redwood_log_bare"
   }
 }

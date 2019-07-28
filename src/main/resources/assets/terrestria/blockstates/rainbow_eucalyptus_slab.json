@@ -1,7 +1,13 @@
 {
   "variants": {
-    "type=bottom": { "model": "terrestria:block/rainbow_eucalyptus_slab" },
-    "type=top": { "model": "terrestria:block/rainbow_eucalyptus_slab_top" },
-    "type=double": { "model": "terrestria:block/rainbow_eucalyptus_planks" }
+    "type=bottom": {
+      "model": "terrestria:block/rainbow_eucalyptus_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/rainbow_eucalyptus_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/rainbow_eucalyptus_planks"
+    }
   }
 }

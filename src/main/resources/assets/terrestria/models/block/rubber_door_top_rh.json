@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/door_top_rh",
   "textures": {
-	"bottom": "terrestria:block/rubber_door_bottom",
-	"top": "terrestria:block/rubber_door_top"
+    "bottom": "terrestria:block/rubber_door_bottom",
+    "top": "terrestria:block/rubber_door_top"
   }
 }

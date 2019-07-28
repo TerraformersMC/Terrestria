@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/japanese_maple_planks" }
+    "": {
+      "model": "terrestria:block/japanese_maple_planks"
+    }
   }
 }

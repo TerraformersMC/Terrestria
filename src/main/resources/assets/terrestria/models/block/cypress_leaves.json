@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/leaves",
   "textures": {
-	"all": "terrestria:block/cypress_leaves"
+    "all": "terrestria:block/cypress_leaves"
   }
 }

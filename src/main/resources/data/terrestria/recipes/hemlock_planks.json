@@ -1,13 +1,13 @@
 {
-	"type": "minecraft:crafting_shapeless",
+  "type": "minecraft:crafting_shapeless",
   "group": "planks",
-	"ingredients": [
-		{
-		  "tag": "terrestria:hemlock_logs"
-		}
-	],
-	"result": {
-		"item": "terrestria:hemlock_planks",
-		"count": 4
-	}
+  "ingredients": [
+    {
+      "tag": "terrestria:hemlock_logs"
+    }
+  ],
+  "result": {
+    "item": "terrestria:hemlock_planks",
+    "count": 4
+  }
 }

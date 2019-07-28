@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_fence_gate_wall",
   "textures": {
-	"texture": "terrestria:block/rainbow_eucalyptus_planks"
+    "texture": "terrestria:block/rainbow_eucalyptus_planks"
   }
 }

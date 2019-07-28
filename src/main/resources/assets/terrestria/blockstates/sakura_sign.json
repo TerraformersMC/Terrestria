@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/sakura_sign" }
+    "": {
+      "model": "terrestria:block/sakura_sign"
+    }
   }
 }

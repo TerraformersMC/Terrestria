@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/indian_paintbrush" }
+    "": {
+      "model": "terrestria:block/indian_paintbrush"
+    }
   }
 }

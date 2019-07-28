@@ -1,5 +1,7 @@
 {
-    "variants": {
-        "": { "model": "terrestria:block/cattail" }
+  "variants": {
+    "": {
+      "model": "terrestria:block/cattail"
     }
+  }
 }

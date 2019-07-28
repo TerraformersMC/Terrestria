@@ -1,19 +1,18 @@
 {
   "values": [
-	"minecraft:oak_slab",
-	"minecraft:spruce_slab",
-	"minecraft:birch_slab",
-	"minecraft:jungle_slab",
-	"minecraft:acacia_slab",
-	"minecraft:dark_oak_slab",
-
-	"terrestria:redwood_slab",
-	"terrestria:hemlock_slab",
-	"terrestria:rubber_slab",
-	"terrestria:cypress_slab",
-	"terrestria:japanese_maple_slab",
-	"terrestria:rainbow_eucalyptus_slab",
-	"terrestria:sakura_slab",
-	"terrestria:willow_slab"
+    "minecraft:oak_slab",
+    "minecraft:spruce_slab",
+    "minecraft:birch_slab",
+    "minecraft:jungle_slab",
+    "minecraft:acacia_slab",
+    "minecraft:dark_oak_slab",
+    "terrestria:redwood_slab",
+    "terrestria:hemlock_slab",
+    "terrestria:rubber_slab",
+    "terrestria:cypress_slab",
+    "terrestria:japanese_maple_slab",
+    "terrestria:rainbow_eucalyptus_slab",
+    "terrestria:sakura_slab",
+    "terrestria:willow_slab"
   ]
 }

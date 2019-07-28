@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/rubber_sign" }
+    "": {
+      "model": "terrestria:block/rubber_sign"
+    }
   }
 }

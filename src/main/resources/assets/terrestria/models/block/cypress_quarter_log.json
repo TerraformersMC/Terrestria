@@ -3,7 +3,7 @@
   "textures": {
     "particle": "terrestria:block/cypress_log",
     "ends": "terrestria:block/cypress_quarter_log",
-	"sides": "terrestria:block/cypress_log",
-	"insides": "terrestria:block/cypress_log_bare"
+    "sides": "terrestria:block/cypress_log",
+    "insides": "terrestria:block/cypress_log_bare"
   }
 }

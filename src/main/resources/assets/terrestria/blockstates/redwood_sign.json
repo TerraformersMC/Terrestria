@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/redwood_sign" }
+    "": {
+      "model": "terrestria:block/redwood_sign"
+    }
   }
 }
