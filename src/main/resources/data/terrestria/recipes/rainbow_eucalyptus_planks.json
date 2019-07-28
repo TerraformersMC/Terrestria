@@ -1,5 +1,6 @@
 {
 	"type": "minecraft:crafting_shapeless",
+  "group": "planks",
 	"ingredients": [
 		{
 		  "tag": "terrestria:rainbow_eucalyptus_logs"

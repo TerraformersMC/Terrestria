@@ -1,5 +1,6 @@
 {
 	"type": "minecraft:crafting_shapeless",
+  "group": "planks",
 	"ingredients": [
 		{
 		  "tag": "terrestria:japanese_maple_logs"
