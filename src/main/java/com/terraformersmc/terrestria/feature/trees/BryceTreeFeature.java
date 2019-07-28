@@ -62,7 +62,7 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 	@Override
 	protected boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		// Total tree height
-		int height = rand.nextInt(5) + 12;
+		int height = rand.nextInt(5) + 8;
 
 		// Maximum leaf/branch radius.
 		double maxRadius = 1.5 + 1.5 * rand.nextDouble();
@@ -103,7 +103,7 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 				if (isAir(world, pos)) {
 					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
-				pos.setOffset(randomHorizontalDirection(rand));
+				pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
 				if (isAir(world, pos)) {
 					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
@@ -112,7 +112,7 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 				}
 			}
-			pos.setOffset(Direction.UP);
+			pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
 		}
 	}
 
@@ -148,23 +148,33 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 		int numBranches = 1 + rand.nextInt(2);
 		int numRoots = rand.nextInt(3);
 		int chance;
+		BlockPos branchOrigin;
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 		if (numRoots > 0) {
 			pos.setOffset(Direction.UP);
 		}
 		for (int i = 1; i <= height; i++) {
+
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 
-			chance = rand.nextInt(4);
-			if (chance == 0) {
+			if (rand.nextInt(3) == 0) {
 				pos.setOffset(randomHorizontalDirection(rand));
+				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			}
+
+			if (i == height) {
+				continue;
+			}
+
+			if (rand.nextInt((int) height / 4) == 0 && i > height / 2) {
+				branchOrigin = pos.toImmutable();
+				placeBranch(blocks, world, new BlockPos.Mutable(branchOrigin), 1 + rand.nextInt(3), randomHorizontalDirection(rand), boundingBox);
+			}
+
+			pos.setOffset(Direction.UP);
 		}
-		BlockPos.Mutable topPos = new BlockPos.Mutable(pos);
-		for (int i = 0; i < numBranches; i++) {
-			placeBranch(blocks, world, topPos, rand.nextInt(5), randomHorizontalDirection(rand), boundingBox);
-		}
+
 		for (int i = 0; i < numRoots; i++) {
 			tryGrowRoot(blocks, world, origin, 1, rand, boundingBox);
 		}
@@ -192,6 +202,11 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 				boundingBox
 			);
 		}
+	}
+
+	private static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
+		Direction out = randomHorizontalDirection(rand);
+		return out == direction ? direction.getOpposite() : out;
 	}
 
 	private static Direction randomHorizontalDirection(Random rand) {
