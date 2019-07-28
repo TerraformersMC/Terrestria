@@ -1,12 +1,13 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-		  "tag": "terrestria:cypress_logs"
-		}
-	],
-	"result": {
-		"item": "terrestria:cypress_planks",
-		"count": 4
-	}
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "terrestria:cypress_logs"
+    }
+  ],
+  "result": {
+    "item": "terrestria:cypress_planks",
+    "count": 4
+  }
 }

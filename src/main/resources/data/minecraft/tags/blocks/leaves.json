@@ -1,22 +1,21 @@
 {
   "values": [
-	"minecraft:jungle_leaves",
-	"minecraft:oak_leaves",
-	"minecraft:spruce_leaves",
-	"minecraft:dark_oak_leaves",
-	"minecraft:acacia_leaves",
-	"minecraft:birch_leaves",
-
-	"terrestria:redwood_leaves",
-	"terrestria:hemlock_leaves",
-	"terrestria:rubber_leaves",
-	"terrestria:cypress_leaves",
-	"terrestria:japanese_maple_leaves",
-	"terrestria:japanese_maple_shrub_leaves",
-	"terrestria:dark_japanese_maple_leaves",
-	"terrestria:rainbow_eucalyptus_leaves",
-	"terrestria:sakura_leaves",
-	"terrestria:willow_leaves",
-	"terrestria:jungle_palm_leaves"
+    "minecraft:jungle_leaves",
+    "minecraft:oak_leaves",
+    "minecraft:spruce_leaves",
+    "minecraft:dark_oak_leaves",
+    "minecraft:acacia_leaves",
+    "minecraft:birch_leaves",
+    "terrestria:redwood_leaves",
+    "terrestria:hemlock_leaves",
+    "terrestria:rubber_leaves",
+    "terrestria:cypress_leaves",
+    "terrestria:japanese_maple_leaves",
+    "terrestria:japanese_maple_shrub_leaves",
+    "terrestria:dark_japanese_maple_leaves",
+    "terrestria:rainbow_eucalyptus_leaves",
+    "terrestria:sakura_leaves",
+    "terrestria:willow_leaves",
+    "terrestria:jungle_palm_leaves"
   ]
 }

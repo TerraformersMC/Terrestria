@@ -1,19 +1,18 @@
 {
   "values": [
-	"minecraft:acacia_trapdoor",
-	"minecraft:birch_trapdoor",
-	"minecraft:dark_oak_trapdoor",
-	"minecraft:jungle_trapdoor",
-	"minecraft:oak_trapdoor",
-	"minecraft:spruce_trapdoor",
-
-	"terrestria:redwood_trapdoor",
-	"terrestria:hemlock_trapdoor",
-	"terrestria:rubber_trapdoor",
-	"terrestria:cypress_trapdoor",
-	"terrestria:japanese_maple_trapdoor",
-	"terrestria:rainbow_eucalyptus_trapdoor",
-	"terrestria:sakura_trapdoor",
-	"terrestria:willow_trapdoor"
+    "minecraft:acacia_trapdoor",
+    "minecraft:birch_trapdoor",
+    "minecraft:dark_oak_trapdoor",
+    "minecraft:jungle_trapdoor",
+    "minecraft:oak_trapdoor",
+    "minecraft:spruce_trapdoor",
+    "terrestria:redwood_trapdoor",
+    "terrestria:hemlock_trapdoor",
+    "terrestria:rubber_trapdoor",
+    "terrestria:cypress_trapdoor",
+    "terrestria:japanese_maple_trapdoor",
+    "terrestria:rainbow_eucalyptus_trapdoor",
+    "terrestria:sakura_trapdoor",
+    "terrestria:willow_trapdoor"
   ]
 }

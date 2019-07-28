@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-	"end": "terrestria:block/rubber_log_top",
-	"side": "terrestria:block/rubber_log"
+    "end": "terrestria:block/rubber_log_top",
+    "side": "terrestria:block/rubber_log"
   }
 }

@@ -2,7 +2,6 @@
   "schemaVersion": 1,
   "id": "terrestria",
   "version": "${version}",
-
   "name": "Terrestria",
   "description": "A vibrant biomes mod adding stunning and highly detailed biomes, inspired by aspects of ExtrabiomesXL and Redpower 2",
   "authors": [
@@ -14,10 +13,8 @@
     "sources": "https://github.com/TerraformersMC/Terrestria",
     "issues": "https://github.com/TerraformersMC/Terrestria/issues"
   },
-
   "license": "LGPL-3.0-only",
   "icon": "assets/terrestria/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "main": [
@@ -27,13 +24,15 @@
       "com.terraformersmc.terrestria.TerrestriaClient"
     ]
   },
-
   "depends": {
     "fabricloader": ">=0.4.0",
     "fabric": "*",
-    "terraform": ">=0.1.0"
+    "terraform": "*"
   },
   "mixins": [
     "mixins.terrestria.json"
-  ]
+  ],
+  "custom": {
+    "extrapieces:piecepack": "extrapieces.terrestria.json"
+  }
 }

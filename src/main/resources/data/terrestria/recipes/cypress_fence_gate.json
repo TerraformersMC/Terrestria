@@ -1,18 +1,19 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"SPS",
-		"SPS"
-	],
-	"key": {
-		"P": {
-			"item": "terrestria:cypress_planks"
-		},
-		"S": {
-		    "item": "minecraft:stick"
-		}
-	},
-	"result": {
-		"item": "terrestria:cypress_fence_gate"
-	}
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_fence_gate",
+  "pattern": [
+    "SPS",
+    "SPS"
+  ],
+  "key": {
+    "P": {
+      "item": "terrestria:cypress_planks"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "terrestria:cypress_fence_gate"
+  }
 }

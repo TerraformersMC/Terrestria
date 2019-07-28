@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/button_inventory",
-    "textures": {
-        "texture": "terrestria:block/japanese_maple_planks"
-    }
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "terrestria:block/japanese_maple_planks"
+  }
 }

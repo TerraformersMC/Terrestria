@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "bark",
   "pattern": [
-	"LL",
-	"LL"
+    "LL",
+    "LL"
   ],
   "key": {
-	"L": {
-	  "item": "terrestria:cypress_log"
-	}
+    "L": {
+      "item": "terrestria:cypress_log"
+    }
   },
   "result": {
-	"item": "terrestria:cypress_wood",
-	"count": 3
+    "item": "terrestria:cypress_wood",
+    "count": 3
   }
 }

@@ -1,10 +1,10 @@
 {
   "values": [
-	"terrestria:cypress_log",
-	"terrestria:cypress_quarter_log",
-	"terrestria:cypress_wood",
-	"terrestria:stripped_cypress_log",
-	"terrestria:stripped_cypress_quarter_log",
-	"terrestria:stripped_cypress_wood"
+    "terrestria:cypress_log",
+    "terrestria:cypress_quarter_log",
+    "terrestria:cypress_wood",
+    "terrestria:stripped_cypress_log",
+    "terrestria:stripped_cypress_quarter_log",
+    "terrestria:stripped_cypress_wood"
   ]
 }

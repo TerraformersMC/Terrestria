@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "bark",
   "pattern": [
-	"LL",
-	"LL"
+    "LL",
+    "LL"
   ],
   "key": {
-	"L": {
-	  "item": "terrestria:willow_log"
-	}
+    "L": {
+      "item": "terrestria:willow_log"
+    }
   },
   "result": {
-	"item": "terrestria:willow_wood",
-	"count": 3
+    "item": "terrestria:willow_wood",
+    "count": 3
   }
 }

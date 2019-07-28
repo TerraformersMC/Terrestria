@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/potted_rainbow_eucalyptus_sapling" }
+    "": {
+      "model": "terrestria:block/potted_rainbow_eucalyptus_sapling"
+    }
   }
 }

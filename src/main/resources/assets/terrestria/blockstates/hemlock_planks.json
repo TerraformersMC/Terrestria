@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/hemlock_planks" }
+    "": {
+      "model": "terrestria:block/hemlock_planks"
+    }
   }
 }

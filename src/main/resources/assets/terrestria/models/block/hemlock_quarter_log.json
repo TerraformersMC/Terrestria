@@ -3,7 +3,7 @@
   "textures": {
     "particle": "terrestria:block/hemlock_log",
     "ends": "terrestria:block/hemlock_quarter_log",
-	"sides": "terrestria:block/hemlock_log",
-	"insides": "terrestria:block/hemlock_log_bare"
+    "sides": "terrestria:block/hemlock_log",
+    "insides": "terrestria:block/hemlock_log_bare"
   }
 }

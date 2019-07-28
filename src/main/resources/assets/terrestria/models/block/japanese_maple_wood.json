@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-	"all": "terrestria:block/japanese_maple_log"
+    "all": "terrestria:block/japanese_maple_log"
   }
 }

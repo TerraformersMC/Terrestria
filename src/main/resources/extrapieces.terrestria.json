@@ -1,0 +1,242 @@
+{
+  "redwood_log": {
+    "base": "terrestria:redwood_log",
+    "textures": {
+      "top": "terrestria:block/redwood_log_top"
+    }
+  },
+  "redwood": {
+    "base": "terrestria:redwood_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:redwood_stairs",
+      "extrapieces:slab": "terrestria:redwood_slab",
+      "extrapieces:fence": "terrestria:redwood_fence",
+      "extrapieces:fence_gate": "terrestria:redwood_fence_gate"
+    }
+  },
+  "stripped_redwood_log": {
+    "base": "terrestria:stripped_redwood_log",
+    "textures": {
+      "top": "terrestria:block/stripped_redwood_log_top"
+    }
+  },
+  "redwood_wood": {
+    "base": "terrestria:redwood_wood",
+    "textures": {
+      "main": "terrestria:block/redwood_log"
+    }
+  },
+  "stripped_redwood_wood": {
+    "base": "terrestria:stripped_redwood_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_redwood_log"
+    }
+  },
+  "hemlock_log": {
+    "base": "terrestria:hemlock_log",
+    "textures": {
+      "top": "terrestria:block/hemlock_log_top"
+    }
+  },
+  "hemlock": {
+    "base": "terrestria:hemlock_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:hemlock_stairs",
+      "extrapieces:slab": "terrestria:hemlock_slab",
+      "extrapieces:fence": "terrestria:hemlock_fence",
+      "extrapieces:fence_gate": "terrestria:hemlock_fence_gate"
+    }
+  },
+  "stripped_hemlock_log": {
+    "base": "terrestria:stripped_hemlock_log",
+    "textures": {
+      "top": "terrestria:block/stripped_hemlock_log_top"
+    }
+  },
+  "hemlock_wood": {
+    "base": "terrestria:hemlock_wood",
+    "textures": {
+      "main": "terrestria:block/hemlock_log"
+    }
+  },
+  "stripped_hemlock_wood": {
+    "base": "terrestria:stripped_hemlock_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_hemlock_log"
+    }
+  },
+  "rubber_log": {
+    "base": "terrestria:rubber_log",
+    "textures": {
+      "top": "terrestria:block/rubber_log_top"
+    }
+  },
+  "rubber": {
+    "base": "terrestria:rubber_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:rubber_stairs",
+      "extrapieces:slab": "terrestria:rubber_slab",
+      "extrapieces:fence": "terrestria:rubber_fence",
+      "extrapieces:fence_gate": "terrestria:rubber_fence_gate"
+    }
+  },
+  "stripped_rubber_log": {
+    "base": "terrestria:stripped_rubber_log",
+    "textures": {
+      "top": "terrestria:block/stripped_rubber_log_top"
+    }
+  },
+  "rubber_wood": {
+    "base": "terrestria:rubber_wood",
+    "textures": {
+      "main": "terrestria:block/rubber_log"
+    }
+  },
+  "stripped_rubber_wood": {
+    "base": "terrestria:stripped_rubber_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_rubber_log"
+    }
+  },
+  "cypress_log": {
+    "base": "terrestria:cypress_log",
+    "textures": {
+      "top": "terrestria:block/cypress_log_top"
+    }
+  },
+  "cypress": {
+    "base": "terrestria:cypress_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:cypress_stairs",
+      "extrapieces:slab": "terrestria:cypress_slab",
+      "extrapieces:fence": "terrestria:cypress_fence",
+      "extrapieces:fence_gate": "terrestria:cypress_fence_gate"
+    }
+  },
+  "stripped_cypress_log": {
+    "base": "terrestria:stripped_cypress_log",
+    "textures": {
+      "top": "terrestria:block/stripped_cypress_log_top"
+    }
+  },
+  "cypress_wood": {
+    "base": "terrestria:cypress_wood",
+    "textures": {
+      "main": "terrestria:block/cypress_log"
+    }
+  },
+  "stripped_cypress_wood": {
+    "base": "terrestria:stripped_cypress_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_cypress_log"
+    }
+  },
+  "willow_log": {
+    "base": "terrestria:willow_log",
+    "textures": {
+      "top": "terrestria:block/willow_log_top"
+    }
+  },
+  "willow": {
+    "base": "terrestria:willow_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:willow_stairs",
+      "extrapieces:slab": "terrestria:willow_slab",
+      "extrapieces:fence": "terrestria:willow_fence",
+      "extrapieces:fence_gate": "terrestria:willow_fence_gate"
+    }
+  },
+  "stripped_willow_log": {
+    "base": "terrestria:stripped_willow_log",
+    "textures": {
+      "top": "terrestria:block/stripped_willow_log_top"
+    }
+  },
+  "willow_wood": {
+    "base": "terrestria:willow_wood",
+    "textures": {
+      "main": "terrestria:block/willow_log"
+    }
+  },
+  "stripped_willow_wood": {
+    "base": "terrestria:stripped_willow_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_willow_log"
+    }
+  },
+  "japanese_maple_log": {
+    "base": "terrestria:japanese_maple_log",
+    "textures": {
+      "top": "terrestria:block/japanese_maple_log_top"
+    }
+  },
+  "japanese_maple": {
+    "base": "terrestria:japanese_maple_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:japanese_maple_stairs",
+      "extrapieces:slab": "terrestria:japanese_maple_slab",
+      "extrapieces:fence": "terrestria:japanese_maple_fence",
+      "extrapieces:fence_gate": "terrestria:japanese_maple_fence_gate"
+    }
+  },
+  "stripped_japanese_maple_log": {
+    "base": "terrestria:stripped_japanese_maple_log",
+    "textures": {
+      "top": "terrestria:block/stripped_japanese_maple_log_top"
+    }
+  },
+  "japanese_maple_wood": {
+    "base": "terrestria:japanese_maple_wood",
+    "textures": {
+      "main": "terrestria:block/japanese_maple_log"
+    }
+  },
+  "stripped_japanese_maple_wood": {
+    "base": "terrestria:stripped_japanese_maple_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_japanese_maple_log"
+    }
+  },
+  "rainbow_eucalyptus_log": {
+    "base": "terrestria:rainbow_eucalyptus_log",
+    "textures": {
+      "top": "terrestria:block/rainbow_eucalyptus_log_top"
+    }
+  },
+  "rainbow_eucalyptus": {
+    "base": "terrestria:rainbow_eucalyptus_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:rainbow_eucalyptus_stairs",
+      "extrapieces:slab": "terrestria:rainbow_eucalyptus_slab",
+      "extrapieces:fence": "terrestria:rainbow_eucalyptus_fence",
+      "extrapieces:fence_gate": "terrestria:rainbow_eucalyptus_fence_gate"
+    }
+  },
+  "stripped_rainbow_eucalyptus_log": {
+    "base": "terrestria:stripped_rainbow_eucalyptus_log",
+    "textures": {
+      "top": "terrestria:block/stripped_rainbow_eucalyptus_log_top"
+    }
+  },
+  "rainbow_eucalyptus_wood": {
+    "base": "terrestria:rainbow_eucalyptus_wood",
+    "textures": {
+      "main": "terrestria:block/rainbow_eucalyptus_log"
+    }
+  },
+  "stripped_rainbow_eucalyptus_wood": {
+    "base": "terrestria:stripped_rainbow_eucalyptus_wood",
+    "textures": {
+      "main": "terrestria:block/stripped_rainbow_eucalyptus_log"
+    }
+  },
+  "sakura": {
+    "base": "terrestria:sakura_planks",
+    "vanilla_pieces": {
+      "extrapieces:stairs": "terrestria:sakura_stairs",
+      "extrapieces:slab": "terrestria:sakura_slab",
+      "extrapieces:fence": "terrestria:sakura_fence",
+      "extrapieces:fence_gate": "terrestria:sakura_fence_gate"
+    }
+  }
+}

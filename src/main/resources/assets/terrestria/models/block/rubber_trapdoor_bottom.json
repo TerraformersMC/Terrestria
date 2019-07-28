@@ -1,6 +1,6 @@
 {
-    "parent": "block/template_orientable_trapdoor_bottom",
-    "textures": {
-        "texture": "terrestria:block/rubber_trapdoor"
-    }
+  "parent": "block/template_orientable_trapdoor_bottom",
+  "textures": {
+    "texture": "terrestria:block/rubber_trapdoor"
+  }
 }

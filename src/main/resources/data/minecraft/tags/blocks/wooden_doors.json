@@ -1,19 +1,18 @@
 {
   "values": [
-	"minecraft:oak_door",
-	"minecraft:spruce_door",
-	"minecraft:birch_door",
-	"minecraft:jungle_door",
-	"minecraft:acacia_door",
-	"minecraft:dark_oak_door",
-
-	"terrestria:redwood_door",
-	"terrestria:hemlock_door",
-	"terrestria:rubber_door",
-	"terrestria:cypress_door",
-	"terrestria:japanese_maple_door",
-	"terrestria:rainbow_eucalyptus_door",
-	"terrestria:sakura_door",
-	"terrestria:willow_door"
+    "minecraft:oak_door",
+    "minecraft:spruce_door",
+    "minecraft:birch_door",
+    "minecraft:jungle_door",
+    "minecraft:acacia_door",
+    "minecraft:dark_oak_door",
+    "terrestria:redwood_door",
+    "terrestria:hemlock_door",
+    "terrestria:rubber_door",
+    "terrestria:cypress_door",
+    "terrestria:japanese_maple_door",
+    "terrestria:rainbow_eucalyptus_door",
+    "terrestria:sakura_door",
+    "terrestria:willow_door"
   ]
 }

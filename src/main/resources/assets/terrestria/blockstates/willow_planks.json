@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/willow_planks" }
+    "": {
+      "model": "terrestria:block/willow_planks"
+    }
   }
 }

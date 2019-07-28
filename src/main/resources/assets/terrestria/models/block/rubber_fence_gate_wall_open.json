@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/template_fence_gate_wall_open",
   "textures": {
-	"texture": "terrestria:block/rubber_planks"
+    "texture": "terrestria:block/rubber_planks"
   }
 }

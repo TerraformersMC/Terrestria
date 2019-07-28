@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/hemlock_sign" }
+    "": {
+      "model": "terrestria:block/hemlock_sign"
+    }
   }
 }

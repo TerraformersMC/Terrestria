@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/potted_monsteras" }
+    "": {
+      "model": "terrestria:block/potted_monsteras"
+    }
   }
 }

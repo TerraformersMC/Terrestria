@@ -1,7 +1,13 @@
 {
   "variants": {
-    "type=bottom": { "model": "terrestria:block/hemlock_slab" },
-    "type=top": { "model": "terrestria:block/hemlock_slab_top" },
-    "type=double": { "model": "terrestria:block/hemlock_planks" }
+    "type=bottom": {
+      "model": "terrestria:block/hemlock_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/hemlock_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/hemlock_planks"
+    }
   }
 }

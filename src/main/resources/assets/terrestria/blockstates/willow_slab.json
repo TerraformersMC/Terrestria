@@ -1,7 +1,13 @@
 {
   "variants": {
-    "type=bottom": { "model": "terrestria:block/willow_slab" },
-    "type=top": { "model": "terrestria:block/willow_slab_top" },
-    "type=double": { "model": "terrestria:block/willow_planks" }
+    "type=bottom": {
+      "model": "terrestria:block/willow_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/willow_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/willow_planks"
+    }
   }
 }
