@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terrestria:basalt_cobblestone"
+          "name": "terrestria:smooth_basalt_stairs"
         }
       ],
       "conditions": [

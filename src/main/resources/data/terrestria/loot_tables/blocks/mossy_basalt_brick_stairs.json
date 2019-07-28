@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terrestria:basalt_cobblestone"
+          "name": "terrestria:mossy_basalt_brick_stairs"
         }
       ],
       "conditions": [
