@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/door_bottom",
   "textures": {
-	"bottom": "terrestria:block/cypress_door_bottom",
-	"top": "terrestria:block/cypress_door_top"
+    "bottom": "terrestria:block/cypress_door_bottom",
+    "top": "terrestria:block/cypress_door_top"
   }
 }

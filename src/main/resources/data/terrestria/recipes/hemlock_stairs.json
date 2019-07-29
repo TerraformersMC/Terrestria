@@ -1,17 +1,18 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"P  ",
-		"PP ",
-		"PPP"
-	],
-	"key": {
-		"P": {
-			"item": "terrestria:hemlock_planks"
-		}
-	},
-	"result": {
-		"item": "terrestria:hemlock_stairs",
-		"count": 4
-	}
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "P  ",
+    "PP ",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "terrestria:hemlock_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:hemlock_stairs",
+    "count": 4
+  }
 }

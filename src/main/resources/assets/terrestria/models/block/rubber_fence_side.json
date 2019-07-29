@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/fence_side",
-    "textures": {
-        "texture": "terrestria:block/rubber_planks"
-    }
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "terrestria:block/rubber_planks"
+  }
 }

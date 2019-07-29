@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "group": "bark",
   "pattern": [
-	"LL",
-	"LL"
+    "LL",
+    "LL"
   ],
   "key": {
-	"L": {
-	  "item": "terrestria:hemlock_log"
-	}
+    "L": {
+      "item": "terrestria:hemlock_log"
+    }
   },
   "result": {
-	"item": "terrestria:hemlock_wood",
-	"count": 3
+    "item": "terrestria:hemlock_wood",
+    "count": 3
   }
 }

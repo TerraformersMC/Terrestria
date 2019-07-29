@@ -1,8 +1,8 @@
 {
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "terrestria:block/cypress_planks",
-        "top": "terrestria:block/cypress_planks",
-        "side": "terrestria:block/cypress_planks"
-    }
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "terrestria:block/cypress_planks",
+    "top": "terrestria:block/cypress_planks",
+    "side": "terrestria:block/cypress_planks"
+  }
 }

@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/rubber_planks" }
+    "": {
+      "model": "terrestria:block/rubber_planks"
+    }
   }
 }

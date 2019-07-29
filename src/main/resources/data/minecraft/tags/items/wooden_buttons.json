@@ -1,19 +1,18 @@
 {
   "values": [
-	"minecraft:oak_button",
-	"minecraft:spruce_button",
-	"minecraft:birch_button",
-	"minecraft:jungle_button",
-	"minecraft:acacia_button",
-	"minecraft:dark_oak_button",
-
-	"terrestria:redwood_button",
-	"terrestria:hemlock_button",
-	"terrestria:rubber_button",
-	"terrestria:cypress_button",
-	"terrestria:japanese_maple_button",
-	"terrestria:rainbow_eucalyptus_button",
-	"terrestria:sakura_button",
-	"terrestria:willow_button"
+    "minecraft:oak_button",
+    "minecraft:spruce_button",
+    "minecraft:birch_button",
+    "minecraft:jungle_button",
+    "minecraft:acacia_button",
+    "minecraft:dark_oak_button",
+    "terrestria:redwood_button",
+    "terrestria:hemlock_button",
+    "terrestria:rubber_button",
+    "terrestria:cypress_button",
+    "terrestria:japanese_maple_button",
+    "terrestria:rainbow_eucalyptus_button",
+    "terrestria:sakura_button",
+    "terrestria:willow_button"
   ]
 }

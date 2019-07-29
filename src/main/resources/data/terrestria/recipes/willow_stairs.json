@@ -1,17 +1,18 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"P  ",
-		"PP ",
-		"PPP"
-	],
-	"key": {
-		"P": {
-			"item": "terrestria:willow_planks"
-		}
-	},
-	"result": {
-		"item": "terrestria:willow_stairs",
-		"count": 4
-	}
+  "type": "minecraft:crafting_shaped",
+  "group": "wooden_stairs",
+  "pattern": [
+    "P  ",
+    "PP ",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "terrestria:willow_planks"
+    }
+  },
+  "result": {
+    "item": "terrestria:willow_stairs",
+    "count": 4
+  }
 }

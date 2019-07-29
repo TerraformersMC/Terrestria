@@ -1,19 +1,18 @@
 {
   "values": [
-	"minecraft:oak_sign",
-	"minecraft:spruce_sign",
-	"minecraft:birch_sign",
-	"minecraft:acacia_sign",
-	"minecraft:jungle_sign",
-	"minecraft:dark_oak_sign",
-
-	"terrestria:redwood_sign",
-	"terrestria:hemlock_sign",
-	"terrestria:rubber_sign",
-	"terrestria:cypress_sign",
-	"terrestria:japanese_maple_sign",
-	"terrestria:rainbow_eucalyptus_sign",
-	"terrestria:sakura_sign",
-	"terrestria:willow_sign"
+    "minecraft:oak_sign",
+    "minecraft:spruce_sign",
+    "minecraft:birch_sign",
+    "minecraft:acacia_sign",
+    "minecraft:jungle_sign",
+    "minecraft:dark_oak_sign",
+    "terrestria:redwood_sign",
+    "terrestria:hemlock_sign",
+    "terrestria:rubber_sign",
+    "terrestria:cypress_sign",
+    "terrestria:japanese_maple_sign",
+    "terrestria:rainbow_eucalyptus_sign",
+    "terrestria:sakura_sign",
+    "terrestria:willow_sign"
   ]
 }

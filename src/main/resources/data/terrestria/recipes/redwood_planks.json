@@ -1,12 +1,13 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-		  "tag": "terrestria:redwood_logs"
-		}
-	],
-	"result": {
-		"item": "terrestria:redwood_planks",
-		"count": 4
-	}
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "terrestria:redwood_logs"
+    }
+  ],
+  "result": {
+    "item": "terrestria:redwood_planks",
+    "count": 4
+  }
 }

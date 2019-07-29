@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": { "model": "terrestria:block/willow_sign" }
+    "": {
+      "model": "terrestria:block/willow_sign"
+    }
   }
 }

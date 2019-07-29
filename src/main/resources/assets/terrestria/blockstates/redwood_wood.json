@@ -1,7 +1,16 @@
 {
   "variants": {
-	"axis=x": { "model":  "terrestria:block/redwood_wood", "x": 90, "y": 90 },
-	"axis=y": { "model":  "terrestria:block/redwood_wood" },
-	"axis=z": { "model":  "terrestria:block/redwood_wood", "x": 90 }
+    "axis=x": {
+      "model": "terrestria:block/redwood_wood",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "terrestria:block/redwood_wood"
+    },
+    "axis=z": {
+      "model": "terrestria:block/redwood_wood",
+      "x": 90
+    }
   }
 }

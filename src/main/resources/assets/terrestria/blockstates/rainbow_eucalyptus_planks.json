@@ -1,5 +1,7 @@
 {
   "variants": {
-	"": { "model": "terrestria:block/rainbow_eucalyptus_planks" }
+    "": {
+      "model": "terrestria:block/rainbow_eucalyptus_planks"
+    }
   }
 }

@@ -1,12 +1,13 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
-			"tag": "terrestria:rubber_logs"
-		}
-	],
-	"result": {
-		"item": "terrestria:rubber_planks",
-		"count": 4
-	}
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "terrestria:rubber_logs"
+    }
+  ],
+  "result": {
+    "item": "terrestria:rubber_planks",
+    "count": 4
+  }
 }

@@ -1,8 +1,7 @@
 {
   "values": [
-	"minecraft:sand",
-	"minecraft:red_sand",
-
-	"terrestria:basalt_sand"
+    "minecraft:sand",
+    "minecraft:red_sand",
+    "terrestria:basalt_sand"
   ]
 }

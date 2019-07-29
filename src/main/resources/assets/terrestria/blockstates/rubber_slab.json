@@ -1,7 +1,13 @@
 {
   "variants": {
-    "type=bottom": { "model": "terrestria:block/rubber_slab" },
-    "type=top": { "model": "terrestria:block/rubber_slab_top" },
-    "type=double": { "model": "terrestria:block/rubber_planks" }
+    "type=bottom": {
+      "model": "terrestria:block/rubber_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/rubber_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/rubber_planks"
+    }
   }
 }

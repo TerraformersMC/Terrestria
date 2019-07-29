@@ -1,6 +1,6 @@
 {
-    "parent": "minecraft:block/pressure_plate_up",
-    "textures": {
-        "texture": "terrestria:block/redwood_planks"
-    }
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "terrestria:block/redwood_planks"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-	"end": "terrestria:block/japanese_maple_log_top",
-	"side": "terrestria:block/japanese_maple_log"
+    "end": "terrestria:block/japanese_maple_log_top",
+    "side": "terrestria:block/japanese_maple_log"
   }
 }

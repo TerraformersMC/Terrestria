@@ -1,8 +1,8 @@
 {
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "terrestria:block/hemlock_planks",
-        "top": "terrestria:block/hemlock_planks",
-        "side": "terrestria:block/hemlock_planks"
-    }
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "terrestria:block/hemlock_planks",
+    "top": "terrestria:block/hemlock_planks",
+    "side": "terrestria:block/hemlock_planks"
+  }
 }

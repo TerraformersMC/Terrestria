@@ -1,10 +1,21 @@
 {
   "variants": {
-	"": [
-	  { "model": "terrestria:block/basalt_sand" },
-	  { "model": "terrestria:block/basalt_sand", "y": 90 },
-	  { "model": "terrestria:block/basalt_sand", "y": 180 },
-	  { "model": "terrestria:block/basalt_sand", "y": 270 }
-	]
+    "": [
+      {
+        "model": "terrestria:block/basalt_sand"
+      },
+      {
+        "model": "terrestria:block/basalt_sand",
+        "y": 90
+      },
+      {
+        "model": "terrestria:block/basalt_sand",
+        "y": 180
+      },
+      {
+        "model": "terrestria:block/basalt_sand",
+        "y": 270
+      }
+    ]
   }
 }

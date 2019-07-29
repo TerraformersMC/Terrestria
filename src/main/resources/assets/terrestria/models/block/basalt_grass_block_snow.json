@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/grass_block_snow",
   "textures": {
-	"particle": "terrestria:block/basalt_dirt",
-	"bottom": "terrestria:block/basalt_dirt",
-	"top": "minecraft:block/grass_block_top",
-	"side": "terrestria:block/basalt_grass_side_snow"
+    "particle": "terrestria:block/basalt_dirt",
+    "bottom": "terrestria:block/basalt_dirt",
+    "top": "minecraft:block/grass_block_top",
+    "side": "terrestria:block/basalt_grass_side_snow"
   }
 }

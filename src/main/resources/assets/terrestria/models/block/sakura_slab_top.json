@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/slab_top",
   "textures": {
-	"bottom": "terrestria:block/sakura_planks",
-	"top": "terrestria:block/sakura_planks",
-	"side": "terrestria:block/sakura_planks"
+    "bottom": "terrestria:block/sakura_planks",
+    "top": "terrestria:block/sakura_planks",
+    "side": "terrestria:block/sakura_planks"
   }
 }
