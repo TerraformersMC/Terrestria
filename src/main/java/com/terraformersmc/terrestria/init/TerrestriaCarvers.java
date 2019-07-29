@@ -8,10 +8,10 @@ import net.minecraft.world.gen.carver.CarverConfig;
 
 public class TerrestriaCarvers {
 
-	public static final CanyonValleyCarver CANYON_VALLEY = register("canyon_valley", new CanyonValleyCarver(ProbabilityConfig::deserialize, 256));
+	public static CanyonValleyCarver CANYON_VALLEY;
 
 	public static void init() {
-
+		CANYON_VALLEY = register("canyon_valley", new CanyonValleyCarver(ProbabilityConfig::deserialize, 256));
 	}
 
 	private static <C extends CarverConfig, F extends Carver<C>> F register(String string_1, F carver_1) {
