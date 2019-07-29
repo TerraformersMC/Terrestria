@@ -1,11 +1,12 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.block.TerraformButtonBlock;
 import com.terraformersmc.terraform.block.TerraformPressurePlateBlock;
+import com.terraformersmc.terraform.block.TerraformStoneButtonBlock;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.block.PressurePlateBlock;
 
 public class StoneBlocks {
 	public StoneVariantBlocks plain;
@@ -15,8 +16,8 @@ public class StoneBlocks {
 	public StoneVariantBlocks bricks;
 	public StoneVariantBlocks mossyBricks;
 
-	public TerraformButtonBlock button; // TODO: Stone button sounds
-	public TerraformPressurePlateBlock pressurePlate; // TODO: Stone pressure plate behavior!
+	public TerraformStoneButtonBlock button;
+	public TerraformPressurePlateBlock pressurePlate;
 	public Block chiseledBricks;
 	public Block crackedBricks;
 
@@ -32,8 +33,8 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformButtonBlock(FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformStoneButtonBlock(FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
 		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
 		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(FabricBlockSettings.copy(Blocks.STONE).materialColor(color).build()));
 
