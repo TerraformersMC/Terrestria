@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.canyon.Perlin;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.carver.Carver;
@@ -19,9 +20,9 @@ public class CanyonValleyCarver extends Carver<ProbabilityConfig> {
 	//absolute max this value can be is 16 (to make math easier)
 	private static final int MAX_BALL_RADIUS = 8;
 	private static final int LAYERS = 5;
-	private static ArrayList<Perlin> depths;
-	private static ArrayList<Perlin> xOffsets;
-	private static ArrayList<Perlin> zOffsets;
+	private static ArrayList<Perlin> depths = new ArrayList<>();
+	private static ArrayList<Perlin> xOffsets = new ArrayList<>();
+	private static ArrayList<Perlin> zOffsets = new ArrayList<>();
 
 	public CanyonValleyCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> config, int heightLimit) {
 		super(config, heightLimit);
@@ -49,16 +50,16 @@ public class CanyonValleyCarver extends Carver<ProbabilityConfig> {
 	}
 
 	//returns a boolean array with values responding to directions boolean[nw, n, ne, e, se, s, sw, w]
-	private boolean[] getChunksWithinRadius(int x, int z, int radius) {
+	private boolean[] getChunksWithinRadius(int x, int z) {
 		return new boolean[] {
-			(x % 16 - radius) < 1 && (z % 16 - radius) < 1,
-			(z % 16 - radius) < 1,
-			(x % 16 + radius) > 16 && (z % 16 - radius) < 1,
-			(x % 16 + radius) > 16,
-			(x % 16 + radius) < 0 && (z % 16 + radius) > 16,
-			(z % 16 + radius) > 16,
-			(x % 16 - radius) < 1 && (z % 16 + radius) > 16,
-			(x % 16 - radius) < 1
+			(x % 16 - MAX_BALL_RADIUS) < 1 && (z % 16 - MAX_BALL_RADIUS) < 1,
+			(z % 16 - MAX_BALL_RADIUS) < 1,
+			(x % 16 + MAX_BALL_RADIUS) > 16 && (z % 16 - MAX_BALL_RADIUS) < 1,
+			(x % 16 + MAX_BALL_RADIUS) > 16,
+			(x % 16 + MAX_BALL_RADIUS) < 0 && (z % 16 + MAX_BALL_RADIUS) > 16,
+			(z % 16 + MAX_BALL_RADIUS) > 16,
+			(x % 16 - MAX_BALL_RADIUS) < 1 && (z % 16 + MAX_BALL_RADIUS) > 16,
+			(x % 16 - MAX_BALL_RADIUS) < 1
 		};
 	}
 
@@ -87,7 +88,7 @@ public class CanyonValleyCarver extends Carver<ProbabilityConfig> {
 
 		int cPosOffsetX = 0;
 		int cPosOffsetZ = 0;
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < 8; i++) {
 			if (chunks[i]) {
 
 				if (i == 0 || i == 6 || i == 7) {
@@ -122,12 +123,15 @@ public class CanyonValleyCarver extends Carver<ProbabilityConfig> {
 				}
 			}
 		}
+
+		if (nearestPoint == null) {
+			return new BlockPos.Mutable(x + 99, 0, 0); //Make sure it's out of range, but not null still
+		}
 		return nearestPoint;
 	}
 
 	private boolean isNearPoint(int chunkX, int chunkZ, int x, int y, int z) {
-		BlockPos nP = findNearestPoint(chunkX, chunkZ, x, y, z, getChunksWithinRadius(x, z, MAX_BALL_RADIUS));
-		return MAX_BALL_RADIUS <= Math.sqrt(((x - nP.getX())* (x - nP.getX())) + ((z - nP.getZ())* (z - nP.getZ())) + ((y - nP.getY())* (y - nP.getY())));
+		return findNearestPoint(chunkX, chunkZ, x, y, z, getChunksWithinRadius(x, z)).isWithinDistance(new Vec3i(x, y, z), MAX_BALL_RADIUS);
 	}
 
 	@Override
