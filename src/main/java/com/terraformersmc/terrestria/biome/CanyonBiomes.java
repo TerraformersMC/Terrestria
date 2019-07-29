@@ -2,9 +2,12 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaCarvers;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 
@@ -37,5 +40,6 @@ public class CanyonBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
 				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
 				.build());
+		TerrestriaBiomes.CANYON.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(TerrestriaCarvers.CANYON_VALLEY, new ProbabilityConfig(1F)));
 	}
 }
