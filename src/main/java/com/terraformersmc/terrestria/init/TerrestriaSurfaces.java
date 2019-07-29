@@ -49,7 +49,7 @@ public class TerrestriaSurfaces {
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
 				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
 				Blocks.SAND.getDefaultState(),
-				TerrestriaBlocks.BASALT.getDefaultState()
+				TerrestriaBlocks.BASALT.plain.full.getDefaultState()
 		);
 
 		SANDSTONE_CLIFF_CONFIG = new CanyonSurfaceConfig(

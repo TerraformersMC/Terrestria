@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "terrestria:block/smooth_basalt",
+    "side": "terrestria:block/smooth_basalt_slab_side"
+  }
+}

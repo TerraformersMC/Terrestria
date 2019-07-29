@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "terrestria:block/mossy_basalt_bricks",
+    "top": "terrestria:block/mossy_basalt_bricks",
+    "side": "terrestria:block/mossy_basalt_bricks"
+  }
+}

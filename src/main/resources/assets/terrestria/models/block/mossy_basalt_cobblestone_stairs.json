@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "terrestria:block/mossy_basalt_cobblestone",
+    "top": "terrestria:block/mossy_basalt_cobblestone",
+    "side": "terrestria:block/mossy_basalt_cobblestone"
+  }
+}

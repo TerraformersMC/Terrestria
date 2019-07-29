@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terrestria:basalt"
+    }
+  ],
+  "result": {
+    "item": "terrestria:basalt_button"
+  }
+}

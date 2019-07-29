@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "terrestria:basalt_cobblestone"
+  },
+  "result": "terrestria:basalt_cobblestone_slab",
+  "count": 2
+}

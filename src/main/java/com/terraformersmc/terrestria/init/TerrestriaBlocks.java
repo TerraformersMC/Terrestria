@@ -4,6 +4,7 @@ import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodColors;
@@ -72,7 +73,7 @@ public class TerrestriaBlocks {
 	public static SandBlock BASALT_SAND;
 	public static Block BASALT_DIRT;
 	public static Block BASALT_GRASS_BLOCK;
-	public static Block BASALT;
+	public static StoneBlocks BASALT;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
 	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
@@ -190,7 +191,7 @@ public class TerrestriaBlocks {
 		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).build()));
 		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).build()));
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, Block.Settings.copy(Blocks.GRASS_BLOCK)));
-		BASALT = TerrestriaRegistry.register("basalt", new Block(FabricBlockSettings.copy(Blocks.STONE).materialColor(MaterialColor.BLACK).build()));
+		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 6, Block.Settings.copy(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
