@@ -19,6 +19,8 @@ public class TerrestriaBiomes {
 	public static Biome CYPRESS_SWAMP;
 	public static Biome DENSE_WOODLANDS;
 	public static Biome DENSE_WOODLANDS_EDGE;
+	public static Biome DUNES;
+	public static Biome DUNES_EDGE;
 	public static Biome HEMLOCK_CLEARING;
 	public static Biome HEMLOCK_RAINFOREST;
 	public static Biome JAPANESE_MAPLE_FOREST;
@@ -47,6 +49,7 @@ public class TerrestriaBiomes {
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
 		DenseWoodlandsBiomes.register();
+		DunesBiomes.register();
 		HemlockRainforestBiomes.register();
 		LushRedwoodForestBiomes.register();
 		RainbowRainforestBiomes.register();

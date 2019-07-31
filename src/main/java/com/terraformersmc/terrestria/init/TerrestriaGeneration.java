@@ -22,6 +22,7 @@ public class TerrestriaGeneration {
 		addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0, "cypress_forest", config);
 		addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0, "cypress_swamp", config);
 		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config);
+		addBiomeVariant(Biomes.DESERT, DUNES, 0.2, "dunes", config);
 		addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0, "hemlock_rainforest", config);
 		addContinentalBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0, "japanese_maple_forest", config);
 		addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "lush_redwood_forest", config);
@@ -50,6 +51,11 @@ public class TerrestriaGeneration {
 
 		if(DENSE_WOODLANDS != null) {
 			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1);
+		}
+
+		if (DUNES != null) {
+			OverworldBiomes.setRiverBiome(DUNES, null);
+			OverworldBiomes.addEdgeBiome(DUNES, DUNES_EDGE, 1);
 		}
 
 		if(HEMLOCK_RAINFOREST != null) {
