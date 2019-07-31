@@ -40,6 +40,6 @@ public class CanyonBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
 				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
 				.build());
-		TerrestriaBiomes.CANYON.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(TerrestriaCarvers.CANYON_VALLEY, new ProbabilityConfig(1F)));
+		TerrestriaBiomes.CANYON.addCarver(GenerationStep.Carver.AIR, Biome.configureCarver(TerrestriaCarvers.CANYON_VALLEY, new ProbabilityConfig(0.2F)));
 	}
 }
