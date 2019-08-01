@@ -43,9 +43,14 @@ public class WoodItems {
 
 		if (blocks.log != blocks.wood) {
 			items.wood = TerrestriaRegistry.registerBlockItem(name + "_wood", blocks.wood);
+		} else {
+			items.wood = items.log;
 		}
+
 		if (blocks.strippedLog != blocks.strippedWood) {
 			items.strippedWood = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_wood", blocks.strippedWood);
+		} else {
+			items.strippedWood = items.strippedLog;
 		}
 
 		return items;

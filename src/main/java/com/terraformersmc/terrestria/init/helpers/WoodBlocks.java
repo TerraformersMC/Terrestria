@@ -58,11 +58,13 @@ public class WoodBlocks {
 		if (size.equals(LogSize.SMALL)) {
 			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
-			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
-			blocks.wood = blocks.log; //no need for a wood type
 			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
+
+			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = blocks.log; // no need for a wood type
+
 			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
-			blocks.strippedWood = blocks.strippedLog; //no need for a stripped wood type
+			blocks.strippedWood = blocks.strippedLog; // wno need for a stripped wood type
 
 			blocks.addTreeFireInfo(registry);
 
