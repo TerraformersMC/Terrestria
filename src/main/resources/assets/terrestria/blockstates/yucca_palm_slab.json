@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "terrestria:block/yucca_palm_slab"
+    },
+    "type=top": {
+      "model": "terrestria:block/yucca_palm_slab_top"
+    },
+    "type=double": {
+      "model": "terrestria:block/yucca_palm_planks"
+    }
+  }
+}

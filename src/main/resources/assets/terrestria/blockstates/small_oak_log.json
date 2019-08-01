@@ -1,0 +1,236 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "down": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_y"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_y",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_z"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat"
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_x",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_z",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_x"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "has_leaves": "false"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "down": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_y_leaves"
+      }
+    },
+    {
+      "when": {
+        "down": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves",
+        "x": 90
+      }
+    },
+    {
+      "when": {
+        "up": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_y_leaves",
+        "x": 180
+      }
+    },
+    {
+      "when": {
+        "up": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves",
+        "x": 270
+      }
+    },
+    {
+      "when": {
+        "north": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_z_leaves"
+      }
+    },
+    {
+      "when": {
+        "north": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves"
+      }
+    },
+    {
+      "when": {
+        "east": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_x_leaves",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "east": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "south": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_z_leaves",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "south": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "west": "true",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_connector_x_leaves"
+      }
+    },
+    {
+      "when": {
+        "west": "false",
+        "has_leaves": "true"
+      },
+      "apply": {
+        "model": "terrestria:block/small_oak_log_flat_leaves",
+        "y": 270
+      }
+    }
+  ]
+}

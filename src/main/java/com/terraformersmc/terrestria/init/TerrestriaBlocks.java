@@ -26,6 +26,11 @@ public class TerrestriaBlocks {
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
+	public static WoodBlocks YUCCA_PALM;
+
+	public static SmallLogBlock SMALL_OAK_LOG;
+	public static SmallLogBlock STRIPPED_SMALL_OAK_LOG;
+	public static SmallLogBlock SAGUARO_CACTUS;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
@@ -89,6 +94,18 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
+		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.RUBBER, flammable, WoodBlocks.LogSize.SMALL);
+
+		// TODO: Leaves for the Small Oak Log
+		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, Block.Settings.copy(Blocks.OAK_LOG)));
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, Block.Settings.copy(Blocks.STRIPPED_OAK_LOG)));
+		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SmallLogBlock(Blocks.CACTUS, null, Block.Settings.copy(Blocks.CACTUS)));
+
+		flammable.add(SMALL_OAK_LOG, 5, 5);
+		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
+
+		flammable.add(SMALL_OAK_LOG, 5, 5);
+		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 

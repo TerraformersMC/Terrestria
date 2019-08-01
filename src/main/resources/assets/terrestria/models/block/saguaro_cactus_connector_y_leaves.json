@@ -1,0 +1,9 @@
+{
+  "parent": "terrestria:block/sakura_log_connector_y_leaves",
+  "textures": {
+    "particle": "terrestria:block/saguaro_cactus",
+    "all": "terrestria:block/saguaro_cactus",
+    "top": "terrestria:block/saguaro_cactus_top",
+    "leaves": "terrestria:block/sakura_leaves_cutout"
+  }
+}

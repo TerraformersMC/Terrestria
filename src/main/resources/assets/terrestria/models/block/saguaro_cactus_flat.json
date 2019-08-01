@@ -1,0 +1,7 @@
+{
+  "parent": "terrestria:block/sakura_log_flat",
+  "textures": {
+    "particle": "terrestria:block/saguaro_cactus",
+    "all": "terrestria:block/saguaro_cactus"
+  }
+}
