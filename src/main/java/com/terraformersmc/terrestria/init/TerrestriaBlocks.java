@@ -101,6 +101,8 @@ public class TerrestriaBlocks {
 		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(SAKURA.leaves).noCollision()));
 
 		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
+		flammable.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
+		flammable.add(JUNGLE_PALM_LEAVES, 30, 60);
 		flammable.add(SAKURA_LEAF_PILE, 30, 60);
 
 		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, Block.Settings.copy(Blocks.SEAGRASS)));
