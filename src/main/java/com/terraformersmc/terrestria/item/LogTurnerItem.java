@@ -27,14 +27,15 @@ public class LogTurnerItem extends Item {
 	}
 
 	private static Direction.Axis cycleAxis(Direction.Axis axis) {
-		switch (axis) {
+		return axis;
+		/* switch (axis) {
 			case X:
 				return Direction.Axis.X;
 			case Y:
 				return Direction.Axis.Y;
 			default:
 				return Direction.Axis.Z;
-		}
+		} */
 	}
 
 	private static QuarterLogBlock.BarkSide cycleBarkSide(QuarterLogBlock.BarkSide side) {
