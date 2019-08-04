@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.surface;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.Perlin;
+import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -16,7 +16,7 @@ import java.util.function.Function;
 
 public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
-	private static final Perlin PERLIN = new Perlin(32, 3445);
+	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(3445);
 
 	public DuneSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
 		super(function);
@@ -24,14 +24,31 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
 	@Override
 	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int seaLevel, long seed, TernarySurfaceConfig config) {
-		vHeight = chunk.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG).get(x & 15, z & 15);
-
+		vHeight = chunk.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG).get(x & 15, z & 15) - 8;
+		seaLevel -= 8;
 		BlockPos.Mutable pos = new BlockPos.Mutable(x, vHeight, z);
 		chunk.setBlockState(pos, config.getTopMaterial(), false);
+
 		//Place the sand dunes
-		for (int h = 0; h < (PERLIN.getNoiseLevelAtPosition(x, (int) (z*1.5)) * (seaLevel - vHeight)) * 5; h++) {
+		double height = (NOISE.sample(x * 0.04 , z * 0.06) * 20) * ((double) vHeight / seaLevel);
+		if (height < 0) {
+			height = 0 - height - 4;
+		} else {
+			height += 4;
+		}
+		height += seaLevel;
+		for (int i = 0; i < 8; i++) {
 			chunk.setBlockState(pos, config.getTopMaterial(), false);
 			pos.setOffset(Direction.UP);
 		}
+		for (double h = seaLevel; h < height && !isRemoved(x, (int) h, z); h++) {
+			chunk.setBlockState(pos, config.getTopMaterial(), false);
+			pos.setOffset(Direction.UP);
+		}
+	}
+
+	//To get the removed sand look
+	private boolean isRemoved(int x, int y, int z) {
+		return y > (NOISE.sample(x * 0.03 + 5 , z * 0.05 + 5) * 20) + 63;
 	}
 }

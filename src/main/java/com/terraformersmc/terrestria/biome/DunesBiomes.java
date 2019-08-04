@@ -27,14 +27,14 @@ public class DunesBiomes {
 
 		TerrestriaBiomes.DUNES = TerrestriaBiomes.register("dunes", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
-			.depth(-0.4F)
+			.depth(0.3F)
 			.scale(0.0F)
 			.build()
 		);
 
 		TerrestriaBiomes.DUNES_EDGE = TerrestriaBiomes.register("dunes_edge", template.builder()
 			.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
-			.depth(0.5F)
+			.depth(0.0F)
 			.scale(0.0F)
 			.build()
 		);
