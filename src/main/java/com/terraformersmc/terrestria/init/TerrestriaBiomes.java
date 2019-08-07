@@ -25,6 +25,9 @@ public class TerrestriaBiomes {
 	public static Biome LUSH_REDWOOD_CLEARING;
 	public static Biome LUSH_REDWOOD_FOREST;
 	public static Biome LUSH_REDWOOD_FOREST_EDGE;
+	public static Biome OUTBACK;
+	public static Biome OUTBACK_BUSHLAND;
+	public static Biome OUTBACK_ULURU;
 	public static Biome RAINBOW_RAINFOREST;
 	public static Biome RAINBOW_RAINFOREST_LAKE;
 	public static Biome RAINBOW_RAINFOREST_MOUNTAINS;
@@ -55,7 +58,8 @@ public class TerrestriaBiomes {
 		SnowyHemlockRainforestBiomes.register();
 		JapaneseMapleForestBiomes.register();
 		VolcanicIslandBiomes.register();
-
+		OutbackBiomes.register();
+		
 		TerrestriaFeatures.addVolcanoStarts(
 				VOLCANIC_ISLAND,
 				VOLCANIC_ISLAND_SHORE,

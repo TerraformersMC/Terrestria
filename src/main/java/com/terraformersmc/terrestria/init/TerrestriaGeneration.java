@@ -3,6 +3,8 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigNode;
+import com.terraformersmc.terrestria.util.TerrestriaOverworldBiomes;
+
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
@@ -30,6 +32,8 @@ public class TerrestriaGeneration {
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config);
+		
+		addContinentalBiome(OUTBACK, OverworldClimate.DRY, 1.0, "outback", config);
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
@@ -100,6 +104,15 @@ public class TerrestriaGeneration {
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND, null);
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_BEACH, null);
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_SHORE, null);
+		}
+		
+		if (OUTBACK != null) {
+			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK, 2);
+			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
+			TerrestriaOverworldBiomes.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
+				Biome.Category category = b.getCategory();
+				return category != Biome.Category.DESERT && category != Biome.Category.SAVANNA && category != Biome.Category.PLAINS && category != Biome.Category.MESA;
+			});
 		}
 	}
 

@@ -1,10 +1,13 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
+import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.surface.RandomSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.RandomSurfaceConfig;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -21,6 +24,9 @@ public class TerrestriaSurfaces {
 	public static CliffSurfaceBuilder CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
+	public static RandomSurfaceBuilder RANDOM_BUILDER;
+	public static RandomSurfaceConfig OUTBACK_CONFIG;
+	public static TernarySurfaceConfig OUTBACK_ULURU_CONFIG;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -46,6 +52,20 @@ public class TerrestriaSurfaces {
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.STONE.getDefaultState()
+		);
+		
+		RANDOM_BUILDER = register("random", new RandomSurfaceBuilder());
+		
+		OUTBACK_CONFIG = new RandomSurfaceConfig(
+				(rand, noise) -> rand.nextInt(3) == 0 ? Blocks.GRASS_BLOCK.getDefaultState() : Blocks.RED_SAND.getDefaultState(),
+				(rand, noise) -> Blocks.RED_SANDSTONE.getDefaultState(),
+				(rand, noise) -> Blocks.RED_SAND.getDefaultState()
+		);
+		
+		OUTBACK_ULURU_CONFIG = new TernarySurfaceConfig(
+				Blocks.RED_SANDSTONE.getDefaultState(),
+				Blocks.RED_SANDSTONE.getDefaultState(),
+				Blocks.RED_SAND.getDefaultState()
 		);
 	}
 
