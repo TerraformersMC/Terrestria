@@ -49,6 +49,7 @@ public class TerrestriaBlocks {
 	public static QuarterLogBlock STRIPPED_CYPRESS_QUARTER_LOG;
 	public static QuarterLogBlock STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static TerraformSaplingBlock BRYCE_SAPLING;
 	public static TerraformSaplingBlock REDWOOD_SAPLING;
 	public static TerraformSaplingBlock HEMLOCK_SAPLING;
 	public static TerraformSaplingBlock RUBBER_SAPLING;
@@ -133,6 +134,12 @@ public class TerrestriaBlocks {
 		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerStrippedQuarterLog(flammable);
 
 		// Saplings
+
+		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new TerraformSaplingBlock(
+				new TerraformSaplingGenerator(
+					() -> TerrestriaFeatures.BRYCE_TREE.sapling()
+				)
+		));
 
 		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new TerraformSaplingBlock(
 				new TerraformLargeSaplingGenerator(

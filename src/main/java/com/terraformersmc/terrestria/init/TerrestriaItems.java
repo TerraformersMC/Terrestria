@@ -38,6 +38,7 @@ public class TerrestriaItems {
 	public static BlockItem STRIPPED_CYPRESS_QUARTER_LOG;
 	public static BlockItem STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static BlockItem BRYCE_SAPLING;
 	public static BlockItem REDWOOD_SAPLING;
 	public static BlockItem HEMLOCK_SAPLING;
 	public static BlockItem RUBBER_SAPLING;
@@ -89,6 +90,7 @@ public class TerrestriaItems {
 		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
 		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
+		BRYCE_SAPLING = TerrestriaRegistry.registerBlockItem("bryce_sapling", TerrestriaBlocks.BRYCE_SAPLING);
 		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
 		HEMLOCK_SAPLING = TerrestriaRegistry.registerBlockItem("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
 		RUBBER_SAPLING = TerrestriaRegistry.registerBlockItem("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
