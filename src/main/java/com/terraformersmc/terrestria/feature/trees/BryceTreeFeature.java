@@ -88,32 +88,31 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 		growLeaves(blocks, world, new BlockPos.Mutable(origin), height, maxRadius, boundingBox);
 
-		//Fix up the log connections
-		correctLogStates(blocks, world, boundingBox);
 		return true;
 	}
 
 	@Override
 	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
 		Random rand = new Random();
+		Direction offset = randomHorizontalDirectionAwayFrom(rand, direction.getOpposite());
 		pos.setOffset(direction);
 		for (int i = 0; i < length; i++) {
 			//50% chance of changing direction otherwise place single block
 			if (rand.nextBoolean()) {
 				//Place block and block to the side
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, this.log, boundingBox);
+					setBlockStateAndUpdate(blocks, world, pos, this.log, direction, boundingBox);
 				}
 				pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, this.log, boundingBox);
+					setBlockStateAndUpdate(blocks, world, pos, this.log, direction, boundingBox);
 				}
 			} else {
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, this.log, boundingBox);
+					setBlockStateAndUpdate(blocks, world, pos, this.log, direction, boundingBox);
 				}
 			}
-			pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
+			pos.setOffset(offset);
 		}
 	}
 
@@ -181,28 +180,44 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 		}
 	}
 
-	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
-		for (BlockPos log : blocks) {
-			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
+	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
+		super.setBlockState(blocks, world, pos, state, boundingBox);
+		correctBlockState(blocks, world, pos, direction, state, boundingBox);
+	}
 
-			Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
+	private void correctBlockState(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, Direction direction, BlockState state, MutableIntBoundingBox boundingBox) {
 
-			setBlockState(
-				blocks,
-				world,
-				log,
-				this.log
-					.with(SmallLogBlock.UP, world.testBlockState(log.up(), tester))
-					.with(SmallLogBlock.DOWN, world.testBlockState(log.down(), tester))
-					.with(SmallLogBlock.NORTH, world.testBlockState(log.north(), tester))
-					.with(SmallLogBlock.EAST, world.testBlockState(log.east(), tester))
-					.with(SmallLogBlock.SOUTH, world.testBlockState(log.south(), tester))
-					.with(SmallLogBlock.WEST, world.testBlockState(log.west(), tester))
-					.with(SmallLogBlock.HAS_LEAVES, leaves),
-				boundingBox
-			);
+		boolean leaves = world.testBlockState(origin, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
+		Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
+
+		BlockState newState = null;
+
+		switch (direction.getOpposite()) {
+			case UP:
+				newState = state.with(SmallLogBlock.UP, world.testBlockState(origin.up(), tester));
+				break;
+			case DOWN:
+				newState = state.with(SmallLogBlock.DOWN, world.testBlockState(origin.up(), tester));
+				break;
+			case EAST:
+				newState = state.with(SmallLogBlock.EAST, world.testBlockState(origin.up(), tester));
+				break;
+			case WEST:
+				newState = state.with(SmallLogBlock.WEST, world.testBlockState(origin.up(), tester));
+				break;
+			case NORTH:
+				newState = state.with(SmallLogBlock.NORTH, world.testBlockState(origin.up(), tester));
+				break;
+			case SOUTH:
+				newState = state.with(SmallLogBlock.SOUTH, world.testBlockState(origin.up(), tester));
+				break;
+			default:
+				newState = state;
 		}
+
+		setBlockState(
+			blocks, world, origin, newState, boundingBox
+		);
 	}
 
 	private static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
@@ -222,5 +237,10 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 				return Direction.SOUTH;
 		}
 		return Direction.NORTH;
+	}
+
+	@Override
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+
 	}
 }
