@@ -105,9 +105,6 @@ public class TerrestriaBlocks {
 		flammable.add(SMALL_OAK_LOG, 5, 5);
 		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
-		flammable.add(SMALL_OAK_LOG, 5, 5);
-		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
-
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",

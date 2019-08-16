@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.SmallLogBlock;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -21,16 +20,18 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements Branches, Roots, Trunk, Leaves, SmallLogs {
-	private TreeDefinition.Basic tree;
+	private BlockState log;
+	private BlockState leaves;
 
-	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, TreeDefinition.Basic tree) {
+	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
 		super(function_1, boolean_1);
-
-		this.tree = tree;
+		
+		this.log = log;
+		this.leaves = leaves;
 	}
 
 	public BryceTreeFeature sapling() {
-		return new BryceTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+		return new BryceTreeFeature(DefaultFeatureConfig::deserialize, true, log, leaves);
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
@@ -101,15 +102,15 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 			if (rand.nextBoolean()) {
 				//Place block and block to the side
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+					setBlockState(blocks, world, pos, this.log, boundingBox);
 				}
 				pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+					setBlockState(blocks, world, pos, this.log, boundingBox);
 				}
 			} else {
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+					setBlockState(blocks, world, pos, this.log, boundingBox);
 				}
 			}
 			pos.setOffset(randomHorizontalDirectionAwayFrom(rand, direction.getOpposite()));
@@ -126,12 +127,12 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 			//Place block and block down and to the side
 			pos.setOffset(randomHorizontalDirection(rand));
 			if (isAir(world, pos)) {
-				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+				setBlockState(blocks, world, pos, this.log, boundingBox);
 			}
 			for (int d = 0; d < 5; d++) {
 				pos.setOffset(Direction.DOWN);
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+					setBlockState(blocks, world, pos, this.log, boundingBox);
 				}
 			}
 		}
@@ -156,11 +157,11 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 		}
 		for (int i = 1; i <= height; i++) {
 
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			setBlockState(blocks, world, pos, this.log, boundingBox);
 
 			if (rand.nextInt(3) == 0) {
 				pos.setOffset(randomHorizontalDirection(rand));
-				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+				setBlockState(blocks, world, pos, this.log, boundingBox);
 			}
 
 			if (i == height) {
@@ -191,7 +192,7 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 				blocks,
 				world,
 				log,
-				tree.getLog()
+				this.log
 					.with(SmallLogBlock.UP, world.testBlockState(log.up(), tester))
 					.with(SmallLogBlock.DOWN, world.testBlockState(log.down(), tester))
 					.with(SmallLogBlock.NORTH, world.testBlockState(log.north(), tester))
