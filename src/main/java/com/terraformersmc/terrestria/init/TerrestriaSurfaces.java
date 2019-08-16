@@ -7,6 +7,7 @@ import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.RandomSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.RandomSurfaceConfig;
+import com.terraformersmc.terrestria.surface.UluruSurfaceBuilder;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
@@ -27,6 +28,7 @@ public class TerrestriaSurfaces {
 	public static RandomSurfaceBuilder RANDOM_BUILDER;
 	public static RandomSurfaceConfig OUTBACK_CONFIG;
 	public static TernarySurfaceConfig OUTBACK_ULURU_CONFIG;
+	public static UluruSurfaceBuilder ULURU_BUILDER;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -67,6 +69,8 @@ public class TerrestriaSurfaces {
 				Blocks.RED_SANDSTONE.getDefaultState(),
 				Blocks.RED_SAND.getDefaultState()
 		);
+		
+		ULURU_BUILDER = register("uluru", new UluruSurfaceBuilder());
 	}
 
 	public static <T extends SurfaceBuilder<SC>, SC extends SurfaceConfig> T register(String name, T surface) {

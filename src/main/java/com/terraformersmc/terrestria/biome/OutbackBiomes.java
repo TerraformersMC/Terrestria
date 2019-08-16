@@ -15,13 +15,16 @@ import static com.terraformersmc.terraform.biome.builder.DefaultFeature.SPRINGS;
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.STRUCTURES;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.PillagerOutpostFeatureConfig;
@@ -42,6 +45,7 @@ public class OutbackBiomes {
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
 						DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.CACTUS, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(2)))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TerrestriaFeatures.OUTBACK_SCRUB, DefaultFeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(2, 0.1F, 2)))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 10, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.HORSE, 1, 1, 1))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8))
@@ -57,9 +61,9 @@ public class OutbackBiomes {
 				.build());
 		
 		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", BetterBiomeBuilder.builder()
-				.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OUTBACK_CONFIG)
+				.configureSurfaceBuilder(TerrestriaSurfaces.ULURU_BUILDER, TerrestriaSurfaces.OUTBACK_ULURU_CONFIG)
 				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
-				.depth(1.9F)
+				.depth(2.2F)
 				.scale(0.18F)
 				.temperature(1.8F)
 				.downfall(0.2F)
@@ -96,7 +100,10 @@ public class OutbackBiomes {
 				.addStructureFeature(Feature.PILLAGER_OUTPOST, new PillagerOutpostFeatureConfig(0.012D))
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
 						DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
-				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.CACTUS, FeatureConfig.DEFAULT, Decorator.COUNT_HEIGHTMAP_DOUBLE, new CountDecoratorConfig(2)))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TerrestriaFeatures.OAK_SHRUB, DefaultFeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(3, 0.1F, 1)))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(TerrestriaFeatures.OUTBACK_SCRUB, DefaultFeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(5, 0.1F, 1)))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.SAVANNA_TREE, DefaultFeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(2, 0.1F, 1)))
+				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(Feature.FANCY_TREE, DefaultFeatureConfig.DEFAULT, Decorator.COUNT_EXTRA_HEIGHTMAP, new CountExtraChanceDecoratorConfig(1, 0.1F, 1)))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 10, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.HORSE, 1, 1, 1))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8))
