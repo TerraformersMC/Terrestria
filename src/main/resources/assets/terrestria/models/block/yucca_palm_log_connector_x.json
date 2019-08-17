@@ -1,64 +1,8 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "terrestria:block/small_log_connector_x",
   "textures": {
     "particle": "terrestria:block/yucca_palm_log",
     "all": "terrestria:block/yucca_palm_log_connector",
     "top": "terrestria:block/yucca_palm_log_top"
-  },
-  "elements": [
-    {
-      "from": [
-        0,
-        3,
-        3
-      ],
-      "to": [
-        3,
-        13,
-        13
-      ],
-      "faces": {
-        "down": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "up": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "north": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "south": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "west": {
-          "texture": "#top",
-          "cullface": "west"
-        }
-      }
-    }
-  ]
+  }
 }

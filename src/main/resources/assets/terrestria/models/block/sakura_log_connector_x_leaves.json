@@ -1,83 +1,9 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "terrestria:block/small_log_connector_x_leaves",
   "textures": {
     "particle": "terrestria:block/sakura_log",
     "all": "terrestria:block/sakura_log_connector",
     "top": "terrestria:block/sakura_log_top",
     "leaves": "terrestria:block/sakura_leaves_cutout"
-  },
-  "elements": [
-    {
-      "from": [
-        0,
-        3,
-        3
-      ],
-      "to": [
-        3,
-        13,
-        13
-      ],
-      "faces": {
-        "down": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "up": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "north": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "south": {
-          "texture": "#all",
-          "uv": [
-            0,
-            0,
-            3,
-            10
-          ]
-        },
-        "west": {
-          "texture": "#top",
-          "cullface": "west"
-        }
-      }
-    },
-    {
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ],
-      "faces": {
-        "west": {
-          "texture": "#leaves",
-          "cullface": "west"
-        }
-      }
-    }
-  ]
+  }
 }

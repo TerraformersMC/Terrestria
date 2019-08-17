@@ -1,59 +1,9 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "terrestria:block/small_log_connector_y_leaves",
   "textures": {
     "particle": "terrestria:block/small_oak_log",
     "all": "terrestria:block/small_oak_log",
     "top": "terrestria:block/small_oak_log_top",
     "leaves": "terrestria:block/small_oak_leaves_cutout"
-  },
-  "elements": [
-    {
-      "from": [
-        3,
-        0,
-        3
-      ],
-      "to": [
-        13,
-        3,
-        13
-      ],
-      "faces": {
-        "north": {
-          "texture": "#all"
-        },
-        "south": {
-          "texture": "#all"
-        },
-        "west": {
-          "texture": "#all"
-        },
-        "east": {
-          "texture": "#all"
-        },
-        "down": {
-          "texture": "#top",
-          "cullface": "down"
-        }
-      }
-    },
-    {
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ],
-      "faces": {
-        "down": {
-          "texture": "#leaves",
-          "cullface": "down"
-        }
-      }
-    }
-  ]
+  }
 }

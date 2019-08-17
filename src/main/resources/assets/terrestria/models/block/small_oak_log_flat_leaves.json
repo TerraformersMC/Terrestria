@@ -1,45 +1,8 @@
 {
-  "parent": "minecraft:block/block",
+  "parent": "terrestria:block/small_log_flat_leaves",
   "textures": {
     "particle": "terrestria:block/small_oak_log",
     "all": "terrestria:block/small_oak_log",
     "leaves": "minecraft:block/oak_leaves"
-  },
-  "elements": [
-    {
-      "from": [
-        3,
-        3,
-        3
-      ],
-      "to": [
-        13,
-        13,
-        13
-      ],
-      "faces": {
-        "north": {
-          "texture": "#all"
-        }
-      }
-    },
-    {
-      "from": [
-        0,
-        0,
-        0
-      ],
-      "to": [
-        16,
-        16,
-        16
-      ],
-      "faces": {
-        "north": {
-          "texture": "#leaves",
-          "cullface": "north"
-        }
-      }
-    }
-  ]
+  }
 }
