@@ -22,8 +22,11 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
-	public static RedwoodTreeFeature REDWOOD_TREE;
-	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
+	public static PinusPonderosaTreeFeature REDWOOD_TREE;
+	public static PinusPonderosaTreeFeature MEGA_REDWOOD_TREE;
+
+	// public static RedwoodTreeFeature REDWOOD_TREE;
+	// public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
 	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
 	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
@@ -50,6 +53,12 @@ public class TerrestriaFeatures {
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree",
+			new PinusPonderosaTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+		);
+
+		MEGA_REDWOOD_TREE = REDWOOD_TREE;
+
+		/*REDWOOD_TREE = register("redwood_tree",
 				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
 		);
 
@@ -59,7 +68,7 @@ public class TerrestriaFeatures {
 						false,
 						TerrestriaBlocks.REDWOOD.getBasicDefinition().toMega(TerrestriaBlocks.REDWOOD_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.REDWOOD.wood.getDefaultState())
 				)
-		);
+		);*/
 
 		TINY_REDWOOD_TREE = register("tiny_redwood_tree",
 				new RedwoodTreeFeatureTiny(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())

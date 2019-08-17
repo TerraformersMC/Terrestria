@@ -4,6 +4,7 @@ import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terrestria.feature.trees.PinusPonderosaTreeFeature;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -124,7 +125,7 @@ public class TerrestriaBlocks {
 
 		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new TerraformSaplingBlock(
 				new TerraformLargeSaplingGenerator(
-						() -> TerrestriaFeatures.REDWOOD_TREE.sapling(),
+						() -> new PinusPonderosaTreeFeature(DefaultFeatureConfig::deserialize, true, REDWOOD.getBasicDefinition()),
 						() -> TerrestriaFeatures.MEGA_REDWOOD_TREE.sapling()
 				)
 		));
