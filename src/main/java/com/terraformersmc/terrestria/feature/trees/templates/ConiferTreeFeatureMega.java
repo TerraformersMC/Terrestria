@@ -130,7 +130,14 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
 					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), boundingBox);
+						int distance = aZ + aX;
+						int extra = dY - height + 1;
+
+						if(extra > 0) {
+							distance += extra;
+						}
+
+						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(distance, 1)), boundingBox);
 					}
 				}
 			}

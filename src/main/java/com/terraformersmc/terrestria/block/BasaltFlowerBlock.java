@@ -21,11 +21,4 @@ public class BasaltFlowerBlock extends FlowerBlock {
 	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext context) {
 		return Blocks.GRASS.getDefaultState().getOutlineShape(view, pos, context);
 	}
-
-	@Override
-	protected boolean canPlantOnTop(BlockState state, BlockView world, BlockPos pos) {
-		Block block = state.getBlock();
-
-		return block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT || super.canPlantOnTop(state, world, pos);
-	}
 }

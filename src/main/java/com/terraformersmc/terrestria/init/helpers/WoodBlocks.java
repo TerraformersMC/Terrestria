@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 
@@ -58,11 +59,13 @@ public class WoodBlocks {
 		if (size.equals(LogSize.SMALL)) {
 			WoodBlocks blocks = registerManufactured(name, colors, registry);
 
-			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
-			blocks.wood = blocks.log; //no need for a wood type
 			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
+
+			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.wood = blocks.log; // no need for a wood type
+
 			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
-			blocks.strippedWood = blocks.strippedLog; //no need for a stripped wood type
+			blocks.strippedWood = blocks.strippedLog; // wno need for a stripped wood type
 
 			blocks.addTreeFireInfo(registry);
 
@@ -93,6 +96,9 @@ public class WoodBlocks {
 		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
 
 		blocks.addManufacturedFireInfo(registry);
+
+		FuelRegistry.INSTANCE.add(blocks.fence, 300);
+		FuelRegistry.INSTANCE.add(blocks.fenceGate, 300);
 
 		return blocks;
 	}
