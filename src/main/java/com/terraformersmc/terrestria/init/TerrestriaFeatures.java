@@ -51,7 +51,7 @@ public class TerrestriaFeatures {
 
 	public static void init() {
 		BRYCE_TREE = register("bryce_tree",
-				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), TerrestriaBlocks.SAKURA.getBasicDefinition().getLeaves()) //Use Sakura leaves for now
+				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
 		);
 
 		REDWOOD_TREE = register("redwood_tree",

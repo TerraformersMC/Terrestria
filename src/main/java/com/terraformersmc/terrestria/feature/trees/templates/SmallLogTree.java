@@ -106,4 +106,15 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		}
 		return Direction.NORTH;
 	}
+
+	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockState blockState, MutableIntBoundingBox boundingBox) {
+		BlockState originalBlockState = ((World) world).getBlockState(pos);
+		if (originalBlockState.getBlock() instanceof SmallLogBlock) {
+			setBlockState(blocks, world, pos, originalBlockState.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
+		} else {
+			if (isAirOrLeaves(world, pos)) {
+				setBlockState(blocks, world, pos, blockState, boundingBox);
+			}
+		}
+	}
 }

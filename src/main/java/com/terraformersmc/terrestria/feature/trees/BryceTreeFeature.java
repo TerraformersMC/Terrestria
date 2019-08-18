@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.feature.trees;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
+import com.terraformersmc.terrestria.feature.trees.components.SmallRoots;
 import com.terraformersmc.terrestria.feature.trees.templates.SmallLogTree;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -13,11 +14,14 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class BryceTreeFeature extends SmallLogTree implements Branches {
+public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoots {
+
+	ArrayList<BlockPos> leafOrigins = new ArrayList<>();
 
 	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
 		super(function_1, boolean_1, log, leaves);
@@ -30,7 +34,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches {
 	@Override
 	protected boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 
-		int height = rand.nextInt(5) + 8; 			// Total tree height
+		int height = rand.nextInt(3) + 7; 			// Total tree height
 		double maxRadius = 1.5 + 1.5 * rand.nextDouble(); 	// Maximum leaf/branch radius.
 
 		//If the tree can pass the max build height
@@ -49,6 +53,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches {
 
 		//Grows a trunk with roots and branches
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, randomHorizontalDirection(rand), boundingBox);
+		placeLeaves(blocks, world, boundingBox);
 		return true;
 	}
 
@@ -73,13 +78,13 @@ public class BryceTreeFeature extends SmallLogTree implements Branches {
 			}
 
 			//Randomly generate a branch if the height is greater than half
-			if (i > height / 2 && rand.nextInt((int) height / 4) == 0) {
-				placeBranch(blocks, world, new BlockPos.Mutable(pos.toImmutable()), 1 + rand.nextInt(4), randomHorizontalDirection(rand), boundingBox);
+			if (i > 4 && rand.nextInt(2) == 1) {
+				placeBranch(blocks, world, new BlockPos.Mutable(pos.toImmutable()), 2 + rand.nextInt(3), randomHorizontalDirection(rand), boundingBox);
 			}
 
 			//Randomly generate roots if the height is less than 4 blocks above the origin
 			if (i < 4 && rand.nextInt(3) < 3) {
-				growRoot(blocks, world, new BlockPos.Mutable(pos.toImmutable()), rand.nextInt(5), boundingBox);
+				placeRoot(blocks, world, new BlockPos.Mutable(pos.toImmutable()), rand.nextInt(5), boundingBox);
 			}
 
 			pos.setOffset(Direction.UP);
@@ -104,10 +109,14 @@ public class BryceTreeFeature extends SmallLogTree implements Branches {
 					}
 				}
 			}
+			if (rand.nextBoolean()) {
+				leafOrigins.add(pos.toImmutable());
+			}
 		}
 	}
 
-	private void growRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int rootLength, MutableIntBoundingBox boundingBox) {
+	@Override
+	public void placeRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int rootLength, MutableIntBoundingBox boundingBox) {
 		Random random = new Random();
 		Direction originalDirection = randomHorizontalDirection(random);
 		Direction direction = null;
@@ -134,6 +143,18 @@ public class BryceTreeFeature extends SmallLogTree implements Branches {
 					setBlockState(blocks, world, pos, ((World) world).getBlockState(pos).with(SmallLogBlock.DOWN, true), boundingBox);
 				}
 				break;
+			}
+		}
+	}
+
+	private void placeLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+		Random random = new Random();
+		BlockPos.Mutable mPos;
+		for (BlockPos pos : leafOrigins) {
+			mPos = new BlockPos.Mutable(pos);
+			for (int i = 0; i < 5; i++) {
+				tryPlaceLeaves(blocks, world, mPos, this.getLeaves(), boundingBox);
+				mPos.offset(randomHorizontalDirection(random));
 			}
 		}
 	}
