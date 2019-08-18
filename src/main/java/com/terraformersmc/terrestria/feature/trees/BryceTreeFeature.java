@@ -5,19 +5,18 @@ import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terrestria.feature.trees.components.*;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
+import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements Branches, Roots, Trunk, Leaves, SmallLogs {
 	private BlockState log;
@@ -122,16 +121,17 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 	@Override
 	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
 		pos.setOffset(Direction.UP);
+		Direction direction = randomHorizontalDirection(rand);
 		for (int i = 0; i < baseTrunkHeight; i++) {
 			//Place block and block down and to the side
-			pos.setOffset(randomHorizontalDirection(rand));
+			pos.setOffset(direction);
 			if (isAir(world, pos)) {
-				setBlockState(blocks, world, pos, this.log, boundingBox);
+				setBlockStateAndUpdate(blocks, world, pos, this.log, direction, boundingBox);
 			}
 			for (int d = 0; d < 5; d++) {
 				pos.setOffset(Direction.DOWN);
 				if (isAir(world, pos)) {
-					setBlockState(blocks, world, pos, this.log, boundingBox);
+					setBlockStateAndUpdate(blocks, world, pos, this.log, direction, boundingBox);
 				}
 			}
 		}
@@ -145,9 +145,8 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 	@Override
 	public void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, int height, MutableIntBoundingBox boundingBox) {
 		Random rand = new Random();
-		int numBranches = 1 + rand.nextInt(2);
-		int numRoots = rand.nextInt(3);
-		int chance;
+		int numRoots = rand.nextInt(4);
+		Direction randDir;
 		BlockPos branchOrigin;
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
@@ -156,11 +155,16 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 		}
 		for (int i = 1; i <= height; i++) {
 
-			setBlockState(blocks, world, pos, this.log, boundingBox);
+			if (i == 1) {
+				setBlockStateAndUpdate(blocks, world, pos, this.log, Direction.UP, boundingBox);
+			} else {
+				setBlockStateAndUpdate(blocks, world, pos, this.log, Direction.UP, boundingBox);
+			}
 
 			if (rand.nextInt(3) == 0) {
-				pos.setOffset(randomHorizontalDirection(rand));
-				setBlockState(blocks, world, pos, this.log, boundingBox);
+				randDir = randomHorizontalDirection(rand);
+				pos.setOffset(randDir);
+				setBlockStateAndUpdate(blocks, world, pos, this.log, randDir, boundingBox);
 			}
 
 			if (i == height) {
@@ -181,43 +185,39 @@ public class BryceTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> 
 	}
 
 	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
-		super.setBlockState(blocks, world, pos, state, boundingBox);
+		setBlockState(blocks, world, pos, state, boundingBox);
 		correctBlockState(blocks, world, pos, direction, state, boundingBox);
 	}
 
 	private void correctBlockState(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, Direction direction, BlockState state, MutableIntBoundingBox boundingBox) {
-
-		boolean leaves = world.testBlockState(origin, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
-		Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
-
-		BlockState newState = null;
-
-		switch (direction.getOpposite()) {
-			case UP:
-				newState = state.with(SmallLogBlock.UP, world.testBlockState(origin.up(), tester));
-				break;
-			case DOWN:
-				newState = state.with(SmallLogBlock.DOWN, world.testBlockState(origin.up(), tester));
-				break;
-			case EAST:
-				newState = state.with(SmallLogBlock.EAST, world.testBlockState(origin.up(), tester));
-				break;
-			case WEST:
-				newState = state.with(SmallLogBlock.WEST, world.testBlockState(origin.up(), tester));
+		World world1 = (World) world;
+		BlockPos pos = origin.toImmutable();
+		switch (direction) {
+			case SOUTH:
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.NORTH, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.SOUTH, true), boundingBox);
 				break;
 			case NORTH:
-				newState = state.with(SmallLogBlock.NORTH, world.testBlockState(origin.up(), tester));
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.SOUTH, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.NORTH, true), boundingBox);
 				break;
-			case SOUTH:
-				newState = state.with(SmallLogBlock.SOUTH, world.testBlockState(origin.up(), tester));
+			case WEST:
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.EAST, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.WEST, true), boundingBox);
 				break;
-			default:
-				newState = state;
+			case EAST:
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.WEST, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.EAST, true), boundingBox);
+				break;
+			case DOWN:
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.UP, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.DOWN, true), boundingBox);
+				break;
+			case UP:
+				setBlockState(blocks, world, pos, state.with(SmallLogBlock.DOWN, true), boundingBox);
+				setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.UP, true), boundingBox);
+				break;
 		}
-
-		setBlockState(
-			blocks, world, origin, newState, boundingBox
-		);
 	}
 
 	private static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
