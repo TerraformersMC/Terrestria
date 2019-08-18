@@ -6,6 +6,6 @@ import net.minecraft.world.ModifiableTestableWorld;
 
 import java.util.Set;
 
-public interface SmallLogs {
+public interface CorrectableStates {
 	void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox);
 }
