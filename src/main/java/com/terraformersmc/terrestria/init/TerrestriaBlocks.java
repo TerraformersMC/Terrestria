@@ -11,7 +11,6 @@ import com.terraformersmc.terrestria.init.helpers.WoodColors;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
-import net.fabricmc.fabric.impl.tools.ToolManager;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -216,17 +215,11 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).build()));
-		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).build()));
-		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, Block.Settings.copy(Blocks.GRASS_BLOCK)));
-		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, Block.Settings.copy(Blocks.GRASS_PATH)));
+		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new TerraformGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copy(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copy(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
-
-		// TODO: There should be a better way to do this
-
-		ToolManager.registerBreakByTool(BASALT_DIRT, FabricToolTags.SHOVELS, 0);
-		ToolManager.registerBreakByTool(BASALT_GRASS_BLOCK, FabricToolTags.SHOVELS, 0);
-		ToolManager.registerBreakByTool(BASALT_GRASS_PATH, FabricToolTags.SHOVELS, 0);
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 6, Block.Settings.copy(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
