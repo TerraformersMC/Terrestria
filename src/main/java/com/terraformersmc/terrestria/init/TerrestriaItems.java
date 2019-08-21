@@ -58,6 +58,11 @@ public class TerrestriaItems {
 	public static BlockItem INDIAN_PAINTBRUSH;
 	public static BlockItem MONSTERAS;
 
+	public static BlockItem TINY_CACTUS;
+	public static BlockItem AGAVE;
+	public static BlockItem ALOE_VERA;
+	public static BlockItem DESERT_GRASS;
+
 	public static void init() {
 		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
 		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
@@ -109,5 +114,10 @@ public class TerrestriaItems {
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
 		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
+
+		TINY_CACTUS = TerrestriaRegistry.registerBlockItem("tiny_cactus", TerrestriaBlocks.TINY_CACTUS);
+		AGAVE = TerrestriaRegistry.registerBlockItem("agave", TerrestriaBlocks.AGAVE);
+		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
+		DESERT_GRASS = TerrestriaRegistry.registerBlockItem("desert_grass", TerrestriaBlocks.DESERT_GRASS);
 	}
 }

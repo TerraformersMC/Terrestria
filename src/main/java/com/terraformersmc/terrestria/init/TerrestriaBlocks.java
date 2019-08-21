@@ -1,9 +1,9 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -86,6 +86,15 @@ public class TerrestriaBlocks {
 	public static PlantBlock MONSTERAS;
 	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
 	public static FlowerPotBlock POTTED_MONSTERAS;
+
+	// Desert Plants
+	public static PlantBlock TINY_CACTUS;
+	public static PlantBlock AGAVE;
+	public static PlantBlock ALOE_VERA;
+	public static PlantBlock DESERT_GRASS;
+	public static FlowerPotBlock POTTED_TINY_CACTUS;
+	public static FlowerPotBlock POTTED_AGAVE;
+	public static FlowerPotBlock POTTED_ALOE_VERA;
 
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
@@ -236,5 +245,13 @@ public class TerrestriaBlocks {
 		POTTED_RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("potted_rainbow_eucalyptus_sapling", new FlowerPotBlock(RAINBOW_EUCALYPTUS_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_SAKURA_SAPLING = TerrestriaRegistry.register("potted_sakura_sapling", new FlowerPotBlock(SAKURA_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("potted_jungle_palm_sapling", new FlowerPotBlock(JUNGLE_PALM_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+
+		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new FlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
+		AGAVE = TerrestriaRegistry.register("agave", new FlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
+		ALOE_VERA = TerrestriaRegistry.register("aloe_vera", new FlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
+		DESERT_GRASS = TerrestriaRegistry.register("desert_grass", new FlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.POPPY)));
+		POTTED_TINY_CACTUS = TerrestriaRegistry.register("potted_tiny_cactus", new FlowerPotBlock(TINY_CACTUS, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_AGAVE = TerrestriaRegistry.register("potted_agave", new FlowerPotBlock(AGAVE, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, Block.Settings.copy(Blocks.POTTED_POPPY)));
 	}
 }
