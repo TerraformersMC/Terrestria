@@ -61,7 +61,7 @@ public class TerrestriaItems {
 	public static BlockItem TINY_CACTUS;
 	public static BlockItem AGAVE;
 	public static BlockItem ALOE_VERA;
-	public static BlockItem DESERT_GRASS;
+	public static BlockItem DEAD_GRASS;
 
 	public static void init() {
 		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
@@ -118,6 +118,6 @@ public class TerrestriaItems {
 		TINY_CACTUS = TerrestriaRegistry.registerBlockItem("tiny_cactus", TerrestriaBlocks.TINY_CACTUS);
 		AGAVE = TerrestriaRegistry.registerBlockItem("agave", TerrestriaBlocks.AGAVE);
 		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
-		DESERT_GRASS = TerrestriaRegistry.registerBlockItem("desert_grass", TerrestriaBlocks.DESERT_GRASS);
+		DEAD_GRASS = TerrestriaRegistry.registerBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
 	}
 }
