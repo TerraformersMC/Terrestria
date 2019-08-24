@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "sets": {
     "redwood_log": {
       "base": "terrestria:redwood_log",
@@ -273,12 +273,28 @@
         "extrapieces:wall": "terrestria:basalt_wall"
       }
     },
+    "smooth_basalt": {
+      "base": "terrestria:smooth_basalt",
+      "vanilla_pieces": {
+        "extrapieces:stairs": "terrestria:smooth_basalt_stairs",
+        "extrapieces:slab": "terrestria:smooth_basalt_slab",
+        "extrapieces:wall": "terrestria:smooth_basalt_wall"
+      }
+    },
     "basalt_cobblestone": {
       "base": "terrestria:basalt_cobblestone",
       "vanilla_pieces": {
         "extrapieces:stairs": "terrestria:basalt_cobblestone_stairs",
         "extrapieces:slab": "terrestria:basalt_cobblestone_slab",
         "extrapieces:wall": "terrestria:basalt_cobblestone_wall"
+      }
+    },
+    "mossy_basalt_cobblestone": {
+      "base": "terrestria:mossy_basalt_cobblestone",
+      "vanilla_pieces": {
+        "extrapieces:stairs": "terrestria:mossy_basalt_cobblestone_stairs",
+        "extrapieces:slab": "terrestria:mossy_basalt_cobblestone_slab",
+        "extrapieces:wall": "terrestria:mossy_basalt_cobblestone_wall"
       }
     },
     "basalt_brick": {
@@ -288,6 +304,20 @@
         "extrapieces:slab": "terrestria:basalt_brick_slab",
         "extrapieces:wall": "terrestria:basalt_brick_wall"
       }
+    },
+    "mossy_basalt_brick": {
+      "base": "terrestria:mossy_basalt_bricks",
+      "vanilla_pieces": {
+        "extrapieces:stairs": "terrestria:mossy_basalt_brick_stairs",
+        "extrapieces:slab": "terrestria:mossy_basalt_brick_slab",
+        "extrapieces:wall": "terrestria:mossy_basalt_brick_wall"
+      }
+    },
+    "chiseled_basalt_brick": {
+      "base": "terrestria:chiseled_basalt_bricks"
+    },
+    "cracked_basalt_brick": {
+      "base": "terrestria:cracked_basalt_bricks"
     }
   }
 }
