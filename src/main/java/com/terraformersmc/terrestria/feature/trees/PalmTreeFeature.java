@@ -4,6 +4,7 @@ import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Blocks;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -66,7 +67,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 			setBlockState(blocks, world, below, Blocks.DIRT.getDefaultState(), boundingBox);
 		} else if (world.testBlockState(below, state -> state.getBlock() == TerrestriaBlocks.BASALT_DIRT || state.getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK)) {
 			setBlockState(blocks, world, below, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), boundingBox);
-		} else if (!world.testBlockState(below, state -> state.getBlock() == TerrestriaBlocks.BASALT_SAND || state.getBlock() == Blocks.SAND)) {
+		} else if (!world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
 			return false;
 		}
 
