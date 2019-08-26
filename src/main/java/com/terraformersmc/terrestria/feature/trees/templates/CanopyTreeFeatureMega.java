@@ -82,7 +82,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 		for (int dZ = 0; dZ < 2; dZ++) {
 			for (int dX = 0; dX < 2; dX++) {
-				setBlockState(blocks, world, origin.add(dX, -1, dZ), Blocks.DIRT.getDefaultState(), boundingBox);
+				setToDirt(world, origin.add(dX, -1, dZ));
 			}
 		}
 
