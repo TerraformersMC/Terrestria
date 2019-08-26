@@ -55,15 +55,23 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 
 		BlockPos below = origin.down();
 
-		if (!isNaturalDirtOrGrass(world, below) && !world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
-			return false;
+		boolean sand = false;
+
+		if (!isNaturalDirtOrGrass(world, below)) {
+			if(world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
+				sand = true;
+			} else {
+				return false;
+			}
 		}
 
 		if(!check(world, origin, height)) {
 			return false;
 		}
 
-		setToDirt(world, below);
+		if(!sand) {
+			setToDirt(world, below);
+		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 		growTrunk(blocks, world, pos, height, rand, boundingBox);
