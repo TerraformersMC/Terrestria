@@ -38,7 +38,7 @@ public class TerrestriaRegistry {
 
 				return entity;
 			},
-			new Item.Settings().group(Terrestria.ITEM_GROUP)
+			new Item.Settings().group(Terrestria.ITEM_GROUP).maxCount(1)
 		));
 	}
 
