@@ -14,6 +14,7 @@ import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 public class DunesBiomes {
 	public static void register() {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+			.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.temperature(0.9F)
 			.downfall(0.1F)
@@ -26,15 +27,13 @@ public class DunesBiomes {
 		);
 
 		TerrestriaBiomes.DUNES = TerrestriaBiomes.register("dunes", template.builder()
-			.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
 			.depth(0.3F)
 			.scale(0.0F)
 			.build()
 		);
 
 		TerrestriaBiomes.DUNES_EDGE = TerrestriaBiomes.register("dunes_edge", template.builder()
-			.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
-			.depth(0.0F)
+			.depth(-0.3F)
 			.scale(0.0F)
 			.build()
 		);
