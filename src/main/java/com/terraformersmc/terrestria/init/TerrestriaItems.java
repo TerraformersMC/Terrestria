@@ -64,15 +64,15 @@ public class TerrestriaItems {
 	public static BlockItem DEAD_GRASS;
 
 	public static void init() {
-		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
-		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
-		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
-		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
-		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
-		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
-		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
-		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM);
+		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD, () -> TerrestriaEntities.REDWOOD_BOAT);
+		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK, () -> TerrestriaEntities.HEMLOCK_BOAT);
+		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER, () -> TerrestriaEntities.RUBBER_BOAT);
+		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS, () -> TerrestriaEntities.CYPRESS_BOAT);
+		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW, () -> TerrestriaEntities.WILLOW_BOAT);
+		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE, () -> TerrestriaEntities.JAPANESE_MAPLE_BOAT);
+		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS, () -> TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
+		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA, () -> TerrestriaEntities.SAKURA_BOAT);
+		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM, () -> TerrestriaEntities.YUCCA_PALM_BOAT);
 
 		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
