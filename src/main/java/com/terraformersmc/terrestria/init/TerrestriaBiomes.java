@@ -25,6 +25,8 @@ public class TerrestriaBiomes {
 	public static Biome LUSH_REDWOOD_CLEARING;
 	public static Biome LUSH_REDWOOD_FOREST;
 	public static Biome LUSH_REDWOOD_FOREST_EDGE;
+	public static Biome LUSH_DESERT;
+	public static Biome OASIS;
 	public static Biome RAINBOW_RAINFOREST;
 	public static Biome RAINBOW_RAINFOREST_LAKE;
 	public static Biome RAINBOW_RAINFOREST_MOUNTAINS;
@@ -49,6 +51,7 @@ public class TerrestriaBiomes {
 		DenseWoodlandsBiomes.register();
 		HemlockRainforestBiomes.register();
 		LushRedwoodForestBiomes.register();
+		OasisBiomes.register();
 		RainbowRainforestBiomes.register();
 		RedwoodForestBiomes.register();
 		SakuraForestBiomes.register();
