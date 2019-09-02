@@ -53,22 +53,24 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 			return false;
 		}
 
+		BlockPos below = origin.down();
+
+		boolean sand = false;
+
+		if (!isNaturalDirtOrGrass(world, below)) {
+			if(world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
+				sand = true;
+			} else {
+				return false;
+			}
+		}
+
 		if(!check(world, origin, height)) {
 			return false;
 		}
 
-		BlockPos below = origin.down();
-
-		// dirt, grass -> dirt
-		// basalt dirt, basalt grass -> basalt dirt
-		// sand, basalt sand -> unchanged, but pass
-
-		if (world.testBlockState(below, state -> state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.GRASS_BLOCK)) {
-			setBlockState(blocks, world, below, Blocks.DIRT.getDefaultState(), boundingBox);
-		} else if (world.testBlockState(below, state -> state.getBlock() == TerrestriaBlocks.BASALT_DIRT || state.getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK)) {
-			setBlockState(blocks, world, below, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), boundingBox);
-		} else if (!world.testBlockState(below, state -> state.matches(BlockTags.SAND))) {
-			return false;
+		if(!sand) {
+			setToDirt(world, below);
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);

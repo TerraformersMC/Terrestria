@@ -13,6 +13,7 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -58,8 +59,12 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements Branches, 
 				return;
 			}
 
-			if (AbstractTreeFeature.isNaturalDirtOrGrass(world, top.down()) ||
-					world.testBlockState(top.down(), state -> state.getFluidState().getFluid().matches(FluidTags.WATER))) {
+			boolean valid = world.testBlockState(top.down(),
+				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) ||
+					     state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
+			);
+
+			if (valid) {
 				setBlockState(blocks, world, top, tree.getLeafPile(), boundingBox);
 			}
 		});

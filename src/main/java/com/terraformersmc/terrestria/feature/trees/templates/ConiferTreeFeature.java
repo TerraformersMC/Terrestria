@@ -50,7 +50,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			return false;
 		}
 
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+		setToDirt(world, origin.down());
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 		growLeaves(blocks, world, origin, height, bareTrunkHeight, maxLeafRadius, boundingBox);
 
