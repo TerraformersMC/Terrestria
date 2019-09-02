@@ -1,16 +1,8 @@
 package com.terraformersmc.terrestria.biome;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.terraformersmc.terraform.biome.builder.BuilderBiomeSettings;
 import com.terraformersmc.terraform.biome.builder.DefaultFeature;
 import com.terraformersmc.terraform.biome.builder.FeatureEntry;
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
-import com.terraformersmc.terraform.biome.builder.TerraformBiome.Builder;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -20,16 +12,15 @@ import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.DoublePlantFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.GrassFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BetterBiomeBuilder extends BuilderBiomeSettings {
 
@@ -312,7 +303,8 @@ public class BetterBiomeBuilder extends BuilderBiomeSettings {
 		.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1));
 		return this;
 	}
-	
+
+	//TODO this needs to extend TerraformBiome or be added the the normal builder but it's constructor is private
 	public static class BetterBiome extends Biome {
 		
 		private final float spawnChance;
