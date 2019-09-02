@@ -3,7 +3,11 @@
   "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinAnimalEntity"
+    "MixinAbstractTreeFeature",
+    "MixinAnimalEntity",
+    "MixinBlock",
+    "MixinFluidBlock",
+    "MixinPlantBlock"
   ],
   "injectors": {
     "defaultRequire": 1

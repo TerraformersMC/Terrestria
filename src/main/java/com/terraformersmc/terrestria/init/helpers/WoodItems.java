@@ -1,7 +1,12 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.entity.TerraformBoatEntity;
+import com.terraformersmc.terraform.item.TerraformBoatItem;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.SignItem;
+
+import java.util.function.Supplier;
 
 public class WoodItems {
 
@@ -20,11 +25,12 @@ public class WoodItems {
 	public BlockItem trapdoor;
 	public BlockItem strippedLog;
 	public BlockItem strippedWood;
+	public TerraformBoatItem boat;
 
 	private WoodItems() {
 	}
 
-	public static WoodItems register(String name, WoodBlocks blocks) {
+	public static WoodItems register(String name, WoodBlocks blocks, Supplier<EntityType<TerraformBoatEntity>> boatType) {
 		WoodItems items = new WoodItems();
 
 		items.log = TerrestriaRegistry.registerBlockItem(name + "_log", blocks.log);
@@ -40,12 +46,18 @@ public class WoodItems {
 		items.trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
 		items.sign = TerrestriaRegistry.registerSignItem(name + "_sign", blocks.sign, blocks.wallSign);
 		items.strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);
+		items.boat = TerrestriaRegistry.registerBoatItem(name + "_boat", boatType);
 
 		if (blocks.log != blocks.wood) {
 			items.wood = TerrestriaRegistry.registerBlockItem(name + "_wood", blocks.wood);
+		} else {
+			items.wood = items.log;
 		}
+
 		if (blocks.strippedLog != blocks.strippedWood) {
 			items.strippedWood = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_wood", blocks.strippedWood);
+		} else {
+			items.strippedWood = items.strippedLog;
 		}
 
 		return items;

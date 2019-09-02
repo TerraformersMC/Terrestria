@@ -48,7 +48,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			return false;
 		}
 
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+		setToDirt(world, below);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 		growBranches(blocks, world, new BlockPos.Mutable(origin), height, rand, boundingBox);
 
@@ -59,14 +59,10 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
 		for (int dY = 0; dY < height; dY++) {
-			for (int dZ = -1; dZ <= 1; dZ++) {
-				for (int dX = -1; dX <= 1; dX++) {
-					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
+			pos.setY(origin.getY() + dY);
 
-					if (!canTreeReplace(world, pos)) {
-						return false;
-					}
-				}
+			if (!canTreeReplace(world, pos)) {
+				return false;
 			}
 		}
 
