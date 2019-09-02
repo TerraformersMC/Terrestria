@@ -68,7 +68,7 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<DefaultFeatur
 		}
 
 		//Set the block below the trunk to dirt (because vanilla does it)
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+		setToDirt(world, origin.down());
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height + bareTrunkHeight, trunkRadius, boundingBox, rand);
 		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, boundingBox);
 

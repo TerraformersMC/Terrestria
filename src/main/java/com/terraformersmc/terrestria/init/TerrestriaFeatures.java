@@ -24,6 +24,7 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
+	public static BryceTreeFeature BRYCE_TREE;
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
 	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
@@ -54,6 +55,10 @@ public class TerrestriaFeatures {
 	public static ShrubFeature OAK_SHRUB;
 	
 	public static void init() {
+		BRYCE_TREE = register("bryce_tree",
+				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
+		);
+
 		REDWOOD_TREE = register("redwood_tree",
 				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
 		);
@@ -177,7 +182,7 @@ public class TerrestriaFeatures {
 				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
-		Feature.STRUCTURES.put("Volcano", VOLCANO_STRUCTURE);
+		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 		

@@ -1,0 +1,9 @@
+{
+  "parent": "terrestria:block/yucca_palm_log_connector_y_leaves",
+  "textures": {
+    "particle": "terrestria:block/stripped_yucca_palm_log",
+    "all": "terrestria:block/stripped_yucca_palm_log",
+    "top": "terrestria:block/stripped_yucca_palm_log_top",
+    "leaves": "terrestria:block/yucca_palm_leaves_cutout"
+  }
+}

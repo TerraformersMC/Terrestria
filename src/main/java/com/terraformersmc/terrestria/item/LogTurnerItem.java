@@ -10,11 +10,12 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Language;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -26,31 +27,7 @@ public class LogTurnerItem extends Item {
 		super(settings);
 	}
 
-	private static Direction.Axis cycleAxis(Direction.Axis axis) {
-		return axis;
-		/* switch (axis) {
-			case X:
-				return Direction.Axis.X;
-			case Y:
-				return Direction.Axis.Y;
-			default:
-				return Direction.Axis.Z;
-		} */
-	}
-
-	private static QuarterLogBlock.BarkSide cycleBarkSide(QuarterLogBlock.BarkSide side) {
-		switch (side) {
-			case SOUTHWEST:
-				return QuarterLogBlock.BarkSide.NORTHWEST;
-			case NORTHWEST:
-				return QuarterLogBlock.BarkSide.NORTHEAST;
-			case NORTHEAST:
-				return QuarterLogBlock.BarkSide.SOUTHEAST;
-			default:
-				return QuarterLogBlock.BarkSide.SOUTHWEST;
-		}
-	}
-
+	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		BlockPos pos = context.getBlockPos();
 		World world = context.getWorld();
@@ -65,27 +42,23 @@ public class LogTurnerItem extends Item {
 
 		if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
 			if (state.getBlock() instanceof QuarterLogBlock) {
-				QuarterLogBlock.BarkSide cycled = cycleBarkSide(state.get(QuarterLogBlock.BARK_SIDE));
-				Direction.Axis newAxis = currentAxis;
+				state = state.cycle(QuarterLogBlock.BARK_SIDE);
 
 				// First cycle the bark side. If we return to the start, then cycle the axis too.
-				if (cycled == QuarterLogBlock.BarkSide.SOUTHWEST) {
-					newAxis = cycleAxis(currentAxis);
+				if (state.get(QuarterLogBlock.BARK_SIDE) == QuarterLogBlock.BarkSide.SOUTHWEST) {
+					state = state.cycle(PillarBlock.AXIS);
 				}
 
-				world.setBlockState(pos, state
-						.with(PillarBlock.AXIS, newAxis)
-						.with(QuarterLogBlock.BARK_SIDE, cycled)
-				);
+				world.setBlockState(pos, state);
 
 				return ActionResult.SUCCESS;
 			} else {
-				world.setBlockState(pos, state.with(PillarBlock.AXIS, cycleAxis(currentAxis)));
+				world.setBlockState(pos, state.cycle(PillarBlock.AXIS));
 
 				return ActionResult.SUCCESS;
 			}
 		} else {
-			Direction.Axis newAxis = context.getPlayerFacing().getAxis();
+			Direction.Axis newAxis = context.getSide().getAxis();
 
 			if (currentAxis != newAxis) {
 				world.setBlockState(pos, state.with(PillarBlock.AXIS, newAxis));
@@ -103,12 +76,15 @@ public class LogTurnerItem extends Item {
 		}
 	}
 
+	@Override
 	@Environment(EnvType.CLIENT)
-	public void buildTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
+	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 
-		for (int i = 0; i < 8; i++) {
-			tooltip.add(new TranslatableText("item." + Terrestria.MOD_ID + ".log_turner.tooltip.line" + i).setStyle(new Style().setColor(Formatting.GRAY)));
+		String translation = Language.getInstance().translate("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
+
+		for(String line: translation.split("\n")) {
+			tooltip.add(new LiteralText(line.trim()).setStyle(new Style().setColor(Formatting.GRAY)));
 		}
 	}
 }

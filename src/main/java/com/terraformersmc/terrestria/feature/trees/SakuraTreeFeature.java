@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.feature.trees;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
-import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
+import com.terraformersmc.terrestria.feature.trees.components.CorrectableStates;
 import com.terraformersmc.terrestria.feature.trees.templates.JapaneseTreeFeature;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
@@ -13,6 +13,7 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -23,7 +24,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs, Branches {
+public class SakuraTreeFeature extends JapaneseTreeFeature implements Branches, CorrectableStates {
 	private TreeDefinition.Sakura tree;
 	private boolean worldGen;
 
@@ -58,8 +59,12 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 				return;
 			}
 
-			if (AbstractTreeFeature.isNaturalDirtOrGrass(world, top.down()) ||
-					world.testBlockState(top.down(), state -> state.getFluidState().getFluid().matches(FluidTags.WATER))) {
+			boolean valid = world.testBlockState(top.down(),
+				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) ||
+					     state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
+			);
+
+			if (valid) {
 				setBlockState(blocks, world, top, tree.getLeafPile(), boundingBox);
 			}
 		});

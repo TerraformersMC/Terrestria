@@ -1,0 +1,7 @@
+{
+  "parent": "terrestria:block/small_log_flat",
+  "textures": {
+    "particle": "terrestria:block/small_oak_log",
+    "all": "terrestria:block/small_oak_log"
+  }
+}

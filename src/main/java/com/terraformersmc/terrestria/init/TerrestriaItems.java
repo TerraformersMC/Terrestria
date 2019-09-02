@@ -16,6 +16,11 @@ public class TerrestriaItems {
 	public static WoodItems JAPANESE_MAPLE;
 	public static WoodItems RAINBOW_EUCALYPTUS;
 	public static WoodItems SAKURA;
+	public static WoodItems YUCCA_PALM;
+
+	public static BlockItem SMALL_OAK_LOG;
+	public static BlockItem STRIPPED_SMALL_OAK_LOG;
+	public static BlockItem SAGUARO_CACTUS;
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static BlockItem DARK_JAPANESE_MAPLE_LEAVES;
@@ -33,6 +38,7 @@ public class TerrestriaItems {
 	public static BlockItem STRIPPED_CYPRESS_QUARTER_LOG;
 	public static BlockItem STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static BlockItem BRYCE_SAPLING;
 	public static BlockItem REDWOOD_SAPLING;
 	public static BlockItem HEMLOCK_SAPLING;
 	public static BlockItem RUBBER_SAPLING;
@@ -52,6 +58,11 @@ public class TerrestriaItems {
 	public static BlockItem INDIAN_PAINTBRUSH;
 	public static BlockItem MONSTERAS;
 
+	public static BlockItem TINY_CACTUS;
+	public static BlockItem AGAVE;
+	public static BlockItem ALOE_VERA;
+	public static BlockItem DEAD_GRASS;
+
 	public static void init() {
 		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
 		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
@@ -61,7 +72,11 @@ public class TerrestriaItems {
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
 		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
-		SAKURA.wood = SAKURA.log;
+		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM);
+
+		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
+		SAGUARO_CACTUS = TerrestriaRegistry.registerBlockItem("saguaro_cactus", TerrestriaBlocks.SAGUARO_CACTUS);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
@@ -80,6 +95,7 @@ public class TerrestriaItems {
 		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
 		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
 
+		BRYCE_SAPLING = TerrestriaRegistry.registerBlockItem("bryce_sapling", TerrestriaBlocks.BRYCE_SAPLING);
 		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
 		HEMLOCK_SAPLING = TerrestriaRegistry.registerBlockItem("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
 		RUBBER_SAPLING = TerrestriaRegistry.registerBlockItem("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
@@ -98,5 +114,10 @@ public class TerrestriaItems {
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
 		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
+
+		TINY_CACTUS = TerrestriaRegistry.registerBlockItem("tiny_cactus", TerrestriaBlocks.TINY_CACTUS);
+		AGAVE = TerrestriaRegistry.registerBlockItem("agave", TerrestriaBlocks.AGAVE);
+		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
+		DEAD_GRASS = TerrestriaRegistry.registerBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
 	}
 }

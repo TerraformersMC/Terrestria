@@ -6,6 +6,6 @@ import net.minecraft.world.ModifiableTestableWorld;
 
 import java.util.Set;
 
-public interface SmallLogs {
-	void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox);
+public interface Leaves {
+	void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, MutableIntBoundingBox boundingBox);
 }

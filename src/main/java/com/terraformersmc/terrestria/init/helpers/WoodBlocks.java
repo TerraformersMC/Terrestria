@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 
@@ -95,6 +96,9 @@ public class WoodBlocks {
 		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
 
 		blocks.addManufacturedFireInfo(registry);
+
+		FuelRegistry.INSTANCE.add(blocks.fence, 300);
+		FuelRegistry.INSTANCE.add(blocks.fenceGate, 300);
 
 		return blocks;
 	}
