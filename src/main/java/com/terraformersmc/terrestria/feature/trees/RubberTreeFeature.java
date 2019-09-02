@@ -48,7 +48,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 			return false;
 		}
 
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+		setToDirt(world, below);
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 		growBranches(blocks, world, new BlockPos.Mutable(origin), height, rand, boundingBox);
 

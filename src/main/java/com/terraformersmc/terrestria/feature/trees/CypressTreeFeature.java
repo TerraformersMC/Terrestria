@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.feature.trees;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terraform.util.Shapes;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -51,7 +50,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			return false;
 		}
 
-		setBlockState(blocks, world, origin.down(), Blocks.DIRT.getDefaultState(), boundingBox);
+		setToDirt(world, below);
 
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
 
