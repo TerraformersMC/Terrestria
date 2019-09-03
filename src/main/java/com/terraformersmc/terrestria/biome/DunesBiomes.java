@@ -33,7 +33,7 @@ public class DunesBiomes {
 		);
 
 		TerrestriaBiomes.DUNES_EDGE = TerrestriaBiomes.register("dunes_edge", template.builder()
-			.depth(-0.3F)
+			.depth(-1F)
 			.scale(0.0F)
 			.build()
 		);
