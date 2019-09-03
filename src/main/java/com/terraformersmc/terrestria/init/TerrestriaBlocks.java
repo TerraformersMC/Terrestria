@@ -63,6 +63,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
+	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
@@ -212,6 +213,10 @@ public class TerrestriaBlocks {
 
 		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new TerraformDesertSaplingBlock(
 				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE.sapling())
+		));
+
+		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformDesertSaplingBlock(
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
 		));
 
 		// Volcanic Island Blocks
