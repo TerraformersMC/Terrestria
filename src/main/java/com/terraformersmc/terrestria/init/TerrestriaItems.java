@@ -54,14 +54,14 @@ public class TerrestriaItems {
 	public static BlockItem MONSTERAS;
 
 	public static void init() {
-		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
-		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
-		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
-		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
-		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
-		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
-		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
+		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD, () -> TerrestriaEntities.REDWOOD_BOAT);
+		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK, () -> TerrestriaEntities.HEMLOCK_BOAT);
+		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER, () -> TerrestriaEntities.RUBBER_BOAT);
+		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS, () -> TerrestriaEntities.CYPRESS_BOAT);
+		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW, () -> TerrestriaEntities.WILLOW_BOAT);
+		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE, () -> TerrestriaEntities.JAPANESE_MAPLE_BOAT);
+		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS, () -> TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
+		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA, () -> TerrestriaEntities.SAKURA_BOAT);
 		SAKURA.wood = SAKURA.log;
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
