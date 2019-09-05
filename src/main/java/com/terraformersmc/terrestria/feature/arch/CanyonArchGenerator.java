@@ -17,18 +17,13 @@ import java.util.Random;
 
 public class CanyonArchGenerator extends StructurePiece {
 
-	private static final int SHAPE_NOISE_ZOOM = 10;
 	private static final int TOP_NOISE_ZOOM = 15;
-	private static final int VERTICAL_NOISE_ZOOM = 8;
 	private static final int MATERIAL_NOISE_ZOOM = 7;
 
-	private int seed;
-
-	private Perlin shapeNoise;
 	private Perlin topNoise;
-	private Perlin verticalNoise;
 	private Perlin materialNoise;
 
+	private int lineSlope;
 	private int maxHeight;
 	private int radius;
 	private int yStart;
@@ -41,11 +36,19 @@ public class CanyonArchGenerator extends StructurePiece {
 		this.setOrientation(null);
 		this.centerX = centerX;
 		this.centerZ = centerZ;
-		seed = random.nextInt(10000);
-		shapeNoise = new Perlin(SHAPE_NOISE_ZOOM, seed);
+
+		int seed = random.nextInt(10000);
+
 		topNoise = new Perlin(TOP_NOISE_ZOOM, seed);
-		verticalNoise = new Perlin(VERTICAL_NOISE_ZOOM, seed);
 		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, seed);
+
+		lineSlope = seed % 10;
+
+		// 50% inversion chance
+		if(seed > 5000) {
+			lineSlope = -lineSlope;
+		}
+
 		maxHeight = 55 + random.nextInt(50);
 		yStart = 30;
 		radius = 15 + random.nextInt(40);
@@ -56,30 +59,31 @@ public class CanyonArchGenerator extends StructurePiece {
 
 	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
 		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, tag);
-		seed = tag.getInt("S");
-		shapeNoise = new Perlin(SHAPE_NOISE_ZOOM, tag.getInt("SN"));
-		topNoise = new Perlin(TOP_NOISE_ZOOM, tag.getInt("TN"));
-		verticalNoise = new Perlin(VERTICAL_NOISE_ZOOM, tag.getInt("VN"));
-		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, tag.getInt("MN"));
-		maxHeight = tag.getInt("MH");
-		radius = tag.getInt("R");
-		yStart = tag.getInt("S");
-		centerX = tag.getInt("CX");
-		centerZ = tag.getInt("CZ");
+
+		topNoise = new Perlin(TOP_NOISE_ZOOM, tag.getInt("TopNoise"));
+		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, tag.getInt("MaterialNoise"));
+
+		lineSlope = tag.getInt("LineSlope");
+		maxHeight = tag.getInt("MaxHeight");
+		radius = tag.getInt("Radius");
+		yStart = tag.getInt("YStart");
+
+		centerX = tag.getInt("CenterX");
+		centerZ = tag.getInt("CenterZ");
 	}
 
 	@Override
 	protected void toNbt(CompoundTag tag) {
-		tag.putInt("S", seed);
-		tag.putInt("SN", shapeNoise.getSeed());
-		tag.putInt("TN", topNoise.getSeed());
-		tag.putInt("VN", verticalNoise.getSeed());
-		tag.putInt("MN", materialNoise.getSeed());
-		tag.putInt("MH", maxHeight);
-		tag.putInt("R", radius);
-		tag.putInt("S", yStart);
-		tag.putInt("CX", centerX);
-		tag.putInt("CZ", centerZ);
+		tag.putInt("TopNoise", topNoise.getSeed());
+		tag.putInt("MaterialNoise", materialNoise.getSeed());
+
+		tag.putInt("LineSlope", lineSlope);
+		tag.putInt("MaxHeight", maxHeight);
+		tag.putInt("Radius", radius);
+		tag.putInt("YStart", yStart);
+
+		tag.putInt("CenterX", centerX);
+		tag.putInt("CenterZ", centerZ);
 	}
 
 	@Override
@@ -92,8 +96,10 @@ public class CanyonArchGenerator extends StructurePiece {
 
 		for (int z = boundingBox.minZ; z <= boundingBox.maxZ; z++) {
 			for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
-				for (int h = 0; h < maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8); h++) {
-					if (shapeArch((double) h, x, z)) {
+				double height = maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8);
+
+				for (int h = 0; h < height; h++) {
+					if (shapeArch(h, x, z)) {
 						pos.set(x, yStart + h, z);
 						world.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
@@ -103,34 +109,57 @@ public class CanyonArchGenerator extends StructurePiece {
 		return true;
 	}
 
-	public int getNthDigit(int number, int n) {
-		return (int) ((number / Math.pow(10, n - 1)) % 10);
-	}
-
-	/*
-	private boolean shapeArch(double h, int x, int z) {
-		//Find the distance from the vertex
-		double distVertex = Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)));
-		//Find the perpendicular distance from the current 2d coordinate from a 2d line generated from the first and second indexes of the seed
-		double a = centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2); // allows for a negative number, just use one of the center cords for ease
-		double distLine = Math.abs((a * (x - centerX)) + z - centerZ) / Math.sqrt((a * a) + 1);
-		return distVertex > radius - 5 && distVertex < radius && distLine < 2 + ((maxHeight - h) / 6);
-	}
-	 */
+	// Circle distance and line distance to create an arch shape
 
 	private boolean shapeArch(double h, int x, int z) {
-		return (Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)))) > radius - 5 &&
-				(Math.sqrt(((x - centerX)* (x - centerX)) + ((z - centerZ)* (z - centerZ)) + ((h - 30.0)* (h - 30.0)))) < radius &&
-				(Math.abs(((centerX < 1 ? -getNthDigit(seed, 2) : getNthDigit(seed, 2)) * (x - centerX)) + z - centerZ) / Math.sqrt((getNthDigit(seed, 2) * getNthDigit(seed, 2)) + 1))
-						< 2 + ((maxHeight - h) / 6);
+		// Test the distance of the point from the center first
+
+		double offsetX = x - centerX;
+		double offsetY = h - 30.0;
+		double offsetZ = z - centerZ;
+
+		// Simple distance formula, testing against a larger and smaller circle.
+
+		double vertexDistanceSquared = offsetX * offsetX + offsetY * offsetY + offsetZ * offsetZ;
+		double minDistanceSq = (radius - 5) * (radius - 5);
+		double maxDistanceSq = radius * radius;
+
+		if(vertexDistanceSquared <= minDistanceSq || vertexDistanceSquared >= maxDistanceSq) {
+			return false;
+		}
+
+		// Test the distance of the point from the line
+		// Finds the perpendicular distance from the current 2d coordinate from a 2d line with a random slope
+
+		// Formula: |ax + by + c| / sqrt(a^2 + b^2)
+		// a = lineSlope, b = 1, c = 0
+
+		// Top part, squared
+		double numeratorSq = lineSlope * offsetX + offsetZ;
+		numeratorSq *= numeratorSq;
+
+		// Bottom part, squared (avoids sqrt call)
+		double denominatorSq = lineSlope * lineSlope + 1;
+
+		// Divide the two together, resulting in the squared distance
+		double lineDistanceSquared = numeratorSq / denominatorSq;
+
+		// Calculate the max distance squared, this decreases as the height increases
+		// Achieves the narrowing effect at the top.
+
+		double maxLineDistanceSquared = 2 + ((maxHeight - h) / 6);
+		maxLineDistanceSquared *= maxLineDistanceSquared;
+
+		return lineDistanceSquared < maxLineDistanceSquared;
 	}
 
-	//Generates the stone layers
+	// Generates the stone layers
+
 	private BlockState getStateAtY(int height, int x, int z) {
-		if (materialNoise.getNoiseLevelAtPosition(x + (height / 6 * seed), z - (height / 6 * seed)) * 3 > height % 6) {
+		if (materialNoise.getNoiseLevelAtPosition(x, z) * 3 > height % 6) {
 			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
 		} else {
-			if (materialNoise.getNoiseLevelAtPosition(x - (height / 6 * seed), z + (height / 6 * seed)) * 4 > height % 3) {
+			if (materialNoise.getNoiseLevelAtPosition(x, z) * 4 > height % 3) {
 				return Blocks.TERRACOTTA.getDefaultState();
 			} else {
 				return Blocks.SMOOTH_SANDSTONE.getDefaultState();
