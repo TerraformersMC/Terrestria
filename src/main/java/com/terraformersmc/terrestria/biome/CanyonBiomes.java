@@ -33,7 +33,7 @@ public class CanyonBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.CANYON_CLIFF, TerrestriaSurfaces.SANDSTONE_CLIFF_CONFIG)
 				.build());
 
-		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon", template.builder()
+		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon_arches", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
 				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
 				.build());
