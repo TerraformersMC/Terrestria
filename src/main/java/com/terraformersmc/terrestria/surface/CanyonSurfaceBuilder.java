@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.surface;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.feature.canyon.Perlin;
+import com.terraformersmc.terrestria.feature.arch.Perlin;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;

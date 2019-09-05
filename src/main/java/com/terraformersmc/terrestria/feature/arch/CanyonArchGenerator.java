@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.canyon;
+package com.terraformersmc.terrestria.feature.arch;
 
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.BlockState;
