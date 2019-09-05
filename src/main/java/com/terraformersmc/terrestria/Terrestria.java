@@ -30,7 +30,6 @@ public class Terrestria implements ModInitializer {
 		TerrestriaEntities.init();
 		TerrestriaFeatures.init();
 		TerrestriaSurfaces.init();
-		TerrestriaCarvers.init();
 		TerrestriaBiomes.init();
 		TerrestriaGeneration.init(config);
 
