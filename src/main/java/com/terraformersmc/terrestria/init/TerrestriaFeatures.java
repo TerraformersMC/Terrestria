@@ -24,7 +24,6 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
-	public static BryceTreeFeature BRYCE_TREE;
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
 	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
@@ -55,10 +54,6 @@ public class TerrestriaFeatures {
 	public static StructurePieceType CANYON_CLIFF_PIECE;
 
 	public static void init() {
-		BRYCE_TREE = register("bryce_tree",
-				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition())
-		);
-
 		REDWOOD_TREE = register("redwood_tree",
 				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
 		);
@@ -182,17 +177,18 @@ public class TerrestriaFeatures {
 				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
-		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
+		// TODO: Change this to lowercase if it doesn't break worlds.
+		Feature.STRUCTURES.put("Volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 
-		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"),
+		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
 				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
-		Feature.STRUCTURES.put("canyon_cliff", CANYON_ARCH_STRUCTURE);
+		Feature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
 
-		CANYON_CLIFF_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_cliff"), CanyonArchGenerator::new);
+		CANYON_CLIFF_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
@@ -209,7 +205,7 @@ public class TerrestriaFeatures {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 
-	public static void addCanyonCliffStructure(Biome biome) {
+	public static void addCanyonArchStructure(Biome biome) {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
 	}
 }

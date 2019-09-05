@@ -69,7 +69,7 @@ public class TerrestriaBiomes {
 		);
 
 		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
-		forEveryBiome(TerrestriaFeatures::addCanyonCliffStructure);
+		forEveryBiome(TerrestriaFeatures::addCanyonArchStructure);
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {
