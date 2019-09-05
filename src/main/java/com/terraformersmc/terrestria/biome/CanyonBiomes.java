@@ -17,7 +17,7 @@ public class CanyonBiomes {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.depth(0.2F)
-			.scale(0.2F)
+			.scale(0.1F)
 			.temperature(0.9F)
 			.downfall(0.1F)
 			.waterColor(0x4da5e3)
