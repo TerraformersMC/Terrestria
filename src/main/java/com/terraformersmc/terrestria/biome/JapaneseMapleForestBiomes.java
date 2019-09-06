@@ -21,6 +21,7 @@ public class JapaneseMapleForestBiomes {
 				.downfall(0.5F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x799c33)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
 				.addStructureFeature(Feature.STRONGHOLD)

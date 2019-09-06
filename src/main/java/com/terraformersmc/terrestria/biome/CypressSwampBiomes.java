@@ -26,6 +26,8 @@ public class CypressSwampBiomes {
 				.downfall(0.7F)
 				.waterColor(0x2c7f32)
 				.waterFogColor(0x053305)
+				.grassColor(0x396e0a)
+				.foliageColor(0x477d16)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
 						DEFAULT_MUSHROOMS, SPRINGS, SEAGRASS, MORE_SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
 						DESERT_VEGETATION)

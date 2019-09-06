@@ -21,6 +21,7 @@ public class CypressForestBiomes {
 				.downfall(0.8F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x7ecc41)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addTreeFeature(TerrestriaFeatures.CYPRESS_TREE, 9)

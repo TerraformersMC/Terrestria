@@ -22,6 +22,7 @@ public class HemlockRainforestBiomes {
 				.downfall(0.9F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x44bf3b)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
