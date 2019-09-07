@@ -47,7 +47,6 @@ public class MixinEatGrassGoal {
 			callbackInfo.setReturnValue(false);
 		} else {
 			BlockPos blockPos_1 = new BlockPos(this.mob);
-			System.out.println("Basalt");
 			callbackInfo.setReturnValue(this.world.getBlockState(blockPos_1.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK);
 		}
 	}

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "terrestria:block/basalt_dirt",
+    "down": "terrestria:block/basalt_dirt",
+    "up": "minecraft:block/podzol_top",
+    "north": "terrestria:block/basalt_podzol",
+    "south": "terrestria:block/basalt_podzol",
+    "east": "terrestria:block/basalt_podzol",
+    "west": "terrestria:block/basalt_podzol"
+  }
+}

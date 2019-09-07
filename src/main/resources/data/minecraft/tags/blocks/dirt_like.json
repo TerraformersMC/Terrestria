@@ -6,6 +6,7 @@
     "minecraft:coarse_dirt",
     "minecraft:mycelium",
     "terrestria:basalt_grass_block",
-    "terrestria:basalt_dirt"
+    "terrestria:basalt_dirt",
+    "terrestria:basalt_podzol"
   ]
 }
