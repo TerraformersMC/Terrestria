@@ -2,10 +2,10 @@ package com.terraformersmc.terrestria.surface;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.feature.arch.Perlin;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -18,8 +18,6 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
-	private static final Perlin PERLIN = new Perlin(14, 346987);
-
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
 
 	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CanyonSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
@@ -31,7 +29,7 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
 	@Override
 	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CanyonSurfaceConfig config) {
-		if(/*noise < 0.1D || */vHeight < seaLevel + 5) {
+		if(vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first
 
@@ -40,77 +38,46 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 			return;
 		}
 
-		// Uses perlin noise for height after we test for generation
-		// double sNoise = PERLIN.getNoiseLevelAtPosition(x, z) * 30.0;
-		double tNoise = PERLIN.getNoiseLevelAtPosition(x + 242, z + 138) * 3;
-
-		double sNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015, z * 0.015) * 60.0);
-
-		int height = 1;
-
-		// Generates canyon steps
-
-		if (sNoise > 3) {
-			height += 2;
-		}
-
-		if (sNoise > 5) {
-			height += 3;
-		}
-
-		if (sNoise > 9) {
-			height += 4;
-		}
-
-		if (sNoise > 14) {
-			height += 4;
-		}
-
-		if (sNoise > 20) {
-			height += 5;
-		}
-
-		if (sNoise > 27) {
-			height += 6;
-		}
-
-		if (sNoise > 39) {
-			height += 7;
-		}
-
-		if (sNoise > 55) {
-			height += 8;
-		}
-
 		BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
 
-		// Determine the number of cliff blocks to use
-		int cliffLayers = (int) (tNoise + 0.5);
+		// Generate noise values
 
-		if (height > 5) {
-			cliffLayers += 1;
-		}
-		if (height > 10) {
-			cliffLayers += sNoise > 10 ?  3 : 1;
-		}
-		if (height > 15) {
-			cliffLayers += sNoise > 20 ?  4 : 2;
+		double cliffNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015, z * 0.015));
+		double underNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015 - 1024, z * 0.015 - 1024));
+		double topNoise   = Math.abs(CLIFF_NOISE.sample(x * 0.015 + 1024, z * 0.015 + 1024));
+
+		// Prevent huge cliffs near borders, make them slightly smaller cliffs
+
+		if(vHeight < seaLevel + 8 && cliffNoise > 0.3) {
+			// seaLevel+5 -> 1/4, seaLevel+6 -> 2/4, seaLevel+7 -> 3/4
+
+			cliffNoise *= (vHeight - seaLevel - 3) * 0.25;
 		}
 
-		//Start placing the cliff material
-		for (int i = 0; i < height; i++) {
+		// Convert noise values to layer counts
+
+		int cliffLayers = cliffNoiseToLayers(cliffNoise);
+		int underLayers = underNoiseToLayers(underNoise, cliffLayers);
+		int topLayers = (int) (topNoise * 2.5) + 1;
+
+		// Place cliff material
+
+		for (int i = 0; i < cliffLayers; i++) {
 			chunk.setBlockState(pos, config.getCliffMaterial(), false);
+
 			pos.setOffset(Direction.UP);
 		}
 
-		//Start placing the under material
-		for (int i = 0; i < cliffLayers; i++) {
+		// Place under material
+
+		for (int i = 0; i < underLayers; i++) {
 			chunk.setBlockState(pos, config.getUnderMaterial(), false);
 			pos.setOffset(Direction.UP);
 		}
 
-		//Place the top Material
-		for (int i = 0; i < PERLIN.getNoiseLevelAtPosition(x + 678, z + 567) * 2.5; i++) {
+		// Place top material
+
+		for (int i = 0; i < topLayers; i++) {
 			chunk.setBlockState(pos, config.getTopMaterial(), false);
 			pos.setOffset(Direction.UP);
 		}
@@ -120,5 +87,72 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
 			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
 		}
+	}
+
+	private static int underNoiseToLayers(double noise, int cliffLayers) {
+		int underLayers = (int) (noise * 3 + 0.5);
+
+		if (cliffLayers > 5) {
+			underLayers += 1;
+		}
+
+		if (cliffLayers > 10) {
+			underLayers += 3;
+		}
+
+		if (cliffLayers > 15) {
+			underLayers += 4;
+		}
+
+		return underLayers;
+	}
+
+	/** 
+	 * "terraces" the input noise (from 0.0 to 1.0) returning an integer from 1 to 40, inclusive
+	 * Domain: [-1.0, 1.0]
+	 * Range: [1, 40]
+	 */
+	private static int cliffNoiseToLayers(double noise) {
+		// Domain transformation:
+		// [0.0, 1.0] -> [0, 60]
+
+		noise = MathHelper.clamp(noise, 0, 1);
+		noise *= 60;
+
+		int height = 1;
+
+		if (noise > 3) {
+			height += 2;
+		}
+
+		if (noise > 5) {
+			height += 3;
+		}
+
+		if (noise > 9) {
+			height += 4;
+		}
+
+		if (noise > 14) {
+			height += 4;
+		}
+
+		if (noise > 20) {
+			height += 5;
+		}
+
+		if (noise > 27) {
+			height += 6;
+		}
+
+		if (noise > 39) {
+			height += 7;
+		}
+
+		if (noise > 55) {
+			height += 8;
+		}
+
+		return height;
 	}
 }
