@@ -16,77 +16,15 @@ import java.util.function.Function;
 
 public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 
+	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
-	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
 
 	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CanyonSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
 		super(function);
 
 		this.seaLevel = seaLevel;
 		this.parent = parent;
-	}
-
-	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CanyonSurfaceConfig config) {
-		if(vHeight < seaLevel + 5) {
-			// In the future make this dig down instead
-			// This will break some stuff like water flowing down so it may need an edge biome first
-
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
-
-			return;
-		}
-
-		BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
-
-		// Generate noise values
-
-		double cliffNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015, z * 0.015));
-		double underNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015 - 1024, z * 0.015 - 1024));
-		double topNoise   = Math.abs(CLIFF_NOISE.sample(x * 0.015 + 1024, z * 0.015 + 1024));
-
-		// Prevent huge cliffs near borders, make them slightly smaller cliffs
-
-		if(vHeight < seaLevel + 8 && cliffNoise > 0.3) {
-			// seaLevel+5 -> 1/4, seaLevel+6 -> 2/4, seaLevel+7 -> 3/4
-
-			cliffNoise *= (vHeight - seaLevel - 3) * 0.25;
-		}
-
-		// Convert noise values to layer counts
-
-		int cliffLayers = cliffNoiseToLayers(cliffNoise);
-		int underLayers = underNoiseToLayers(underNoise, cliffLayers);
-		int topLayers = (int) (topNoise * 2.5) + 1;
-
-		// Place cliff material
-
-		for (int i = 0; i < cliffLayers; i++) {
-			chunk.setBlockState(pos, config.getCliffMaterial(), false);
-
-			pos.setOffset(Direction.UP);
-		}
-
-		// Place under material
-
-		for (int i = 0; i < underLayers; i++) {
-			chunk.setBlockState(pos, config.getUnderMaterial(), false);
-			pos.setOffset(Direction.UP);
-		}
-
-		// Place top material
-
-		for (int i = 0; i < topLayers; i++) {
-			chunk.setBlockState(pos, config.getTopMaterial(), false);
-			pos.setOffset(Direction.UP);
-		}
-
-		if(pos.getY() <= vHeight) {
-			// Prevent exposed stone.
-
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
-		}
 	}
 
 	private static int underNoiseToLayers(double noise, int cliffLayers) {
@@ -107,7 +45,7 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 		return underLayers;
 	}
 
-	/** 
+	/**
 	 * "terraces" the input noise (from 0.0 to 1.0) returning an integer from 1 to 40, inclusive
 	 * Domain: [-1.0, 1.0]
 	 * Range: [1, 40]
@@ -154,5 +92,67 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 		}
 
 		return height;
+	}
+
+	@Override
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CanyonSurfaceConfig config) {
+		if (vHeight < seaLevel + 5) {
+			// In the future make this dig down instead
+			// This will break some stuff like water flowing down so it may need an edge biome first
+
+			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
+
+			return;
+		}
+
+		BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
+
+		// Generate noise values
+
+		double cliffNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015, z * 0.015));
+		double underNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015 - 1024, z * 0.015 - 1024));
+		double topNoise = Math.abs(CLIFF_NOISE.sample(x * 0.015 + 1024, z * 0.015 + 1024));
+
+		// Prevent huge cliffs near borders, make them slightly smaller cliffs
+
+		if (vHeight < seaLevel + 8 && cliffNoise > 0.3) {
+			// seaLevel+5 -> 1/4, seaLevel+6 -> 2/4, seaLevel+7 -> 3/4
+
+			cliffNoise *= (vHeight - seaLevel - 3) * 0.25;
+		}
+
+		// Convert noise values to layer counts
+
+		int cliffLayers = cliffNoiseToLayers(cliffNoise);
+		int underLayers = underNoiseToLayers(underNoise, cliffLayers);
+		int topLayers = (int) (topNoise * 2.5) + 1;
+
+		// Place cliff material
+
+		for (int i = 0; i < cliffLayers; i++) {
+			chunk.setBlockState(pos, config.getCliffMaterial(), false);
+
+			pos.setOffset(Direction.UP);
+		}
+
+		// Place under material
+
+		for (int i = 0; i < underLayers; i++) {
+			chunk.setBlockState(pos, config.getUnderMaterial(), false);
+			pos.setOffset(Direction.UP);
+		}
+
+		// Place top material
+
+		for (int i = 0; i < topLayers; i++) {
+			chunk.setBlockState(pos, config.getTopMaterial(), false);
+			pos.setOffset(Direction.UP);
+		}
+
+		if (pos.getY() <= vHeight) {
+			// Prevent exposed stone.
+
+			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
+		}
 	}
 }
