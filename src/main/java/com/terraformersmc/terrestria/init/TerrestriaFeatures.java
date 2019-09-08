@@ -51,7 +51,7 @@ public class TerrestriaFeatures {
 	public static StructurePieceType VOLCANO_PIECE;
 
 	public static CanyonArchStructureFeature CANYON_ARCH_STRUCTURE;
-	public static StructurePieceType CANYON_CLIFF_PIECE;
+	public static StructurePieceType CANYON_ARCH_PIECE;
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree",
@@ -188,7 +188,7 @@ public class TerrestriaFeatures {
 
 		Feature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
 
-		CANYON_CLIFF_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
+		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

@@ -19,8 +19,8 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 
 	private static final int ARCH_SPACING = 5;
 
-	// How many chunks should be in between each canyonCliff at least
-	private static final int CANYON_CLIFF_SEPARATION = 3;
+	// How many chunks should be in between each canyon arch at least
+	private static final int ARCH_SEPARATION = 3;
 	private static final int SEED_MODIFIER = 0x0401C480;
 
 	public CanyonArchStructureFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function) {
@@ -43,8 +43,8 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 		// Get random position within grid area
 		finalChunkX *= ARCH_SPACING;
 		finalChunkZ *= ARCH_SPACING;
-		finalChunkX += random_1.nextInt(ARCH_SPACING - CANYON_CLIFF_SEPARATION);
-		finalChunkZ += random_1.nextInt(ARCH_SPACING - CANYON_CLIFF_SEPARATION);
+		finalChunkX += random_1.nextInt(ARCH_SPACING - ARCH_SEPARATION);
+		finalChunkZ += random_1.nextInt(ARCH_SPACING - ARCH_SEPARATION);
 
 		return new ChunkPos(finalChunkX, finalChunkZ);
 	}
@@ -66,7 +66,7 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 	}
 
 	public StructureFeature.StructureStartFactory getStructureStartFactory() {
-		return CanyonArchStructureFeature.CanyonCliffStructureStart::new;
+		return CanyonArchStructureFeature.CanyonArchStructureStart::new;
 	}
 
 	public String getName() {
@@ -77,15 +77,15 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 		return 12;
 	}
 
-	public static class CanyonCliffStructureStart extends StructureStart {
-		CanyonCliffStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
+	public static class CanyonArchStructureStart extends StructureStart {
+		CanyonArchStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
 			super(feature, chunkX, chunkZ, biome, boundingBox, references, baseSeed);
 		}
 
 		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {
-			CanyonArchGenerator canyonCliff = new CanyonArchGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
+			CanyonArchGenerator canyonArch = new CanyonArchGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
 
-			this.children.add(canyonCliff);
+			this.children.add(canyonArch);
 			this.setBoundingBoxFromChildren();
 		}
 	}

@@ -32,7 +32,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private int centerZ;
 
 	CanyonArchGenerator(Random random, int centerX, int centerZ, Biome biome) {
-		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, 0);
+		super(TerrestriaFeatures.CANYON_ARCH_PIECE, 0);
 		this.setOrientation(null);
 		this.centerX = centerX;
 		this.centerZ = centerZ;
@@ -58,7 +58,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
-		super(TerrestriaFeatures.CANYON_CLIFF_PIECE, tag);
+		super(TerrestriaFeatures.CANYON_ARCH_PIECE, tag);
 
 		topNoise = new Perlin(TOP_NOISE_ZOOM, tag.getInt("TopNoise"));
 		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, tag.getInt("MaterialNoise"));
