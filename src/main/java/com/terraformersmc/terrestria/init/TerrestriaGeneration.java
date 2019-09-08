@@ -44,7 +44,8 @@ public class TerrestriaGeneration {
 		}
 
 		if (CANYON_CLIFFS != null) {
-			OverworldBiomes.addHillsBiome(CANYON_CLIFFS, CANYON, 1);
+			OverworldBiomes.addHillsBiome(CANYON_CLIFFS, CANYON_ARCHES, 1);
+			OverworldBiomes.addEdgeBiome(CANYON_CLIFFS, CANYON_EDGE, 1);
 		}
 
 		if(CYPRESS_FOREST != null) {

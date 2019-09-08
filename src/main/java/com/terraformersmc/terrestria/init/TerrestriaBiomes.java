@@ -15,8 +15,9 @@ public class TerrestriaBiomes {
 	public static Biome CALDERA_BEACH;
 	public static Biome CALDERA_FOOTHILLS;
 	public static Biome CALDERA_RIDGE;
+	public static Biome CANYON_ARCHES;
 	public static Biome CANYON_CLIFFS;
-	public static Biome CANYON;
+	public static Biome CANYON_EDGE;
 	public static Biome CYPRESS_FOREST;
 	public static Biome CYPRESS_SWAMP;
 	public static Biome DENSE_WOODLANDS;
