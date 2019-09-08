@@ -1,15 +1,7 @@
 {
+	"parent": "terraform:block/small_log_leaves",
 	"textures": {
 		"particle": "block/oak_leaves",
 		"leaves": "block/oak_leaves"
-	},
-	"elements": [
-		{
-			"from": [0, 0, 0],
-			"to": [16, 16, 16],
-			"faces": {
-				"up": {"uv": [0, 0, 16, 16], "texture": "#leaves"}
-			}
-		}
-	]
+	}
 }

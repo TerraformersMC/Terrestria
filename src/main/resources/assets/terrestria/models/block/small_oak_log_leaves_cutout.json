@@ -1,36 +1,7 @@
 {
+	"parent": "terraform:block/small_log_leaves_cutout",
 	"textures": {
 		"particle": "block/oak_leaves",
 		"leaves": "block/oak_leaves"
-	},
-	"elements": [
-		{
-			"from": [0, 0, 0],
-			"to": [3, 16, 16],
-			"faces": {
-				"up": {"uv": [0, 0, 3, 16], "texture": "#leaves"}
-			}
-		},
-		{
-			"from": [13, 0, 0],
-			"to": [16, 16, 16],
-			"faces": {
-				"up": {"uv": [13, 0, 16, 16], "texture": "#leaves"}
-			}
-		},
-		{
-			"from": [3, 0, 0],
-			"to": [13, 16, 3],
-			"faces": {
-				"up": {"uv": [3, 0, 13, 3], "texture": "#leaves"}
-			}
-		},
-		{
-			"from": [3, 0, 13],
-			"to": [13, 16, 16],
-			"faces": {
-				"up": {"uv": [3, 13, 13, 16], "texture": "#leaves"}
-			}
-		}
-	]
+	}
 }

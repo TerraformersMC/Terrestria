@@ -2,8 +2,7 @@
   "multipart": [
     {
       "when": {
-        "down": "true",
-        "has_leaves": "false"
+        "down": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_y"
@@ -11,8 +10,7 @@
     },
     {
       "when": {
-        "down": "false",
-        "has_leaves": "false"
+        "down": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat",
@@ -21,8 +19,7 @@
     },
     {
       "when": {
-        "up": "true",
-        "has_leaves": "false"
+        "up": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_y",
@@ -31,8 +28,7 @@
     },
     {
       "when": {
-        "up": "false",
-        "has_leaves": "false"
+        "up": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat",
@@ -41,8 +37,7 @@
     },
     {
       "when": {
-        "north": "true",
-        "has_leaves": "false"
+        "north": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_z"
@@ -50,8 +45,7 @@
     },
     {
       "when": {
-        "north": "false",
-        "has_leaves": "false"
+        "north": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat"
@@ -59,8 +53,7 @@
     },
     {
       "when": {
-        "east": "true",
-        "has_leaves": "false"
+        "east": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_x",
@@ -69,8 +62,7 @@
     },
     {
       "when": {
-        "east": "false",
-        "has_leaves": "false"
+        "east": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat",
@@ -79,8 +71,7 @@
     },
     {
       "when": {
-        "south": "true",
-        "has_leaves": "false"
+        "south": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_z",
@@ -89,8 +80,7 @@
     },
     {
       "when": {
-        "south": "false",
-        "has_leaves": "false"
+        "south": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat",
@@ -99,8 +89,7 @@
     },
     {
       "when": {
-        "west": "true",
-        "has_leaves": "false"
+        "west": "true"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_connector_x"
@@ -108,127 +97,10 @@
     },
     {
       "when": {
-        "west": "false",
-        "has_leaves": "false"
+        "west": "false"
       },
       "apply": {
         "model": "terrestria:block/saguaro_cactus_flat",
-        "y": 270
-      }
-    },
-    {
-      "when": {
-        "down": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_y_leaves"
-      }
-    },
-    {
-      "when": {
-        "down": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves",
-        "x": 90
-      }
-    },
-    {
-      "when": {
-        "up": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_y_leaves",
-        "x": 180
-      }
-    },
-    {
-      "when": {
-        "up": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves",
-        "x": 270
-      }
-    },
-    {
-      "when": {
-        "north": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_z_leaves"
-      }
-    },
-    {
-      "when": {
-        "north": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves"
-      }
-    },
-    {
-      "when": {
-        "east": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_x_leaves",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "east": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves",
-        "y": 90
-      }
-    },
-    {
-      "when": {
-        "south": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_z_leaves",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "south": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "west": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_connector_x_leaves"
-      }
-    },
-    {
-      "when": {
-        "west": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/saguaro_cactus_flat_leaves",
         "y": 270
       }
     }
