@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.feature.arch;
 
+import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -8,7 +9,6 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
@@ -17,11 +17,7 @@ import java.util.Random;
 
 public class CanyonArchGenerator extends StructurePiece {
 
-	private static final int TOP_NOISE_ZOOM = 15;
-	private static final int MATERIAL_NOISE_ZOOM = 7;
-
-	private Perlin topNoise;
-	private Perlin materialNoise;
+	private OpenSimplexNoise noise;
 
 	private int lineSlope;
 	private int maxHeight;
@@ -34,18 +30,18 @@ public class CanyonArchGenerator extends StructurePiece {
 	CanyonArchGenerator(Random random, int centerX, int centerZ, Biome biome) {
 		super(TerrestriaFeatures.CANYON_ARCH_PIECE, 0);
 		this.setOrientation(null);
+
 		this.centerX = centerX;
 		this.centerZ = centerZ;
 
 		int seed = random.nextInt(10000);
 
-		topNoise = new Perlin(TOP_NOISE_ZOOM, seed);
-		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, seed);
+		noise = new OpenSimplexNoise(seed);
 
 		lineSlope = seed % 10;
 
 		// 50% inversion chance
-		if(seed > 5000) {
+		if (seed > 5000) {
 			lineSlope = -lineSlope;
 		}
 
@@ -53,15 +49,16 @@ public class CanyonArchGenerator extends StructurePiece {
 		yStart = 30;
 		radius = 15 + random.nextInt(40);
 
-		int radiusBound = MathHelper.ceil(radius * 1.5);
-		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, 30, centerZ - radiusBound, centerX + radiusBound, 30 + maxHeight, centerZ + radiusBound);
+		// Just to be sure.
+		int radiusBound = radius + 5;
+
+		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
 	}
 
 	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
 		super(TerrestriaFeatures.CANYON_ARCH_PIECE, tag);
 
-		topNoise = new Perlin(TOP_NOISE_ZOOM, tag.getInt("TopNoise"));
-		materialNoise = new Perlin(MATERIAL_NOISE_ZOOM, tag.getInt("MaterialNoise"));
+		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
 
 		lineSlope = tag.getInt("LineSlope");
 		maxHeight = tag.getInt("MaxHeight");
@@ -74,8 +71,7 @@ public class CanyonArchGenerator extends StructurePiece {
 
 	@Override
 	protected void toNbt(CompoundTag tag) {
-		tag.putInt("TopNoise", topNoise.getSeed());
-		tag.putInt("MaterialNoise", materialNoise.getSeed());
+		tag.putLong("NoiseSeed", noise.getSeed());
 
 		tag.putInt("LineSlope", lineSlope);
 		tag.putInt("MaxHeight", maxHeight);
@@ -96,7 +92,9 @@ public class CanyonArchGenerator extends StructurePiece {
 
 		for (int z = boundingBox.minZ; z <= boundingBox.maxZ; z++) {
 			for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
-				double height = maxHeight - (topNoise.getNoiseLevelAtPosition(x, z) * 8);
+
+				double noiseValue = noise.sample(x * 0.05, z * 0.05);
+				double height = maxHeight - Math.abs(noiseValue) * 8;
 
 				for (int h = 0; h < height; h++) {
 					if (shapeArch(h, x, z)) {
@@ -106,6 +104,7 @@ public class CanyonArchGenerator extends StructurePiece {
 				}
 			}
 		}
+
 		return true;
 	}
 
@@ -115,7 +114,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		// Test the distance of the point from the center first
 
 		double offsetX = x - centerX;
-		double offsetY = h - 30.0;
+		double offsetY = h - yStart;
 		double offsetZ = z - centerZ;
 
 		// Simple distance formula, testing against a larger and smaller circle.
@@ -124,7 +123,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		double minDistanceSq = (radius - 5) * (radius - 5);
 		double maxDistanceSq = radius * radius;
 
-		if(vertexDistanceSquared <= minDistanceSq || vertexDistanceSquared >= maxDistanceSq) {
+		if (vertexDistanceSquared <= minDistanceSq || vertexDistanceSquared >= maxDistanceSq) {
 			return false;
 		}
 
@@ -156,14 +155,14 @@ public class CanyonArchGenerator extends StructurePiece {
 	// Generates the stone layers
 
 	private BlockState getStateAtY(int height, int x, int z) {
-		if (materialNoise.getNoiseLevelAtPosition(x, z) * 3 > height % 6) {
+		double noiseValue = Math.abs(noise.sample(x * 0.05, z * 0.05));
+
+		if (noiseValue * 3 > height % 6) {
 			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
+		} else if (noiseValue * 4 > height % 3) {
+			return Blocks.TERRACOTTA.getDefaultState();
 		} else {
-			if (materialNoise.getNoiseLevelAtPosition(x, z) * 4 > height % 3) {
-				return Blocks.TERRACOTTA.getDefaultState();
-			} else {
-				return Blocks.SMOOTH_SANDSTONE.getDefaultState();
-			}
+			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
 		}
 	}
 }
