@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "terrestria:sakura_leaves"
+    }
+  ],
+  "result": {
+    "item": "terrestria:sakura_leaf_pile",
+    "count": 9
+  }
+}

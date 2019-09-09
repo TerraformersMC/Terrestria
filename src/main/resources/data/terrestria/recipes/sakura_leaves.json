@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:sakura_leaf_pile"
+    }
+  },
+  "result": {
+    "item": "terrestria:sakura_leaves"
+  }
+}

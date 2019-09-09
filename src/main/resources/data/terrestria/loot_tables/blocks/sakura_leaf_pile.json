@@ -6,12 +6,16 @@
       "entries": [
         {
           "type": "minecraft:item",
+
           "name": "terrestria:sakura_leaf_pile"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:survives_explosion"
+          "condition": "minecraft:match_tool",
+          "predicate": {
+            "item": "minecraft:shears"
+          }
         }
       ]
     }
