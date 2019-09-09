@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.mixin;
 
+import com.terraformersmc.terraform.block.TerraformFarmlandBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.*;
 import net.minecraft.state.property.IntProperty;
@@ -36,21 +37,21 @@ public class MixinStemBlock {
 	}
 
 	@Inject(method = "onScheduledTick", at = @At("HEAD"), cancellable = true)
-	private void onScheduledTick(BlockState blockState_1, World world_1, BlockPos blockPos_1, Random random_1, CallbackInfo info) {
-		if (world_1.getLightLevel(blockPos_1, 0) >= 9) {
-			float float_1 = this.getAvailableMoisture(blockState_1.getBlock(), world_1, blockPos_1);
-			if (random_1.nextInt((int)(25.0F / float_1) + 1) == 0) {
-				int int_1 = (Integer)blockState_1.get(AGE);
-				if (int_1 < 7) {
-					blockState_1 = (BlockState)blockState_1.with(AGE, int_1 + 1);
-					world_1.setBlockState(blockPos_1, blockState_1, 2);
+	private void onScheduledTick(BlockState state, World world, BlockPos pos, Random rand, CallbackInfo info) {
+		if (world.getLightLevel(pos, 0) >= 9) {
+			float moisture = this.getAvailableMoisture(state.getBlock(), world, pos);
+			if (rand.nextInt((int)(25.0F / moisture) + 1) == 0) {
+				int age = state.get(AGE);
+				if (age < 7) {
+					state = state.with(AGE, age + 1);
+					world.setBlockState(pos, state, 2);
 				} else {
-					Direction direction_1 = Direction.Type.HORIZONTAL.random(random_1);
-					BlockPos blockPos_2 = blockPos_1.offset(direction_1);
-					Block block_1 = world_1.getBlockState(blockPos_2.down()).getBlock();
-					if (world_1.getBlockState(blockPos_2).isAir() && (block_1 == TerrestriaBlocks.BASALT_FARMLAND || block_1 == TerrestriaBlocks.BASALT_GRASS_BLOCK || block_1 == TerrestriaBlocks.BASALT_DIRT)) {
-						world_1.setBlockState(blockPos_2, this.gourdBlock.getDefaultState());
-						world_1.setBlockState(blockPos_1, (BlockState)this.gourdBlock.getAttachedStem().getDefaultState().with(HorizontalFacingBlock.FACING, direction_1));
+					Direction direction = Direction.Type.HORIZONTAL.random(rand);
+					BlockPos randPos = pos.offset(direction);
+					Block block = world.getBlockState(randPos.down()).getBlock();
+					if (world.getBlockState(randPos).isAir() && (block == TerrestriaBlocks.BASALT_FARMLAND || block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT)) {
+						world.setBlockState(randPos, this.gourdBlock.getDefaultState());
+						world.setBlockState(pos, this.gourdBlock.getAttachedStem().getDefaultState().with(HorizontalFacingBlock.FACING, direction));
 						info.cancel();
 					}
 				}
@@ -59,50 +60,49 @@ public class MixinStemBlock {
 		}
 	}
 
-	private static float getAvailableMoisture(Block block_1, BlockView blockView_1, BlockPos blockPos_1) {
-		float float_1 = 1.0F;
-		BlockPos blockPos_2 = blockPos_1.down();
+	private static float getAvailableMoisture(Block block, BlockView view, BlockPos pos) {
+		float moistureAmt = 1.0F;
+		BlockPos downPos = pos.down();
 
-		for(int int_1 = -1; int_1 <= 1; ++int_1) {
-			for(int int_2 = -1; int_2 <= 1; ++int_2) {
-				float float_2 = 0.0F;
-				BlockState blockState_1 = blockView_1.getBlockState(blockPos_2.add(int_1, 0, int_2));
-				if (blockState_1.getBlock() == Blocks.FARMLAND) {
-					float_2 = 1.0F;
-					if ((Integer)blockState_1.get(FarmlandBlock.MOISTURE) > 0) {
-						float_2 = 3.0F;
+		for(int i = -1; i <= 1; ++i) {
+			for(int j = -1; j <= 1; ++j) {
+				float moistureFromFarmlnd = 0.0F;
+				BlockState state = view.getBlockState(downPos.add(i, 0, j));
+				if (state.getBlock() == TerrestriaBlocks.BASALT_FARMLAND) {
+					moistureFromFarmlnd = 1.5F;
+					if (state.get(TerraformFarmlandBlock.MOISTURE) > 0) {
+						moistureFromFarmlnd = 4.5F;
 					}
 				}
-				if (blockState_1.getBlock() == TerrestriaBlocks.BASALT_FARMLAND) {
-					float_2 = 1.5F;
-					if ((Integer)blockState_1.get(FarmlandBlock.MOISTURE) > 0) {
-						float_2 = 4.5F;
+				if (state.getBlock() == Blocks.FARMLAND) {
+					moistureFromFarmlnd = 1.0F;
+					if (state.get(TerraformFarmlandBlock.MOISTURE) > 0) {
+						moistureFromFarmlnd = 3.0F;
 					}
 				}
 
-				if (int_1 != 0 || int_2 != 0) {
-					float_2 /= 4.0F;
+				if (i != 0 || j != 0) {
+					moistureFromFarmlnd /= 4.0F;
 				}
 
-				float_1 += float_2;
+				moistureAmt += moistureFromFarmlnd;
 			}
 		}
 
-		BlockPos blockPos_3 = blockPos_1.north();
-		BlockPos blockPos_4 = blockPos_1.south();
-		BlockPos blockPos_5 = blockPos_1.west();
-		BlockPos blockPos_6 = blockPos_1.east();
-		boolean boolean_1 = block_1 == blockView_1.getBlockState(blockPos_5).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6).getBlock();
-		boolean boolean_2 = block_1 == blockView_1.getBlockState(blockPos_3).getBlock() || block_1 == blockView_1.getBlockState(blockPos_4).getBlock();
-		if (boolean_1 && boolean_2) {
-			float_1 /= 2.0F;
+		BlockPos north = pos.north();
+		BlockPos south = pos.south();
+		BlockPos west = pos.west();
+		BlockPos east = pos.east();
+		boolean eastwest = block == view.getBlockState(west).getBlock() || block == view.getBlockState(east).getBlock();
+		boolean northsouth = block == view.getBlockState(north).getBlock() || block == view.getBlockState(south).getBlock();
+		if (eastwest && northsouth) {
+			moistureAmt /= 2.0F;
 		} else {
-			boolean boolean_3 = block_1 == blockView_1.getBlockState(blockPos_5.north()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6.north()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6.south()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_5.south()).getBlock();
-			if (boolean_3) {
-				float_1 /= 2.0F;
+			boolean temp = block == view.getBlockState(west.north()).getBlock() || block == view.getBlockState(east.north()).getBlock() || block == view.getBlockState(east.south()).getBlock() || block == view.getBlockState(west.south()).getBlock();
+			if (temp) {
+				moistureAmt /= 2.0F;
 			}
 		}
-
-		return float_1;
+		return moistureAmt;
 	}
 }

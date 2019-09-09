@@ -21,47 +21,47 @@ public class MixinCropBlock {
 	}
 
 	@Inject(method = "getAvailableMoisture", at = @At("HEAD"), cancellable = true)
-	private static void getAvailableMoisture(Block block_1, BlockView blockView_1, BlockPos blockPos_1, CallbackInfoReturnable<Float> info) {
-		float float_1 = 1.0F;
+	private static void getAvailableMoisture(Block block, BlockView view, BlockPos pos, CallbackInfoReturnable<Float> info) {
+		float moistureAmt = 1.0F;
 		boolean shouldCancel = false;
-		BlockPos blockPos_2 = blockPos_1.down();
+		BlockPos downPos = pos.down();
 
-		for(int int_1 = -1; int_1 <= 1; ++int_1) {
-			for(int int_2 = -1; int_2 <= 1; ++int_2) {
-				float float_2 = 0.0F;
-				BlockState blockState_1 = blockView_1.getBlockState(blockPos_2.add(int_1, 0, int_2));
-				if (blockState_1.getBlock() == TerrestriaBlocks.BASALT_FARMLAND) {
-					float_2 = 1.5F;
+		for(int i = -1; i <= 1; ++i) {
+			for(int j = -1; j <= 1; ++j) {
+				float moistureFromFarmlnd = 0.0F;
+				BlockState state = view.getBlockState(downPos.add(i, 0, j));
+				if (state.getBlock() == TerrestriaBlocks.BASALT_FARMLAND) {
+					moistureFromFarmlnd = 1.5F;
 					shouldCancel = true;
-					if (blockState_1.get(TerraformFarmlandBlock.MOISTURE) > 0) {
-						float_2 = 4.5F;
+					if (state.get(TerraformFarmlandBlock.MOISTURE) > 0) {
+						moistureFromFarmlnd = 4.5F;
 					}
 				}
 
-				if (int_1 != 0 || int_2 != 0) {
-					float_2 /= 4.0F;
+				if (i != 0 || j != 0) {
+					moistureFromFarmlnd /= 4.0F;
 				}
 
-				float_1 += float_2;
+				moistureAmt += moistureFromFarmlnd;
 			}
 		}
 
-		BlockPos blockPos_3 = blockPos_1.north();
-		BlockPos blockPos_4 = blockPos_1.south();
-		BlockPos blockPos_5 = blockPos_1.west();
-		BlockPos blockPos_6 = blockPos_1.east();
-		boolean boolean_1 = block_1 == blockView_1.getBlockState(blockPos_5).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6).getBlock();
-		boolean boolean_2 = block_1 == blockView_1.getBlockState(blockPos_3).getBlock() || block_1 == blockView_1.getBlockState(blockPos_4).getBlock();
-		if (boolean_1 && boolean_2) {
-			float_1 /= 2.0F;
+		BlockPos north = pos.north();
+		BlockPos south = pos.south();
+		BlockPos west = pos.west();
+		BlockPos east = pos.east();
+		boolean eastwest = block == view.getBlockState(west).getBlock() || block == view.getBlockState(east).getBlock();
+		boolean northsouth = block == view.getBlockState(north).getBlock() || block == view.getBlockState(south).getBlock();
+		if (eastwest && northsouth) {
+			moistureAmt /= 2.0F;
 		} else {
-			boolean boolean_3 = block_1 == blockView_1.getBlockState(blockPos_5.north()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6.north()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_6.south()).getBlock() || block_1 == blockView_1.getBlockState(blockPos_5.south()).getBlock();
-			if (boolean_3) {
-				float_1 /= 2.0F;
+			boolean temp = block == view.getBlockState(west.north()).getBlock() || block == view.getBlockState(east.north()).getBlock() || block == view.getBlockState(east.south()).getBlock() || block == view.getBlockState(west.south()).getBlock();
+			if (temp) {
+				moistureAmt /= 2.0F;
 			}
 		}
 		if (shouldCancel) {
-			info.setReturnValue(float_1);
+			info.setReturnValue(moistureAmt);
 			info.cancel();
 		}
 	}

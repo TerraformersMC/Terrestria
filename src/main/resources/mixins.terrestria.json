@@ -13,7 +13,8 @@
     "MixinHoeItem",
     "MixinCropBlock",
     "MixinStemBlock",
-    "MixinAttachedStemBlock"
+    "MixinAttachedStemBlock",
+    "MixinSugarCaneBlock"
   ],
   "injectors": {
     "defaultRequire": 1

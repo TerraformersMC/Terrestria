@@ -46,20 +46,20 @@ public class MixinEatGrassGoal {
 		if (this.mob.getRand().nextInt(this.mob.isBaby() ? 50 : 1000) != 0) {
 			callbackInfo.setReturnValue(false);
 		} else {
-			BlockPos blockPos_1 = new BlockPos(this.mob);
-			callbackInfo.setReturnValue(this.world.getBlockState(blockPos_1.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK);
+			BlockPos pos = new BlockPos(this.mob);
+			callbackInfo.setReturnValue(this.world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK);
 		}
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"), cancellable = true)
 	private void tick(CallbackInfo info) {
 		if (this.timer == 4) {
-			BlockPos blockPos_1 = new BlockPos(this.mob);
-			BlockPos blockPos_2 = blockPos_1.down();
-			if (this.world.getBlockState(blockPos_2).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
+			BlockPos pos = new BlockPos(this.mob);
+			BlockPos downPos = pos.down();
+			if (this.world.getBlockState(downPos).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
 				if (this.world.getGameRules().getBoolean(GameRules.MOB_GRIEFING)) {
-					this.world.playLevelEvent(2001, blockPos_2, Block.getRawIdFromState(Blocks.GRASS_BLOCK.getDefaultState()));
-					this.world.setBlockState(blockPos_2, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), 2);
+					this.world.playLevelEvent(2001, downPos, Block.getRawIdFromState(Blocks.GRASS_BLOCK.getDefaultState()));
+					this.world.setBlockState(downPos, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), 2);
 				}
 
 				this.mob.onEatingGrass();

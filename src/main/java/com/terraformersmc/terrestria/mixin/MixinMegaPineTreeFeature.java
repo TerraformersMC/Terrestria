@@ -18,15 +18,15 @@ public class MixinMegaPineTreeFeature {
 	@Inject(method = "prepareGroundColumn", at = @At("HEAD"), cancellable = true)
 	private void prepareGroundColumn(ModifiableTestableWorld world, BlockPos pos, CallbackInfo info) {
 		boolean didPlaceBasaltPodzol = false;
-		for(int int_1 = 2; int_1 >= -3; --int_1) {
-			BlockPos posUp = pos.up(int_1);
-			if (world.testBlockState(posUp, (blockState_1) -> (blockState_1.getBlock() == TerrestriaBlocks.BASALT_DIRT) || (blockState_1.getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK))) {
+		for(int i = 2; i >= -3; --i) {
+			BlockPos posUp = pos.up(i);
+			if (world.testBlockState(posUp, (state) -> (state.getBlock() == TerrestriaBlocks.BASALT_DIRT) || (state.getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK))) {
 				world.setBlockState(posUp, TerrestriaBlocks.BASALT_PODZOL.getDefaultState(), 18);
 				didPlaceBasaltPodzol = true;
 				break;
 			}
 
-			if (!(world.testBlockState(posUp, BlockState::isAir)) && int_1 < 0) {
+			if (!(world.testBlockState(posUp, BlockState::isAir)) && i < 0) {
 				break;
 			}
 		}
