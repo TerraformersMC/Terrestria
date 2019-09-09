@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "moisture=0": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=1": { "model": "terrestria:block/basalt_farmlandd" },
+    "moisture=2": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=3": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=4": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=5": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=6": { "model": "terrestria:block/basalt_farmland" },
+    "moisture=7": { "model": "terrestria:block/basalt_farmland_moist" }
+  }
+}

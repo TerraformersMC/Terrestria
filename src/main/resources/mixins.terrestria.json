@@ -9,7 +9,11 @@
     "MixinFluidBlock",
     "MixinPlantBlock",
     "MixinEatGrassGoal",
-    "MixinMegaPineTreeFeature"
+    "MixinMegaPineTreeFeature",
+    "MixinHoeItem",
+    "MixinCropBlock",
+    "MixinStemBlock",
+    "MixinAttachedStemBlock"
   ],
   "injectors": {
     "defaultRequire": 1
