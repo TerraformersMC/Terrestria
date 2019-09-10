@@ -7,7 +7,8 @@
     "MixinAnimalEntity",
     "MixinBlock",
     "MixinFluidBlock",
-    "MixinPlantBlock"
+    "MixinPlantBlock",
+    "MixinEatGrassGoal"
   ],
   "injectors": {
     "defaultRequire": 1
