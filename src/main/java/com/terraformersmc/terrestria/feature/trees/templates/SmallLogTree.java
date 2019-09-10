@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
+import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -38,37 +39,37 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		switch (direction) {
 			case SOUTH:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.NORTH, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.SOUTH, true), boundingBox);
 				}
 				break;
 			case NORTH:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.SOUTH, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.NORTH, true), boundingBox);
 				}
 					break;
 			case WEST:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.EAST, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.WEST, true), boundingBox);
 				}
 				break;
 			case EAST:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.WEST, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.EAST, true), boundingBox);
 				}
 				break;
 			case DOWN:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.UP, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.DOWN, true), boundingBox);
 				}
 				break;
 			case UP:
 				setBlockState(blocks, world, pos, state.with(SmallLogBlock.DOWN, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
+				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof BareSmallLogBlock) {
 					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.UP, true), boundingBox);
 				}
 				break;
