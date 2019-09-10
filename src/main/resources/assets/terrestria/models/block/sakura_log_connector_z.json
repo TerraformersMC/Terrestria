@@ -1,8 +1,0 @@
-{
-  "parent": "terrestria:block/small_log_connector_z",
-  "textures": {
-    "particle": "terrestria:block/sakura_log",
-    "all": "terrestria:block/sakura_log_connector",
-    "top": "terrestria:block/sakura_log_top"
-  }
-}

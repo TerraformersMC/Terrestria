@@ -1,7 +1,0 @@
-{
-  "parent": "terrestria:block/small_log_flat",
-  "textures": {
-    "particle": "terrestria:block/sakura_log",
-    "all": "terrestria:block/sakura_log"
-  }
-}
