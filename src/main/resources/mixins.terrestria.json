@@ -9,6 +9,7 @@
     "MixinEatGrassGoal",
     "MixinFluidBlock",
     "MixinMegaPineTreeFeature",
+    "MixinMushroomPlantBlock",
     "MixinPlantBlock"
   ],
   "injectors": {
