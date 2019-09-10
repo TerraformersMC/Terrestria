@@ -2,32 +2,19 @@ package com.terraformersmc.terrestria.mixin;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.ai.goal.EatGrassGoal;
-import net.minecraft.entity.ai.goal.Goal;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import java.util.EnumSet;
-import java.util.Random;
-import java.util.function.Predicate;
 
 @Mixin(EatGrassGoal.class)
 public class MixinEatGrassGoal {

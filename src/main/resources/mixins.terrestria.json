@@ -6,9 +6,9 @@
     "MixinAbstractTreeFeature",
     "MixinAnimalEntity",
     "MixinBlock",
+    "MixinEatGrassGoal",
     "MixinFluidBlock",
-    "MixinPlantBlock",
-    "MixinEatGrassGoal"
+    "MixinPlantBlock"
   ],
   "injectors": {
     "defaultRequire": 1
