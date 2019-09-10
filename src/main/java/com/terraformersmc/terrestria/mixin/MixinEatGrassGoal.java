@@ -38,7 +38,7 @@ public class MixinEatGrassGoal {
 		}
 	}
 
-	@Inject(method = "tick", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "tick", at = @At("HEAD"))
 	private void tick(CallbackInfo info) {
 		if (this.timer - 1 == 4) {
 			BlockPos pos = new BlockPos(this.mob);
