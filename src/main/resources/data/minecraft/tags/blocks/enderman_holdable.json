@@ -20,6 +20,7 @@
     "minecraft:netherrack",
     "terrestria:basalt_grass_block",
     "terrestria:basalt_dirt",
-    "terrestria:basalt_sand"
+    "terrestria:basalt_sand",
+    "terrestria:basalt_podzol"
   ]
 }
