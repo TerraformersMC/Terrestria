@@ -64,6 +64,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
 	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
+	public static TerraformSaplingBlock YUCCA_PALM_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
@@ -110,7 +111,6 @@ public class TerrestriaBlocks {
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
 		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.RUBBER, flammable, WoodBlocks.LogSize.SMALL);
 
-		// TODO: Leaves for the Small Oak Log
 		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, Block.Settings.copy(Blocks.OAK_LOG)));
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, Block.Settings.copy(Blocks.STRIPPED_OAK_LOG)));
 		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new BareSmallLogBlock(null, Block.Settings.copy(Blocks.CACTUS)));
@@ -216,7 +216,13 @@ public class TerrestriaBlocks {
 		));
 
 		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformDesertSaplingBlock(
-				new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
+		));
+
+		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new TerraformSaplingBlock(
+			new TerraformSaplingGenerator(
+				() -> TerrestriaFeatures.YUCCA_PALM_TREE.sapling()
+			)
 		));
 
 		// Volcanic Island Blocks

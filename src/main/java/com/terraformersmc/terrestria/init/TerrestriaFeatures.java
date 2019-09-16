@@ -40,6 +40,7 @@ public class TerrestriaFeatures {
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
+	public static YuccaPalmTreeFeature YUCCA_PALM_TREE;
 
 	public static SaguaroCactusFeature SAGUARO_CACTUS;
 
@@ -164,6 +165,10 @@ public class TerrestriaFeatures {
 
 		SAGUARO_CACTUS = register("saguaro_cactus",
 				new SaguaroCactusFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
+		);
+
+		YUCCA_PALM_TREE = register("yucca_palm",
+				new YuccaPalmTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
 		);
 
 		CATTAIL = register("cattail",
