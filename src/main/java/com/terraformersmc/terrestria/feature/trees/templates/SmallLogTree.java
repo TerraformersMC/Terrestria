@@ -32,36 +32,6 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		this.leaves = leaves;
 	}
 
-	protected BooleanProperty getStateFromDirection(Direction direction) {
-		switch (direction) {
-			case SOUTH:
-				return BareSmallLogBlock.SOUTH;
-			case NORTH:
-				return BareSmallLogBlock.NORTH;
-			case WEST:
-				return BareSmallLogBlock.WEST;
-			case EAST:
-				return BareSmallLogBlock.EAST;
-			case DOWN:
-				return BareSmallLogBlock.DOWN;
-			case UP:
-				return BareSmallLogBlock.UP;
-		}
-		return null;
-	}
-
-	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
-		correctBlockState(blocks, world, pos, direction, boundingBox);
-		setBlockState(blocks, world, pos, state, boundingBox);
-		pos.setOffset(direction.getOpposite());
-		correctBlockState(blocks, world, pos, direction.getOpposite(), boundingBox);
-	}
-
-	private void correctBlockState(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, Direction direction, MutableIntBoundingBox boundingBox) {
-		setBlockState(blocks, world, origin, getOriginalState(world, origin).with(getStateFromDirection(direction), true), boundingBox);
-	}
-
 	@Override
 	protected boolean generate(Set<BlockPos> set, ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, MutableIntBoundingBox mutableIntBoundingBox) {
 		return false;
@@ -75,30 +45,34 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return leaves;
 	}
 
-	protected static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
-		Direction out = randomHorizontalDirection(rand);
-		return out == direction ? direction.getOpposite() : out;
+	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
+		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(Direction.DOWN));
+		if (getOriginalState(world, pos) != null) {
+			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getStateFromDirection(direction), true), boundingBox);
+		}
+		pos.setOffset(direction);
+		setBlockState(blocks, world, pos, log.with(getStateFromDirection(direction.getOpposite()), true), boundingBox);
 	}
 
-	protected static Direction randomHorizontalDirection(Random rand) {
-		switch (rand.nextInt(4)) {
-			case 0:
-				return Direction.NORTH;
-			case 1:
-				return Direction.EAST;
-			case 2:
-				return Direction.WEST;
-			case 3:
-				return Direction.SOUTH;
+	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+
+		boolean leaves = world.testBlockState(pos, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
+		Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
+		Predicate<BlockState> leafTester = tested -> (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
+
+		if (world.testBlockState(pos, leafTester)) {
+			setBlockState(blocks, world, pos, this.leaves, boundingBox);
+		} else {
+			if (world.testBlockState(pos, tester)) {
+				setBlockState(blocks, world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, leaves), boundingBox);
+			}
 		}
-		return Direction.NORTH;
 	}
 
 	protected BlockState getOriginalState(ModifiableTestableWorld world, BlockPos.Mutable pos) {
 
-		//TODO make this not use dirt for the sake of just in case
 		if (!world.testBlockState(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
-			return Blocks.DIRT.getDefaultState();
+			return null;
 		}
 
 		BlockState blockStateBuidler = this.getLog();
@@ -128,18 +102,40 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return blockStateBuidler;
 	}
 
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+	protected static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
+		Direction out = randomHorizontalDirection(rand);
+		return out == direction ? direction.getOpposite() : out;
+	}
 
-		boolean leaves = world.testBlockState(pos, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
-		Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
-		Predicate<BlockState> leafTester = tested -> (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
-
-		if (world.testBlockState(pos, leafTester)) {
-			setBlockState(blocks, world, pos, this.leaves, boundingBox);
-		} else {
-			if (world.testBlockState(pos, tester)) {
-				setBlockState(blocks, world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, leaves), boundingBox);
-			}
+	protected static Direction randomHorizontalDirection(Random rand) {
+		switch (rand.nextInt(4)) {
+			case 0:
+				return Direction.NORTH;
+			case 1:
+				return Direction.EAST;
+			case 2:
+				return Direction.WEST;
+			case 3:
+				return Direction.SOUTH;
 		}
+		return Direction.NORTH;
+	}
+
+	protected BooleanProperty getStateFromDirection(Direction direction) {
+		switch (direction) {
+			case SOUTH:
+				return BareSmallLogBlock.SOUTH;
+			case NORTH:
+				return BareSmallLogBlock.NORTH;
+			case WEST:
+				return BareSmallLogBlock.WEST;
+			case EAST:
+				return BareSmallLogBlock.EAST;
+			case DOWN:
+				return BareSmallLogBlock.DOWN;
+			case UP:
+				return BareSmallLogBlock.UP;
+		}
+		return null;
 	}
 }
