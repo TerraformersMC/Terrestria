@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.feature.trees;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
-import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
+import com.terraformersmc.terrestria.feature.trees.components.CorrectableStates;
 import com.terraformersmc.terrestria.feature.trees.templates.JapaneseTreeFeature;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
@@ -24,7 +24,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs, Branches {
+public class SakuraTreeFeature extends JapaneseTreeFeature implements Branches, CorrectableStates {
 	private TreeDefinition.Sakura tree;
 	private boolean worldGen;
 
