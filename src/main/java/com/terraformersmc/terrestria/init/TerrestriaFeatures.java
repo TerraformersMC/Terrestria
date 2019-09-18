@@ -1,7 +1,11 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terraform.feature.CattailFeature;
+import com.terraformersmc.terraform.feature.FallenLogFeature;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
 import com.terraformersmc.terrestria.feature.trees.*;
@@ -43,6 +47,9 @@ public class TerrestriaFeatures {
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
+	public static YuccaPalmTreeFeature YUCCA_PALM_TREE;
+
+	public static SaguaroCactusFeature SAGUARO_CACTUS;
 
 	public static CattailFeature CATTAIL;
 	public static FallenLogFeature FALLEN_REDWOOD_LOG;
@@ -164,6 +171,14 @@ public class TerrestriaFeatures {
 
 		RUBBER_TREE = register("rubber_tree",
 				new RubberTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RUBBER.getBasicDefinition())
+		);
+
+		SAGUARO_CACTUS = register("saguaro_cactus",
+				new SaguaroCactusFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
+		);
+
+		YUCCA_PALM_TREE = register("yucca_palm",
+				new YuccaPalmTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
 		);
 
 		CATTAIL = register("cattail",

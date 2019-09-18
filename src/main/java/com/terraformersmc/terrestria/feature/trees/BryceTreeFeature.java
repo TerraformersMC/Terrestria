@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.SmallRoots;
 import com.terraformersmc.terrestria.feature.trees.templates.SmallLogTree;
@@ -152,10 +153,13 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		BlockPos.Mutable mPos;
 		for (BlockPos pos : leafOrigins) {
 			mPos = new BlockPos.Mutable(pos);
-			for (int i = 0; i < 5; i++) {
-				tryPlaceLeaves(blocks, world, mPos, this.getLeaves(), boundingBox);
-				mPos.offset(randomHorizontalDirection(random));
+			for (int i = 0; i < 2; i++) {
+				Shapes.circle(new BlockPos.Mutable(mPos.toImmutable()), 1.0, position -> {
+					tryPlaceLeaves(blocks, world, position, this.getLeaves(), boundingBox);
+				});
+				mPos.setOffset(Direction.UP);
 			}
+			tryPlaceLeaves(blocks, world, mPos, this.getLeaves(), boundingBox);
 		}
 	}
 

@@ -1,234 +1,178 @@
 {
   "multipart": [
-    {
-      "when": {
-        "down": "true",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "up": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_y"
+        "model": "terrestria:block/stripped_yucca_palm_log_branch"
       }
     },
-    {
-      "when": {
-        "down": "false",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "down": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat",
-        "x": 90
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 180
       }
     },
-    {
-      "when": {
-        "up": "true",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "north": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_y",
-        "x": 180
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90
       }
     },
-    {
-      "when": {
-        "up": "false",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "south": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat",
-        "x": 270
-      }
-    },
-    {
-      "when": {
-        "north": "true",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_z"
-      }
-    },
-    {
-      "when": {
-        "north": "false",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat"
-      }
-    },
-    {
-      "when": {
-        "east": "true",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_x",
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
         "y": 180
       }
     },
-    {
-      "when": {
-        "east": "false",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "east": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat",
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
         "y": 90
       }
     },
-    {
-      "when": {
-        "south": "true",
-        "has_leaves": "false"
-      },
+	{
+      "when": { "west": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_z",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "south": "false",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "west": "true",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_x"
-      }
-    },
-    {
-      "when": {
-        "west": "false",
-        "has_leaves": "false"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat",
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
         "y": 270
       }
     },
-    {
-      "when": {
-        "down": "true",
-        "has_leaves": "true"
-      },
+		{
+      "when": { "up": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_y_leaves"
+        "model": "terrestria:block/stripped_yucca_palm_log"
       }
     },
-    {
-      "when": {
-        "down": "false",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "down": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves",
-        "x": 90
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 180
       }
     },
-    {
-      "when": {
-        "up": "true",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "north": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_y_leaves",
-        "x": 180
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90
       }
     },
-    {
-      "when": {
-        "up": "false",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "south": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves",
-        "x": 270
-      }
-    },
-    {
-      "when": {
-        "north": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_z_leaves"
-      }
-    },
-    {
-      "when": {
-        "north": "false",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves"
-      }
-    },
-    {
-      "when": {
-        "east": "true",
-        "has_leaves": "true"
-      },
-      "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_x_leaves",
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
         "y": 180
       }
     },
-    {
-      "when": {
-        "east": "false",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "east": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves",
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
         "y": 90
       }
     },
-    {
-      "when": {
-        "south": "true",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "west": "false"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_z_leaves",
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout"
+      }
+    },
+	{
+      "when": { "down": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
         "y": 180
       }
     },
-    {
-      "when": {
-        "south": "false",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "east": "true", "has_leaves": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves",
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves"
+      }
+    },
+	{
+      "when": { "down": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
         "y": 180
       }
     },
-    {
-      "when": {
-        "west": "true",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "east": "false", "has_leaves": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_connector_x_leaves"
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
+        "y": 90
       }
     },
-    {
-      "when": {
-        "west": "false",
-        "has_leaves": "true"
-      },
+	{
+      "when": { "west": "false", "has_leaves": "true"},
       "apply": {
-        "model": "terrestria:block/stripped_yucca_palm_log_flat_leaves",
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
         "y": 270
       }
     }

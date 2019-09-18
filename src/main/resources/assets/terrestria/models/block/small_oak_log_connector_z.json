@@ -1,8 +1,0 @@
-{
-  "parent": "terrestria:block/small_log_connector_z",
-  "textures": {
-    "particle": "terrestria:block/small_oak_log",
-    "all": "terrestria:block/small_oak_log_connector",
-    "top": "terrestria:block/small_oak_log_top"
-  }
-}
