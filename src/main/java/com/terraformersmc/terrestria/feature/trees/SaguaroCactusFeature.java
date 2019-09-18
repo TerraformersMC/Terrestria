@@ -54,9 +54,9 @@ public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branche
 		pos.setOffset(direction);
 		for (int i = 0; i < length; i++) {
 			if (i == 0) {
-				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), direction, boundingBox, false);
+				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), direction, boundingBox);
 			} else {
-				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox, false);
+				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
 			}
 			pos.setOffset(Direction.UP);
 		}
@@ -71,7 +71,7 @@ public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branche
 			if (i == 0) {
 				setBlockState(blocks, world, pos, this.getLog().with(SmallLogBlock.DOWN, true), boundingBox);
 			} else {
-				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox, false);
+				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
 			}
 
 			//Always place an arm half way up ish
