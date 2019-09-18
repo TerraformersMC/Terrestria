@@ -69,7 +69,7 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 				pos.setOffset(Direction.UP);
 			}
 			//Place the leaves on the end of the branches
-			tryPlaceLeaves(blocks, world, pos.setOffset(Direction.DOWN), this.getLeaves(), boundingBox);
+			tryPlaceLeaves(blocks, world, pos.setOffset(Direction.DOWN), boundingBox);
 		}
 	}
 
@@ -100,11 +100,11 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 	}
 
 	private void placeLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
-		tryPlaceLeaves(blocks, world, pos, this.getLeaves(), boundingBox);
+		tryPlaceLeaves(blocks, world, pos, boundingBox);
 		pos.setOffset(Direction.UP);
-		Shapes.circle(new BlockPos.Mutable(pos.toImmutable()), 1.0, position -> tryPlaceLeaves(blocks, world, position, this.getLeaves(), boundingBox));
+		Shapes.circle(new BlockPos.Mutable(pos.toImmutable()), 1.0, position -> tryPlaceLeaves(blocks, world, position, boundingBox));
 		pos.setOffset(Direction.UP);
-		tryPlaceLeaves(blocks, world, pos, this.getLeaves(), boundingBox);
+		tryPlaceLeaves(blocks, world, pos, boundingBox);
 	}
 
 	@Override
