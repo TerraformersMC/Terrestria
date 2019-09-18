@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.Trunk;
 import com.terraformersmc.terrestria.feature.trees.templates.SmallLogTree;
@@ -58,7 +59,7 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 		} else {
 			for (int i = 0; i < length; i++) {
 				if (!isAir(world, pos)) {
-					break;
+					return;
 				}
 				if (i == 0) {
 					setBlockStateAndUpdate(blocks, world, pos, this.getLog(), direction, boundingBox);
@@ -67,6 +68,8 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 				}
 				pos.setOffset(Direction.UP);
 			}
+			//Place the leaves on the end of the branches
+			tryPlaceLeaves(blocks, world, pos.setOffset(Direction.DOWN), this.getLeaves(), boundingBox);
 		}
 	}
 
@@ -77,7 +80,7 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 		Direction armDir = randomHorizontalDirection(random);
 		for (int i = 0; i < length; i++) {
 			if (!isAir(world, pos)) {
-				break;
+				return;
 			}
 			if (i == 0) {
 				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), direction, boundingBox);
@@ -92,6 +95,16 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 			}
 			pos.setOffset(Direction.UP);
 		}
+		//Place the leaves on the end of the branches
+		placeLeaves(blocks, world, pos.setOffset(Direction.DOWN, 2), boundingBox);
+	}
+
+	private void placeLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+		tryPlaceLeaves(blocks, world, pos, this.getLeaves(), boundingBox);
+		pos.setOffset(Direction.UP);
+		Shapes.circle(new BlockPos.Mutable(pos.toImmutable()), 1.0, position -> tryPlaceLeaves(blocks, world, position, this.getLeaves(), boundingBox));
+		pos.setOffset(Direction.UP);
+		tryPlaceLeaves(blocks, world, pos, this.getLeaves(), boundingBox);
 	}
 
 	@Override
@@ -118,6 +131,7 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 			}
 			pos.setOffset(Direction.UP);
 		}
+		placeLeaves(blocks, world, pos.setOffset(Direction.DOWN, 2), boundingBox);
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
