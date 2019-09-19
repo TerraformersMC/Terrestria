@@ -4,7 +4,6 @@ import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -16,7 +15,6 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 
@@ -55,16 +53,18 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	}
 
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
-
-		boolean leaves = world.testBlockState(pos, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
-		Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
-		Predicate<BlockState> leafTester = tested -> (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
-
-		if (world.testBlockState(pos, leafTester)) {
+		if (world.testBlockState(pos, BlockState::isAir)) {
 			setBlockState(blocks, world, pos, this.leaves, boundingBox);
 		} else {
-			if (world.testBlockState(pos, tester)) {
-				setBlockState(blocks, world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, leaves), boundingBox);
+			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
+				setBlockState(blocks, world, pos, this.getLog()
+					.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
+					.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
+					.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
+					.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
+					.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
+					.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)))
+					.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
 			}
 		}
 	}
