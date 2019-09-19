@@ -3,9 +3,7 @@ package com.terraformersmc.terrestria.feature.trees.templates;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
@@ -46,11 +44,13 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	}
 
 	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(Direction.DOWN));
+		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
 		if (getOriginalState(world, pos) != null) {
+			//Fix the previous block
 			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getStateFromDirection(direction), true), boundingBox);
 		}
 		pos.setOffset(direction);
+		//Place a new block and connect it to the previous block
 		setBlockState(blocks, world, pos, log.with(getStateFromDirection(direction.getOpposite()), true), boundingBox);
 	}
 
@@ -75,31 +75,13 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 			return null;
 		}
 
-		BlockState blockStateBuidler = this.getLog();
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.NORTH))) {
-			blockStateBuidler.with(BareSmallLogBlock.NORTH, true);
-		}
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.SOUTH))) {
-			blockStateBuidler.with(BareSmallLogBlock.SOUTH, true);
-		}
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.EAST))) {
-			blockStateBuidler.with(BareSmallLogBlock.EAST, true);
-		}
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.WEST))) {
-			blockStateBuidler.with(BareSmallLogBlock.WEST, true);
-		}
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.UP))) {
-			blockStateBuidler.with(BareSmallLogBlock.UP, true);
-		}
-		if (world.testBlockState(pos, direction -> direction.get(BareSmallLogBlock.DOWN))) {
-			blockStateBuidler.with(BareSmallLogBlock.DOWN, true);
-		}
-		if (this.getLog().getBlock() instanceof SmallLogBlock) {
-			if (world.testBlockState(pos, leaves -> leaves.get(SmallLogBlock.HAS_LEAVES))) {
-				blockStateBuidler.with(SmallLogBlock.HAS_LEAVES, true);
-			}
-		}
-		return blockStateBuidler;
+		return this.getLog()
+			.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
+			.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
+			.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
+			.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
+			.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
+			.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)));
 	}
 
 	protected static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
