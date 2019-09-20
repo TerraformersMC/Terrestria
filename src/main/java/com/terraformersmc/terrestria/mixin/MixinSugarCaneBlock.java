@@ -22,21 +22,17 @@ import java.util.Iterator;
 public class MixinSugarCaneBlock {
 	@Inject(method = "canPlaceAt", at = @At("HEAD"), cancellable = true)
 	private void canPlaceAt(BlockState state, ViewableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
-		Block block = world.getBlockState(pos.down()).getBlock();
-		if (block == state.getBlock()) {
-			info.setReturnValue(true);
-		} else {
-			if (block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_SAND || block == TerrestriaBlocks.BASALT_PODZOL) {
-				BlockPos downPos = pos.down();
-				Iterator iterator = Direction.Type.HORIZONTAL.iterator();
+		BlockPos downPos = pos.down();
+		Block block = world.getBlockState(downPos).getBlock();
 
-				while(iterator.hasNext()) {
-					Direction direction = (Direction)iterator.next();
-					BlockState downState = world.getBlockState(downPos.offset(direction));
-					FluidState fluidState = world.getFluidState(downPos.offset(direction));
-					if (fluidState.matches(FluidTags.WATER) || downState.getBlock() == Blocks.FROSTED_ICE) {
-						info.setReturnValue(true);
-					}
+		if (block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_SAND || block == TerrestriaBlocks.BASALT_PODZOL) {
+
+			for(Direction direction: Direction.Type.HORIZONTAL) {
+				BlockState candidateState = world.getBlockState(downPos.offset(direction));
+				FluidState fluidState = world.getFluidState(downPos.offset(direction));
+
+				if (fluidState.matches(FluidTags.WATER) || candidateState.getBlock() == Blocks.FROSTED_ICE) {
+					info.setReturnValue(true);
 				}
 			}
 		}
