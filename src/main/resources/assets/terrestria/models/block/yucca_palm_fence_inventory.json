@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_inventory",
+  "textures": {
+    "texture": "terrestria:block/yucca_palm_planks"
+  }
+}

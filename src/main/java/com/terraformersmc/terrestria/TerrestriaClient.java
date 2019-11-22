@@ -21,7 +21,8 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves,
 				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES,
 				TerrestriaBlocks.REDWOOD.leaves,
-				TerrestriaBlocks.HEMLOCK.leaves
+				TerrestriaBlocks.HEMLOCK.leaves,
+				TerrestriaBlocks.SMALL_OAK_LOG
 		);
 
 		ColorProviderRegistry.BLOCK.register(

@@ -1,14 +1,13 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
-import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
-import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
-import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terraform.feature.FallenLogFeature;
-import com.terraformersmc.terrestria.feature.trees.RedwoodTreeFeatureMega;
+import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.*;
+import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
+import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
@@ -22,6 +21,7 @@ import net.minecraft.world.gen.feature.*;
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaFeatures {
+	public static BryceTreeFeature BRYCE_TREE;
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
 	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
@@ -40,6 +40,9 @@ public class TerrestriaFeatures {
 	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
+	public static YuccaPalmTreeFeature YUCCA_PALM_TREE;
+
+	public static SaguaroCactusFeature SAGUARO_CACTUS;
 
 	public static CattailFeature CATTAIL;
 	public static FallenLogFeature FALLEN_REDWOOD_LOG;
@@ -49,6 +52,10 @@ public class TerrestriaFeatures {
 	public static StructurePieceType VOLCANO_PIECE;
 
 	public static void init() {
+		BRYCE_TREE = register("bryce_tree",
+				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
+		);
+
 		REDWOOD_TREE = register("redwood_tree",
 				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
 		);
@@ -156,6 +163,14 @@ public class TerrestriaFeatures {
 				new RubberTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RUBBER.getBasicDefinition())
 		);
 
+		SAGUARO_CACTUS = register("saguaro_cactus",
+				new SaguaroCactusFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
+		);
+
+		YUCCA_PALM_TREE = register("yucca_palm",
+				new YuccaPalmTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+		);
+
 		CATTAIL = register("cattail",
 				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
 		);
@@ -172,6 +187,7 @@ public class TerrestriaFeatures {
 				new VolcanoStructureFeature(DefaultFeatureConfig::deserialize)
 		);
 
+		// TODO test and change this to volcano to be standard case with other features
 		Feature.STRUCTURES.put("Volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);

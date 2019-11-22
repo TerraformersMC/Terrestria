@@ -1,0 +1,92 @@
+{
+  "multipart": [
+	{
+      "when": { "up": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch"
+      }
+    },
+	{
+      "when": { "down": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "true"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log_branch",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log"
+      }
+    },
+	{
+      "when": { "down": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "false"},
+      "apply": {
+        "model": "terrestria:block/saguaro_cactus_log",
+		"x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

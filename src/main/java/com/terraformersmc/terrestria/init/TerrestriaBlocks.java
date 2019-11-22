@@ -1,10 +1,11 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
+import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -29,6 +30,11 @@ public class TerrestriaBlocks {
 	public static WoodBlocks JAPANESE_MAPLE;
 	public static WoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
+	public static WoodBlocks YUCCA_PALM;
+
+	public static SmallLogBlock SMALL_OAK_LOG;
+	public static SmallLogBlock STRIPPED_SMALL_OAK_LOG;
+	public static BareSmallLogBlock SAGUARO_CACTUS;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
@@ -47,6 +53,7 @@ public class TerrestriaBlocks {
 	public static QuarterLogBlock STRIPPED_CYPRESS_QUARTER_LOG;
 	public static QuarterLogBlock STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
+	public static TerraformSaplingBlock BRYCE_SAPLING;
 	public static TerraformSaplingBlock REDWOOD_SAPLING;
 	public static TerraformSaplingBlock HEMLOCK_SAPLING;
 	public static TerraformSaplingBlock RUBBER_SAPLING;
@@ -58,6 +65,8 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
+	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
+	public static TerraformSaplingBlock YUCCA_PALM_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
@@ -83,6 +92,15 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
 	public static FlowerPotBlock POTTED_MONSTERAS;
 
+	// Desert Plants
+	public static PlantBlock TINY_CACTUS;
+	public static PlantBlock AGAVE;
+	public static PlantBlock ALOE_VERA;
+	public static PlantBlock DEAD_GRASS;
+	public static FlowerPotBlock POTTED_TINY_CACTUS;
+	public static FlowerPotBlock POTTED_AGAVE;
+	public static FlowerPotBlock POTTED_ALOE_VERA;
+
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
 
@@ -94,6 +112,14 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
+		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, flammable, WoodBlocks.LogSize.SMALL);
+
+		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, Block.Settings.copy(Blocks.OAK_LOG)));
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, Block.Settings.copy(Blocks.STRIPPED_OAK_LOG)));
+		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, Block.Settings.copy(Blocks.CACTUS)));
+
+		flammable.add(SMALL_OAK_LOG, 5, 5);
+		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
@@ -123,6 +149,12 @@ public class TerrestriaBlocks {
 		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerStrippedQuarterLog(flammable);
 
 		// Saplings
+
+		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new TerraformSaplingBlock(
+				new TerraformSaplingGenerator(
+					() -> TerrestriaFeatures.BRYCE_TREE.sapling()
+				)
+		));
 
 		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new TerraformSaplingBlock(
 				new TerraformLargeSaplingGenerator(
@@ -186,6 +218,16 @@ public class TerrestriaBlocks {
 				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE.sapling())
 		));
 
+		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformDesertSaplingBlock(
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
+		));
+
+		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new TerraformSaplingBlock(
+			new TerraformSaplingGenerator(
+				() -> TerrestriaFeatures.YUCCA_PALM_TREE.sapling()
+			)
+		));
+
 		// Volcanic Island Blocks
 
 		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
@@ -212,5 +254,13 @@ public class TerrestriaBlocks {
 		POTTED_RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("potted_rainbow_eucalyptus_sapling", new FlowerPotBlock(RAINBOW_EUCALYPTUS_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_SAKURA_SAPLING = TerrestriaRegistry.register("potted_sakura_sapling", new FlowerPotBlock(SAKURA_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
 		POTTED_JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("potted_jungle_palm_sapling", new FlowerPotBlock(JUNGLE_PALM_SAPLING, Block.Settings.copy(Blocks.POTTED_POPPY)));
+
+		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new TerraformDesertPlantBlock(Block.Settings.copy(Blocks.POPPY)));
+		AGAVE = TerrestriaRegistry.register("agave", new TerraformDesertPlantBlock(Block.Settings.copy(Blocks.POPPY)));
+		ALOE_VERA = TerrestriaRegistry.register("aloe_vera", new TerraformDesertPlantBlock(Block.Settings.copy(Blocks.POPPY)));
+		DEAD_GRASS = TerrestriaRegistry.register("dead_grass", new TerraformDesertPlantBlock(Block.Settings.copy(Blocks.POPPY)));
+		POTTED_TINY_CACTUS = TerrestriaRegistry.register("potted_tiny_cactus", new FlowerPotBlock(TINY_CACTUS, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_AGAVE = TerrestriaRegistry.register("potted_agave", new FlowerPotBlock(AGAVE, Block.Settings.copy(Blocks.POTTED_POPPY)));
+		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, Block.Settings.copy(Blocks.POTTED_POPPY)));
 	}
 }

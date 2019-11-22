@@ -21,6 +21,7 @@ public class TerrestriaEntities {
 	public static EntityType<TerraformBoatEntity> JAPANESE_MAPLE_BOAT;
 	public static EntityType<TerraformBoatEntity> RAINBOW_EUCALYPTUS_BOAT;
 	public static EntityType<TerraformBoatEntity> SAKURA_BOAT;
+	public static EntityType<TerraformBoatEntity> YUCCA_PALM_BOAT;
 
 	public static void init() {
 		REDWOOD_BOAT = registerBoat("redwood", TerrestriaItems.REDWOOD, BoatEntity.Type.DARK_OAK);
@@ -31,6 +32,7 @@ public class TerrestriaEntities {
 		JAPANESE_MAPLE_BOAT = registerBoat("japanese_maple", TerrestriaItems.JAPANESE_MAPLE, BoatEntity.Type.ACACIA);
 		RAINBOW_EUCALYPTUS_BOAT = registerBoat("rainbow_eucalyptus", TerrestriaItems.RAINBOW_EUCALYPTUS, BoatEntity.Type.JUNGLE);
 		SAKURA_BOAT = registerBoat("sakura", TerrestriaItems.SAKURA, BoatEntity.Type.DARK_OAK);
+		YUCCA_PALM_BOAT = registerBoat("yucca_palm", TerrestriaItems.YUCCA_PALM, BoatEntity.Type.BIRCH);
 	}
 
 	private static EntityType<TerraformBoatEntity> registerBoat(String name, WoodItems wood, BoatEntity.Type vanilla) {
