@@ -69,7 +69,7 @@ public class YuccaPalmTreeFeature extends SmallLogTree implements Trunk, Branche
 			}
 			pos.setOffset(Direction.UP);
 		}
-		//Place the leaves on the end of the branches
+		// Place the leaves on the end of the branches
 		tryPlaceLeaves(blocks, world, pos.setOffset(Direction.DOWN), boundingBox);
 	}
 

@@ -27,7 +27,7 @@ public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branche
 	protected boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
 		int height = rand.nextInt(2) + 4;
 
-		//If the tree can pass the max build height
+		// If the tree can pass the max build height
 		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
@@ -74,11 +74,11 @@ public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branche
 				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
 			}
 
-			//Always place an arm half way up ish
+			// Always place an arm half way up ish
 			if (i == ((int) height / 2) - 1) {
 				placeBranch(blocks, world, new BlockPos.Mutable(pos), random.nextInt(1) + 2, armDir, boundingBox);
 			}
-			//Half of the time place a second arm one block higher in a different direction
+			// Half of the time place a second arm one block higher in a different direction
 			if (i == ((int) height / 2)) {
 				if (random.nextBoolean()) {
 					placeBranch(blocks, world, new BlockPos.Mutable(pos), random.nextInt(1) + 2, randomHorizontalDirectionAwayFrom(random, armDir), boundingBox);

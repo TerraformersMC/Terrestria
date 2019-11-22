@@ -48,7 +48,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
 		}
 		pos.setOffset(direction);
-		//Place a new block and connect it to the previous block
+		// Place a new block and connect it to the previous block
 		setBlockState(blocks, world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), boundingBox);
 	}
 
