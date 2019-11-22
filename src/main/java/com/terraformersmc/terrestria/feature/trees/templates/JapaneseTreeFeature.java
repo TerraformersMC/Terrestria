@@ -5,7 +5,7 @@ import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.GroundClutter;
-import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
+import com.terraformersmc.terrestria.feature.trees.components.CorrectableStates;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
@@ -17,7 +17,7 @@ import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import java.util.*;
 import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements GroundClutter, Branches, SmallLogs {
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements GroundClutter, Branches, CorrectableStates {
 	protected TreeDefinition.Basic tree;
 
 	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
