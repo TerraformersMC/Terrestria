@@ -44,7 +44,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
 		if (getOriginalState(world, pos) != null) {
-			//Fix the previous block
+			// Fix the previous block
 			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
 		}
 		pos.setOffset(direction);
