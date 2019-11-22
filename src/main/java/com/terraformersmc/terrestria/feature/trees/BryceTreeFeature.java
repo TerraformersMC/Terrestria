@@ -24,8 +24,8 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 
 	ArrayList<BlockPos> leafOrigins = new ArrayList<>();
 
-	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1, log, leaves);
+	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbor, log, leaves);
 	}
 
 	public BryceTreeFeature sapling() {

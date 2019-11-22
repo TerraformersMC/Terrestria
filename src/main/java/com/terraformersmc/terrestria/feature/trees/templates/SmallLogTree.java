@@ -21,8 +21,8 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private BlockState log;
 	private BlockState leaves;
 
-	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1);
+	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbor);
 
 		this.log = log;
 		this.leaves = leaves;

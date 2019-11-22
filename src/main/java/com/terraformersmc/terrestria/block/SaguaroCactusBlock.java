@@ -16,7 +16,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		super(stripped, settings);
 	}
 
-	public void onEntityCollision(BlockState blockState_1, World world_1, BlockPos blockPos_1, Entity entity_1) {
-		entity_1.damage(DamageSource.CACTUS, 1.0F);
+	public void onEntityCollision(BlockState blockState, World world, BlockPos pos, Entity entity) {
+		entity.damage(DamageSource.CACTUS, 1.0F);
 	}
 }
