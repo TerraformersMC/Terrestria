@@ -57,13 +57,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 			setBlockState(blocks, world, pos, this.leaves, boundingBox);
 		} else {
 			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-				setBlockState(blocks, world, pos, this.getLog()
-					.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
-					.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
-					.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
-					.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
-					.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
-					.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)))
+				setBlockState(blocks, world, pos, getOriginalState(world, pos)
 					.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
 			}
 		}
