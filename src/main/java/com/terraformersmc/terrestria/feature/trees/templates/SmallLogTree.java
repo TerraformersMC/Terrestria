@@ -45,11 +45,11 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
 		if (getOriginalState(world, pos) != null) {
 			//Fix the previous block
-			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getStateFromDirection(direction), true), boundingBox);
+			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
 		}
 		pos.setOffset(direction);
 		//Place a new block and connect it to the previous block
-		setBlockState(blocks, world, pos, log.with(getStateFromDirection(direction.getOpposite()), true), boundingBox);
+		setBlockState(blocks, world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), boundingBox);
 	}
 
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
@@ -103,7 +103,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return Direction.NORTH;
 	}
 
-	protected BooleanProperty getStateFromDirection(Direction direction) {
+	protected BooleanProperty getPropertyFromDirection(Direction direction) {
 		switch (direction) {
 			case SOUTH:
 				return BareSmallLogBlock.SOUTH;

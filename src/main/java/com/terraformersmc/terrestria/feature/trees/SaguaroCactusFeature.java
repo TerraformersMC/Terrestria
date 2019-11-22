@@ -19,8 +19,8 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branches {
-	public SaguaroCactusFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1, log, leaves);
+	public SaguaroCactusFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbors, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbors, log, leaves);
 	}
 
 	@Override
