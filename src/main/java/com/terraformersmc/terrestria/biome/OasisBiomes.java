@@ -35,16 +35,18 @@ public class OasisBiomes {
 
 		TerrestriaBiomes.LUSH_DESERT = TerrestriaBiomes.register("lush_desert", template.builder()
 			.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
-			.addDefaultFeature(DESERT_DEAD_BUSHES)
 			.depth(0.4F)
 			.scale(0.05F)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
+			.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
+			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
+			.addRareTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.sapling(), 1)
 			.build()
 		);
 
 		TerrestriaBiomes.OASIS = TerrestriaBiomes.register("oasis", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OASIS_CONFIG)
-			.depth(0.0F)
+			.depth(-0.2F)
 			.scale(0.07F)
 			.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE, 2)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
