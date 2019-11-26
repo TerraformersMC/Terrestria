@@ -6,9 +6,13 @@
     "MixinAbstractTreeFeature",
     "MixinAnimalEntity",
     "MixinBlock",
+    "MixinEatGrassGoal",
     "MixinFluidBlock",
-    "MixinPlantBlock",
     "PredicateMixinEaseBiomeEdgeLayer"
+    "MixinMegaPineTreeFeature",
+    "MixinMushroomPlantBlock",
+    "MixinPlantBlock",
+    "MixinSugarCaneBlock"
   ],
   "injectors": {
     "defaultRequire": 1

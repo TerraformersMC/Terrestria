@@ -22,10 +22,10 @@ import java.util.function.Function;
 
 public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoots {
 
-	ArrayList<BlockPos> leafOrigins = new ArrayList<>();
+	private ArrayList<BlockPos> leafOrigins = new ArrayList<>();
 
-	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1, log, leaves);
+	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbor, log, leaves);
 	}
 
 	public BryceTreeFeature sapling() {
@@ -38,7 +38,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		int height = rand.nextInt(3) + 7; 			// Total tree height
 		double maxRadius = 1.5 + 1.5 * rand.nextDouble(); 	// Maximum leaf/branch radius.
 
-		//If the tree can pass the max build height
+		// If the tree can pass the max build height
 		if (origin.getY() + height + 1 > 256 || origin.getY() < 1) {
 			return false;
 		}
@@ -52,7 +52,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 			return false;
 		}
 
-		//Grows a trunk with roots and branches
+		// Grows a trunk with roots and branches
 		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, randomHorizontalDirection(rand), boundingBox);
 		placeLeaves(blocks, world, boundingBox);
 		return true;
@@ -71,19 +71,19 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
 			}
 
-			//Randomly change direction
+			// Randomly change direction
 			if (rand.nextInt(4) == 0) {
 				randDir = randomHorizontalDirectionAwayFrom(rand, direction.getOpposite());
 				pos.setOffset(randDir);
 				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), randDir, boundingBox);
 			}
 
-			//Randomly generate a branch if the height is greater than half
+			// Randomly generate a branch if the height is greater than half
 			if (i > 4 && rand.nextInt(2) == 1) {
 				placeBranch(blocks, world, new BlockPos.Mutable(pos.toImmutable()), 2 + rand.nextInt(3), randomHorizontalDirection(rand), boundingBox);
 			}
 
-			//Randomly generate roots if the height is less than 4 blocks above the origin
+			// Randomly generate roots if the height is less than 4 blocks above the origin
 			if (i < 4 && rand.nextInt(3) < 3) {
 				placeRoot(blocks, world, new BlockPos.Mutable(pos.toImmutable()), rand.nextInt(5), boundingBox);
 			}
@@ -122,7 +122,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		Direction originalDirection = randomHorizontalDirection(random);
 		Direction direction = null;
 		for (int i = 0; i < rootLength; i++) {
-			//Place block and block down and to the side
+			// Place block and block down and to the side
 			direction = randomHorizontalDirectionAwayFrom(random, originalDirection.getOpposite());
 			pos.setOffset(direction);
 			if (isAir(world, pos)) {

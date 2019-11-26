@@ -21,8 +21,8 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private BlockState log;
 	private BlockState leaves;
 
-	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1);
+	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbor);
 
 		this.log = log;
 		this.leaves = leaves;
@@ -44,12 +44,12 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
 		if (getOriginalState(world, pos) != null) {
-			//Fix the previous block
-			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getStateFromDirection(direction), true), boundingBox);
+			// Fix the previous block
+			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
 		}
 		pos.setOffset(direction);
-		//Place a new block and connect it to the previous block
-		setBlockState(blocks, world, pos, log.with(getStateFromDirection(direction.getOpposite()), true), boundingBox);
+		// Place a new block and connect it to the previous block
+		setBlockState(blocks, world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), boundingBox);
 	}
 
 	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
@@ -57,13 +57,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 			setBlockState(blocks, world, pos, this.leaves, boundingBox);
 		} else {
 			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-				setBlockState(blocks, world, pos, this.getLog()
-					.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
-					.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
-					.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
-					.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
-					.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
-					.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)))
+				setBlockState(blocks, world, pos, getOriginalState(world, pos)
 					.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
 			}
 		}
@@ -103,7 +97,7 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return Direction.NORTH;
 	}
 
-	protected BooleanProperty getStateFromDirection(Direction direction) {
+	protected BooleanProperty getPropertyFromDirection(Direction direction) {
 		switch (direction) {
 			case SOUTH:
 				return BareSmallLogBlock.SOUTH;
