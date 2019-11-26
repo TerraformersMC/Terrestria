@@ -1,13 +1,14 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
 import com.mojang.datafixers.Dynamic;
+import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
@@ -20,59 +21,11 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 	private BlockState log;
 	private BlockState leaves;
 
-	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function_1, boolean boolean_1, BlockState log, BlockState leaves) {
-		super(function_1, boolean_1);
+	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer, updateNeighbor);
 
 		this.log = log;
 		this.leaves = leaves;
-	}
-
-	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
-		setBlockState(blocks, world, pos, state, boundingBox);
-		correctBlockState(blocks, world, pos, direction, state, boundingBox);
-	}
-
-	private void correctBlockState(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, Direction direction, BlockState state, MutableIntBoundingBox boundingBox) {
-		World world1 = (World) world;
-		BlockPos pos = origin.toImmutable();
-		switch (direction) {
-			case SOUTH:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.NORTH, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.SOUTH, true), boundingBox);
-				}
-				break;
-			case NORTH:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.SOUTH, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.NORTH, true), boundingBox);
-				}
-					break;
-			case WEST:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.EAST, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.WEST, true), boundingBox);
-				}
-				break;
-			case EAST:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.WEST, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.EAST, true), boundingBox);
-				}
-				break;
-			case DOWN:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.UP, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.DOWN, true), boundingBox);
-				}
-				break;
-			case UP:
-				setBlockState(blocks, world, pos, state.with(SmallLogBlock.DOWN, true), boundingBox);
-				if (world1.getBlockState(pos.offset(direction.getOpposite())).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos.offset(direction.getOpposite()), world1.getBlockState(origin.offset(direction.getOpposite())).with(SmallLogBlock.UP, true), boundingBox);
-				}
-				break;
-		}
 	}
 
 	@Override
@@ -86,6 +39,43 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 
 	public BlockState getLeaves() {
 		return leaves;
+	}
+
+	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
+		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
+		if (getOriginalState(world, pos) != null) {
+			// Fix the previous block
+			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
+		}
+		pos.setOffset(direction);
+		// Place a new block and connect it to the previous block
+		setBlockState(blocks, world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), boundingBox);
+	}
+
+	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+		if (world.testBlockState(pos, BlockState::isAir)) {
+			setBlockState(blocks, world, pos, this.leaves, boundingBox);
+		} else {
+			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
+				setBlockState(blocks, world, pos, getOriginalState(world, pos)
+					.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
+			}
+		}
+	}
+
+	protected BlockState getOriginalState(ModifiableTestableWorld world, BlockPos.Mutable pos) {
+
+		if (!world.testBlockState(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
+			return null;
+		}
+
+		return this.getLog()
+			.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
+			.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
+			.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
+			.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
+			.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
+			.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)));
 	}
 
 	protected static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
@@ -107,14 +97,21 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return Direction.NORTH;
 	}
 
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockState blockState, MutableIntBoundingBox boundingBox) {
-		BlockState originalBlockState = ((World) world).getBlockState(pos);
-		if (originalBlockState.getBlock() instanceof SmallLogBlock) {
-			setBlockState(blocks, world, pos, originalBlockState.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
-		} else {
-			if (isAirOrLeaves(world, pos)) {
-				setBlockState(blocks, world, pos, blockState, boundingBox);
-			}
+	protected BooleanProperty getPropertyFromDirection(Direction direction) {
+		switch (direction) {
+			case SOUTH:
+				return BareSmallLogBlock.SOUTH;
+			case NORTH:
+				return BareSmallLogBlock.NORTH;
+			case WEST:
+				return BareSmallLogBlock.WEST;
+			case EAST:
+				return BareSmallLogBlock.EAST;
+			case DOWN:
+				return BareSmallLogBlock.DOWN;
+			case UP:
+				return BareSmallLogBlock.UP;
 		}
+		return null;
 	}
 }

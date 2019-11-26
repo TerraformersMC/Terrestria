@@ -1,0 +1,7 @@
+{
+	"parent": "terraform:block/small_log",
+	"textures": {
+		"particle": "terrestria:block/yucca_palm_log_section",
+		"side": "terrestria:block/yucca_palm_log"
+	}
+}

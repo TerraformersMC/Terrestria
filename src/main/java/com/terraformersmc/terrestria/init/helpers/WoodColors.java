@@ -11,6 +11,7 @@ public class WoodColors {
 	public static final WoodColors JAPANESE_MAPLE;
 	public static final WoodColors RAINBOW_EUCALYPTUS;
 	public static final WoodColors SAKURA;
+	public static final WoodColors YUCCA_PALM;
 
 	static {
 		REDWOOD = new WoodColors();
@@ -47,6 +48,11 @@ public class WoodColors {
 		SAKURA.bark = MaterialColor.SPRUCE;
 		SAKURA.planks = MaterialColor.BROWN;
 		SAKURA.leaves = MaterialColor.PINK;
+
+		YUCCA_PALM = new WoodColors();
+		YUCCA_PALM.bark = MaterialColor.GRAY;
+		YUCCA_PALM.planks = MaterialColor.YELLOW_TERRACOTTA;
+		YUCCA_PALM.leaves = MaterialColor.LIGHT_GRAY;
 	}
 
 	public MaterialColor bark;

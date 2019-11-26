@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
+import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -14,6 +15,7 @@ import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.JungleTreeFeature;
 
@@ -32,7 +34,7 @@ public class TerrestriaBlocks {
 
 	public static SmallLogBlock SMALL_OAK_LOG;
 	public static SmallLogBlock STRIPPED_SMALL_OAK_LOG;
-	public static SmallLogBlock SAGUARO_CACTUS;
+	public static BareSmallLogBlock SAGUARO_CACTUS;
 
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
@@ -63,6 +65,8 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
 	public static TerraformSaplingBlock SAKURA_SAPLING;
 	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
+	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
+	public static TerraformSaplingBlock YUCCA_PALM_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
@@ -81,6 +85,7 @@ public class TerrestriaBlocks {
 	public static Block BASALT_DIRT;
 	public static Block BASALT_GRASS_BLOCK;
 	public static Block BASALT_GRASS_PATH;
+	public static Block BASALT_PODZOL;
 	public static StoneBlocks BASALT;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
@@ -107,12 +112,11 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
 		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
-		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.RUBBER, flammable, WoodBlocks.LogSize.SMALL);
+		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, flammable, WoodBlocks.LogSize.SMALL);
 
-		// TODO: Leaves for the Small Oak Log
 		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, Block.Settings.copy(Blocks.OAK_LOG)));
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, Block.Settings.copy(Blocks.STRIPPED_OAK_LOG)));
-		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SmallLogBlock(Blocks.CACTUS, null, Block.Settings.copy(Blocks.CACTUS)));
+		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, Block.Settings.copy(Blocks.CACTUS)));
 
 		flammable.add(SMALL_OAK_LOG, 5, 5);
 		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
@@ -125,7 +129,7 @@ public class TerrestriaBlocks {
 
 		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
-		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(Block.Settings.copy(SAKURA.leaves).noCollision()));
+		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).materialColor(MaterialColor.FOLIAGE).build()));
 
 		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
 		flammable.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
@@ -214,12 +218,23 @@ public class TerrestriaBlocks {
 				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE.sapling())
 		));
 
+		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformDesertSaplingBlock(
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
+		));
+
+		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new TerraformSaplingBlock(
+			new TerraformSaplingGenerator(
+				() -> TerrestriaFeatures.YUCCA_PALM_TREE.sapling()
+			)
+		));
+
 		// Volcanic Island Blocks
 
 		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copy(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copy(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		BASALT_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copy(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, Block.Settings.copy(Blocks.POPPY)));

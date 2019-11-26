@@ -1,7 +1,0 @@
-{
-  "parent": "terrestria:block/small_log_flat",
-  "textures": {
-    "particle": "terrestria:block/yucca_palm_log",
-    "all": "terrestria:block/yucca_palm_log"
-  }
-}

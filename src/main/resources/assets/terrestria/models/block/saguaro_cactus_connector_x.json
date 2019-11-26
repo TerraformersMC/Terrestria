@@ -1,8 +1,0 @@
-{
-  "parent": "terrestria:block/small_log_connector_x",
-  "textures": {
-    "particle": "terrestria:block/saguaro_cactus",
-    "all": "terrestria:block/saguaro_cactus_connector",
-    "top": "terrestria:block/saguaro_cactus_top"
-  }
-}

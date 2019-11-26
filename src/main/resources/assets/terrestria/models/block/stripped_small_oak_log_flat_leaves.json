@@ -1,8 +1,0 @@
-{
-  "parent": "terrestria:block/small_oak_log_flat_leaves",
-  "textures": {
-    "particle": "terrestria:block/stripped_small_oak_log",
-    "all": "terrestria:block/stripped_small_oak_log",
-    "leaves": "minecraft:block/oak_leaves"
-  }
-}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "terrestria:sakura_leaves"
+    }
+  },
+  "result": {
+    "item": "terrestria:sakura_leaf_pile",
+    "count": 16
+  }
+}
