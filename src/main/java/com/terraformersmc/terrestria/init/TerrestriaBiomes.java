@@ -51,7 +51,7 @@ public class TerrestriaBiomes {
 		DenseWoodlandsBiomes.register();
 		HemlockRainforestBiomes.register();
 		LushRedwoodForestBiomes.register();
-		OasisBiomes.register();
+		LushDesertBiomes.register();
 		RainbowRainforestBiomes.register();
 		RedwoodForestBiomes.register();
 		SakuraForestBiomes.register();

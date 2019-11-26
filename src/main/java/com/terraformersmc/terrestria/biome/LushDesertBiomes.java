@@ -15,7 +15,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
-public class OasisBiomes {
+public class LushDesertBiomes {
 	public static void register() {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 			.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
