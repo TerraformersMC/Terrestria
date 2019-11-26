@@ -31,7 +31,7 @@ public class TerrestriaGeneration {
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config);
-		addBiomeVariant(Biomes.DESERT, LUSH_DESERT, 0.10, "lush_desert", config);
+		addContinentalBiome(LUSH_DESERT, OverworldClimate.DRY, 0.5, "lush_desert", config);
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
@@ -64,8 +64,8 @@ public class TerrestriaGeneration {
 			addHillsBiome(JAPANESE_MAPLE_FOREST, WOODED_JAPANESE_MAPLE_HILLS, 1.0);
 		}
 
-		if (LUSH_DESERT != null) {
-			addHillsBiome(LUSH_DESERT, OASIS, 1.0);
+		if(LUSH_DESERT != null) {
+			OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
 		}
 
 		if(LUSH_REDWOOD_FOREST != null) {

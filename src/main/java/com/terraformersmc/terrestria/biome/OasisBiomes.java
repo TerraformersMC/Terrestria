@@ -40,7 +40,7 @@ public class OasisBiomes {
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
 			.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-			.addRareTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.sapling(), 1)
+			.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.sapling(), 2)
 			.build()
 		);
 
