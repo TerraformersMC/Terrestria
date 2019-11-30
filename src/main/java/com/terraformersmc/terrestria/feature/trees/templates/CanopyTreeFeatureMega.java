@@ -12,7 +12,7 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -42,7 +42,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
 		// Total trunk height
 		int height = getHeight(rand);
 
@@ -128,7 +128,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		return true;
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -148,7 +148,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		}
 	}
 
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkHeight, Random rand, BlockBox boundingBox) {
 		int branches = rand.nextInt(10) + 15;
 
 		int[] offset = new int[3];
@@ -203,7 +203,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		}
 	}
 
-	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox boundingBox) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -214,7 +214,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, boundingBox);
 	}
 
-	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox boundingBox) {
 		if (rand.nextInt(5) == 0) {
 			return;
 		}

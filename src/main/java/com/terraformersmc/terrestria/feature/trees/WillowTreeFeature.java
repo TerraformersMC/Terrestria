@@ -6,7 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -30,7 +30,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
 		// Total tree height
 		int height = rand.nextInt(3) + 8;
 
@@ -70,7 +70,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 	}
 
 	// Grows the center trunk.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
 		// Grows the trunk at 80% of it's total height (so the trunk doesn't poke out)
 		for (int i = 0; i < (height * .8); i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
@@ -85,7 +85,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		});
 	}
 
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int maxRadius, MutableIntBoundingBox boundingBox) {
+	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int maxRadius, BlockBox boundingBox) {
 		// Save original origin for use in z branch
 
 		BlockPos origin = pos.toImmutable();
@@ -111,7 +111,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		pos.set(origin);
 	}
 
-	private void growDangingBit(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox, Random random) {
+	private void growDangingBit(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox, Random random) {
 		int randHolder;
 
 		// 33% chance of a dangling bit generating.
@@ -127,7 +127,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, double minRadius, MutableIntBoundingBox boundingBox, Random rand) {
+	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, double minRadius, BlockBox boundingBox, Random rand) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

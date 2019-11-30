@@ -6,7 +6,7 @@ import com.terraformersmc.terrestria.feature.trees.templates.JapaneseTreeFeature
 import net.minecraft.block.LogBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 
@@ -24,12 +24,12 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox boundingBox) {
 		setToDirt(world, origin.down());
 	}
 
 	@Override
-	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
+	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox boundingBox) {
 		for (int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
 			setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), boundingBox);
@@ -40,6 +40,6 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockBox boundingBox) {
 	}
 }

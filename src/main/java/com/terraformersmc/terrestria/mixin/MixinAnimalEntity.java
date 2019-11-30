@@ -17,7 +17,7 @@ import java.util.Random;
 public class MixinAnimalEntity {
 	@Inject(method = "method_20663", at = @At("HEAD"), cancellable = true)
 	private static void canSpawnAt(EntityType<? extends AnimalEntity> entity, IWorld world, SpawnType spawnType, BlockPos pos, Random random, CallbackInfoReturnable<Boolean> callbackInfo) {
-		if(world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK && world.getLightLevel(pos, 0) > 8) {
+		if(world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK && world.method_22335(pos, 0) > 8) {
 			callbackInfo.setReturnValue(true);
 		}
 	}

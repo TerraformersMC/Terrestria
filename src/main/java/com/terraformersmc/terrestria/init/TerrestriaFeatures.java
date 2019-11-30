@@ -37,7 +37,6 @@ public class TerrestriaFeatures {
 	public static JapaneseMapleShrubFeature JAPANESE_MAPLE_SHRUB;
 	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
 	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
-	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
 
@@ -95,10 +94,6 @@ public class TerrestriaFeatures {
 				new WillowTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.WILLOW.getBasicDefinition())
 		);
 
-		TALLER_BIRCH_TREE = register("taller_birch_tree",
-				new OakTreeFeature(DefaultFeatureConfig::deserialize, false, 8, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), false)
-		);
-
 		SAKURA_TREE = register("sakura_tree",
 				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura(
 						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
@@ -133,14 +128,6 @@ public class TerrestriaFeatures {
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
 				))
-		);
-
-		SMALL_RAINBOW_EUCALYPTUS_TREE = register("small_rainbow_eucalyptus_tree",
-				new JungleTreeFeature(DefaultFeatureConfig::deserialize, false, 5,
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState(),
-						true
-				)
 		);
 
 		TreeDefinition.Basic junglePalm = new TreeDefinition.Basic(

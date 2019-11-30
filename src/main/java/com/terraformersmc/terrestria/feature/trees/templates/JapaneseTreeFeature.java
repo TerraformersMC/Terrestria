@@ -8,7 +8,7 @@ import com.terraformersmc.terrestria.feature.trees.components.GroundClutter;
 import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -27,7 +27,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
 		// Total trunk height (8-11)
 		int height = rand.nextInt(4) + 8;
 
@@ -94,20 +94,20 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 	}
 
 	// Grows the center trunk and top leaves of the tree.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
 		for (int i = 0; i < height; i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox) {
 		if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, Random rand, BlockBox boundingBox) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

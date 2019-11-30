@@ -16,6 +16,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
 
@@ -80,7 +81,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 		int radiusBound = MathHelper.ceil(radius * 1.5);
 
-		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
+		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
 	}
 
 	public VolcanoGenerator(StructureManager manager, CompoundTag tag) {
@@ -164,7 +165,8 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, Random random, MutableIntBoundingBox boundingBox, ChunkPos chunkPos) {
+	public boolean generate(IWorld world, ChunkGenerator<?> var2, Random random, BlockBox boundingBox, ChunkPos chunkPos) {
+
 		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
@@ -263,7 +265,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				// Place the basalt column to the specified height.
 
-				int startY = world.getTop(Heightmap.Type.OCEAN_FLOOR_WG, x, z) - baseY;
+				int startY = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, new BlockPos(x, 0, z)).getY() - baseY;
 
 				for (int dY = startY; dY < columnHeight - 1; dY++) {
 					pos.set(x, baseY + dY, z);
@@ -337,6 +339,8 @@ public class VolcanoGenerator extends StructurePiece {
 				}
 			}
 		}
+
+		System.out.println("Generating!" + chunkPos + " : " + pos);
 
 		return true;
 	}

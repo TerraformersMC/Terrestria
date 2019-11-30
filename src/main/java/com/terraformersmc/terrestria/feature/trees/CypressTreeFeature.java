@@ -5,7 +5,7 @@ import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -29,7 +29,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
 		// Total tree height
 		int height = rand.nextInt(5) + 12;
 
@@ -87,14 +87,14 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	}
 
 	// Grows the center trunk.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
 		for (int i = 0; i < (height * .6); i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, BlockBox boundingBox) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

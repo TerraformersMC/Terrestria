@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -17,7 +18,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 	}
 
 	@Override
-	public void grow(World world, Random random, BlockPos centerPos, BlockState grassState) {
+	public void grow(ServerWorld world, Random random, BlockPos centerPos, BlockState grassState) {
 		BlockPos above = centerPos.up();
 
 		BlockState grass = TerrestriaBlocks.MONSTERAS.getDefaultState();
@@ -48,7 +49,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 				}
 			}
 
-			if (!world.isAir(pos)) {
+			if (!world.getBlockState(pos).isAir()) {
 				continue;
 			}
 

@@ -7,7 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -45,7 +45,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
 		// Total trunk height
 		int height = rand.nextInt(5) + 8;
 
@@ -101,7 +101,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	}
 
 	// Grows the bent trunk of the tree.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random rand, BlockBox boundingBox) {
 		for (int i = 0; i < 2; i++) {
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
 			pos.setOffset(Direction.UP);
@@ -140,13 +140,13 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		}
 	}
 
-	private void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+	private void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox) {
 		if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
 			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, BlockBox boundingBox) {
 		BlockPos center = pos.toImmutable();
 
 		if(canTreeReplace(world, pos)) {
@@ -178,7 +178,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		}
 	}
 
-	private void placeSpiral(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Direction direction, boolean invertLeafSpiral, MutableIntBoundingBox boundingBox) {
+	private void placeSpiral(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Direction direction, boolean invertLeafSpiral, BlockBox boundingBox) {
 		tryPlaceLeaves(blocks, world, pos, boundingBox);
 
 		Direction spiral = spiral(direction, invertLeafSpiral);

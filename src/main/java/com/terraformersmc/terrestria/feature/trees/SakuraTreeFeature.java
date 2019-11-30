@@ -12,7 +12,7 @@ import net.minecraft.block.LeavesBlock;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -40,7 +40,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 	}
 
 	@Override
-	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, MutableIntBoundingBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox boundingBox) {
 		int x = origin.getX();
 		int z = origin.getZ();
 
@@ -71,7 +71,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 	}
 
 	@Override
-	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
+	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox boundingBox) {
 		for (int i = 0; i < length; i++) {
 			pos.setOffset(direction);
 			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
@@ -79,7 +79,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 	}
 
 	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockBox boundingBox) {
 		for (BlockPos log : blocks) {
 			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
 
@@ -103,7 +103,7 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 	}
 
 	@Override
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox) {
 		if (world.testBlockState(pos, candidate -> candidate.getBlock() instanceof SmallLogBlock)) {
 			setBlockState(blocks, world, pos, tree.getLogLeaves(), boundingBox);
 		} else {
