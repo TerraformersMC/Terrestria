@@ -10,7 +10,8 @@
     "MixinFluidBlock",
     "MixinMegaPineTreeFeature",
     "MixinMushroomPlantBlock",
-    "MixinPlantBlock"
+    "MixinPlantBlock",
+    "MixinSugarCaneBlock"
   ],
   "injectors": {
     "defaultRequire": 1
