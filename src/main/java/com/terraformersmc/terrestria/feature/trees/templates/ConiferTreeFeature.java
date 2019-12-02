@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.feature.trees.templates;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -11,26 +12,23 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
 	private TreeDefinition.Basic tree;
 
-	public ConiferTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
+	public ConiferTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
+		super(function);
 
 		this.tree = tree;
 	}
 
-	public ConiferTreeFeature sapling() {
-		return new ConiferTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 
 		int height = getLeafHeight(rand);
 		int bareTrunkHeight = getBareTrunkHeight(rand);
@@ -51,8 +49,8 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		}
 
 		setToDirt(world, origin.down());
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
-		growLeaves(blocks, world, origin, height, bareTrunkHeight, maxLeafRadius, boundingBox);
+		growTrunk(logs, world, new BlockPos.Mutable(origin), height, box);
+		growLeaves(logs, world, origin, height, bareTrunkHeight, maxLeafRadius, box);
 
 		return true;
 	}
@@ -81,7 +79,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		return true;
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, BlockBox boundingBox) {
+	private void growLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, BlockBox box) {
 		int radius = 0;
 		int radiusTarget = 1;
 		boolean topCone = true;
@@ -102,7 +100,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
 
 					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), boundingBox);
+						PortUtil.setBlockState(logs, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(aZ + aX, 1)), box);
 					}
 				}
 			}
@@ -122,9 +120,9 @@ public class ConiferTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 		}
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
+	private void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box) {
 		for (int i = 0; i < height; i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLog(), box);
 
 			pos.setOffset(Direction.UP);
 		}

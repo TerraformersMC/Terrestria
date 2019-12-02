@@ -18,6 +18,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
@@ -28,19 +29,15 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 	private TreeDefinition.Sakura tree;
 	private boolean worldGen;
 
-	public SakuraTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Sakura tree) {
-		super(function, notify, tree);
+	public SakuraTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, boolean notify, TreeDefinition.Sakura tree) {
+		super(function, tree);
 
 		this.tree = tree;
 		this.worldGen = !notify;
 	}
 
-	public SakuraTreeFeature sapling() {
-		return new SakuraTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox box) {
 		int x = origin.getX();
 		int z = origin.getZ();
 
@@ -65,28 +62,28 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 			);
 
 			if (valid) {
-				setBlockState(blocks, world, top, tree.getLeafPile(), boundingBox);
+				PortUtil.setBlockState(logs, world, top, tree.getLeafPile(), box);
 			}
 		});
 	}
 
 	@Override
-	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox boundingBox) {
+	public void placeBranch(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox box) {
 		for (int i = 0; i < length; i++) {
 			pos.setOffset(direction);
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLog(), box);
 		}
 	}
 
 	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockBox boundingBox) {
-		for (BlockPos log : blocks) {
+	public void correctLogStates(Set<BlockPos> logs, ModifiableTestableWorld world, BlockBox box) {
+		for (BlockPos log : logs) {
 			boolean leaves = world.testBlockState(log, tested -> tested.getBlock() instanceof SmallLogBlock && tested.get(SmallLogBlock.HAS_LEAVES));
 
 			Predicate<BlockState> tester = tested -> tested.getBlock() instanceof SmallLogBlock || (!leaves && tested.getBlock() instanceof LeavesBlock) || tested.isOpaque();
 
-			setBlockState(
-					blocks,
+			PortUtil.setBlockState(
+					logs,
 					world,
 					log,
 					tree.getLog()
@@ -97,17 +94,17 @@ public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs,
 							.with(SmallLogBlock.SOUTH, world.testBlockState(log.south(), tester))
 							.with(SmallLogBlock.WEST, world.testBlockState(log.west(), tester))
 							.with(SmallLogBlock.HAS_LEAVES, leaves),
-					boundingBox
+					box
 			);
 		}
 	}
 
 	@Override
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox) {
+	protected void tryPlaceLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox box) {
 		if (world.testBlockState(pos, candidate -> candidate.getBlock() instanceof SmallLogBlock)) {
-			setBlockState(blocks, world, pos, tree.getLogLeaves(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogLeaves(), box);
 		} else {
-			super.tryPlaceLeaves(blocks, world, pos, boundingBox);
+			super.tryPlaceLeaves(logs, world, pos, box);
 		}
 	}
 }

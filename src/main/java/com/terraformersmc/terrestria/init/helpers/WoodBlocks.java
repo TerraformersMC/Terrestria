@@ -90,7 +90,7 @@ public class WoodBlocks {
 		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).materialColor(colors.planks).build()));
 		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).materialColor(colors.planks).build()));
 
-		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "textures/entity/signs/" + name + ".png");
+		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name + ".png");
 
 		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
 		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));

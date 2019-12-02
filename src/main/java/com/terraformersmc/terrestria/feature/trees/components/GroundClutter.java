@@ -8,5 +8,5 @@ import java.util.Random;
 import java.util.Set;
 
 public interface GroundClutter {
-	void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox boundingBox);
+	void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox box);
 }

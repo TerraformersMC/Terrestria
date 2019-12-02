@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.feature.trees.templates;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.GroundClutter;
 import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
@@ -12,22 +13,22 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.*;
 import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> implements GroundClutter, Branches, SmallLogs {
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements GroundClutter, Branches, SmallLogs {
 	protected TreeDefinition.Basic tree;
 
-	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
+	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
+		super(function);
 
 		this.tree = tree;
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		// Total trunk height (8-11)
 		int height = rand.nextInt(4) + 8;
 
@@ -52,17 +53,17 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 		}
 
 		// Place ground cover (leaf piles, turn grass under log to dirt, etc)
-		placeGroundCover(blocks, world, new BlockPos.Mutable(origin), maxRadius, rand, boundingBox);
+		placeGroundCover(logs, world, new BlockPos.Mutable(origin), maxRadius, rand, box);
 
 		// Place the log blocks making up the main trunk
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
+		growTrunk(logs, world, new BlockPos.Mutable(origin), height, box);
 
 		// Grow leaves and branches from the trunk
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
-		growLeaves(blocks, world, pos, height - bareTrunkHeight, maxRadius, rand, boundingBox);
+		growLeaves(logs, world, pos, height - bareTrunkHeight, maxRadius, rand, box);
 
 		// Fix up log block states if needed, such as with mini logs
-		correctLogStates(blocks, world, boundingBox);
+		correctLogStates(logs, world, box);
 
 		return true;
 	}
@@ -94,20 +95,20 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 	}
 
 	// Grows the center trunk and top leaves of the tree.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox boundingBox) {
+	private void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box) {
 		for (int i = 0; i < height; i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLog(), box);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox boundingBox) {
+	protected void tryPlaceLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, BlockBox box) {
 		if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLeaves(), box);
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, Random rand, BlockBox boundingBox) {
+	private void growLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, Random rand, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -127,10 +128,10 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 				pos.set(x, y + layer, z);
 
 				Direction direction = directions.next();
-				placeBranch(blocks, world, pos, (int) Math.ceil(innerRadius), direction, boundingBox);
+				placeBranch(logs, world, pos, (int) Math.ceil(innerRadius), direction, box);
 
 				pos.setOffset(direction);
-				tryPlaceLeaves(blocks, world, pos, boundingBox);
+				tryPlaceLeaves(logs, world, pos, box);
 			}
 
 			pos.set(x, y + layer, z);
@@ -140,7 +141,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 							return;
 						}
 
-						tryPlaceLeaves(blocks, world, pos, boundingBox);
+						tryPlaceLeaves(logs, world, pos, box);
 					}
 			);
 		}
@@ -168,12 +169,12 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<DefaultFea
 				}
 
 				pos.set(x, y + layer, z);
-				placeBranch(blocks, world, pos, (int) Math.ceil(innerRadius), direction, boundingBox);
+				placeBranch(logs, world, pos, (int) Math.ceil(innerRadius), direction, box);
 			}
 
 			pos.set(x, y + layer, z);
 			Shapes.canopyCircle(pos, radius, innerRadius,
-					(position) -> tryPlaceLeaves(blocks, world, pos, boundingBox)
+					(position) -> tryPlaceLeaves(logs, world, pos, box)
 			);
 		}
 	}

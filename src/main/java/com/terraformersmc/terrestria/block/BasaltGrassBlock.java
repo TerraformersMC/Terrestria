@@ -17,6 +17,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 		super(dirt, path, settings);
 	}
 
+	// TODO: Refactor to be like vanilla grass
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos centerPos, BlockState grassState) {
 		BlockPos above = centerPos.up();
@@ -44,7 +45,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 				);
 
 				// Check if the block is a valid block
-				if (!block.canPlaceAt(world, pos) || world.getBlockState(pos).method_21743(world, pos)) {
+				if (!block.canPlaceAt(world, pos) || world.getBlockState(pos).isFullCube(world, pos)) {
 					continue outer;
 				}
 			}

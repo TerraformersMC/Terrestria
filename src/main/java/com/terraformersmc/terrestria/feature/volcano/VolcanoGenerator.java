@@ -165,7 +165,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> var2, Random random, BlockBox boundingBox, ChunkPos chunkPos) {
+	public boolean generate(IWorld world, ChunkGenerator<?> var2, Random random, BlockBox box, ChunkPos chunkPos) {
 
 		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");

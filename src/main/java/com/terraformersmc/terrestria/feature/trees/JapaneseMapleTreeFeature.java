@@ -9,37 +9,34 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
 public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
-	public JapaneseMapleTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify, tree);
-	}
-
-	public JapaneseMapleTreeFeature sapling() {
-		return new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+	public JapaneseMapleTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
+		super(function, tree);
 	}
 
 	@Override
-	public void placeGroundCover(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox boundingBox) {
+	public void placeGroundCover(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable origin, double maxRadius, Random rand, BlockBox box) {
 		setToDirt(world, origin.down());
 	}
 
 	@Override
-	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox boundingBox) {
+	public void placeBranch(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, BlockBox box) {
 		for (int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
-			setBlockState(blocks, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLog().with(LogBlock.AXIS, direction.getAxis()), box);
 		}
 
 		pos.setOffset(direction);
-		tryPlaceLeaves(blocks, world, pos, boundingBox);
+		tryPlaceLeaves(logs, world, pos, box);
 	}
 
 	@Override
-	public void correctLogStates(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockBox boundingBox) {
+	public void correctLogStates(Set<BlockPos> logs, ModifiableTestableWorld world, BlockBox box) {
 	}
 }

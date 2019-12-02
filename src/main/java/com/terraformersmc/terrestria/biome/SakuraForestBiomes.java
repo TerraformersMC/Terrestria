@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -25,8 +26,8 @@ public class SakuraForestBiomes {
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addTreeFeature(TerrestriaFeatures.SAKURA_TREE, 6)
-				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_SHRUB, 4)
+				.addTreeFeature(TerrestriaFeatures.SAKURA_TREE.configure(TerrestriaFeatureConfigs.SAKURA), 6)
+				// TODO .addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_SHRUB.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE), 4)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);

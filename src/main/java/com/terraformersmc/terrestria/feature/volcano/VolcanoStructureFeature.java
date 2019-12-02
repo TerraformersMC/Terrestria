@@ -83,8 +83,8 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 	}
 
 	public static class VolcanoStructureStart extends StructureStart {
-		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, BlockBox boundingBox, int references, long baseSeed) {
-			super(feature, chunkX, chunkZ, boundingBox, references, baseSeed);
+		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, BlockBox box, int references, long baseSeed) {
+			super(feature, chunkX, chunkZ, box, references, baseSeed);
 		}
 
 		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {

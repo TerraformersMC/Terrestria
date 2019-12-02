@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.feature.trees.templates;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -11,26 +12,23 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class ConiferTreeFeatureNew extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
 	private TreeDefinition.Basic tree;
 
-	public ConiferTreeFeatureNew(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
+	public ConiferTreeFeatureNew(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
+		super(function);
 
 		this.tree = tree;
 	}
 
-	public ConiferTreeFeatureNew sapling() {
-		return new ConiferTreeFeatureNew(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, BlockBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		int height = getLeafHeight(rand);
 		int bareTrunkHeight = getBareTrunkHeight(rand);
 		int maxLeafRadius = getMaxLeafRadius(rand);
@@ -55,13 +53,13 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 
 		//Set the block below the trunk to dirt (because vanilla does it)
 		setToDirt(world, origin.down());
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height + bareTrunkHeight, trunkRadius, boundingBox, rand);
-		growLeaves(blocks, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, boundingBox);
+		growTrunk(logs, world, new BlockPos.Mutable(origin), height + bareTrunkHeight, trunkRadius, box, rand);
+		growLeaves(logs, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, box);
 
 		return true;
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int maxRadius, double shrinkAmmount, int layers, BlockBox boundingBox) {
+	private void growLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int maxRadius, double shrinkAmmount, int layers, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -81,7 +79,7 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 						innerRadius(maxRadius - (layer * shrinkAmmount), currentHeight, layerHeight),
 						position -> {
 							if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-								setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+								PortUtil.setBlockState(logs, world, pos, tree.getLeaves(), box);
 							}
 						});
 			}
@@ -112,9 +110,9 @@ public class ConiferTreeFeatureNew extends AbstractTreeFeature<DefaultFeatureCon
 		return x < 0 ? 0 : x;
 	}
 
-	public void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkRadius, BlockBox boundingBox, Random rand) {
+	public void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkRadius, BlockBox box, Random rand) {
 		for (int i = 0; i < (height * 0.83); i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLog(), box);
 			pos.setOffset(Direction.UP);
 		}
 	}
