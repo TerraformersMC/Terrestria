@@ -12,7 +12,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MegaPineTreeFeature.class)
 public class MixinMegaPineTreeFeature {
-	@Inject(method = "prepareGroundColumn", at = @At("HEAD"))
+	// TODO
+
+	/*@Inject(method = "prepareGroundColumn", at = @At("HEAD"))
 	private void prepareGroundColumn(ModifiableTestableWorld world, BlockPos pos, CallbackInfo info) {
 		for(int i = 2; i >= -3; --i) {
 			BlockPos posUp = pos.up(i);
@@ -26,5 +28,5 @@ public class MixinMegaPineTreeFeature {
 				break;
 			}
 		}
-	}
+	}*/
 }

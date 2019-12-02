@@ -17,6 +17,13 @@ import java.util.function.Supplier;
 public class TerrestriaRegistry {
 
 	public static BlockItem registerBlockItem(String name, Block block) {
+		if(block == null) {
+			// TODO
+			System.out.println("Skipping registration for null block " + name);
+
+			return null;
+		}
+
 		BlockItem item = new BlockItem(block, new Item.Settings().group(Terrestria.ITEM_GROUP));
 		item.appendBlocks(Item.BLOCK_ITEMS, item);
 
