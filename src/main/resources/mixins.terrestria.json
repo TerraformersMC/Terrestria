@@ -12,6 +12,9 @@
     "MixinPlantBlock",
     "MixinSugarCaneBlock"
   ],
+  "client": [
+    "MixinRenderLayers"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

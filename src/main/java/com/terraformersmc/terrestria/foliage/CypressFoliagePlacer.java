@@ -18,10 +18,9 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 		this(dynamic.get("radius").asInt(0), dynamic.get("radius_random").asInt(0));
 	}
 
-	// generate
-	public void method_23448(ModifiableTestableWorld modifiableTestableWorld, Random random, BranchedTreeFeatureConfig branchedBranchedTreeFeatureConfig, int height, int trunkHeight, int radius, BlockPos blockPos, Set<BlockPos> set) {
-		this.method_23449(modifiableTestableWorld, random, branchedBranchedTreeFeatureConfig, height, blockPos, 0, radius, set);
-		this.method_23449(modifiableTestableWorld, random, branchedBranchedTreeFeatureConfig, height, blockPos, 1, 1, set);
+	public void generate(ModifiableTestableWorld modifiableTestableWorld, Random random, BranchedTreeFeatureConfig branchedBranchedTreeFeatureConfig, int height, int trunkHeight, int radius, BlockPos blockPos, Set<BlockPos> set) {
+		this.generate(modifiableTestableWorld, random, branchedBranchedTreeFeatureConfig, height, blockPos, 0, radius, set);
+		this.generate(modifiableTestableWorld, random, branchedBranchedTreeFeatureConfig, height, blockPos, 1, 1, set);
 		BlockPos blockPos2 = blockPos.up();
 
 		for(int n = -1; n <= 1; n++) {
@@ -39,8 +38,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 
 	}
 
-	// radius
-	public int method_23452(Random random, int i, int j, BranchedTreeFeatureConfig branchedBranchedTreeFeatureConfig) {
+	public int getRadius(Random random, int i, int j, BranchedTreeFeatureConfig branchedBranchedTreeFeatureConfig) {
 		return this.radius + random.nextInt(this.randomRadius + 1);
 	}
 
