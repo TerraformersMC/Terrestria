@@ -33,8 +33,6 @@ public class TerrestriaFeatures {
 	public static WillowTreeFeature WILLOW_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
-	public static JungleGroundBushFeature JAPANESE_MAPLE_SHRUB;
-	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
 	public static CanopyTreeFeatureMega RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
@@ -86,33 +84,11 @@ public class TerrestriaFeatures {
 
 		// TODO: Heightmaps
 		SAKURA_TREE = register("sakura_tree",
-				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize2, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura(
-						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
-						TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState()
-				))
+				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize2, false, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState())
 		);
 
 		JAPANESE_MAPLE_TREE = register("japanese_maple_tree",
-				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
-		);
-
-		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic(
-				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
-				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
-		);
-
-		// TODO: TreeDefinition
-		JAPANESE_MAPLE_SHRUB = register("japanese_maple_shrub",
-				new JungleGroundBushFeature(BranchedTreeFeatureConfig::deserialize2)
-		);
-
-		TreeDefinition.Basic darkJapaneseMapleTreeDefinition = new TreeDefinition.Basic(
-				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
-				TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
-		);
-
-		DARK_JAPANESE_MAPLE_TREE = register("dark_japanese_maple_tree",
-				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize2, darkJapaneseMapleTreeDefinition)
+				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",

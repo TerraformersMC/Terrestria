@@ -21,6 +21,17 @@ public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig CYPRESS = basic(TerrestriaBlocks.CYPRESS);
 	public static final BranchedTreeFeatureConfig WILLOW = basic(TerrestriaBlocks.WILLOW);
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE = basic(TerrestriaBlocks.JAPANESE_MAPLE);
+
+	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE_SHRUB = basic (
+			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
+			TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
+	);
+
+	public static final BranchedTreeFeatureConfig DARK_JAPANESE_MAPLE = basic (
+			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
+			TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
+	);
+
 	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basic(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 	public static final BranchedTreeFeatureConfig SAKURA = basic(TerrestriaBlocks.SAKURA);
 	public static final BranchedTreeFeatureConfig JUNGLE_PALM = basic(Blocks.JUNGLE_LOG.getDefaultState(), TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState());

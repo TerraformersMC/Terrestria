@@ -64,7 +64,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.CYPRESS_SAPLING,
 				TerrestriaBlocks.WILLOW_SAPLING,
 				TerrestriaBlocks.JAPANESE_MAPLE_SAPLING,
-				// TODO TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING,
+				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING,
 				TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING,
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING,
 				TerrestriaBlocks.SAKURA_SAPLING,

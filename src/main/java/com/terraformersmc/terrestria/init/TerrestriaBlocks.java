@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
+import com.terraformersmc.terrestria.block.ShrublingGenerator;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -166,17 +167,13 @@ public class TerrestriaBlocks {
 			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.JAPANESE_MAPLE)
 		));
 
-		// TODO
-
-		/*JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.register("japanese_maple_shrub_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_SHRUB, () -> TerrestriaFeatureConfigs.JAPANESE_MAPLE) // TODO
-		));*/
+		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.register("japanese_maple_shrub_sapling", new TerraformSaplingBlock(
+			new ShrublingGenerator(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB))
+		);
 
 		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("dark_japanese_maple_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.DARK_JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.JAPANESE_MAPLE) // TODO
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE)
 		));
-
-
 
 		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock(
 			new TerraformLargeSaplingGenerator(
