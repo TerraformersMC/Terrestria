@@ -51,7 +51,7 @@ public class TerrestriaFeatures {
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree",
-				new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+				new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
@@ -62,11 +62,11 @@ public class TerrestriaFeatures {
 		);
 
 		TINY_REDWOOD_TREE = register("tiny_redwood_tree",
-				new RedwoodTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.REDWOOD.getBasicDefinition())
+				new RedwoodTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		HEMLOCK_TREE = register("hemlock_tree",
-				new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
+				new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
@@ -77,7 +77,7 @@ public class TerrestriaFeatures {
 		);
 
 		TINY_HEMLOCK_TREE = register("tiny_hemlock_tree",
-				new HemlockTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
+				new HemlockTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		CYPRESS_TREE = register("cypress_tree",

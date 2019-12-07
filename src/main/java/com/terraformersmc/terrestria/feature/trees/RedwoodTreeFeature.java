@@ -9,8 +9,8 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class RedwoodTreeFeature extends ConiferTreeFeature {
-	public RedwoodTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
-		super(function, tree);
+	public RedwoodTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
+		super(function);
 	}
 
 	@Override

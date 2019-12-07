@@ -22,8 +22,6 @@ import java.util.function.Function;
 public class ConiferTreeFeatureMega extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Roots {
 	private static final int EXTRA_LEAVES_HEIGHT = 2;
 	private TreeDefinition.Mega tree;
-	private int height;
-	private int bareTrunkHeight;
 
 	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Mega tree) {
 		super(function);

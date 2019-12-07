@@ -9,7 +9,7 @@ import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import java.util.function.Function;
 
 public class HemlockTreeFeature extends ConiferTreeFeature {
-	public HemlockTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
-		super(function, tree);
+	public HemlockTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
+		super(function);
 	}
 }

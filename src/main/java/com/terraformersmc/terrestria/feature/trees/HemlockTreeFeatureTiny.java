@@ -10,8 +10,8 @@ import java.util.Random;
 import java.util.function.Function;
 
 public class HemlockTreeFeatureTiny extends ConiferTreeFeature {
-	public HemlockTreeFeatureTiny(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Basic tree) {
-		super(function, tree);
+	public HemlockTreeFeatureTiny(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
+		super(function);
 	}
 
 	@Override
