@@ -80,7 +80,8 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 	// Grows the center trunk.
 	private void growTrunk(Set<BlockPos> logs, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box, BranchedTreeFeatureConfig config) {
 		for (int i = 0; i < (height * .6); i++) {
-			PortUtil.setBlockState(logs, world, pos, config.trunkProvider.getBlockState(rand, pos), box);
+			setLogBlockState(world, rand, pos, logs, box, config);
+
 			pos.setOffset(Direction.UP);
 		}
 	}
@@ -102,7 +103,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 
 			Shapes.circle(pos, radius, position -> {
 				if (AbstractTreeFeature.isAirOrLeaves(world, position)) {
-					PortUtil.setBlockState(leaves, world, pos, config.leavesProvider.getBlockState(rand, position), box);
+					setLeavesBlockState(world, rand, pos, leaves, box, config);
 				}
 			});
 		}

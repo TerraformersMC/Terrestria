@@ -6,6 +6,7 @@
     "MixinAbstractTreeFeature",
     "MixinAnimalEntity",
     "MixinEatGrassGoal",
+    "MixinFeature",
     "MixinFluidBlock",
     "MixinMegaPineTreeFeature",
     "MixinMushroomPlantBlock",
