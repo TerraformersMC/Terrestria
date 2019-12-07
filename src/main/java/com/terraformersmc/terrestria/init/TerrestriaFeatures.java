@@ -26,14 +26,11 @@ import net.minecraft.world.gen.feature.*;
 public class TerrestriaFeatures {
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
-	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
 	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
-	public static HemlockTreeFeatureTiny TINY_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
 	public static CanopyTreeFeatureMega MEGA_CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
-	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
 	public static JungleGroundBushFeature JAPANESE_MAPLE_SHRUB;
@@ -61,10 +58,6 @@ public class TerrestriaFeatures {
 				)
 		);
 
-		TINY_REDWOOD_TREE = register("tiny_redwood_tree",
-				new RedwoodTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2)
-		);
-
 		HEMLOCK_TREE = register("hemlock_tree",
 				new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
@@ -74,10 +67,6 @@ public class TerrestriaFeatures {
 						BranchedTreeFeatureConfig::deserialize2,
 						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
 				)
-		);
-
-		TINY_HEMLOCK_TREE = register("tiny_hemlock_tree",
-				new HemlockTreeFeatureTiny(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		CYPRESS_TREE = register("cypress_tree",

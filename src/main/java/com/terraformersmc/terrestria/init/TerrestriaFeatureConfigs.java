@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,6 +10,8 @@ import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.foliage.PineFoliagePlacer;
+import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
 public class TerrestriaFeatureConfigs {
@@ -24,10 +25,26 @@ public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig SAKURA = basic(TerrestriaBlocks.SAKURA);
 	public static final BranchedTreeFeatureConfig JUNGLE_PALM = basic(Blocks.JUNGLE_LOG.getDefaultState(), TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState());
 
+	public static final BranchedTreeFeatureConfig TINY_REDWOOD = spruce(TerrestriaBlocks.REDWOOD);
+	public static final BranchedTreeFeatureConfig TINY_HEMLOCK = spruce(TerrestriaBlocks.HEMLOCK);
+
 	public static final FallenLogFeatureConfig FALLEN_HEMLOCK_LOG = fallenLog(TerrestriaBlocks.HEMLOCK);
 	public static final FallenLogFeatureConfig FALLEN_REDWOOD_LOG = fallenLog(TerrestriaBlocks.REDWOOD);
 
 	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS_SMALL = basicJungle(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+
+	private static BranchedTreeFeatureConfig spruce(WoodBlocks blocks) {
+		return spruce(blocks.log.getDefaultState(), blocks.leaves.getDefaultState());
+	}
+
+	private static BranchedTreeFeatureConfig spruce(BlockState log, BlockState leaves) {
+		BranchedTreeFeatureConfig.Builder builder = new BranchedTreeFeatureConfig.Builder(
+				new SimpleStateProvider(log),
+				new SimpleStateProvider(leaves),
+				new SpruceFoliagePlacer(2, 1));
+
+		return builder.baseHeight(6).heightRandA(3).trunkHeight(1).trunkHeightRandom(1).trunkTopOffsetRandom(2).noVines().build();
+	}
 
 	private static FallenLogFeatureConfig fallenLog(WoodBlocks blocks) {
 		return fallenLog(blocks.log.getDefaultState(), blocks.leaves.getDefaultState());
