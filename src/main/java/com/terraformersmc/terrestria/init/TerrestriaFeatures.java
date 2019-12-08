@@ -119,7 +119,8 @@ public class TerrestriaFeatures {
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 
-		SAKURA_LEAF_PILE_DECORATOR = Registry.register(
+		// TODO
+		/*SAKURA_LEAF_PILE_DECORATOR = Registry.register(
 				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "sakura_leaf_pile"),
 				MixinTreeDecoratorType.create(SakuraLeafPileDecorator::new)
 		);
@@ -127,7 +128,7 @@ public class TerrestriaFeatures {
 		FIX_SMALL_LOGS_DECORATOR = Registry.register(
 				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
 				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
-		);
+		);*/
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

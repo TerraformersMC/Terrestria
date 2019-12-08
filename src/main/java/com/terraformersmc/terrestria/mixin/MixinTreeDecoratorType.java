@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 import java.util.function.Function;
 
-@Mixin(TreeDecoratorType.class)
+//@Mixin(TreeDecoratorType.class)
 public interface MixinTreeDecoratorType {
-	@Invoker("<init>")
+	//@Invoker("<init>")
 	static <P extends TreeDecorator> TreeDecoratorType<P> create(Function<Dynamic<?>, P> function) {
 		throw new UnsupportedOperationException();
 	}
