@@ -40,7 +40,7 @@ public class CypressSwampBiomes {
 							.createDecoratedFeature(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 						Feature.RANDOM_PATCH
-							.configure(DefaultBiomeFeatures.field_21095) // lily pads
+							.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)
 							.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))))
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 2)
 				.addGrassFeature(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
