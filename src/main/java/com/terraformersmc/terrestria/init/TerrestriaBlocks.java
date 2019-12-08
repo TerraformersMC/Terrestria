@@ -16,7 +16,9 @@ import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 import net.minecraft.world.gen.feature.OakTreeFeature;
 
 // This class exports public block constants, these fields have to be public
@@ -154,7 +156,7 @@ public class TerrestriaBlocks {
 			new TerraformLargeSaplingGenerator(
 				() -> TerrestriaFeatures.CYPRESS_TREE,
 				() -> TerrestriaFeatureConfigs.CYPRESS,
-				null, // TODO () -> TerrestriaFeatures.MEGA_CYPRESS_TREE
+				() -> (AbstractTreeFeature<MegaTreeFeatureConfig>)(Object)TerrestriaFeatures.MEGA_CYPRESS_TREE,
 				null
 			)
 		));
@@ -185,7 +187,6 @@ public class TerrestriaBlocks {
 			)
 		));
 
-		// TODO: Notify
 		SAKURA_SAPLING = TerrestriaRegistry.register("sakura_sapling", new TerraformSaplingBlock(
 			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAKURA_TREE, () -> TerrestriaFeatureConfigs.SAKURA)
 		));

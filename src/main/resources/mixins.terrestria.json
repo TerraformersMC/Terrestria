@@ -4,11 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinAbstractTreeFeature",
+    "MixinAlterGroundTreeDecorator",
     "MixinAnimalEntity",
     "MixinEatGrassGoal",
     "MixinFeature",
     "MixinFluidBlock",
-    "MixinMegaPineTreeFeature",
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
     "MixinSugarCaneBlock",

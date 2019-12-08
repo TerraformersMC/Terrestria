@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// TODO: Fix this and add to isDirt in Feature
-
 @Mixin(AbstractTreeFeature.class)
 public abstract class MixinAbstractTreeFeature extends Feature {
 	// Bypasses the "no default constructor" error
@@ -24,25 +22,26 @@ public abstract class MixinAbstractTreeFeature extends Feature {
 		throw new UnsupportedOperationException();
 	}
 
-	@Inject(method = "isNaturalDirtOrGrass", at = @At("HEAD"), cancellable = true)
-	private static void hookIsNaturalDirtOrGrass(TestableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
+	@Inject(method = "isNaturalDirt", at = @At("HEAD"), cancellable = true)
+	private static void hookIsNaturalDirt(TestableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
 		if (world.testBlockState(pos, state -> {
 			Block block = state.getBlock();
 			return block == TerrestriaBlocks.BASALT_GRASS_BLOCK;
 		})) {
-			callback.setReturnValue(true);
+			callback.setReturnValue(false);
 		}
 	}
 
-	@Inject(method = "isDirtOrGrass", at = @At("HEAD"), cancellable = true)
+	// TODO: Basalt farmland when added
+	/*@Inject(method = "isDirtOrGrass", at = @At("HEAD"), cancellable = true)
 	private static void hookIsDirtOrGrass(TestableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
 		if (world.testBlockState(pos, state -> {
 			Block block = state.getBlock();
-			return block == TerrestriaBlocks.BASALT_GRASS_BLOCK;
+			return block == TerrestriaBlocks.BASALT_FARMLAND;
 		})) {
 			callback.setReturnValue(true);
 		}
-	}
+	}*/
 
 	@Inject(method = "setToDirt", at = @At("HEAD"), cancellable = true)
 	private void hookSetToDirt(ModifiableTestableWorld world, BlockPos pos, CallbackInfo callback) {

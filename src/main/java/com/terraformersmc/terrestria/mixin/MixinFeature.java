@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinFeature {
 	@Inject(method = "isDirt", at = @At("HEAD"), cancellable = true)
 	private static void includeAndisol(Block block, CallbackInfoReturnable<Boolean> callback) {
-		if(block == TerrestriaBlocks.BASALT_DIRT) {
+		if(block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_PODZOL) {
 			callback.setReturnValue(true);
 		}
 	}
