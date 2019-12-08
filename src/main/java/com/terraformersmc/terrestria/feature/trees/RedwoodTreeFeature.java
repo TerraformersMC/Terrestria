@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.templates.ConiferTreeFeature;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 

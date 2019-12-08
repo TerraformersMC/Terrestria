@@ -6,13 +6,11 @@ import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Roots;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;

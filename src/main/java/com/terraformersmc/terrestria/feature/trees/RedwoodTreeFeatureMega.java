@@ -10,7 +10,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;

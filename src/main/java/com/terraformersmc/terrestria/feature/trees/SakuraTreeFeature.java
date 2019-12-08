@@ -1,14 +1,11 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
 import com.terraformersmc.terrestria.feature.trees.templates.JapaneseTreeFeature;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.tag.FluidTags;
@@ -19,7 +16,6 @@ import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
