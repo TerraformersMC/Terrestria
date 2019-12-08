@@ -142,8 +142,8 @@ public class WoodBlocks {
 		registry.add(fenceGate, 5, 20);
 	}
 
-	public TreeDefinition.Basic getBasicDefinition() {
-		return new TreeDefinition.Basic(this.log.getDefaultState(), this.leaves.getDefaultState());
+	public TreeDefinition.Mega getMegaDefinition(Block quarterLog) {
+		return new TreeDefinition.Mega(this.log.getDefaultState(), this.leaves.getDefaultState(), quarterLog.getDefaultState(), this.wood.getDefaultState());
 	}
 
 	public enum LogSize {
