@@ -192,7 +192,7 @@ public class TerrestriaBlocks {
 		));
 
 		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new TerraformDesertSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE, () -> TerrestriaFeatureConfigs.SAKURA)
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE, () -> TerrestriaFeatureConfigs.JUNGLE_PALM)
 		));
 
 		// Volcanic Island Blocks

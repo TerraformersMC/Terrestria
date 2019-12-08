@@ -160,7 +160,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 			placeSpiral(world, rand, pos, leaves, box, config, direction, !invertLeafSpiral);
 
 			pos.set(center).setOffset(direction, 3);
-			placeSpiral(world, rand, pos, leaves, box, config, direction, !invertLeafSpiral);
+			placeSpiral(world, rand, pos, leaves, box, config, direction, invertLeafSpiral);
 		}
 	}
 
