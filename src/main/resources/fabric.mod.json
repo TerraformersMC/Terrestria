@@ -25,9 +25,9 @@
     ]
   },
   "depends": {
-    "fabricloader": ">=0.4.0",
-    "fabric": "*",
-    "terraform": "*"
+    "fabricloader": ">=0.7.2",
+    "fabric": ">=0.4.1",
+    "terraform": ">=1.3.0"
   },
   "mixins": [
     "mixins.terrestria.json"

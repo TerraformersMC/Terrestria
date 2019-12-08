@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria;
 
-import com.terraformersmc.terraform.block.TerraformSaplingBlock;
+import com.terraformersmc.terraform.block.TerraformSignBlock;
 import com.terraformersmc.terraform.entity.TerraformBoatEntity;
+import com.terraformersmc.terraform.registry.SpriteIdentifierRegistry;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
@@ -10,19 +11,17 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.entity.BoatEntityRenderer;
+import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 
 // This class is an entrypoint
 @SuppressWarnings("unused")
@@ -76,6 +75,17 @@ public class TerrestriaClient implements ClientModInitializer {
 		
 		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
 
+		addSigns(
+				TerrestriaBlocks.REDWOOD.sign,
+				TerrestriaBlocks.HEMLOCK.sign,
+				TerrestriaBlocks.RUBBER.sign,
+				TerrestriaBlocks.CYPRESS.sign,
+				TerrestriaBlocks.WILLOW.sign,
+				TerrestriaBlocks.JAPANESE_MAPLE.sign,
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
+				TerrestriaBlocks.SAKURA.sign
+		);
+
 		ColorProviderRegistry.ITEM.register(
 				FOLIAGE_ITEM_COLORS,
 				TerrestriaItems.RUBBER.leaves,
@@ -102,6 +112,18 @@ public class TerrestriaClient implements ClientModInitializer {
 		addBoatRenderer(TerrestriaEntities.JAPANESE_MAPLE_BOAT);
 		addBoatRenderer(TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
 		addBoatRenderer(TerrestriaEntities.SAKURA_BOAT);
+	}
+
+	private void addSigns(TerraformSignBlock... signs) {
+		for(TerraformSignBlock sign: signs) {
+			addSign(sign);
+		}
+	}
+
+	private void addSign(TerraformSignBlock sign) {
+		Identifier texture = sign.getTexture();
+
+		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, texture));
 	}
 
 	private void addColoredGrass(Block grass) {
