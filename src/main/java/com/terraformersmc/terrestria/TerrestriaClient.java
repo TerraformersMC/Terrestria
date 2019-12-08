@@ -48,16 +48,10 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.HEMLOCK.leaves
 		);
 
-		// TODO: REDWOOD and HEMLOCK
-		
-		addUncoloredFoliage(
-				TerrestriaBlocks.JAPANESE_MAPLE.leaves,
-				TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES,
-				TerrestriaBlocks.SAKURA.leaves,
-				TerrestriaBlocks.SAKURA_LEAF_PILE
-		);
+		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
-		addPlants(
+		BlockRenderLayerMap.INSTANCE.putBlocks(
+				PLANT_BLOCK_LAYER,
 				TerrestriaBlocks.REDWOOD_SAPLING,
 				TerrestriaBlocks.HEMLOCK_SAPLING,
 				TerrestriaBlocks.RUBBER_SAPLING,
@@ -77,7 +71,8 @@ public class TerrestriaClient implements ClientModInitializer {
 		
 		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
 
-		addColoredFoliage(
+		ColorProviderRegistry.ITEM.register(
+				FOLIAGE_ITEM_COLORS,
 				TerrestriaItems.RUBBER.leaves,
 				TerrestriaItems.CYPRESS.leaves,
 				TerrestriaItems.WILLOW.leaves,
@@ -87,12 +82,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaItems.HEMLOCK.leaves
 		);
 
-		addUncoloredFoliage(
-				TerrestriaItems.JAPANESE_MAPLE.leaves,
-				TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES,
-				TerrestriaItems.SAKURA.leaves,
-				TerrestriaItems.SAKURA_LEAF_PILE
-		);
+		BlockRenderLayerMap.INSTANCE.putItem(TerrestriaItems.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
 		ColorProviderRegistry.ITEM.register(
 				GRASS_ITEM_COLORS,
@@ -100,65 +90,8 @@ public class TerrestriaClient implements ClientModInitializer {
 		);
 	}
 
-	private void addColoredFoliage(Block leaves) {
-		addUncoloredFoliage(leaves);
-		ColorProviderRegistry.BLOCK.register(FOLIAGE_BLOCK_COLORS, leaves);
-	}
-
-	private void addColoredFoliage(Block... allLeaves) {
-		for(Block leaves: allLeaves) {
-			addColoredFoliage(leaves);
-		}
-	}
-
-	private void addColoredFoliage(Item leaves) {
-		addUncoloredFoliage(leaves);
-		ColorProviderRegistry.ITEM.register(FOLIAGE_ITEM_COLORS, leaves);
-	}
-
-	private void addColoredFoliage(Item... allLeaves) {
-		for(Item leaves: allLeaves) {
-			addColoredFoliage(leaves);
-		}
-	}
-
-	private void addUncoloredFoliage(Block leaves) {
-		//BlockRenderLayerMap.INSTANCE.putBlock(leaves, LEAVES_BLOCK_LAYER);
-	}
-
-	private void addUncoloredFoliage(Block... allLeaves) {
-		for(Block leaves: allLeaves) {
-			addUncoloredFoliage(leaves);
-		}
-	}
-
-	private void addUncoloredFoliage(Item leaves) {
-		//BlockRenderLayerMap.INSTANCE.putItem(leaves, LEAVES_ITEM_LAYER);
-	}
-
-	private void addUncoloredFoliage(Item... allLeaves) {
-		for(Item leaves: allLeaves) {
-			addUncoloredFoliage(leaves);
-		}
-	}
-	
-	private void addPlants(Block... plants) {
-		for(Block plant: plants) {
-			addPlant(plant);
-		}
-	}
-
-	private void addPlant(Block plant) {
-		BlockRenderLayerMap.INSTANCE.putBlock(plant, PLANT_BLOCK_LAYER);
-	}
-
 	private void addColoredGrass(Block grass) {
 		BlockRenderLayerMap.INSTANCE.putBlock(grass, GRASS_BLOCK_LAYER);
 		ColorProviderRegistry.BLOCK.register(GRASS_BLOCK_COLORS, grass);
-	}
-
-	private void addColoredGrass(Item grass) {
-		// BlockRenderLayerMap.INSTANCE.putBlock(grass, GRASS_BLOCK_LAYER);
-		ColorProviderRegistry.ITEM.register(GRASS_ITEM_COLORS, grass);
 	}
 }
