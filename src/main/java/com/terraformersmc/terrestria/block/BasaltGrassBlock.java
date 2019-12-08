@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,7 +18,6 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 		super(dirt, path, settings);
 	}
 
-	// TODO: Refactor to be like vanilla grass
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos centerPos, BlockState grassState) {
 		BlockPos above = centerPos.up();
@@ -50,7 +50,13 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 				}
 			}
 
-			if (!world.getBlockState(pos).isAir()) {
+			BlockState state = world.getBlockState(pos);
+
+			if (state.getBlock() == Blocks.GRASS && random.nextInt(10) == 0) {
+				((Fertilizable)state.getBlock()).grow(world, random, pos, state);
+			}
+
+			if (!state.isAir()) {
 				continue;
 			}
 
