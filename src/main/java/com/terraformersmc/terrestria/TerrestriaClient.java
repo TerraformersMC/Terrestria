@@ -1,11 +1,14 @@
 package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terraform.block.TerraformSaplingBlock;
+import com.terraformersmc.terraform.entity.TerraformBoatEntity;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.block.BlockColorProvider;
@@ -16,6 +19,8 @@ import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.TexturedRenderLayers;
+import net.minecraft.client.render.entity.BoatEntityRenderer;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 
@@ -88,10 +93,23 @@ public class TerrestriaClient implements ClientModInitializer {
 				GRASS_ITEM_COLORS,
 				TerrestriaItems.BASALT_GRASS_BLOCK
 		);
+
+		addBoatRenderer(TerrestriaEntities.REDWOOD_BOAT);
+		addBoatRenderer(TerrestriaEntities.HEMLOCK_BOAT);
+		addBoatRenderer(TerrestriaEntities.RUBBER_BOAT);
+		addBoatRenderer(TerrestriaEntities.CYPRESS_BOAT);
+		addBoatRenderer(TerrestriaEntities.WILLOW_BOAT);
+		addBoatRenderer(TerrestriaEntities.JAPANESE_MAPLE_BOAT);
+		addBoatRenderer(TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
+		addBoatRenderer(TerrestriaEntities.SAKURA_BOAT);
 	}
 
 	private void addColoredGrass(Block grass) {
 		BlockRenderLayerMap.INSTANCE.putBlock(grass, GRASS_BLOCK_LAYER);
 		ColorProviderRegistry.BLOCK.register(GRASS_BLOCK_COLORS, grass);
+	}
+	
+	private void addBoatRenderer(EntityType<TerraformBoatEntity> boat) {
+		EntityRendererRegistry.INSTANCE.register(boat, (dispatcher, context) -> new BoatEntityRenderer(dispatcher));
 	}
 }
