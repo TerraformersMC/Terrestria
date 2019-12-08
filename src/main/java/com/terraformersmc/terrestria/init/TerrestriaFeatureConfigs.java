@@ -13,6 +13,7 @@ import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.PineFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
@@ -23,9 +24,12 @@ import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig REDWOOD = basic(TerrestriaBlocks.REDWOOD);
+	public static final MegaTreeFeatureConfig MEGA_REDWOOD = basicMega(TerrestriaBlocks.REDWOOD);
 	public static final BranchedTreeFeatureConfig HEMLOCK = basic(TerrestriaBlocks.HEMLOCK);
+	public static final MegaTreeFeatureConfig MEGA_HEMLOCK = basicMega(TerrestriaBlocks.HEMLOCK);
 	public static final BranchedTreeFeatureConfig RUBBER = basic(TerrestriaBlocks.RUBBER);
 	public static final BranchedTreeFeatureConfig CYPRESS = basic(TerrestriaBlocks.CYPRESS);
+	public static final MegaTreeFeatureConfig MEGA_CYPRESS = basicMega(TerrestriaBlocks.CYPRESS);
 	public static final BranchedTreeFeatureConfig WILLOW = basic(TerrestriaBlocks.WILLOW);
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE = basic(TerrestriaBlocks.JAPANESE_MAPLE);
 
@@ -39,7 +43,7 @@ public class TerrestriaFeatureConfigs {
 			TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
 	);
 
-	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basic(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+	public static final MegaTreeFeatureConfig MEGA_RAINBOW_EUCALYPTUS = basicMega(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 	public static final BranchedTreeFeatureConfig SAKURA = sakura(
 			TerrestriaBlocks.SAKURA,
 			ImmutableList.of(
@@ -56,7 +60,7 @@ public class TerrestriaFeatureConfigs {
 	public static final FallenLogFeatureConfig FALLEN_HEMLOCK_LOG = fallenLog(TerrestriaBlocks.HEMLOCK);
 	public static final FallenLogFeatureConfig FALLEN_REDWOOD_LOG = fallenLog(TerrestriaBlocks.REDWOOD);
 
-	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS_SMALL = basicJungle(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basicJungle(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 
 	private static BranchedTreeFeatureConfig spruce(WoodBlocks blocks) {
 		return spruce(blocks.log.getDefaultState(), blocks.leaves.getDefaultState());
@@ -91,6 +95,17 @@ public class TerrestriaFeatureConfigs {
 		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
 
 		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).build();
+	}
+
+	private static MegaTreeFeatureConfig basicMega(WoodBlocks blocks) {
+		return basicMega(blocks.log.getDefaultState(), blocks.leaves.getDefaultState());
+	}
+
+	private static MegaTreeFeatureConfig basicMega(BlockState log, BlockState leaves) {
+		SimpleStateProvider logProvider = new SimpleStateProvider(log);
+		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+
+		return new MegaTreeFeatureConfig.Builder(logProvider, leavesProvider).build();
 	}
 
 	private static BranchedTreeFeatureConfig sakura(WoodBlocks blocks, List<TreeDecorator> decorators) {

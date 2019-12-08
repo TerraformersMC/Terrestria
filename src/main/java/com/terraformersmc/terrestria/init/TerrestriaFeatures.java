@@ -52,7 +52,7 @@ public class TerrestriaFeatures {
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
 				new RedwoodTreeFeatureMega(
-						BranchedTreeFeatureConfig::deserialize2,
+						MegaTreeFeatureConfig::method_23408,
 						TerrestriaBlocks.REDWOOD.getMegaDefinition(TerrestriaBlocks.REDWOOD_QUARTER_LOG)
 				)
 		);
@@ -61,7 +61,7 @@ public class TerrestriaFeatures {
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
 				new HemlockTreeFeatureMega(
-						BranchedTreeFeatureConfig::deserialize2,
+						MegaTreeFeatureConfig::method_23408,
 						TerrestriaBlocks.HEMLOCK.getMegaDefinition(TerrestriaBlocks.HEMLOCK_QUARTER_LOG)
 				)
 		);
@@ -70,7 +70,7 @@ public class TerrestriaFeatures {
 
 		MEGA_CYPRESS_TREE = register("mega_cypress_tree",
 				new CanopyTreeFeatureMega(
-						BranchedTreeFeatureConfig::deserialize2,
+						MegaTreeFeatureConfig::method_23408,
 						TerrestriaBlocks.CYPRESS.getMegaDefinition(TerrestriaBlocks.CYPRESS_QUARTER_LOG)
 				)
 		);
@@ -88,7 +88,7 @@ public class TerrestriaFeatures {
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
-				new CanopyTreeFeatureMega(BranchedTreeFeatureConfig::deserialize2, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getMegaDefinition(
+				new CanopyTreeFeatureMega(MegaTreeFeatureConfig::method_23408, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getMegaDefinition(
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG
 				))
 		);

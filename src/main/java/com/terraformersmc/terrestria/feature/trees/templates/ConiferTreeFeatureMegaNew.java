@@ -10,16 +10,16 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
+public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatureConfig> {
 	private TreeDefinition.Mega tree;
 
-	public ConiferTreeFeatureMegaNew(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+	public ConiferTreeFeatureMegaNew(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
 		super(function);
 		this.tree = tree;
 	}
@@ -40,7 +40,7 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<BranchedTreeF
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
 		int height = getLeafHeight(rand);
 		int bareTrunkHeight = getBareTrunkHeight(rand);
 		int maxLeafRadius = getMaxLeafRadius(rand);

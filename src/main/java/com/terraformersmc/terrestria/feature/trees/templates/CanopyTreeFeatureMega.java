@@ -16,16 +16,16 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class CanopyTreeFeatureMega extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Roots {
+public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureConfig> implements Roots {
 	private TreeDefinition.Mega tree;
 
-	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
 		super(function);
 
 		this.tree = tree;
@@ -38,7 +38,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<BranchedTreeFeatu
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
 		// Total trunk height
 		int height = getHeight(rand);
 

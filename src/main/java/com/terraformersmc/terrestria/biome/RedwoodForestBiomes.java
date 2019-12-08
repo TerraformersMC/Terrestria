@@ -37,7 +37,7 @@ public class RedwoodForestBiomes {
 		TerrestriaBiomes.REDWOOD_FOREST = TerrestriaBiomes.register("redwood_forest", template.builder()
 				.depth(1.2F)
 				.scale(0.3F)
-				.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 7)
+				.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD), 7)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 3)
 				.addRareTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 1)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 4)

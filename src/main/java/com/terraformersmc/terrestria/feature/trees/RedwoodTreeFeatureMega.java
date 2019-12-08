@@ -10,7 +10,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Roots {
 	private TreeDefinition.Mega tree;
 
-	public RedwoodTreeFeatureMega(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+	public RedwoodTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
 		super(function, tree);
 		this.tree = tree;
 	}

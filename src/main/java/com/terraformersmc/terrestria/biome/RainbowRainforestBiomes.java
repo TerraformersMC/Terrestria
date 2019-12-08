@@ -29,7 +29,7 @@ public class RainbowRainforestBiomes {
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.JUNGLE_TEMPLE)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.configure(TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS), 5)
+				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.configure(TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS), 5)
 				.addTreeFeature(Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 5)
 				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
 				.addDefaultSpawnEntries()

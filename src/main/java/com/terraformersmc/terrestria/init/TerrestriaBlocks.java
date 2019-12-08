@@ -16,10 +16,7 @@ import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
-import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
-import net.minecraft.world.gen.feature.OakTreeFeature;
+import net.minecraft.world.gen.feature.*;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -131,8 +128,8 @@ public class TerrestriaBlocks {
 			new TerraformLargeSaplingGenerator(
 				() -> TerrestriaFeatures.REDWOOD_TREE,
 				() -> TerrestriaFeatureConfigs.REDWOOD,
-				null, // TODO () -> TerrestriaFeatures.MEGA_REDWOOD_TREE,
-				null // TODO () -> TerrestriaFeatureConfigs.REDWOOD
+				() -> TerrestriaFeatures.MEGA_REDWOOD_TREE,
+				() -> TerrestriaFeatureConfigs.MEGA_REDWOOD
 			)
 		));
 
@@ -140,8 +137,8 @@ public class TerrestriaBlocks {
 			new TerraformLargeSaplingGenerator(
 				() -> TerrestriaFeatures.HEMLOCK_TREE,
 				() -> TerrestriaFeatureConfigs.HEMLOCK,
-				null, // TODO () -> TerrestriaFeatures.MEGA_HEMLOCK_TREE,
-				null // TODO
+				() -> TerrestriaFeatures.MEGA_HEMLOCK_TREE,
+				() -> TerrestriaFeatureConfigs.MEGA_HEMLOCK
 			)
 		));
 
@@ -156,8 +153,8 @@ public class TerrestriaBlocks {
 			new TerraformLargeSaplingGenerator(
 				() -> TerrestriaFeatures.CYPRESS_TREE,
 				() -> TerrestriaFeatureConfigs.CYPRESS,
-				() -> (AbstractTreeFeature<MegaTreeFeatureConfig>)(Object)TerrestriaFeatures.MEGA_CYPRESS_TREE,
-				null
+				() -> TerrestriaFeatures.MEGA_CYPRESS_TREE,
+				() -> TerrestriaFeatureConfigs.MEGA_CYPRESS
 			)
 		));
 
@@ -179,11 +176,10 @@ public class TerrestriaBlocks {
 
 		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock(
 			new TerraformLargeSaplingGenerator(
-				() -> new OakTreeFeature(BranchedTreeFeatureConfig::deserialize2),
-				() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_SMALL,
-				null,
-				null
-				// TODO () -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE
+				() -> (AbstractTreeFeature<BranchedTreeFeatureConfig>)Feature.NORMAL_TREE,
+				() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS,
+				() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE,
+				() -> TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS
 			)
 		));
 

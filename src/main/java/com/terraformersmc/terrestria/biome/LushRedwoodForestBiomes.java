@@ -47,7 +47,7 @@ public class LushRedwoodForestBiomes {
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
 				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 4)
-				.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 4)
+				.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD), 4)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 2)
 				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
 				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 2)
