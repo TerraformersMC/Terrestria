@@ -340,8 +340,6 @@ public class VolcanoGenerator extends StructurePiece {
 			}
 		}
 
-		System.out.println("Generating!" + chunkPos + " : " + pos);
-
 		return true;
 	}
 
