@@ -1,18 +1,24 @@
 package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
+import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.decorator.CocoaBeansTreeDecorator;
 import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
+import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.PineFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
+
+import java.util.Collections;
+import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig REDWOOD = basic(TerrestriaBlocks.REDWOOD);
@@ -33,7 +39,11 @@ public class TerrestriaFeatureConfigs {
 	);
 
 	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basic(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-	public static final BranchedTreeFeatureConfig SAKURA = basic(TerrestriaBlocks.SAKURA);
+	public static final BranchedTreeFeatureConfig SAKURA = sakura(
+			TerrestriaBlocks.SAKURA,
+			Collections.singletonList(new SakuraLeafPileDecorator(4))
+	);
+
 	public static final BranchedTreeFeatureConfig JUNGLE_PALM = basic(Blocks.JUNGLE_LOG.getDefaultState(), TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState());
 
 	public static final BranchedTreeFeatureConfig TINY_REDWOOD = spruce(TerrestriaBlocks.REDWOOD);
@@ -77,6 +87,17 @@ public class TerrestriaFeatureConfigs {
 		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
 
 		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).build();
+	}
+
+	private static BranchedTreeFeatureConfig sakura(WoodBlocks blocks, List<TreeDecorator> decorators) {
+		return sakura(blocks.log.getDefaultState(), blocks.leaves.getDefaultState(), decorators);
+	}
+
+	private static BranchedTreeFeatureConfig sakura(BlockState log, BlockState leaves, List<TreeDecorator> decorators) {
+		SimpleStateProvider logProvider = new SimpleStateProvider(log);
+		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+
+		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).treeDecorators(decorators).build();
 	}
 
 	private static BranchedTreeFeatureConfig basicJungle(WoodBlocks blocks) {

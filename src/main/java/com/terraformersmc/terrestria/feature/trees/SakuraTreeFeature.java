@@ -5,17 +5,12 @@ import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
 import com.terraformersmc.terrestria.feature.trees.templates.JapaneseTreeFeature;
 import com.terraformersmc.terraform.block.SmallLogBlock;
-import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
-import net.minecraft.world.EmptyBlockView;
-import net.minecraft.world.Heightmap;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
@@ -25,43 +20,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class SakuraTreeFeature extends JapaneseTreeFeature implements SmallLogs, Branches {
-	private BlockState leafPile;
-
-	public SakuraTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, boolean notify, BlockState leafPile) {
+	public SakuraTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
 		super(function);
-
-		this.leafPile = leafPile;
-	}
-
-	@Override
-	public void placeGroundCover(ModifiableTestableWorld world, Random rand, BlockPos.Mutable origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, double maxRadius) {
-		int x = origin.getX();
-		int z = origin.getZ();
-
-		Shapes.circle(origin, maxRadius, pos -> {
-			if (pos.getX() == x && pos.getZ() == z) {
-				return;
-			}
-
-			if (rand.nextInt(2) != 0) {
-				return;
-			}
-
-			BlockPos top = world.getTopPosition(Heightmap.Type.WORLD_SURFACE, pos);
-
-			if (!AbstractTreeFeature.isAir(world, top)) {
-				return;
-			}
-
-			boolean valid = world.testBlockState(top.down(),
-				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) ||
-					     state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
-			);
-
-			if (valid) {
-				PortUtil.setBlockState(leaves, world, top, leafPile, box);
-			}
-		});
 	}
 
 	@Override

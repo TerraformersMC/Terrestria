@@ -5,7 +5,6 @@ import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
-import com.terraformersmc.terrestria.feature.trees.components.GroundClutter;
 import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
@@ -20,7 +19,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import java.util.*;
 import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements GroundClutter, Branches, SmallLogs {
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Branches, SmallLogs {
 	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
 		super(function);
 	}
@@ -50,9 +49,6 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 			return false;
 		}
 
-		// Place ground cover (leaf piles, turn grass under log to dirt, etc)
-		placeGroundCover(world, rand, new BlockPos.Mutable(origin), logs, leaves, box, config, maxRadius);
-
 		// Place the log blocks making up the main trunk
 		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, box, config, height);
 
@@ -62,6 +58,11 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 
 		// Fix up log block states if needed, such as with mini logs
 		correctLogStates(logs, world, box);
+
+		// TODO: Better check
+		if(!world.testBlockState(origin, state -> state.getBlock() instanceof SmallLogBlock)) {
+			setToDirt(world, below);
+		}
 
 		return true;
 	}

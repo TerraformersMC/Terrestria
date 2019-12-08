@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
@@ -9,12 +10,14 @@ import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terraform.feature.FallenLogFeature;
 import com.terraformersmc.terrestria.feature.trees.RedwoodTreeFeatureMega;
+import com.terraformersmc.terrestria.mixin.MixinTreeDecoratorType;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.TreeDecoratorType;
 import net.minecraft.world.gen.feature.*;
 
 // This class exports public feature constants, these fields have to be public
@@ -39,6 +42,8 @@ public class TerrestriaFeatures {
 
 	public static VolcanoStructureFeature VOLCANO_STRUCTURE;
 	public static StructurePieceType VOLCANO_PIECE;
+
+	public static TreeDecoratorType<SakuraLeafPileDecorator> SAKURA_LEAF_PILE_DECORATOR;
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize2));
@@ -72,9 +77,8 @@ public class TerrestriaFeatures {
 				new WillowTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
 
-		// TODO: Heightmaps
 		SAKURA_TREE = register("sakura_tree",
-				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize2, false, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState())
+				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize2)
 		);
 
 		JAPANESE_MAPLE_TREE = register("japanese_maple_tree",
@@ -112,6 +116,11 @@ public class TerrestriaFeatures {
 		Feature.STRUCTURES.put("Volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
+
+		SAKURA_LEAF_PILE_DECORATOR = Registry.register(
+				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "sakura_leaf_pile"),
+				MixinTreeDecoratorType.create(SakuraLeafPileDecorator::new)
+		);
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

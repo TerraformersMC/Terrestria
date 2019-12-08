@@ -21,11 +21,6 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 	}
 
 	@Override
-	public void placeGroundCover(ModifiableTestableWorld world, Random rand, BlockPos.Mutable origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, double maxRadius) {
-		setToDirt(world, origin.setOffset(Direction.DOWN));
-	}
-
-	@Override
 	public void placeBranch(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, Direction direction, int length) {
 		for (int i = 0; i < length - 1; i++) {
 			pos.setOffset(direction);
