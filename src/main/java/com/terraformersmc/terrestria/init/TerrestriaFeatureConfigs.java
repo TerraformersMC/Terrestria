@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.init;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
+import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
@@ -41,7 +42,10 @@ public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basic(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 	public static final BranchedTreeFeatureConfig SAKURA = sakura(
 			TerrestriaBlocks.SAKURA,
-			Collections.singletonList(new SakuraLeafPileDecorator(4))
+			ImmutableList.of(
+					new SakuraLeafPileDecorator(4),
+					new FixSmallLogsDecorator()
+			)
 	);
 
 	public static final BranchedTreeFeatureConfig JUNGLE_PALM = basic(Blocks.JUNGLE_LOG.getDefaultState(), TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState());

@@ -5,7 +5,6 @@ import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
-import com.terraformersmc.terrestria.feature.trees.components.SmallLogs;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -19,7 +18,7 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import java.util.*;
 import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Branches, SmallLogs {
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Branches {
 	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
 		super(function);
 	}
@@ -55,9 +54,6 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 		// Grow leaves and branches from the trunk
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
 		growLeaves(world, rand, pos, logs, leaves, box, config, height - bareTrunkHeight, maxRadius);
-
-		// Fix up log block states if needed, such as with mini logs
-		correctLogStates(logs, world, box);
 
 		// TODO: Better check
 		if(!world.testBlockState(origin, state -> state.getBlock() instanceof SmallLogBlock)) {

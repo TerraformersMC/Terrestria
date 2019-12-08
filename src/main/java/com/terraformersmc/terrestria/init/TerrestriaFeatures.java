@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
+import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
@@ -44,6 +45,7 @@ public class TerrestriaFeatures {
 	public static StructurePieceType VOLCANO_PIECE;
 
 	public static TreeDecoratorType<SakuraLeafPileDecorator> SAKURA_LEAF_PILE_DECORATOR;
+	public static TreeDecoratorType<FixSmallLogsDecorator> FIX_SMALL_LOGS_DECORATOR;
 
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize2));
@@ -120,6 +122,11 @@ public class TerrestriaFeatures {
 		SAKURA_LEAF_PILE_DECORATOR = Registry.register(
 				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "sakura_leaf_pile"),
 				MixinTreeDecoratorType.create(SakuraLeafPileDecorator::new)
+		);
+
+		FIX_SMALL_LOGS_DECORATOR = Registry.register(
+				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
+				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
 		);
 	}
 

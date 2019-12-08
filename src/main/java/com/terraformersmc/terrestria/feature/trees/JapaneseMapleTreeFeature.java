@@ -31,8 +31,4 @@ public class JapaneseMapleTreeFeature extends JapaneseTreeFeature {
 		pos.setOffset(direction);
 		tryPlaceLeaves(world, rand, pos, logs, leaves, box, config);
 	}
-
-	@Override
-	public void correctLogStates(Set<BlockPos> logs, ModifiableTestableWorld world, BlockBox box) {
-	}
 }
