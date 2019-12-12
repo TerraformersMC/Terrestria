@@ -4,6 +4,7 @@ plugins {
 	id 'idea'
 	id 'eclipse'
 	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'com.wynprice.cursemaven' version '2.1.0'
 }
 
 sourceCompatibility = 1.8
@@ -26,6 +27,8 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
+	
+	modImplementation "curse.maven:climatic-world-type:2832570"
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 }
