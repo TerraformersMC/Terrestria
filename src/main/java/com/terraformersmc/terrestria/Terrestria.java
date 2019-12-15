@@ -1,5 +1,8 @@
 package com.terraformersmc.terrestria;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.command.LocateAny;
@@ -27,6 +30,7 @@ public class Terrestria implements ModInitializer {
 	public static final String MOD_ID = "terrestria";
 	public static ItemGroup ITEM_GROUP;
 	public static BiomeConfigHandler BIOME_CONFIG_HANDLER;
+	public static final Logger log = LogManager.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
@@ -45,7 +49,8 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBiomes.init();
 		TerrestriaGeneration.init(config, configCache);
 
-		if (isModLoaded("cwt")) {
+		if (FabricLoader.getInstance().isModLoaded("cwt")) {
+			log.info("Terrestria has detected ClimaticWorldType is installed... loading compatibility!");
 			ClimaticWorldTypeCompat.init(configCache);
 		}
 
@@ -53,9 +58,5 @@ public class Terrestria implements ModInitializer {
 
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(ITEM_GROUP)));
 		LocateAny.register();
-	}
-
-	private static boolean isModLoaded(String id) {
-		return FabricLoader.getInstance().isModLoaded(id);
 	}
 }

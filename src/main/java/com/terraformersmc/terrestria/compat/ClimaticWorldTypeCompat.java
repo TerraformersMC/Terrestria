@@ -16,7 +16,7 @@ public final class ClimaticWorldTypeCompat {
 		computeIfEnabled("caldera", configCache, () -> {
 			ClimateBiomes.addBiome(Climate.HUMID_SUBTROPICAL, TerrestriaBiomes.CALDERA_RIDGE, 5);
 			ClimateBiomes.addBiome(Climate.COOL_TEMPERATE, TerrestriaBiomes.CALDERA_RIDGE, 5);
-			ClimateBiomes.addSmallEdgeCorrection(TerrestriaBiomes.CALDERA_BEACH, TerrestriaBiomes.CALDERA_RIDGE, TerrestriaBiomes.CALDERA);
+			ClimateBiomes.addSmallEdgeCorrection(TerrestriaBiomes.CALDERA_BEACH, TerrestriaBiomes.CALDERA, TerrestriaBiomes.CALDERA_BEACH, TerrestriaBiomes.CALDERA);
 
 			ClimateBiomesImpl.trackBiomeIfAbsent(TerrestriaBiomes.CALDERA);
 			ClimateBiomesImpl.trackBiomeIfAbsent(TerrestriaBiomes.CALDERA_FOOTHILLS);

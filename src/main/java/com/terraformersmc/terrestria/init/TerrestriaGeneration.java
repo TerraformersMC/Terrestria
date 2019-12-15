@@ -110,7 +110,10 @@ public class TerrestriaGeneration {
 
 		BiomeConfigNode.Variant variant = config.variant(name, new BiomeConfigNode.Variant(enable, chance));
 		enable = variant.isEnabled();
-		configCache.cache(name, enable);
+
+		if (enable) {
+			configCache.cache(name);
+		}
 
 		if(biome != null && enable && variant.getVariantChance() > 0.0) {
 			OverworldBiomes.addBiomeVariant(parent, biome, variant.getVariantChance());
@@ -122,7 +125,10 @@ public class TerrestriaGeneration {
 
 		BiomeConfigNode.Continental continental = config.continental(name, new BiomeConfigNode.Continental(enable, weight));
 		enable = continental.isEnabled();
-		configCache.cache(name, enable);
+
+		if (enable) {
+			configCache.cache(name);
+		}
 
 		if(biome != null && enable && continental.getWeight() > 0.0) {
 			OverworldBiomes.addContinentalBiome(biome, climate, continental.getWeight());
