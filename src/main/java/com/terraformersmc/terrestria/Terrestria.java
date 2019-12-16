@@ -1,12 +1,14 @@
 package com.terraformersmc.terrestria;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.command.LocateAny;
-import com.terraformersmc.terrestria.compat.BiomeEnabledConfigCache;
 import com.terraformersmc.terrestria.compat.ClimaticWorldTypeCompat;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
@@ -39,7 +41,7 @@ public class Terrestria implements ModInitializer {
 
 		BiomeConfig config = BIOME_CONFIG_HANDLER.getBiomeConfig();
 
-		BiomeEnabledConfigCache configCache = new BiomeEnabledConfigCache();
+		Set<String> configCache = new HashSet<>();
 
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();

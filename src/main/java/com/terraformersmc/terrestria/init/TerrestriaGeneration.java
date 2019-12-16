@@ -1,21 +1,51 @@
 package com.terraformersmc.terrestria.init;
 
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_BEACH;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_FOOTHILLS;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_RIDGE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CYPRESS_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CYPRESS_SWAMP;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.DENSE_WOODLANDS;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.DENSE_WOODLANDS_EDGE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.HEMLOCK_CLEARING;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.HEMLOCK_RAINFOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.JAPANESE_MAPLE_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_CLEARING;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST_LAKE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_CLEARING;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_FOREST_EDGE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SAKURA_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SNOWY_HEMLOCK_FOREST;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND_BEACH;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND_SHORE;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_CYPRESS_HILLS;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_SAKURA_HILLS;
+
+import java.util.Set;
+
 import com.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigNode;
-import com.terraformersmc.terrestria.compat.BiomeEnabledConfigCache;
 
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
 public class TerrestriaGeneration {
 	// Note: This can handle the cases of biomes not registered, but currently biomes are always registered
 
-	public static void init(BiomeConfig config, BiomeEnabledConfigCache configCache) {
+	public static void init(BiomeConfig config, Set<String> configCache) {
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
 		// 10% of Deep Oceans will be replaced with Volcanic Islands
@@ -105,14 +135,14 @@ public class TerrestriaGeneration {
 		}
 	}
 
-	private static void addBiomeVariant(Biome parent, Biome biome, double chance, String name, BiomeConfig config, BiomeEnabledConfigCache configCache) {
+	private static void addBiomeVariant(Biome parent, Biome biome, double chance, String name, BiomeConfig config, Set<String> configCache) {
 		boolean enable = !config.isFrozen();
 
 		BiomeConfigNode.Variant variant = config.variant(name, new BiomeConfigNode.Variant(enable, chance));
 		enable = variant.isEnabled();
 
 		if (enable) {
-			configCache.cache(name);
+			configCache.add(name);
 		}
 
 		if(biome != null && enable && variant.getVariantChance() > 0.0) {
@@ -120,14 +150,14 @@ public class TerrestriaGeneration {
 		}
 	}
 
-	private static void addContinentalBiome(Biome biome, OverworldClimate climate, double weight, String name, BiomeConfig config, BiomeEnabledConfigCache configCache) {
+	private static void addContinentalBiome(Biome biome, OverworldClimate climate, double weight, String name, BiomeConfig config, Set<String> configCache) {
 		boolean enable = !config.isFrozen();
 
 		BiomeConfigNode.Continental continental = config.continental(name, new BiomeConfigNode.Continental(enable, weight));
 		enable = continental.isEnabled();
 
 		if (enable) {
-			configCache.cache(name);
+			configCache.add(name);
 		}
 
 		if(biome != null && enable && continental.getWeight() > 0.0) {
