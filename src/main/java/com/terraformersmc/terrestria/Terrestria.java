@@ -30,18 +30,18 @@ import net.minecraft.util.registry.Registry;
 
 public class Terrestria implements ModInitializer {
 	public static final String MOD_ID = "terrestria";
-	public static ItemGroup ITEM_GROUP;
-	public static BiomeConfigHandler BIOME_CONFIG_HANDLER;
+	public static ItemGroup itemGroup;
+	public static BiomeConfigHandler biomeConfigHandler;
 	public static final Logger log = LogManager.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
-		ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
-		BIOME_CONFIG_HANDLER = new BiomeConfigHandler(MOD_ID);
+		itemGroup = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
+		biomeConfigHandler = new BiomeConfigHandler(MOD_ID);
 
-		BiomeConfig config = BIOME_CONFIG_HANDLER.getBiomeConfig();
+		BiomeConfig config = biomeConfigHandler.getBiomeConfig();
 
-		Set<String> configCache = new HashSet<>();
+		Set<String> enabledBiomes = new HashSet<>();
 
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
@@ -49,16 +49,16 @@ public class Terrestria implements ModInitializer {
 		TerrestriaFeatures.init();
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
-		TerrestriaGeneration.init(config, configCache);
+		TerrestriaGeneration.init(config, enabledBiomes);
 
 		if (FabricLoader.getInstance().isModLoaded("cwt")) {
 			log.info("Terrestria has detected ClimaticWorldType is installed... loading compatibility!");
-			ClimaticWorldTypeCompat.init(configCache);
+			ClimaticWorldTypeCompat.init(enabledBiomes);
 		}
 
-		BIOME_CONFIG_HANDLER.save();
+		biomeConfigHandler.save();
 
-		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(ITEM_GROUP)));
+		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
 		LocateAny.register();
 	}
 }
