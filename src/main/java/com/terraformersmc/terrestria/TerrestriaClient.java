@@ -29,6 +29,7 @@ public class TerrestriaClient implements ClientModInitializer {
 	private static final RenderLayer LEAVES_ITEM_LAYER = TexturedRenderLayers.getEntityCutout();
 	private static final RenderLayer GRASS_BLOCK_LAYER = RenderLayer.getCutoutMipped();
 	private static final RenderLayer PLANT_BLOCK_LAYER = RenderLayer.getCutout();
+	private static final RenderLayer DOOR_BLOCK_LAYER = RenderLayer.getCutout();
 
 	private static final BlockColorProvider FOLIAGE_BLOCK_COLORS =
 			(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.getDefaultColor();
@@ -55,6 +56,18 @@ public class TerrestriaClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
+			DOOR_BLOCK_LAYER,
+			TerrestriaBlocks.REDWOOD.door,
+			TerrestriaBlocks.RAINBOW_EUCALYPTUS.door,
+			TerrestriaBlocks.CYPRESS.door,
+			TerrestriaBlocks.WILLOW.door,
+			TerrestriaBlocks.JAPANESE_MAPLE.door,
+			TerrestriaBlocks.RAINBOW_EUCALYPTUS.trapdoor,
+			TerrestriaBlocks.CYPRESS.trapdoor,
+			TerrestriaBlocks.WILLOW.trapdoor
+		);
+
+		BlockRenderLayerMap.INSTANCE.putBlocks(
 				PLANT_BLOCK_LAYER,
 				TerrestriaBlocks.REDWOOD_SAPLING,
 				TerrestriaBlocks.HEMLOCK_SAPLING,
@@ -72,7 +85,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.INDIAN_PAINTBRUSH,
 				TerrestriaBlocks.MONSTERAS
 		);
-		
+
 		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
 
 		addSigns(
@@ -130,7 +143,7 @@ public class TerrestriaClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(grass, GRASS_BLOCK_LAYER);
 		ColorProviderRegistry.BLOCK.register(GRASS_BLOCK_COLORS, grass);
 	}
-	
+
 	private void addBoatRenderer(EntityType<TerraformBoatEntity> boat) {
 		EntityRendererRegistry.INSTANCE.register(boat, (dispatcher, context) -> new BoatEntityRenderer(dispatcher));
 	}
