@@ -86,6 +86,23 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.MONSTERAS
 		);
 
+		BlockRenderLayerMap.INSTANCE.putBlocks(
+				PLANT_BLOCK_LAYER,
+				TerrestriaBlocks.POTTED_REDWOOD_SAPLING,
+				TerrestriaBlocks.POTTED_HEMLOCK_SAPLING,
+				TerrestriaBlocks.POTTED_RUBBER_SAPLING,
+				TerrestriaBlocks.POTTED_CYPRESS_SAPLING,
+				TerrestriaBlocks.POTTED_WILLOW_SAPLING,
+				TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SAPLING,
+				TerrestriaBlocks.POTTED_JAPANESE_MAPLE_SHRUB_SAPLING,
+				TerrestriaBlocks.POTTED_DARK_JAPANESE_MAPLE_SAPLING,
+				TerrestriaBlocks.POTTED_RAINBOW_EUCALYPTUS_SAPLING,
+				TerrestriaBlocks.POTTED_SAKURA_SAPLING,
+				TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING,
+				TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH,
+				TerrestriaBlocks.POTTED_MONSTERAS
+		);
+
 		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
 
 		addSigns(
