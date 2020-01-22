@@ -34,7 +34,7 @@ public class TerrestriaRegistry {
 			(world, x, y, z) -> {
 				TerraformBoatEntity entity = boatType.get().create(world);
 
-				entity.setPosition(x, y, z);
+				entity.setPos(x, y, z);
 
 				return entity;
 			},

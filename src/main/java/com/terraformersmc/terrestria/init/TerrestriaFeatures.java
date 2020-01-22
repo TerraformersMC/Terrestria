@@ -48,56 +48,56 @@ public class TerrestriaFeatures {
 	public static TreeDecoratorType<FixSmallLogsDecorator> FIX_SMALL_LOGS_DECORATOR;
 
 	public static void init() {
-		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize2));
+		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
 				new RedwoodTreeFeatureMega(
-						MegaTreeFeatureConfig::method_23408,
+						MegaTreeFeatureConfig::deserialize,
 						TerrestriaBlocks.REDWOOD.getMegaDefinition(TerrestriaBlocks.REDWOOD_QUARTER_LOG)
 				)
 		);
 
-		HEMLOCK_TREE = register("hemlock_tree", new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize2));
+		HEMLOCK_TREE = register("hemlock_tree", new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
 				new HemlockTreeFeatureMega(
-						MegaTreeFeatureConfig::method_23408,
+						MegaTreeFeatureConfig::deserialize,
 						TerrestriaBlocks.HEMLOCK.getMegaDefinition(TerrestriaBlocks.HEMLOCK_QUARTER_LOG)
 				)
 		);
 
-		CYPRESS_TREE = register("cypress_tree", new CypressTreeFeature(BranchedTreeFeatureConfig::deserialize2));
+		CYPRESS_TREE = register("cypress_tree", new CypressTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_CYPRESS_TREE = register("mega_cypress_tree",
 				new CanopyTreeFeatureMega(
-						MegaTreeFeatureConfig::method_23408,
+						MegaTreeFeatureConfig::deserialize,
 						TerrestriaBlocks.CYPRESS.getMegaDefinition(TerrestriaBlocks.CYPRESS_QUARTER_LOG)
 				)
 		);
 
 		WILLOW_TREE = register("willow_tree",
-				new WillowTreeFeature(BranchedTreeFeatureConfig::deserialize2)
+				new WillowTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		SAKURA_TREE = register("sakura_tree",
-				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize2)
+				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		JAPANESE_MAPLE_TREE = register("japanese_maple_tree",
-				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize2)
+				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
-				new CanopyTreeFeatureMega(MegaTreeFeatureConfig::method_23408, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getMegaDefinition(
+				new CanopyTreeFeatureMega(MegaTreeFeatureConfig::deserialize, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getMegaDefinition(
 						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG
 				))
 		);
 
 		JUNGLE_PALM_TREE = register("jungle_palm_tree",
-				new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize2, Blocks.JUNGLE_WOOD.getDefaultState())
+				new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
 		);
 
-		RUBBER_TREE = register("rubber_tree", new RubberTreeFeature(BranchedTreeFeatureConfig::deserialize2));
+		RUBBER_TREE = register("rubber_tree", new RubberTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		CATTAIL = register("cattail",
 				new CattailFeature(SeagrassFeatureConfig::deserialize, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)

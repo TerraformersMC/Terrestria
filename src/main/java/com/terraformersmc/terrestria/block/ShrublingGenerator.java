@@ -23,7 +23,7 @@ public class ShrublingGenerator extends SaplingGenerator {
 	}
 
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random) {
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
 		throw new UnsupportedOperationException("Shrublings don't have tree features, they have bush features instead");
 	}
 
