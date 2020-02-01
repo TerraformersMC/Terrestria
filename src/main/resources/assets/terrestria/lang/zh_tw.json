@@ -201,7 +201,7 @@
   "block.terrestria.potted_jungle_palm_sapling": "叢林棕櫚樹苗盆栽",
   "block.terrestria.potted_japanese_maple_shrub_sapling": "日本楓木灌木樹苗",
   "item.terrestria.log_turner": "木頭旋轉器",
-  "item.terrestria.log_turner.tooltip": "對著壹個原木使用這個工具,\n 妳所對準的面將成為原木朝向妳使用此工具的面\n 當妳所對著的是壹個木方塊時\n 如果妳對著的是壹個木方塊,它就會使橡皮面轉90°順時針方向旋轉\n 直到妳想讓這個木塊旋轉到妳想要到達的方向\n 所有的轉向都會以順時針進行\n 當妳按住潛行進行旋轉木塊時\n 木塊不會以表面的年輪進行旋轉",
+  "item.terrestria.log_turner.tooltip": "對著壹個原木使用這個工具,\n 你所對準的面將成為原木朝向你使用此工具的面\n 當你所對著的是壹個木方塊時\n 如果你對著的是壹個木方塊,它就會使橡皮面轉90°順時針方向旋轉\n 直到你想讓這個木塊旋轉到你想要到達的方向\n 所有的轉向都會以順時針進行\n 當你按住潛行進行旋轉木塊時\n 木塊不會以表面的年輪進行旋轉",
   "biome.terrestria.redwood_forest": "紅杉木樹林",
   "biome.terrestria.redwood_forest_edge": "紅杉木樹林邊緣",
   "biome.terrestria.redwood_clearing": "紅杉木樹林空地",
