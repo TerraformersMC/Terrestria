@@ -74,6 +74,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				// TODO: Edit the model so that it can be conditionally transparent like actual leaves!
 				// Currently they will always be transparent.
 				TerrestriaBlocks.SAKURA.log,
+				TerrestriaBlocks.SAKURA.strippedLog,
 				TerrestriaBlocks.REDWOOD_SAPLING,
 				TerrestriaBlocks.HEMLOCK_SAPLING,
 				TerrestriaBlocks.RUBBER_SAPLING,
