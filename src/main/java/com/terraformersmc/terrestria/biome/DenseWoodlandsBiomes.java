@@ -21,6 +21,7 @@ public class DenseWoodlandsBiomes {
 				.downfall(0.3F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x89ad49)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
 						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(Feature.STRONGHOLD)
