@@ -7,6 +7,8 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,8 +16,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(AbstractTreeFeature.class)
-public abstract class MixinAbstractTreeFeature extends Feature {
-	// Bypasses the "no default constructor" error
+public abstract class MixinAbstractTreeFeature<FC extends FeatureConfig> extends Feature<FC> {
+	// Bypasses the "no default constructor" error, will never actually get used
 	private MixinAbstractTreeFeature() {
 		super(null);
 

@@ -8,8 +8,9 @@ import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.render.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -69,6 +70,10 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
 				PLANT_BLOCK_LAYER,
+				// Needs to be transparent because of the log cutout part.
+				// TODO: Edit the model so that it can be conditionally transparent like actual leaves!
+				// Currently they will always be transparent.
+				TerrestriaBlocks.SAKURA.log,
 				TerrestriaBlocks.REDWOOD_SAPLING,
 				TerrestriaBlocks.HEMLOCK_SAPLING,
 				TerrestriaBlocks.RUBBER_SAPLING,
