@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
+import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
 import com.terraformersmc.terrestria.block.ShrublingGenerator;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
@@ -151,7 +152,8 @@ public class TerrestriaBlocks {
 
 		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new TerraformSaplingBlock(
 				new TerraformSaplingGenerator(
-					() -> TerrestriaFeatures.BRYCE_TREE.sapling()
+					() -> TerrestriaFeatures.BRYCE_TREE,
+					() -> TerrestriaFeatureConfigs.SMALL_OAK
 				)
 		));
 
@@ -223,13 +225,11 @@ public class TerrestriaBlocks {
 		));
 
 		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformDesertSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS)
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAGUARO_CACTUS, () -> TerrestriaFeatureConfigs.SAGUARO_CACTUS)
 		));
 
 		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(
-				() -> TerrestriaFeatures.YUCCA_PALM_TREE.sapling()
-			)
+			new TerraformSaplingGenerator(() -> TerrestriaFeatures.YUCCA_PALM_TREE, () -> TerrestriaFeatureConfigs.YUCCA_PALM)
 		));
 
 		// Volcanic Island Blocks

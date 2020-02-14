@@ -104,11 +104,11 @@ public class TerrestriaFeatures {
 		RUBBER_TREE = register("rubber_tree", new RubberTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		SAGUARO_CACTUS = register("saguaro_cactus",
-				new SaguaroCactusFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
+				new SaguaroCactusFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
 		);
 
 		YUCCA_PALM_TREE = register("yucca_palm",
-				new YuccaPalmTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+				new YuccaPalmTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
 		);
 
 		CATTAIL = register("cattail",

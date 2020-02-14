@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.init;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -51,6 +52,10 @@ public class TerrestriaFeatureConfigs {
 					new FixSmallLogsDecorator()
 			)
 	);
+
+	public static final BranchedTreeFeatureConfig SAGUARO_CACTUS = basic(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null);
+	public static final BranchedTreeFeatureConfig YUCCA_PALM = basic(TerrestriaBlocks.YUCCA_PALM);
+	public static final BranchedTreeFeatureConfig SMALL_OAK = basic(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
 
 	public static final BranchedTreeFeatureConfig JUNGLE_PALM = basic(Blocks.JUNGLE_LOG.getDefaultState(), TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState());
 
