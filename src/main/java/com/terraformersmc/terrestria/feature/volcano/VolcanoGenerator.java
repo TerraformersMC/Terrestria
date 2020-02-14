@@ -16,6 +16,7 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
 
@@ -80,7 +81,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 		int radiusBound = MathHelper.ceil(radius * 1.5);
 
-		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
+		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
 	}
 
 	public VolcanoGenerator(StructureManager manager, CompoundTag tag) {
@@ -164,17 +165,18 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, Random random, MutableIntBoundingBox boundingBox, ChunkPos chunkPos) {
-		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
-			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
+	public boolean generate(IWorld world, ChunkGenerator<?> var2, Random random, BlockBox box, ChunkPos chunkPos) {
+
+		if (box.maxY < this.boundingBox.maxY || box.minY > this.boundingBox.minY) {
+			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
 		int chamberMiddle = baseY - lavaTubeLength - chamberHeight / 2;
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = boundingBox.minZ; z <= boundingBox.maxZ; z++) {
-			for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
+		for (int z = box.minZ; z <= box.maxZ; z++) {
+			for (int x = box.minX; x <= box.maxX; x++) {
 				int dX = x - centerX;
 				int dZ = z - centerZ;
 
@@ -263,7 +265,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				// Place the basalt column to the specified height.
 
-				int startY = world.getTop(Heightmap.Type.OCEAN_FLOOR_WG, x, z) - baseY;
+				int startY = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, new BlockPos(x, 0, z)).getY() - baseY;
 
 				for (int dY = startY; dY < columnHeight - 1; dY++) {
 					pos.set(x, baseY + dY, z);

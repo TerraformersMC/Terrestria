@@ -3,8 +3,8 @@ package com.terraformersmc.terrestria.mixin;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.FluidBlock;
-import net.minecraft.fluid.FluidState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,9 +19,9 @@ public class MixinFluidBlock {
 		// Either Cobblestone or Obsidian formed
 
 		if(!callback.getReturnValueZ()) {
-			FluidState fluid = world.getFluidState(pos);
+			BlockState here = world.getBlockState(pos);
 
-			if(fluid.isStill()) {
+			if(here.getBlock() != Blocks.COBBLESTONE) {
 				// Obsidian was formed, nothing to override
 
 				return;
