@@ -90,7 +90,11 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.CATTAIL,
 				TerrestriaBlocks.TALL_CATTAIL,
 				TerrestriaBlocks.INDIAN_PAINTBRUSH,
-				TerrestriaBlocks.MONSTERAS
+				TerrestriaBlocks.MONSTERAS,
+				TerrestriaBlocks.AGAVE,
+				TerrestriaBlocks.TINY_CACTUS,
+				TerrestriaBlocks.DEAD_GRASS,
+				TerrestriaBlocks.ALOE_VERA
 		);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
