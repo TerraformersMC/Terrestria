@@ -149,6 +149,7 @@ public class TerrestriaClient implements ClientModInitializer {
 		addBoatRenderer(TerrestriaEntities.JAPANESE_MAPLE_BOAT);
 		addBoatRenderer(TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
 		addBoatRenderer(TerrestriaEntities.SAKURA_BOAT);
+		addBoatRenderer(TerrestriaEntities.YUCCA_PALM_BOAT);
 	}
 
 	private void addSigns(TerraformSignBlock... signs) {
