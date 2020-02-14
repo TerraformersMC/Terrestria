@@ -108,7 +108,11 @@ public class TerrestriaFeatures {
 		);
 
 		YUCCA_PALM_TREE = register("yucca_palm",
-				new YuccaPalmTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+			new YuccaPalmTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+		);
+
+		BRYCE_TREE = register("bryce",
+			new BryceTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
 		);
 
 		CATTAIL = register("cattail",
