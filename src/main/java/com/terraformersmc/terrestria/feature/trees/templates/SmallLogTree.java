@@ -5,32 +5,28 @@ import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
+public class SmallLogTree extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
 
 	private BlockState log;
 	private BlockState leaves;
 
-	public SmallLogTree(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
-		super(configDeserializer, updateNeighbor);
+	public SmallLogTree(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+		super(configDeserializer);
 
 		this.log = log;
 		this.leaves = leaves;
-	}
-
-	@Override
-	protected boolean generate(Set<BlockPos> set, ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, MutableIntBoundingBox mutableIntBoundingBox) {
-		return false;
 	}
 
 	public BlockState getLog() {
@@ -41,24 +37,23 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 		return leaves;
 	}
 
-	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, MutableIntBoundingBox boundingBox) {
+	protected void setBlockStateAndUpdate(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, BlockState state, Direction direction, BlockBox box) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin.offset(direction.getOpposite()));
 		if (getOriginalState(world, pos) != null) {
 			// Fix the previous block
-			setBlockState(blocks, world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), boundingBox);
+			setBlockState( world, pos, getOriginalState(world, pos).with(getPropertyFromDirection(direction), true), box);
 		}
 		pos.setOffset(direction);
 		// Place a new block and connect it to the previous block
-		setBlockState(blocks, world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), boundingBox);
+		setBlockState( world, pos, log.with(getPropertyFromDirection(direction.getOpposite()), true), box);
 	}
 
-	protected void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
+	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, BlockState::isAir)) {
-			setBlockState(blocks, world, pos, this.leaves, boundingBox);
+			setLeavesBlockState(world, rand, pos, leaves, box, config);
 		} else {
 			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-				setBlockState(blocks, world, pos, getOriginalState(world, pos)
-					.with(SmallLogBlock.HAS_LEAVES, true), boundingBox);
+				setBlockState(world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), box);
 			}
 		}
 	}
@@ -113,5 +108,10 @@ public class SmallLogTree extends AbstractTreeFeature<DefaultFeatureConfig> {
 				return BareSmallLogBlock.UP;
 		}
 		return null;
+	}
+
+	@Override
+	protected boolean generate(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, Set<BlockPos> set2, BlockBox blockBox, BranchedTreeFeatureConfig treeFeatureConfig) {
+		return false;
 	}
 }

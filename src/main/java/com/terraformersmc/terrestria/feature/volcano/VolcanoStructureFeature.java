@@ -6,8 +6,9 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -50,11 +51,12 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return new ChunkPos(finalChunkX, finalChunkZ);
 	}
 
-	public boolean shouldStartAt(ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ) {
+	@Override
+	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, Biome biomeIn) {
 		ChunkPos start = this.getStart(generator, random, chunkX, chunkZ, 0, 0);
 
 		if (chunkX == start.x && chunkZ == start.z) {
-			Biome biome = generator.getBiomeSource().getBiome(new BlockPos(chunkX * 16 + 9, 0, chunkZ * 16 + 9));
+			Biome biome = biomeAccess.getBiome(new BlockPos(chunkX * 16 + 9, 0, chunkZ * 16 + 9));
 
 			if (biome.getCategory() == Biome.Category.OCEAN && random.nextInt(4) != 0) {
 				return false;
@@ -81,8 +83,8 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 	}
 
 	public static class VolcanoStructureStart extends StructureStart {
-		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, Biome biome, MutableIntBoundingBox boundingBox, int references, long baseSeed) {
-			super(feature, chunkX, chunkZ, biome, boundingBox, references, baseSeed);
+		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, BlockBox box, int references, long baseSeed) {
+			super(feature, chunkX, chunkZ, box, references, baseSeed);
 		}
 
 		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {

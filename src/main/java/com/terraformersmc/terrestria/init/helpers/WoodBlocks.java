@@ -61,10 +61,10 @@ public class WoodBlocks {
 
 			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 
-			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).build()));
+			blocks.log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(blocks.leaves, () -> blocks.strippedLog, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.bark).nonOpaque().build()));
 			blocks.wood = blocks.log; // no need for a wood type
 
-			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
+			blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(blocks.leaves, null, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).nonOpaque().build()));
 			blocks.strippedWood = blocks.strippedLog; // wno need for a stripped wood type
 
 			blocks.addTreeFireInfo(registry);
@@ -90,7 +90,7 @@ public class WoodBlocks {
 		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).materialColor(colors.planks).build()));
 		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).materialColor(colors.planks).build()));
 
-		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "textures/entity/signs/" + name + ".png");
+		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name);
 
 		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
 		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
@@ -142,8 +142,8 @@ public class WoodBlocks {
 		registry.add(fenceGate, 5, 20);
 	}
 
-	public TreeDefinition.Basic getBasicDefinition() {
-		return new TreeDefinition.Basic(this.log.getDefaultState(), this.leaves.getDefaultState());
+	public TreeDefinition.Mega getMegaDefinition(Block quarterLog) {
+		return new TreeDefinition.Mega(this.log.getDefaultState(), this.leaves.getDefaultState(), quarterLog.getDefaultState(), this.wood.getDefaultState());
 	}
 
 	public enum LogSize {

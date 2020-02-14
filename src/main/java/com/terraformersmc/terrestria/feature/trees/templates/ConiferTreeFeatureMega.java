@@ -4,37 +4,31 @@ import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.ExtendedLeavesBlock;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Roots;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> implements Roots {
+public class ConiferTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureConfig> implements Roots {
 	private static final int EXTRA_LEAVES_HEIGHT = 2;
 	private TreeDefinition.Mega tree;
-	private int height;
-	private int bareTrunkHeight;
 
-	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
-		super(function, notify);
+	public ConiferTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+		super(function);
 
 		this.tree = tree;
 	}
 
-	public ConiferTreeFeatureMega sapling() {
-		return new ConiferTreeFeatureMega(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
 		// Total trunk height
 		int height = getHeight(rand);
 
@@ -70,9 +64,9 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 			}
 		}
 
-		growLeaves(blocks, world, origin, height, bareTrunkHeight, maxRadius, boundingBox);
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
-		growRoots(blocks, world, new BlockPos.Mutable(origin), bareTrunkHeight + 2, rand, boundingBox);
+		growLeaves(logs, world, origin, height, bareTrunkHeight, maxRadius, box);
+		growTrunk(logs, world, new BlockPos.Mutable(origin), height, box);
+		growRoots(logs, world, new BlockPos.Mutable(origin), bareTrunkHeight + 2, rand, box);
 
 		return true;
 	}
@@ -107,7 +101,7 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 		return true;
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius, BlockBox box) {
 		int radius = 0;
 		int radiusTarget = 1;
 		boolean topCone = true;
@@ -135,7 +129,7 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 							distance += extra;
 						}
 
-						setBlockState(blocks, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(distance, 1)), boundingBox);
+						PortUtil.setBlockState(logs, world, pos, tree.getLeaves().with(ExtendedLeavesBlock.DISTANCE, Math.max(distance, 1)), box);
 					}
 				}
 			}
@@ -155,23 +149,23 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 		}
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
 		for (int i = 0; i < height; i++) {
 			pos.set(x, y + i, z);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), box);
 
 			pos.set(x + 1, y + i, z);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), box);
 
 			pos.set(x, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), box);
 
 			pos.set(x + 1, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), box);
 		}
 	}
 
@@ -184,12 +178,12 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCo
 	}
 
 	@Override
-	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox box) {
 
 	}
 
 	@Override
-	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox box) {
 
 	}
 }

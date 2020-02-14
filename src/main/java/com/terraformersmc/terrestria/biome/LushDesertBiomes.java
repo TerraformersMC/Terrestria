@@ -1,10 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
-import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
+import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -47,7 +44,7 @@ public class LushDesertBiomes {
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
 			.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-			.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.sapling(), 2)
+			.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.configure(TerrestriaFeatureConfigs.SAGUARO_CACTUS), 2)
 			.build()
 		);
 
@@ -55,7 +52,7 @@ public class LushDesertBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OASIS_CONFIG)
 			.depth(-0.2F)
 			.scale(0.07F)
-			.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE, 2)
+			.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)

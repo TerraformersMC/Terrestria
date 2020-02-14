@@ -7,13 +7,15 @@ import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import com.terraformersmc.terrestria.feature.trees.components.SmallRoots;
 import com.terraformersmc.terrestria.feature.trees.templates.SmallLogTree;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -24,16 +26,16 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 
 	private ArrayList<BlockPos> leafOrigins = new ArrayList<>();
 
-	public BryceTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
+	public BryceTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> configDeserializer, boolean updateNeighbor, BlockState log, BlockState leaves) {
 		super(configDeserializer, updateNeighbor, log, leaves);
 	}
 
 	public BryceTreeFeature sapling() {
-		return new BryceTreeFeature(DefaultFeatureConfig::deserialize, true, this.getLog(), this.getLeaves());
+		return new BryceTreeFeature(BranchedTreeFeatureConfig::deserialize, true, this.getLog(), this.getLeaves());
 	}
 
 	@Override
-	protected boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	protected boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> wood, Set<BlockPos> leaves, BlockBox blockBox, BranchedTreeFeatureConfig treeFeatureConfig) {
 
 		int height = rand.nextInt(3) + 7; 			// Total tree height
 		double maxRadius = 1.5 + 1.5 * rand.nextDouble(); 	// Maximum leaf/branch radius.
@@ -53,12 +55,12 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		}
 
 		// Grows a trunk with roots and branches
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, randomHorizontalDirection(rand), boundingBox);
-		placeLeaves(blocks, world, boundingBox);
+		growTrunk(wood, world, new BlockPos.Mutable(origin), height, randomHorizontalDirection(rand), blockBox, treeFeatureConfig);
+		placeLeaves(leaves, world, blockBox, treeFeatureConfig);
 		return true;
 	}
 
-	public void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, int height, Direction direction, MutableIntBoundingBox boundingBox) {
+	public void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable origin, int height, Direction direction, BlockBox boundingBox, BranchedTreeFeatureConfig config) {
 		Random rand = new Random();
 		Direction randDir;
 
@@ -66,7 +68,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		for (int i = 1; i <= height; i++) {
 
 			if (i == 1) {
-				setBlockState(blocks, world, pos, this.getLog().with(SmallLogBlock.DOWN, true), boundingBox);
+				setBlockState(world, pos, this.getLog().with(SmallLogBlock.DOWN, true), boundingBox);
 			} else {
 				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
 			}
@@ -80,7 +82,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 
 			// Randomly generate a branch if the height is greater than half
 			if (i > 4 && rand.nextInt(2) == 1) {
-				placeBranch(blocks, world, new BlockPos.Mutable(pos.toImmutable()), 2 + rand.nextInt(3), randomHorizontalDirection(rand), boundingBox);
+				placeBranch(world, rand, new BlockPos.Mutable(pos.toImmutable()), blocks, blocks, boundingBox, config, direction, 2 + rand.nextInt(3));
 			}
 
 			// Randomly generate roots if the height is less than 4 blocks above the origin
@@ -92,19 +94,17 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 		}
 	}
 
-	@Override
-	public void placeBranch(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int length, Direction direction, MutableIntBoundingBox boundingBox) {
-		Random rand = new Random();
+	public void placeBranch(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox boundingBox, TreeFeatureConfig config, Direction direction, int length) {
 		Direction offset = null;
 		for (int i = 0; i < length; i++) {
 			offset = randomHorizontalDirectionAwayFrom(rand, direction.getOpposite());
 			pos.setOffset(offset);
 			if (isAir(world, pos)) {
-				setBlockStateAndUpdate(blocks, world, pos, this.getLog(), offset, boundingBox);
+				setBlockStateAndUpdate(logs, world, pos, this.getLog(), offset, boundingBox);
 				if (rand.nextBoolean()) {
 					pos.setOffset(Direction.UP);
 					if (isAir(world, pos)) {
-						setBlockStateAndUpdate(blocks, world, pos, this.getLog(), Direction.UP, boundingBox);
+						setBlockStateAndUpdate(logs, world, pos, this.getLog(), Direction.UP, boundingBox);
 					} else {
 						pos.setOffset(Direction.DOWN);
 					}
@@ -117,7 +117,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 	}
 
 	@Override
-	public void placeRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int rootLength, MutableIntBoundingBox boundingBox) {
+	public void placeRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int rootLength, BlockBox boundingBox) {
 		Random random = new Random();
 		Direction originalDirection = randomHorizontalDirection(random);
 		Direction direction = null;
@@ -141,25 +141,25 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 			} else {
 				pos.setOffset(Direction.UP);
 				if (((World) world).getBlockState(pos).getBlock() instanceof SmallLogBlock) {
-					setBlockState(blocks, world, pos, ((World) world).getBlockState(pos).with(SmallLogBlock.DOWN, true), boundingBox);
+					setBlockState(world, pos, ((World) world).getBlockState(pos).with(SmallLogBlock.DOWN, true), boundingBox);
 				}
 				break;
 			}
 		}
 	}
 
-	private void placeLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, MutableIntBoundingBox boundingBox) {
+	private void placeLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockBox boundingBox, BranchedTreeFeatureConfig config) {
 		Random random = new Random();
 		BlockPos.Mutable mPos;
 		for (BlockPos pos : leafOrigins) {
 			mPos = new BlockPos.Mutable(pos);
 			for (int i = 0; i < 2; i++) {
 				Shapes.circle(new BlockPos.Mutable(mPos.toImmutable()), 1.0, position -> {
-					tryPlaceLeaves(blocks, world, position, boundingBox);
+					tryPlaceLeaves(world, position, random, blocks, boundingBox, config);
 				});
 				mPos.setOffset(Direction.UP);
 			}
-			tryPlaceLeaves(blocks, world, mPos, boundingBox);
+			tryPlaceLeaves(world, mPos, random, blocks, boundingBox, config);
 		}
 	}
 
