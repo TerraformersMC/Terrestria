@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
+import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
@@ -20,7 +21,7 @@ import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 public class OutbackBiomes {
 	public static void register() {
 		//TODO this needs to be using a template
-		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", BetterBiomeBuilder.builder()
+		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", TerraformBiome.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 			.depth(0.125F)
@@ -49,8 +50,8 @@ public class OutbackBiomes {
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1))
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 			.build());
-		
-		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", BetterBiomeBuilder.builder()
+
+		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", TerraformBiome.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.ULURU_BUILDER, TerrestriaSurfaces.OUTBACK_ULURU_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 			.depth(2.2F)
@@ -75,9 +76,9 @@ public class OutbackBiomes {
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1))
 			.build());
-		
+
 		//TODO
-		TerrestriaBiomes.OUTBACK_BUSHLAND = TerrestriaBiomes.register("outback_bushland", BetterBiomeBuilder.builder()
+		TerrestriaBiomes.OUTBACK_BUSHLAND = TerrestriaBiomes.register("outback_bushland", TerraformBiome.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 			.depth(0.125F)
