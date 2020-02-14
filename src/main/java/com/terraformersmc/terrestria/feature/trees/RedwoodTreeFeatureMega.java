@@ -7,10 +7,10 @@ import com.terraformersmc.terrestria.feature.trees.templates.ConiferTreeFeatureM
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
@@ -19,23 +19,23 @@ import java.util.function.Function;
 public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Roots {
 	private TreeDefinition.Mega tree;
 
-	public RedwoodTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
-		super(function, notify, tree);
+	public RedwoodTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+		super(function, tree);
 		this.tree = tree;
 	}
 
-	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		tryGrowRoot(blocks, world, pos.set(x - 1, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + 2, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z - 1), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, boundingBox);
+		tryGrowRoot(logs, world, pos.set(x - 1, y, z + rand.nextInt(2)), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + 2, y, z + rand.nextInt(2)), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z - 1), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, box);
 	}
 
-	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox box) {
 		if (rand.nextInt(5) == 0) {
 			return;
 		}
@@ -44,7 +44,7 @@ public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Ro
 
 		for (int i = 0; i < height; i++) {
 			if (canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				setBlockState(blocks, world, bottom, tree.getBark(), boundingBox);
+				PortUtil.setBlockState(logs, world, bottom, tree.getBark(), box);
 			}
 
 			bottom.setOffset(Direction.UP);
