@@ -1,24 +1,16 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terraform.feature.CattailFeature;
+import com.terraformersmc.terraform.feature.FallenLogFeature;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
+import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
+import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
+import com.terraformersmc.terrestria.feature.trees.templates.ScrubFeature;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
-import com.terraformersmc.terrestria.feature.trees.*;
-import com.terraformersmc.terraform.block.SmallLogBlock;
-import com.terraformersmc.terraform.feature.CattailFeature;
-import com.terraformersmc.terraform.feature.FallenLogFeature;
-import com.terraformersmc.terrestria.feature.trees.templates.ScrubFeature;
-import com.terraformersmc.terrestria.feature.trees.templates.ShrubFeature;
-
-import com.terraformersmc.terrestria.feature.trees.*;
-import com.terraformersmc.terraform.feature.CattailFeature;
-import com.terraformersmc.terraform.feature.FallenLogFeature;
-import com.terraformersmc.terrestria.feature.trees.RedwoodTreeFeatureMega;
-import com.terraformersmc.terrestria.mixin.MixinTreeDecoratorType;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
@@ -58,10 +50,10 @@ public class TerrestriaFeatures {
 	public static TreeDecoratorType<SakuraLeafPileDecorator> SAKURA_LEAF_PILE_DECORATOR;
 	public static TreeDecoratorType<FixSmallLogsDecorator> FIX_SMALL_LOGS_DECORATOR;
 
-	
+
 	public static ScrubFeature OUTBACK_SCRUB;
-	public static ShrubFeature OAK_SHRUB;
-	
+	public static ScrubFeature OAK_SHRUB;
+
 	public static void init() {
 		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
@@ -141,11 +133,10 @@ public class TerrestriaFeatures {
 		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
-		
-		OUTBACK_SCRUB = register("outback_scrub", new OutbackScrubFeature(false));
-		
-		TreeDefinition.Basic oakDefinition = new TreeDefinition.Basic(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
-		OAK_SHRUB = register("oak_shrub", new ShrubFeature(DefaultFeatureConfig::deserialize, false, oakDefinition));
+
+		OUTBACK_SCRUB = register("outback_scrub", new OutbackScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
+
+		OAK_SHRUB = register("oak_shrub", new ScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

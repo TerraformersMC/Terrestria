@@ -33,6 +33,8 @@ public class TerrestriaFeatureConfigs {
 	public static final MegaTreeFeatureConfig MEGA_CYPRESS = basicMega(TerrestriaBlocks.CYPRESS);
 	public static final BranchedTreeFeatureConfig WILLOW = basic(TerrestriaBlocks.WILLOW);
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE = basic(TerrestriaBlocks.JAPANESE_MAPLE);
+	public static final BranchedTreeFeatureConfig OUTBACK_SCRUB = basic(Blocks.OAK_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState());
+	public static final BranchedTreeFeatureConfig OAK_SHRUB = basic(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
 
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE_SHRUB = basic (
 			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
