@@ -10,8 +10,10 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.SignItem;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class TerrestriaRegistry {
@@ -32,9 +34,13 @@ public class TerrestriaRegistry {
 	public static TerraformBoatItem registerBoatItem(String name, Supplier<EntityType<TerraformBoatEntity>> boatType) {
 		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new TerraformBoatItem (
 			(world, x, y, z) -> {
-				TerraformBoatEntity entity = boatType.get().create(world);
+				TerraformBoatEntity entity = Objects.requireNonNull(boatType.get().create(world), "null boat from EntityType::create");
 
-				entity.setPos(x, y, z);
+				entity.updatePosition(x, y, z);
+				entity.setVelocity(Vec3d.ZERO);
+				entity.prevX = x;
+				entity.prevY = y;
+				entity.prevZ = z;
 
 				return entity;
 			},
