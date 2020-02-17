@@ -85,7 +85,7 @@ public class WoodBlocks {
 		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, FabricBlockSettings.copy(Blocks.OAK_STAIRS).materialColor(colors.planks).build()));
 		blocks.fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE).materialColor(colors.planks).build()));
 		blocks.fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
-		blocks.door = TerrestriaRegistry.register(name + "_door", new TerraformDoorBlock(FabricBlockSettings.copy(Blocks.OAK_FENCE_GATE).materialColor(colors.planks).build()));
+		blocks.door = TerrestriaRegistry.register(name + "_door", new TerraformDoorBlock(FabricBlockSettings.copy(Blocks.OAK_DOOR).materialColor(colors.planks).build()));
 		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformButtonBlock(FabricBlockSettings.copy(Blocks.OAK_BUTTON).materialColor(colors.planks).build()));
 		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(FabricBlockSettings.copy(Blocks.OAK_PRESSURE_PLATE).materialColor(colors.planks).build()));
 		blocks.trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TerraformTrapdoorBlock(FabricBlockSettings.copy(Blocks.OAK_TRAPDOOR).materialColor(colors.planks).build()));
@@ -93,7 +93,7 @@ public class WoodBlocks {
 		Identifier signTexture = new Identifier(Terrestria.MOD_ID, "entity/signs/" + name);
 
 		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
-		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_SIGN).materialColor(colors.planks).build()));
+		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copy(Blocks.OAK_WALL_SIGN).materialColor(colors.planks).build()));
 
 		blocks.addManufacturedFireInfo(registry);
 
