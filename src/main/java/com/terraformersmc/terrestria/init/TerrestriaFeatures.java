@@ -1,23 +1,28 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terraform.block.SmallLogBlock;
-import com.terraformersmc.terraform.feature.CattailFeature;
-import com.terraformersmc.terraform.feature.FallenLogFeature;
+import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
+import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
+import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
+import com.terraformersmc.terrestria.feature.trees.*;
+import com.terraformersmc.terraform.feature.CattailFeature;
+import com.terraformersmc.terraform.feature.FallenLogFeature;
+import com.terraformersmc.terrestria.feature.trees.RedwoodTreeFeatureMega;
+import com.terraformersmc.terrestria.mixin.MixinTreeDecoratorType;
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.decorator.TreeDecoratorType;
 import net.minecraft.world.gen.feature.*;
 
 // This class exports public feature constants, these fields have to be public
@@ -26,20 +31,14 @@ public class TerrestriaFeatures {
 	public static BryceTreeFeature BRYCE_TREE;
 	public static RedwoodTreeFeature REDWOOD_TREE;
 	public static RedwoodTreeFeatureMega MEGA_REDWOOD_TREE;
-	public static RedwoodTreeFeatureTiny TINY_REDWOOD_TREE;
 	public static HemlockTreeFeature HEMLOCK_TREE;
 	public static HemlockTreeFeatureMega MEGA_HEMLOCK_TREE;
-	public static HemlockTreeFeatureTiny TINY_HEMLOCK_TREE;
 	public static CypressTreeFeature CYPRESS_TREE;
-	public static CypressTreeFeatureMega MEGA_CYPRESS_TREE;
+	public static CanopyTreeFeatureMega MEGA_CYPRESS_TREE;
 	public static WillowTreeFeature WILLOW_TREE;
-	public static OakTreeFeature TALLER_BIRCH_TREE;
 	public static SakuraTreeFeature SAKURA_TREE;
 	public static JapaneseMapleTreeFeature JAPANESE_MAPLE_TREE;
-	public static JapaneseMapleShrubFeature JAPANESE_MAPLE_SHRUB;
-	public static JapaneseMapleTreeFeature DARK_JAPANESE_MAPLE_TREE;
-	public static RainbowEucalyptusTreeFeature RAINBOW_EUCALYPTUS_TREE;
-	public static JungleTreeFeature SMALL_RAINBOW_EUCALYPTUS_TREE;
+	public static CanopyTreeFeatureMega RAINBOW_EUCALYPTUS_TREE;
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
 	public static YuccaPalmTreeFeature YUCCA_PALM_TREE;
@@ -53,127 +52,74 @@ public class TerrestriaFeatures {
 	public static VolcanoStructureFeature VOLCANO_STRUCTURE;
 	public static StructurePieceType VOLCANO_PIECE;
 
+	public static TreeDecoratorType<SakuraLeafPileDecorator> SAKURA_LEAF_PILE_DECORATOR;
+	public static TreeDecoratorType<FixSmallLogsDecorator> FIX_SMALL_LOGS_DECORATOR;
+
 	public static CanyonArchStructureFeature CANYON_ARCH_STRUCTURE;
 	public static StructurePieceType CANYON_ARCH_PIECE;
 
 	public static void init() {
-		BRYCE_TREE = register("bryce_tree",
-				new BryceTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
-		);
-
-		REDWOOD_TREE = register("redwood_tree",
-				new RedwoodTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
-		);
+		REDWOOD_TREE = register("redwood_tree", new RedwoodTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_REDWOOD_TREE = register("mega_redwood_tree",
 				new RedwoodTreeFeatureMega(
-						DefaultFeatureConfig::deserialize,
-						false,
-						TerrestriaBlocks.REDWOOD.getBasicDefinition().toMega(TerrestriaBlocks.REDWOOD_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.REDWOOD.wood.getDefaultState())
+						MegaTreeFeatureConfig::deserialize,
+						TerrestriaBlocks.REDWOOD.getMegaDefinition(TerrestriaBlocks.REDWOOD_QUARTER_LOG)
 				)
 		);
 
-		TINY_REDWOOD_TREE = register("tiny_redwood_tree",
-				new RedwoodTreeFeatureTiny(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.getBasicDefinition())
-		);
-
-		HEMLOCK_TREE = register("hemlock_tree",
-				new HemlockTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
-		);
+		HEMLOCK_TREE = register("hemlock_tree", new HemlockTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_HEMLOCK_TREE = register("mega_hemlock_tree",
 				new HemlockTreeFeatureMega(
-						DefaultFeatureConfig::deserialize, false,
-						TerrestriaBlocks.HEMLOCK.getBasicDefinition().toMega(TerrestriaBlocks.HEMLOCK_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.HEMLOCK.wood.getDefaultState())
+						MegaTreeFeatureConfig::deserialize,
+						TerrestriaBlocks.HEMLOCK.getMegaDefinition(TerrestriaBlocks.HEMLOCK_QUARTER_LOG)
 				)
 		);
 
-		TINY_HEMLOCK_TREE = register("tiny_hemlock_tree",
-				new HemlockTreeFeatureTiny(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.getBasicDefinition())
-		);
-
-		CYPRESS_TREE = register("cypress_tree",
-				new CypressTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.CYPRESS.getBasicDefinition())
-		);
+		CYPRESS_TREE = register("cypress_tree", new CypressTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		MEGA_CYPRESS_TREE = register("mega_cypress_tree",
-				new CypressTreeFeatureMega(
-						DefaultFeatureConfig::deserialize, false,
-						TerrestriaBlocks.CYPRESS.getBasicDefinition().toMega(TerrestriaBlocks.CYPRESS_QUARTER_LOG.getDefaultState(), TerrestriaBlocks.CYPRESS.wood.getDefaultState())
+				new CanopyTreeFeatureMega(
+						MegaTreeFeatureConfig::deserialize,
+						TerrestriaBlocks.CYPRESS.getMegaDefinition(TerrestriaBlocks.CYPRESS_QUARTER_LOG)
 				)
 		);
 
 		WILLOW_TREE = register("willow_tree",
-				new WillowTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.WILLOW.getBasicDefinition())
-		);
-
-		TALLER_BIRCH_TREE = register("taller_birch_tree",
-				new OakTreeFeature(DefaultFeatureConfig::deserialize, false, 8, Blocks.BIRCH_LOG.getDefaultState(), Blocks.BIRCH_LEAVES.getDefaultState(), false)
+				new WillowTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		SAKURA_TREE = register("sakura_tree",
-				new SakuraTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAKURA.getBasicDefinition().toSakura(
-						TerrestriaBlocks.SAKURA.log.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true),
-						TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState()
-				))
+				new SakuraTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		JAPANESE_MAPLE_TREE = register("japanese_maple_tree",
-				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.JAPANESE_MAPLE.getBasicDefinition())
-		);
-
-		TreeDefinition.Basic shrubDefinition = new TreeDefinition.Basic(
-				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
-				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
-		);
-
-		JAPANESE_MAPLE_SHRUB = register("japanese_maple_shrub",
-				new JapaneseMapleShrubFeature(DefaultFeatureConfig::deserialize, false, shrubDefinition)
-		);
-
-		TreeDefinition.Basic darkJapaneseMapleTreeDefinition = new TreeDefinition.Basic(
-				TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
-				TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
-		);
-
-		DARK_JAPANESE_MAPLE_TREE = register("dark_japanese_maple_tree",
-				new JapaneseMapleTreeFeature(DefaultFeatureConfig::deserialize, false, darkJapaneseMapleTreeDefinition)
+				new JapaneseMapleTreeFeature(BranchedTreeFeatureConfig::deserialize)
 		);
 
 		RAINBOW_EUCALYPTUS_TREE = register("rainbow_eucalyptus_tree",
-				new RainbowEucalyptusTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getBasicDefinition().toMega(
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG.getDefaultState(),
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()
+				new CanopyTreeFeatureMega(MegaTreeFeatureConfig::deserialize, TerrestriaBlocks.RAINBOW_EUCALYPTUS.getMegaDefinition(
+						TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG
 				))
 		);
 
-		SMALL_RAINBOW_EUCALYPTUS_TREE = register("small_rainbow_eucalyptus_tree",
-				new JungleTreeFeature(DefaultFeatureConfig::deserialize, false, 5,
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
-						TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState(),
-						true
-				)
-		);
-
-		TreeDefinition.Basic junglePalm = new TreeDefinition.Basic(
-				Blocks.JUNGLE_LOG.getDefaultState(),
-				TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()
-		);
-
 		JUNGLE_PALM_TREE = register("jungle_palm_tree",
-				new PalmTreeFeature(DefaultFeatureConfig::deserialize, false, junglePalm.withBark(Blocks.JUNGLE_WOOD.getDefaultState()))
+				new PalmTreeFeature(BranchedTreeFeatureConfig::deserialize, Blocks.JUNGLE_WOOD.getDefaultState())
 		);
 
-		RUBBER_TREE = register("rubber_tree",
-				new RubberTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.RUBBER.getBasicDefinition())
-		);
+		RUBBER_TREE = register("rubber_tree", new RubberTreeFeature(BranchedTreeFeatureConfig::deserialize));
 
 		SAGUARO_CACTUS = register("saguaro_cactus",
-				new SaguaroCactusFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
+				new SaguaroCactusFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState(), null)
 		);
 
 		YUCCA_PALM_TREE = register("yucca_palm",
-				new YuccaPalmTreeFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+			new YuccaPalmTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.YUCCA_PALM.log.getDefaultState(), TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState())
+		);
+
+		BRYCE_TREE = register("bryce",
+			new BryceTreeFeature(BranchedTreeFeatureConfig::deserialize, false, TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState())
 		);
 
 		CATTAIL = register("cattail",
@@ -181,11 +127,11 @@ public class TerrestriaFeatures {
 		);
 
 		FALLEN_REDWOOD_LOG = register("fallen_redwood_log",
-				new FallenLogFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.REDWOOD.log.getDefaultState())
+				new FallenLogFeature(FallenLogFeatureConfig::deserialize)
 		);
 
 		FALLEN_HEMLOCK_LOG = register("fallen_hemlock_log",
-				new FallenLogFeature(DefaultFeatureConfig::deserialize, false, TerrestriaBlocks.HEMLOCK.log.getDefaultState())
+				new FallenLogFeature(FallenLogFeatureConfig::deserialize)
 		);
 
 		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "volcano"),
@@ -195,6 +141,17 @@ public class TerrestriaFeatures {
 		Feature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
+
+		// TODO
+		/*SAKURA_LEAF_PILE_DECORATOR = Registry.register(
+				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "sakura_leaf_pile"),
+				MixinTreeDecoratorType.create(SakuraLeafPileDecorator::new)
+		);
+
+		FIX_SMALL_LOGS_DECORATOR = Registry.register(
+				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
+				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
+		);*/
 
 		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
 				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
@@ -211,12 +168,12 @@ public class TerrestriaFeatures {
 
 	public static void addVolcanoStarts(Biome... biomes) {
 		for (Biome biome : biomes) {
-			biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, new DefaultFeatureConfig());
+			biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE.configure(FeatureConfig.DEFAULT));
 		}
 	}
 
 	public static void addVolcanoStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.VOLCANO_STRUCTURE.configure(FeatureConfig.DEFAULT));
 	}
 
 	public static void addCanyonArchStructure(Biome biome) {

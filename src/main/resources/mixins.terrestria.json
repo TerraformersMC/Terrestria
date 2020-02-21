@@ -4,10 +4,14 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinAbstractTreeFeature",
+    "MixinAlterGroundTreeDecorator",
     "MixinAnimalEntity",
-    "MixinBlock",
+    "MixinEatGrassGoal",
+    "MixinFeature",
     "MixinFluidBlock",
-    "MixinPlantBlock"
+    "MixinMushroomPlantBlock",
+    "MixinPlantBlock",
+    "MixinSugarCaneBlock"
   ],
   "injectors": {
     "defaultRequire": 1

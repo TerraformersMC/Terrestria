@@ -1,35 +1,26 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Basic tree;
-
-	public CypressTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
-
-		this.tree = tree;
-	}
-
-	public CypressTreeFeature sapling() {
-		return new CypressTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
+	public CypressTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
+		super(function);
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		// Total tree height
 		int height = rand.nextInt(5) + 12;
 
@@ -52,10 +43,10 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 
 		setToDirt(world, below);
 
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
+		growTrunk(logs, rand, world, new BlockPos.Mutable(origin), height, box, config);
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
-		growLeaves(blocks, world, pos, height, maxRadius, boundingBox);
+		growLeaves(leaves, rand, world, pos, height, maxRadius, box, config);
 
 		return true;
 	}
@@ -63,7 +54,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for (int dY = origin.getY(); dY < height; dY++) {
+		for (int dY = 2; dY < height; dY++) {
 			for (int dZ = -radius; dZ <= radius; dZ++) {
 				for (int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
@@ -75,9 +66,9 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			}
 		}
 
-		pos.set(origin.getX(), origin.getY() + height, origin.getZ());
+		pos.set(origin.getX(), origin.getY(), origin.getZ());
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < height + 4; i++) {
 			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
 				return false;
 			}
@@ -87,14 +78,15 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 	}
 
 	// Grows the center trunk.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> logs, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box, BranchedTreeFeatureConfig config) {
 		for (int i = 0; i < (height * .6); i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			setLogBlockState(world, rand, pos, logs, box, config);
+
 			pos.setOffset(Direction.UP);
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(Set<BlockPos> leaves, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, BlockBox box, BranchedTreeFeatureConfig config) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -110,8 +102,8 @@ public class CypressTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig
 			}
 
 			Shapes.circle(pos, radius, position -> {
-				if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-					setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+				if (AbstractTreeFeature.isAirOrLeaves(world, position)) {
+					setLeavesBlockState(world, rand, pos, leaves, box, config);
 				}
 			});
 		}

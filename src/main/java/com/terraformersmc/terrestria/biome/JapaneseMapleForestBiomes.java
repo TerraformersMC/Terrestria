@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -21,13 +22,15 @@ public class JapaneseMapleForestBiomes {
 				.downfall(0.5F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x7aab1a)
+				.foliageColor(0x7aab1a)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
 				.addStructureFeature(Feature.STRONGHOLD)
 				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
-				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_TREE, 3)
-				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_SHRUB, 3)
-				.addTreeFeature(TerrestriaFeatures.DARK_JAPANESE_MAPLE_TREE, 3)
+				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE), 3)
+				.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 3)
+				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_TREE.configure(TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE), 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);

@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -22,6 +23,7 @@ public class HemlockRainforestBiomes {
 				.downfall(0.9F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
+				.grassColor(0x60b05a)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
@@ -37,18 +39,18 @@ public class HemlockRainforestBiomes {
 		TerrestriaBiomes.HEMLOCK_CLEARING = TerrestriaBiomes.register("hemlock_clearing", template.builder()
 				.depth(0.95F)
 				.scale(0.2F)
-				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 2)
+				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 1)
+				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
 				.build());
 
 		TerrestriaBiomes.HEMLOCK_RAINFOREST = TerrestriaBiomes.register("hemlock_rainforest", template.builder()
 				.depth(0.95F)
 				.scale(0.55F)
-				.addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE, 8)
-				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE, 8)
-				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG, 4)
-				.addTreeFeature(TerrestriaFeatures.TINY_HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.MEGA_HEMLOCK), 8)
+				.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 8)
+				.addTreeFeature(TerrestriaFeatures.FALLEN_HEMLOCK_LOG.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 4)
+				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)
 				.build());
 	}
 }

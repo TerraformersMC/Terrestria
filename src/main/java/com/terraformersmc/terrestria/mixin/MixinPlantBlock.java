@@ -17,7 +17,7 @@ public class MixinPlantBlock {
 	protected void hookPlantOnTop(BlockState state, BlockView view, BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
 		Block block = state.getBlock();
 
-		if(block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT) {
+		if(block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_PODZOL) {
 			callback.setReturnValue(true);
 		}
 	}

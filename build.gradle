@@ -3,7 +3,8 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'fabric-loom' version '0.2.4-SNAPSHOT'
+	id 'fabric-loom' version '0.2.6-SNAPSHOT'
+	id 'com.wynprice.cursemaven' version '2.1.0'
 }
 
 sourceCompatibility = 1.8
@@ -16,12 +17,18 @@ group = project.maven_group
 def ENV = System.getenv()
 version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "custom")
 
+repositories {
+	mavenLocal()
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
+	
+	modImplementation "curse.maven:climatic-world-type:2832570"
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 }
@@ -60,7 +67,7 @@ publishing {
 			}
 
 			afterEvaluate {
-				artifact(remapJar.output) {
+				artifact(remapJar) {
 					builtBy remapJar
 				}
 			}
