@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.feature.trees.templates;
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockBox;
@@ -49,12 +50,10 @@ public class SmallLogTree extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 	}
 
 	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
-		if (world.testBlockState(pos, BlockState::isAir)) {
-			setLeavesBlockState(world, rand, pos, leaves, box, config);
+		if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
+			PortUtil.setBlockState(leaves, world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), box);
 		} else {
-			if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-				setBlockState(world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), box);
-			}
+			PortUtil.setBlockState(leaves, world, pos, config.leavesProvider.getBlockState(rand, pos), box);
 		}
 	}
 

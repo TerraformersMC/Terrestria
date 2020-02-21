@@ -2,10 +2,12 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
@@ -36,6 +38,7 @@ public class CanyonBiomes {
 
 		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.CANYON_CLIFF, TerrestriaSurfaces.SANDSTONE_CLIFF_CONFIG)
+			.addRareTreeFeature(TerrestriaFeatures.BRYCE_TREE.configure(TerrestriaFeatureConfigs.SMALL_OAK), 12)
 			.build());
 
 		TerrestriaBiomes.CANYON_EDGE = TerrestriaBiomes.register("canyon_edge", template.builder()
