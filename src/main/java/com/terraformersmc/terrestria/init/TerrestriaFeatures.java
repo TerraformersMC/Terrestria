@@ -177,6 +177,6 @@ public class TerrestriaFeatures {
 	}
 
 	public static void addCanyonArchStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, Biome.configureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE, FeatureConfig.DEFAULT, Decorator.NOPE, DecoratorConfig.DEFAULT));
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.CANYON_ARCH_STRUCTURE.configure(FeatureConfig.DEFAULT));
 	}
 }

@@ -7,11 +7,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MutableIntBoundingBox;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
 
@@ -52,7 +53,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		// Just to be sure.
 		int radiusBound = radius + 5;
 
-		this.boundingBox = new MutableIntBoundingBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
+		this.boundingBox = new BlockBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
 	}
 
 	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
@@ -83,8 +84,8 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, Random random, MutableIntBoundingBox boundingBox, ChunkPos chunkPos) {
-		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
+	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos) {
+		if (blockBox.maxY < this.boundingBox.maxY || blockBox.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
 
