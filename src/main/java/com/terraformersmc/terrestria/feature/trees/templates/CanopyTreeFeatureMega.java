@@ -4,29 +4,29 @@ import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Roots;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureConfig> implements Roots {
+public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureConfig> implements Roots {
 	private TreeDefinition.Mega tree;
 
-	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Mega tree) {
-		super(function, notify);
+	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
+		super(function);
 
 		this.tree = tree;
 	}
@@ -37,12 +37,8 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		);
 	}
 
-	public CanopyTreeFeatureMega sapling() {
-		return new CanopyTreeFeatureMega(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
 		// Total trunk height
 		int height = getHeight(rand);
 
@@ -86,13 +82,13 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 			}
 		}
 
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height / 2, boundingBox);
+		growTrunk(logs, world, new BlockPos.Mutable(origin), height / 2, box);
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
-		growBranches(blocks, world, pos, height - bareTrunkHeight, height / 2 - bareTrunkHeight, rand, boundingBox);
+		growBranches(logs, leaves, world, pos, height - bareTrunkHeight, height / 2 - bareTrunkHeight, rand, box);
 
 		pos.set(origin).setOffset(Direction.DOWN, 2);
-		growRoots(blocks, world, pos, bareTrunkHeight + 2, rand, boundingBox);
+		growRoots(logs, world, pos, bareTrunkHeight + 2, rand, box);
 
 		return true;
 	}
@@ -128,27 +124,27 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		return true;
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
 		for (int i = 0; i < height; i++) {
 			pos.set(x, y + i, z);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), box);
 
 			pos.set(x + 1, y + i, z);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), box);
 
 			pos.set(x, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), box);
 
 			pos.set(x + 1, y + i, z + 1);
-			setBlockState(blocks, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), boundingBox);
+			PortUtil.setBlockState(logs, world, pos, tree.getLogQuarter().with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), box);
 		}
 	}
 
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growBranches(Set<BlockPos> logs, Set<BlockPos> leaves, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkHeight, Random rand, BlockBox box) {
 		int branches = rand.nextInt(10) + 15;
 
 		int[] offset = new int[3];
@@ -169,7 +165,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 			Shapes.line(pos, offset, position -> {
 				if (!world.testBlockState(position, candidate -> candidate.getBlock() instanceof QuarterLogBlock)) {
-					setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+					PortUtil.setBlockState(logs, world, pos, tree.getLog(), box);
 				}
 			});
 
@@ -194,7 +190,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 				Shapes.circle(pos, layerRadius, position -> {
 					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
+						PortUtil.setBlockState(leaves, world, pos, tree.getLeaves(), box);
 					}
 				});
 
@@ -203,18 +199,18 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 		}
 	}
 
-	public void growRoots(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		tryGrowRoot(blocks, world, pos.set(x - 1, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + 2, y, z + rand.nextInt(2)), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z - 1), baseTrunkHeight, rand, boundingBox);
-		tryGrowRoot(blocks, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, boundingBox);
+		tryGrowRoot(logs, world, pos.set(x - 1, y, z + rand.nextInt(2)), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + 2, y, z + rand.nextInt(2)), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z - 1), baseTrunkHeight, rand, box);
+		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, box);
 	}
 
-	public void tryGrowRoot(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, MutableIntBoundingBox boundingBox) {
+	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox box) {
 		if (rand.nextInt(5) == 0) {
 			return;
 		}
@@ -223,7 +219,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<DefaultFeatureCon
 
 		for (int i = 0; i < height; i++) {
 			if (canTreeReplace(world, bottom) || AbstractTreeFeature.isReplaceablePlant(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				setBlockState(blocks, world, bottom, tree.getBark(), boundingBox);
+				PortUtil.setBlockState(logs, world, bottom, tree.getBark(), box);
 			}
 
 			bottom.setOffset(Direction.UP);

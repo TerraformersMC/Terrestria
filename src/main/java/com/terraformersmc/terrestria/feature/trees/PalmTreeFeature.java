@@ -1,29 +1,27 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.WithBark tree;
+public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
+	private BlockState bark;
 
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.WithBark tree) {
-		super(function, notify);
+	public PalmTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function, BlockState bark) {
+		super(function);
 
-		this.tree = tree;
+		this.bark = bark;
 	}
 
 	private static Direction spiral(Direction direction, boolean invert) {
@@ -40,12 +38,8 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		}
 	}
 
-	public PalmTreeFeature sapling() {
-		return new PalmTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
-	}
-
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		// Total trunk height
 		int height = rand.nextInt(5) + 8;
 
@@ -74,8 +68,8 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
-		growTrunk(blocks, world, pos, height, rand, boundingBox);
-		growLeaves(blocks, world, pos, rand, boundingBox);
+		growTrunk(world, rand, pos, logs, box, config, height);
+		growLeaves(world, rand, pos, leaves, box, config);
 
 		return true;
 	}
@@ -101,9 +95,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 	}
 
 	// Grows the bent trunk of the tree.
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
 		for (int i = 0; i < 2; i++) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			setLogBlockState(world, rand, pos, logs, box, config);
 			pos.setOffset(Direction.UP);
 		}
 
@@ -118,7 +112,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 			}
 
 			if (run++ == 3) {
-				setBlockState(blocks, world, pos, tree.getBark(), boundingBox);
+				PortUtil.setBlockState(logs, world, pos, bark, box);
 
 				if (rand.nextBoolean()) {
 					pos.setOffset(velocityX, 0, 0);
@@ -131,39 +125,31 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 					return;
 				}
 
-				setBlockState(blocks, world, pos, tree.getBark(), boundingBox);
+				PortUtil.setBlockState(logs, world, pos, bark, box);
 			} else {
-				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+				setLogBlockState(world, rand, pos, logs, box, config);
 			}
 
 			pos.setOffset(Direction.UP);
 		}
+
+		setLogBlockState(world, rand, pos, logs, box, config);
 	}
 
-	private void tryPlaceLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, MutableIntBoundingBox boundingBox) {
-		if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-			setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
-		}
-	}
-
-	private void growLeaves(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, MutableIntBoundingBox boundingBox) {
+	private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		BlockPos center = pos.toImmutable();
 
-		if(canTreeReplace(world, pos)) {
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
-		}
-
-		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(0, 1, 0), boundingBox);
-		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(1, 1, 0), boundingBox);
-		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(0, 1, 1), boundingBox);
-		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(-1, 1, 0), boundingBox);
-		tryPlaceLeaves(blocks, world, pos.set(center).setOffset(0, 1, -1), boundingBox);
+		setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, 0), leaves, box, config);
+		setLeavesBlockState(world, rand, pos.set(center).setOffset(1, 1, 0), leaves, box, config);
+		setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, 1), leaves, box, config);
+		setLeavesBlockState(world, rand, pos.set(center).setOffset(-1, 1, 0), leaves, box, config);
+		setLeavesBlockState(world, rand, pos.set(center).setOffset(0, 1, -1), leaves, box, config);
 
 		boolean invertLeafSpiral = rand.nextBoolean();
 
 		for (int dZ = -1; dZ < 2; dZ++) {
 			for (int dX = -1; dX < 2; dX++) {
-				tryPlaceLeaves(blocks, world, pos.set(center).setOffset(dZ, 0, dX), boundingBox);
+				setLeavesBlockState(world, rand, pos.set(center).setOffset(dZ, 0, dX), leaves, box, config);
 			}
 		}
 
@@ -171,21 +157,21 @@ public class PalmTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
 			Direction direction = Direction.fromHorizontal(d);
 
 			pos.set(center).setOffset(direction, 2);
-			placeSpiral(blocks, world, pos, direction, !invertLeafSpiral, boundingBox);
+			placeSpiral(world, rand, pos, leaves, box, config, direction, !invertLeafSpiral);
 
 			pos.set(center).setOffset(direction, 3);
-			placeSpiral(blocks, world, pos, direction, invertLeafSpiral, boundingBox);
+			placeSpiral(world, rand, pos, leaves, box, config, direction, invertLeafSpiral);
 		}
 	}
 
-	private void placeSpiral(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, Direction direction, boolean invertLeafSpiral, MutableIntBoundingBox boundingBox) {
-		tryPlaceLeaves(blocks, world, pos, boundingBox);
+	private void placeSpiral(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
+		setLeavesBlockState(world, rand, pos, leaves, box, config);
 
 		Direction spiral = spiral(direction, invertLeafSpiral);
-		tryPlaceLeaves(blocks, world, pos.setOffset(spiral), boundingBox);
+		setLeavesBlockState(world, rand, pos.setOffset(spiral), leaves, box, config);
 
 		for (int i = 0; i < 2; i++) {
-			tryPlaceLeaves(blocks, world, pos.setOffset(Direction.DOWN), boundingBox);
+			setLeavesBlockState(world, rand, pos.setOffset(Direction.DOWN), leaves, box, config);
 		}
 	}
 }

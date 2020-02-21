@@ -13,6 +13,8 @@
     "#terrestria:redwood_logs",
     "#terrestria:rubber_logs",
     "#terrestria:sakura_logs",
-    "#terrestria:willow_logs"
+    "#terrestria:small_oak_logs",
+    "#terrestria:willow_logs",
+	"#terrestria:yucca_palm_logs"
   ]
 }

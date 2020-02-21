@@ -1,0 +1,7 @@
+{
+	"parent": "terraform:block/small_log_leaves_cutout",
+	"textures": {
+		"particle": "block/oak_leaves",
+		"leaves": "block/oak_leaves"
+	}
+}

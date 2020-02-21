@@ -1,0 +1,180 @@
+{
+  "multipart": [
+	{
+      "when": { "up": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch"
+      }
+    },
+	{
+      "when": { "down": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "true"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log_branch",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log"
+      }
+    },
+	{
+      "when": { "down": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "false"},
+      "apply": {
+        "model": "terrestria:block/stripped_yucca_palm_log",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout"
+      }
+    },
+	{
+      "when": { "down": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "true", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves_cutout",
+		"x": 90,
+        "y": 270
+      }
+    },
+		{
+      "when": { "up": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves"
+      }
+    },
+	{
+      "when": { "down": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 180
+      }
+    },
+	{
+      "when": { "north": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90
+      }
+    },
+	{
+      "when": { "south": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
+        "y": 180
+      }
+    },
+	{
+      "when": { "east": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
+        "y": 90
+      }
+    },
+	{
+      "when": { "west": "false", "has_leaves": "true"},
+      "apply": {
+        "model": "terrestria:block/yucca_palm_log_leaves",
+		"x": 90,
+        "y": 270
+      }
+    }
+  ]
+}

@@ -1,36 +1,26 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.MutableIntBoundingBox;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig> {
-	private TreeDefinition.Basic tree;
-
-	public RubberTreeFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function, boolean notify, TreeDefinition.Basic tree) {
-		super(function, notify);
-
-		this.tree = tree;
-	}
-
-	public RubberTreeFeature sapling() {
-		return new RubberTreeFeature(DefaultFeatureConfig::deserialize, true, tree);
+public class RubberTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
+	public RubberTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
+		super(function);
 	}
 
 	@Override
-	public boolean generate(Set<BlockPos> blocks, ModifiableTestableWorld world, Random rand, BlockPos origin, MutableIntBoundingBox boundingBox) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
 		// Total trunk height
 		int height = rand.nextInt(4) + 12;
 
@@ -49,8 +39,8 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		}
 
 		setToDirt(world, below);
-		growTrunk(blocks, world, new BlockPos.Mutable(origin), height, boundingBox);
-		growBranches(blocks, world, new BlockPos.Mutable(origin), height, rand, boundingBox);
+		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, box, config, height);
+		growBranches(world, rand, new BlockPos.Mutable(origin), logs, leaves, box, config, height);
 
 		return true;
 	}
@@ -69,27 +59,23 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 		return true;
 	}
 
-	private void growTrunk(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, MutableIntBoundingBox boundingBox) {
-		int x = pos.getX();
-		int z = pos.getZ();
-
+	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
 		for (int i = 0; i < height; i++) {
-			pos.set(x, pos.getY(), z);
-			setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+			setLogBlockState(world, rand, pos, logs, box, config);
 			pos.setOffset(Direction.UP);
 		}
 	}
 
-	private void growBranches(Set<BlockPos> blocks, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, Random random, MutableIntBoundingBox boundingBox) {
+	private void growBranches(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config, int height) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
 		for (int branch = 0; branch < 16; branch++) {
-			int baseY = random.nextInt(height - 2) + 4;
+			int baseY = rand.nextInt(height - 2) + 4;
 
-			float length = random.nextFloat() * 7 + 2;
-			float angle = random.nextFloat() * (float) Math.PI * 2;
+			float length = rand.nextFloat() * 7 + 2;
+			float angle = rand.nextFloat() * (float) Math.PI * 2;
 
 			int offsetX = (int) (MathHelper.cos(angle) * length);
 			int offsetZ = (int) (MathHelper.sin(angle) * length);
@@ -125,15 +111,13 @@ public class RubberTreeFeature extends AbstractTreeFeature<DefaultFeatureConfig>
 					break;
 				}
 
-				setBlockState(blocks, world, pos, tree.getLog(), boundingBox);
+				setLogBlockState(world, rand, pos, logs, box, config);
 
 				for (Direction direction : Direction.values()) {
 					pos.set(x + movedX, y + baseY + offsetY, z + movedZ);
 					pos.setOffset(direction);
 
-					if (AbstractTreeFeature.isAirOrLeaves(world, pos)) {
-						setBlockState(blocks, world, pos, tree.getLeaves(), boundingBox);
-					}
+					setLeavesBlockState(world, rand, pos, leaves, box, config);
 				}
 			}
 		}

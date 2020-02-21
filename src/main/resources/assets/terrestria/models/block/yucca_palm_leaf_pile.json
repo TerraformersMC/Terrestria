@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "terrestria:block/yucca_palm_leaves",
+    "particle": "terrestria:block/yucca_palm_leaves"
+  }
+}
