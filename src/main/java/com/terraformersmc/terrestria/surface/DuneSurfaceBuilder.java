@@ -28,6 +28,7 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 		vHeight = chunk.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG).get(x & 15, z & 15);
 		BlockPos.Mutable pos = new BlockPos.Mutable(x, vHeight - 8, z);
 
+		// TODO: Blending doesn't work some of the time
 		double blend = MathHelper.clamp((vHeight - seaLevel) * 0.125, 0, 1);
 
 		double height = (NOISE.sample(x * 0.01 , z * 0.015) * 30) * blend;
