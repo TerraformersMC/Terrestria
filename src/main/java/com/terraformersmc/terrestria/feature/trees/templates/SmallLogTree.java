@@ -51,9 +51,9 @@ public class SmallLogTree extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 
 	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-			PortUtil.setBlockState(leaves, world, pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), box);
+			world.setBlockState(pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), 0);
 		} else {
-			PortUtil.setBlockState(leaves, world, pos, config.leavesProvider.getBlockState(rand, pos), box);
+			world.setBlockState(pos, config.leavesProvider.getBlockState(rand, pos), 0);
 		}
 	}
 
