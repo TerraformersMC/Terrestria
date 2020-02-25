@@ -76,6 +76,10 @@ public class TerrestriaClient implements ClientModInitializer {
 				// Currently they will always be transparent.
 				TerrestriaBlocks.SAKURA.log,
 				TerrestriaBlocks.SAKURA.strippedLog,
+				TerrestriaBlocks.SMALL_OAK_LOG,
+				TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG,
+				TerrestriaBlocks.YUCCA_PALM.log,
+				TerrestriaBlocks.YUCCA_PALM.strippedLog,
 				TerrestriaBlocks.REDWOOD_SAPLING,
 				TerrestriaBlocks.HEMLOCK_SAPLING,
 				TerrestriaBlocks.RUBBER_SAPLING,
@@ -87,14 +91,16 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING,
 				TerrestriaBlocks.SAKURA_SAPLING,
 				TerrestriaBlocks.JUNGLE_PALM_SAPLING,
+				TerrestriaBlocks.BRYCE_SAPLING,
+				TerrestriaBlocks.YUCCA_PALM_SAPLING,
 				TerrestriaBlocks.CATTAIL,
 				TerrestriaBlocks.TALL_CATTAIL,
 				TerrestriaBlocks.INDIAN_PAINTBRUSH,
 				TerrestriaBlocks.MONSTERAS,
+				TerrestriaBlocks.ALOE_VERA,
 				TerrestriaBlocks.AGAVE,
 				TerrestriaBlocks.TINY_CACTUS,
-				TerrestriaBlocks.DEAD_GRASS,
-				TerrestriaBlocks.ALOE_VERA
+				TerrestriaBlocks.DEAD_GRASS
 		);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
@@ -111,7 +117,10 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.POTTED_SAKURA_SAPLING,
 				TerrestriaBlocks.POTTED_JUNGLE_PALM_SAPLING,
 				TerrestriaBlocks.POTTED_INDIAN_PAINTBRUSH,
-				TerrestriaBlocks.POTTED_MONSTERAS
+				TerrestriaBlocks.POTTED_MONSTERAS,
+				TerrestriaBlocks.POTTED_AGAVE,
+				TerrestriaBlocks.POTTED_ALOE_VERA,
+				TerrestriaBlocks.POTTED_TINY_CACTUS
 		);
 
 		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
