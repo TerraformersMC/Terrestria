@@ -1,0 +1,18 @@
+{
+  "values": [
+    "minecraft:oak_boat",
+    "minecraft:spruce_boat",
+    "minecraft:birch_boat",
+    "minecraft:jungle_boat",
+    "minecraft:acacia_boat",
+    "minecraft:dark_oak_boat",
+    "terrestria:redwood_boat",
+    "terrestria:hemlock_boat",
+    "terrestria:rubber_boat",
+    "terrestria:cypress_boat",
+    "terrestria:japanese_maple_boat",
+    "terrestria:rainbow_eucalyptus_boat",
+    "terrestria:sakura_boat",
+    "terrestria:willow_boat"
+  ]
+}
