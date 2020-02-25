@@ -11,7 +11,8 @@
     "MixinFluidBlock",
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
-    "MixinSugarCaneBlock"
+    "MixinSugarCaneBlock",
+    "MixinPredicateEaseBiomeEdgeLayer"
   ],
   "injectors": {
     "defaultRequire": 1
