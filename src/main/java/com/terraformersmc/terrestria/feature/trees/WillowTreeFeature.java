@@ -168,7 +168,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
-		for (int dY = origin.getY(); dY < height; dY++) {
+		for (int dY = height / 3; dY < height; dY++) {
 			for (int dZ = -radius; dZ <= radius; dZ++) {
 				for (int dX = -radius; dX <= radius; dX++) {
 					pos.set(origin.getX() + dX, origin.getY() + dY, origin.getZ() + dZ);
@@ -180,9 +180,9 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 			}
 		}
 
-		pos.set(origin.getX(), origin.getY() + height, origin.getZ());
+		pos.set(origin.getX(), origin.getY(), origin.getZ());
 
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < height / 3; i++) {
 			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
 				return false;
 			}
