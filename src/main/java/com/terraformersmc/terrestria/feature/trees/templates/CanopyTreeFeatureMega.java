@@ -9,10 +9,10 @@ import com.terraformersmc.terrestria.feature.trees.components.Roots;
 import net.minecraft.block.SeagrassBlock;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
@@ -33,7 +33,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 
 	protected static boolean canTreeReplace(TestableWorld world, BlockPos pos) {
 		return AbstractTreeFeature.canTreeReplace(world, pos) || world.testBlockState(pos,
-				state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock
+				state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock
 		);
 	}
 
@@ -52,7 +52,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 		BlockPos below = origin.down();
 
 		int down = 0;
-		while (world.testBlockState(below, state -> state.getFluidState().getFluid().matches(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock)) {
+		while (world.testBlockState(below, state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) || state.getBlock() instanceof SeagrassBlock)) {
 			below = below.down();
 			down++;
 		}

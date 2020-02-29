@@ -44,7 +44,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 							(!hasLeaves && tested.getBlock() instanceof LeavesBlock) ||
 							tested.isOpaque();
 
-			method_23470(
+			setBlockStateAndEncompassPosition(
 					world,
 					log,
 					existing
@@ -65,7 +65,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 				ops,
 				ops.createMap(ImmutableMap.of(
 						ops.createString("type"),
-						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.field_21319).toString())
+						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.type).toString())
 				))
 		).getValue();
 	}

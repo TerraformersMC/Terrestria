@@ -47,13 +47,13 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 			}
 
 			boolean valid = world.testBlockState(top.down(),
-					state -> state.getFluidState().getFluid().matches(FluidTags.WATER) ||
+					state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) ||
 							state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
 			);
 
 			if (valid) {
 				// setBlockState
-				method_23470(world, top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), placed, box);
+				setBlockStateAndEncompassPosition(world, top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), placed, box);
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 				ops,
 				ops.createMap(ImmutableMap.of(
 						ops.createString("type"),
-						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.field_21319).toString()),
+						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.type).toString()),
 						ops.createString("chance"),
 						ops.createInt(chance)
 				))
