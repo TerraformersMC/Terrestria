@@ -52,7 +52,9 @@ public class SmallLogTree extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos.Mutable pos, Random rand, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
 			world.setBlockState(pos, getOriginalState(world, pos).with(SmallLogBlock.HAS_LEAVES, true), 0);
-		} else {
+			return;
+		}
+		if (world.testBlockState(pos, BlockState::isAir)) {
 			world.setBlockState(pos, config.leavesProvider.getBlockState(rand, pos), 0);
 		}
 	}

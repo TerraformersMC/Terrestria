@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.surface;
 
 import com.mojang.datafixers.Dynamic;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
+import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,13 +15,13 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 import java.util.Random;
 import java.util.function.Function;
 
-public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
+public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
 
-	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CanyonSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
+	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CliffSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
 		super(function);
 
 		this.seaLevel = seaLevel;
@@ -95,7 +96,7 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CanyonSurfaceConfig> {
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CanyonSurfaceConfig config) {
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CliffSurfaceConfig config) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first

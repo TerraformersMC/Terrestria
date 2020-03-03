@@ -6,7 +6,6 @@ import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.CanyonSurfaceConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -24,7 +23,7 @@ public class TerrestriaSurfaces {
 	public static CanyonSurfaceBuilder CANYON_CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
 	public static CliffSurfaceBuilder SANDSTONE_CLIFF;
-	public static CanyonSurfaceConfig SANDSTONE_CLIFF_CONFIG;
+	public static CliffSurfaceConfig SANDSTONE_CLIFF_CONFIG;
 	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 
@@ -43,7 +42,7 @@ public class TerrestriaSurfaces {
 
 		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
-		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CanyonSurfaceConfig::deserialize, 62, BEACH));
+		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
@@ -52,7 +51,7 @@ public class TerrestriaSurfaces {
 				TerrestriaBlocks.BASALT.plain.full.getDefaultState()
 		);
 
-		SANDSTONE_CLIFF_CONFIG = new CanyonSurfaceConfig(
+		SANDSTONE_CLIFF_CONFIG = new CliffSurfaceConfig(
 			Blocks.SAND.getDefaultState(),
 			Blocks.TERRACOTTA.getDefaultState(),
 			Blocks.SAND.getDefaultState(),

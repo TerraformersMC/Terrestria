@@ -20,7 +20,8 @@ public class CanyonArchGenerator extends StructurePiece {
 
 	private OpenSimplexNoise noise;
 
-	private int lineSlope;
+	private float a;
+	private float b;
 	private int maxHeight;
 	private int radius;
 	private int yStart;
@@ -39,12 +40,8 @@ public class CanyonArchGenerator extends StructurePiece {
 
 		noise = new OpenSimplexNoise(seed);
 
-		lineSlope = seed % 10;
-
-		// 50% inversion chance
-		if (seed > 5000) {
-			lineSlope = -lineSlope;
-		}
+		a = random.nextFloat() * 2 - 1;
+		b = random.nextFloat() * 2 - 1;
 
 		maxHeight = 55 + random.nextInt(50);
 		yStart = 30;
@@ -61,7 +58,8 @@ public class CanyonArchGenerator extends StructurePiece {
 
 		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
 
-		lineSlope = tag.getInt("LineSlope");
+		a = tag.getFloat("a");
+		b = tag.getFloat("b");
 		maxHeight = tag.getInt("MaxHeight");
 		radius = tag.getInt("Radius");
 		yStart = tag.getInt("YStart");
@@ -74,7 +72,8 @@ public class CanyonArchGenerator extends StructurePiece {
 	protected void toNbt(CompoundTag tag) {
 		tag.putLong("NoiseSeed", noise.getSeed());
 
-		tag.putInt("LineSlope", lineSlope);
+		tag.putFloat("a", a);
+		tag.putFloat("b", b);
 		tag.putInt("MaxHeight", maxHeight);
 		tag.putInt("Radius", radius);
 		tag.putInt("YStart", yStart);
@@ -132,14 +131,15 @@ public class CanyonArchGenerator extends StructurePiece {
 		// Finds the perpendicular distance from the current 2d coordinate from a 2d line with a random slope
 
 		// Formula: |ax + by + c| / sqrt(a^2 + b^2)
-		// a = lineSlope, b = 1, c = 0
+		// a = a, b = b, c = 0
 
-		// Top part, squared
-		double numeratorSq = lineSlope * offsetX + offsetZ;
+		// Top expression, squared
+		double numeratorSq = (a * offsetX) + (b * offsetZ);
+		//Square numerator so we don't have to call sqrt in denominator
 		numeratorSq *= numeratorSq;
 
-		// Bottom part, squared (avoids sqrt call)
-		double denominatorSq = lineSlope * lineSlope + 1;
+		// Bottom expression, squared
+		double denominatorSq = (a * a) + (b * b);
 
 		// Divide the two together, resulting in the squared distance
 		double lineDistanceSquared = numeratorSq / denominatorSq;

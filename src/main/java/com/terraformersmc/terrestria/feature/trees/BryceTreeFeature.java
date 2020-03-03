@@ -142,7 +142,7 @@ public class BryceTreeFeature extends SmallLogTree implements Branches, SmallRoo
 	private void placeLeaves(ModifiableTestableWorld world, Random random, BlockPos.Mutable pos, Set<BlockPos> blocks, BlockBox boundingBox, TreeFeatureConfig config) {
 		for (int i = 0; i < 2; i++) {
 			Shapes.circle(new BlockPos.Mutable(pos.toImmutable()), 1.0, position -> {
-				tryPlaceLeaves(world, pos, random, blocks, boundingBox, config);
+				tryPlaceLeaves(world, position, random, blocks, boundingBox, config);
 			});
 			pos.setOffset(Direction.UP);
 		}
