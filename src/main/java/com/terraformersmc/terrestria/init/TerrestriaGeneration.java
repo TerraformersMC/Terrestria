@@ -26,15 +26,17 @@ public class TerrestriaGeneration {
 		addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33, "caldera", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0, "cypress_forest", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0, "cypress_swamp", config, enabledBiomes);
-		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config, enabledBiomes);
 		addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0, "hemlock_rainforest", config, enabledBiomes);
+		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config, enabledBiomes);
 		addContinentalBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0, "japanese_maple_forest", config, enabledBiomes);
 		addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "lush_redwood_forest", config, enabledBiomes);
-		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "redwood_forest", config, enabledBiomes);
+		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config, enabledBiomes);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config, enabledBiomes);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
+		addContinentalBiome(CANYON_CLIFFS, OverworldClimate.DRY, 1.0, "canyon_cliffs", config, enabledBiomes);
+		addContinentalBiome(DUNES, OverworldClimate.DRY, 0.2, "dunes", config, enabledBiomes);
 		addContinentalBiome(OUTBACK, OverworldClimate.DRY, 1.0, "outback", config, enabledBiomes);
 
 		if(CALDERA_RIDGE != null) {
@@ -48,6 +50,11 @@ public class TerrestriaGeneration {
 			OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
 		}
 
+		if (CANYON_CLIFFS != null) {
+			OverworldBiomes.addHillsBiome(CANYON_CLIFFS, CANYON_ARCHES, 1);
+			OverworldBiomes.addEdgeBiome(CANYON_CLIFFS, CANYON_EDGE, 1);
+		}
+
 		if(CYPRESS_FOREST != null) {
 			OverworldBiomes.addHillsBiome(CYPRESS_FOREST, WOODED_CYPRESS_HILLS, 1.0);
 
@@ -56,6 +63,11 @@ public class TerrestriaGeneration {
 
 		if(DENSE_WOODLANDS != null) {
 			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1);
+		}
+
+		if (DUNES != null) {
+			OverworldBiomes.setRiverBiome(DUNES, null);
+			OverworldBiomes.addEdgeBiome(DUNES, DUNES_EDGE, 1);
 		}
 
 		if(HEMLOCK_RAINFOREST != null) {

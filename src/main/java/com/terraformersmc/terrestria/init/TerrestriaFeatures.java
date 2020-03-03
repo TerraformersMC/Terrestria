@@ -8,6 +8,10 @@ import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
+import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.arch.CanyonArchGenerator;
+import com.terraformersmc.terrestria.feature.arch.CanyonArchStructureFeature;
+import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.trees.templates.ScrubFeature;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
@@ -49,6 +53,9 @@ public class TerrestriaFeatures {
 
 	public static TreeDecoratorType<SakuraLeafPileDecorator> SAKURA_LEAF_PILE_DECORATOR;
 	public static TreeDecoratorType<FixSmallLogsDecorator> FIX_SMALL_LOGS_DECORATOR;
+
+	public static CanyonArchStructureFeature CANYON_ARCH_STRUCTURE;
+	public static StructurePieceType CANYON_ARCH_PIECE;
 
 
 	public static ScrubFeature OUTBACK_SCRUB;
@@ -140,6 +147,18 @@ public class TerrestriaFeatures {
 
 		OUTBACK_SCRUB = register("outback_scrub", new OutbackScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
 
+		FIX_SMALL_LOGS_DECORATOR = Registry.register(
+				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
+				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
+		);*/
+
+		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
+				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
+		);
+
+		Feature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
+
+		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
 		OAK_SHRUB = register("oak_shrub", new ScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
 	}
 
@@ -155,5 +174,9 @@ public class TerrestriaFeatures {
 
 	public static void addVolcanoStructure(Biome biome) {
 		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.VOLCANO_STRUCTURE.configure(FeatureConfig.DEFAULT));
+	}
+
+	public static void addCanyonArchStructure(Biome biome) {
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.CANYON_ARCH_STRUCTURE.configure(FeatureConfig.DEFAULT));
 	}
 }
