@@ -4,6 +4,7 @@ import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
 import net.minecraft.block.Blocks;
@@ -19,6 +20,8 @@ public class TerrestriaSurfaces {
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
+	public static CliffSurfaceBuilder CLIFF;
+	public static DuneSurfaceBuilder DUNES;
 	public static CliffSurfaceBuilder BASALT_CLIFF;
 	public static CanyonSurfaceBuilder CANYON_CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
@@ -26,6 +29,7 @@ public class TerrestriaSurfaces {
 	public static CliffSurfaceConfig SANDSTONE_CLIFF_CONFIG;
 	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
+	public static TernarySurfaceConfig DUNES_CONFIG;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -39,6 +43,8 @@ public class TerrestriaSurfaces {
 		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 62, v -> Blocks.SAND.getDefaultState()));
 
 		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+
+		DUNES = register("dunes", new DuneSurfaceBuilder(TernarySurfaceConfig::deserialize));
 
 		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
@@ -69,6 +75,12 @@ public class TerrestriaSurfaces {
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.STONE.getDefaultState()
+		);
+
+		DUNES_CONFIG = new TernarySurfaceConfig(
+			Blocks.SAND.getDefaultState(),
+			Blocks.SANDSTONE.getDefaultState(),
+			Blocks.SAND.getDefaultState()
 		);
 	}
 

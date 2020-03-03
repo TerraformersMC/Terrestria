@@ -35,6 +35,7 @@ public class TerrestriaGeneration {
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config, enabledBiomes);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
 		addContinentalBiome(CANYON_CLIFFS, OverworldClimate.DRY, 1.0, "canyon_cliffs", config, enabledBiomes);
+		addContinentalBiome(DUNES, OverworldClimate.DRY, 0.2, "dunes", config, enabledBiomes);
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
@@ -60,6 +61,11 @@ public class TerrestriaGeneration {
 
 		if(DENSE_WOODLANDS != null) {
 			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1);
+		}
+
+		if (DUNES != null) {
+			OverworldBiomes.setRiverBiome(DUNES, null);
+			OverworldBiomes.addEdgeBiome(DUNES, DUNES_EDGE, 1);
 		}
 
 		if(HEMLOCK_RAINFOREST != null) {
