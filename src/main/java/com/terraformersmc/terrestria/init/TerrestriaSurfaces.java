@@ -4,6 +4,9 @@ import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
+import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.RandomSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.RandomSurfaceConfig;
@@ -22,8 +25,15 @@ public class TerrestriaSurfaces {
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
 	public static CliffSurfaceBuilder CLIFF;
+	public static DuneSurfaceBuilder DUNES;
+	public static CliffSurfaceBuilder BASALT_CLIFF;
+	public static CanyonSurfaceBuilder CANYON_CLIFF;
 	public static CliffSurfaceConfig BASALT_CONFIG;
+	public static CliffSurfaceBuilder SANDSTONE_CLIFF;
+	public static CliffSurfaceConfig SANDSTONE_CLIFF_CONFIG;
+	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
+	public static TernarySurfaceConfig DUNES_CONFIG;
 	public static RandomSurfaceConfig OASIS_CONFIG;
 
 	public static void init() {
@@ -37,7 +47,13 @@ public class TerrestriaSurfaces {
 
 		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 62, v -> Blocks.SAND.getDefaultState()));
 
-		CLIFF = register("cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+
+		DUNES = register("dunes", new DuneSurfaceBuilder(TernarySurfaceConfig::deserialize));
+
+		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
+
+		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
 		RANDOM_BUILDER = register("random", new RandomSurfaceBuilder());
 
@@ -54,10 +70,30 @@ public class TerrestriaSurfaces {
 				TerrestriaBlocks.BASALT.plain.full.getDefaultState()
 		);
 
+		SANDSTONE_CLIFF_CONFIG = new CliffSurfaceConfig(
+			Blocks.SAND.getDefaultState(),
+			Blocks.TERRACOTTA.getDefaultState(),
+			Blocks.SAND.getDefaultState(),
+			Blocks.SMOOTH_SANDSTONE.getDefaultState()
+		);
+
+		SANDSTONE_CONFIG = new CliffSurfaceConfig(
+			Blocks.SAND.getDefaultState(),
+			Blocks.TERRACOTTA.getDefaultState(),
+			Blocks.SAND.getDefaultState(),
+			Blocks.SMOOTH_SANDSTONE.getDefaultState()
+		);
+
 		ALPS_CONFIG = new TernarySurfaceConfig(
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.SNOW_BLOCK.getDefaultState(),
 				Blocks.STONE.getDefaultState()
+		);
+
+		DUNES_CONFIG = new TernarySurfaceConfig(
+			Blocks.SAND.getDefaultState(),
+			Blocks.SANDSTONE.getDefaultState(),
+			Blocks.SAND.getDefaultState()
 		);
 	}
 
