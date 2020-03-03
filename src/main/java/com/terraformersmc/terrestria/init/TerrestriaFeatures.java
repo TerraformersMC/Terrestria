@@ -147,11 +147,6 @@ public class TerrestriaFeatures {
 
 		OUTBACK_SCRUB = register("outback_scrub", new OutbackScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
 
-		FIX_SMALL_LOGS_DECORATOR = Registry.register(
-				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
-				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
-		);*/
-
 		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
 				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
 		);
