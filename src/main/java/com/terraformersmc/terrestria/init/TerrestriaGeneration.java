@@ -1,35 +1,5 @@
 package com.terraformersmc.terrestria.init;
 
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_BEACH;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_FOOTHILLS;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CALDERA_RIDGE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CYPRESS_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.CYPRESS_SWAMP;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.DENSE_WOODLANDS;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.DENSE_WOODLANDS_EDGE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.HEMLOCK_CLEARING;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.HEMLOCK_RAINFOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.JAPANESE_MAPLE_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_CLEARING;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST_LAKE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_CLEARING;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.REDWOOD_FOREST_EDGE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SAKURA_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.SNOWY_HEMLOCK_FOREST;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND_BEACH;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.VOLCANIC_ISLAND_SHORE;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_CYPRESS_HILLS;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS;
-import static com.terraformersmc.terrestria.init.TerrestriaBiomes.WOODED_SAKURA_HILLS;
-
 import java.util.Set;
 
 import com.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
@@ -42,6 +12,8 @@ import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
+
 public class TerrestriaGeneration {
 	// Note: This can handle the cases of biomes not registered, but currently biomes are always registered
 
@@ -53,15 +25,16 @@ public class TerrestriaGeneration {
 		addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33, "caldera", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0, "cypress_forest", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0, "cypress_swamp", config, enabledBiomes);
-		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config, enabledBiomes);
 		addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0, "hemlock_rainforest", config, enabledBiomes);
+		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config, enabledBiomes);
 		addContinentalBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0, "japanese_maple_forest", config, enabledBiomes);
 		addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "lush_redwood_forest", config, enabledBiomes);
-		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "redwood_forest", config, enabledBiomes);
+		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config, enabledBiomes);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config, enabledBiomes);
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
+		addContinentalBiome(CANYON_CLIFFS, OverworldClimate.DRY, 1.0, "canyon_cliffs", config, enabledBiomes);
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
@@ -72,6 +45,11 @@ public class TerrestriaGeneration {
 			OverworldBiomes.setRiverBiome(CALDERA, null);
 			OverworldBiomes.setRiverBiome(CALDERA_BEACH, null);
 			OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
+		}
+
+		if (CANYON_CLIFFS != null) {
+			OverworldBiomes.addHillsBiome(CANYON_CLIFFS, CANYON_ARCHES, 1);
+			OverworldBiomes.addEdgeBiome(CANYON_CLIFFS, CANYON_EDGE, 1);
 		}
 
 		if(CYPRESS_FOREST != null) {
