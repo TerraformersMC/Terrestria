@@ -27,10 +27,6 @@ public class IslandHeadFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		super(function);
 	}
 
-	private boolean growMoss(int height, Random random) {
-		return random.nextInt(10) / (height + 1) > 5;
-	}
-
 	private boolean checkObstructions(TestableWorld world, BlockPos origin) {
 		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
 
@@ -78,7 +74,7 @@ public class IslandHeadFeature extends AbstractTreeFeature<TreeFeatureConfig> {
 		for (int y = 0; y < 6; y++) {
 			for (int x = 0; x < 3; x++) {
 				for (int z = 0; z < 3; z++) {
-					if (growMoss(y, random)) {
+					if ((float) random.nextInt(y + 1) / 3 < .15) {
 						world.setBlockState(pos, MOSS_BLOCK, 1);
 					} else {
 						world.setBlockState(pos, PRIMARY_BLOCK, 1);
