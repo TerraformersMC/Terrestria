@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -13,13 +13,13 @@ import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliage.PineFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TerrestriaFeatureConfigs {
@@ -32,6 +32,7 @@ public class TerrestriaFeatureConfigs {
 	public static final MegaTreeFeatureConfig MEGA_CYPRESS = basicMega(TerrestriaBlocks.CYPRESS);
 	public static final BranchedTreeFeatureConfig WILLOW = basic(TerrestriaBlocks.WILLOW);
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE = basic(TerrestriaBlocks.JAPANESE_MAPLE);
+	public static final TreeFeatureConfig ISLAND_HEADS = new TreeFeatureConfig.Builder(null, null).build();
 
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE_SHRUB = basic (
 			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
