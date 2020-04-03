@@ -10,14 +10,14 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import java.util.Random;
 
-public class RandomSurfaceBuilder extends SurfaceBuilder<RandomSurfaceConfig> {
+public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOutlinedSurfaceConfig> {
 
-	public RandomSurfaceBuilder() {
-		super(RandomSurfaceConfig::deserialize);
+	public ThreeLayerOutlineSurfaceBuilder() {
+		super(ThreeLayerOutlinedSurfaceConfig::deserialize);
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, long seed, RandomSurfaceConfig config) {
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, long seed, ThreeLayerOutlinedSurfaceConfig config) {
 		int localX = x & 15;
 		int localZ = z & 15;
 
@@ -38,12 +38,18 @@ public class RandomSurfaceBuilder extends SurfaceBuilder<RandomSurfaceConfig> {
 			} else if (currentBlock == Blocks.STONE) {
 				BlockState stateToSet;
 				if (run == 0) {
-					stateToSet = config.getTopMaterial(rand, noise);
+					stateToSet = config.getTopMaterial();
+					if (noise > 0.5) {
+						stateToSet = config.getMiddleMaterial();
+					}
+					if (noise > 0.7) {
+						stateToSet = config.getOuterMaterial();
+					}
 				} else if (run == -1) {
 					run = 1;
-					stateToSet = config.getUnderwaterMaterial(rand, noise);
+					stateToSet = config.getUnderwaterMaterial();
 				} else if (run < 5) {
-					stateToSet = config.getUnderMaterial(rand, noise);
+					stateToSet = config.getUnderMaterial();
 				} else {
 					stateToSet = STONE;
 				}

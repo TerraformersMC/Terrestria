@@ -7,9 +7,8 @@ import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
-import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.surface.RandomSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.RandomSurfaceConfig;
+import com.terraformersmc.terrestria.surface.ThreeLayerOutlineSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.ThreeLayerOutlinedSurfaceConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
-	public static RandomSurfaceBuilder RANDOM_BUILDER;
+	public static ThreeLayerOutlineSurfaceBuilder RANDOM_BUILDER;
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
@@ -34,7 +33,7 @@ public class TerrestriaSurfaces {
 	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 	public static TernarySurfaceConfig DUNES_CONFIG;
-	public static RandomSurfaceConfig OASIS_CONFIG;
+	public static ThreeLayerOutlinedSurfaceConfig OASIS_CONFIG;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -55,12 +54,14 @@ public class TerrestriaSurfaces {
 
 		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
-		RANDOM_BUILDER = register("random", new RandomSurfaceBuilder());
+		RANDOM_BUILDER = register("random", new ThreeLayerOutlineSurfaceBuilder());
 
-		OASIS_CONFIG = new RandomSurfaceConfig(
-			(rand, noise) -> noise > 0.5 ? noise > 0.7 ? Blocks.GRASS_BLOCK.getDefaultState() : Blocks.COARSE_DIRT.getDefaultState() : Blocks.SAND.getDefaultState(),
-			(rand, noise) -> Blocks.SANDSTONE.getDefaultState(),
-			(rand, noise) -> Blocks.SAND.getDefaultState()
+		OASIS_CONFIG = new ThreeLayerOutlinedSurfaceConfig(
+				Blocks.SAND.getDefaultState(),
+				Blocks.COARSE_DIRT.getDefaultState(), 0.5F,
+				Blocks.GRASS_BLOCK.getDefaultState(), 0.7F,
+				Blocks.SANDSTONE.getDefaultState(),
+				Blocks.SAND.getDefaultState()
 		);
 
 		BASALT_CONFIG = new CliffSurfaceConfig(

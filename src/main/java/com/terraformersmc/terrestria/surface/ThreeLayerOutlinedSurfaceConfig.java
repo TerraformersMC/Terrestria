@@ -3,16 +3,29 @@ package com.terraformersmc.terrestria.surface;
 import com.mojang.datafixers.Dynamic;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
-import java.util.Random;
+public class RandomSurfaceConfig extends TernarySurfaceConfig {
 
-public class RandomSurfaceConfig implements SurfaceConfig {
+	private final BlockState topMiddle;
+	private final BlockState
 
-	private final RandomNoiseFunction<BlockState> top;
-	private final RandomNoiseFunction<BlockState> under;
-	private final RandomNoiseFunction<BlockState> underwater;
+	public RandomSurfaceConfig(BlockState top, BlockState topSecondary, BlockState under, BlockState underwater) {
+		super(top, under, underwater);
+		this.topMiddle = topSecondary;
+	}
 
+	public BlockState getTopMiddle() {
+		return topMiddle;
+	}
+
+	public static RandomSurfaceConfig deserialize(Dynamic<?> dynamic) {
+		TernarySurfaceConfig ternary = TernarySurfaceConfig.deserialize(dynamic);
+		BlockState topSecondary = (BlockState)dynamic.get("secondary_top_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
+		return new RandomSurfaceConfig(ternary.getTopMaterial(), ternary.getUnderMaterial(), ternary.getUnderwaterMaterial(), topSecondary);
+	}
+
+	/*
 	public RandomSurfaceConfig(RandomNoiseFunction<BlockState> topStateProvider, RandomNoiseFunction<BlockState> underStateProvider, RandomNoiseFunction<BlockState> underwaterStateProvider) {
 		this.top = topStateProvider;
 		this.under = underStateProvider;
@@ -53,5 +66,6 @@ public class RandomSurfaceConfig implements SurfaceConfig {
 		BlockState blockState_3 = (BlockState)dynamic_1.get("underwater_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
 		return new RandomSurfaceConfig((m, n) -> blockState_1, (m, n) -> blockState_2, (m, n) -> blockState_3);
 	}
+	 */
 
 }
