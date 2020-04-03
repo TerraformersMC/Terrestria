@@ -7,9 +7,8 @@ import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.RandomSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.RandomSurfaceConfig;
+import com.terraformersmc.terrestria.surface.TwoBlockWeightedRandomSurfaceConfig;
 import com.terraformersmc.terrestria.surface.UluruSurfaceBuilder;
 
 import net.minecraft.block.Blocks;
@@ -36,7 +35,7 @@ public class TerrestriaSurfaces {
 	public static TernarySurfaceConfig ALPS_CONFIG;
 	public static TernarySurfaceConfig DUNES_CONFIG;
 	public static RandomSurfaceBuilder RANDOM_BUILDER;
-	public static RandomSurfaceConfig OUTBACK_CONFIG;
+	public static TwoBlockWeightedRandomSurfaceConfig OUTBACK_CONFIG;
 	public static TernarySurfaceConfig OUTBACK_ULURU_CONFIG;
 	public static UluruSurfaceBuilder ULURU_BUILDER;
 
@@ -91,21 +90,22 @@ public class TerrestriaSurfaces {
 			Blocks.SANDSTONE.getDefaultState(),
 			Blocks.SAND.getDefaultState()
 		);
-		
+
 		RANDOM_BUILDER = register("random", new RandomSurfaceBuilder());
-		
-		OUTBACK_CONFIG = new RandomSurfaceConfig(
-				(rand, noise) -> rand.nextInt(3) == 0 ? Blocks.GRASS_BLOCK.getDefaultState() : Blocks.RED_SAND.getDefaultState(),
-				(rand, noise) -> Blocks.RED_SANDSTONE.getDefaultState(),
-				(rand, noise) -> Blocks.RED_SAND.getDefaultState()
+
+		OUTBACK_CONFIG = new TwoBlockWeightedRandomSurfaceConfig(
+				Blocks.RED_SAND.getDefaultState(), 3,
+				Blocks.GRASS_BLOCK.getDefaultState(),
+				Blocks.RED_SANDSTONE.getDefaultState(),
+				Blocks.RED_SAND.getDefaultState()
 		);
-		
+
 		OUTBACK_ULURU_CONFIG = new TernarySurfaceConfig(
 				Blocks.RED_SANDSTONE.getDefaultState(),
 				Blocks.RED_SANDSTONE.getDefaultState(),
 				Blocks.RED_SAND.getDefaultState()
 		);
-		
+
 		ULURU_BUILDER = register("uluru", new UluruSurfaceBuilder());
 	}
 

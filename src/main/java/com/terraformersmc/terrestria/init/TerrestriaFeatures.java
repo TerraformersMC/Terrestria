@@ -8,11 +8,9 @@ import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchStructureFeature;
-import com.terraformersmc.terrestria.feature.trees.*;
-import com.terraformersmc.terrestria.feature.trees.templates.ScrubFeature;
+import com.terraformersmc.terrestria.feature.trees.ScrubFeature;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
 import net.minecraft.block.Blocks;
@@ -145,7 +143,7 @@ public class TerrestriaFeatures {
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 
-		OUTBACK_SCRUB = register("outback_scrub", new OutbackScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
+		OUTBACK_SCRUB = register("outback_scrub", new ScrubFeature(BranchedTreeFeatureConfig::deserialize, false));
 
 		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
 				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)

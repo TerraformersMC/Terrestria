@@ -10,23 +10,23 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class RandomSurfaceBuilder extends SurfaceBuilder<RandomSurfaceConfig> {
+public class RandomSurfaceBuilder extends SurfaceBuilder<TwoBlockWeightedRandomSurfaceConfig> {
 
 	public RandomSurfaceBuilder() {
-		super(RandomSurfaceConfig::deserialize);
+		super(TwoBlockWeightedRandomSurfaceConfig::deserialize);
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, long seed, RandomSurfaceConfig config) {
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, long seed, TwoBlockWeightedRandomSurfaceConfig config) {
 		int localX = x & 15;
 		int localZ = z & 15;
-		
+
 		int run = -1;
 		BlockPos.Mutable chunkPos = new BlockPos.Mutable(localX, 0, localZ);
-		
+
 		for (int y = height; y >= 0; --y) {
 			chunkPos.setY(y);
-			
+
 			Block currentBlock = chunk.getBlockState(chunkPos).getBlock();
 			++run;
 			if (currentBlock == Blocks.WATER) {
@@ -38,12 +38,12 @@ public class RandomSurfaceBuilder extends SurfaceBuilder<RandomSurfaceConfig> {
 			} else if (currentBlock == Blocks.STONE) {
 				BlockState stateToSet;
 				if (run == 0) {
-					stateToSet = config.getTopMaterial(rand, noise);
+					stateToSet = rand.nextInt(config.getPrimaryFactor()) == 0 ? config.getSecondaryMaterial() : config.getPrimaryMaterial();
 				} else if (run == -1) {
 					run = 1;
-					stateToSet = config.getUnderwaterMaterial(rand, noise);
+					stateToSet = config.getUnderwaterMaterial();
 				} else if (run < 5) {
-					stateToSet = config.getUnderMaterial(rand, noise);
+					stateToSet = config.getUnderMaterial();
 				} else {
 					stateToSet = STONE;
 				}
