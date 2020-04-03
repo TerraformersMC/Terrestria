@@ -5,67 +5,43 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
-public class RandomSurfaceConfig extends TernarySurfaceConfig {
+public class ThreeLayerOutlinedSurfaceConfig extends TernarySurfaceConfig {
 
-	private final BlockState topMiddle;
-	private final BlockState
+	private final BlockState middle;
+	private final float middleNoisePoint;
+	private final BlockState outer;
+	private final float outerNoisePoint;
 
-	public RandomSurfaceConfig(BlockState top, BlockState topSecondary, BlockState under, BlockState underwater) {
-		super(top, under, underwater);
-		this.topMiddle = topSecondary;
+	public ThreeLayerOutlinedSurfaceConfig(BlockState inner, BlockState topMiddle, float middleNoisePoint, BlockState topEdge, float outerNoisePoint, BlockState under, BlockState underwater) {
+		super(inner, under, underwater);
+		this.middle = topMiddle;
+		this.middleNoisePoint = middleNoisePoint;
+		this.outer = topEdge;
+		this.outerNoisePoint = outerNoisePoint;
 	}
 
-	public BlockState getTopMiddle() {
-		return topMiddle;
+	public BlockState getMiddleMaterial() {
+		return middle;
 	}
 
-	public static RandomSurfaceConfig deserialize(Dynamic<?> dynamic) {
+	public float getMiddleNoisePoint() {
+		return middleNoisePoint;
+	}
+
+	public BlockState getOuterMaterial() {
+		return outer;
+	}
+
+	public float getOuterNoisePoint() {
+		return outerNoisePoint;
+	}
+
+	public static ThreeLayerOutlinedSurfaceConfig deserialize(Dynamic<?> dynamic) {
 		TernarySurfaceConfig ternary = TernarySurfaceConfig.deserialize(dynamic);
-		BlockState topSecondary = (BlockState)dynamic.get("secondary_top_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
-		return new RandomSurfaceConfig(ternary.getTopMaterial(), ternary.getUnderMaterial(), ternary.getUnderwaterMaterial(), topSecondary);
+		BlockState topMiddle = (BlockState)dynamic.get("middle_top_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
+		float middleNoise = dynamic.get("middle_top_noise").asFloat(0.5F);
+		BlockState topEdge = (BlockState)dynamic.get("edge_top_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
+		float outerNoise = dynamic.get("middle_top_noise").asFloat(0.7F);
+		return new ThreeLayerOutlinedSurfaceConfig(ternary.getTopMaterial(), topMiddle, middleNoise, topEdge, outerNoise, ternary.getUnderMaterial(), ternary.getUnderwaterMaterial());
 	}
-
-	/*
-	public RandomSurfaceConfig(RandomNoiseFunction<BlockState> topStateProvider, RandomNoiseFunction<BlockState> underStateProvider, RandomNoiseFunction<BlockState> underwaterStateProvider) {
-		this.top = topStateProvider;
-		this.under = underStateProvider;
-		this.underwater = underwaterStateProvider;
-	}
-
-	public BlockState getTopMaterial(Random rand, double noiseVal) {
-		return this.top.apply(rand, noiseVal);
-	}
-
-	public BlockState getUnderMaterial(Random rand, double noiseVal) {
-		return this.under.apply(rand, noiseVal);
-	}
-
-	public BlockState getUnderwaterMaterial(Random rand, double noiseVal) {
-		return this.underwater.apply(rand, noiseVal);
-	}
-
-	@Override
-	@Deprecated
-	public BlockState getTopMaterial() {
-		return this.top.apply(new Random(), 0);
-	}
-
-	@Override
-	@Deprecated
-	public BlockState getUnderMaterial() {
-		return this.under.apply(new Random(), 0);
-	}
-
-	public static interface RandomNoiseFunction<T> {
-		public T apply(Random rand, double noiseVal);
-	}
-
-	public static RandomSurfaceConfig deserialize(Dynamic<?> dynamic_1) {
-		BlockState blockState_1 = (BlockState)dynamic_1.get("top_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
-		BlockState blockState_2 = (BlockState)dynamic_1.get("under_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
-		BlockState blockState_3 = (BlockState)dynamic_1.get("underwater_material").map(BlockState::deserialize).orElse(Blocks.AIR.getDefaultState());
-		return new RandomSurfaceConfig((m, n) -> blockState_1, (m, n) -> blockState_2, (m, n) -> blockState_3);
-	}
-	 */
-
 }
