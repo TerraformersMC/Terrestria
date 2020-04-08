@@ -41,17 +41,17 @@ public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		}
 
 		setToDirt(world, origin.down());
-		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, box, config, height);
+		growTrunk(world, rand, origin.mutableCopy(), logs, box, config, height);
 		growLeaves(world, rand, origin, leaves, box, config, height, bareTrunkHeight, maxLeafRadius);
 
 		return true;
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int i = 0; i < bareTrunkHeight; i++) {
-			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+			if (!canTreeReplace(world, pos.move(Direction.UP))) {
 				return false;
 			}
 		}
@@ -76,7 +76,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		int radiusTarget = 1;
 		boolean topCone = true;
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = height; dY >= bareTrunkHeight; dY--) {
 			for (int dZ = -radius; dZ <= radius; dZ++) {
@@ -118,7 +118,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		for (int i = 0; i < height; i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
 
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 

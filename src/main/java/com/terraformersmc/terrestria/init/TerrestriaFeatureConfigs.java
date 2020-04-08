@@ -16,6 +16,7 @@ import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
 
@@ -67,9 +68,9 @@ public class TerrestriaFeatureConfigs {
 		BranchedTreeFeatureConfig.Builder builder = new BranchedTreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new SpruceFoliagePlacer(2, 1));
-
-		return builder.baseHeight(6).heightRandA(3).trunkHeight(1).trunkHeightRandom(1).trunkTopOffsetRandom(2).noVines().build();
+				new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
+				new StraightTrunkPlacer(6, 3, 2));
+		return builder.noVines().build();
 	}
 
 	private static FallenLogFeatureConfig fallenLog(WoodBlocks blocks) {
@@ -91,7 +92,7 @@ public class TerrestriaFeatureConfigs {
 		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
 		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
-		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).build();
+		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null, new StraightTrunkPlacer(0, 0, 0)).build();
 	}
 
 	private static MegaTreeFeatureConfig basicMega(WoodBlocks blocks) {
@@ -113,7 +114,7 @@ public class TerrestriaFeatureConfigs {
 		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
 		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
-		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).treeDecorators(decorators).build();
+		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null, new StraightTrunkPlacer(0, 0, 0)).treeDecorators(decorators).build();
 	}
 
 	private static BranchedTreeFeatureConfig basicJungle(WoodBlocks blocks) {
@@ -124,10 +125,7 @@ public class TerrestriaFeatureConfigs {
 		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
 		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
-		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, new BlobFoliagePlacer(2, 0))
-				.baseHeight(4)
-				.heightRandA(8)
-				.foliageHeight(3)
+		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 8, 0))
 				.treeDecorators(ImmutableList.of(
 						new CocoaBeansTreeDecorator(0.2F),
 						new TrunkVineTreeDecorator(),

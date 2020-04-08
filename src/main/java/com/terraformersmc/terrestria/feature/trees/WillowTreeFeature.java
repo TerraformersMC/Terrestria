@@ -1,15 +1,15 @@
 package com.terraformersmc.terrestria.feature.trees;
 
 import com.mojang.datafixers.Dynamic;
+import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LogBlock;
+import net.minecraft.block.PillarBlock;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import com.terraformersmc.terraform.util.*;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
 import java.util.Random;
@@ -50,12 +50,12 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 		setToDirt(world, below);
 
 		// Grow the trunk
-		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, leaves, box, config, height);
-		growBranches(world, rand, new BlockPos.Mutable(origin.offset(Direction.UP, height / 3)), logs, box, config, (int) maxRadius - 1);
-		growBranches(world, rand, new BlockPos.Mutable(origin.offset(Direction.UP, (height / 2) + 1)), logs, box, config, (int) (maxRadius * radiusFactor(height / 2, height)));
+		growTrunk(world, rand, origin.mutableCopy(), logs, leaves, box, config, height);
+		growBranches(world, rand, origin.offset(Direction.UP, height / 3).mutableCopy(), logs, box, config, (int) maxRadius - 1);
+		growBranches(world, rand, origin.offset(Direction.UP, (height / 2) + 1).mutableCopy(), logs, box, config, (int) (maxRadius * radiusFactor(height / 2, height)));
 
 		// Grow the leaves
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 		growLeaves(world, rand, pos, leaves, box, config, height, maxRadius, minRadius);
 
 		return true;
@@ -66,7 +66,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 		// Grows the trunk at 80% of it's total height (so the trunk doesn't poke out)
 		for (int i = 0; i < (height * .8); i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 
 		// Make sure there are leaf blocks on the top of the tree
@@ -81,24 +81,24 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 		BlockPos origin = pos.toImmutable();
 		int branchLength = maxRadius - 2;
 
-		pos.setOffset(Direction.WEST, branchLength);
+		pos.move(Direction.WEST, branchLength);
 		for (int x = -branchLength; x <= branchLength; x++) {
 			if (isAirOrLeaves(world, pos)) {
 				BlockState state = config.trunkProvider.getBlockState(rand, pos);
 
-				PortUtil.setBlockState(logs, world, pos, state.with(LogBlock.AXIS, Direction.WEST.getAxis()), box);
+				PortUtil.setBlockState(logs, world, pos, state.with(PillarBlock.AXIS, Direction.WEST.getAxis()), box);
 			}
-			pos.setOffset(Direction.EAST);
+			pos.move(Direction.EAST);
 		}
 
-		pos.set(origin).setOffset(Direction.NORTH, branchLength);
+		pos.set(origin).move(Direction.NORTH, branchLength);
 		for (int z = -branchLength; z <= branchLength; z++) {
 			if (isAirOrLeaves(world, pos)) {
 				BlockState state = config.trunkProvider.getBlockState(rand, pos);
 
-				PortUtil.setBlockState(logs, world, pos, state.with(LogBlock.AXIS, Direction.NORTH.getAxis()), box);
+				PortUtil.setBlockState(logs, world, pos, state.with(PillarBlock.AXIS, Direction.NORTH.getAxis()), box);
 			}
-			pos.setOffset(Direction.SOUTH);
+			pos.move(Direction.SOUTH);
 		}
 
 		// Reset the branches
@@ -114,11 +114,11 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 
 			randHolder = rand.nextInt(3);
 			for (int d = 0; d < randHolder; d++) {
-				pos.setOffset(Direction.DOWN);
+				pos.move(Direction.DOWN);
 				setLeavesBlockState(world, rand, pos, leaves, box, config);
 			}
 
-			pos.setOffset(Direction.UP, randHolder);
+			pos.move(Direction.UP, randHolder);
 		}
 	}
 
@@ -166,7 +166,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = height / 3; dY < height; dY++) {
 			for (int dZ = -radius; dZ <= radius; dZ++) {
@@ -183,7 +183,7 @@ public class WillowTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 		pos.set(origin.getX(), origin.getY(), origin.getZ());
 
 		for (int i = 0; i < height / 3; i++) {
-			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+			if (!canTreeReplace(world, pos.move(Direction.UP))) {
 				return false;
 			}
 		}

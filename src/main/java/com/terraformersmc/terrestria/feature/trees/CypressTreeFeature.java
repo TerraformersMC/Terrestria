@@ -43,16 +43,16 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 
 		setToDirt(world, below);
 
-		growTrunk(logs, rand, world, new BlockPos.Mutable(origin), height, box, config);
+		growTrunk(logs, rand, world, origin.mutableCopy(), height, box, config);
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 		growLeaves(leaves, rand, world, pos, height, maxRadius, box, config);
 
 		return true;
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = 2; dY < height; dY++) {
 			for (int dZ = -radius; dZ <= radius; dZ++) {
@@ -69,7 +69,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		pos.set(origin.getX(), origin.getY(), origin.getZ());
 
 		for (int i = 0; i < height + 4; i++) {
-			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+			if (!canTreeReplace(world, pos.move(Direction.UP))) {
 				return false;
 			}
 		}
@@ -82,7 +82,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		for (int i = 0; i < (height * .6); i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
 
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 

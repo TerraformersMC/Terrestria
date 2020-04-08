@@ -21,11 +21,11 @@ public class SakuraTreeFeature extends JapaneseTreeFeature {
 	@Override
 	public void placeBranch(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, Direction direction, int length) {
 		for (int i = 0; i < length - 1; i++) {
-			pos.setOffset(direction);
+			pos.move(direction);
 			setLogBlockState(world, rand, pos, logs, box, config);
 		}
 
-		pos.setOffset(direction);
+		pos.move(direction);
 		tryPlaceLeaves(world, rand, pos, logs, leaves, box, config);
 	}
 }

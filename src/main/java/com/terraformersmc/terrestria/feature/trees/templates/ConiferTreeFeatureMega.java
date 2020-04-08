@@ -65,14 +65,14 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureC
 		}
 
 		growLeaves(logs, world, origin, height, bareTrunkHeight, maxRadius, box);
-		growTrunk(logs, world, new BlockPos.Mutable(origin), height, box);
-		growRoots(logs, world, new BlockPos.Mutable(origin), bareTrunkHeight + 2, rand, box);
+		growTrunk(logs, world, origin.mutableCopy(), height, box);
+		growRoots(logs, world, origin.mutableCopy(), bareTrunkHeight + 2, rand, box);
 
 		return true;
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int i = 0; i < bareTrunkHeight; i++) {
 			boolean canReplaceAll =
@@ -106,7 +106,7 @@ public class ConiferTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureC
 		int radiusTarget = 1;
 		boolean topCone = true;
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = height + EXTRA_LEAVES_HEIGHT; dY >= bareTrunkHeight; dY--) {
 			for (int dZ = -radius; dZ <= radius + 1; dZ++) {

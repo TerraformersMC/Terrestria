@@ -39,14 +39,14 @@ public class RubberTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 		}
 
 		setToDirt(world, below);
-		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, box, config, height);
-		growBranches(world, rand, new BlockPos.Mutable(origin), logs, leaves, box, config, height);
+		growTrunk(world, rand, origin.mutableCopy(), logs, box, config, height);
+		growBranches(world, rand, origin.mutableCopy(), logs, leaves, box, config, height);
 
 		return true;
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = 0; dY < height; dY++) {
 			pos.setY(origin.getY() + dY);
@@ -62,7 +62,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
 		for (int i = 0; i < height; i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 
@@ -115,7 +115,7 @@ public class RubberTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCo
 
 				for (Direction direction : Direction.values()) {
 					pos.set(x + movedX, y + baseY + offsetY, z + movedZ);
-					pos.setOffset(direction);
+					pos.move(direction);
 
 					setLeavesBlockState(world, rand, pos, leaves, box, config);
 				}

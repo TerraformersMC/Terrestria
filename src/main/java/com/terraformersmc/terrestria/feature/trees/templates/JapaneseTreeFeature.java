@@ -49,10 +49,10 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 		}
 
 		// Place the log blocks making up the main trunk
-		growTrunk(world, rand, new BlockPos.Mutable(origin), logs, box, config, height);
+		growTrunk(world, rand, origin.mutableCopy(), logs, box, config, height);
 
 		// Grow leaves and branches from the trunk
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
+		BlockPos.Mutable pos = origin.mutableCopy().move(Direction.UP, bareTrunkHeight);
 		growLeaves(world, rand, pos, logs, leaves, box, config, height - bareTrunkHeight, maxRadius);
 
 		// TODO: Better check
@@ -64,10 +64,10 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int maxRadius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int i = 0; i < bareTrunkHeight; i++) {
-			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+			if (!canTreeReplace(world, pos.move(Direction.UP))) {
 				return false;
 			}
 		}
@@ -93,7 +93,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
 		for (int i = 0; i < height; i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 
@@ -131,7 +131,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 				Direction direction = directions.next();
 				placeBranch(world, rand, pos, logs, leaves, box, config, direction, (int) Math.ceil(innerRadius));
 
-				pos.setOffset(direction);
+				pos.move(direction);
 
 				tryPlaceLeaves(world, rand, pos, logs, leaves, box, config);
 			}

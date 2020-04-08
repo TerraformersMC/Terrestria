@@ -24,6 +24,7 @@ public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Ro
 		this.tree = tree;
 	}
 
+	@Override
 	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
@@ -35,6 +36,7 @@ public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Ro
 		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, box);
 	}
 
+	@Override
 	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox box) {
 		if (rand.nextInt(5) == 0) {
 			return;
@@ -47,7 +49,7 @@ public class RedwoodTreeFeatureMega extends ConiferTreeFeatureMega implements Ro
 				PortUtil.setBlockState(logs, world, bottom, tree.getBark(), box);
 			}
 
-			bottom.setOffset(Direction.UP);
+			bottom.move(Direction.UP);
 		}
 	}
 

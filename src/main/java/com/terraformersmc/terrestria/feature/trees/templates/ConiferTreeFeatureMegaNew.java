@@ -27,7 +27,7 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatu
 	public void growTrunk(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, int trunkRadius, BlockBox box, Random rand) {
 		for (int i = 0; i < (height * 0.83); i++) {
 			Shapes.circle(pos, trunkRadius(getMaxTrunkRadius(rand), i, (height * 0.83)), position -> PortUtil.setBlockState(logs, world, position, tree.getLog(), box));
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 
@@ -65,8 +65,8 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatu
 
 		//Set the block below the trunk to dirt (because vanilla does it)
 		setToDirt(world, origin.down());
-		growTrunk(logs, world, new BlockPos.Mutable(origin), height + bareTrunkHeight, trunkRadius, box, rand);
-		growLeaves(logs, world, new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, box);
+		growTrunk(logs, world, origin.mutableCopy(), height + bareTrunkHeight, trunkRadius, box, rand);
+		growLeaves(logs, world, origin.mutableCopy().move(Direction.UP, bareTrunkHeight), height, maxLeafRadius, shrinkAmount, leafLayers, box);
 
 		return true;
 	}
@@ -123,10 +123,10 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatu
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight, int radius) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int i = 0; i < bareTrunkHeight; i++) {
-			if (!canTreeReplace(world, pos.setOffset(Direction.UP))) {
+			if (!canTreeReplace(world, pos.move(Direction.UP))) {
 				return false;
 			}
 		}

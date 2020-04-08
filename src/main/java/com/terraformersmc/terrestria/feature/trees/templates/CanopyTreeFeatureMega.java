@@ -82,19 +82,19 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 			}
 		}
 
-		growTrunk(logs, world, new BlockPos.Mutable(origin), height / 2, box);
+		growTrunk(logs, world, origin.mutableCopy(), height / 2, box);
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin).setOffset(Direction.UP, bareTrunkHeight);
+		BlockPos.Mutable pos = origin.mutableCopy().move(Direction.UP, bareTrunkHeight);
 		growBranches(logs, leaves, world, pos, height - bareTrunkHeight, height / 2 - bareTrunkHeight, rand, box);
 
-		pos.set(origin).setOffset(Direction.DOWN, 2);
+		pos.set(origin).move(Direction.DOWN, 2);
 		growRoots(logs, world, pos, bareTrunkHeight + 2, rand, box);
 
 		return true;
 	}
 
 	private boolean checkForObstructions(TestableWorld world, BlockPos origin, int height, int bareTrunkHeight) {
-		BlockPos.Mutable pos = new BlockPos.Mutable(origin);
+		BlockPos.Mutable pos = origin.mutableCopy();
 
 		for (int dY = 0; dY < bareTrunkHeight; dY++) {
 			for (int dZ = 0; dZ < 2; dZ++) {
@@ -181,7 +181,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 			int z = pos.getZ();
 			int radius = maxRadius == 4 ? 3 + rand.nextInt(2) : 2 + rand.nextInt(maxRadius - 1);
 
-			pos.setOffset(Direction.DOWN);
+			pos.move(Direction.DOWN);
 
 			for (int i = -1; i <= 1; i++) {
 				pos.set(x, pos.getY(), z);
@@ -194,11 +194,12 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 					}
 				});
 
-				pos.setOffset(Direction.UP);
+				pos.move(Direction.UP);
 			}
 		}
 	}
 
+	@Override
 	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, int baseTrunkHeight, Random rand, BlockBox box) {
 		int x = pos.getX();
 		int y = pos.getY();
@@ -210,6 +211,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 		tryGrowRoot(logs, world, pos.set(x + rand.nextInt(2), y, z + 2), baseTrunkHeight, rand, box);
 	}
 
+	@Override
 	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, int baseTrunkHeight, Random rand, BlockBox box) {
 		if (rand.nextInt(5) == 0) {
 			return;
@@ -222,7 +224,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 				PortUtil.setBlockState(logs, world, bottom, tree.getBark(), box);
 			}
 
-			bottom.setOffset(Direction.UP);
+			bottom.move(Direction.UP);
 		}
 	}
 

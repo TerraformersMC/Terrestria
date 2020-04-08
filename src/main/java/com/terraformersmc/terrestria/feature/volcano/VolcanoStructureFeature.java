@@ -29,6 +29,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		super(function);
 	}
 
+	@Override
 	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
 		chunkX += VOLCANO_SPACING * scaleX;
 		chunkZ += VOLCANO_SPACING * scaleZ;
@@ -40,7 +41,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		int finalChunkX = chunkX / VOLCANO_SPACING;
 		int finalChunkZ = chunkZ / VOLCANO_SPACING;
 
-		((ChunkRandom) random_1).setStructureSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
+		((ChunkRandom) random_1).setRegionSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
 
 		// Get random position within grid area
 		finalChunkX *= VOLCANO_SPACING;
@@ -70,14 +71,17 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return false;
 	}
 
+	@Override
 	public StructureFeature.StructureStartFactory getStructureStartFactory() {
 		return VolcanoStructureStart::new;
 	}
 
+	@Override
 	public String getName() {
 		return "Volcano";
 	}
 
+	@Override
 	public int getRadius() {
 		return 12;
 	}
@@ -87,6 +91,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 			super(feature, chunkX, chunkZ, box, references, baseSeed);
 		}
 
+		@Override
 		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {
 			VolcanoGenerator volcano = new VolcanoGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
 

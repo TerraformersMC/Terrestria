@@ -31,7 +31,7 @@ public class MixinEatGrassGoal {
 
 	@Inject(method = "canStart", at = @At(value = "FIELD", target = "Lnet/minecraft/block/Blocks;GRASS_BLOCK:Lnet/minecraft/block/Block;"), cancellable = true)
 	private void canStart(CallbackInfoReturnable<Boolean> callbackInfo) {
-		BlockPos pos = new BlockPos(this.mob);
+		BlockPos pos = this.mob.getBlockPos();
 
 		if(this.world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
 			callbackInfo.setReturnValue(true);
@@ -41,7 +41,7 @@ public class MixinEatGrassGoal {
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void tick(CallbackInfo info) {
 		if (this.timer - 1 == 4) {
-			BlockPos pos = new BlockPos(this.mob);
+			BlockPos pos = this.mob.getBlockPos();
 			BlockPos downPos = pos.down();
 
 			if (this.world.getBlockState(downPos).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {

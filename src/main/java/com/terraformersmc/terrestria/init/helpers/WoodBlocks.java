@@ -43,8 +43,8 @@ public class WoodBlocks {
 		} else {
 			blocks.leaves = TerrestriaRegistry.register(name + "_leaves", new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(colors.leaves).build()));
 		}
-		blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
-		blocks.strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", new LogBlock(colors.planks, FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
+		blocks.strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new PillarBlock(FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
+		blocks.strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", new PillarBlock(FabricBlockSettings.copy(Blocks.OAK_LOG).materialColor(colors.planks).build()));
 
 		blocks.addTreeFireInfo(registry);
 

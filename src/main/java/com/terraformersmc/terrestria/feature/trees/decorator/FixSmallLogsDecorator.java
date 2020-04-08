@@ -60,6 +60,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 		}
 	}
 
+	@Override
 	public <T> T serialize(DynamicOps<T> ops) {
 		return new Dynamic<T>(
 				ops,

@@ -1,11 +1,9 @@
 package com.terraformersmc.terrestria.block;
 
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.FlowerBlock;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
@@ -18,7 +16,7 @@ public class BasaltFlowerBlock extends FlowerBlock {
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, EntityContext context) {
+	public VoxelShape getOutlineShape(BlockState state, BlockView view, BlockPos pos, ShapeContext context) {
 		return Blocks.GRASS.getDefaultState().getOutlineShape(view, pos, context);
 	}
 }
