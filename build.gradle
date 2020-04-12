@@ -110,18 +110,19 @@ buildAndAttemptRelease {
 	def releaseType = project.default_release_type
 
 	proc.in.eachLine { line -> // Loops over the lines the git log command returns
+		def processedLine = line.toString()
 		if (cancel) {
 			return
 		}
 		if (latestCommit) {
-			if (line.toString().contains("#release")) {
-				if (line.toString().contains("#release stable")) {
+			if (processedLine.contains("#release")) {
+				if (processedLine.contains("#release stable")) {
 					releaseType = "stable"
-				} else if (line.toString().contains("#release beta")) {
+				} else if (processedLine.contains("#release beta")) {
 					releaseType = "beta"
 					curseReleaseType = "beta"
 					stabilitySuffix = " (Beta)"
-				} else if (line.toString().contains("#release alpha")) {
+				} else if (processedLine.contains("#release alpha")) {
 					releaseType = "alpha"
 					curseReleaseType = "alpha"
 					stabilitySuffix = " (Alpha)"
@@ -129,24 +130,27 @@ buildAndAttemptRelease {
 				release = true
 			}
 		}
-		if (!latestCommit && line.toString().contains("#release")) {
+		if (!latestCommit && processedLine.contains("#release")) {
 			// Cancel if it finds another release (that isn't the first one)
 			cancel = true
 			return
 		}
 		if (release) {
 			if (project.changelog_type == "commit_change_tags") {
-				def splitLine = line.split(/\#change /)
+				def splitLine = processedLine.split(/\#change /)
+				println "Adding changelog lines for commit $processedLine"
 				def firstSplit = true
 				splitLine.each { string ->
+					println " Commit: $processedLine - has string: $string"
 					if (firstSplit) {
 						firstSplit = false
 						return
 					}
 					if (string.startsWith("\"")) {
 						try {
-							def matches = string =~ /"(.*)"/
+							def matches = string =~ /"(.*?)"/
 							def message = matches[0][1]
+							println "   Read as message: $message"
 							if (!message.isAllWhitespace()) {
 								if (changes.length() == 0) {
 									changes << "- $message"
@@ -160,13 +164,13 @@ buildAndAttemptRelease {
 					}
 				}
 			} else if (project.changelog_type == "literal_commits") {
-				if (project.changelog_hide_unimportant_commits.toBoolean() && line.startsWith("Merge") && line.contains("branch")) {
+				if (project.changelog_hide_unimportant_commits.toBoolean() && processedLine.startsWith("Merge") && processedLine.contains("branch")) {
 					return
 				}
 				if (changes.length() == 0) {
-					changes << "- $line"
+					changes << "- $processedLine"
 				} else {
-					changes << "\n- $line"
+					changes << "\n- $processedLine"
 				}
 			}
 		}
@@ -179,6 +183,7 @@ buildAndAttemptRelease {
 	if (release) {
 		println "This build IS scheduled to be released"
 		releaseChangelog = changes.toString()
+		println releaseChangelog
 		dependsOn tasks.getByName("curseforge")
 	} else {
 		println "This build is NOT scheduled to be released"
