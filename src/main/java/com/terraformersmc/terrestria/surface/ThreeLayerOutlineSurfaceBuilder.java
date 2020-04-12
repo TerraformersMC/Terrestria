@@ -39,10 +39,10 @@ public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOu
 				BlockState stateToSet;
 				if (run == 0) {
 					stateToSet = config.getTopMaterial();
-					if (noise > 0.5) {
+					if (noise > config.getMiddleNoisePoint()) {
 						stateToSet = config.getMiddleMaterial();
 					}
-					if (noise > 0.7) {
+					if (noise > config.getOuterNoisePoint()) {
 						stateToSet = config.getOuterMaterial();
 					}
 				} else if (run == -1) {

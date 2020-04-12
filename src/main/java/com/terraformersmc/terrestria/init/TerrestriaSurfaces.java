@@ -19,7 +19,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
-	public static ThreeLayerOutlineSurfaceBuilder RANDOM_BUILDER;
+	public static ThreeLayerOutlineSurfaceBuilder THREE_LAYER_OUTLINE;
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
@@ -54,7 +54,7 @@ public class TerrestriaSurfaces {
 
 		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
-		RANDOM_BUILDER = register("random", new ThreeLayerOutlineSurfaceBuilder());
+		THREE_LAYER_OUTLINE = register("random", new ThreeLayerOutlineSurfaceBuilder());
 
 		OASIS_CONFIG = new ThreeLayerOutlinedSurfaceConfig(
 				Blocks.SAND.getDefaultState(),

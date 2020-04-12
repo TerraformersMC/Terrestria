@@ -49,7 +49,7 @@ public class LushDesertBiomes {
 		);
 
 		TerrestriaBiomes.OASIS = TerrestriaBiomes.register("oasis", template.builder()
-			.configureSurfaceBuilder(TerrestriaSurfaces.RANDOM_BUILDER, TerrestriaSurfaces.OASIS_CONFIG)
+			.configureSurfaceBuilder(TerrestriaSurfaces.THREE_LAYER_OUTLINE, TerrestriaSurfaces.OASIS_CONFIG)
 			.depth(-0.2F)
 			.scale(0.07F)
 			.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
