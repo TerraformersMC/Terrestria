@@ -49,6 +49,11 @@ public final class ClimaticWorldTypeCompat {
 			ClimateBiomes.addBiome(Climate.WARM_TEMPERATE, TerrestriaBiomes.JAPANESE_MAPLE_FOREST, 10);
 		}
 
+		// Lush Desert
+		if (enabledBiomes.contains("lush_desert")) {
+			ClimateBiomes.addBiome(Climate.TROPICAL_DESERT, TerrestriaBiomes.LUSH_DESERT, 3);
+		}
+
 		// Lush Redwood Forest
 		if (enabledBiomes.contains("lush_redwood_forest")) {
 			if (enabledBiomes.contains("redwood_forest")) {

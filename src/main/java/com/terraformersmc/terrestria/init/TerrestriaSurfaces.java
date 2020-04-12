@@ -7,6 +7,8 @@ import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.ThreeLayerOutlineSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.ThreeLayerOutlinedSurfaceConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -17,6 +19,7 @@ import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
+	public static ThreeLayerOutlineSurfaceBuilder THREE_LAYER_OUTLINE;
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
@@ -30,6 +33,7 @@ public class TerrestriaSurfaces {
 	public static CliffSurfaceConfig SANDSTONE_CONFIG;
 	public static TernarySurfaceConfig ALPS_CONFIG;
 	public static TernarySurfaceConfig DUNES_CONFIG;
+	public static ThreeLayerOutlinedSurfaceConfig OASIS_CONFIG;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -49,6 +53,16 @@ public class TerrestriaSurfaces {
 		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
 		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
+
+		THREE_LAYER_OUTLINE = register("random", new ThreeLayerOutlineSurfaceBuilder());
+
+		OASIS_CONFIG = new ThreeLayerOutlinedSurfaceConfig(
+				Blocks.SAND.getDefaultState(),
+				Blocks.COARSE_DIRT.getDefaultState(), 0.5F,
+				Blocks.GRASS_BLOCK.getDefaultState(), 0.7F,
+				Blocks.SANDSTONE.getDefaultState(),
+				Blocks.SAND.getDefaultState()
+		);
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
 				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),

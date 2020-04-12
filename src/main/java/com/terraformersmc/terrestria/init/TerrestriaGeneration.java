@@ -29,6 +29,7 @@ public class TerrestriaGeneration {
 		addContinentalBiome(DENSE_WOODLANDS, OverworldClimate.DRY, 1.0, "dense_woodlands", config, enabledBiomes);
 		addContinentalBiome(JAPANESE_MAPLE_FOREST, OverworldClimate.TEMPERATE, 1.0, "japanese_maple_forest", config, enabledBiomes);
 		addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "lush_redwood_forest", config, enabledBiomes);
+		addContinentalBiome(LUSH_DESERT, OverworldClimate.DRY, 1.0, "lush_desert", config, enabledBiomes);
 		addContinentalBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "redwood_forest", config, enabledBiomes);
 		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config, enabledBiomes);
@@ -60,7 +61,7 @@ public class TerrestriaGeneration {
 		}
 
 		if(DENSE_WOODLANDS != null) {
-			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1);
+			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1.0);
 		}
 
 		if (DUNES != null) {
@@ -76,6 +77,10 @@ public class TerrestriaGeneration {
 
 		if(JAPANESE_MAPLE_FOREST != null) {
 			OverworldBiomes.addHillsBiome(JAPANESE_MAPLE_FOREST, WOODED_JAPANESE_MAPLE_HILLS, 1.0);
+		}
+
+		if(LUSH_DESERT != null) {
+			OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
 		}
 
 		if(LUSH_REDWOOD_FOREST != null) {
@@ -94,7 +99,7 @@ public class TerrestriaGeneration {
 
 		if(REDWOOD_FOREST != null) {
 			OverworldBiomes.addHillsBiome(REDWOOD_FOREST, REDWOOD_CLEARING, 1.0);
-			OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1);
+			OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1.0);
 
 			FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
 		}
