@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.util.HoeUtil;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
@@ -16,7 +17,9 @@ import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -77,6 +80,7 @@ public class TerrestriaBlocks {
 	public static Block BASALT_GRASS_BLOCK;
 	public static Block BASALT_GRASS_PATH;
 	public static Block BASALT_PODZOL;
+	public static Block BASALT_FARMLAND;
 	public static StoneBlocks BASALT;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
@@ -98,7 +102,7 @@ public class TerrestriaBlocks {
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
 
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves",
-			new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(MaterialColor.RED_TERRACOTTA).build())
+				new LeavesBlock(FabricBlockSettings.copy(Blocks.OAK_LEAVES).materialColor(MaterialColor.RED_TERRACOTTA).build())
 		);
 
 		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(Block.Settings.copy(Blocks.OAK_LEAVES)));
@@ -125,70 +129,70 @@ public class TerrestriaBlocks {
 		// Saplings
 
 		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new TerraformSaplingBlock(
-			new TerraformLargeSaplingGenerator(
-				() -> TerrestriaFeatures.REDWOOD_TREE,
-				() -> TerrestriaFeatureConfigs.REDWOOD,
-				() -> TerrestriaFeatures.MEGA_REDWOOD_TREE,
-				() -> TerrestriaFeatureConfigs.MEGA_REDWOOD
-			)
+				new TerraformLargeSaplingGenerator(
+						() -> TerrestriaFeatures.REDWOOD_TREE,
+						() -> TerrestriaFeatureConfigs.REDWOOD,
+						() -> TerrestriaFeatures.MEGA_REDWOOD_TREE,
+						() -> TerrestriaFeatureConfigs.MEGA_REDWOOD
+				)
 		));
 
 		HEMLOCK_SAPLING = TerrestriaRegistry.register("hemlock_sapling", new TerraformSaplingBlock(
-			new TerraformLargeSaplingGenerator(
-				() -> TerrestriaFeatures.HEMLOCK_TREE,
-				() -> TerrestriaFeatureConfigs.HEMLOCK,
-				() -> TerrestriaFeatures.MEGA_HEMLOCK_TREE,
-				() -> TerrestriaFeatureConfigs.MEGA_HEMLOCK
-			)
+				new TerraformLargeSaplingGenerator(
+						() -> TerrestriaFeatures.HEMLOCK_TREE,
+						() -> TerrestriaFeatureConfigs.HEMLOCK,
+						() -> TerrestriaFeatures.MEGA_HEMLOCK_TREE,
+						() -> TerrestriaFeatureConfigs.MEGA_HEMLOCK
+				)
 		));
 
 		RUBBER_SAPLING = TerrestriaRegistry.register("rubber_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(
-				() -> TerrestriaFeatures.RUBBER_TREE,
-				() -> TerrestriaFeatureConfigs.RUBBER
-			)
+				new TerraformSaplingGenerator(
+						() -> TerrestriaFeatures.RUBBER_TREE,
+						() -> TerrestriaFeatureConfigs.RUBBER
+				)
 		));
 
 		CYPRESS_SAPLING = TerrestriaRegistry.register("cypress_sapling", new TerraformSaplingBlock(
-			new TerraformLargeSaplingGenerator(
-				() -> TerrestriaFeatures.CYPRESS_TREE,
-				() -> TerrestriaFeatureConfigs.CYPRESS,
-				() -> TerrestriaFeatures.MEGA_CYPRESS_TREE,
-				() -> TerrestriaFeatureConfigs.MEGA_CYPRESS
-			)
+				new TerraformLargeSaplingGenerator(
+						() -> TerrestriaFeatures.CYPRESS_TREE,
+						() -> TerrestriaFeatureConfigs.CYPRESS,
+						() -> TerrestriaFeatures.MEGA_CYPRESS_TREE,
+						() -> TerrestriaFeatureConfigs.MEGA_CYPRESS
+				)
 		));
 
 		WILLOW_SAPLING = TerrestriaRegistry.register("willow_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.WILLOW_TREE, () -> TerrestriaFeatureConfigs.WILLOW)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.WILLOW_TREE, () -> TerrestriaFeatureConfigs.WILLOW)
 		));
 
 		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("japanese_maple_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.JAPANESE_MAPLE)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.JAPANESE_MAPLE)
 		));
 
 		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.register("japanese_maple_shrub_sapling", new TerraformSaplingBlock(
-			new ShrublingGenerator(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB))
+				new ShrublingGenerator(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB))
 		);
 
 		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("dark_japanese_maple_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JAPANESE_MAPLE_TREE, () -> TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE)
 		));
 
 		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock(
-			new TerraformLargeSaplingGenerator(
-				() -> (AbstractTreeFeature<BranchedTreeFeatureConfig>)Feature.NORMAL_TREE,
-				() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS,
-				() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE,
-				() -> TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS
-			)
+				new TerraformLargeSaplingGenerator(
+						() -> (AbstractTreeFeature<BranchedTreeFeatureConfig>) Feature.NORMAL_TREE,
+						() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS,
+						() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE,
+						() -> TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS
+				)
 		));
 
 		SAKURA_SAPLING = TerrestriaRegistry.register("sakura_sapling", new TerraformSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAKURA_TREE, () -> TerrestriaFeatureConfigs.SAKURA)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.SAKURA_TREE, () -> TerrestriaFeatureConfigs.SAKURA)
 		));
 
 		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new TerraformDesertSaplingBlock(
-			new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE, () -> TerrestriaFeatureConfigs.JUNGLE_PALM)
+				new TerraformSaplingGenerator(() -> TerrestriaFeatures.JUNGLE_PALM_TREE, () -> TerrestriaFeatureConfigs.JUNGLE_PALM)
 		));
 
 		// Volcanic Island Blocks
@@ -198,7 +202,12 @@ public class TerrestriaBlocks {
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copy(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copy(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0).build()));
 		BASALT_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copy(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		BASALT_FARMLAND = TerrestriaRegistry.register("basalt_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build(), BASALT_DIRT));
 		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
+
+		HoeUtil.putTillable(BASALT_DIRT, BASALT_FARMLAND.getDefaultState());
+		HoeUtil.putTillable(BASALT_GRASS_BLOCK, BASALT_FARMLAND.getDefaultState());
+		HoeUtil.putTillable(BASALT_GRASS_PATH, BASALT_FARMLAND.getDefaultState());
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, Block.Settings.copy(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.TALL_GRASS)));
