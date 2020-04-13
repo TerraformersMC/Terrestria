@@ -5,17 +5,15 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.templates.CanopyTreeFeatureMega;
-import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.arch.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
-import com.terraformersmc.terrestria.feature.trees.*;
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terraform.feature.FallenLogFeature;
 import com.terraformersmc.terrestria.feature.trees.RedwoodTreeFeatureMega;
-import com.terraformersmc.terrestria.mixin.MixinTreeDecoratorType;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
@@ -42,6 +40,8 @@ public class TerrestriaFeatures {
 	public static PalmTreeFeature JUNGLE_PALM_TREE;
 	public static RubberTreeFeature RUBBER_TREE;
 	public static YuccaPalmTreeFeature YUCCA_PALM_TREE;
+
+	public static ShrubFeature SHRUB;
 
 	public static SaguaroCactusFeature SAGUARO_CACTUS;
 
@@ -160,6 +160,8 @@ public class TerrestriaFeatures {
 		Feature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
 
 		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
+
+		SHRUB = register("shrub", new ShrubFeature(ShrubFeatureConfig::deserialize));
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
