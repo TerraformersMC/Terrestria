@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.terraformersmc.terraform.block.TerraformGrassBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
@@ -9,14 +8,13 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 import java.util.Random;
 import java.util.function.Supplier;
 
 public class BasaltGrassBlock extends TerraformGrassBlock {
 	public BasaltGrassBlock(Block dirt, Supplier<Block> path, Settings settings) {
-		super(dirt, path, settings, ImmutableMap.of(Blocks.DIRT, Blocks.GRASS_BLOCK));
+		super(dirt, path, settings);
 	}
 
 	@Override
@@ -27,22 +25,22 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 		BlockState flower = TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState();
 
 		// 33% chance of normal grass
-		if(random.nextInt(3) == 0) {
+		if (random.nextInt(3) == 0) {
 			grass = Blocks.GRASS.getDefaultState();
 		}
 
 		outer:
-		for(int tries = 0; tries < 128; tries++) {
+		for (int tries = 0; tries < 128; tries++) {
 			BlockPos pos = above;
 			BlockState block = random.nextInt(8) == 0 ? flower : grass;
 
 			// Steps only a few blocks at a time in moving to the random position.
 			// Likely to avoid growing on the other side of walls.
-			for(int moves = 0; moves < 8; moves++) {
+			for (int moves = 0; moves < 8; moves++) {
 				pos = pos.add(
-					 random.nextInt(3) - 1,
-					(random.nextInt(3) - 1) * random.nextInt(3) / 2,
-					 random.nextInt(3) - 1
+						random.nextInt(3) - 1,
+						(random.nextInt(3) - 1) * random.nextInt(3) / 2,
+						random.nextInt(3) - 1
 				);
 
 				// Check if the block is a valid block
@@ -54,7 +52,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 			BlockState state = world.getBlockState(pos);
 
 			if (state.getBlock() == Blocks.GRASS && random.nextInt(10) == 0) {
-				((Fertilizable)state.getBlock()).grow(world, random, pos, state);
+				((Fertilizable) state.getBlock()).grow(world, random, pos, state);
 			}
 
 			if (!state.isAir()) {
