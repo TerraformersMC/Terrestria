@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.block;
 
+import com.google.common.collect.ImmutableMap;
 import com.terraformersmc.terraform.block.TerraformGrassBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
 
 public class BasaltGrassBlock extends TerraformGrassBlock {
 	public BasaltGrassBlock(Block dirt, Supplier<Block> path, Settings settings) {
-		super(dirt, path, settings);
+		super(dirt, path, settings, ImmutableMap.of(Blocks.DIRT, Blocks.GRASS_BLOCK));
 	}
 
 	@Override

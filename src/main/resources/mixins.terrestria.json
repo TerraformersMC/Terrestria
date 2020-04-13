@@ -11,6 +11,7 @@
     "MixinFluidBlock",
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
+    "MixinSpreadableBlock",
     "MixinSugarCaneBlock"
   ],
   "injectors": {
