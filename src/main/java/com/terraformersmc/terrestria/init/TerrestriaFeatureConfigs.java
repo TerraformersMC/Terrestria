@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
@@ -15,11 +14,9 @@ import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
-import net.minecraft.world.gen.foliage.PineFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
-import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TerrestriaFeatureConfigs {
@@ -33,12 +30,12 @@ public class TerrestriaFeatureConfigs {
 	public static final BranchedTreeFeatureConfig WILLOW = basic(TerrestriaBlocks.WILLOW);
 	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE = basic(TerrestriaBlocks.JAPANESE_MAPLE);
 
-	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE_SHRUB = basic (
+	public static final BranchedTreeFeatureConfig JAPANESE_MAPLE_SHRUB = basic(
 			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
 			TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()
 	);
 
-	public static final BranchedTreeFeatureConfig DARK_JAPANESE_MAPLE = basic (
+	public static final BranchedTreeFeatureConfig DARK_JAPANESE_MAPLE = basic(
 			TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(),
 			TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()
 	);
@@ -68,8 +65,8 @@ public class TerrestriaFeatureConfigs {
 
 	private static BranchedTreeFeatureConfig spruce(BlockState log, BlockState leaves) {
 		BranchedTreeFeatureConfig.Builder builder = new BranchedTreeFeatureConfig.Builder(
-				new SimpleStateProvider(log),
-				new SimpleStateProvider(leaves),
+				new SimpleBlockStateProvider(log),
+				new SimpleBlockStateProvider(leaves),
 				new SpruceFoliagePlacer(2, 1));
 
 		return builder.baseHeight(6).heightRandA(3).trunkHeight(1).trunkHeightRandom(1).trunkTopOffsetRandom(2).noVines().build();
@@ -80,8 +77,8 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	private static FallenLogFeatureConfig fallenLog(BlockState log, BlockState leaves) {
-		SimpleStateProvider logProvider = new SimpleStateProvider(log);
-		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
+		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
 		return new FallenLogFeatureConfig.Builder(logProvider, leavesProvider).baseLength(5).lengthRandom(8).build();
 	}
@@ -91,8 +88,8 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	private static BranchedTreeFeatureConfig basic(BlockState log, BlockState leaves) {
-		SimpleStateProvider logProvider = new SimpleStateProvider(log);
-		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
+		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
 		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).build();
 	}
@@ -102,8 +99,8 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	private static MegaTreeFeatureConfig basicMega(BlockState log, BlockState leaves) {
-		SimpleStateProvider logProvider = new SimpleStateProvider(log);
-		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
+		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
 		return new MegaTreeFeatureConfig.Builder(logProvider, leavesProvider).build();
 	}
@@ -113,8 +110,8 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	private static BranchedTreeFeatureConfig sakura(BlockState log, BlockState leaves, List<TreeDecorator> decorators) {
-		SimpleStateProvider logProvider = new SimpleStateProvider(log);
-		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
+		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
 		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, null).treeDecorators(decorators).build();
 	}
@@ -124,19 +121,19 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	private static BranchedTreeFeatureConfig basicJungle(BlockState log, BlockState leaves) {
-		SimpleStateProvider logProvider = new SimpleStateProvider(log);
-		SimpleStateProvider leavesProvider = new SimpleStateProvider(leaves);
+		SimpleBlockStateProvider logProvider = new SimpleBlockStateProvider(log);
+		SimpleBlockStateProvider leavesProvider = new SimpleBlockStateProvider(leaves);
 
 		return new BranchedTreeFeatureConfig.Builder(logProvider, leavesProvider, new BlobFoliagePlacer(2, 0))
-			.baseHeight(4)
-			.heightRandA(8)
-			.foliageHeight(3)
-			.treeDecorators(ImmutableList.of(
-				new CocoaBeansTreeDecorator(0.2F),
-				new TrunkVineTreeDecorator(),
-				new LeaveVineTreeDecorator())
-			)
-			.noVines()
-			.build();
+				.baseHeight(4)
+				.heightRandA(8)
+				.foliageHeight(3)
+				.treeDecorators(ImmutableList.of(
+						new CocoaBeansTreeDecorator(0.2F),
+						new TrunkVineTreeDecorator(),
+						new LeaveVineTreeDecorator())
+				)
+				.noVines()
+				.build();
 	}
 }
