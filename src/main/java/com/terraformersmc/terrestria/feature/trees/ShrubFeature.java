@@ -21,22 +21,27 @@ public class ShrubFeature extends Feature<ShrubFeatureConfig> {
 	@Override
 	public boolean generate(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, ShrubFeatureConfig config) {
 		//only generate on grass
-		if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) return false;
+		if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
+			return false;
+		}
 
-		//height can be 1 or 2 blocks
-		int height = random.nextInt(2) + 1;
-		for (int y = 0; y < height; y++) {
-			world.setBlockState(pos.add(0, y, 0), config.woodState, 2);
+		//set the base trunk
+		world.setBlockState(pos, config.woodState, 2);
+
+		//50% of shrubs are twice as tall
+		if (random.nextBoolean()) {
+			world.setBlockState(pos.up(), config.woodState, 2);
+			pos = pos.up();
 		}
 
 		//top of the shrub
-		setIfAir(world, pos.add(0, height, 0), config.leafState);
+		setIfAir(world, pos.up(), config.leafState);
 
 		//the other 4 blocks on the side
-		setIfAir(world, pos.add(0, height - 1, 1), config.leafState);
-		setIfAir(world, pos.add(0, height - 1, -1), config.leafState);
-		setIfAir(world, pos.add(-1, height - 1, 0), config.leafState);
-		setIfAir(world, pos.add(1, height - 1, 0), config.leafState);
+		setIfAir(world, pos.north(), config.leafState);
+		setIfAir(world, pos.south(), config.leafState);
+		setIfAir(world, pos.east(), config.leafState);
+		setIfAir(world, pos.west(), config.leafState);
 		return true;
 	}
 
