@@ -20,24 +20,24 @@ public class ShrubFeature extends Feature<ShrubFeatureConfig> {
 
 	@Override
 	public boolean generate(IWorld world, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random random, BlockPos pos, ShrubFeatureConfig config) {
-		//only generate on grass
+		// Only generate on grass
 		if (world.getBlockState(pos.down()) != Blocks.GRASS_BLOCK.getDefaultState()) {
 			return false;
 		}
 
-		//set the base trunk
+		// Set the base trunk block
 		world.setBlockState(pos, config.woodState, 2);
 
-		//50% of shrubs are twice as tall
+		// 50% of shrubs are twice as tall
 		if (random.nextBoolean()) {
-			world.setBlockState(pos.up(), config.woodState, 2);
 			pos = pos.up();
+			world.setBlockState(pos, config.woodState, 2);
 		}
 
-		//top of the shrub
+		// Top of the shrub
 		setIfAir(world, pos.up(), config.leafState);
 
-		//the other 4 blocks on the side
+		// The other 4 blocks on the side
 		setIfAir(world, pos.north(), config.leafState);
 		setIfAir(world, pos.south(), config.leafState);
 		setIfAir(world, pos.east(), config.leafState);

@@ -125,7 +125,6 @@ public class TerrestriaGeneration {
 		}
 
 		if (OUTBACK != null) {
-			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK, 2);
 			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
 			OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
 				Biome.Category category = b.getCategory();
