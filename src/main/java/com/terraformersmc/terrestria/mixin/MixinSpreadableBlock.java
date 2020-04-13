@@ -25,7 +25,7 @@ public abstract class MixinSpreadableBlock {
 	}
 
 	@Inject(method = "scheduledTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;getBlock()Lnet/minecraft/block/Block;"), locals = LocalCapture.CAPTURE_FAILHARD)
-	private void onDo(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo info, BlockState defaultState, int i, BlockPos spreadingPos) {
+	private void onScheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random, CallbackInfo info, BlockState defaultState, int i, BlockPos spreadingPos) {
 		BlockState defaultBasaltGrassState = TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState();
 		if (world.getBlockState(spreadingPos).getBlock() == TerrestriaBlocks.BASALT_DIRT && TerraformGrassBlock.canSpread(defaultBasaltGrassState, world, spreadingPos)) {
 			world.setBlockState(spreadingPos, defaultBasaltGrassState.with(SpreadableBlock.SNOWY, world.getBlockState(spreadingPos.up()).getBlock() == Blocks.SNOW));
