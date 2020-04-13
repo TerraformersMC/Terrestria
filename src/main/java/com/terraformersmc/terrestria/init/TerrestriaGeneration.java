@@ -37,6 +37,7 @@ public class TerrestriaGeneration {
 		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
 		addContinentalBiome(CANYON_CLIFFS, OverworldClimate.DRY, 1.0, "canyon_cliffs", config, enabledBiomes);
 		addContinentalBiome(DUNES, OverworldClimate.DRY, 0.2, "dunes", config, enabledBiomes);
+		addContinentalBiome(OUTBACK, OverworldClimate.DRY, 1.0, "outback", config, enabledBiomes);
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
@@ -121,6 +122,15 @@ public class TerrestriaGeneration {
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND, null);
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_BEACH, null);
 			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_SHORE, null);
+		}
+
+		if (OUTBACK != null) {
+			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK, 2);
+			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
+			OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
+				Biome.Category category = b.getCategory();
+				return category != Biome.Category.DESERT && category != Biome.Category.SAVANNA && category != Biome.Category.PLAINS && category != Biome.Category.MESA;
+			});
 		}
 	}
 

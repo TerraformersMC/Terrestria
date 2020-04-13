@@ -7,6 +7,7 @@ import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
+import com.terraformersmc.terrestria.surface.PatchyGrassSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.ThreeLayerOutlineSurfaceBuilder;
 import com.terraformersmc.terrestria.surface.ThreeLayerOutlinedSurfaceConfig;
 import net.minecraft.block.Blocks;
@@ -34,6 +35,9 @@ public class TerrestriaSurfaces {
 	public static TernarySurfaceConfig ALPS_CONFIG;
 	public static TernarySurfaceConfig DUNES_CONFIG;
 	public static ThreeLayerOutlinedSurfaceConfig OASIS_CONFIG;
+	public static TernarySurfaceConfig OUTBACK_ULURU_CONFIG;
+	public static PatchyGrassSurfaceBuilder PATCHY_GRASS;
+	public static TernarySurfaceConfig OUTBACK_CONFIG;
 
 	public static void init() {
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
@@ -55,6 +59,8 @@ public class TerrestriaSurfaces {
 		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
 
 		THREE_LAYER_OUTLINE = register("random", new ThreeLayerOutlineSurfaceBuilder());
+
+		PATCHY_GRASS = register("patchy_grass", new PatchyGrassSurfaceBuilder(TernarySurfaceConfig::deserialize));
 
 		OASIS_CONFIG = new ThreeLayerOutlinedSurfaceConfig(
 				Blocks.SAND.getDefaultState(),
@@ -95,6 +101,18 @@ public class TerrestriaSurfaces {
 			Blocks.SAND.getDefaultState(),
 			Blocks.SANDSTONE.getDefaultState(),
 			Blocks.SAND.getDefaultState()
+		);
+
+		OUTBACK_ULURU_CONFIG = new TernarySurfaceConfig(
+			Blocks.RED_SANDSTONE.getDefaultState(),
+			Blocks.RED_SANDSTONE.getDefaultState(),
+			Blocks.RED_SAND.getDefaultState()
+		);
+
+		OUTBACK_CONFIG = new TernarySurfaceConfig(
+			Blocks.RED_SAND.getDefaultState(),
+			Blocks.RED_SANDSTONE.getDefaultState(),
+			Blocks.RED_SAND.getDefaultState()
 		);
 	}
 

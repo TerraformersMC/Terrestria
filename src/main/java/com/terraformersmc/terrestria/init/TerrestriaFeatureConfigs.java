@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.terraformersmc.terraform.feature.FallenLogFeatureConfig;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.trees.ShrubFeatureConfig;
 import com.terraformersmc.terrestria.feature.trees.decorator.FixSmallLogsDecorator;
 import com.terraformersmc.terrestria.feature.trees.decorator.SakuraLeafPileDecorator;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -66,6 +67,9 @@ public class TerrestriaFeatureConfigs {
 	public static final FallenLogFeatureConfig FALLEN_REDWOOD_LOG = fallenLog(TerrestriaBlocks.REDWOOD);
 
 	public static final BranchedTreeFeatureConfig RAINBOW_EUCALYPTUS = basicJungle(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+
+	public static final ShrubFeatureConfig OAK_SHRUB = new ShrubFeatureConfig(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
+	public static final ShrubFeatureConfig ACACIA_SHRUB = new ShrubFeatureConfig(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState());
 
 	private static BranchedTreeFeatureConfig spruce(WoodBlocks blocks) {
 		return spruce(blocks.log.getDefaultState(), blocks.leaves.getDefaultState());
