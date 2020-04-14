@@ -28,11 +28,11 @@ public class MixinFluidBlock {
 			}
 
 			Block below = world.getBlockState(pos.down()).getBlock();
-			Block cobblestone = TerrestriaBlocks.BASALT.cobblestone.full;
+			Block cobblestone = TerrestriaBlocks.VOLCANIC_ROCK.cobblestone.full;
 
 			// If basalt cobblestone / stone is below, change to basalt cobblestone
 
-			if(below == TerrestriaBlocks.BASALT.plain.full || below == cobblestone) {
+			if(below == TerrestriaBlocks.VOLCANIC_ROCK.plain.full || below == cobblestone) {
 				world.setBlockState(pos, cobblestone.getDefaultState());
 			}
 		}

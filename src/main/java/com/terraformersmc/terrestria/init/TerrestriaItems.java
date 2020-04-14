@@ -50,7 +50,7 @@ public class TerrestriaItems {
 	public static BlockItem BASALT_DIRT;
 	public static BlockItem BASALT_GRASS_BLOCK;
 	public static BlockItem BASALT_PODZOL;
-	public static BlockItem BASALT_FARMLAND;
+	public static BlockItem ANDISOL_FARMLAND;
 	public static BlockItem INDIAN_PAINTBRUSH;
 	public static BlockItem MONSTERAS;
 
@@ -94,12 +94,12 @@ public class TerrestriaItems {
 		SAKURA_SAPLING = TerrestriaRegistry.registerBlockItem("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
 		JUNGLE_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("jungle_palm_sapling", TerrestriaBlocks.JUNGLE_PALM_SAPLING);
 
-		BASALT = StoneItems.register("basalt", TerrestriaBlocks.BASALT);
-		BASALT_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BASALT_SAND);
-		BASALT_DIRT = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.BASALT_DIRT);
-		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.BASALT_GRASS_BLOCK);
-		BASALT_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.BASALT_PODZOL);
-		BASALT_FARMLAND = TerrestriaRegistry.registerBlockItem("basalt_farmland", TerrestriaBlocks.BASALT_FARMLAND);
+		BASALT = StoneItems.register("basalt", TerrestriaBlocks.VOLCANIC_ROCK);
+		BASALT_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BLACK_SAND);
+		BASALT_DIRT = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.ANDISOL);
+		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
+		BASALT_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.ANDISOL_PODZOL);
+		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL_FARMLAND);
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
 		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
 	}

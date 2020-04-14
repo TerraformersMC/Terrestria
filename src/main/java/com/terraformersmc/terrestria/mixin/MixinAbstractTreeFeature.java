@@ -28,7 +28,7 @@ public abstract class MixinAbstractTreeFeature<FC extends FeatureConfig> extends
 	private static void hookIsNaturalDirt(TestableWorld world, BlockPos pos, CallbackInfoReturnable<Boolean> callback) {
 		if (world.testBlockState(pos, state -> {
 			Block block = state.getBlock();
-			return block == TerrestriaBlocks.BASALT_GRASS_BLOCK;
+			return block == TerrestriaBlocks.ANDISOL_GRASS_BLOCK;
 		})) {
 			callback.setReturnValue(false);
 		}
@@ -49,9 +49,9 @@ public abstract class MixinAbstractTreeFeature<FC extends FeatureConfig> extends
 	private void hookSetToDirt(ModifiableTestableWorld world, BlockPos pos, CallbackInfo callback) {
 		if (world.testBlockState(pos, state -> {
 			Block block = state.getBlock();
-			return block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT;
+			return block == TerrestriaBlocks.ANDISOL_GRASS_BLOCK || block == TerrestriaBlocks.ANDISOL;
 		})) {
-			super.setBlockState(world, pos, TerrestriaBlocks.BASALT_DIRT.getDefaultState());
+			super.setBlockState(world, pos, TerrestriaBlocks.ANDISOL.getDefaultState());
 
 			callback.cancel();
 		}

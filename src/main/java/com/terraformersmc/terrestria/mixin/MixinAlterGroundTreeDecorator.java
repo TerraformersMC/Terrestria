@@ -22,12 +22,12 @@ public class MixinAlterGroundTreeDecorator {
 			BlockPos posUp = pos.up(i);
 
 			Predicate<BlockState> isBasaltDirt =
-					state -> state.getBlock() == TerrestriaBlocks.BASALT_DIRT ||
-							state.getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK ||
-							state.getBlock() == TerrestriaBlocks.BASALT_PODZOL;
+					state -> state.getBlock() == TerrestriaBlocks.ANDISOL ||
+							state.getBlock() == TerrestriaBlocks.ANDISOL_GRASS_BLOCK ||
+							state.getBlock() == TerrestriaBlocks.ANDISOL_PODZOL;
 
 			if (world.testBlockState(posUp, isBasaltDirt)) {
-				world.setBlockState(posUp, TerrestriaBlocks.BASALT_PODZOL.getDefaultState(), 18);
+				world.setBlockState(posUp, TerrestriaBlocks.ANDISOL_PODZOL.getDefaultState(), 18);
 				callback.cancel();
 				break;
 			}

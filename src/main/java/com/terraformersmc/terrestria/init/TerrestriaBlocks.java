@@ -1,9 +1,36 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terraform.block.*;
-import com.terraformersmc.terraform.util.HoeUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.SandBlock;
+import net.minecraft.block.SeagrassBlock;
+import net.minecraft.block.TallSeagrassBlock;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.Feature;
+
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.tools.FabricToolTags;
+
+import com.terraformersmc.terraform.block.LeafPileBlock;
+import com.terraformersmc.terraform.block.QuarterLogBlock;
+import com.terraformersmc.terraform.block.TallCattailBlock;
+import com.terraformersmc.terraform.block.TerraformDesertSaplingBlock;
+import com.terraformersmc.terraform.block.TerraformFarmlandBlock;
+import com.terraformersmc.terraform.block.TerraformGrassPathBlock;
+import com.terraformersmc.terraform.block.TerraformSaplingBlock;
+import com.terraformersmc.terraform.block.TerraformSeagrassBlock;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
+import com.terraformersmc.terraform.util.TillableBlockRegistry;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.ShrublingGenerator;
@@ -11,15 +38,6 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodColors;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.tools.FabricToolTags;
-import net.minecraft.block.*;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
-import net.minecraft.world.gen.feature.Feature;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -75,13 +93,13 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_SAKURA_SAPLING;
 
 	// Volcanic Island blocks
-	public static SandBlock BASALT_SAND;
-	public static Block BASALT_DIRT;
-	public static Block BASALT_GRASS_BLOCK;
-	public static Block BASALT_GRASS_PATH;
-	public static Block BASALT_PODZOL;
-	public static Block BASALT_FARMLAND;
-	public static StoneBlocks BASALT;
+	public static SandBlock BLACK_SAND;
+	public static Block ANDISOL;
+	public static Block ANDISOL_GRASS_BLOCK;
+	public static Block ANDISOL_GRASS_PATH;
+	public static Block ANDISOL_PODZOL;
+	public static Block ANDISOL_FARMLAND;
+	public static StoneBlocks VOLCANIC_ROCK;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
 	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
@@ -197,17 +215,17 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
-		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
-		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copy(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
-		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copy(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0).build()));
-		BASALT_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copy(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0).build()));
-		BASALT_FARMLAND = TerrestriaRegistry.register("basalt_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build(), BASALT_DIRT));
-		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
+		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copy(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		ANDISOL = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copy(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(ANDISOL, () -> ANDISOL_GRASS_PATH, FabricBlockSettings.copy(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		ANDISOL_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(ANDISOL, FabricBlockSettings.copy(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		ANDISOL_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copy(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0).build()));
+		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copy(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0).build(), ANDISOL));
+		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
-		HoeUtil.putTillable(BASALT_DIRT, BASALT_FARMLAND.getDefaultState());
-		HoeUtil.putTillable(BASALT_GRASS_BLOCK, BASALT_FARMLAND.getDefaultState());
-		HoeUtil.putTillable(BASALT_GRASS_PATH, BASALT_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL_GRASS_BLOCK, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL_GRASS_PATH, ANDISOL_FARMLAND.getDefaultState());
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, Block.Settings.copy(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, Block.Settings.copy(Blocks.TALL_GRASS)));

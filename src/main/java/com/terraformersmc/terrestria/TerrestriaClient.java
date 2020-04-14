@@ -109,7 +109,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.POTTED_MONSTERAS
 		);
 
-		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
+		addColoredGrass(TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
 
 		addSigns(
 				TerrestriaBlocks.REDWOOD.sign,

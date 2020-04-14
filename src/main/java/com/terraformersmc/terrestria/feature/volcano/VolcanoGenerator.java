@@ -234,7 +234,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				double scaled = (dist / radius) * noise;
 				int columnHeight = (int) (shape(scaled) * height);
-				BlockState top = TerrestriaBlocks.BASALT.plain.full.getDefaultState();
+				BlockState top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
 
 				// Below bedrock, skip.
 
@@ -256,9 +256,9 @@ public class VolcanoGenerator extends StructurePiece {
 					double scaledHeight = (double) (columnHeight) / (double) (lavaHeight);
 					if (scaledHeight < vegetation) {
 						if (columnHeight < 4) {
-							top = TerrestriaBlocks.BASALT_SAND.getDefaultState();
+							top = TerrestriaBlocks.BLACK_SAND.getDefaultState();
 						} else {
-							top = TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState();
+							top = TerrestriaBlocks.ANDISOL_GRASS_BLOCK.getDefaultState();
 						}
 					}
 				}
@@ -271,7 +271,7 @@ public class VolcanoGenerator extends StructurePiece {
 					pos.set(x, baseY + dY, z);
 
 					if (world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) {
-						world.setBlockState(pos, TerrestriaBlocks.BASALT.plain.full.getDefaultState(), 2);
+						world.setBlockState(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(), 2);
 					}
 				}
 
@@ -284,7 +284,7 @@ public class VolcanoGenerator extends StructurePiece {
 					for (int y = startY; y < endY; y++) {
 						pos.set(x, y, z);
 
-						world.setBlockState(pos, TerrestriaBlocks.BASALT.plain.full.getDefaultState(), 2);
+						world.setBlockState(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(), 2);
 					}
 				}
 
@@ -300,7 +300,7 @@ public class VolcanoGenerator extends StructurePiece {
 					if (underwater && random.nextInt(80) == 0) {
 						top = Blocks.MAGMA_BLOCK.getDefaultState();
 					} else {
-						top = TerrestriaBlocks.BASALT.plain.full.getDefaultState();
+						top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
 					}
 				} else if (scaled > 0.25 && scaled < 0.35) {
 					if (!underwater && random.nextInt(320) == 0) {
@@ -357,7 +357,7 @@ public class VolcanoGenerator extends StructurePiece {
 		} else if (goldNoise < -0.75) {
 			return Blocks.GOLD_ORE.getDefaultState();
 		} else {
-			return obsidianNoise > 0.25 ? Blocks.OBSIDIAN.getDefaultState() : TerrestriaBlocks.BASALT.plain.full.getDefaultState();
+			return obsidianNoise > 0.25 ? Blocks.OBSIDIAN.getDefaultState() : TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
 		}
 	}
 }

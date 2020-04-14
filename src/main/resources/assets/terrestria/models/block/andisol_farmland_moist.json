@@ -3,6 +3,6 @@
   "textures": {
     "particle": "terrestria:block/basalt_dirt",
     "dirt": "terrestria:block/basalt_dirt",
-    "top": "terrestria:block/basalt_farmland"
+    "top": "terrestria:block/andisol_farmland_moist"
   }
 }

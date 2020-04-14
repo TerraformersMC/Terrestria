@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.mixin;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldView;
@@ -21,7 +20,7 @@ public class MixinMushroomPlantBlock {
 			BlockState downState = world.getBlockState(downPos);
 			Block block = downState.getBlock();
 
-			if (block == TerrestriaBlocks.BASALT_PODZOL) {
+			if (block == TerrestriaBlocks.ANDISOL_PODZOL) {
 				info.setReturnValue(true);
 			}
 		}
