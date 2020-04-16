@@ -32,7 +32,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 		for (BlockPos log : logs) {
 			BlockState existing = world.getBlockState(log);
 
-			if(!(existing.getBlock() instanceof SmallLogBlock)) {
+			if (!(existing.getBlock() instanceof SmallLogBlock)) {
 				continue;
 			}
 
@@ -41,8 +41,8 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 			Predicate<BlockState> tester =
 					tested ->
 							tested.getBlock() instanceof SmallLogBlock ||
-							(!hasLeaves && tested.getBlock() instanceof LeavesBlock) ||
-							tested.isOpaque();
+									(!hasLeaves && tested.getBlock() instanceof LeavesBlock) ||
+									tested.isOpaque();
 
 			setBlockStateAndEncompassPosition(
 					world,

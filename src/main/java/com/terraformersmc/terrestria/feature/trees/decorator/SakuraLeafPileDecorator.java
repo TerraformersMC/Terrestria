@@ -28,14 +28,14 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 
 		this.chance = chance;
 	}
-	
+
 	public <T> SakuraLeafPileDecorator(Dynamic<T> dynamic) {
 		this(dynamic.get("chance").asInt(1));
 	}
-	
+
 	@Override
 	public void generate(IWorld world, Random rand, List<BlockPos> logs, List<BlockPos> leaves, Set<BlockPos> placed, BlockBox box) {
-		for(BlockPos pos: leaves) {
+		for (BlockPos pos : leaves) {
 			if (rand.nextInt(chance) != 0) {
 				continue;
 			}

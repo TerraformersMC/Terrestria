@@ -89,7 +89,6 @@ publishing {
 	}
 }
 
-
 import com.matthewprenger.cursegradle.CurseArtifact
 
 def fullChangelogBuilder = StringBuilder.newInstance()
@@ -108,6 +107,11 @@ buildAndAttemptRelease {
 	def release = false
 	def cancel = false
 	def releaseType = project.default_release_type
+	if (project.default_release_type == "stable") {
+		curseReleaseType = "release"
+	} else {
+		curseReleaseType = project.default_release_type
+	}
 
 	proc.in.eachLine { line -> // Loops over the lines the git log command returns
 		def processedLine = line.toString()
@@ -190,7 +194,6 @@ buildAndAttemptRelease {
 	}
 	dependsOn build
 }
-
 curseforge {
 	apiKey = project.hasProperty('terraformersmc_curse_api_key') ? project.property('terraformersmc_curse_api_key') : "###"
 	project {
