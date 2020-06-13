@@ -1,6 +1,8 @@
 package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terraform.block.BareSmallLogBlock;
+import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,15 +32,18 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		entity.damage(DamageSource.CACTUS, 1.0F);
 	}
 
+	@Override
+	@SuppressWarnings("deprecation")
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		if (!state.canPlaceAt(world, pos)) {
+		if (!isSupported(state, world, pos)) {
 			world.breakBlock(pos, true);
 		}
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos) {
-		if (!state.canPlaceAt(world, pos)) {
+		if (!isSupported(state, world, pos)) {
 			world.getBlockTickScheduler().schedule(pos, this, 1);
 		}
 
@@ -49,22 +54,50 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		return (block == TerrestriaBlocks.SAGUARO_CACTUS || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT);
 	}
 
-	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Iterator horizontalBlocks = Direction.Type.HORIZONTAL.iterator();
-
-		Direction direction;
+	private boolean isSupported(BlockState state, WorldView world, BlockPos pos) {
 		BlockState blockState;
-		do {
-			if (!horizontalBlocks.hasNext()) {
-				Block block = world.getBlockState(pos.down()).getBlock();
-				return isSupportedBlock(block) && !world.getBlockState(pos.up()).getMaterial().isLiquid();
-			}
+		if (isSupportedBlock(world.getBlockState(pos.down()).getBlock())) {
+			return true;
+		}
+		if (state.get(BareSmallLogBlock.DOWN)) {
+			blockState = world.getBlockState(pos.down());
+			return (blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS && blockState.get(BareSmallLogBlock.UP));
+		}
+		if (state.get(BareSmallLogBlock.SOUTH)) {
+			blockState = world.getBlockState(pos.south());
+			return (blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS && blockState.get(BareSmallLogBlock.NORTH));
+		}
+		if (state.get(BareSmallLogBlock.NORTH)) {
+			blockState = world.getBlockState(pos.north());
+			return (blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS && blockState.get(BareSmallLogBlock.SOUTH));
+		}
+		if (state.get(BareSmallLogBlock.WEST)) {
+			blockState = world.getBlockState(pos.west());
+			return (blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS && blockState.get(BareSmallLogBlock.EAST));
+		}
+		if (state.get(BareSmallLogBlock.EAST)) {
+			blockState = world.getBlockState(pos.east());
+			return (blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS && blockState.get(BareSmallLogBlock.WEST));
+		}
+		return false;
+	}
 
-			direction = (Direction)horizontalBlocks.next();
-			blockState = world.getBlockState(pos.offset(direction));
-		} while ((blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS || !blockState.getMaterial().isSolid()) && !world.getFluidState(pos.offset(direction)).matches(FluidTags.LAVA));
+	private boolean canBeSupported(WorldView world, BlockPos pos) {
+		if (world.getBlockState(pos.north()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
+				world.getBlockState(pos.south()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
+				world.getBlockState(pos.east()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
+				world.getBlockState(pos.west()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS) {
+			return true;
+		}
+		return false;
+	}
 
+	@Override
+	@SuppressWarnings("deprecation")
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
+		if (isSupportedBlock(world.getBlockState(pos.down()).getBlock()) || canBeSupported(world, pos)) {
+			return true;
+		}
 		return false;
 	}
 }
