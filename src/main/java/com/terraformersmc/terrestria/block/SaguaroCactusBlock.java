@@ -45,9 +45,26 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		return super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
 	}
 
+	public boolean isSupportedBlock(Block block) {
+		return (block == TerrestriaBlocks.SAGUARO_CACTUS || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT);
+	}
+
 	@Override
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		Block block = world.getBlockState(pos.down()).getBlock();
-		return (block == TerrestriaBlocks.SAGUARO_CACTUS || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT) && !world.getBlockState(pos.up()).getMaterial().isLiquid();
+		Iterator horizontalBlocks = Direction.Type.HORIZONTAL.iterator();
+
+		Direction direction;
+		BlockState blockState;
+		do {
+			if (!horizontalBlocks.hasNext()) {
+				Block block = world.getBlockState(pos.down()).getBlock();
+				return isSupportedBlock(block) && !world.getBlockState(pos.up()).getMaterial().isLiquid();
+			}
+
+			direction = (Direction)horizontalBlocks.next();
+			blockState = world.getBlockState(pos.offset(direction));
+		} while ((blockState.getBlock() == TerrestriaBlocks.SAGUARO_CACTUS || !blockState.getMaterial().isSolid()) && !world.getFluidState(pos.offset(direction)).matches(FluidTags.LAVA));
+
+		return false;
 	}
 }
