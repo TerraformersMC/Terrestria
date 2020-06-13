@@ -68,13 +68,10 @@ public class SaguaroCactusFeature extends SmallLogTree implements Trunk, Branche
 	public void growTrunk(Set<BlockPos> logs, Set<BlockPos> leaves, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box, TreeFeatureConfig config) {
 		Random random = new Random();
 		Direction armDir = randomHorizontalDirection(random);
+		setBlockState(world, pos, this.getLog().with(SmallLogBlock.DOWN, true));
 		for (int i = 0; i < height; i++) {
 
-			if (i == 0) {
-				setBlockState(world, pos, this.getLog().with(SmallLogBlock.DOWN, true));
-			} else {
-				setBlockStateAndUpdate(logs, world, pos, this.getLog(), Direction.UP, box);
-			}
+			setBlockStateAndUpdate(logs, world, pos, this.getLog(), Direction.UP, box);
 
 			// Always place an arm half way up ish
 			if (i == ((int) height / 2) - 1) {
