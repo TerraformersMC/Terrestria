@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.command.LocateAny;
-import com.terraformersmc.terrestria.compat.ClimaticWorldTypeCompat;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaEntities;
@@ -21,7 +20,6 @@ import com.terraformersmc.terrestria.item.LogTurnerItem;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -50,11 +48,6 @@ public class Terrestria implements ModInitializer {
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
 		TerrestriaGeneration.init(config, enabledBiomes);
-
-		if (FabricLoader.getInstance().isModLoaded("cwt")) {
-			log.info("Terrestria has detected ClimaticWorldType is installed... loading compatibility!");
-			ClimaticWorldTypeCompat.init(enabledBiomes);
-		}
 
 		biomeConfigHandler.save();
 
