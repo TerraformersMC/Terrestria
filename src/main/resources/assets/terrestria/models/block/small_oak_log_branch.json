@@ -1,8 +1,8 @@
 {
 	"parent": "terraform:block/small_log_branch",
 	"textures": {
-		"particle": "terrestria:block/small_oak_log_top",
-		"end": "terrestria:block/small_oak_log_top",
+		"particle": "block/oak_log_top",
+		"end": "block/oak_log_top",
 		"side": "block/oak_log"
 	}
 }

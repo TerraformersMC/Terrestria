@@ -1,7 +1,7 @@
 {
 	"parent": "terraform:block/small_log",
 	"textures": {
-		"particle": "terrestria:block/stripped_small_oak_log_section",
+		"particle": "block/oak_log_top",
 		"side": "block/stripped_oak_log"
 	}
 }

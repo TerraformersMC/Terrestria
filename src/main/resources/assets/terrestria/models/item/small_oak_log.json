@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "terrestria:block/small_oak_log",
-    "all": "terrestria:block/small_oak_log"
+    "particle": "block/oak_log",
+    "all": "block/oak_log"
   },
   "elements": [
     {

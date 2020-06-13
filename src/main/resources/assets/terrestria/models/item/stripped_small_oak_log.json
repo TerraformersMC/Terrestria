@@ -1,8 +1,8 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "terrestria:block/stripped_small_oak_log",
-    "all": "terrestria:block/stripped_small_oak_log"
+    "particle": "block/stripped_oak_log",
+    "all": "block/stripped_oak_log"
   },
   "elements": [
     {
