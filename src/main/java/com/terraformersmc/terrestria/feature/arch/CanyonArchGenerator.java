@@ -10,8 +10,9 @@ import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
@@ -83,8 +84,8 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> chunkGenerator, Random random, BlockBox blockBox, ChunkPos chunkPos) {
-		if (blockBox.maxY < this.boundingBox.maxY || blockBox.minY > this.boundingBox.minY) {
+	public boolean generate(ServerWorldAccess serverWorldAccess, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
+		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
 
@@ -99,7 +100,7 @@ public class CanyonArchGenerator extends StructurePiece {
 				for (int h = 0; h < height; h++) {
 					if (shapeArch(h, x, z)) {
 						pos.set(x, yStart + h, z);
-						world.setBlockState(pos, getStateAtY(h, x, z), 2);
+						serverWorldAccess.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
 				}
 			}

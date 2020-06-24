@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.arch;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
 import net.minecraft.util.math.BlockBox;
@@ -8,13 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
+import net.minecraft.world.biome.source.BiomeSource;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 
@@ -24,11 +25,12 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 	private static final int ARCH_SEPARATION = 3;
 	private static final int SEED_MODIFIER = 0x0401C480;
 
-	public CanyonArchStructureFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function) {
-		super(function);
+	public CanyonArchStructureFeature(Codec<DefaultFeatureConfig> codec) {
+		super(codec);
 	}
 
-	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
+
+	protected ChunkPos getStart(ChunkGenerator chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
 		chunkX += ARCH_SPACING * scaleX;
 		chunkZ += ARCH_SPACING * scaleZ;
 
@@ -39,7 +41,7 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 		int finalChunkX = chunkX / ARCH_SPACING;
 		int finalChunkZ = chunkZ / ARCH_SPACING;
 
-		((ChunkRandom) random_1).setStructureSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
+		((ChunkRandom) random_1).setRegionSeed(random_1.nextLong(), finalChunkX, finalChunkZ, SEED_MODIFIER);
 
 		// Get random position within grid area
 		finalChunkX *= ARCH_SPACING;
@@ -51,17 +53,16 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 	}
 
 	@Override
-	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, Biome biomeIn) {
-		ChunkPos start = this.getStart(generator, random, chunkX, chunkZ, 0, 0);
+	protected boolean shouldStartAt(ChunkGenerator generator, BiomeSource biomeSource, long l, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig featureConfig) {
+		ChunkPos start = this.getStart(generator, chunkRandom, chunkX, chunkZ, 0, 0);
 
 		if (chunkX == start.x && chunkZ == start.z) {
-			Biome biome = biomeAccess.getBiome(new BlockPos(chunkX * 16 + 9, 0, chunkZ * 16 + 9));
 
 			if (biome.getCategory() == Biome.Category.OCEAN) {
 				return false;
 			}
 
-			return generator.hasStructure(biome, this);
+			return true;
 		}
 
 		return false;
@@ -84,8 +85,9 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 			super(feature, chunkX, chunkZ, box, references, baseSeed);
 		}
 
-		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {
-			CanyonArchGenerator canyonArch = new CanyonArchGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
+		@Override
+		public void init(ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome, FeatureConfig featureConfig) {
+			CanyonArchGenerator canyonArch = new CanyonArchGenerator(this.random, x * 16, z * 16, biome);
 
 			this.children.add(canyonArch);
 			this.setBoundingBoxFromChildren();

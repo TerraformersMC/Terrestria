@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.random;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Dynamic;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -10,14 +10,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class IslandHeadFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+public class IslandHeadFeature extends TreeFeature {
 
 	private static final BlockState PRIMARY_BLOCK = TerrestriaBlocks.BASALT.plain.full.getDefaultState();
 	private static final BlockState MOSS_BLOCK = TerrestriaBlocks.BASALT.mossyCobblestone.full.getDefaultState();

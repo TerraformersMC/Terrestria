@@ -146,7 +146,7 @@ public class TerrestriaFeatures {
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
 
 		ISLAND_HEAD = register("island_head",
-				new IslandHeadFeature(TreeFeatureConfig::deserialize)
+				new IslandHeadFeature(TreeFeatureConfig.CODEC)
 		);
 
 		// TODO
@@ -161,10 +161,10 @@ public class TerrestriaFeatures {
 		);*/
 
 		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
-				new CanyonArchStructureFeature(DefaultFeatureConfig::deserialize)
+				new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC)
 		);
 
-		Feature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
+		StructureFeature.STRUCTURES.put("canyon_arch", CANYON_ARCH_STRUCTURE);
 
 		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
 
@@ -182,10 +182,10 @@ public class TerrestriaFeatures {
 	}
 
 	public static void addVolcanoStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.VOLCANO_STRUCTURE.configure(FeatureConfig.DEFAULT));
+		biome.addStructureFeature(TerrestriaFeatures.VOLCANO_STRUCTURE.configure(FeatureConfig.DEFAULT));
 	}
 
 	public static void addCanyonArchStructure(Biome biome) {
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_STRUCTURES, TerrestriaFeatures.CANYON_ARCH_STRUCTURE.configure(FeatureConfig.DEFAULT));
+		biome.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE.configure(FeatureConfig.DEFAULT));
 	}
 }
