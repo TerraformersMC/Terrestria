@@ -32,7 +32,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 		for (BlockPos log : logs) {
 			BlockState existing = world.getBlockState(log);
 
-			if(!(existing.getBlock() instanceof SmallLogBlock)) {
+			if (!(existing.getBlock() instanceof SmallLogBlock)) {
 				continue;
 			}
 
@@ -41,10 +41,10 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 			Predicate<BlockState> tester =
 					tested ->
 							tested.getBlock() instanceof SmallLogBlock ||
-							(!hasLeaves && tested.getBlock() instanceof LeavesBlock) ||
-							tested.isOpaque();
+									(!hasLeaves && tested.getBlock() instanceof LeavesBlock) ||
+									tested.isOpaque();
 
-			method_23470(
+			setBlockStateAndEncompassPosition(
 					world,
 					log,
 					existing
@@ -65,7 +65,7 @@ public class FixSmallLogsDecorator extends TreeDecorator {
 				ops,
 				ops.createMap(ImmutableMap.of(
 						ops.createString("type"),
-						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.field_21319).toString())
+						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.type).toString())
 				))
 		).getValue();
 	}

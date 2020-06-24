@@ -5,9 +5,7 @@ import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
@@ -45,6 +43,7 @@ public class VolcanicIslandBiomes {
 				.depth(0.05F)
 				.scale(0.05F)
 				.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
+				.addRareTreeFeature(TerrestriaFeatures.ISLAND_HEAD.configure(TerrestriaFeatureConfigs.ISLAND_HEADS), 15)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()

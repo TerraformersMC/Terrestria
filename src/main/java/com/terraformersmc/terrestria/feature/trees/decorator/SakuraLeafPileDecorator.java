@@ -28,14 +28,14 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 
 		this.chance = chance;
 	}
-	
+
 	public <T> SakuraLeafPileDecorator(Dynamic<T> dynamic) {
 		this(dynamic.get("chance").asInt(1));
 	}
-	
+
 	@Override
 	public void generate(IWorld world, Random rand, List<BlockPos> logs, List<BlockPos> leaves, Set<BlockPos> placed, BlockBox box) {
-		for(BlockPos pos: leaves) {
+		for (BlockPos pos : leaves) {
 			if (rand.nextInt(chance) != 0) {
 				continue;
 			}
@@ -53,7 +53,7 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 
 			if (valid) {
 				// setBlockState
-				method_23470(world, top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), placed, box);
+				setBlockStateAndEncompassPosition(world, top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), placed, box);
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public class SakuraLeafPileDecorator extends TreeDecorator {
 				ops,
 				ops.createMap(ImmutableMap.of(
 						ops.createString("type"),
-						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.field_21319).toString()),
+						ops.createString(Registry.TREE_DECORATOR_TYPE.getId(this.type).toString()),
 						ops.createString("chance"),
 						ops.createInt(chance)
 				))
