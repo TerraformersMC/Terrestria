@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
@@ -22,8 +23,8 @@ public class LushDesertBiomes {
 			.downfall(0.7F)
 			.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 				DEFAULT_GRASS, SPRINGS, FROZEN_TOP_LAYER)
-			.addStructureFeature(Feature.STRONGHOLD)
-			.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+			.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+			.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8))
 			.addSpawnEntry(new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4))
