@@ -14,17 +14,19 @@ import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 public class OutbackBiomes {
 	public static void register() {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
-			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
-			.temperature(1.8F)
-			.downfall(0.3F)
-			.waterColor(4159204)
-			.waterFogColor(329011)
-			.addDefaultSpawnEntries()
-			.setSpawnChance(0.03F)
-			.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-			.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-			.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
-				DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
+				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
+				.temperature(1.8F)
+				.downfall(0.3F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.addDefaultSpawnEntries()
+				.setSpawnChance(0.03F)
+				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.DESERT_RUINED_PORTAL)
+				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
+				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
+					DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
 		);
 
 		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template.builder()

@@ -31,6 +31,8 @@ public class HemlockRainforestBiomes {
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
+				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))

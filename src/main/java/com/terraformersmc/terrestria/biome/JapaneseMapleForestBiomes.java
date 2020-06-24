@@ -29,6 +29,8 @@ public class JapaneseMapleForestBiomes {
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
+				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
 				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE), 3)
 				.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 3)
 				.addTreeFeature(TerrestriaFeatures.JAPANESE_MAPLE_TREE.configure(TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE), 3)

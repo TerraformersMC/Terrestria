@@ -33,6 +33,8 @@ public class LushRedwoodForestBiomes {
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.MOUNTAIN_RUINED_PORTAL)
+				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))

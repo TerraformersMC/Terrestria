@@ -26,6 +26,8 @@ public class VolcanicIslandBiomes {
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 1)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_RUINED_PORTAL)
+				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))

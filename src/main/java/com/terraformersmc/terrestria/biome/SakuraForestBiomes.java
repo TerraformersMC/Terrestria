@@ -27,6 +27,8 @@ public class SakuraForestBiomes {
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
+				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
 				.addTreeFeature(TerrestriaFeatures.SAKURA_TREE.configure(TerrestriaFeatureConfigs.SAKURA), 6)
 				.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
 				.addDefaultSpawnEntries()
