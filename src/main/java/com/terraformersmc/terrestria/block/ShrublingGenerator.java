@@ -6,7 +6,7 @@ import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -23,16 +23,16 @@ public class ShrublingGenerator extends SaplingGenerator {
 	}
 
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
 		throw new UnsupportedOperationException("Shrublings don't have tree features, they have bush features instead");
 	}
 
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createBushFeature(Random random) {
-		return Feature.JUNGLE_GROUND_BUSH.configure(config);
+		return Feature.TREE.configure(config);
 	}
 
 	@Override
-	public boolean generate(ServerWorld world, ChunkGenerator<?> generator, BlockPos pos, BlockState state, Random random) {
+	public boolean generate(ServerWorld world, ChunkGenerator generator, BlockPos pos, BlockState state, Random random) {
 		ConfiguredFeature<?, ?> feature = this.createBushFeature(random);
 
 		if (feature == null) {

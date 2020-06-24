@@ -1,15 +1,15 @@
 package com.terraformersmc.terrestria.feature.trees;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.feature.trees.templates.ConiferTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class RedwoodTreeFeature extends ConiferTreeFeature {
-	public RedwoodTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
-		super(function);
+
+	public RedwoodTreeFeature(Codec<TreeFeatureConfig> codec) {
+		super(codec);
 	}
 
 	@Override

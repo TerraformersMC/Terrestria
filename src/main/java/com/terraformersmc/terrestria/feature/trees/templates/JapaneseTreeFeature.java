@@ -1,8 +1,9 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
+import com.terraformersmc.terrestria.feature.trees.AbstractTreeFeature;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Branches;
 import net.minecraft.block.Block;
@@ -11,20 +12,17 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.*;
-import java.util.function.Function;
 
-public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> implements Branches {
-	public JapaneseTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
-		super(function);
+public abstract class JapaneseTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> implements Branches {
+	public JapaneseTreeFeature(Codec<TreeFeatureConfig> codec) {
+		super(codec);
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		// Total trunk height (8-11)
 		int height = rand.nextInt(4) + 8;
 
@@ -90,7 +88,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 	}
 
 	// Grows the center trunk and top leaves of the tree.
-	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
+	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, TreeFeatureConfig config, int height) {
 		for (int i = 0; i < height; i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
 			pos.move(Direction.UP);
@@ -109,7 +107,7 @@ public abstract class JapaneseTreeFeature extends AbstractTreeFeature<BranchedTr
 		}
 	}
 
-	private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config, int height, double maxRadius) {
+	private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, int height, double maxRadius) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

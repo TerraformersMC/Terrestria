@@ -64,8 +64,6 @@ public class TerrestriaBiomes {
 				Biomes.DEEP_LUKEWARM_OCEAN,
 				Biomes.DEEP_WARM_OCEAN
 		);
-
-		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {

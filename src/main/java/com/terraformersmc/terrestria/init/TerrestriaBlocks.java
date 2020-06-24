@@ -176,7 +176,7 @@ public class TerrestriaBlocks {
 
 		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock(
 			new TerraformLargeSaplingGenerator(
-				() -> (AbstractTreeFeature<BranchedTreeFeatureConfig>)Feature.NORMAL_TREE,
+				() -> (TreeFeatureConfig<TreeFeatureConfig>)Feature.TREE,
 				() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS,
 				() -> TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE,
 				() -> TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS

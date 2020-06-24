@@ -1,9 +1,10 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
+import com.terraformersmc.terrestria.feature.trees.AbstractTreeFeature;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import com.terraformersmc.terrestria.feature.trees.components.Roots;
 import net.minecraft.block.SeagrassBlock;
@@ -15,19 +16,16 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 
-public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureConfig> implements Roots {
+public class CanopyTreeFeatureMega extends AbstractTreeFeature<TreeFeatureConfig> implements Roots {
 	private TreeDefinition.Mega tree;
 
-	public CanopyTreeFeatureMega(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
-		super(function);
-
+	public CanopyTreeFeatureMega(Codec<TreeFeatureConfig> codec, TreeDefinition.Mega tree) {
+		super(codec);
 		this.tree = tree;
 	}
 
@@ -38,7 +36,7 @@ public class CanopyTreeFeatureMega extends AbstractTreeFeature<MegaTreeFeatureCo
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		// Total trunk height
 		int height = getHeight(rand);
 

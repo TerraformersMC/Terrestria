@@ -1,26 +1,25 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.feature.TreeDefinition;
 import com.terraformersmc.terraform.util.Shapes;
+import com.terraformersmc.terrestria.feature.trees.AbstractTreeFeature;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 
-public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatureConfig> {
+public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<TreeFeatureConfig> {
 	private TreeDefinition.Mega tree;
 
-	public ConiferTreeFeatureMegaNew(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> function, TreeDefinition.Mega tree) {
-		super(function);
+	public ConiferTreeFeatureMegaNew(Codec<TreeFeatureConfig> codec, TreeDefinition.Mega tree) {
+		super(codec);
 		this.tree = tree;
 	}
 
@@ -40,7 +39,7 @@ public class ConiferTreeFeatureMegaNew extends AbstractTreeFeature<MegaTreeFeatu
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, MegaTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		int height = getLeafHeight(rand);
 		int bareTrunkHeight = getBareTrunkHeight(rand);
 		int maxLeafRadius = getMaxLeafRadius(rand);

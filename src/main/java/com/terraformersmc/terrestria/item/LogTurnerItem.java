@@ -7,6 +7,7 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -81,10 +82,10 @@ public class LogTurnerItem extends Item {
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 
-		String translation = Language.getInstance().translate("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
+		String translation = Language.getInstance().get("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 
 		for(String line: translation.split("\n")) {
-			tooltip.add(new LiteralText(line.trim()).setStyle(new Style().setColor(Formatting.GRAY)));
+			tooltip.add(new LiteralText(line.trim()).setStyle(Style.EMPTY.withColor(Formatting.GRAY)));
 		}
 	}
 }

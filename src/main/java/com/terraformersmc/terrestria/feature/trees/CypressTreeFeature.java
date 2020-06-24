@@ -1,26 +1,26 @@
 package com.terraformersmc.terrestria.feature.trees;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.util.Shapes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Function;
 
-public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
-	public CypressTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
-		super(function);
+public class CypressTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+
+	public CypressTreeFeature(Codec<TreeFeatureConfig> codec) {
+		super(codec);
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 		// Total tree height
 		int height = rand.nextInt(5) + 12;
 
@@ -78,7 +78,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 	}
 
 	// Grows the center trunk.
-	private void growTrunk(Set<BlockPos> logs, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box, BranchedTreeFeatureConfig config) {
+	private void growTrunk(Set<BlockPos> logs, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, BlockBox box, TreeFeatureConfig config) {
 		for (int i = 0; i < (height * .6); i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
 
@@ -86,7 +86,7 @@ public class CypressTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		}
 	}
 
-	private void growLeaves(Set<BlockPos> leaves, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, BlockBox box, BranchedTreeFeatureConfig config) {
+	private void growLeaves(Set<BlockPos> leaves, Random rand, ModifiableTestableWorld world, BlockPos.Mutable pos, int height, double maxRadius, BlockBox box, TreeFeatureConfig config) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();

@@ -1,13 +1,13 @@
 package com.terraformersmc.terrestria.feature.trees;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.feature.trees.templates.ConiferTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.function.Function;
 
 public class HemlockTreeFeature extends ConiferTreeFeature {
-	public HemlockTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
-		super(function);
+	public HemlockTreeFeature(Codec<TreeFeatureConfig> codec) {
+		super(codec);
 	}
 }

@@ -7,7 +7,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
@@ -47,8 +47,8 @@ public class CypressSwampBiomes {
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 2)
 				.addGrassFeature(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
 				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 1)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 8, 2, 4))
 				.build());

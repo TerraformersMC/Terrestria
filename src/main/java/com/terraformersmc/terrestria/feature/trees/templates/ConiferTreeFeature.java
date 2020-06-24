@@ -1,26 +1,26 @@
 package com.terraformersmc.terrestria.feature.trees.templates;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
+import com.terraformersmc.terrestria.feature.trees.AbstractTreeFeature;
 import com.terraformersmc.terrestria.feature.trees.PortUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Function;
 
-public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig> {
-	public ConiferTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> function) {
-		super(function);
+public class ConiferTreeFeature extends AbstractTreeFeature<TreeFeatureConfig> {
+
+	public ConiferTreeFeature(Codec<TreeFeatureConfig> codec) {
+		super(codec);
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config) {
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> logs, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config) {
 
 		int height = getLeafHeight(rand);
 		int bareTrunkHeight = getBareTrunkHeight(rand);
@@ -71,7 +71,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		return true;
 	}
 
-	private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> leaves, BlockBox box, BranchedTreeFeatureConfig config, int height, int bareTrunkHeight, int maxRadius) {
+	private void growLeaves(ModifiableTestableWorld world, Random rand, BlockPos origin, Set<BlockPos> leaves, BlockBox box, TreeFeatureConfig config, int height, int bareTrunkHeight, int maxRadius) {
 		int radius = 0;
 		int radiusTarget = 1;
 		boolean topCone = true;
@@ -114,7 +114,7 @@ public class ConiferTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureC
 		}
 	}
 
-	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, BranchedTreeFeatureConfig config, int height) {
+	private void growTrunk(ModifiableTestableWorld world, Random rand, BlockPos.Mutable pos, Set<BlockPos> logs, BlockBox box, TreeFeatureConfig config, int height) {
 		for (int i = 0; i < height; i++) {
 			setLogBlockState(world, rand, pos, logs, box, config);
 

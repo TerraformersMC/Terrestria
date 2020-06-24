@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
@@ -26,8 +27,8 @@ public class VolcanicIslandBiomes {
 				.addGrassFeature(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 1)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 1)
-				.addStructureFeature(Feature.STRONGHOLD)
-				.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, MineshaftFeature.Type.NORMAL))
+				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
