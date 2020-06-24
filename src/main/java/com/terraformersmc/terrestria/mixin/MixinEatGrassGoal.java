@@ -6,6 +6,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.ai.goal.EatGrassGoal;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
@@ -31,7 +32,7 @@ public class MixinEatGrassGoal {
 
 	@Inject(method = "canStart", at = @At(value = "FIELD", target = "Lnet/minecraft/block/Blocks;GRASS_BLOCK:Lnet/minecraft/block/Block;"), cancellable = true)
 	private void canStart(CallbackInfoReturnable<Boolean> callbackInfo) {
-		BlockPos pos = new BlockPos(this.mob);
+		BlockPos pos = this.mob.getPositionTarget();
 
 		if(this.world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
 			callbackInfo.setReturnValue(true);
@@ -41,12 +42,12 @@ public class MixinEatGrassGoal {
 	@Inject(method = "tick", at = @At("HEAD"))
 	private void tick(CallbackInfo info) {
 		if (this.timer - 1 == 4) {
-			BlockPos pos = new BlockPos(this.mob);
+			BlockPos pos = this.mob.getPositionTarget();
 			BlockPos downPos = pos.down();
 
 			if (this.world.getBlockState(downPos).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
-				if (this.world.getGameRules().getBoolean(GameRules.MOB_GRIEFING)) {
-					this.world.playLevelEvent(2001, downPos, Block.getRawIdFromState(Blocks.GRASS_BLOCK.getDefaultState()));
+				if (this.world.getGameRules().getBoolean(GameRules.field_19388)) {
+					this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(Blocks.GRASS_BLOCK.getDefaultState()));
 					this.world.setBlockState(downPos, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), 2);
 				}
 

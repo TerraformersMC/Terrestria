@@ -1,21 +1,17 @@
 package com.terraformersmc.terrestria.feature.volcano;
 
-import com.mojang.datafixers.Dynamic;
-import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.BlockBox;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.gen.ChunkRandom;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 	//
@@ -25,11 +21,11 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 	private static final int VOLCANO_SEPARATION = 3;
 	private static final int SEED_MODIFIER = 0x0401C480;
 
-	public VolcanoStructureFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> function) {
-		super(function);
+	public VolcanoStructureFeature(Codec<DefaultFeatureConfig> codec) {
+		super(codec);
 	}
 
-	protected ChunkPos getStart(ChunkGenerator<?> chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
+	protected ChunkPos getStart(ChunkGenerator chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
 		chunkX += VOLCANO_SPACING * scaleX;
 		chunkZ += VOLCANO_SPACING * scaleZ;
 
@@ -40,7 +36,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		int finalChunkX = chunkX / VOLCANO_SPACING;
 		int finalChunkZ = chunkZ / VOLCANO_SPACING;
 
-		((ChunkRandom) random_1).setStructureSeed(chunkGenerator_1.getSeed(), finalChunkX, finalChunkZ, SEED_MODIFIER);
+		((ChunkRandom) random_1).setRegionSeed(random_1.nextLong(), finalChunkX, finalChunkZ, SEED_MODIFIER);
 
 		// Get random position within grid area
 		finalChunkX *= VOLCANO_SPACING;
@@ -51,8 +47,7 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return new ChunkPos(finalChunkX, finalChunkZ);
 	}
 
-	@Override
-	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, Biome biomeIn) {
+/*	public boolean shouldStartAt(BiomeAccess biomeAccess, ChunkGenerator generator, Random random, int chunkX, int chunkZ, Biome biomeIn) {
 		ChunkPos start = this.getStart(generator, random, chunkX, chunkZ, 0, 0);
 
 		if (chunkX == start.x && chunkZ == start.z) {
@@ -64,11 +59,11 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 				return false;
 			}
 
-			return generator.hasStructure(biome, this);
+			return true;
 		}
 
 		return false;
-	}
+	}*/
 
 	public StructureFeature.StructureStartFactory getStructureStartFactory() {
 		return VolcanoStructureStart::new;
@@ -82,13 +77,14 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return 12;
 	}
 
-	public static class VolcanoStructureStart extends StructureStart {
-		VolcanoStructureStart(StructureFeature<?> feature, int chunkX, int chunkZ, BlockBox box, int references, long baseSeed) {
+	public static class VolcanoStructureStart extends StructureStart<DefaultFeatureConfig> {
+		VolcanoStructureStart(StructureFeature<DefaultFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long baseSeed) {
 			super(feature, chunkX, chunkZ, box, references, baseSeed);
 		}
 
-		public void initialize(ChunkGenerator<?> generator, StructureManager manager, int chunkX, int chunkZ, Biome biome) {
-			VolcanoGenerator volcano = new VolcanoGenerator(this.random, chunkX * 16, chunkZ * 16, biome);
+		@Override
+		public void init(ChunkGenerator chunkGenerator, StructureManager structureManager, int x, int z, Biome biome, DefaultFeatureConfig featureConfig) {
+			VolcanoGenerator volcano = new VolcanoGenerator(this.random, x * 16, z * 16, biome);
 
 			this.children.add(volcano);
 			this.setBoundingBoxFromChildren();

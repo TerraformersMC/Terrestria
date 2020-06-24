@@ -48,7 +48,7 @@ public class LushDesertBiomes {
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
 			.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-			.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.configure(TerrestriaFeatureConfigs.SAGUARO_CACTUS), 2)
+			//.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.configure(TerrestriaFeatureConfigs.SAGUARO_CACTUS), 2)
 			.build()
 		);
 
@@ -56,7 +56,7 @@ public class LushDesertBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.THREE_LAYER_OUTLINE, TerrestriaSurfaces.OASIS_CONFIG)
 			.depth(-0.2F)
 			.scale(0.07F)
-			.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
+			//.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
 			.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 			.addGrassFeature(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)

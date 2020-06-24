@@ -5,9 +5,9 @@ import com.terraformersmc.terraform.entity.TerraformBoatEntity;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
-import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.vehicle.BoatEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -40,7 +40,7 @@ public class TerrestriaEntities {
 		TerraformBoat boat = new TerraformBoat(wood.boat, wood.planks, skin, vanilla);
 
 		EntityType<TerraformBoatEntity> type = FabricEntityTypeBuilder.<TerraformBoatEntity>create(
-			EntityCategory.MISC, (entity, world) -> new TerraformBoatEntity(entity, world, boat))
+			SpawnGroup.MISC, (entity, world) -> new TerraformBoatEntity(entity, world, boat))
 			.size(EntityDimensions.fixed(1.375F, 0.5625F))
 			.build();
 

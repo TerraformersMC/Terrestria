@@ -40,27 +40,27 @@ public class TerrestriaSurfaces {
 	public static TernarySurfaceConfig OUTBACK_CONFIG;
 
 	public static void init() {
-		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 100, v -> Blocks.SAND.getDefaultState()));
+		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 100, v -> Blocks.SAND.getDefaultState()));
 
 		BASALT_BEACH = register("basalt_beach", new BeachSurfaceBuilder(
-				TernarySurfaceConfig::deserialize,
+				TernarySurfaceConfig.CODEC,
 				62,
 				v -> v > 1.0 ? TerrestriaBlocks.BASALT_SAND.getDefaultState() : Blocks.SAND.getDefaultState()
 		));
 
-		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig::deserialize, 62, v -> Blocks.SAND.getDefaultState()));
+		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 62, v -> Blocks.SAND.getDefaultState()));
 
-		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BASALT_BEACH));
+		BASALT_CLIFF = register("basalt_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig.CODEC, 62, BASALT_BEACH));
 
-		DUNES = register("dunes", new DuneSurfaceBuilder(TernarySurfaceConfig::deserialize));
+		DUNES = register("dunes", new DuneSurfaceBuilder(TernarySurfaceConfig.CODEC));
 
-		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
+		SANDSTONE_CLIFF = register("canyon_cliff", new CliffSurfaceBuilder(CliffSurfaceConfig.CODEC, 62, BEACH));
 
-		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig::deserialize, 62, BEACH));
+		CANYON_CLIFF = register("sandstone_cliff", new CanyonSurfaceBuilder(CliffSurfaceConfig.CODEC, 62, BEACH));
 
-		THREE_LAYER_OUTLINE = register("random", new ThreeLayerOutlineSurfaceBuilder());
+		THREE_LAYER_OUTLINE = register("random", new ThreeLayerOutlineSurfaceBuilder(ThreeLayerOutlinedSurfaceConfig.CODEC));
 
-		PATCHY_GRASS = register("patchy_grass", new PatchyGrassSurfaceBuilder(TernarySurfaceConfig::deserialize));
+		PATCHY_GRASS = register("patchy_grass", new PatchyGrassSurfaceBuilder(TernarySurfaceConfig.CODEC));
 
 		OASIS_CONFIG = new ThreeLayerOutlinedSurfaceConfig(
 				Blocks.SAND.getDefaultState(),

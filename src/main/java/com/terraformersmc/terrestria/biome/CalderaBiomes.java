@@ -58,10 +58,10 @@ public class CalderaBiomes {
 				.downfall(0.1F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
-				.addRareTreeFeature(TerrestriaFeatures.REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 2)
+/*				.addRareTreeFeature(TerrestriaFeatures.REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 2)
 				.addRareTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 2)
 				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 1)
-				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)
+				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)*/
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
@@ -74,8 +74,8 @@ public class CalderaBiomes {
 				.downfall(1F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
-				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 1)
-				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)
+/*				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 1)
+				.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_HEMLOCK), 1)*/
 				.build());
 	}
 }

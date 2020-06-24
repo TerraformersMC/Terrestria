@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.surface;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -12,8 +13,8 @@ import java.util.Random;
 
 public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOutlinedSurfaceConfig> {
 
-	public ThreeLayerOutlineSurfaceBuilder() {
-		super(ThreeLayerOutlinedSurfaceConfig::deserialize);
+	public ThreeLayerOutlineSurfaceBuilder(Codec<ThreeLayerOutlinedSurfaceConfig> codec) {
+		super(codec);
 	}
 
 	@Override

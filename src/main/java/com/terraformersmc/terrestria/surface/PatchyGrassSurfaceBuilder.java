@@ -1,10 +1,8 @@
 package com.terraformersmc.terrestria.surface;
 
 import java.util.Random;
-import java.util.function.Function;
 
-import com.mojang.datafixers.Dynamic;
-
+import com.mojang.serialization.Codec;
 import net.minecraft.block.BlockState;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.Chunk;
@@ -12,8 +10,9 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class PatchyGrassSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
-	public PatchyGrassSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-		super(function);
+
+	public PatchyGrassSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+		super(codec);
 	}
 
 	@Override

@@ -81,10 +81,10 @@ public class LogTurnerItem extends Item {
 	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context) {
 		super.appendTooltip(stack, world, tooltip, context);
 
-		String translation = Language.getInstance().translate("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
+		String translation = Language.getInstance().get("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 
 		for(String line: translation.split("\n")) {
-			tooltip.add(new LiteralText(line.trim()).setStyle(new Style().setColor(Formatting.GRAY)));
+			tooltip.add(new LiteralText(line.trim()).formatted(Formatting.GRAY));
 		}
 	}
 }

@@ -13,9 +13,10 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
 import java.util.Random;
@@ -165,7 +166,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> var2, Random random, BlockBox box, ChunkPos chunkPos) {
+	public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
 
 		if (box.maxY < this.boundingBox.maxY || box.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
@@ -311,7 +312,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				// Finally, actually set the top block. If lava, it needs a fluid tick update to get going.
 
-				pos.setOffset(Direction.DOWN);
+				pos.move(Direction.DOWN);
 
 				if ((world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) && startY < columnHeight) {
 					world.setBlockState(pos, top, 2);

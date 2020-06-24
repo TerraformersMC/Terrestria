@@ -29,8 +29,8 @@ public class SakuraForestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
-				.addTreeFeature(TerrestriaFeatures.SAKURA_TREE.configure(TerrestriaFeatureConfigs.SAKURA), 6)
-				.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
+				//.addTreeFeature(TerrestriaFeatures.SAKURA_TREE.configure(TerrestriaFeatureConfigs.SAKURA), 6)
+				//.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);

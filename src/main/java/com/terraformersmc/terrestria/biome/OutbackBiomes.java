@@ -4,7 +4,6 @@ import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -33,7 +32,7 @@ public class OutbackBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.depth(0.125F)
 			.scale(0.05F)
-			.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
+			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 			.build());
 
@@ -47,10 +46,10 @@ public class OutbackBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.depth(0.125F)
 			.scale(0.05F)
-			.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 2)
-			.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
-			.addTreeFeature(Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 1)
-			.addTreeFeature(Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 2)
+			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 2)
+			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
+			//.addTreeFeature(Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 1)
+			//.addTreeFeature(Feature.ACACIA_TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 2)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 			.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 			.build());

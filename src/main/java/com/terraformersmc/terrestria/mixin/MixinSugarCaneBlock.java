@@ -28,7 +28,7 @@ public class MixinSugarCaneBlock {
 				BlockState candidateState = world.getBlockState(downPos.offset(direction));
 				FluidState fluidState = world.getFluidState(downPos.offset(direction));
 
-				if (fluidState.matches(FluidTags.WATER) || candidateState.getBlock() == Blocks.FROSTED_ICE) {
+				if (fluidState.isIn(FluidTags.WATER) || candidateState.getBlock() == Blocks.FROSTED_ICE) {
 					info.setReturnValue(true);
 				}
 			}

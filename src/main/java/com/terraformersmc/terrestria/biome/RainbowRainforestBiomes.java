@@ -6,7 +6,6 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
@@ -27,9 +26,9 @@ public class RainbowRainforestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_PYRAMID)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_RUINED_PORTAL)
-				.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.configure(TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS), 5)
-				.addTreeFeature(Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 5)
-				.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
+				//.addTreeFeature(TerrestriaFeatures.RAINBOW_EUCALYPTUS_TREE.configure(TerrestriaFeatureConfigs.MEGA_RAINBOW_EUCALYPTUS), 5)
+				//.addTreeFeature(Feature.FANCY_TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 5)
+				//.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))

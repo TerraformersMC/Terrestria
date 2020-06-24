@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
@@ -19,8 +19,8 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(3445);
 
-	public DuneSurfaceBuilder(Function<Dynamic<?>, ? extends TernarySurfaceConfig> function) {
-		super(function);
+	public DuneSurfaceBuilder(Codec<TernarySurfaceConfig> codec) {
+		super(codec);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
 		for (int i = 0; i < 8; i++) {
 			chunk.setBlockState(pos, config.getTopMaterial(), false);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 
 		// Cap the height based on noise
@@ -46,7 +46,7 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 
 		for (int h = 0; h < height; h++) {
 			chunk.setBlockState(pos, config.getTopMaterial(), false);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 	}
 }

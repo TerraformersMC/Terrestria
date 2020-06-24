@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.surface;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import net.minecraft.block.BlockState;
@@ -13,7 +13,6 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 
@@ -21,9 +20,8 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 	private int seaLevel;
 	private SurfaceBuilder<TernarySurfaceConfig> parent;
 
-	public CanyonSurfaceBuilder(Function<Dynamic<?>, ? extends CliffSurfaceConfig> function, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
-		super(function);
-
+	public CanyonSurfaceBuilder(Codec<CliffSurfaceConfig> codec, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
+		super(codec);
 		this.seaLevel = seaLevel;
 		this.parent = parent;
 	}
@@ -133,21 +131,21 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 		for (int i = 0; i < cliffLayers; i++) {
 			chunk.setBlockState(pos, config.getCliffMaterial(), false);
 
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 
 		// Place under material
 
 		for (int i = 0; i < underLayers; i++) {
 			chunk.setBlockState(pos, config.getUnderMaterial(), false);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 
 		// Place top material
 
 		for (int i = 0; i < topLayers; i++) {
 			chunk.setBlockState(pos, config.getTopMaterial(), false);
-			pos.setOffset(Direction.UP);
+			pos.move(Direction.UP);
 		}
 
 		if (pos.getY() <= vHeight) {

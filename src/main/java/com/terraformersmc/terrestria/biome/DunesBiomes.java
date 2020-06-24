@@ -4,8 +4,10 @@ import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
@@ -21,8 +23,8 @@ public class DunesBiomes {
 			.waterColor(0x4da5e3)
 			.waterFogColor(0x24a0b0)
 			.addDefaultFeatures(STRUCTURES, DUNGEONS, MINEABLES, ORES, DISKS, FROZEN_TOP_LAYER)
-			.addStructureFeature(Feature.STRONGHOLD)
-			.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
+			.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+			.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 			.addDefaultSpawnEntries()
 		);
 

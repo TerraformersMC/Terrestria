@@ -6,6 +6,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
@@ -26,19 +27,19 @@ public class CanyonBiomes {
 			.waterFogColor(0x24a0b0)
 			.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DESERT_DEAD_BUSHES,
 				DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, FROZEN_TOP_LAYER)
-			.addStructureFeature(Feature.STRONGHOLD)
-			.addStructureFeature(Feature.MINESHAFT, new MineshaftFeatureConfig(0.004D, NORMAL))
+			.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
+			.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 			.addDefaultSpawnEntries()
 		);
 
 		TerrestriaBiomes.CANYON_ARCHES = TerrestriaBiomes.register("canyon_arches", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
-				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
+				//.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE)
 				.build());
 
 		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.CANYON_CLIFF, TerrestriaSurfaces.SANDSTONE_CLIFF_CONFIG)
-			.addRareTreeFeature(TerrestriaFeatures.BRYCE_TREE.configure(TerrestriaFeatureConfigs.SMALL_OAK), 12)
+			//.addRareTreeFeature(TerrestriaFeatures.BRYCE_TREE.configure(TerrestriaFeatureConfigs.SMALL_OAK), 12)
 			.build());
 
 		TerrestriaBiomes.CANYON_EDGE = TerrestriaBiomes.register("canyon_edge", template.builder()
