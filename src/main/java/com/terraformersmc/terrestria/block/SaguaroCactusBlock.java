@@ -1,24 +1,19 @@
 package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terraform.block.BareSmallLogBlock;
-import com.terraformersmc.terraform.block.SmallLogBlock;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-import java.util.Iterator;
 import java.util.Random;
 import java.util.function.Supplier;
 
@@ -42,7 +37,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 
 	@Override
 	@SuppressWarnings("deprecation")
-	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, IWorld world, BlockPos pos, BlockPos neighborPos) {
+	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!isSupported(state, world, pos)) {
 			world.getBlockTickScheduler().schedule(pos, this, 1);
 		}

@@ -3,8 +3,9 @@ package com.terraformersmc.terrestria.block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -32,17 +33,17 @@ public class ShrublingGenerator extends SaplingGenerator {
 	}
 
 	@Override
-	public boolean generate(IWorld world, ChunkGenerator<?> generator, BlockPos pos, BlockState state, Random random) {
+	public boolean generate(ServerWorld serverWorld, ChunkGenerator chunkGenerator, BlockPos blockPos, BlockState blockState, Random random) {
 		ConfiguredFeature<?, ?> feature = this.createBushFeature(random);
 
 		if (feature == null) {
 			return false;
 		}
 
-		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
+		serverWorld.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
 
-		if (!feature.generate(world, generator, random, pos)) {
-			world.setBlockState(pos, state, 4);
+		if (!feature.generate(serverWorld, chunkGenerator, random, blockPos)) {
+			world.setBlockState(blockPos, state, 4);
 			return false;
 		}
 
