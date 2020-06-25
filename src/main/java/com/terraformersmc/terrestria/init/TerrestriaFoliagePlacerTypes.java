@@ -1,11 +1,10 @@
 package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
+import com.terraformersmc.terraform.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.foliageplacers.PalmFanFoliagePlacer;
-import com.terraformersmc.terrestria.mixin.FoliagePlacerTypeAccessor;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
@@ -18,7 +17,7 @@ public class TerrestriaFoliagePlacerTypes {
 	}
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {
-		return Registry.register(Registry.FOLIAGE_PLACER_TYPE, new Identifier(Terrestria.MOD_ID, name), FoliagePlacerTypeAccessor.createFoliagePlacerType(codec));
+		return PlacerTypes.registerFoliagePlacer(new Identifier(Terrestria.MOD_ID, name), codec);
 	}
 
 }

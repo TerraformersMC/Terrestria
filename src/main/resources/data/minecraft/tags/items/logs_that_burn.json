@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "#minecraft:dark_oak_logs",
     "#minecraft:oak_logs",
