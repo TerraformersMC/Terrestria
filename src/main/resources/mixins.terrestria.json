@@ -3,7 +3,7 @@
   "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinTreeFeature",
+    "FoliagePlacerTypeAccessor",
     "MixinAlterGroundTreeDecorator",
     "MixinAnimalEntity",
     "MixinEatGrassGoal",
@@ -11,7 +11,9 @@
     "MixinFluidBlock",
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
-    "MixinSugarCaneBlock"
+    "MixinSugarCaneBlock",
+    "MixinTreeFeature",
+    "TrunkPlacerTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

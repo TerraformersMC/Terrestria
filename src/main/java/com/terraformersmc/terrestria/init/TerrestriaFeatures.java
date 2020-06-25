@@ -29,28 +29,13 @@ public class TerrestriaFeatures {
 
 	public static void init() {
 
-		CATTAIL = register("cattail",
-				new CattailFeature(SeagrassFeatureConfig.CODEC, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL)
-		);
+		CATTAIL = register("cattail", new CattailFeature(SeagrassFeatureConfig.CODEC, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL));
 
-		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "volcano"),
-				new VolcanoStructureFeature(DefaultFeatureConfig.CODEC)
-		);
+		VOLCANO_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "volcano"), new VolcanoStructureFeature(DefaultFeatureConfig.CODEC));
 
 		StructureFeature.STRUCTURES.put("volcano", VOLCANO_STRUCTURE);
 
 		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
-
-		// TODO
-		/*SAKURA_LEAF_PILE_DECORATOR = Registry.register(
-				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "sakura_leaf_pile"),
-				MixinTreeDecoratorType.create(SakuraLeafPileDecorator::new)
-		);
-
-		FIX_SMALL_LOGS_DECORATOR = Registry.register(
-				Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, "fix_small_logs"),
-				MixinTreeDecoratorType.create(FixSmallLogsDecorator::new)
-		);*/
 
 		CANYON_ARCH_STRUCTURE = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, "canyon_arch"),
 				new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC)
@@ -60,6 +45,13 @@ public class TerrestriaFeatures {
 
 		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
 	}
+
+	//TODO I have not tested this but it should work for registering structures
+/*	public static <T extends StructureFeature<FC>, FC extends FeatureConfig> T registerStructure(String name, T feature) {
+		T structure = Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
+		StructureFeature.STRUCTURES.put(name, feature);
+		return structure;
+	}*/
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
 		return Registry.register(Registry.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);

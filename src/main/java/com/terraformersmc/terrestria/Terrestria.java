@@ -3,19 +3,13 @@ package com.terraformersmc.terrestria;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.terraformersmc.terrestria.init.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.command.LocateAny;
-import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.TerrestriaEntities;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaGeneration;
-import com.terraformersmc.terrestria.init.TerrestriaItems;
-import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 
 import net.fabricmc.api.ModInitializer;
@@ -44,6 +38,8 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
 		TerrestriaEntities.init();
+		TerrestriaFoliagePlacerTypes.init();
+		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaFeatures.init();
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();

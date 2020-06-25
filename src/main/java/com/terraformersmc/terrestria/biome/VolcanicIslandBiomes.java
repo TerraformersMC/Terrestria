@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
+import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
@@ -38,13 +39,13 @@ public class VolcanicIslandBiomes {
 				.category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
-				//.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 5)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_FEATURE_CONFIG), 5)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
 				.depth(0.05F)
 				.scale(0.05F)
-				//.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_FEATURE_CONFIG), 2)
 				//.addRareTreeFeature(TerrestriaFeatures.ISLAND_HEAD.configure(TerrestriaFeatureConfigs.ISLAND_HEADS), 15)
 				.build());
 
@@ -52,7 +53,7 @@ public class VolcanicIslandBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
 				.depth(0F)
 				.scale(0.05F)
-				//.addTreeFeature(TerrestriaFeatures.JUNGLE_PALM_TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_FEATURE_CONFIG), 2)
 				.build());
 	}
 }
