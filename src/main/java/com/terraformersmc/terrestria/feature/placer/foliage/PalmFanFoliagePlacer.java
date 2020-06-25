@@ -18,9 +18,8 @@ import java.util.Set;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((palmTopFoliagePlacerInstance) -> {
-		return getCombinedCodec(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new);
-	});
+	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((palmTopFoliagePlacerInstance) ->
+			getCombinedCodec(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new));
 
 	private static Products.P4<RecordCodecBuilder.Mu<PalmFanFoliagePlacer>, Integer, Integer, Integer, Integer> getCombinedCodec(RecordCodecBuilder.Instance<PalmFanFoliagePlacer> instance) {
 		return method_28846(instance);

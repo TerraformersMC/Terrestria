@@ -34,7 +34,7 @@ public class CypressSwampBiomes {
 						DESERT_VEGETATION)
 				//.addTreeFeature(TerrestriaFeatures.MEGA_CYPRESS_TREE.configure(TerrestriaFeatureConfigs.MEGA_CYPRESS), 2)
 				//.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
-				//.addTreeFeature(TerrestriaFeatures.WILLOW_TREE.configure(TerrestriaFeatureConfigs.WILLOW), 1)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.WILLOW_TREE), 1)
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 						TerrestriaFeatures.CATTAIL
 							.configure(new SeagrassFeatureConfig(80, 0.3D))

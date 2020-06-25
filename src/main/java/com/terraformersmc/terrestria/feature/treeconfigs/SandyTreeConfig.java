@@ -10,8 +10,8 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
-public class PalmTreeFeatureConfig extends TerrestriaTreeFeatureConfig implements ExtendedTreeGeneration {
-	public PalmTreeFeatureConfig(TreeFeatureConfig config) {
+public class SandyTreeConfig extends TerrestriaTreeFeatureConfig implements ExtendedTreeGeneration {
+	public SandyTreeConfig(TreeFeatureConfig config) {
 		super(config);
 	}
 
