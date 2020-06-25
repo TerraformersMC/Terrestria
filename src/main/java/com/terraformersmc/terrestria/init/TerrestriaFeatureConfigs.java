@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.feature.foliageplacers.PalmFanFoliagePlacer;
+import com.terraformersmc.terrestria.feature.treeconfigs.PalmTreeFeatureConfig;
 import com.terraformersmc.terrestria.feature.trunkplacers.BentTrunkPlacer;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -12,7 +13,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig JUNGLE_PALM_FEATURE_CONFIG;
 
 	public static void init() {
-		JUNGLE_PALM_FEATURE_CONFIG = new TreeFeatureConfig.Builder(
+		JUNGLE_PALM_FEATURE_CONFIG = new PalmTreeFeatureConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(Blocks.JUNGLE_WOOD.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()),
 				new PalmFanFoliagePlacer(3, 0, 0, 0),
@@ -20,7 +21,6 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 2))
 
 				.ignoreVines()
-				.build();
+				.build());
 	}
-
 }

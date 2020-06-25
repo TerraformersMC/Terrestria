@@ -3,7 +3,6 @@
   "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "FoliagePlacerTypeAccessor",
     "MixinAlterGroundTreeDecorator",
     "MixinAnimalEntity",
     "MixinEatGrassGoal",
