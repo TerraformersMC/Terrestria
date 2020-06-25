@@ -31,7 +31,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected FoliagePlacerType<?> method_28843() {
+	protected FoliagePlacerType<?> getType() {
 		return TerrestriaFoliagePlacerTypes.PALM_TOP_FOLIAGE_PLACER;
 	}
 

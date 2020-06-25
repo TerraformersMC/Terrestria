@@ -27,7 +27,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	protected TrunkPlacerType<?> method_28903() {
+	protected TrunkPlacerType<?> getType() {
 		return TerrestriaTrunkPlacerTypes.BENT_TRUNK_PLACER;
 	}
 

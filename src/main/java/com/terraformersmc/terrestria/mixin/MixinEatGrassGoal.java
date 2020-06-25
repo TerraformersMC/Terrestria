@@ -46,7 +46,7 @@ public class MixinEatGrassGoal {
 			BlockPos downPos = pos.down();
 
 			if (this.world.getBlockState(downPos).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK) {
-				if (this.world.getGameRules().getBoolean(GameRules.field_19388)) {
+				if (this.world.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
 					this.world.syncGlobalEvent(2001, downPos, Block.getRawIdFromState(Blocks.GRASS_BLOCK.getDefaultState()));
 					this.world.setBlockState(downPos, TerrestriaBlocks.BASALT_DIRT.getDefaultState(), 2);
 				}
