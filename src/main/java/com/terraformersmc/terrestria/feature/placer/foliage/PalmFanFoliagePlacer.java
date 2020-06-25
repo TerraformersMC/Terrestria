@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.feature.placer.foliage;
 
-import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
@@ -19,11 +18,7 @@ import java.util.Set;
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 
 	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((palmTopFoliagePlacerInstance) ->
-			getCombinedCodec(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new));
-
-	private static Products.P4<RecordCodecBuilder.Mu<PalmFanFoliagePlacer>, Integer, Integer, Integer, Integer> getCombinedCodec(RecordCodecBuilder.Instance<PalmFanFoliagePlacer> instance) {
-		return method_28846(instance);
-	}
+			method_28846(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new));
 
 	public PalmFanFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);
