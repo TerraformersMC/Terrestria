@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.trunkplacers;
+package com.terraformersmc.terrestria.feature.placer.trunk;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -28,7 +28,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 
 	@Override
 	protected TrunkPlacerType<?> getType() {
-		return TerrestriaTrunkPlacerTypes.BENT_TRUNK_PLACER;
+		return TerrestriaTrunkPlacerTypes.BENT;
 	}
 
 	@Override

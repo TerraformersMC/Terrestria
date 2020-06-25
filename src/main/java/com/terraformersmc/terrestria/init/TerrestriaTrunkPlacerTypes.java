@@ -1,24 +1,23 @@
 package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
+import com.terraformersmc.terraform.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.trunkplacers.BentTrunkPlacer;
-import com.terraformersmc.terrestria.mixin.TrunkPlacerTypeAccessor;
+import com.terraformersmc.terrestria.feature.placer.trunk.BentTrunkPlacer;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 public class TerrestriaTrunkPlacerTypes {
 
-	public static TrunkPlacerType<BentTrunkPlacer> BENT_TRUNK_PLACER;
+	public static TrunkPlacerType<BentTrunkPlacer> BENT;
 
 	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {
-		return Registry.register(Registry.TRUNK_PLACER_TYPE, new Identifier(Terrestria.MOD_ID, name), TrunkPlacerTypeAccessor.createTrunkPlacerType(codec));
+		return PlacerTypes.registerTrunkPlacer(new Identifier(Terrestria.MOD_ID, name), codec);
 	}
 
 	public static void init() {
-		BENT_TRUNK_PLACER = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
+		BENT = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
 	}
 
 }

@@ -3,14 +3,11 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
@@ -22,8 +19,8 @@ public class RedwoodForestBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.9F)
 				.downfall(0.9F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
+				.waterColor(0x3f76e4)
+				.waterFogColor(0x50533)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
 						FROZEN_TOP_LAYER)
@@ -41,8 +38,8 @@ public class RedwoodForestBiomes {
 				.depth(1.2F)
 				.scale(0.3F)
 				//.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD), 7)
-				//.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 3)
-				//.addRareTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 1)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 3)
+				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 4)
 				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 7)
 				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 7)
@@ -52,7 +49,7 @@ public class RedwoodForestBiomes {
 				.depth(0.5F)
 				.scale(0.3F)
 				//.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 3)
-				//.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 2)
 				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
 				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
 				.build());
@@ -60,8 +57,8 @@ public class RedwoodForestBiomes {
 		TerrestriaBiomes.REDWOOD_CLEARING = TerrestriaBiomes.register("redwood_clearing", template.builder()
 				.depth(1.2F)
 				.scale(0.3F)
-				//.addTreeFeature(TerrestriaFeatures.FALLEN_REDWOOD_LOG.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 2)
-				//.addTreeFeature(Feature.NORMAL_TREE.configure(TerrestriaFeatureConfigs.TINY_REDWOOD), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 2)
 				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
 				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
 				.build());

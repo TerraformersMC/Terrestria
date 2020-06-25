@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.foliageplacers;
+package com.terraformersmc.terrestria.feature.placer.foliage;
 
 import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
@@ -32,7 +32,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected FoliagePlacerType<?> getType() {
-		return TerrestriaFoliagePlacerTypes.PALM_TOP_FOLIAGE_PLACER;
+		return TerrestriaFoliagePlacerTypes.PALM_TOP;
 	}
 
 	@Override

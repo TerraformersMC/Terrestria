@@ -35,18 +35,20 @@ public abstract class MixinTreeFeature<FC extends FeatureConfig> extends Feature
 
 	@Inject(method = "generate(Lnet/minecraft/world/ModifiableTestableWorld;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/util/math/BlockBox;Lnet/minecraft/world/gen/feature/TreeFeatureConfig;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/TreeFeature;isDirtOrGrass(Lnet/minecraft/world/TestableWorld;Lnet/minecraft/util/math/BlockPos;)Z"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
 	private void onGenerate(ModifiableTestableWorld world, Random random, BlockPos pos, Set logPositions, Set leavesPositions, BlockBox box, TreeFeatureConfig config, CallbackInfoReturnable<Boolean> cir, int i, int j, int k, int l, BlockPos blockPos2) {
-		if ((config instanceof ExtendedTreeGeneration) && ((ExtendedTreeGeneration) config).canGenerateOn(world, blockPos2.down())) {
-			OptionalInt minClippedHeight = config.minimumSize.getMinClippedHeight();
-			int r = this.method_29963(world, i, blockPos2, config);
-			if (r >= i || minClippedHeight.isPresent() && r >= minClippedHeight.getAsInt()) {
-				List<FoliagePlacer.TreeNode> list = config.trunkPlacer.generate(world, random, r, blockPos2, logPositions, box, config);
-				list.forEach((treeNode) -> config.foliagePlacer.generate(world, random, config, r, treeNode, j, l, leavesPositions, box));
-				cir.setReturnValue(true);
+		if ((config instanceof ExtendedTreeGeneration)) {
+			if (((ExtendedTreeGeneration) config).canGenerateOn(world, blockPos2.down())) {
+				OptionalInt minClippedHeight = config.minimumSize.getMinClippedHeight();
+				int r = this.method_29963(world, i, blockPos2, config);
+				if (r >= i || minClippedHeight.isPresent() && r >= minClippedHeight.getAsInt()) {
+					List<FoliagePlacer.TreeNode> list = config.trunkPlacer.generate(world, random, r, blockPos2, logPositions, box, config);
+					list.forEach((treeNode) -> config.foliagePlacer.generate(world, random, config, r, treeNode, j, l, leavesPositions, box));
+					cir.setReturnValue(true);
+				} else {
+					cir.setReturnValue(false);
+				}
 			} else {
 				cir.setReturnValue(false);
 			}
-		} else {
-			cir.setReturnValue(false);
 		}
 	}
 }

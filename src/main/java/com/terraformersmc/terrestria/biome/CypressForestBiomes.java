@@ -21,8 +21,8 @@ public class CypressForestBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.7F)
 				.downfall(0.8F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
+				.waterColor(0x3f76e4)
+				.waterFogColor(0x50533)
 				.grassColor(0x7ecc41)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, TALL_BIRCH_TREES)

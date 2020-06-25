@@ -21,8 +21,8 @@ public class SakuraForestBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.8F)
 				.downfall(1.0F)
-				.waterColor(4159204)
-				.waterFogColor(329011)
+				.waterColor(0x3f76e4)
+				.waterFogColor(0x50533)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
