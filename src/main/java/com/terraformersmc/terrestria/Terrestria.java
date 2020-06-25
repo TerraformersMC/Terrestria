@@ -40,6 +40,7 @@ public class Terrestria implements ModInitializer {
 		TerrestriaEntities.init();
 		TerrestriaFoliagePlacerTypes.init();
 		TerrestriaTrunkPlacerTypes.init();
+		TerrestriaFeatureConfigs.init();
 		TerrestriaFeatures.init();
 		TerrestriaSurfaces.init();
 		TerrestriaBiomes.init();
