@@ -21,17 +21,13 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((palmTopFoliagePlacerInstance) -> {
 		return getCombinedCodec(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new);
 	});
-	public final boolean flipSpiral;
 
-	private static Products.P5<RecordCodecBuilder.Mu<PalmFanFoliagePlacer>, Integer, Integer, Integer, Integer, Boolean> getCombinedCodec(RecordCodecBuilder.Instance<PalmFanFoliagePlacer> instance) {
-		return method_28846(instance).and(Codec.BOOL.fieldOf("flip_spiral").forGetter((palmFoliagePlacer) -> {
-			return palmFoliagePlacer.flipSpiral;
-		}));
+	private static Products.P4<RecordCodecBuilder.Mu<PalmFanFoliagePlacer>, Integer, Integer, Integer, Integer> getCombinedCodec(RecordCodecBuilder.Instance<PalmFanFoliagePlacer> instance) {
+		return method_28846(instance);
 	}
 
-	public PalmFanFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset, boolean flipSpiral) {
+	public PalmFanFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);
-		this.flipSpiral = flipSpiral;
 	}
 
 	@Override
@@ -47,6 +43,9 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 
 		//The working mutable position
 		BlockPos.Mutable pos = new BlockPos.Mutable();
+
+		//Determine weather this tree should have it's spiral flipped to make it have more variation among trees
+		boolean flipSpiral = random.nextBoolean();
 
 		//Place the top blocks
 		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 0), leaves, blockBox, config);

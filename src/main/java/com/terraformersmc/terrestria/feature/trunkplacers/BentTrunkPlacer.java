@@ -40,27 +40,27 @@ public class BentTrunkPlacer extends TrunkPlacer {
 		method_27400(world, pos.down());
 
 		//Create the Mutable version of our block position so that we can procedurally create the trunk
-		BlockPos.Mutable currentPosition = pos.mutableCopy();
+		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 
 		//Place the first few blocks
-		for (int i = 0; i < 3 + random.nextInt(2); i++) {
-			method_27402(world, random, currentPosition.up(), set, blockBox, treeFeatureConfig);
+		for (int i = 0; i < 4 + random.nextInt(3); i++) {
+			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
-		//Offset in the lean direction
-		pos.offset(bendDirection);
+		//Offset in the lean direction and also move it down to keep the trunk solid
+		currentPosition.move(bendDirection).move(Direction.DOWN);
 
 		//Place a few more blocks
-		for (int i = 0; i < 2 + random.nextInt(1); i++) {
-			method_27402(world, random, currentPosition.up(), set, blockBox, treeFeatureConfig);
+		for (int i = 0; i < 4 + random.nextInt(1); i++) {
+			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
-		//50% of the time make a 3rd set of blocks
+		//50% of the time make a 3rd set of blocks the same as the step before
 		if (random.nextBoolean()) {
-			pos.offset(bendDirection);
+			currentPosition.move(bendDirection).move(Direction.DOWN);
 
-			for (int i = 0; i < 2; i++) {
-				method_27402(world, random, currentPosition.up(), set, blockBox, treeFeatureConfig);
+			for (int i = 0; i < 3; i++) {
+				method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 			}
 		}
 

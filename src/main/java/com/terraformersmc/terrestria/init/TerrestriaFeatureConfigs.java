@@ -15,9 +15,10 @@ public class TerrestriaFeatureConfigs {
 		JUNGLE_PALM_FEATURE_CONFIG = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(Blocks.JUNGLE_WOOD.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()),
-				new PalmFanFoliagePlacer(3, 0, 0, 0, true),
+				new PalmFanFoliagePlacer(3, 0, 0, 0),
 				new BentTrunkPlacer(15, 15, 15),
 				new TwoLayersFeatureSize(1, 0, 2))
+
 				.ignoreVines()
 				.build();
 	}

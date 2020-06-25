@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.feature.treeconfigs;
 
+import com.terraformersmc.terrestria.feature.treeconfigs.helpers.SandyTree;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -10,7 +11,7 @@ import net.minecraft.world.gen.trunk.TrunkPlacer;
 
 import java.util.List;
 
-public class PalmTreeFeatureConfig extends TreeFeatureConfig {
+public class PalmTreeFeatureConfig extends TreeFeatureConfig implements SandyTree {
 
 	protected PalmTreeFeatureConfig(BlockStateProvider trunkProvider, BlockStateProvider leavesProvider, FoliagePlacer foliagePlacer, TrunkPlacer trunkPlacer, FeatureSize minimumSize, List<TreeDecorator> decorators, int maxWaterDepth, boolean ignoreVines, Heightmap.Type heightmap) {
 		super(trunkProvider, leavesProvider, foliagePlacer, trunkPlacer, minimumSize, decorators, maxWaterDepth, ignoreVines, heightmap);

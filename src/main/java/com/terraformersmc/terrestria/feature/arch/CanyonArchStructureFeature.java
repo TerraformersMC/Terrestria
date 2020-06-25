@@ -62,7 +62,7 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 				return false;
 			}
 
-			return true;
+			return biomeSource.getBiomeForNoiseGen(chunkX*16, 60, chunkZ*16).hasStructureFeature(this);
 		}
 
 		return false;
