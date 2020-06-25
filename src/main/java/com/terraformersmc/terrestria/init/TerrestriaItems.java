@@ -88,15 +88,16 @@ public class TerrestriaItems {
 
 		CATTAIL = TerrestriaRegistry.registerBlockItem("cattail", TerrestriaBlocks.CATTAIL);
 
-		REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("redwood_quarter_log", TerrestriaBlocks.REDWOOD_QUARTER_LOG);
-		HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK_QUARTER_LOG);
-		CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("cypress_quarter_log", TerrestriaBlocks.CYPRESS_QUARTER_LOG);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS_QUARTER_LOG);
+		//TODO make this automatic with a new QuarteredWoodItems like QuarteredWoodBlocks
+		REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("redwood_quarter_log", TerrestriaBlocks.REDWOOD.quarterLog);
+		HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK.quarterLog);
+		CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("cypress_quarter_log", TerrestriaBlocks.CYPRESS.quarterLog);
+		RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog);
 
-		STRIPPED_REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_redwood_quarter_log", TerrestriaBlocks.STRIPPED_REDWOOD_QUARTER_LOG);
-		STRIPPED_HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_hemlock_quarter_log", TerrestriaBlocks.STRIPPED_HEMLOCK_QUARTER_LOG);
-		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.STRIPPED_CYPRESS_QUARTER_LOG);
-		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
+		STRIPPED_REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_redwood_quarter_log", TerrestriaBlocks.REDWOOD.strippedQuarterLog);
+		STRIPPED_HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_hemlock_quarter_log", TerrestriaBlocks.HEMLOCK.strippedQuarterLog);
+		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.CYPRESS.strippedQuarterLog);
+		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS.strippedQuarterLog);
 
 		BRYCE_SAPLING = TerrestriaRegistry.registerBlockItem("bryce_sapling", TerrestriaBlocks.BRYCE_SAPLING);
 		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);

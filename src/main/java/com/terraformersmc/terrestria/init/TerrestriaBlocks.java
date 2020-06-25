@@ -4,10 +4,7 @@ import com.terraformersmc.terraform.block.*;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
-import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
-import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
-import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
-import com.terraformersmc.terrestria.init.helpers.WoodColors;
+import com.terraformersmc.terrestria.init.helpers.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -20,13 +17,13 @@ import net.minecraft.sound.BlockSoundGroup;
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaBlocks {
-	public static WoodBlocks REDWOOD;
-	public static WoodBlocks HEMLOCK;
+	public static QuarteredWoodBlocks REDWOOD;
+	public static QuarteredWoodBlocks HEMLOCK;
 	public static WoodBlocks RUBBER;
-	public static WoodBlocks CYPRESS;
+	public static QuarteredWoodBlocks CYPRESS;
 	public static WoodBlocks WILLOW;
 	public static WoodBlocks JAPANESE_MAPLE;
-	public static WoodBlocks RAINBOW_EUCALYPTUS;
+	public static QuarteredWoodBlocks RAINBOW_EUCALYPTUS;
 	public static WoodBlocks SAKURA;
 	public static WoodBlocks YUCCA_PALM;
 
@@ -41,15 +38,6 @@ public class TerrestriaBlocks {
 
 	public static SeagrassBlock CATTAIL;
 	public static TallSeagrassBlock TALL_CATTAIL;
-
-	public static QuarterLogBlock REDWOOD_QUARTER_LOG;
-	public static QuarterLogBlock HEMLOCK_QUARTER_LOG;
-	public static QuarterLogBlock CYPRESS_QUARTER_LOG;
-	public static QuarterLogBlock RAINBOW_EUCALYPTUS_QUARTER_LOG;
-	public static QuarterLogBlock STRIPPED_REDWOOD_QUARTER_LOG;
-	public static QuarterLogBlock STRIPPED_HEMLOCK_QUARTER_LOG;
-	public static QuarterLogBlock STRIPPED_CYPRESS_QUARTER_LOG;
-	public static QuarterLogBlock STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
 
 	public static NewTerraformSaplingBlock BRYCE_SAPLING;
 	public static NewTerraformSaplingBlock REDWOOD_SAPLING;
@@ -103,13 +91,13 @@ public class TerrestriaBlocks {
 	public static void init() {
 		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
 
-		REDWOOD = WoodBlocks.register("redwood", WoodColors.REDWOOD, flammable, true);
-		HEMLOCK = WoodBlocks.register("hemlock", WoodColors.HEMLOCK, flammable, true);
+		REDWOOD = QuarteredWoodBlocks.register("redwood", WoodColors.REDWOOD, flammable, true);
+		HEMLOCK = QuarteredWoodBlocks.register("hemlock", WoodColors.HEMLOCK, flammable, true);
 		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
-		CYPRESS = WoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
+		CYPRESS = QuarteredWoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
 		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
 		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
-		RAINBOW_EUCALYPTUS = WoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
+		RAINBOW_EUCALYPTUS = QuarteredWoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
 		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
 		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, flammable, WoodBlocks.LogSize.SMALL);
 
@@ -137,15 +125,6 @@ public class TerrestriaBlocks {
 
 		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
 		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
-
-		REDWOOD_QUARTER_LOG = REDWOOD.registerQuarterLog(() -> STRIPPED_REDWOOD_QUARTER_LOG, flammable);
-		HEMLOCK_QUARTER_LOG = HEMLOCK.registerQuarterLog(() -> STRIPPED_HEMLOCK_QUARTER_LOG, flammable);
-		CYPRESS_QUARTER_LOG = CYPRESS.registerQuarterLog(() -> STRIPPED_CYPRESS_QUARTER_LOG, flammable);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerQuarterLog(() -> STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG, flammable);
-		STRIPPED_REDWOOD_QUARTER_LOG = REDWOOD.registerStrippedQuarterLog(flammable);
-		STRIPPED_HEMLOCK_QUARTER_LOG = HEMLOCK.registerStrippedQuarterLog(flammable);
-		STRIPPED_CYPRESS_QUARTER_LOG = CYPRESS.registerStrippedQuarterLog(flammable);
-		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = RAINBOW_EUCALYPTUS.registerStrippedQuarterLog(flammable);
 
 		// Saplings
 
