@@ -9,6 +9,7 @@ import com.terraformersmc.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.shapes.impl.validator.AirValidator;
 import com.terraformersmc.shapes.impl.validator.SafelistValidator;
+import com.terraformersmc.terrestria.feature.shapes.SetFiller;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.Blocks;
@@ -46,7 +47,7 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(radius - 1, radius - 1, 2)))
 				.applyLayer(TranslateLayer.of(Position.of(pos.down())))
 				.stream().filter(AirValidator.of(world))
-				.forEach(SimpleFiller.of(world, config.leavesProvider.getBlockState(random, pos)));
+				.forEach(SetFiller.of(world, config.leavesProvider.getBlockState(random, pos), leaves));
 	}
 
 	@Override

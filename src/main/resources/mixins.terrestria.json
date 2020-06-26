@@ -11,7 +11,8 @@
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
     "MixinSugarCaneBlock",
-    "MixinTreeFeature"
+    "MixinTreeFeature",
+    "TreeDecoratorTypeAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

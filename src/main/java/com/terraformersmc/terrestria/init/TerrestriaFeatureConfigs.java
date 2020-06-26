@@ -1,5 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
+import java.util.List;
+
+import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.feature.placer.foliage.CanopyFoliagePlacer;
 import com.terraformersmc.terrestria.feature.placer.foliage.PyramidFoliagePlacer;
 import com.terraformersmc.terrestria.feature.placer.foliage.NoneFoliagePlacer;
@@ -7,11 +10,13 @@ import com.terraformersmc.terrestria.feature.placer.foliage.PalmFanFoliagePlacer
 import com.terraformersmc.terrestria.feature.placer.trunk.*;
 import com.terraformersmc.terrestria.feature.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.feature.treeconfigs.SandyTreeConfig;
+import com.terraformersmc.terrestria.feature.treedecorator.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
@@ -68,22 +73,21 @@ public class TerrestriaFeatureConfigs {
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
 		FALLEN_REDWOOD_LOG = fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1));
 		JAPANESE_MAPLE_SHRUB = shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState());
-		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1));
+		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
 	}
 
-	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, CanopyTree4BranchTrunkPlacer trunkPlacer) {
-		return canopyOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), trunkPlacer);
+	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
+		return canopyOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), trunkPlacer, decorators);
 	}
 
-	static TreeFeatureConfig canopyOf(BlockState log, BlockState leaves, CanopyTree4BranchTrunkPlacer trunkPlacer) {
+	static TreeFeatureConfig canopyOf(BlockState log, BlockState leaves, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
 				new CanopyFoliagePlacer(0, 0, 0, 0),
 				trunkPlacer,
 				new TwoLayersFeatureSize(1, 0 , 1))
-				//some dangly bit decorator
-				//.decorators()
+				.decorators(decorators)
 				.build();
 	}
 
