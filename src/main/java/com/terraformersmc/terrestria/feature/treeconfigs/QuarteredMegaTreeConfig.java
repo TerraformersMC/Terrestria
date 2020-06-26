@@ -6,14 +6,12 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class QuarteredMegaTreeConfig extends TerrestriaTreeFeatureConfig {
 
-	public BlockState quarterLogBlock;
+	public final BlockState quarterLogBlock;
+	public final BlockState woodBlock;
 
-	public QuarteredMegaTreeConfig(TreeFeatureConfig config, BlockState quarterLogBlock) {
+	public QuarteredMegaTreeConfig(TreeFeatureConfig config, BlockState quarterLogBlock, BlockState woodBlock) {
 		super(config);
 		this.quarterLogBlock = quarterLogBlock;
-	}
-
-	public BlockState getQuarterLogBlock() {
-		return quarterLogBlock;
+		this.woodBlock = woodBlock;
 	}
 }

@@ -92,20 +92,19 @@ public class TerrestriaFeatureConfigs {
 	}
 
 	static QuarteredMegaTreeConfig megaConiferOf(QuarteredWoodBlocks woodBlocks, QuarteredMegaIncrementedStraightTrunkPlacer logPlacer, PyramidFoliagePlacer foliagePlacer) {
-		return megaConiferOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), woodBlocks.quarterLog.getDefaultState(), logPlacer, foliagePlacer);
+		return megaConiferOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), woodBlocks.quarterLog.getDefaultState(), woodBlocks.wood.getDefaultState(), logPlacer, foliagePlacer);
 	}
 
-	static QuarteredMegaTreeConfig megaConiferOf(BlockState log, BlockState leaves, BlockState quarterLog, QuarteredMegaIncrementedStraightTrunkPlacer logPlacer, PyramidFoliagePlacer foliagePlacer) {
+	static QuarteredMegaTreeConfig megaConiferOf(BlockState log, BlockState leaves, BlockState quarterLog, BlockState wood, QuarteredMegaIncrementedStraightTrunkPlacer logPlacer, PyramidFoliagePlacer foliagePlacer) {
 		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
 				foliagePlacer,
 				logPlacer,
 				new TwoLayersFeatureSize(1, 0, 1))
-				//Tree root decorator
-				//.decorators()
-				.build()
-				, quarterLog);
+				.build(),
+				quarterLog,
+				wood);
 	}
 
 	static TreeFeatureConfig fallenLogOf(WoodBlocks woodBlocks, FallenStraightTrunkPlacer trunk) {
