@@ -17,10 +17,12 @@ import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.feature.JungleFoliagePlacer;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
+import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -34,9 +36,11 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig SMALL_REDWOOD_TREE;
 	public static TreeFeatureConfig HEMLOCK_TREE;
 	public static TreeFeatureConfig REDWOOD_TREE;
+	public static TreeFeatureConfig MEGA_CYPRESS_TREE;
 	public static TreeFeatureConfig MEGA_HEMLOCK_TREE;
 	public static TreeFeatureConfig MEGA_REDWOOD_TREE;
 	public static TreeFeatureConfig CYPRESS_TREE;
+	public static TreeFeatureConfig RAINBOW_EUCALYPTUS_TREE;
 
 	public static TreeFeatureConfig FALLEN_HEMLOCK_LOG;
 	public static TreeFeatureConfig FALLEN_REDWOOD_LOG;
@@ -88,6 +92,28 @@ public class TerrestriaFeatureConfigs {
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
 		FALLEN_REDWOOD_LOG = fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1));
 		JAPANESE_MAPLE_SHRUB = shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState());
+		RAINBOW_EUCALYPTUS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
+				new LargeOakFoliagePlacer(2, 0, 1, 0, 2),
+				new QuarteredMegaCanopyTrunkPlacer(4, 2, 1),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.ignoreVines()
+				.maxWaterDepth(3)
+				.build(),
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
+		MEGA_CYPRESS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
+				new LargeOakFoliagePlacer(3, 0, 2, 0, 2),
+				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.ignoreVines()
+				.maxWaterDepth(3)
+				.build(),
+				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.CYPRESS.wood.getDefaultState());
 		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
 	}
 
