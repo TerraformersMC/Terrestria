@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.feature.placer.foliage.CanopyFoliagePlacer;
+import com.terraformersmc.terrestria.feature.placer.foliage.CypressFoliagePlacer;
 import com.terraformersmc.terrestria.feature.placer.foliage.PyramidFoliagePlacer;
 import com.terraformersmc.terrestria.feature.placer.foliage.NoneFoliagePlacer;
 import com.terraformersmc.terrestria.feature.placer.foliage.PalmFanFoliagePlacer;
@@ -35,6 +36,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig REDWOOD_TREE;
 	public static TreeFeatureConfig MEGA_HEMLOCK_TREE;
 	public static TreeFeatureConfig MEGA_REDWOOD_TREE;
+	public static TreeFeatureConfig CYPRESS_TREE;
 
 	public static TreeFeatureConfig FALLEN_HEMLOCK_LOG;
 	public static TreeFeatureConfig FALLEN_REDWOOD_LOG;
@@ -50,8 +52,10 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 2))
 				.ignoreVines()
 				.build());
+
 		SMALL_HEMLOCK_TREE = spruceOf(TerrestriaBlocks.HEMLOCK);
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
+
 		HEMLOCK_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.HEMLOCK.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.HEMLOCK.leaves.getDefaultState()),
@@ -60,6 +64,7 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
 				.build();
+
 		REDWOOD_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.REDWOOD.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.REDWOOD.leaves.getDefaultState()),
@@ -68,6 +73,16 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
 				.build();
+
+		CYPRESS_TREE = new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
+				new CypressFoliagePlacer(0,0,0,0),
+				new StraightTrunkPlacer(7, 3, 0),
+				new TwoLayersFeatureSize(1, 0, 1))
+				.ignoreVines()
+				.build();
+
 		MEGA_HEMLOCK_TREE = megaConiferOf(TerrestriaBlocks.HEMLOCK, new QuarteredMegaIncrementedStraightTrunkPlacer(12, 4, 2), new PyramidFoliagePlacer(0, 0, 0, 0));
 		MEGA_REDWOOD_TREE = megaConiferOf(TerrestriaBlocks.REDWOOD, new QuarteredMegaIncrementedStraightTrunkPlacer(22, 6, 4), new PyramidFoliagePlacer(0, 0, 0, 0));
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));

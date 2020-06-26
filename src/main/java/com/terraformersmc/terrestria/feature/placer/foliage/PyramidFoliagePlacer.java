@@ -21,8 +21,8 @@ import java.util.Set;
 
 public class PyramidFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<PyramidFoliagePlacer> CODEC = RecordCodecBuilder.create(megaConiferFoliagePlacerInstance ->
-			method_28846(megaConiferFoliagePlacerInstance).apply(megaConiferFoliagePlacerInstance, PyramidFoliagePlacer::new));
+	public static final Codec<PyramidFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+			method_28846(instance).apply(instance, PyramidFoliagePlacer::new));
 
 	public PyramidFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);

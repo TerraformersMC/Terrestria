@@ -14,7 +14,7 @@ import java.util.Random;
 import java.util.Set;
 
 public class NoneFoliagePlacer extends FoliagePlacer {
-	public static final Codec<NoneFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) -> method_28846(instance).apply(instance, (radius, randomRadius, offset, randomOffset) -> new NoneFoliagePlacer()));
+	public static final Codec<NoneFoliagePlacer> CODEC = Codec.unit(new NoneFoliagePlacer());
 
 	public NoneFoliagePlacer() {
 		super(0, 0, 0, 0);

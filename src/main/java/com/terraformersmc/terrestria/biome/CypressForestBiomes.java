@@ -26,7 +26,7 @@ public class CypressForestBiomes {
 				.grassColor(0x7ecc41)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, TALL_BIRCH_TREES)
-				//.addTreeFeature(TerrestriaFeatures.TREE.configure(TerrestriaFeatureConfigs.CYPRESS), 9)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.CYPRESS_TREE), 9)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addDefaultSpawnEntries()
