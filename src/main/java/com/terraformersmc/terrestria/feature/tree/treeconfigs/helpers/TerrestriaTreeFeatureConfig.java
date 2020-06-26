@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.feature.treeconfigs.helpers;
+package com.terraformersmc.terrestria.feature.tree.treeconfigs.helpers;
 
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
