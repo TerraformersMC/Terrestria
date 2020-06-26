@@ -35,6 +35,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig SMALL_REDWOOD_TREE;
 	public static TreeFeatureConfig HEMLOCK_TREE;
 	public static TreeFeatureConfig REDWOOD_TREE;
+	public static TreeFeatureConfig MEGA_CYPRESS_TREE;
 	public static TreeFeatureConfig MEGA_HEMLOCK_TREE;
 	public static TreeFeatureConfig MEGA_REDWOOD_TREE;
 	public static TreeFeatureConfig RAINBOW_EUCALYPTUS_TREE;
@@ -87,6 +88,17 @@ public class TerrestriaFeatureConfigs {
 				.build(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
+		MEGA_CYPRESS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
+				new LargeOakFoliagePlacer(3, 0, 2, 0, 2),
+				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.ignoreVines()
+				.maxWaterDepth(3)
+				.build(),
+				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.CYPRESS.wood.getDefaultState());
 		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
 	}
 

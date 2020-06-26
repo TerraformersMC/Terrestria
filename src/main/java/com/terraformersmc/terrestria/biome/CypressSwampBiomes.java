@@ -32,7 +32,7 @@ public class CypressSwampBiomes {
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
 						DEFAULT_MUSHROOMS, SPRINGS, SEAGRASS, MORE_SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
 						DESERT_VEGETATION)
-				//.addTreeFeature(TerrestriaFeatures.MEGA_CYPRESS_TREE.configure(TerrestriaFeatureConfigs.MEGA_CYPRESS), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_CYPRESS_TREE), 2)
 				//.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.WILLOW_TREE), 1)
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
