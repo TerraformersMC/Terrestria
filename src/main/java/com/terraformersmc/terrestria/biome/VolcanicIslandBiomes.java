@@ -32,6 +32,7 @@ public class VolcanicIslandBiomes {
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
+				.addStructureFeature(TerrestriaStructures.VOLCANO)
 		);
 
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template.builder()

@@ -21,6 +21,10 @@ version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "c
 
 repositories {
 	mavenLocal()
+	maven {
+		name = 'Earthcomputer Mods'
+		url = 'https://dl.bintray.com/earthcomputer/mods'
+	}
 }
 
 dependencies {
@@ -30,6 +34,10 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
 	modCompile "com.terraformersmc:shapes:${project.shapes_version}"
+
+	//Structures lib, in the future we will want to replace this with a fapi
+	modImplementation 'net.earthcomputer:libstructure:1.3'
+	include 'net.earthcomputer:libstructure:1.3'
 
 	include "com.terraformersmc:terraform:${project.terraform_version}"
 }
