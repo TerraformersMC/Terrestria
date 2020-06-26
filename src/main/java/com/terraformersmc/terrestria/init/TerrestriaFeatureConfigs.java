@@ -3,10 +3,8 @@ package com.terraformersmc.terrestria.init;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
-import com.terraformersmc.terrestria.feature.placer.foliage.CanopyFoliagePlacer;
-import com.terraformersmc.terrestria.feature.placer.foliage.PyramidFoliagePlacer;
-import com.terraformersmc.terrestria.feature.placer.foliage.NoneFoliagePlacer;
-import com.terraformersmc.terrestria.feature.placer.foliage.PalmFanFoliagePlacer;
+import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.placer.foliage.*;
 import com.terraformersmc.terrestria.feature.placer.trunk.*;
 import com.terraformersmc.terrestria.feature.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.feature.treeconfigs.SandyTreeConfig;
@@ -28,6 +26,8 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 public class TerrestriaFeatureConfigs {
 
+	public static TreeFeatureConfig BRYCE_TREE;
+
 	public static TreeFeatureConfig JUNGLE_PALM_TREE;
 	public static TreeFeatureConfig WILLOW_TREE;
 
@@ -46,6 +46,13 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig JAPANESE_MAPLE_SHRUB;
 
 	public static void init() {
+		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState()),
+				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
+				new SmallLogSphereFoliagePlacer(1, 0, 0, 0),
+				new SpindlyTrunkPlacer(10, 0, 0),
+				new TwoLayersFeatureSize(1, 0, 0))
+				.build());
 		JUNGLE_PALM_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(Blocks.JUNGLE_WOOD.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()),

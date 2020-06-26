@@ -36,7 +36,7 @@ public class CanyonBiomes {
 
 		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.CANYON_CLIFF, TerrestriaSurfaces.SANDSTONE_CLIFF_CONFIG)
-			//.addRareTreeFeature(TerrestriaFeatures.BRYCE_TREE.configure(TerrestriaFeatureConfigs.SMALL_OAK), 12)
+			.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.BRYCE_TREE), 12)
 			.build());
 
 		TerrestriaBiomes.CANYON_EDGE = TerrestriaBiomes.register("canyon_edge", template.builder()

@@ -15,6 +15,7 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<QuarteredMegaIncrementedStraightTrunkPlacer> QUARTERED_MEGA_TREE;
 	public static TrunkPlacerType<QuarteredMegaCanopyTrunkPlacer> QUARTERED_MEGA_CANOPY;
 	public static TrunkPlacerType<IncrementedStraightTrunkPlacer> INCREMENTED_STRAIGHT;
+	public static TrunkPlacerType<SpindlyTrunkPlacer> SPINDLY;
 
 	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {
 		return PlacerTypes.registerTrunkPlacer(new Identifier(Terrestria.MOD_ID, name), codec);
@@ -26,6 +27,7 @@ public class TerrestriaTrunkPlacerTypes {
 		QUARTERED_MEGA_TREE = register("quartered_mega_trunk_placer", QuarteredMegaIncrementedStraightTrunkPlacer.CODEC);
 		QUARTERED_MEGA_CANOPY = register("quartered_mega_canopy_trunk_placer", QuarteredMegaCanopyTrunkPlacer.CODEC);
 		INCREMENTED_STRAIGHT = register("incremented_straight_trunk_placer", IncrementedStraightTrunkPlacer.CODEC);
+		SPINDLY = register("spindly_trunk_placer", SpindlyTrunkPlacer.CODEC);
 	}
 
 }
