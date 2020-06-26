@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.init;
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.placer.foliage.*;
+import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;

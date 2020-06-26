@@ -2,10 +2,10 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.arch.CanyonArchGenerator;
-import com.terraformersmc.terrestria.feature.arch.CanyonArchStructureFeature;
-import com.terraformersmc.terrestria.feature.volcano.VolcanoGenerator;
-import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
+import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
+import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
+import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
+import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.volcano.VolcanoStructureFeature;
+import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
 import net.earthcomputer.libstructure.LibStructure;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biomes;

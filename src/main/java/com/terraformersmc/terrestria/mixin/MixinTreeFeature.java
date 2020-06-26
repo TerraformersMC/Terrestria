@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.mixin;
 
-import com.terraformersmc.terrestria.feature.treeconfigs.helpers.ExtendedTreeGeneration;
+import com.terraformersmc.terrestria.feature.tree.treeconfigs.helpers.ExtendedTreeGeneration;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;

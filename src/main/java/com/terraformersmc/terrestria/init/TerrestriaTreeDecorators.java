@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.treedecorator.DanglingLeavesTreeDecorator;
+import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.mixin.TreeDecoratorTypeAccessor;
 
 import net.minecraft.util.Identifier;
