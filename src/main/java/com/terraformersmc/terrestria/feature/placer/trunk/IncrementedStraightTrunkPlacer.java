@@ -40,7 +40,7 @@ public class IncrementedStraightTrunkPlacer extends TrunkPlacer {
 
 		//Set the radius
 		//If the tree converges give it a larger base radius but vary both
-		int radius = (converge ? random.nextInt(4) : random.nextInt(2)) + 5;
+		int radius = (converge ? (random.nextInt(3) + 2) : random.nextInt(2)) + 2;
 
 		//Determine the number of layers to place
 		//This varies between the two types of conifer here

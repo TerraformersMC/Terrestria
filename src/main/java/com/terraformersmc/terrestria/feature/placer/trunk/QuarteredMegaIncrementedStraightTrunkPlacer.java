@@ -46,11 +46,11 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 
 		//Set the radius
 		//If the tree converges give it a larger base radius but vary both
-		int radius = (converge ? random.nextInt(4) : random.nextInt(2) + 1) + 3;
+		int radius = (converge ? (5 + random.nextInt(2)) : (3 + random.nextInt(2)));
 
 		//Determine the number of layers to place
 		//This varies between the two types of conifer here
-		int layers = converge ? (radius - 2) : (6 + random.nextInt(4));
+		int layers = converge ? radius : (6 + random.nextInt(4));
 
 		//Check and set the block below to dirt
 		method_27400(world, pos.down());
@@ -72,13 +72,16 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 		//Place the layers
 		for (int i = 0; i < layers; i++) {
 			//Place the layers
-			for (int j = 0; j < (converge ? (radius - i) : 3); j++) {
+			for (int j = 0; j < (converge ? (radius - i + 1) : 4); j++) {
 				placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
 			}
 			//Add locations for leaves to be placed at the top of the layer
 			//The radius is determined by weather it converges or not, if it does subtract one from it every layer
 			foliageNodes.add(new FoliagePlacer.TreeNode(currentPosition.toImmutable(), (converge ? (radius - i) : radius), true));
 		}
+
+		//Make sure the top is covered
+		foliageNodes.add(new FoliagePlacer.TreeNode(currentPosition.toImmutable().up(), (converge ? 1 : radius), true));
 
 		//Generate the roots
 		growRoots(set, world, pos.mutableCopy(), random, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
