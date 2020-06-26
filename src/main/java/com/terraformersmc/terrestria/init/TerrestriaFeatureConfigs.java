@@ -85,7 +85,8 @@ public class TerrestriaFeatureConfigs {
 				.ignoreVines()
 				.maxWaterDepth(3)
 				.build(),
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState());
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
 		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
 	}
 
