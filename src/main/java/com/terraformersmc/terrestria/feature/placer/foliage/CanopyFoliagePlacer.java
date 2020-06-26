@@ -25,8 +25,8 @@ import java.util.Set;
 
 public class CanopyFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<CanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(droopyFoliagePlacerInstance ->
-			method_28846(droopyFoliagePlacerInstance).apply(droopyFoliagePlacerInstance, CanopyFoliagePlacer::new));
+	public static final Codec<CanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+			method_28846(instance).apply(instance, CanopyFoliagePlacer::new));
 
 	public CanopyFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);

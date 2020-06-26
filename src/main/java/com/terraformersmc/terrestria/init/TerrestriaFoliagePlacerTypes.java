@@ -14,6 +14,7 @@ public class TerrestriaFoliagePlacerTypes {
 	public static FoliagePlacerType<PyramidFoliagePlacer> PYRAMID;
 	public static FoliagePlacerType<NoneFoliagePlacer> NONE;
 	public static FoliagePlacerType<PalmFanFoliagePlacer> PALM_TOP;
+	public static FoliagePlacerType<CypressFoliagePlacer> CYPRESS;
 	public static FoliagePlacerType<SmallLogSphereFoliagePlacer> SMALL_LOG_SPHERE;
 
 	public static void init() {
@@ -22,6 +23,7 @@ public class TerrestriaFoliagePlacerTypes {
 		NONE = register("none_foliage_placer", NoneFoliagePlacer.CODEC);
 		PALM_TOP = register("palm_top_foliage_placer", PalmFanFoliagePlacer.CODEC);
 		SMALL_LOG_SPHERE = register("small_log_sphere_foliage_placer", SmallLogSphereFoliagePlacer.CODEC);
+		CYPRESS = register("cypress_foliage_placer", CypressFoliagePlacer.CODEC);
 	}
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {

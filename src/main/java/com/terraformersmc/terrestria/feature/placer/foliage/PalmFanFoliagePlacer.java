@@ -17,8 +17,8 @@ import java.util.Set;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((palmTopFoliagePlacerInstance) ->
-			method_28846(palmTopFoliagePlacerInstance).apply(palmTopFoliagePlacerInstance, PalmFanFoliagePlacer::new));
+	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+			method_28846(instance).apply(instance, PalmFanFoliagePlacer::new));
 
 	public PalmFanFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);
