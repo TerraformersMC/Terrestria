@@ -5,13 +5,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.shapes.api.Position;
 import com.terraformersmc.shapes.impl.Shapes;
 import com.terraformersmc.shapes.impl.filler.SimpleFiller;
-import com.terraformersmc.shapes.impl.layer.pathfinder.SubtractLayer;
+import com.terraformersmc.shapes.impl.layer.pathfinder.AddLayer;
 import com.terraformersmc.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.shapes.impl.validator.AirValidator;
-import com.terraformersmc.shapes.impl.validator.SafelistValidator;
-import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -22,18 +19,18 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import java.util.Random;
 import java.util.Set;
 
-public class CanopyFoliagePlacer extends FoliagePlacer {
+public class PyramidFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<CanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(droopyFoliagePlacerInstance ->
-			method_28846(droopyFoliagePlacerInstance).apply(droopyFoliagePlacerInstance, CanopyFoliagePlacer::new));
+	public static final Codec<PyramidFoliagePlacer> CODEC = RecordCodecBuilder.create(megaConiferFoliagePlacerInstance ->
+			method_28846(megaConiferFoliagePlacerInstance).apply(megaConiferFoliagePlacerInstance, PyramidFoliagePlacer::new));
 
-	public CanopyFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
+	public PyramidFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);
 	}
 
 	@Override
 	protected FoliagePlacerType<?> getType() {
-		return TerrestriaFoliagePlacerTypes.CANOPY;
+		return TerrestriaFoliagePlacerTypes.PYRAMID;
 	}
 
 	@Override
@@ -42,11 +39,20 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 		radius = treeNode.getFoliageRadius();
 		BlockPos pos = treeNode.getCenter();
 
-		Shapes.hemiEllipsoid(radius, radius, 5)
-				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(radius - 1, radius - 1, 2)))
-				.applyLayer(TranslateLayer.of(Position.of(pos.down())))
-				.stream().filter(AirValidator.of(world))
-				.forEach(SimpleFiller.of(world, config.leavesProvider.getBlockState(random, pos)));
+		if (treeNode.isGiantTrunk()) {
+			Shapes.rectangularPyramid(radius * 2, radius, radius * 2)
+					.applyLayer(new AddLayer(Shapes.rectangularPyramid(radius * 2, radius, radius * 2).applyLayer(TranslateLayer.of(Position.of(0, 0, 1)))))
+					.applyLayer(new AddLayer(Shapes.rectangularPyramid(radius * 2, radius, radius * 2).applyLayer(TranslateLayer.of(Position.of(1, 0, 0)))))
+					.applyLayer(new AddLayer(Shapes.rectangularPyramid(radius * 2, radius, radius * 2).applyLayer(TranslateLayer.of(Position.of(1, 0, 1)))))
+					.applyLayer(TranslateLayer.of(Position.of(pos)))
+					.stream().filter(AirValidator.of(world))
+					.forEach(SimpleFiller.of(world, config.leavesProvider.getBlockState(random, pos)));
+		} else {
+			Shapes.rectangularPyramid(radius * 2, radius, radius * 2)
+					.applyLayer(TranslateLayer.of(Position.of(pos)))
+					.stream().filter(AirValidator.of(world))
+					.forEach(SimpleFiller.of(world, config.leavesProvider.getBlockState(random, pos)));
+		}
 	}
 
 	@Override
@@ -56,6 +62,6 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
-		return baseHeight == dz && dy == dz;
+		return false;
 	}
 }

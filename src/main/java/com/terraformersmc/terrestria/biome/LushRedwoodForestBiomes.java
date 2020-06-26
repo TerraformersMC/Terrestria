@@ -49,8 +49,8 @@ public class LushRedwoodForestBiomes {
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
-				//.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 4)
-				//.addTreeFeature(TerrestriaFeatures.MEGA_REDWOOD_TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD), 4)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 4)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD_TREE), 4)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 2)
@@ -58,8 +58,8 @@ public class LushRedwoodForestBiomes {
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template.builder()
-				//.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 1)
-				//.addTreeFeature(TerrestriaFeatures.REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 1)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.REDWOOD_TREE), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 2)
 				.build());
