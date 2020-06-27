@@ -17,6 +17,7 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<IncrementedStraightTrunkPlacer> INCREMENTED_STRAIGHT;
 	public static TrunkPlacerType<SmallCanopyTree4BranchTrunkPlacer> SMALL_CANOPY_4_BRANCHES;
 	public static TrunkPlacerType<SpindlyTrunkPlacer> SPINDLY;
+	public static TrunkPlacerType<SmallBranchingTrunkPlacer> SMALL_BRANCHING;
 
 	public static void init() {
 		BENT = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
@@ -26,6 +27,7 @@ public class TerrestriaTrunkPlacerTypes {
 		INCREMENTED_STRAIGHT = register("incremented_straight_trunk_placer", IncrementedStraightTrunkPlacer.CODEC);
 		SMALL_CANOPY_4_BRANCHES = register("small_canopy_tree_4_branch_trunk_placer", SmallCanopyTree4BranchTrunkPlacer.CODEC);
 		SPINDLY = register("spindly_trunk_placer", SpindlyTrunkPlacer.CODEC);
+		SMALL_BRANCHING = register("small_branching_trunk_placer", SmallBranchingTrunkPlacer.CODEC);
 	}
 
 	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {

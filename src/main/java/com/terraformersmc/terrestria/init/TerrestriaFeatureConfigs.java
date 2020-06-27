@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.init;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
@@ -44,6 +45,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig FALLEN_REDWOOD_LOG;
 
 	public static TreeFeatureConfig JAPANESE_MAPLE_SHRUB;
+	public static TreeFeatureConfig YUCCA_PALM_TREE;
 
 	public static void init() {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -127,6 +129,12 @@ public class TerrestriaFeatureConfigs {
 				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.CYPRESS.wood.getDefaultState());
 		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
+		YUCCA_PALM_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState()),
+				new SmallLogSphereFoliagePlacer(1, 0, 0, 0),
+				new SmallBranchingTrunkPlacer(6, 2, 1),
+				new TwoLayersFeatureSize(1, 1, 1)).build());
 	}
 
 	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
