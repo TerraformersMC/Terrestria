@@ -11,13 +11,14 @@ import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.decorator.TreeDecoratorType;
 
 public class TerrestriaTreeDecorators {
-	public static TreeDecoratorType<DanglingLeavesTreeDecorator> DANGLING_LEAVES;
 
-	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, Codec<P> codec) {
-		return Registry.register(Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, name), TreeDecoratorTypeAccessor.createTreeDecoratorType(codec));
-	}
+	public static TreeDecoratorType<DanglingLeavesTreeDecorator> DANGLING_LEAVES;
 
 	public static void init() {
 		DANGLING_LEAVES = register("dangling_leaves", DanglingLeavesTreeDecorator.CODEC);
+	}
+
+	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, Codec<P> codec) {
+		return Registry.register(Registry.TREE_DECORATOR_TYPE, new Identifier(Terrestria.MOD_ID, name), TreeDecoratorTypeAccessor.createTreeDecoratorType(codec));
 	}
 }

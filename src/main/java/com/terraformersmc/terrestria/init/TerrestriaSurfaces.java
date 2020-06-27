@@ -24,7 +24,6 @@ public class TerrestriaSurfaces {
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
 	public static BeachSurfaceBuilder BEACH;
-	public static CliffSurfaceBuilder CLIFF;
 	public static DuneSurfaceBuilder DUNES;
 	public static CliffSurfaceBuilder BASALT_CLIFF;
 	public static CanyonSurfaceBuilder CANYON_CLIFF;

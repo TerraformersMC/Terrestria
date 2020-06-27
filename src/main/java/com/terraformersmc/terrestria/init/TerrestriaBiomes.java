@@ -2,13 +2,9 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biome.*;
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-
-import java.util.function.Consumer;
 
 public class TerrestriaBiomes {
 	public static Biome CALDERA;

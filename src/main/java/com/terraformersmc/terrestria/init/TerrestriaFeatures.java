@@ -2,15 +2,11 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
-import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
-import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
 
 // This class exports public feature constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")

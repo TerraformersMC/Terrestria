@@ -6,15 +6,15 @@ import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureF
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
 import net.earthcomputer.libstructure.LibStructure;
-import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.StructureConfig;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.StructureFeature;
 
 public class TerrestriaStructures {
 
