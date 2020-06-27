@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
 import com.terraformersmc.terraform.helpers.DirectionHelper;
+import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.block.BlockState;
@@ -81,10 +82,10 @@ public class QuarteredMegaCanopyTrunkPlacer extends TrunkPlacer {
 	}
 
 	private BlockPos placeLayer(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, QuarteredMegaTreeConfig treeFeatureConfig, boolean placeBranches) {
-		checkAndPlaceSpecificBlockState(world, random, pos.south(), 		set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST));
-		checkAndPlaceSpecificBlockState(world, random, pos.east(), 			set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST));
-		checkAndPlaceSpecificBlockState(world, random, pos.south().east(), 	set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST));
-		checkAndPlaceSpecificBlockState(world, random, pos, 				set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST));
+		checkAndPlaceSpecificBlockState(world, random, pos.south(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST) : treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.south().east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos, set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST): treeFeatureConfig.logBlock);
 
 		//Place a branch if we need one
 		if (placeBranches) {
