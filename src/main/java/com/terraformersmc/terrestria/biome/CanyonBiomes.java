@@ -1,10 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
-import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
+import com.terraformersmc.terrestria.init.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.*;
 
@@ -31,7 +28,7 @@ public class CanyonBiomes {
 
 		TerrestriaBiomes.CANYON_ARCHES = TerrestriaBiomes.register("canyon_arches", template.builder()
 				.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
-				.addStructureFeature(TerrestriaFeatures.CANYON_ARCH_STRUCTURE.configure(FeatureConfig.DEFAULT))
+				.addStructureFeature(TerrestriaStructures.CANYON_ARCH)
 				.build());
 
 		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template.builder()

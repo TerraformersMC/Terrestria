@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.feature.structure.arch;
 
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundTag;
@@ -31,7 +32,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private int centerZ;
 
 	CanyonArchGenerator(Random random, int centerX, int centerZ, Biome biome) {
-		super(TerrestriaFeatures.CANYON_ARCH_PIECE, 0);
+		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0);
 		this.setOrientation(null);
 
 		this.centerX = centerX;
@@ -55,7 +56,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
-		super(TerrestriaFeatures.CANYON_ARCH_PIECE, tag);
+		super(TerrestriaStructures.CANYON_ARCH_PIECE, tag);
 
 		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
 

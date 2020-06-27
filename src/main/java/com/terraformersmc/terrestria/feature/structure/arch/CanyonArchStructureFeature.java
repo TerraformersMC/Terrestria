@@ -17,61 +17,12 @@ import java.util.Random;
 
 public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 
-	private static final int ARCH_SPACING = 5;
-
-	// How many chunks should be in between each canyon arch at least
-	private static final int ARCH_SEPARATION = 3;
-	private static final int SEED_MODIFIER = 0x0401C480;
-
 	public CanyonArchStructureFeature(Codec<DefaultFeatureConfig> codec) {
 		super(codec);
 	}
 
-
-	protected ChunkPos getStart(ChunkGenerator chunkGenerator_1, Random random_1, int chunkX, int chunkZ, int scaleX, int scaleZ) {
-		chunkX += ARCH_SPACING * scaleX;
-		chunkZ += ARCH_SPACING * scaleZ;
-
-		// Adjust to grid position
-		chunkX = chunkX < 0 ? chunkX - ARCH_SPACING + 1 : chunkX;
-		chunkZ = chunkZ < 0 ? chunkZ - ARCH_SPACING + 1 : chunkZ;
-
-		int finalChunkX = chunkX / ARCH_SPACING;
-		int finalChunkZ = chunkZ / ARCH_SPACING;
-
-		((ChunkRandom) random_1).setRegionSeed(random_1.nextLong(), finalChunkX, finalChunkZ, SEED_MODIFIER);
-
-		// Get random position within grid area
-		finalChunkX *= ARCH_SPACING;
-		finalChunkZ *= ARCH_SPACING;
-		finalChunkX += random_1.nextInt(ARCH_SPACING - ARCH_SEPARATION);
-		finalChunkZ += random_1.nextInt(ARCH_SPACING - ARCH_SEPARATION);
-
-		return new ChunkPos(finalChunkX, finalChunkZ);
-	}
-
-	@Override
-	protected boolean shouldStartAt(ChunkGenerator generator, BiomeSource biomeSource, long l, ChunkRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, DefaultFeatureConfig featureConfig) {
-		ChunkPos start = this.getStart(generator, chunkRandom, chunkX, chunkZ, 0, 0);
-
-		if (chunkX == start.x && chunkZ == start.z) {
-
-			if (biome.getCategory() == Biome.Category.OCEAN) {
-				return false;
-			}
-
-			return biomeSource.getBiomeForNoiseGen(chunkX*16, 60, chunkZ*16).hasStructureFeature(this);
-		}
-
-		return false;
-	}
-
 	public StructureFeature.StructureStartFactory getStructureStartFactory() {
 		return CanyonArchStructureStart::new;
-	}
-
-	public String getName() {
-		return "canyon_arch";
 	}
 
 	public int getRadius() {

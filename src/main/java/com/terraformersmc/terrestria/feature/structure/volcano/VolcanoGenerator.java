@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terraform.noise.SimpleRadialNoise;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
@@ -40,7 +41,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private int centerZ;
 
 	VolcanoGenerator(Random random, int centerX, int centerZ, Biome biome) {
-		super(TerrestriaFeatures.VOLCANO_PIECE, 0);
+		super(TerrestriaStructures.VOLCANO_PIECE, 0);
 		this.setOrientation(null);
 
 		this.centerX = centerX;
@@ -86,7 +87,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	public VolcanoGenerator(StructureManager manager, CompoundTag tag) {
-		super(TerrestriaFeatures.VOLCANO_PIECE, tag);
+		super(TerrestriaStructures.VOLCANO_PIECE, tag);
 
 		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN"), 0.75, 0.5);
 		vegetationNoise = new SimpleRadialNoise(16, tag.getLong("VVN"), 0.25, 0.5);

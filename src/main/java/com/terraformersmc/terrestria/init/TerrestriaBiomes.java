@@ -52,7 +52,6 @@ public class TerrestriaBiomes {
 	public static Biome WOODED_SAKURA_HILLS;
 
 	public static void init() {
-
 		CalderaBiomes.register();
 		CanyonBiomes.register();
 		CypressForestBiomes.register();
@@ -69,26 +68,9 @@ public class TerrestriaBiomes {
 		JapaneseMapleForestBiomes.register();
 		VolcanicIslandBiomes.register();
 		OutbackBiomes.register();
-
-		TerrestriaFeatures.addVolcanoStarts(
-				VOLCANIC_ISLAND,
-				VOLCANIC_ISLAND_SHORE,
-				Biomes.DEEP_OCEAN,
-				Biomes.DEEP_COLD_OCEAN,
-				Biomes.DEEP_LUKEWARM_OCEAN,
-				Biomes.DEEP_WARM_OCEAN
-		);
-
-		forEveryBiome(TerrestriaFeatures::addVolcanoStructure);
-		forEveryBiome(TerrestriaFeatures::addCanyonArchStructure);
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {
 		return Registry.register(Registry.BIOME, new Identifier(Terrestria.MOD_ID, name), biome);
-	}
-
-	private static void forEveryBiome(Consumer<Biome> biomes) {
-		Registry.BIOME.forEach(biomes);
-		RegistryEntryAddedCallback.event(Registry.BIOME).register((rawId, id, biome) -> biomes.accept(biome));
 	}
 }
