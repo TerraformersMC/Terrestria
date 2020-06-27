@@ -50,7 +50,8 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig DARK_JAPANESE_MAPLE_TREE;
 	public static TreeFeatureConfig YUCCA_PALM_TREE;
 	public static TreeFeatureConfig OAK_DOT_SHRUB;
-	public static TreeFeatureConfig ACATIA_DOT_SHRUB;
+	public static TreeFeatureConfig ACACIA_DOT_SHRUB;
+	public static TreeFeatureConfig RUBBER_TREE;
 
 	public static void init() {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -89,6 +90,14 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
 				.build();
+
+		RUBBER_TREE = new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
+				new SphereFoliagePlacer(1, 0, 0, 0),
+				new RubberTreeTrunkPlacer(6, 2, 2),
+				new TwoLayersFeatureSize(1, 1, 1)
+				).build();
 
 		CYPRESS_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
@@ -163,7 +172,7 @@ public class TerrestriaFeatureConfigs {
 				new SmallBranchingTrunkPlacer(6, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1)).build());
 		OAK_DOT_SHRUB = dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
-		ACATIA_DOT_SHRUB = dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState());
+		ACACIA_DOT_SHRUB = dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState());
 	}
 
 	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {

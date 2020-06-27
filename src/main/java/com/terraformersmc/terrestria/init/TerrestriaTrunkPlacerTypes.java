@@ -18,6 +18,7 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<SmallCanopyTree4BranchTrunkPlacer> SMALL_CANOPY_4_BRANCHES;
 	public static TrunkPlacerType<SpindlyTrunkPlacer> SPINDLY;
 	public static TrunkPlacerType<SmallBranchingTrunkPlacer> SMALL_BRANCHING;
+	public static TrunkPlacerType<RubberTreeTrunkPlacer> RUBBER_TREE;
 
 	public static void init() {
 		BENT = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
@@ -25,6 +26,7 @@ public class TerrestriaTrunkPlacerTypes {
 		QUARTERED_MEGA_TREE = register("quartered_mega_trunk_placer", QuarteredMegaIncrementedStraightTrunkPlacer.CODEC);
 		QUARTERED_MEGA_CANOPY = register("quartered_mega_canopy_trunk_placer", QuarteredMegaCanopyTrunkPlacer.CODEC);
 		INCREMENTED_STRAIGHT = register("incremented_straight_trunk_placer", IncrementedStraightTrunkPlacer.CODEC);
+		RUBBER_TREE = register("rubber_tree_trunk_placer", RubberTreeTrunkPlacer.CODEC);
 		SMALL_CANOPY_4_BRANCHES = register("small_canopy_tree_4_branch_trunk_placer", SmallCanopyTree4BranchTrunkPlacer.CODEC);
 		SPINDLY = register("spindly_trunk_placer", SpindlyTrunkPlacer.CODEC);
 		SMALL_BRANCHING = register("small_branching_trunk_placer", SmallBranchingTrunkPlacer.CODEC);

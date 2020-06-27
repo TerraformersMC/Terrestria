@@ -28,7 +28,7 @@ public class RainbowRainforestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_RUINED_PORTAL)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_TREE), 5)
 				.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 5)
-				//.addTreeFeature(TerrestriaFeatures.RUBBER_TREE.configure(TerrestriaFeatureConfigs.RUBBER), 3)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RUBBER_TREE), 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
