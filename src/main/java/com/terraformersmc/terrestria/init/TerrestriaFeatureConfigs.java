@@ -49,6 +49,8 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig JAPANESE_MAPLE_TREE;
 	public static TreeFeatureConfig DARK_JAPANESE_MAPLE_TREE;
 	public static TreeFeatureConfig YUCCA_PALM_TREE;
+	public static TreeFeatureConfig OAK_DOT_SHRUB;
+	public static TreeFeatureConfig ACATIA_DOT_SHRUB;
 
 	public static void init() {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -114,7 +116,7 @@ public class TerrestriaFeatureConfigs {
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
 		RAINBOW_EUCALYPTS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()), 
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
 				new BlobFoliagePlacer(2, 0, 0, 0, 3),
 				new StraightTrunkPlacer(4, 8, 0),
@@ -160,6 +162,8 @@ public class TerrestriaFeatureConfigs {
 				new SmallLogSphereFoliagePlacer(1, 0, 0, 0),
 				new SmallBranchingTrunkPlacer(6, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1)).build());
+		OAK_DOT_SHRUB = dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
+		ACATIA_DOT_SHRUB = dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState());
 	}
 
 	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
@@ -221,6 +225,16 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(0, 0, 0))
 
 				.heightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES)
+				.build();
+	}
+
+	static TreeFeatureConfig dotShrubOf(BlockState log, BlockState leaves) {
+		return new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(log),
+				new SimpleBlockStateProvider(leaves),
+				new DotShrubPlacer(0, 0, 0, 0),
+				new StraightTrunkPlacer(1, 1, 0),
+				new TwoLayersFeatureSize(0, 0, 0))
 				.build();
 	}
 

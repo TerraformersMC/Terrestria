@@ -33,7 +33,7 @@ public class OutbackBiomes {
 			.depth(0.125F)
 			.scale(0.05F)
 			.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.YUCCA_PALM_TREE), 12)
-			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
+			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.ACATIA_DOT_SHRUB), 3)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 			.build());
 
@@ -48,8 +48,8 @@ public class OutbackBiomes {
 			.depth(0.125F)
 			.scale(0.05F)
 			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.YUCCA_PALM_TREE), 1)
-			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 2)
-			//.addTreeFeature(TerrestriaFeatures.SHRUB.configure(TerrestriaFeatureConfigs.ACACIA_SHRUB), 3)
+			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_DOT_SHRUB), 2)
+			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.ACATIA_DOT_SHRUB), 3)
 			.addRareTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 24)
 			.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 2)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
