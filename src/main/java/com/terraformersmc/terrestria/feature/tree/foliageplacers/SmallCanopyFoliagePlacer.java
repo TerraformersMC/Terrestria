@@ -40,7 +40,7 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 		BlockPos pos = treeNode.getCenter();
 
 		Shapes.hemiEllipsoid(diameter, diameter, diameter * 2)
-				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(diameter - 1, diameter - 1, diameter)))
+				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(diameter - 2, diameter - 2, diameter - 1)))
 				.applyLayer(TranslateLayer.of(Position.of(pos.down(2))))
 				.stream()
 				.forEach((position) -> {
