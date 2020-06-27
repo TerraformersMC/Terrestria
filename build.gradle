@@ -34,12 +34,11 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
 	modCompile "com.terraformersmc:shapes:${project.shapes_version}"
+	modImplementation "net.earthcomputer:libstructure:${project.libstructure_version}" //TODO: Structures lib, in the future we will want to replace this with a fapi
 
-	//Structures lib, in the future we will want to replace this with a fapi
-	modImplementation 'net.earthcomputer:libstructure:1.3'
-	include 'net.earthcomputer:libstructure:1.3'
-
+	include "com.terraformersmc:shapes:${project.shapes_version}"
 	include "com.terraformersmc:terraform:${project.terraform_version}"
+	include "net.earthcomputer:libstructure:${project.libstructure_version}"
 }
 
 processResources {

@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
+import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.block.BlockState;
@@ -66,14 +67,14 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 
 		//Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
+			placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
 		}
 
 		//Place the layers
 		for (int i = 0; i < layers; i++) {
 			//Place the layers
 			for (int j = 0; j < (converge ? (radius - i + 1) : 4); j++) {
-				placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
+				placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
 			}
 			//Add locations for leaves to be placed at the top of the layer
 			//The radius is determined by weather it converges or not, if it does subtract one from it every layer
@@ -84,17 +85,17 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 		foliageNodes.add(new FoliagePlacer.TreeNode(currentPosition.toImmutable().up(), (converge ? 1 : radius), true));
 
 		//Generate the roots
-		growRoots(set, world, pos.mutableCopy(), random, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
+		growRoots(set, world, pos.mutableCopy(), random, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
 
 		//Return the nodes as an Immutable List to be placed later
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
 	private void placeLayer(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, QuarteredMegaTreeConfig treeFeatureConfig) {
-		checkAndPlaceSpecificBlockState(world, random, pos.south(), 		set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST));
-		checkAndPlaceSpecificBlockState(world, random, pos.east(), 			set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST));
-		checkAndPlaceSpecificBlockState(world, random, pos.south().east(), 	set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST));
-		checkAndPlaceSpecificBlockState(world, random, pos, 				set, blockBox, treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST));
+		checkAndPlaceSpecificBlockState(world, random, pos.south(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST) : treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.south().east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos, set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST): treeFeatureConfig.logBlock);
 	}
 
 	private static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {

@@ -125,6 +125,7 @@ public class TerrestriaFeatureConfigs {
 				.maxWaterDepth(3)
 				.build(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
 		RAINBOW_EUCALYPTS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
@@ -173,6 +174,7 @@ public class TerrestriaFeatureConfigs {
 				.maxWaterDepth(3)
 				.build(),
 				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
+				TerrestriaBlocks.CYPRESS.log.getDefaultState(),
 				TerrestriaBlocks.CYPRESS.wood.getDefaultState());
 		WILLOW_TREE = canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState())));
 		YUCCA_PALM_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -213,6 +215,7 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.build(),
 				quarterLog,
+				log,
 				wood);
 	}
 

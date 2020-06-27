@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria;
 import com.terraformersmc.terraform.block.TerraformSignBlock;
 import com.terraformersmc.terraform.entity.TerraformBoatEntity;
 import com.terraformersmc.terraform.registry.SpriteIdentifierRegistry;
+import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
@@ -10,7 +11,6 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -43,6 +43,8 @@ public class TerrestriaClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		TerrestriaConfigManager.initializeClientConfig();
+
 		ColorProviderRegistry.BLOCK.register(
 				FOLIAGE_BLOCK_COLORS,
 				TerrestriaBlocks.RUBBER.leaves,
@@ -58,15 +60,15 @@ public class TerrestriaClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
-			DOOR_BLOCK_LAYER,
-			TerrestriaBlocks.REDWOOD.door,
-			TerrestriaBlocks.RAINBOW_EUCALYPTUS.door,
-			TerrestriaBlocks.CYPRESS.door,
-			TerrestriaBlocks.WILLOW.door,
-			TerrestriaBlocks.JAPANESE_MAPLE.door,
-			TerrestriaBlocks.RAINBOW_EUCALYPTUS.trapdoor,
-			TerrestriaBlocks.CYPRESS.trapdoor,
-			TerrestriaBlocks.WILLOW.trapdoor
+				DOOR_BLOCK_LAYER,
+				TerrestriaBlocks.REDWOOD.door,
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.door,
+				TerrestriaBlocks.CYPRESS.door,
+				TerrestriaBlocks.WILLOW.door,
+				TerrestriaBlocks.JAPANESE_MAPLE.door,
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.trapdoor,
+				TerrestriaBlocks.CYPRESS.trapdoor,
+				TerrestriaBlocks.WILLOW.trapdoor
 		);
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
@@ -168,7 +170,7 @@ public class TerrestriaClient implements ClientModInitializer {
 	}
 
 	private void addSigns(TerraformSignBlock... signs) {
-		for(TerraformSignBlock sign: signs) {
+		for (TerraformSignBlock sign : signs) {
 			addSign(sign);
 		}
 	}

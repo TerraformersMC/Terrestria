@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
@@ -37,11 +38,13 @@ public class TerrestriaStructures {
 	}
 
 	public static void addToVanillaBiomes() {
-		Biomes.DEEP_WARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-		Biomes.DEEP_LUKEWARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-		Biomes.DEEP_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-		Biomes.DEEP_COLD_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-		Biomes.DEEP_FROZEN_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+		if (TerrestriaConfigManager.getGeneralConfig().areOceanVolcanoesEnabled()) {
+			Biomes.DEEP_WARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+			Biomes.DEEP_LUKEWARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+			Biomes.DEEP_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+			Biomes.DEEP_COLD_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+			Biomes.DEEP_FROZEN_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+		}
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
