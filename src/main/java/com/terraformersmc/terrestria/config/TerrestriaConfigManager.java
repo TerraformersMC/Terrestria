@@ -20,6 +20,9 @@ public class TerrestriaConfigManager {
 	private static void prepareFiles() {
 		if (directory == null) {
 			directory = new File(FabricLoader.getInstance().getConfigDirectory(), Terrestria.MOD_ID);
+			if (!directory.exists()) {
+				directory.mkdir();
+			}
 		}
 		if (clientFile == null && FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			clientFile = new File(directory, "client.json");

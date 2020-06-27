@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.util.TillableBlockRegistry;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
@@ -73,6 +74,7 @@ public class TerrestriaBlocks {
 	public static Block BASALT_GRASS_BLOCK;
 	public static Block BASALT_GRASS_PATH;
 	public static Block BASALT_PODZOL;
+	public static Block ANDISOL_FARMLAND;
 	public static StoneBlocks BASALT;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
@@ -259,7 +261,12 @@ public class TerrestriaBlocks {
 		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0)));
 		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0)));
 		BASALT_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), BASALT_DIRT));
 		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
+
+		TillableBlockRegistry.add(BASALT_DIRT, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(BASALT_GRASS_BLOCK, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(BASALT_GRASS_PATH, ANDISOL_FARMLAND.getDefaultState());
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, FabricBlockSettings.copyOf(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, FabricBlockSettings.copyOf(Blocks.TALL_GRASS)));
