@@ -38,6 +38,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig MEGA_REDWOOD_TREE;
 	public static TreeFeatureConfig CYPRESS_TREE;
 	public static TreeFeatureConfig RAINBOW_EUCALYPTUS_TREE;
+	public static TreeFeatureConfig SAKURA_TREE;
 
 	public static TreeFeatureConfig FALLEN_HEMLOCK_LOG;
 	public static TreeFeatureConfig FALLEN_REDWOOD_LOG;
@@ -107,6 +108,13 @@ public class TerrestriaFeatureConfigs {
 				.build(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
+		SAKURA_TREE = new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.leaves.getDefaultState()),
+				new SmallCanopyFoliagePlacer(0, 0, 0, 0),
+				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.build();
 		MEGA_CYPRESS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),

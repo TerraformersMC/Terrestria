@@ -3,13 +3,10 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
@@ -29,8 +26,8 @@ public class SakuraForestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
-				//.addTreeFeature(TerrestriaFeatures.SAKURA_TREE.configure(TerrestriaFeatureConfigs.SAKURA), 6)
-				//.addTreeFeature(Feature.JUNGLE_GROUND_BUSH.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SAKURA_TREE), 6)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);
