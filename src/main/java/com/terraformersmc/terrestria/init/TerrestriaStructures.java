@@ -6,6 +6,8 @@ import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureF
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
 import net.earthcomputer.libstructure.LibStructure;
+import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
+import net.minecraft.structure.StructurePiece;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -25,8 +27,8 @@ public class TerrestriaStructures {
 
 	public static void init() {
 
-		VOLCANO_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "volcano"), VolcanoGenerator::new);
-		CANYON_ARCH_PIECE = Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, "canyon_arch"), CanyonArchGenerator::new);
+		VOLCANO_PIECE = registerStructurePiece("volcano", VolcanoGenerator::new);
+		CANYON_ARCH_PIECE = registerStructurePiece("canyon_arch", CanyonArchGenerator::new);
 
 		CANYON_ARCH = registerDefaultStructure("canyon_arch_structure", new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC), 5, 3);
 		OCEAN_VOLCANO = registerDefaultStructure("ocean_volcano_structure", new VolcanoStructureFeature(DefaultFeatureConfig.CODEC), 24, 8);
@@ -40,6 +42,10 @@ public class TerrestriaStructures {
 		Biomes.DEEP_OCEAN.addStructureFeature(OCEAN_VOLCANO);
 		Biomes.DEEP_COLD_OCEAN.addStructureFeature(OCEAN_VOLCANO);
 		Biomes.DEEP_FROZEN_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+	}
+
+	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
+		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
 	}
 
 	private static ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> registerDefaultStructure(String id, StructureFeature<DefaultFeatureConfig> feature, int spacing, int separation) {
