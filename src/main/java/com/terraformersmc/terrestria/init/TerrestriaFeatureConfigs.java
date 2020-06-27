@@ -14,17 +14,18 @@ import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.decorator.TreeDecorator;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
-import sun.reflect.generics.tree.Tree;
 
 import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 
+	private static TreeFeatureConfig RAINBOW_EUCALYPTS_SAPLING_TREE;
 	public static TreeFeatureConfig BRYCE_TREE;
 
 	public static TreeFeatureConfig JUNGLE_PALM_TREE;
@@ -112,6 +113,14 @@ public class TerrestriaFeatureConfigs {
 				.build(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
+		RAINBOW_EUCALYPTS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()), 
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
+				new BlobFoliagePlacer(2, 0, 0, 0, 3),
+				new StraightTrunkPlacer(4, 8, 0),
+				new TwoLayersFeatureSize(1, 0, 1)))
+				.ignoreVines()
+				.build();
 		SAKURA_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.leaves.getDefaultState()),
