@@ -38,7 +38,7 @@ public class SmallLogSphereFoliagePlacer extends SmallFoliagePlacer {
 				.applyLayer(TranslateLayer.of(Position.of(treeNode.getCenter())))
 				.stream()
 				.forEach((block) -> {
-					tryPlaceLeaves(world, block.toBlockPos(), random, config);
+					tryPlaceLeaves(world, block.toBlockPos(), random, leaves, config);
 				});
 
 	}

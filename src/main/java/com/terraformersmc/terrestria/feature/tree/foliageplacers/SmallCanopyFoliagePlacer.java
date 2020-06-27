@@ -44,7 +44,7 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 				.forEach((position) -> {
 					//On the bottom layer only place 50% of the blocks
 					if (position.getY() != (pos.getY() - 1) || random.nextBoolean()) {
-						tryPlaceLeaves(world, position.toBlockPos(), random, config);
+						tryPlaceLeaves(world, position.toBlockPos(), random, leaves, config);
 					}
 				});
 

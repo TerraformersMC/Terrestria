@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.SandyTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
+import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -138,6 +139,7 @@ public class TerrestriaFeatureConfigs {
 				new SmallCanopyFoliagePlacer(0, 0, 0, 0),
 				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
+				.decorators(ImmutableList.of(new SakuraTreeDecorator()))
 				.build();
 		JAPANESE_MAPLE_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState()),
