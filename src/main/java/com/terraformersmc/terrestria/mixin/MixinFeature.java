@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinFeature {
 	@Inject(method = "isSoil(Lnet/minecraft/block/Block;)Z", at = @At("HEAD"), cancellable = true)
 	private static void includeAndisol(Block block, CallbackInfoReturnable<Boolean> callback) {
-		if (block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_PODZOL) {
+		if (block == TerrestriaBlocks.ANDISOL || block == TerrestriaBlocks.ANDISOL_GRASS_BLOCK || block == TerrestriaBlocks.ANDISOL_PODZOL) {
 			callback.setReturnValue(true);
 		}
 	}

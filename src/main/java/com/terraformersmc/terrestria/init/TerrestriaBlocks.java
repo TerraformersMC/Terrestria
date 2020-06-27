@@ -69,13 +69,13 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_SAGUARO_CACTUS_SAPLING;
 
 	// Volcanic Island blocks
-	public static SandBlock BASALT_SAND;
-	public static Block BASALT_DIRT;
-	public static Block BASALT_GRASS_BLOCK;
-	public static Block BASALT_GRASS_PATH;
-	public static Block BASALT_PODZOL;
+	public static SandBlock BLACK_SAND;
+	public static Block ANDISOL;
+	public static Block ANDISOL_GRASS_BLOCK;
+	public static Block ANDISOL_GRASS_PATH;
+	public static Block ANDISOL_PODZOL;
 	public static Block ANDISOL_FARMLAND;
-	public static StoneBlocks BASALT;
+	public static StoneBlocks VOLCANIC_ROCK;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
 	public static FlowerPotBlock POTTED_INDIAN_PAINTBRUSH;
@@ -256,17 +256,17 @@ public class TerrestriaBlocks {
 
 		// Volcanic Island Blocks
 
-		BASALT_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copyOf(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		BASALT_DIRT = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		BASALT_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(BASALT_DIRT, () -> BASALT_GRASS_PATH, FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		BASALT_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(BASALT_DIRT, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0)));
-		BASALT_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), BASALT_DIRT));
-		BASALT = StoneBlocks.register("basalt", MaterialColor.BLACK);
+		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copyOf(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(ANDISOL, () -> ANDISOL_GRASS_PATH, FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(ANDISOL, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), ANDISOL));
+		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
-		TillableBlockRegistry.add(BASALT_DIRT, ANDISOL_FARMLAND.getDefaultState());
-		TillableBlockRegistry.add(BASALT_GRASS_BLOCK, ANDISOL_FARMLAND.getDefaultState());
-		TillableBlockRegistry.add(BASALT_GRASS_PATH, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL_GRASS_BLOCK, ANDISOL_FARMLAND.getDefaultState());
+		TillableBlockRegistry.add(ANDISOL_GRASS_PATH, ANDISOL_FARMLAND.getDefaultState());
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, FabricBlockSettings.copyOf(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, FabricBlockSettings.copyOf(Blocks.TALL_GRASS)));

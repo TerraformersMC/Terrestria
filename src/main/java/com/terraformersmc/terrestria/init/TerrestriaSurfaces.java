@@ -44,7 +44,7 @@ public class TerrestriaSurfaces {
 		BASALT_BEACH = register("basalt_beach", new BeachSurfaceBuilder(
 				TernarySurfaceConfig.CODEC,
 				62,
-				v -> v > 1.0 ? TerrestriaBlocks.BASALT_SAND.getDefaultState() : Blocks.SAND.getDefaultState()
+				v -> v > 1.0 ? TerrestriaBlocks.BLACK_SAND.getDefaultState() : Blocks.SAND.getDefaultState()
 		));
 
 		BEACH = register("beach", new BeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 62, v -> Blocks.SAND.getDefaultState()));
@@ -70,10 +70,10 @@ public class TerrestriaSurfaces {
 		);
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
-				TerrestriaBlocks.BASALT_GRASS_BLOCK.getDefaultState(),
-				TerrestriaBlocks.BASALT_DIRT.getDefaultState(),
+				TerrestriaBlocks.ANDISOL_GRASS_BLOCK.getDefaultState(),
+				TerrestriaBlocks.ANDISOL.getDefaultState(),
 				Blocks.SAND.getDefaultState(),
-				TerrestriaBlocks.BASALT.plain.full.getDefaultState()
+				TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState()
 		);
 
 		SANDSTONE_CLIFF_CONFIG = new CliffSurfaceConfig(

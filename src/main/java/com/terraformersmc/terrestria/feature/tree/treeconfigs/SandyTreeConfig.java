@@ -19,7 +19,7 @@ public class SandyTreeConfig extends TerrestriaTreeFeatureConfig implements Exte
 	public boolean canGenerateOn(ModifiableTestableWorld world, BlockPos pos) {
 		return (world.testBlockState(pos, (state) -> {
 			Block block = state.getBlock();
-			return block == Blocks.SAND || block == Blocks.RED_SAND || block == TerrestriaBlocks.BASALT_SAND;
+			return block == Blocks.SAND || block == Blocks.RED_SAND || block == TerrestriaBlocks.BLACK_SAND;
 		})) || Feature.isSoil(world, pos);
 	}
 }

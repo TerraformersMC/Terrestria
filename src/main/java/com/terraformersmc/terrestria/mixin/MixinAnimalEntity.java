@@ -18,7 +18,7 @@ public class MixinAnimalEntity {
 
 	@Inject(method = "isValidNaturalSpawn", at = @At("HEAD"), cancellable = true)
 	private static void canSpawnAt(EntityType<? extends AnimalEntity> type, WorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random, CallbackInfoReturnable<Boolean> cir) {
-		if(world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.BASALT_GRASS_BLOCK && world.getBaseLightLevel(pos, 0) > 8) {
+		if(world.getBlockState(pos.down()).getBlock() == TerrestriaBlocks.ANDISOL_GRASS_BLOCK && world.getBaseLightLevel(pos, 0) > 8) {
 			cir.setReturnValue(true);
 		}
 	}

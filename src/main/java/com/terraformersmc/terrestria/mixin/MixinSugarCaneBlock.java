@@ -22,7 +22,7 @@ public class MixinSugarCaneBlock {
 		BlockPos downPos = pos.down();
 		Block block = world.getBlockState(downPos).getBlock();
 
-		if (block == TerrestriaBlocks.BASALT_GRASS_BLOCK || block == TerrestriaBlocks.BASALT_DIRT || block == TerrestriaBlocks.BASALT_SAND || block == TerrestriaBlocks.BASALT_PODZOL) {
+		if (block == TerrestriaBlocks.ANDISOL_GRASS_BLOCK || block == TerrestriaBlocks.ANDISOL || block == TerrestriaBlocks.BLACK_SAND || block == TerrestriaBlocks.ANDISOL_PODZOL) {
 
 			for(Direction direction: Direction.Type.HORIZONTAL) {
 				BlockState candidateState = world.getBlockState(downPos.offset(direction));

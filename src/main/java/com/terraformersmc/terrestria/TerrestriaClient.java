@@ -127,7 +127,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING
 		);
 
-		addColoredGrass(TerrestriaBlocks.BASALT_GRASS_BLOCK);
+		addColoredGrass(TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
 
 		addSigns(
 				TerrestriaBlocks.REDWOOD.sign,
