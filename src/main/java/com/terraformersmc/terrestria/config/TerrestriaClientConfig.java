@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.config;
 
 public class TerrestriaClientConfig {
-	private boolean optiLeaves = false;
+	private boolean optiLeaves = true;
 
 	public boolean isOptiLeavesEnabled() {
 		return optiLeaves;
