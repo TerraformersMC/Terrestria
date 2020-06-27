@@ -15,6 +15,7 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<QuarteredMegaIncrementedStraightTrunkPlacer> QUARTERED_MEGA_TREE;
 	public static TrunkPlacerType<QuarteredMegaCanopyTrunkPlacer> QUARTERED_MEGA_CANOPY;
 	public static TrunkPlacerType<IncrementedStraightTrunkPlacer> INCREMENTED_STRAIGHT;
+	public static TrunkPlacerType<SaguaroCactusTrunkPlacer> SAGUARO_CACTUS;
 	public static TrunkPlacerType<SmallCanopyTree4BranchTrunkPlacer> SMALL_CANOPY_4_BRANCHES;
 	public static TrunkPlacerType<SpindlyTrunkPlacer> SPINDLY;
 	public static TrunkPlacerType<SmallBranchingTrunkPlacer> SMALL_BRANCHING;
@@ -27,6 +28,7 @@ public class TerrestriaTrunkPlacerTypes {
 		QUARTERED_MEGA_CANOPY = register("quartered_mega_canopy_trunk_placer", QuarteredMegaCanopyTrunkPlacer.CODEC);
 		INCREMENTED_STRAIGHT = register("incremented_straight_trunk_placer", IncrementedStraightTrunkPlacer.CODEC);
 		RUBBER_TREE = register("rubber_tree_trunk_placer", RubberTreeTrunkPlacer.CODEC);
+		SAGUARO_CACTUS = register("saguaro_cactus_trunk_placer", SaguaroCactusTrunkPlacer.CODEC);
 		SMALL_CANOPY_4_BRANCHES = register("small_canopy_tree_4_branch_trunk_placer", SmallCanopyTree4BranchTrunkPlacer.CODEC);
 		SPINDLY = register("spindly_trunk_placer", SpindlyTrunkPlacer.CODEC);
 		SMALL_BRANCHING = register("small_branching_trunk_placer", SmallBranchingTrunkPlacer.CODEC);

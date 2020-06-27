@@ -47,7 +47,7 @@ public class LushDesertBiomes {
 				.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
 				.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
 				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.YUCCA_PALM_TREE), 12)
-				//.addTreeFeature(TerrestriaFeatures.SAGUARO_CACTUS.configure(TerrestriaFeatureConfigs.SAGUARO_CACTUS), 2)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SAGUARO_CACTUS_FEATURE), 2)
 				.build()
 		);
 

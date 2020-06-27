@@ -1,20 +1,19 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.DefaultFeature;
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.chunk.StrongholdConfig;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
 
 public class CalderaBiomes {
+
 	public static void register() {
 		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
 				.waterColor(0x54d3c0)
@@ -58,8 +57,8 @@ public class CalderaBiomes {
 				.downfall(0.1F)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)
-//				.addRareTreeFeature(TerrestriaFeatures.REDWOOD_TREE.configure(TerrestriaFeatureConfigs.REDWOOD), 2)
-//				.addRareTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 2)
+				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.REDWOOD_TREE), 2)
+				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
 				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))

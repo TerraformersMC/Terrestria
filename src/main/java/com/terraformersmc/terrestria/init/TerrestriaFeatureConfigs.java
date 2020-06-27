@@ -53,6 +53,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig OAK_DOT_SHRUB;
 	public static TreeFeatureConfig ACACIA_DOT_SHRUB;
 	public static TreeFeatureConfig RUBBER_TREE;
+	public static SandyTreeConfig SAGUARO_CACTUS_FEATURE;
 
 	public static void init() {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -133,6 +134,13 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 1)))
 				.ignoreVines()
 				.build();
+		SAGUARO_CACTUS_FEATURE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState()),
+				new NoneFoliagePlacer(),
+				new SaguaroCactusTrunkPlacer(0,0,0),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.build());
 		SAKURA_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.leaves.getDefaultState()),
