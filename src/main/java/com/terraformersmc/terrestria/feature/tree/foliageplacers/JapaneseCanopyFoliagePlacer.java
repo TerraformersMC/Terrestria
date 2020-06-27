@@ -7,8 +7,10 @@ import com.terraformersmc.shapes.impl.Shapes;
 import com.terraformersmc.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.shapes.impl.validator.AirValidator;
+import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terrestria.feature.helpers.shapes.SetFiller;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -19,12 +21,12 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import java.util.Random;
 import java.util.Set;
 
-public class CanopyFoliagePlacer extends FoliagePlacer {
+public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 
-	public static final Codec<CanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
-			method_28846(instance).apply(instance, CanopyFoliagePlacer::new));
+	public static final Codec<JapaneseCanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+			method_28846(instance).apply(instance, JapaneseCanopyFoliagePlacer::new));
 
-	public CanopyFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
+	public JapaneseCanopyFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
 		super(radius, randomRadius, offset, randomOffset);
 	}
 
@@ -34,16 +36,27 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int i, BlockBox blockBox) {
+	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int diameter, Set<BlockPos> leaves, int i, BlockBox blockBox) {
 
-		radius = treeNode.getFoliageRadius();
+		diameter = treeNode.getFoliageRadius() * 2;
 		BlockPos pos = treeNode.getCenter();
 
-		Shapes.hemiEllipsoid(radius * 2, radius * 2, radius * 2.5)
-				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(radius * 2  - 2, radius * 2 - 2, radius * 1.5)))
-				.applyLayer(TranslateLayer.of(Position.of(pos.down())))
-				.stream().filter(AirValidator.of(world))
-				.forEach(SetFiller.of(world, config.leavesProvider.getBlockState(random, pos), leaves));
+		Shapes.hemiEllipsoid(diameter, diameter, diameter * 1.8)
+				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(diameter - 2, diameter - 2, diameter - 1)))
+				.applyLayer(TranslateLayer.of(Position.of(pos.down(2))))
+				.stream()
+				.forEach((position) -> {
+					//On the bottom layer only place 50% of the blocks
+					if (position.getY() != (pos.getY() - 1) || random.nextBoolean()) {
+						tryPlaceLeaves(world, position.toBlockPos(), random, config);
+					}
+				});
+	}
+
+	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos pos, Random random, TreeFeatureConfig config) {
+		if (world.testBlockState(pos, BlockState::isAir)) {
+			world.setBlockState(pos, config.leavesProvider.getBlockState(random, pos), 0);
+		}
 	}
 
 	@Override

@@ -6,8 +6,6 @@ import com.terraformersmc.shapes.api.Position;
 import com.terraformersmc.shapes.impl.Shapes;
 import com.terraformersmc.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.shapes.impl.layer.transform.TranslateLayer;
-import com.terraformersmc.shapes.impl.validator.AirValidator;
-import com.terraformersmc.terrestria.feature.helpers.shapes.SetFiller;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.templates.SmallFoliagePlacer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.math.BlockBox;

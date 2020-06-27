@@ -73,7 +73,7 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 
 		//Return the crossing of the branches as the foliage placer's center
-		return ImmutableList.of(new FoliagePlacer.TreeNode(origin, radius*2, false));
+		return ImmutableList.of(new FoliagePlacer.TreeNode(origin, radius, false));
 	}
 
 	private static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {

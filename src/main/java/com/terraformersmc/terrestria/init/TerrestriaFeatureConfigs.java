@@ -1,14 +1,11 @@
 package com.terraformersmc.terrestria.init;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
-import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.SandyTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
+import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
@@ -22,6 +19,9 @@ import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
+import sun.reflect.generics.tree.Tree;
+
+import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 
@@ -45,6 +45,8 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig FALLEN_REDWOOD_LOG;
 
 	public static TreeFeatureConfig JAPANESE_MAPLE_SHRUB;
+	public static TreeFeatureConfig JAPANESE_MAPLE_TREE;
+	public static TreeFeatureConfig DARK_JAPANESE_MAPLE_TREE;
 	public static TreeFeatureConfig YUCCA_PALM_TREE;
 
 	public static void init() {
@@ -117,6 +119,20 @@ public class TerrestriaFeatureConfigs {
 				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
 				.build();
+		JAPANESE_MAPLE_TREE = new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.leaves.getDefaultState()),
+				new JapaneseCanopyFoliagePlacer(0, 0, 0, 0),
+				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
+				new TwoLayersFeatureSize(1, 1, 1)
+		).build();
+		DARK_JAPANESE_MAPLE_TREE = new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()),
+				new JapaneseCanopyFoliagePlacer(0, 0, 0, 0),
+				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
+				new TwoLayersFeatureSize(1, 1, 1)
+		).build();
 		MEGA_CYPRESS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),

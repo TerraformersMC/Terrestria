@@ -11,6 +11,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 public class TerrestriaFoliagePlacerTypes {
 
 	public static FoliagePlacerType<CanopyFoliagePlacer> CANOPY;
+	public static FoliagePlacerType<JapaneseCanopyFoliagePlacer> JAPANESE_CANOPY;
 	public static FoliagePlacerType<SmallCanopyFoliagePlacer> SMALL_CANOPY;
 	public static FoliagePlacerType<PyramidFoliagePlacer> PYRAMID;
 	public static FoliagePlacerType<NoneFoliagePlacer> NONE;
@@ -20,6 +21,7 @@ public class TerrestriaFoliagePlacerTypes {
 
 	public static void init() {
 		CANOPY = register("canopy_foliage_placer", CanopyFoliagePlacer.CODEC);
+		JAPANESE_CANOPY = register("japanese_canopy_foliage_placer", JapaneseCanopyFoliagePlacer.CODEC);
 		SMALL_CANOPY = register("small_canopy_foliage_placer", SmallCanopyFoliagePlacer.CODEC);
 		PYRAMID = register("pyramid_foliage_placer", PyramidFoliagePlacer.CODEC);
 		NONE = register("none_foliage_placer", NoneFoliagePlacer.CODEC);
