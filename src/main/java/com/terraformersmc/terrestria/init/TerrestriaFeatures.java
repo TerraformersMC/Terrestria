@@ -2,8 +2,10 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terraform.feature.CattailFeature;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.feature.misc.DumDumHeadFeature;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
@@ -13,9 +15,11 @@ import net.minecraft.world.gen.feature.SeagrassFeatureConfig;
 public class TerrestriaFeatures {
 
 	public static CattailFeature CATTAIL;
+	public static Feature<DefaultFeatureConfig> DUM_DUM_HEAD;
 
 	public static void init() {
 		CATTAIL = register("cattail", new CattailFeature(SeagrassFeatureConfig.CODEC, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL));
+		DUM_DUM_HEAD = register("dum_dum_head", new DumDumHeadFeature(DefaultFeatureConfig.CODEC));
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

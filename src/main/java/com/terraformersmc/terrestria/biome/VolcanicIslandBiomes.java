@@ -46,7 +46,7 @@ public class VolcanicIslandBiomes {
 				.depth(0.05F)
 				.scale(0.05F)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 2)
-				//.addRareTreeFeature(TerrestriaFeatures.ISLAND_HEAD.configure(TerrestriaFeatureConfigs.ISLAND_HEADS), 15)
+				.addRareTreeFeature(TerrestriaFeatures.DUM_DUM_HEAD.configure(new DefaultFeatureConfig()), 15)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
