@@ -33,7 +33,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 
 			BlockPos.Mutable mutable = pos.down().mutableCopy();
 			if (world.getBlockState(mutable).isAir() || world.getBlockState(mutable).getBlock() instanceof SmallLogBlock) {
-				while (true) {
+				while(mutable.getY() > 0) {
 					//check for a solid block and place on top
 					if (world.getBlockState(mutable).isOpaque() || world.getFluidState(mutable).isIn(FluidTags.WATER)) {
 						world.setBlockState(mutable.up(), TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), 3);
