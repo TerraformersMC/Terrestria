@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 
-	private static TreeFeatureConfig RAINBOW_EUCALYPTS_SAPLING_TREE;
+	private static TreeFeatureConfig RAINBOW_EUCALYPTUS_SAPLING_TREE;
 	public static TreeFeatureConfig BRYCE_TREE;
 
 	public static TreeFeatureConfig JUNGLE_PALM_TREE;
@@ -71,28 +71,10 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 2))
 				.ignoreVines()
 				.build());
-
 		SMALL_HEMLOCK_TREE = spruceOf(TerrestriaBlocks.HEMLOCK);
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
-
-		HEMLOCK_TREE = new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.HEMLOCK.log.getDefaultState()),
-				new SimpleBlockStateProvider(TerrestriaBlocks.HEMLOCK.leaves.getDefaultState()),
-				new PyramidFoliagePlacer(0,0,0,0),
-				new IncrementedStraightTrunkPlacer(8, 3, 1),
-				new TwoLayersFeatureSize(1, 1, 1))
-				.ignoreVines()
-				.build();
-
-		REDWOOD_TREE = new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.REDWOOD.log.getDefaultState()),
-				new SimpleBlockStateProvider(TerrestriaBlocks.REDWOOD.leaves.getDefaultState()),
-				new PyramidFoliagePlacer(0,0,0,0),
-				new IncrementedStraightTrunkPlacer(12, 4, 2),
-				new TwoLayersFeatureSize(1, 1, 1))
-				.ignoreVines()
-				.build();
-
+		HEMLOCK_TREE = coniferOf(TerrestriaBlocks.HEMLOCK, 8, 3, 1);
+		REDWOOD_TREE = coniferOf(TerrestriaBlocks.HEMLOCK, 12, 4, 2);
 		RUBBER_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
@@ -100,7 +82,6 @@ public class TerrestriaFeatureConfigs {
 				new RubberTreeTrunkPlacer(6, 2, 2),
 				new TwoLayersFeatureSize(1, 1, 1)
 				).build();
-
 		CYPRESS_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
@@ -109,7 +90,6 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
 				.build();
-
 		MEGA_HEMLOCK_TREE = megaConiferOf(TerrestriaBlocks.HEMLOCK, new QuarteredMegaIncrementedStraightTrunkPlacer(12, 4, 2), new PyramidFoliagePlacer(0, 0, 0, 0));
 		MEGA_REDWOOD_TREE = megaConiferOf(TerrestriaBlocks.REDWOOD, new QuarteredMegaIncrementedStraightTrunkPlacer(22, 6, 4), new PyramidFoliagePlacer(0, 0, 0, 0));
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
@@ -127,7 +107,7 @@ public class TerrestriaFeatureConfigs {
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState());
-		RAINBOW_EUCALYPTS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
+		RAINBOW_EUCALYPTUS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
 				new BlobFoliagePlacer(2, 0, 0, 0, 3),
@@ -199,6 +179,21 @@ public class TerrestriaFeatureConfigs {
 				trunkPlacer,
 				new TwoLayersFeatureSize(1, 0 , 1))
 				.decorators(decorators)
+				.build();
+	}
+
+	static TreeFeatureConfig coniferOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
+		return coniferOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
+	}
+
+	static TreeFeatureConfig coniferOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
+		return new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(log),
+				new SimpleBlockStateProvider(leaves),
+				new PyramidFoliagePlacer(0,0,0,0),
+				new IncrementedStraightTrunkPlacer(height, randomHeight, extraRandomHeight),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.ignoreVines()
 				.build();
 	}
 
