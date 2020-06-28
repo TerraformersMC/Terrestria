@@ -1,7 +1,6 @@
 {
-  "parent": "block/seagrass",
+  "parent": "minecraft:block/template_seagrass",
   "textures": {
-    "seagrass": "terrestria:block/cattail",
-    "particle": "terrestria:block/cattail"
+    "texture": "terrestria:block/cattail"
   }
 }
