@@ -4,10 +4,10 @@ import com.terraformersmc.terraform.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -23,6 +23,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		super(stripped, settings);
 	}
 
+	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
 		entity.damage(DamageSource.CACTUS, 1.0F);
 	}
@@ -46,7 +47,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	public boolean isSupportedBlock(Block block) {
-		return (block == TerrestriaBlocks.SAGUARO_CACTUS || block == Blocks.SAND || block == Blocks.RED_SAND || block == Blocks.GRASS_BLOCK || block == Blocks.DIRT || block == Blocks.COARSE_DIRT);
+		return block == TerrestriaBlocks.SAGUARO_CACTUS || block.isIn(BlockTags.SAND);
 	}
 
 	private boolean isSupported(BlockState state, WorldView world, BlockPos pos) {
@@ -78,21 +79,15 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	private boolean canBeSupported(WorldView world, BlockPos pos) {
-		if (world.getBlockState(pos.north()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
+		return world.getBlockState(pos.north()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
 				world.getBlockState(pos.south()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
 				world.getBlockState(pos.east()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS ||
-				world.getBlockState(pos.west()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS) {
-			return true;
-		}
-		return false;
+				world.getBlockState(pos.west()).getBlock() == TerrestriaBlocks.SAGUARO_CACTUS;
 	}
 
 	@Override
 	@SuppressWarnings("deprecation")
 	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		if (isSupportedBlock(world.getBlockState(pos.down()).getBlock()) || canBeSupported(world, pos)) {
-			return true;
-		}
-		return false;
+		return isSupportedBlock(world.getBlockState(pos.down()).getBlock()) || canBeSupported(world, pos);
 	}
 }
