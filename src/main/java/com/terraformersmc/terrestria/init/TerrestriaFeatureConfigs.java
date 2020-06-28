@@ -26,7 +26,7 @@ import java.util.List;
 
 public class TerrestriaFeatureConfigs {
 
-	private static TreeFeatureConfig RAINBOW_EUCALYPTUS_SAPLING_TREE;
+	public static TreeFeatureConfig RAINBOW_EUCALYPTUS_SAPLING_TREE;
 	public static TreeFeatureConfig BRYCE_TREE;
 
 	public static TreeFeatureConfig JUNGLE_PALM_TREE;
