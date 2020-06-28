@@ -1,7 +1,24 @@
 {
   "variants": {
-    "": {
-      "model": "terrestria:block/basalt_podzol"
+    "snowy=false": [
+      {
+        "model": "terrestria:block/basalt_podzol"
+      },
+      {
+        "model": "terrestria:block/basalt_podzol",
+        "y": 90
+      },
+      {
+        "model": "terrestria:block/basalt_podzol",
+        "y": 180
+      },
+      {
+        "model": "terrestria:block/basalt_podzol",
+        "y": 270
+      }
+    ],
+    "snowy=true": {
+      "model": "terrestria:block/basalt_grass_block_snow"
     }
   }
 }

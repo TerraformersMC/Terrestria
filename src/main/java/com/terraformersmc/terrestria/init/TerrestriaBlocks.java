@@ -152,7 +152,7 @@ public class TerrestriaBlocks {
 		ANDISOL = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
 		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(ANDISOL, () -> ANDISOL_GRASS_PATH, FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0)));
 		ANDISOL_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(ANDISOL, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_PODZOL = TerrestriaRegistry.register("basalt_podzol", new Block(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL_PODZOL = TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
 		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), ANDISOL));
 		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
