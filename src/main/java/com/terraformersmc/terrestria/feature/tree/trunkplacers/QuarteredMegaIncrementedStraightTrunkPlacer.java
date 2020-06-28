@@ -67,14 +67,14 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 
 		//Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
+			placeLayer(world, random, currentPosition.move(Direction.UP), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
 		}
 
 		//Place the layers
 		for (int i = 0; i < layers; i++) {
 			//Place the layers
 			for (int j = 0; j < (converge ? (radius - i + 1) : 4); j++) {
-				placeLayer(world, random, currentPosition.move(Direction.UP).toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
+				placeLayer(world, random, currentPosition.move(Direction.UP), set, blockBox, ((QuarteredMegaTreeConfig) treeFeatureConfig));
 			}
 			//Add locations for leaves to be placed at the top of the layer
 			//The radius is determined by weather it converges or not, if it does subtract one from it every layer
@@ -91,17 +91,17 @@ public class QuarteredMegaIncrementedStraightTrunkPlacer extends TrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private void placeLayer(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, QuarteredMegaTreeConfig treeFeatureConfig) {
-		checkAndPlaceSpecificBlockState(world, random, pos.south(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST) : treeFeatureConfig.logBlock);
-		checkAndPlaceSpecificBlockState(world, random, pos.east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST): treeFeatureConfig.logBlock);
-		checkAndPlaceSpecificBlockState(world, random, pos.south().east(), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST): treeFeatureConfig.logBlock);
-		checkAndPlaceSpecificBlockState(world, random, pos, set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST): treeFeatureConfig.logBlock);
+	private void placeLayer(ModifiableTestableWorld world, Random random, BlockPos.Mutable pos, Set<BlockPos> set, BlockBox blockBox, QuarteredMegaTreeConfig treeFeatureConfig) {
+		checkAndPlaceSpecificBlockState(world, random, pos.move(Direction.SOUTH), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST) : treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.move(Direction.EAST), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.move(Direction.NORTH), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST): treeFeatureConfig.logBlock);
+		checkAndPlaceSpecificBlockState(world, random, pos.move(Direction.WEST), set, blockBox, TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled() ? treeFeatureConfig.quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST): treeFeatureConfig.logBlock);
 	}
 
 	private static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
 		if (TreeFeature.canReplace(modifiableTestableWorld, blockPos)) {
 			method_27404(modifiableTestableWorld, blockPos, blockState, blockBox);
-			set.add(blockPos.toImmutable());
+			set.add(blockPos);
 		}
 	}
 
