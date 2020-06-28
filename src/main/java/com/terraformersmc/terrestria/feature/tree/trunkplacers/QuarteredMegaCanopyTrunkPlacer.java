@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.block.QuarterLogBlock;
-import com.terraformersmc.terraform.helpers.DirectionHelper;
+import com.terraformersmc.terraform.util.DirectionHelper;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;

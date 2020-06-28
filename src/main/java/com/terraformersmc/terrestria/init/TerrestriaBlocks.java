@@ -12,8 +12,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
-import net.minecraft.block.sapling.DarkOakSaplingGenerator;
-import net.minecraft.block.sapling.OakSaplingGenerator;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.sound.BlockSoundGroup;
 
@@ -42,20 +40,20 @@ public class TerrestriaBlocks {
 	public static SeagrassBlock CATTAIL;
 	public static TallSeagrassBlock TALL_CATTAIL;
 
-	public static NewTerraformSaplingBlock BRYCE_SAPLING;
-	public static NewTerraformSaplingBlock REDWOOD_SAPLING;
-	public static NewTerraformSaplingBlock HEMLOCK_SAPLING;
-	public static NewTerraformSaplingBlock RUBBER_SAPLING;
-	public static NewTerraformSaplingBlock CYPRESS_SAPLING;
-	public static NewTerraformSaplingBlock WILLOW_SAPLING;
-	public static NewTerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
-	public static NewTerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
-	public static NewTerraformSaplingBlock DARK_JAPANESE_MAPLE_SAPLING;
-	public static NewTerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
-	public static NewTerraformSaplingBlock SAKURA_SAPLING;
-	public static NewTerraformSaplingBlock JUNGLE_PALM_SAPLING;
-	public static NewTerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
-	public static NewTerraformSaplingBlock YUCCA_PALM_SAPLING;
+	public static TerraformSaplingBlock BRYCE_SAPLING;
+	public static TerraformSaplingBlock REDWOOD_SAPLING;
+	public static TerraformSaplingBlock HEMLOCK_SAPLING;
+	public static TerraformSaplingBlock RUBBER_SAPLING;
+	public static TerraformSaplingBlock CYPRESS_SAPLING;
+	public static TerraformSaplingBlock WILLOW_SAPLING;
+	public static TerraformSaplingBlock JAPANESE_MAPLE_SAPLING;
+	public static TerraformSaplingBlock JAPANESE_MAPLE_SHRUB_SAPLING;
+	public static TerraformSaplingBlock DARK_JAPANESE_MAPLE_SAPLING;
+	public static TerraformSaplingBlock RAINBOW_EUCALYPTUS_SAPLING;
+	public static TerraformSaplingBlock SAKURA_SAPLING;
+	public static TerraformSaplingBlock JUNGLE_PALM_SAPLING;
+	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
+	public static TerraformSaplingBlock YUCCA_PALM_SAPLING;
 
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
@@ -133,20 +131,20 @@ public class TerrestriaBlocks {
 		// Saplings
 		AbstractBlock.Settings saplingSettings = AbstractBlock.Settings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS);
 
-		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.BRYCE_TREE), saplingSettings));
-		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new NewTerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.REDWOOD_TREE, () -> TerrestriaFeatureConfigs.MEGA_REDWOOD_TREE), saplingSettings));
-		HEMLOCK_SAPLING = TerrestriaRegistry.register("hemlock_sapling", new NewTerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.HEMLOCK_TREE, () -> TerrestriaFeatureConfigs.MEGA_HEMLOCK_TREE), saplingSettings));
-		RUBBER_SAPLING = TerrestriaRegistry.register("rubber_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.RUBBER_TREE), saplingSettings));
-		CYPRESS_SAPLING = TerrestriaRegistry.register("cypress_sapling", new NewTerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.CYPRESS_TREE, () -> TerrestriaFeatureConfigs.MEGA_CYPRESS_TREE), saplingSettings));
-		WILLOW_SAPLING = TerrestriaRegistry.register("willow_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.WILLOW_TREE), saplingSettings));
-		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("japanese_maple_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JAPANESE_MAPLE_TREE), saplingSettings));
-		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.register("japanese_maple_shrub_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), saplingSettings));
-		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("dark_japanese_maple_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE_TREE), saplingSettings));
-		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new NewTerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_SAPLING_TREE, () -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_TREE), saplingSettings));
-		SAKURA_SAPLING = TerrestriaRegistry.register("sakura_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.SAKURA_TREE), saplingSettings));
-		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), saplingSettings));
-		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.SAGUARO_CACTUS_FEATURE), saplingSettings));
-		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new NewTerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.YUCCA_PALM_TREE), saplingSettings));
+		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.BRYCE_TREE), saplingSettings));
+		REDWOOD_SAPLING = TerrestriaRegistry.register("redwood_sapling", new TerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.REDWOOD_TREE, () -> TerrestriaFeatureConfigs.MEGA_REDWOOD_TREE), saplingSettings));
+		HEMLOCK_SAPLING = TerrestriaRegistry.register("hemlock_sapling", new TerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.HEMLOCK_TREE, () -> TerrestriaFeatureConfigs.MEGA_HEMLOCK_TREE), saplingSettings));
+		RUBBER_SAPLING = TerrestriaRegistry.register("rubber_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.RUBBER_TREE), saplingSettings));
+		CYPRESS_SAPLING = TerrestriaRegistry.register("cypress_sapling", new TerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.CYPRESS_TREE, () -> TerrestriaFeatureConfigs.MEGA_CYPRESS_TREE), saplingSettings));
+		WILLOW_SAPLING = TerrestriaRegistry.register("willow_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.WILLOW_TREE), saplingSettings));
+		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("japanese_maple_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JAPANESE_MAPLE_TREE), saplingSettings));
+		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.register("japanese_maple_shrub_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), saplingSettings));
+		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.register("dark_japanese_maple_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE_TREE), saplingSettings));
+		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.register("rainbow_eucalyptus_sapling", new TerraformSaplingBlock(new TerraformLargeSaplingGenerator(() -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_SAPLING_TREE, () -> TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_TREE), saplingSettings));
+		SAKURA_SAPLING = TerrestriaRegistry.register("sakura_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.SAKURA_TREE), saplingSettings));
+		JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("jungle_palm_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), saplingSettings));
+		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("saguaro_cactus_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.SAGUARO_CACTUS_FEATURE), saplingSettings));
+		YUCCA_PALM_SAPLING = TerrestriaRegistry.register("yucca_palm_sapling", new TerraformSaplingBlock(new TerraformSaplingGenerator(() -> TerrestriaFeatureConfigs.YUCCA_PALM_TREE), saplingSettings));
 
 		// Volcanic Island Blocks
 
