@@ -20,6 +20,7 @@ import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.trunk.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
@@ -73,8 +74,8 @@ public class TerrestriaFeatureConfigs {
 				.build());
 		SMALL_HEMLOCK_TREE = spruceOf(TerrestriaBlocks.HEMLOCK);
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
-		HEMLOCK_TREE = coniferOf(TerrestriaBlocks.HEMLOCK, 8, 3, 1);
-		REDWOOD_TREE = coniferOf(TerrestriaBlocks.REDWOOD, 12, 4, 2);
+		HEMLOCK_TREE = tallSpruceOf(TerrestriaBlocks.HEMLOCK, 24, 4, 3);
+		REDWOOD_TREE = tallSpruceOf(TerrestriaBlocks.REDWOOD, 24, 4, 3);
 		RUBBER_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
@@ -90,8 +91,8 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
 				.build();
-		MEGA_HEMLOCK_TREE = megaConiferOf(TerrestriaBlocks.HEMLOCK, new QuarteredMegaIncrementedStraightTrunkPlacer(12, 4, 2), new PyramidFoliagePlacer(0, 0, 0, 0));
-		MEGA_REDWOOD_TREE = megaConiferOf(TerrestriaBlocks.REDWOOD, new QuarteredMegaIncrementedStraightTrunkPlacer(22, 6, 4), new PyramidFoliagePlacer(0, 0, 0, 0));
+		MEGA_HEMLOCK_TREE = giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 4, 3);
+		MEGA_REDWOOD_TREE = giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 4, 3);
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
 		FALLEN_REDWOOD_LOG = fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1));
 		JAPANESE_MAPLE_SHRUB = shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState());
@@ -182,38 +183,6 @@ public class TerrestriaFeatureConfigs {
 				.build();
 	}
 
-	static TreeFeatureConfig coniferOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
-		return coniferOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
-	}
-
-	static TreeFeatureConfig coniferOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
-		return new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(log),
-				new SimpleBlockStateProvider(leaves),
-				new PyramidFoliagePlacer(0,0,0,0),
-				new IncrementedStraightTrunkPlacer(height, randomHeight, extraRandomHeight),
-				new TwoLayersFeatureSize(1, 1, 1))
-				.ignoreVines()
-				.build();
-	}
-
-	static QuarteredMegaTreeConfig megaConiferOf(QuarteredWoodBlocks woodBlocks, QuarteredMegaIncrementedStraightTrunkPlacer logPlacer, PyramidFoliagePlacer foliagePlacer) {
-		return megaConiferOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), woodBlocks.quarterLog.getDefaultState(), woodBlocks.wood.getDefaultState(), logPlacer, foliagePlacer);
-	}
-
-	static QuarteredMegaTreeConfig megaConiferOf(BlockState log, BlockState leaves, BlockState quarterLog, BlockState wood, QuarteredMegaIncrementedStraightTrunkPlacer logPlacer, PyramidFoliagePlacer foliagePlacer) {
-		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(log),
-				new SimpleBlockStateProvider(leaves),
-				foliagePlacer,
-				logPlacer,
-				new TwoLayersFeatureSize(1, 0, 1))
-				.build(),
-				quarterLog,
-				log,
-				wood);
-	}
-
 	static TreeFeatureConfig fallenLogOf(WoodBlocks woodBlocks, FallenStraightTrunkPlacer trunk) {
 		return fallenLogOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), trunk);
 	}
@@ -265,6 +234,38 @@ public class TerrestriaFeatureConfigs {
 				new SimpleBlockStateProvider(leaves),
 				new SpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
 				new StraightTrunkPlacer(5, 2, 1),
+				new TwoLayersFeatureSize(2, 0, 2))
+
+				.ignoreVines()
+				.build();
+	}
+
+	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
+		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
+	}
+
+	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
+		return new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(log),
+				new SimpleBlockStateProvider(leaves),
+				new SpruceFoliagePlacer(2, 5, 0, 2, 1, 11),
+				new StraightTrunkPlacer(height, randomHeight, extraRandomHeight),
+				new TwoLayersFeatureSize(2, 0, 2))
+
+				.ignoreVines()
+				.build();
+	}
+
+	static TreeFeatureConfig giantSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
+		return giantSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
+	}
+
+	static TreeFeatureConfig giantSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
+		return new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(log),
+				new SimpleBlockStateProvider(leaves),
+				new SpruceFoliagePlacer(2, 5, 0, 2, 1, 11),
+				new GiantTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 0, 2))
 
 				.ignoreVines()
