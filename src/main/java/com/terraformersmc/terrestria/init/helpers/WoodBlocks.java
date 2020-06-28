@@ -77,7 +77,7 @@ public class WoodBlocks {
 		blocks.name = name;
 		blocks.colors = colors;
 
-		blocks.planks = TerrestriaRegistry.register(name + "_planks", new Block(AbstractBlock.Settings.of(Material.WOOD)));
+		blocks.planks = TerrestriaRegistry.register(name + "_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).materialColor(colors.planks)));
 		blocks.slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_SLAB).materialColor(colors.planks)));
 		blocks.stairs = TerrestriaRegistry.register(name + "_stairs", new TerraformStairsBlock(blocks.planks, FabricBlockSettings.copyOf(Blocks.OAK_STAIRS).materialColor(colors.planks)));
 		blocks.fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).materialColor(colors.planks)));
