@@ -54,7 +54,8 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES,
 				TerrestriaBlocks.REDWOOD.leaves,
 				TerrestriaBlocks.HEMLOCK.leaves,
-				TerrestriaBlocks.SMALL_OAK_LOG
+				TerrestriaBlocks.SMALL_OAK_LOG,
+				TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG
 		);
 
 		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
