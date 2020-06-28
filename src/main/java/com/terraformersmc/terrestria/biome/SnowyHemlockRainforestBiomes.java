@@ -41,14 +41,14 @@ public class SnowyHemlockRainforestBiomes {
 		);
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_FOREST = TerrestriaBiomes.register("snowy_hemlock_forest", template.builder()
-				//.addTreeFeature(TerrestriaFeatures.MEGA_HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.MEGA_HEMLOCK), 8)
-				//.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 8)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_HEMLOCK_TREE), 8)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 8)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 4)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
 				.build());
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING = TerrestriaBiomes.register("snowy_hemlock_clearing", template.builder()
-				//.addTreeFeature(TerrestriaFeatures.HEMLOCK_TREE.configure(TerrestriaFeatureConfigs.HEMLOCK), 1)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 1)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
 				.build());
