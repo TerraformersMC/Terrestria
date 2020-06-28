@@ -37,9 +37,10 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig SMALL_REDWOOD_TREE;
 	public static TreeFeatureConfig HEMLOCK_TREE;
 	public static TreeFeatureConfig REDWOOD_TREE;
-	public static TreeFeatureConfig MEGA_CYPRESS_TREE;
 	public static TreeFeatureConfig MEGA_HEMLOCK_TREE;
 	public static TreeFeatureConfig MEGA_REDWOOD_TREE;
+
+	public static TreeFeatureConfig MEGA_CYPRESS_TREE;
 	public static TreeFeatureConfig CYPRESS_TREE;
 	public static TreeFeatureConfig RAINBOW_EUCALYPTUS_TREE;
 	public static TreeFeatureConfig SAKURA_TREE;
@@ -74,8 +75,11 @@ public class TerrestriaFeatureConfigs {
 				.build());
 		SMALL_HEMLOCK_TREE = spruceOf(TerrestriaBlocks.HEMLOCK);
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
-		HEMLOCK_TREE = tallSpruceOf(TerrestriaBlocks.HEMLOCK, 24, 4, 3);
-		REDWOOD_TREE = tallSpruceOf(TerrestriaBlocks.REDWOOD, 24, 4, 3);
+		HEMLOCK_TREE = tallSpruceOf(TerrestriaBlocks.HEMLOCK, 24, 4, 3, 2, 5, 1, 11);
+		REDWOOD_TREE = tallSpruceOf(TerrestriaBlocks.REDWOOD, 24, 4, 3, 5, 2, 12, 7);
+		// TODO: Roots
+		MEGA_HEMLOCK_TREE = giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 8, 7, 2, 5, 1, 11);
+		MEGA_REDWOOD_TREE = giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 8, 7, 2, 5, 12, 7);
 		RUBBER_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
@@ -91,8 +95,6 @@ public class TerrestriaFeatureConfigs {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
 				.build();
-		MEGA_HEMLOCK_TREE = giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 4, 3);
-		MEGA_REDWOOD_TREE = giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 4, 3);
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
 		FALLEN_REDWOOD_LOG = fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1));
 		JAPANESE_MAPLE_SHRUB = shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState());
@@ -240,15 +242,15 @@ public class TerrestriaFeatureConfigs {
 				.build();
 	}
 
-	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
-		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
+	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight, baseRadius, randomRadius, baseBareHeight, randomBareHeight);
 	}
 
-	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
+	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new SpruceFoliagePlacer(2, 5, 0, 2, 1, 11),
+				new SpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
 				new StraightTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 0, 2))
 
@@ -256,15 +258,15 @@ public class TerrestriaFeatureConfigs {
 				.build();
 	}
 
-	static TreeFeatureConfig giantSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight) {
-		return giantSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight);
+	static TreeFeatureConfig giantSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+		return giantSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight, baseRadius, randomRadius, baseBareHeight, randomBareHeight);
 	}
 
-	static TreeFeatureConfig giantSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight) {
+	static TreeFeatureConfig giantSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new SpruceFoliagePlacer(2, 5, 0, 2, 1, 11),
+				new SpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
 				new GiantTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 0, 2))
 
