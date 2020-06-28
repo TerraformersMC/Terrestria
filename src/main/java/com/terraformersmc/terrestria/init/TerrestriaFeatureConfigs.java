@@ -74,7 +74,7 @@ public class TerrestriaFeatureConfigs {
 		SMALL_HEMLOCK_TREE = spruceOf(TerrestriaBlocks.HEMLOCK);
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
 		HEMLOCK_TREE = coniferOf(TerrestriaBlocks.HEMLOCK, 8, 3, 1);
-		REDWOOD_TREE = coniferOf(TerrestriaBlocks.HEMLOCK, 12, 4, 2);
+		REDWOOD_TREE = coniferOf(TerrestriaBlocks.REDWOOD, 12, 4, 2);
 		RUBBER_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
