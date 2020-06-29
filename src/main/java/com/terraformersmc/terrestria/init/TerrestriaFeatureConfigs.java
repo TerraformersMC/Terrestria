@@ -7,6 +7,7 @@ import com.terraformersmc.terrestria.feature.tree.treeconfigs.SandyTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
+import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -256,19 +257,18 @@ public class TerrestriaFeatureConfigs {
 				.build();
 	}
 
-	static TreeFeatureConfig giantSpruceOf(WoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
-		return giantSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), height, randomHeight, extraRandomHeight, baseRadius, randomRadius, baseBareHeight, randomBareHeight);
-	}
-
-	static TreeFeatureConfig giantSpruceOf(BlockState log, BlockState leaves, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
-		return new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(log),
-				new SimpleBlockStateProvider(leaves),
+	static TreeFeatureConfig giantSpruceOf(QuarteredWoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(woodBlocks.log.getDefaultState()),
+				new SimpleBlockStateProvider(woodBlocks.leaves.getDefaultState()),
 				new PredictiveSpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
-				new GiantTrunkPlacer(height, randomHeight, extraRandomHeight),
+				new MegaTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 0, 2))
 
 				.ignoreVines()
-				.build();
+				.build(),
+				woodBlocks.quarterLog.getDefaultState(),
+				woodBlocks.log.getDefaultState(),
+				woodBlocks.wood.getDefaultState());
 	}
 }
