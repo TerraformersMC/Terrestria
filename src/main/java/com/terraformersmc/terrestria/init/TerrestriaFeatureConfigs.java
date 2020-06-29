@@ -75,7 +75,6 @@ public class TerrestriaFeatureConfigs {
 		SMALL_REDWOOD_TREE = spruceOf(TerrestriaBlocks.REDWOOD);
 		HEMLOCK_TREE = tallSpruceOf(TerrestriaBlocks.HEMLOCK, 24, 4, 3, 2, 5, 1, 11);
 		REDWOOD_TREE = tallSpruceOf(TerrestriaBlocks.REDWOOD, 24, 4, 3, 5, 2, 12, 7);
-		// TODO: Roots
 		MEGA_HEMLOCK_TREE = giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 8, 7, 2, 5, 1, 11);
 		MEGA_REDWOOD_TREE = giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 8, 7, 2, 5, 12, 7);
 		RUBBER_TREE = new TreeFeatureConfig.Builder(

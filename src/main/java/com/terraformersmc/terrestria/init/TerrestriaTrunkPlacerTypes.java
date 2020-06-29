@@ -24,7 +24,7 @@ public class TerrestriaTrunkPlacerTypes {
 		BENT = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
 		CANOPY_4_BRANCHES = register("canopy_tree_4_branch_trunk_placer", CanopyTree4BranchTrunkPlacer.CODEC);
 		QUARTERED_MEGA_CANOPY = register("quartered_mega_canopy_trunk_placer", QuarteredMegaCanopyTrunkPlacer.CODEC);
-		MEGA = register("mega", MegaTrunkPlacer.CODEC);
+		MEGA = register("mega_trunk_placer", MegaTrunkPlacer.CODEC);
 		RUBBER_TREE = register("rubber_tree_trunk_placer", RubberTreeTrunkPlacer.CODEC);
 		SAGUARO_CACTUS = register("saguaro_cactus_trunk_placer", SaguaroCactusTrunkPlacer.CODEC);
 		SMALL_CANOPY_4_BRANCHES = register("small_canopy_tree_4_branch_trunk_placer", SmallCanopyTree4BranchTrunkPlacer.CODEC);
