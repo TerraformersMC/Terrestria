@@ -6,6 +6,7 @@ import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terraform.util.TillableBlockRegistry;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
+import com.terraformersmc.terrestria.block.PricklyDesertPlantBlock;
 import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
 import com.terraformersmc.terrestria.init.helpers.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -179,7 +180,7 @@ public class TerrestriaBlocks {
 		POTTED_JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("potted_jungle_palm_sapling", new FlowerPotBlock(JUNGLE_PALM_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("potted_saguaro_cactus_sapling", new FlowerPotBlock(SAGUARO_CACTUS_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 
-		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY), true));
+		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new PricklyDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY), true));
 		AGAVE = TerrestriaRegistry.register("agave", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY)));
 		ALOE_VERA = TerrestriaRegistry.register("aloe_vera", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY)));
 		DEAD_GRASS = TerrestriaRegistry.register("dead_grass", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY), true));

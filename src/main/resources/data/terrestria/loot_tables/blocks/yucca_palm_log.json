@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "terrestria:sakura_log"
+          "name": "terrestria:yucca_palm_log"
         }
       ],
       "conditions": [
@@ -20,7 +20,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
+          "block": "terrestria:yucca_palm_log",
           "properties": {
             "has_leaves": "true"
           }
@@ -58,7 +58,7 @@
                   ]
                 }
               ],
-              "name": "terrestria:sakura_leaves"
+              "name": "terrestria:yucca_palm_leaves"
             },
             {
               "type": "minecraft:item",
@@ -77,7 +77,7 @@
                   ]
                 }
               ],
-              "name": "terrestria:sakura_sapling"
+              "name": "terrestria:yucca_palm_sapling"
             }
           ]
         }
@@ -120,7 +120,7 @@
       "conditions": [
         {
           "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
+          "block": "terrestria:yucca_palm_log",
           "properties": {
             "has_leaves": "true"
           }

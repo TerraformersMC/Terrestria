@@ -5,29 +5,6 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "terrestria:sakura_log"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
-          "properties": {
-            "has_leaves": "true"
-          }
-        }
-      ],
-      "entries": [
-        {
           "type": "minecraft:alternatives",
           "children": [
             {
@@ -58,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "terrestria:sakura_leaves"
+              "name": "terrestria:yucca_palm_leaf_pile"
             },
             {
               "type": "minecraft:item",
@@ -70,14 +47,14 @@
                   "condition": "minecraft:table_bonus",
                   "enchantment": "minecraft:fortune",
                   "chances": [
-                    0.05,
-                    0.0625,
-                    0.083333336,
-                    0.1
+                    0.00625,
+                    0.0078125,
+                    0.010416667,
+                    0.0125
                   ]
                 }
               ],
-              "name": "terrestria:sakura_sapling"
+              "name": "terrestria:yucca_palm_sapling"
             }
           ]
         }
@@ -93,11 +70,11 @@
               "condition": "minecraft:table_bonus",
               "enchantment": "minecraft:fortune",
               "chances": [
-                0.02,
-                0.022222223,
-                0.025,
-                0.033333335,
-                0.1
+                0.0025,
+                0.00277777787,
+                0.003125,
+                0.00416666687,
+                0.0125
               ]
             }
           ],
@@ -118,13 +95,6 @@
         }
       ],
       "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
-          "properties": {
-            "has_leaves": "true"
-          }
-        },
         {
           "condition": "minecraft:inverted",
           "term": {

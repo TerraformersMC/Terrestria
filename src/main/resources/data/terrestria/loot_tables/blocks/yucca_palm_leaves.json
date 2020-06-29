@@ -5,29 +5,6 @@
       "rolls": 1,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "terrestria:sakura_log"
-        }
-      ],
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
-          "properties": {
-            "has_leaves": "true"
-          }
-        }
-      ],
-      "entries": [
-        {
           "type": "minecraft:alternatives",
           "children": [
             {
@@ -58,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "terrestria:sakura_leaves"
+              "name": "terrestria:yucca_palm_leaves"
             },
             {
               "type": "minecraft:item",
@@ -77,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "terrestria:sakura_sapling"
+              "name": "terrestria:yucca_palm_sapling"
             }
           ]
         }
@@ -118,13 +95,6 @@
         }
       ],
       "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "terrestria:sakura_log",
-          "properties": {
-            "has_leaves": "true"
-          }
-        },
         {
           "condition": "minecraft:inverted",
           "term": {
