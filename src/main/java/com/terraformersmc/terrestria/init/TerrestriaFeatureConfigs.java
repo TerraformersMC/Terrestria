@@ -19,7 +19,6 @@ import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
-import net.minecraft.world.gen.trunk.GiantTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
@@ -263,7 +262,7 @@ public class TerrestriaFeatureConfigs {
 				new SimpleBlockStateProvider(woodBlocks.leaves.getDefaultState()),
 				new PredictiveSpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
 				new MegaTrunkPlacer(height, randomHeight, extraRandomHeight),
-				new TwoLayersFeatureSize(2, 0, 2))
+				new TwoLayersFeatureSize(2, 1, 2))
 
 				.ignoreVines()
 				.build(),
