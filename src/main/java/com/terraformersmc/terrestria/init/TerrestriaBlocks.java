@@ -1,6 +1,15 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.block.BareSmallLogBlock;
+import com.terraformersmc.terraform.block.LeafPileBlock;
+import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terraform.block.TerraformDesertPlantBlock;
+import com.terraformersmc.terraform.block.TerraformDesertSaplingBlock;
+import com.terraformersmc.terraform.block.TerraformFarmlandBlock;
+import com.terraformersmc.terraform.block.TerraformGrassPathBlock;
+import com.terraformersmc.terraform.block.TerraformSaplingBlock;
+import com.terraformersmc.terraform.block.TerraformSeagrassBlock;
+import com.terraformersmc.terraform.block.TerraformSnowyBlock;
 import com.terraformersmc.terraform.util.TerraformLargeSaplingGenerator;
 import com.terraformersmc.terraform.util.TerraformSaplingGenerator;
 import com.terraformersmc.terraform.util.TillableBlockRegistry;
@@ -8,13 +17,30 @@ import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.PricklyDesertPlantBlock;
 import com.terraformersmc.terrestria.block.SaguaroCactusBlock;
-import com.terraformersmc.terrestria.init.helpers.*;
+import com.terraformersmc.terrestria.block.TallCattailBlock;
+import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
+import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
+import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
+import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
+import com.terraformersmc.terrestria.init.helpers.WoodColors;
+
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FlowerPotBlock;
+import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
+import net.minecraft.block.PlantBlock;
+import net.minecraft.block.SandBlock;
+import net.minecraft.block.SeagrassBlock;
+import net.minecraft.block.TallSeagrassBlock;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.sound.BlockSoundGroup;
+
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.*;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.sound.BlockSoundGroup;
 
 // This class exports public block constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
