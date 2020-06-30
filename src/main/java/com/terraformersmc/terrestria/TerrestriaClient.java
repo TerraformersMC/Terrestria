@@ -138,7 +138,8 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.WILLOW.sign,
 				TerrestriaBlocks.JAPANESE_MAPLE.sign,
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
-				TerrestriaBlocks.SAKURA.sign
+				TerrestriaBlocks.SAKURA.sign,
+				TerrestriaBlocks.YUCCA_PALM.sign
 		);
 
 		ColorProviderRegistry.ITEM.register(
