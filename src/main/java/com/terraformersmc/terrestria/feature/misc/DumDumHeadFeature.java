@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ServerWorldAccess;
@@ -29,6 +30,11 @@ public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 
 		//Check that we wont pass build height
 		if (blockPos.getY() + 8 > 256 || blockPos.getY() < 1) {
+			return false;
+		}
+
+		//Check to see if the block underneath is good for placement
+		if (!world.testBlockState(blockPos.down(), blockState -> blockState.isIn(BlockTags.SAND))) {
 			return false;
 		}
 
