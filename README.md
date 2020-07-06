@@ -5,10 +5,10 @@
 ## About Terrestria
 
 Terrestria is a detailed and vibrant biomes mod for Minecraft 1.14.4 and above running on the Fabric mod loader.
-Terrestria enhances gameplay through the addition of 12 major biomes supported by 17 component biomes, 8 new wood types, 
+Terrestria enhances gameplay through the addition of 17 major biomes supported by 24 component biomes, 9 new wood types, 
 as well as a healthy selection of foliage - providing a refreshing new selection of terrain.
 
-The goal of Terrestria is to be *the* most polished and visually appealing biomes mod available for Minecraft 1.14,
+The goal of Terrestria is to be *the* most polished and visually appealing biomes mod available for Minecraft 1.16,
 and to this end there has been intense focus on selecting, detailing, and refining the biomes until they
 look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount
 of biomes and then populating them with large amounts of detail and component biomes. This overall results in a
@@ -16,12 +16,17 @@ more cohesive experience compared to existing biome mods.
 
 ### Biomes
  - [Caldera](https://github.com/TerraformersMC/Terrestria/wiki/Caldera)
+ - [Canyon](https://github.com/TerraformersMC/Terrestria/wiki/Canyon)
  - [Cypress Forest](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Forest)
  - [Cypress Swamp](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Swamp)
  - [Dense Woodlands](https://github.com/TerraformersMC/Terrestria/wiki/Dense-Woodlands)
+ - [Dunes](https://github.com/TerraformersMC/Terrestria/wiki/Dunes)
  - [Hemlock Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Hemlock-Rainforest)
  - [Japanese Maple Forest](https://github.com/TerraformersMC/Terrestria/wiki/Japanese-Maple-Forest)
+ - [Lush Desert](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Desert)
  - [Lush Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Redwood-Forest)
+ - [Oasis](https://github.com/TerraformersMC/Terrestria/wiki/Oasis)
+ - [Outback](https://github.com/TerraformersMC/Terrestria/wiki/Outback)
  - [Rainbow Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Rainbow-Rainforest)
  - [Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Redwood-Forest)
  - [Sakura Forest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
@@ -37,7 +42,8 @@ more cohesive experience compared to existing biome mods.
 
  - coderbot: Project lead and lead developer
  - NeusFear: Artist and developer
- - Valoeghese: Developer
+ - SuperCoder79: Developer
+ - Valoeghese: Former Developer
  - Prospector: TerraformersMC organizer, Terraform Developer, and adviser
 
 ### Licensing
