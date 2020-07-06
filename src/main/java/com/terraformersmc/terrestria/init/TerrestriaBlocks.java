@@ -94,6 +94,7 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_RAINBOW_EUCALYPTUS_SAPLING;
 	public static FlowerPotBlock POTTED_SAKURA_SAPLING;
 	public static FlowerPotBlock POTTED_SAGUARO_CACTUS_SAPLING;
+	public static FlowerPotBlock POTTED_YUCCA_PALM_SAPLING;
 
 	// Volcanic Island blocks
 	public static SandBlock BLACK_SAND;
@@ -205,6 +206,7 @@ public class TerrestriaBlocks {
 		POTTED_SAKURA_SAPLING = TerrestriaRegistry.register("potted_sakura_sapling", new FlowerPotBlock(SAKURA_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_JUNGLE_PALM_SAPLING = TerrestriaRegistry.register("potted_jungle_palm_sapling", new FlowerPotBlock(JUNGLE_PALM_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.register("potted_saguaro_cactus_sapling", new FlowerPotBlock(SAGUARO_CACTUS_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+		POTTED_YUCCA_PALM_SAPLING = TerrestriaRegistry.register("potted_yucca_palm_sapling", new FlowerPotBlock(YUCCA_PALM_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 
 		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new PricklyDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY), true));
 		AGAVE = TerrestriaRegistry.register("agave", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY)));

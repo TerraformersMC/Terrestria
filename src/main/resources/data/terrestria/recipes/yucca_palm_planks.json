@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "terrestria:yucca_palm_logs"
+    }
+  ],
+  "result": {
+    "item": "terrestria:yucca_palm_planks",
+    "count": 4
+  }
+}
