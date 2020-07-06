@@ -109,6 +109,7 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
 				PLANT_BLOCK_LAYER,
+				TerrestriaBlocks.POTTED_BRYCE_SAPLING,
 				TerrestriaBlocks.POTTED_REDWOOD_SAPLING,
 				TerrestriaBlocks.POTTED_HEMLOCK_SAPLING,
 				TerrestriaBlocks.POTTED_RUBBER_SAPLING,
@@ -125,7 +126,8 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.POTTED_AGAVE,
 				TerrestriaBlocks.POTTED_ALOE_VERA,
 				TerrestriaBlocks.POTTED_TINY_CACTUS,
-				TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING
+				TerrestriaBlocks.POTTED_SAGUARO_CACTUS_SAPLING,
+				TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING
 		);
 
 		addColoredGrass(TerrestriaBlocks.ANDISOL_GRASS_BLOCK);

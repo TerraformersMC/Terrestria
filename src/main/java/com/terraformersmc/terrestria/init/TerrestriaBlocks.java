@@ -82,6 +82,7 @@ public class TerrestriaBlocks {
 	public static TerraformSaplingBlock SAGUARO_CACTUS_SAPLING;
 	public static TerraformSaplingBlock YUCCA_PALM_SAPLING;
 
+	public static FlowerPotBlock POTTED_BRYCE_SAPLING;
 	public static FlowerPotBlock POTTED_REDWOOD_SAPLING;
 	public static FlowerPotBlock POTTED_HEMLOCK_SAPLING;
 	public static FlowerPotBlock POTTED_JUNGLE_PALM_SAPLING;
@@ -194,6 +195,7 @@ public class TerrestriaBlocks {
 		POTTED_INDIAN_PAINTBRUSH = TerrestriaRegistry.register("potted_indian_paintbrush", new FlowerPotBlock(INDIAN_PAINTBRUSH, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_MONSTERAS = TerrestriaRegistry.register("potted_monsteras", new FlowerPotBlock(MONSTERAS, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 
+		POTTED_BRYCE_SAPLING = TerrestriaRegistry.register("potted_bryce_sapling", new FlowerPotBlock(BRYCE_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_REDWOOD_SAPLING = TerrestriaRegistry.register("potted_redwood_sapling", new FlowerPotBlock(REDWOOD_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_HEMLOCK_SAPLING = TerrestriaRegistry.register("potted_hemlock_sapling", new FlowerPotBlock(HEMLOCK_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_RUBBER_SAPLING = TerrestriaRegistry.register("potted_rubber_sapling", new FlowerPotBlock(RUBBER_SAPLING, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
