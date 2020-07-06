@@ -74,14 +74,12 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 			}
 
 			Direction originalDirection = Direction.Type.HORIZONTAL.random(random);
-			boolean onePlaced = false;
 			// Randomly generate up to two roots if the height is less than 4 blocks above the origin
-			if (i < 4 && random.nextInt(3) < 3) {
-				if (onePlaced) {
-					placeRoot(treeFeatureConfig, random, set, world, currentPosition.toImmutable(), random.nextInt(5), blockBox, originalDirection.getOpposite());
-				}
+			if (i < 2 && random.nextInt(3) < 3) {
 				placeRoot(treeFeatureConfig, random, set, world, currentPosition.toImmutable(), random.nextInt(5), blockBox, originalDirection);
-				onePlaced = true;
+			}
+			if (i < 5 && i > 2 && random.nextInt(3) < 3) {
+				placeRoot(treeFeatureConfig, random, set, world, currentPosition.toImmutable(), random.nextInt(5), blockBox, originalDirection.getOpposite());
 			}
 		}
 
