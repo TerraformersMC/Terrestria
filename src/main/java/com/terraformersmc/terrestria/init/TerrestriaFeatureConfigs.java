@@ -54,6 +54,7 @@ public class TerrestriaFeatureConfigs {
 	public static TreeFeatureConfig ACACIA_DOT_SHRUB;
 	public static TreeFeatureConfig RUBBER_TREE;
 	public static SandyTreeConfig SAGUARO_CACTUS_FEATURE;
+	public static TreeFeatureConfig OAK_SHRUB;
 
 	public static void init() {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
@@ -95,6 +96,7 @@ public class TerrestriaFeatureConfigs {
 		FALLEN_HEMLOCK_LOG = fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1));
 		FALLEN_REDWOOD_LOG = fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1));
 		JAPANESE_MAPLE_SHRUB = shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState());
+		OAK_SHRUB = shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
 		RAINBOW_EUCALYPTUS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),

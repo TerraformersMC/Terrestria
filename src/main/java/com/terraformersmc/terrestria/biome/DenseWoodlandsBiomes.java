@@ -2,6 +2,8 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biome.builder.TerraformBiome;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -22,7 +24,6 @@ public class DenseWoodlandsBiomes {
 				.downfall(0.3F)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)
-				.grassColor(0x89ad49)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
 						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
@@ -32,11 +33,13 @@ public class DenseWoodlandsBiomes {
 
 		TerrestriaBiomes.DENSE_WOODLANDS = TerrestriaBiomes.register("dense_woodlands", template.builder()
 				.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 7)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 1)
 				.build()
 		);
 
 		TerrestriaBiomes.DENSE_WOODLANDS_EDGE = TerrestriaBiomes.register("dense_woodlands_edge", template.builder()
 				.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 3)
+				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 1)
 				.build()
 		);
 	}
