@@ -19,10 +19,6 @@ public class VolcanoStructureFeature extends StructureFeature<DefaultFeatureConf
 		return VolcanoStructureStart::new;
 	}
 
-	public int getRadius() {
-		return 12;
-	}
-
 	public static class VolcanoStructureStart extends StructureStart<DefaultFeatureConfig> {
 		VolcanoStructureStart(StructureFeature<DefaultFeatureConfig> feature, int chunkX, int chunkZ, BlockBox box, int references, long baseSeed) {
 			super(feature, chunkX, chunkZ, box, references, baseSeed);

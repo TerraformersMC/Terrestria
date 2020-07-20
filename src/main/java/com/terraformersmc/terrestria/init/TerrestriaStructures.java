@@ -33,7 +33,7 @@ public class TerrestriaStructures {
 
 		CANYON_ARCH = registerDefaultStructure("canyon_arch_structure", new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC), 5, 3);
 		OCEAN_VOLCANO = registerDefaultStructure("ocean_volcano_structure", new VolcanoStructureFeature(DefaultFeatureConfig.CODEC), 24, 8);
-		VOLCANO = registerDefaultStructure("volcano_structure", new VolcanoStructureFeature(DefaultFeatureConfig.CODEC), 6, 3);
+		VOLCANO = registerDefaultStructure("volcano_structure", new VolcanoStructureFeature(DefaultFeatureConfig.CODEC), 10, 5);
 
 	}
 

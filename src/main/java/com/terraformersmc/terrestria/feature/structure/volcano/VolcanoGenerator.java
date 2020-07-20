@@ -55,7 +55,7 @@ public class VolcanoGenerator extends StructurePiece {
 		if (biome == Biomes.DEEP_OCEAN || biome == Biomes.DEEP_COLD_OCEAN || biome == Biomes.DEEP_LUKEWARM_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) {
 			height = 20 + random.nextInt(20);
 			baseY = 30;
-		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE) {
+		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE || biome == TerrestriaBiomes.VOLCANIC_ISLAND_BEACH) {
 			height = 48 + random.nextInt(32);
 			baseY = 45;
 		} else {
@@ -65,7 +65,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 		if (height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE) {
+		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE || biome == TerrestriaBiomes.VOLCANIC_ISLAND_BEACH) {
 			radius = random.nextInt(height / 3) + height / 4;
 		} else {
 			radius = random.nextInt(height * 3 / 4) + height / 2;
