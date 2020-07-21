@@ -1,0 +1,14 @@
+{
+  "defaultMap": {
+    "spriteMap": [
+      {
+        "sprite": "terrestria:block/tall_cattail_bottom",
+        "material": "canvas:low_foliage"
+      },
+      {
+        "sprite": "terrestria:block/tall_cattail_top",
+        "material": "canvas:high_foliage"
+      }
+    ]
+  }
+}
