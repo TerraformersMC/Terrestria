@@ -1,0 +1,10 @@
+{
+  "defaultMap": {
+    "spriteMap": [
+      {
+        "sprite": "terrestria:block/cattail",
+        "material": "canvas:low_foliage"
+      }
+    ]
+  }
+}
