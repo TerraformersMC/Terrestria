@@ -159,7 +159,7 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		ColorProviderRegistry.ITEM.register(
 				GRASS_ITEM_COLORS,
-				TerrestriaItems.BASALT_GRASS_BLOCK
+				TerrestriaItems.ANDISOL_GRASS_BLOCK
 		);
 
 		addBoatRenderer(TerrestriaEntities.REDWOOD_BOAT);

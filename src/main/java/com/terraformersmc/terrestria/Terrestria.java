@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigHandler;
-import com.terraformersmc.terrestria.command.LocateAny;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
@@ -23,7 +22,7 @@ public class Terrestria implements ModInitializer {
 	public static final String MOD_ID = "terrestria";
 	public static ItemGroup itemGroup;
 	public static BiomeConfigHandler biomeConfigHandler;
-	public static final Logger log = LogManager.getLogger(MOD_ID);
+	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	@Override
 	public void onInitialize() {
@@ -53,6 +52,5 @@ public class Terrestria implements ModInitializer {
 		biomeConfigHandler.save();
 
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
-		LocateAny.register();
 	}
 }

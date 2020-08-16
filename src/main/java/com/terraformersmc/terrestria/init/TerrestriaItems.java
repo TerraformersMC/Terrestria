@@ -53,11 +53,12 @@ public class TerrestriaItems {
 	public static BlockItem SAGUARO_CACTUS_SAPLING;
 	public static BlockItem YUCCA_PALM_SAPLING;
 
-	public static StoneItems BASALT;
-	public static BlockItem BASALT_SAND;
-	public static BlockItem BASALT_DIRT;
-	public static BlockItem BASALT_GRASS_BLOCK;
-	public static BlockItem BASALT_PODZOL;
+	public static StoneItems VOLCANIC_ROCK;
+	public static BlockItem BLACK_SAND;
+	public static BlockItem ANDISOL;
+	public static BlockItem ANDISOL_GRASS_BLOCK;
+	public static BlockItem ANDISOL_GRASS_PATH;
+	public static BlockItem ANDISOL_PODZOL;
 	public static BlockItem ANDISOL_FARMLAND;
 	public static BlockItem INDIAN_PAINTBRUSH;
 	public static BlockItem MONSTERAS;
@@ -115,11 +116,12 @@ public class TerrestriaItems {
 		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.registerBlockItem("saguaro_cactus_sapling", TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
 		YUCCA_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("yucca_palm_sapling", TerrestriaBlocks.YUCCA_PALM_SAPLING);
 
-		BASALT = StoneItems.register("basalt", TerrestriaBlocks.VOLCANIC_ROCK);
-		BASALT_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BLACK_SAND);
-		BASALT_DIRT = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.ANDISOL);
-		BASALT_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
-		BASALT_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.ANDISOL_PODZOL);
+		VOLCANIC_ROCK = StoneItems.register("basalt", TerrestriaBlocks.VOLCANIC_ROCK);
+		BLACK_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BLACK_SAND);
+		ANDISOL = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.ANDISOL);
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
+		ANDISOL_GRASS_PATH = TerrestriaRegistry.registerBlockItem("andisol_grass_path", TerrestriaBlocks.ANDISOL_GRASS_PATH);
+		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.ANDISOL_PODZOL);
 		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL_FARMLAND);
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
 		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
