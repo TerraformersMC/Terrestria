@@ -208,8 +208,6 @@ curseforge {
 		changelog = releaseChangelog
 		mainArtifact(file("${project.buildDir}/libs/${archivesBaseName}-${version}.jar"))
 		mainArtifact.displayName = "$project.project_name v$project.mod_version for $project.minecraft_version"
-		addArtifact sourcesJar
-		additionalArtifacts.forEach { artifact -> artifact.displayName = "$project.project_name v$project.mod_version for $project.minecraft_version"}
 		relations {
 			if (!project.curseforge_required_dependencies.isEmpty()) {
 				project.curseforge_required_dependencies.split(", ").each {
