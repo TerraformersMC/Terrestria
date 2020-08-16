@@ -12,6 +12,7 @@
     "MixinPlantBlock",
     "MixinSugarCaneBlock",
     "MixinTreeFeature",
+    "MixinTrunkPlacer",
     "TreeDecoratorTypeAccessor"
   ],
   "injectors": {
