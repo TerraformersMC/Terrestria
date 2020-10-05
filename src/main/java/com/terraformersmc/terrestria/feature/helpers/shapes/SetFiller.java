@@ -2,9 +2,9 @@ package com.terraformersmc.terrestria.feature.helpers.shapes;
 
 import java.util.Set;
 
-import com.terraformersmc.shapes.api.Filler;
+import com.terraformersmc.terraform.shapes.api.Filler;
 
-import com.terraformersmc.shapes.api.Position;
+import com.terraformersmc.terraform.shapes.api.Position;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableWorld;

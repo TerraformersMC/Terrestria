@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
@@ -9,11 +10,11 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class RainbowRainforestBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.temperature(0.95F)
@@ -30,8 +31,8 @@ public class RainbowRainforestBiomes {
 				.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 5)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RUBBER_TREE), 3)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.PARROT, 40, 1, 2))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.PARROT, 40, 1, 2))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.OCELOT, 2, 1, 1))
 		);
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST = TerrestriaBiomes.register("rainbow_rainforest", template.builder()

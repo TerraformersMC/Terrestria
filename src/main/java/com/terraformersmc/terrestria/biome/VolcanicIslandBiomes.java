@@ -1,17 +1,18 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.*;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class VolcanicIslandBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)
@@ -29,9 +30,9 @@ public class VolcanicIslandBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_RUINED_PORTAL)
 				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 15, 1, 5))
 				.addStructureFeature(TerrestriaStructures.VOLCANO)
 		);
 

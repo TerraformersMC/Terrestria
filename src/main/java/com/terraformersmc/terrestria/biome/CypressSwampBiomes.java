@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
@@ -14,11 +15,11 @@ import net.minecraft.world.gen.decorator.DecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class CypressSwampBiomes {
 	public static void register() {
-		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", TerraformBiome.builder()
+		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
 				.depth(-0.25F)
@@ -49,7 +50,7 @@ public class CypressSwampBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 8, 2, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4))
 				.build());
 	}
 }

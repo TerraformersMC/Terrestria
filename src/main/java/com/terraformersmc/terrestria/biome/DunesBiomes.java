@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
@@ -10,12 +11,12 @@ import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 
 public class DunesBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 			.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.temperature(0.9F)

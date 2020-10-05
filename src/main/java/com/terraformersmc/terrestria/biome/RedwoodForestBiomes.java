@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import net.minecraft.block.Blocks;
@@ -10,11 +11,11 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class RedwoodForestBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.9F)
@@ -29,9 +30,9 @@ public class RedwoodForestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.MOUNTAIN_RUINED_PORTAL)
 				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4))
 		);
 
 		TerrestriaBiomes.REDWOOD_FOREST = TerrestriaBiomes.register("redwood_forest", template.builder()

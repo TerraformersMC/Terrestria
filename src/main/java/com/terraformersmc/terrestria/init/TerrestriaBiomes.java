@@ -3,8 +3,10 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biome.*;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
 
 public class TerrestriaBiomes {
 	public static Biome CALDERA;
@@ -46,6 +48,22 @@ public class TerrestriaBiomes {
 	public static Biome WOODED_CYPRESS_HILLS;
 	public static Biome WOODED_JAPANESE_MAPLE_HILLS;
 	public static Biome WOODED_SAKURA_HILLS;
+
+	// Copied from Traverse
+	public static BiomeEffects.Builder createDefaultBiomeEffects() {
+		return new BiomeEffects.Builder()
+				.waterColor(0x3F76E4)
+				.waterFogColor(0x50533)
+				.skyColor(getSkyColor(0.2F))
+				.fogColor(0xC0D8FF);
+	}
+
+	// Copied from Minecraft
+	private static int getSkyColor(float temperature) {
+		float f = temperature / 3.0F;
+		f = MathHelper.clamp(f, -1.0F, 1.0F);
+		return MathHelper.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
+	}
 
 	public static void init() {
 		CalderaBiomes.register();

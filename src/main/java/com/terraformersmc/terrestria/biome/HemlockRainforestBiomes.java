@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import net.minecraft.block.Blocks;
@@ -10,11 +11,11 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class HemlockRainforestBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.6F)
@@ -31,9 +32,9 @@ public class HemlockRainforestBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
 				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 8, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.FOX, 8, 2, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4))
 		);
 
 		TerrestriaBiomes.HEMLOCK_CLEARING = TerrestriaBiomes.register("hemlock_clearing", template.builder()

@@ -1,17 +1,18 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.*;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 
 public class CanyonBiomes {
 
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.depth(0.2F)
 			.scale(0.1F)

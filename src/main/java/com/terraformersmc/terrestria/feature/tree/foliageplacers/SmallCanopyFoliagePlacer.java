@@ -2,10 +2,10 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.shapes.api.Position;
-import com.terraformersmc.shapes.impl.Shapes;
-import com.terraformersmc.shapes.impl.layer.pathfinder.SubtractLayer;
-import com.terraformersmc.shapes.impl.layer.transform.TranslateLayer;
+import com.terraformersmc.terraform.shapes.api.Position;
+import com.terraformersmc.terraform.shapes.impl.Shapes;
+import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.SubtractLayer;
+import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.templates.SmallFoliagePlacer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.math.BlockBox;

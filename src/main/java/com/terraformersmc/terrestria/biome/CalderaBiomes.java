@@ -1,21 +1,23 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class CalderaBiomes {
 
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
 				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
@@ -23,9 +25,9 @@ public class CalderaBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
 				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
 				.addDefaultSpawnEntries()
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SQUID, 3, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SALMON, 15, 3, 6))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.COD, 15, 1, 5))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 15, 1, 5))
 		);
 
 		TerrestriaBiomes.CALDERA = TerrestriaBiomes.register("caldera", template.builder()
@@ -61,7 +63,7 @@ public class CalderaBiomes {
 				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
 		TerrestriaBiomes.CALDERA_RIDGE = TerrestriaBiomes.register("caldera_ridge", template.builder()

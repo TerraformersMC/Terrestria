@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biome.builder.TerraformBiome;
+import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
+import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -9,11 +10,11 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biome.builder.DefaultFeature.*;
+import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class LushDesertBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiome.builder()
+		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)
@@ -26,17 +27,17 @@ public class LushDesertBiomes {
 				.addStructureFeature(DefaultBiomeFeatures.DESERT_RUINED_PORTAL)
 				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
 				.addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.BAT, 10, 8, 8))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SPIDER, 100, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SKELETON, 100, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.CREEPER, 100, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.SLIME, 100, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.WITCH, 5, 1, 1))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.ZOMBIE, 19, 4, 4))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1, 1))
-				.addSpawnEntry(new Biome.SpawnEntry(EntityType.HUSK, 80, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SKELETON, 100, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.CREEPER, 100, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SLIME, 100, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 19, 4, 4))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1, 1))
+				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.HUSK, 80, 4, 4))
 		);
 
 		TerrestriaBiomes.LUSH_DESERT = TerrestriaBiomes.register("lush_desert", template.builder()
