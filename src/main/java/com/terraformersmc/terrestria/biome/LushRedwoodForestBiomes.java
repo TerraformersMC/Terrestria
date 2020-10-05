@@ -8,6 +8,8 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
@@ -27,15 +29,15 @@ public class LushRedwoodForestBiomes {
 				.downfall(0.9F)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
 						FROZEN_TOP_LAYER, DEFAULT_FLOWERS)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.MOUNTAIN_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_MOUNTAIN)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))

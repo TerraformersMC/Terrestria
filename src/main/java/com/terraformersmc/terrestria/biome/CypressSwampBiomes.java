@@ -8,7 +8,10 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.decorator.ConfiguredDecorator;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
@@ -30,25 +33,23 @@ public class CypressSwampBiomes {
 				.waterFogColor(0x053305)
 				.grassColor(0x699e3c)
 				.foliageColor(0x619137)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
-						DEFAULT_MUSHROOMS, SPRINGS, SEAGRASS, MORE_SEAGRASS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
+						DEFAULT_MUSHROOMS, SPRINGS, /*TODO: SEAGRASS, MORE_SEAGRASS,*/ FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
 						DESERT_VEGETATION)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_CYPRESS_TREE), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RUBBER_TREE), 3)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.WILLOW_TREE), 1)
-				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				/*TODO:.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 						TerrestriaFeatures.CATTAIL
-							.configure(new SeagrassFeatureConfig(80, 0.3D))
+							.configure(new ProbabilityConfig(80, 0.3D))
 							.createDecoratedFeature(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
 				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-						Feature.RANDOM_PATCH
-							.configure(DefaultBiomeFeatures.LILY_PAD_CONFIG)
-							.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))))
+						ConfiguredFeatures.PATCH_WATERLILLY.decorate(ConfiguredFeatures.Decorators.HEIGHTMAP_SPREAD_DOUBLE, Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))))*/
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 2)
 				.addGrassFeature(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
 				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 1)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4))
 				.build());

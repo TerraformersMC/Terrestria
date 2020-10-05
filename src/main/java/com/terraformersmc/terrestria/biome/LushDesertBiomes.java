@@ -6,6 +6,8 @@ import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -20,13 +22,13 @@ public class LushDesertBiomes {
 				.waterFogColor(0x50533)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, SPRINGS, FROZEN_TOP_LAYER)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_PYRAMID)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)
+				.addStructureFeature(ConfiguredStructureFeatures.DESERT_PYRAMID)
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4))

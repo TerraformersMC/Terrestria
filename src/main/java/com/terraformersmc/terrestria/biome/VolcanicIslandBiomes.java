@@ -6,6 +6,7 @@ import com.terraformersmc.terrestria.init.*;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.*;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -19,16 +20,16 @@ public class VolcanicIslandBiomes {
 				.downfall(0.9F)
 				.waterColor(0x54d3c0)
 				.waterFogColor(0x24a0b0)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
 				.addGrassFeature(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 1)
 				.addGrassFeature(Blocks.FERN.getDefaultState(), 1)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.JUNGLE_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_JUNGLE)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6))

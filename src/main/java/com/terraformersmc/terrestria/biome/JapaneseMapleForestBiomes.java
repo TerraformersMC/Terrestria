@@ -7,6 +7,8 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.MineshaftFeature;
@@ -26,12 +28,12 @@ public class JapaneseMapleForestBiomes {
 				.waterFogColor(0x50533)
 				.grassColor(0x7aab1a)
 				.foliageColor(0x7aab1a)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_TREE), 3)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE_TREE), 3)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 3)

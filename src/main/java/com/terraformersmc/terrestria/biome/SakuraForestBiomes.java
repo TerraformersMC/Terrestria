@@ -6,6 +6,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -21,12 +23,12 @@ public class SakuraForestBiomes {
 				.downfall(1.0F)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.PLAINS_VILLAGE)
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SAKURA_TREE), 6)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 4)
 				.addDefaultSpawnEntries()

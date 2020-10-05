@@ -4,6 +4,8 @@ import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -20,11 +22,11 @@ public class OutbackBiomes {
 				.waterFogColor(0x50533)
 				.addDefaultSpawnEntries()
 				.setSpawnChance(0.03F)
-				.addStructureFeature(DefaultBiomeFeatures.STRONGHOLD)
-				.addStructureFeature(DefaultBiomeFeatures.NORMAL_MINESHAFT)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_RUINED_PORTAL)
-				.addStructureFeature(DefaultBiomeFeatures.DESERT_VILLAGE)
-				.addDefaultFeatures(LAND_CARVERS, STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
+				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
+				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT)
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
 					DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
 		);
 
@@ -50,8 +52,8 @@ public class OutbackBiomes {
 			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.YUCCA_PALM_TREE), 1)
 			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_DOT_SHRUB), 2)
 			.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.ACACIA_DOT_SHRUB), 3)
-			.addRareTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.FANCY_TREE_CONFIG), 24)
-			.addTreeFeature(Feature.TREE.configure(DefaultBiomeFeatures.ACACIA_TREE_CONFIG), 2)
+			.addRareTreeFeature(ConfiguredFeatures.FANCY_OAK, 24)
+			.addTreeFeature(ConfiguredFeatures.ACACIA, 2)
 			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 			.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 			.build());
