@@ -5,6 +5,7 @@ import com.terraformersmc.terraform.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 
@@ -13,8 +14,8 @@ import java.util.Set;
 
 public abstract class SmallFoliagePlacer extends FoliagePlacer {
 
-	public SmallFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
-		super(radius, randomRadius, offset, randomOffset);
+	public SmallFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+		super(radius, offset);
 	}
 
 	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos pos, Random random, Set<BlockPos> leaves, TreeFeatureConfig config) {

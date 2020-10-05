@@ -12,9 +12,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
+import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.tree.TreeDecoratorType;
 
 public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	public static final Codec<DanglingLeavesTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -32,7 +32,7 @@ public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void generate(WorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
+	public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
 		for (BlockPos pos : leavesPositions) {
 			if (world.getBlockState(pos.down()).isAir()) {
 				//if there is air below, then make dangling leaves 33% of the time

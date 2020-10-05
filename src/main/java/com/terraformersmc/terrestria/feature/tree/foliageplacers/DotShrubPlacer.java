@@ -7,6 +7,7 @@ import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -18,10 +19,10 @@ import java.util.Set;
 public class DotShrubPlacer extends FoliagePlacer {
 
 	public static final Codec<DotShrubPlacer> CODEC = RecordCodecBuilder.create(dotShrubPlacerInstance ->
-			method_28846(dotShrubPlacerInstance).apply(dotShrubPlacerInstance, DotShrubPlacer::new));
+			fillFoliagePlacerFields(dotShrubPlacerInstance).apply(dotShrubPlacerInstance, DotShrubPlacer::new));
 
-	public DotShrubPlacer(int radius, int randomRadius, int offset, int randomOffset) {
-		super(radius, randomRadius, offset, randomOffset);
+	public DotShrubPlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+		super(radius, offset);
 	}
 
 	@Override
@@ -44,7 +45,7 @@ public class DotShrubPlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int getHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
 		return 0;
 	}
 

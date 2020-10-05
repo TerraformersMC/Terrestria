@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
@@ -14,9 +15,10 @@ import java.util.Set;
 
 public class NoneFoliagePlacer extends FoliagePlacer {
 	public static final Codec<NoneFoliagePlacer> CODEC = Codec.unit(new NoneFoliagePlacer());
+	private static final UniformIntDistribution ZERO = UniformIntDistribution.of(0);
 
 	public NoneFoliagePlacer() {
-		super(0, 0, 0, 0);
+		super(ZERO, ZERO);
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class NoneFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int getHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
 		return 0;
 	}
 

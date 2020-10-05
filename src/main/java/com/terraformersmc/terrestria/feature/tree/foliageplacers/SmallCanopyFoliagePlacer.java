@@ -11,6 +11,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
@@ -20,10 +21,10 @@ import java.util.Set;
 public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 
 	public static final Codec<SmallCanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(smallCanopyFoliagePlacerInstance ->
-			method_28846(smallCanopyFoliagePlacerInstance).apply(smallCanopyFoliagePlacerInstance, SmallCanopyFoliagePlacer::new));
+			fillFoliagePlacerFields(smallCanopyFoliagePlacerInstance).apply(smallCanopyFoliagePlacerInstance, SmallCanopyFoliagePlacer::new));
 
-	public SmallCanopyFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
-		super(radius, randomRadius, offset, randomOffset);
+	public SmallCanopyFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+		super(radius, offset);
 	}
 
 	@Override
@@ -51,7 +52,7 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	public int getHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
 		return 0;
 	}
 

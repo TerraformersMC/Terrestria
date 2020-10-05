@@ -11,6 +11,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -18,10 +19,10 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class CypressFoliagePlacer extends FoliagePlacer {
 	public static final Codec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
-			method_28846(instance).apply(instance, CypressFoliagePlacer::new));
+			fillFoliagePlacerFields(instance).apply(instance, CypressFoliagePlacer::new));
 
-	public CypressFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset) {
-		super(radius, randomRadius, offset, randomOffset);
+	public CypressFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+		super(radius, offset);
 	}
 
 	@Override
@@ -62,7 +63,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int getHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
 		return 0;
 	}
 

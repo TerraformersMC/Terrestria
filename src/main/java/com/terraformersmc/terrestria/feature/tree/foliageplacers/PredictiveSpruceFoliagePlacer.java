@@ -13,27 +13,29 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 
 public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
-	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
-		method_28846(instance).and(instance.group(
-				Codec.INT.fieldOf("trunk_height").forGetter(placer -> placer.trunkHeight),
-				Codec.INT.fieldOf("trunk_height_random").forGetter(placer -> placer.randomTrunkHeight))
+	// Copied from SpruceFoliagePlacer. There doesn't appear to be a convenient way to turn a SpruceFoliagePlacer into a
+	// PredictiveSpruceFoliagePlacer.
+	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+		fillFoliagePlacerFields(instance).and(
+				UniformIntDistribution.createValidatedCodec(0, 16, 8)
+						.fieldOf("trunk_height")
+						.forGetter(placer -> placer.trunkHeight)
 		).apply(instance, PredictiveSpruceFoliagePlacer::new)
 	);
 
-	private final int trunkHeight;
-	private final int randomTrunkHeight;
+	private final UniformIntDistribution trunkHeight;
 
-	public PredictiveSpruceFoliagePlacer(int radius, int randomRadius, int offset, int randomOffset, int trunkHeight, int randomTrunkHeight) {
-		super(radius, randomRadius, offset, randomOffset, trunkHeight, randomTrunkHeight);
+	public PredictiveSpruceFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset, UniformIntDistribution trunkHeight) {
+		super(radius, offset, trunkHeight);
 
 		this.trunkHeight = trunkHeight;
-		this.randomTrunkHeight = randomTrunkHeight;
 	}
 
 	@Override

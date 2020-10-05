@@ -13,9 +13,9 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
+import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.tree.TreeDecoratorType;
 
 public class SakuraTreeDecorator extends TreeDecorator {
 	public static Codec<SakuraTreeDecorator> CODEC = Codec.unit(new SakuraTreeDecorator());
@@ -26,7 +26,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void generate(WorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
+	public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
 		for (BlockPos pos : leavesPositions) {
 			// 1/3 positions have leaf piles
 			if (random.nextInt(3) > 0) continue;

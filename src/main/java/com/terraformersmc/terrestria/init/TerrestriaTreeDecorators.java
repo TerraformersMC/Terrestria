@@ -8,8 +8,8 @@ import com.terraformersmc.terrestria.mixin.TreeDecoratorTypeAccessor;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.decorator.TreeDecorator;
-import net.minecraft.world.gen.decorator.TreeDecoratorType;
+import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.tree.TreeDecoratorType;
 
 public class TerrestriaTreeDecorators {
 
