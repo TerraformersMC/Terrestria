@@ -12,13 +12,14 @@ import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.decorator.TreeDecorator;
+import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
+import net.minecraft.world.gen.tree.TreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
@@ -60,14 +61,14 @@ public class TerrestriaFeatureConfigs {
 		BRYCE_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState()),
 				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-				new SmallLogSphereFoliagePlacer(1, 0, 0, 0),
+				new SmallLogSphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new SpindlyTrunkPlacer(10, 0, 0),
 				new TwoLayersFeatureSize(1, 0, 0))
 				.build());
 		JUNGLE_PALM_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(Blocks.JUNGLE_WOOD.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()),
-				new PalmFanFoliagePlacer(3, 0, 0, 0),
+				new PalmFanFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(0)),
 				new BentTrunkPlacer(15, 15, 15),
 				new TwoLayersFeatureSize(1, 0, 2))
 				.ignoreVines()
@@ -81,14 +82,14 @@ public class TerrestriaFeatureConfigs {
 		RUBBER_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
-				new SphereFoliagePlacer(1, 0, 0, 0),
+				new SphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new RubberTreeTrunkPlacer(6, 2, 2),
 				new TwoLayersFeatureSize(1, 1, 1)
 				).build();
 		CYPRESS_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
-				new CypressFoliagePlacer(0,0,0,0),
+				new CypressFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new StraightTrunkPlacer(7, 3, 0),
 				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
@@ -100,7 +101,7 @@ public class TerrestriaFeatureConfigs {
 		RAINBOW_EUCALYPTUS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
-				new LargeOakFoliagePlacer(2, 0, 1, 0, 2),
+				new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2),
 				new QuarteredMegaCanopyTrunkPlacer(4, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
@@ -112,7 +113,7 @@ public class TerrestriaFeatureConfigs {
 		RAINBOW_EUCALYPTUS_SAPLING_TREE = (new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
-				new BlobFoliagePlacer(2, 0, 0, 0, 3),
+				new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3),
 				new StraightTrunkPlacer(4, 8, 0),
 				new TwoLayersFeatureSize(1, 0, 1)))
 				.ignoreVines()
@@ -127,7 +128,7 @@ public class TerrestriaFeatureConfigs {
 		SAKURA_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.leaves.getDefaultState()),
-				new SmallCanopyFoliagePlacer(0, 0, 0, 0),
+				new SmallCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
 				.decorators(ImmutableList.of(new SakuraTreeDecorator()))
@@ -135,21 +136,21 @@ public class TerrestriaFeatureConfigs {
 		JAPANESE_MAPLE_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.leaves.getDefaultState()),
-				new JapaneseCanopyFoliagePlacer(0, 0, 0, 0),
+				new JapaneseCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
 				new TwoLayersFeatureSize(1, 1, 1)
 		).build();
 		DARK_JAPANESE_MAPLE_TREE = new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()),
-				new JapaneseCanopyFoliagePlacer(0, 0, 0, 0),
+				new JapaneseCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
 				new TwoLayersFeatureSize(1, 1, 1)
 		).build();
 		MEGA_CYPRESS_TREE = new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
-				new LargeOakFoliagePlacer(3, 0, 2, 0, 2),
+				new LargeOakFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(2), 2),
 				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
@@ -162,7 +163,7 @@ public class TerrestriaFeatureConfigs {
 		YUCCA_PALM_TREE = new SandyTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState()),
-				new SmallLogSphereFoliagePlacer(1, 0, 0, 0),
+				new SmallLogSphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new SmallBranchingTrunkPlacer(6, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1)).build());
 		OAK_DOT_SHRUB = dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState());
@@ -177,7 +178,7 @@ public class TerrestriaFeatureConfigs {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new CanopyFoliagePlacer(0, 0, 0, 0),
+				new CanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				trunkPlacer,
 				new TwoLayersFeatureSize(1, 0 , 1))
 				.decorators(decorators)
@@ -207,7 +208,7 @@ public class TerrestriaFeatureConfigs {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new BushFoliagePlacer(2, 0, 1, 0, 2),
+				new BushFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2),
 				new StraightTrunkPlacer(1, 0, 0),
 				new TwoLayersFeatureSize(0, 0, 0))
 
@@ -219,7 +220,7 @@ public class TerrestriaFeatureConfigs {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new DotShrubPlacer(0, 0, 0, 0),
+				new DotShrubPlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new StraightTrunkPlacer(1, 1, 0),
 				new TwoLayersFeatureSize(0, 0, 0))
 				.build();
@@ -233,7 +234,7 @@ public class TerrestriaFeatureConfigs {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new PredictiveSpruceFoliagePlacer(2, 1, 0, 2, 1, 1),
+				new PredictiveSpruceFoliagePlacer(UniformIntDistribution.of(2, 1), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(1, 1)),
 				new StraightTrunkPlacer(5, 2, 1),
 				new TwoLayersFeatureSize(2, 0, 2))
 
@@ -249,7 +250,7 @@ public class TerrestriaFeatureConfigs {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
 				new SimpleBlockStateProvider(leaves),
-				new PredictiveSpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
+				new PredictiveSpruceFoliagePlacer(UniformIntDistribution.of(baseRadius, randomRadius), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(baseBareHeight, randomBareHeight)),
 				new StraightTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 0, 2))
 
@@ -261,7 +262,7 @@ public class TerrestriaFeatureConfigs {
 		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(woodBlocks.log.getDefaultState()),
 				new SimpleBlockStateProvider(woodBlocks.leaves.getDefaultState()),
-				new PredictiveSpruceFoliagePlacer(baseRadius, randomRadius, 0, 2, baseBareHeight, randomBareHeight),
+				new PredictiveSpruceFoliagePlacer(UniformIntDistribution.of(baseRadius, randomRadius), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(baseBareHeight, randomBareHeight)),
 				new MegaTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 1, 2))
 
