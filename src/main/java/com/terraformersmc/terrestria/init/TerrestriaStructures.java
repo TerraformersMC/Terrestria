@@ -61,7 +61,8 @@ public class TerrestriaStructures {
 	}
 
 	private static void addOceanVolcanoesToBiome(RegistryKey<Biome> biome) {
-		BuiltinRegistries.BIOME.get(biome).getGenerationSettings().getStructureFeatures().add(() -> OCEAN_VOLCANO);
+		// TODO: Cannot add to an immutable registry!
+		// TODO: BuiltinRegistries.BIOME.get(biome).getGenerationSettings().getStructureFeatures().add(() -> OCEAN_VOLCANO);
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {

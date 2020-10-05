@@ -32,7 +32,9 @@
   "depends": {
     "fabricloader": ">=0.7.2",
     "fabric": ">=0.4.1",
-    "terraform": "*"
+    "terraform-biome-builder-api-v1": "*",
+    "terraform-legacy-v0": "*",
+    "terraform-shapes-api-v1": "*"
   },
   "mixins": [
     "mixins.terrestria.json"

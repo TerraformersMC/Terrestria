@@ -44,10 +44,10 @@ public class TerrestriaGeneration {
 			// TODO OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
 			// TODO OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
 
-			OverworldBiomes.setRiverBiome(CALDERA_FOOTHILLS, null);
-			OverworldBiomes.setRiverBiome(CALDERA, null);
-			OverworldBiomes.setRiverBiome(CALDERA_BEACH, null);
-			OverworldBiomes.setRiverBiome(CALDERA_RIDGE, null);
+			OverworldBiomes.setRiverBiome(CALDERA_FOOTHILLS, CALDERA_FOOTHILLS);
+			OverworldBiomes.setRiverBiome(CALDERA, CALDERA);
+			OverworldBiomes.setRiverBiome(CALDERA_BEACH, CALDERA_BEACH);
+			OverworldBiomes.setRiverBiome(CALDERA_RIDGE, CALDERA_RIDGE);
 		}
 
 		if (CANYON_CLIFFS != null) {
@@ -66,7 +66,7 @@ public class TerrestriaGeneration {
 		}
 
 		if (DUNES != null) {
-			OverworldBiomes.setRiverBiome(DUNES, null);
+			OverworldBiomes.setRiverBiome(DUNES, DUNES);
 			OverworldBiomes.addEdgeBiome(DUNES, DUNES_EDGE, 1);
 		}
 
@@ -119,9 +119,9 @@ public class TerrestriaGeneration {
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, 1);
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_BEACH, 1);
 
-			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND, null);
-			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_BEACH, null);
-			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_SHORE, null);
+			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND);
+			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_BEACH, VOLCANIC_ISLAND_BEACH);
+			OverworldBiomes.setRiverBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
 		}
 
 		if (OUTBACK != null) {
