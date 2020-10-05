@@ -32,13 +32,16 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modCompile "com.terraformersmc:terraform:${project.terraform_version}"
-	modCompile "com.terraformersmc:shapes:${project.shapes_version}"
-	modImplementation "net.earthcomputer:libstructure:${project.libstructure_version}" //TODO: Structures lib, in the future we will want to replace this with a fapi
 
-	include "com.terraformersmc:shapes:${project.shapes_version}"
-	include "com.terraformersmc:terraform:${project.terraform_version}"
-	include "net.earthcomputer:libstructure:${project.libstructure_version}"
+	includeMod "net.earthcomputer:libstructure:${project.libstructure_version}"
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_wood_api_version}"
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
+}
+
+def includeMod(String dep) {
+	dependencies.modCompile(dep)
+	dependencies.include(dep)
 }
 
 processResources {
