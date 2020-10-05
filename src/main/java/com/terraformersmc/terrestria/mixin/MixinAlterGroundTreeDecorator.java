@@ -4,7 +4,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.decorator.AlterGroundTreeDecorator;
+import net.minecraft.world.gen.tree.AlterGroundTreeDecorator;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
