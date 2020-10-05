@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
 
-import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terraform.noise.SimpleRadialNoise;
@@ -13,9 +12,7 @@ import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Heightmap;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
@@ -39,7 +36,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private int centerX;
 	private int centerZ;
 
-	VolcanoGenerator(Random random, int centerX, int centerZ, Biome biome) {
+	VolcanoGenerator(Random random, int centerX, int centerZ, VolcanoFeatureConfig config) {
 		super(TerrestriaStructures.VOLCANO_PIECE, 0);
 		this.setOrientation(null);
 
@@ -52,20 +49,12 @@ public class VolcanoGenerator extends StructurePiece {
 		chamberOreSeed = random.nextLong();
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		if (biome == Biomes.DEEP_OCEAN || biome == Biomes.DEEP_COLD_OCEAN || biome == Biomes.DEEP_LUKEWARM_OCEAN || biome == Biomes.DEEP_FROZEN_OCEAN || biome == Biomes.DEEP_WARM_OCEAN) {
-			height = 20 + random.nextInt(20);
-			baseY = 30;
-		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE || biome == TerrestriaBiomes.VOLCANIC_ISLAND_BEACH) {
-			height = 48 + random.nextInt(32);
-			baseY = 45;
-		} else {
-			height = 32 + random.nextInt(64);
-			baseY = 60;
-		}
+		this.height = config.getHeight().getValue(random);
+		this.baseY = config.getBaseY();
 
 		if (height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if (biome == TerrestriaBiomes.VOLCANIC_ISLAND_SHORE || biome == TerrestriaBiomes.VOLCANIC_ISLAND_BEACH) {
+		} else if (config.isThinIfTall()) {
 			radius = random.nextInt(height / 3) + height / 4;
 		} else {
 			radius = random.nextInt(height * 3 / 4) + height / 2;
@@ -166,8 +155,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-
+	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
 		if (box.maxY < this.boundingBox.maxY || box.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}

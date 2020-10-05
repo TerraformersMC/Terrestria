@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
 
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -11,8 +10,7 @@ import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
@@ -31,7 +29,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private int centerX;
 	private int centerZ;
 
-	CanyonArchGenerator(Random random, int centerX, int centerZ, Biome biome) {
+	CanyonArchGenerator(Random random, int centerX, int centerZ) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0);
 		this.setOrientation(null);
 
@@ -85,7 +83,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess serverWorldAccess, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
+	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
 		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
@@ -101,7 +99,7 @@ public class CanyonArchGenerator extends StructurePiece {
 				for (int h = 0; h < height; h++) {
 					if (shapeArch(h, x, z)) {
 						pos.set(x, yStart + h, z);
-						serverWorldAccess.setBlockState(pos, getStateAtY(h, x, z), 2);
+						world.setBlockState(pos, getStateAtY(h, x, z), 2);
 					}
 				}
 			}

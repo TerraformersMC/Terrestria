@@ -36,7 +36,6 @@ public class VolcanicIslandBiomes {
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 15, 1, 5))
-				.addStructureFeature(TerrestriaStructures.VOLCANO)
 		);
 
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template.builder()
@@ -44,6 +43,7 @@ public class VolcanicIslandBiomes {
 				.depth(0.1F)
 				.scale(0.2F)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 5)
+				.addStructureFeature(TerrestriaStructures.VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
@@ -51,6 +51,7 @@ public class VolcanicIslandBiomes {
 				.scale(0.05F)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 2)
 				.addRareTreeFeature(TerrestriaFeatures.DUM_DUM_HEAD.configure(new DefaultFeatureConfig()), 15)
+				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
@@ -58,6 +59,7 @@ public class VolcanicIslandBiomes {
 				.depth(0F)
 				.scale(0.05F)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 2)
+				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 	}
 }
