@@ -18,8 +18,10 @@ public class VolcanicIslandBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)
 				.downfall(0.9F)
-				.waterColor(0x54d3c0)
-				.waterFogColor(0x24a0b0)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x54d3c0)
+					.waterFogColor(0x24a0b0)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)

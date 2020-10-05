@@ -25,8 +25,10 @@ public class DenseWoodlandsBiomes {
 				.scale(0.05F)
 				.temperature(0.9F)
 				.downfall(0.3F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
 						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)

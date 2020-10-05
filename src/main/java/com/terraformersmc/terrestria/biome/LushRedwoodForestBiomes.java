@@ -27,8 +27,10 @@ public class LushRedwoodForestBiomes {
 				.scale(0.3F)
 				.temperature(0.9F)
 				.downfall(0.9F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
 						FROZEN_TOP_LAYER, DEFAULT_FLOWERS)

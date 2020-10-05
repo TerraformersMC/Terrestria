@@ -20,8 +20,10 @@ public class RainbowRainforestBiomes {
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.temperature(0.95F)
 				.downfall(0.9F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						JUNGLE_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, JUNGLE_VEGETATION, FROZEN_TOP_LAYER)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)

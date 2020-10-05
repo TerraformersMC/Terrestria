@@ -18,8 +18,10 @@ public class OutbackBiomes {
 				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 				.temperature(1.8F)
 				.downfall(0.3F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addDefaultSpawnEntries()
 				.setSpawnChance(0.03F)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
@@ -29,6 +31,8 @@ public class OutbackBiomes {
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
 					DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
 		);
+
+		// TODO: Will the configureSurfaceBuilder calls later on mess with stuff? Prospector had an issue with this.
 
 		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)

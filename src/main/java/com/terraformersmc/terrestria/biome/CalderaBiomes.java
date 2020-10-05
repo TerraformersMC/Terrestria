@@ -18,8 +18,10 @@ public class CalderaBiomes {
 
 	public static void register() {
 		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
-				.waterColor(0x54d3c0)
-				.waterFogColor(0x24a0b0)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x54d3c0)
+					.waterFogColor(0x24a0b0)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
@@ -37,8 +39,6 @@ public class CalderaBiomes {
 				.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
-				.waterColor(0x54d3c0)
-				.waterFogColor(0x24a0b0)
 				.build());
 
 		TerrestriaBiomes.CALDERA_BEACH = TerrestriaBiomes.register("caldera_beach", template.builder()
@@ -57,8 +57,10 @@ public class CalderaBiomes {
 				.scale(0.4F)
 				.temperature(0.0F)
 				.downfall(0.1F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.REDWOOD_TREE), 2)
 				.addRareTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 2)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
@@ -73,8 +75,10 @@ public class CalderaBiomes {
 				.scale(0F)
 				.temperature(0F)
 				.downfall(1F)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
 				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
 				.build());

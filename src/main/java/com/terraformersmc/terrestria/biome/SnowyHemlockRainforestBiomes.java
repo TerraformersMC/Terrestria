@@ -8,6 +8,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
@@ -27,9 +28,11 @@ public class SnowyHemlockRainforestBiomes {
 				.scale(0.55F)
 				.temperature(-0.5F)
 				.downfall(1.0F)
-				.waterColor(0x3d57d6)
-				.waterFogColor(0x50533)
-				.grassColor(0x42a584)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3d57d6)
+					.waterFogColor(0x50533)
+					.grassColor(0x42a584)
+				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
 				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)

@@ -18,8 +18,10 @@ public class LushDesertBiomes {
 	public static void register() {
 		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
-				.waterColor(0x3f76e4)
-				.waterFogColor(0x50533)
+				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+					.waterColor(0x3f76e4)
+					.waterFogColor(0x50533)
+				)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,

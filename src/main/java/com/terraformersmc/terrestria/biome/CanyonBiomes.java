@@ -18,8 +18,10 @@ public class CanyonBiomes {
 			.scale(0.1F)
 			.temperature(0.9F)
 			.downfall(0.1F)
-			.waterColor(0x4da5e3)
-			.waterFogColor(0x24a0b0)
+			.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+				.waterColor(0x4da5e3)
+				.waterFogColor(0x24a0b0)
+			)
 			.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DESERT_DEAD_BUSHES,
 				DEFAULT_GRASS, DEFAULT_MUSHROOMS, DESERT_VEGETATION, FROZEN_TOP_LAYER)
 			.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
