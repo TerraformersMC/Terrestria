@@ -9,8 +9,11 @@ import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureF
 import net.earthcomputer.libstructure.LibStructure;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
@@ -39,12 +42,16 @@ public class TerrestriaStructures {
 
 	public static void addToVanillaBiomes() {
 		if (TerrestriaConfigManager.getGeneralConfig().areOceanVolcanoesEnabled()) {
-			Biomes.DEEP_WARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-			Biomes.DEEP_LUKEWARM_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-			Biomes.DEEP_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-			Biomes.DEEP_COLD_OCEAN.addStructureFeature(OCEAN_VOLCANO);
-			Biomes.DEEP_FROZEN_OCEAN.addStructureFeature(OCEAN_VOLCANO);
+			addOceanVolcanoesToBiome(BiomeKeys.DEEP_WARM_OCEAN);
+			addOceanVolcanoesToBiome(BiomeKeys.DEEP_LUKEWARM_OCEAN);
+			addOceanVolcanoesToBiome(BiomeKeys.DEEP_OCEAN);
+			addOceanVolcanoesToBiome(BiomeKeys.DEEP_COLD_OCEAN);
+			addOceanVolcanoesToBiome(BiomeKeys.DEEP_FROZEN_OCEAN);
 		}
+	}
+
+	private static void addOceanVolcanoesToBiome(RegistryKey<Biome> biome) {
+		BuiltinRegistries.BIOME.get(biome).getGenerationSettings().getStructureFeatures().add(() -> OCEAN_VOLCANO);
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
@@ -52,11 +59,15 @@ public class TerrestriaStructures {
 	}
 
 	private static ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> registerDefaultStructure(String id, StructureFeature<DefaultFeatureConfig> feature, int spacing, int separation) {
-		LibStructure.registerStructure(new Identifier(Terrestria.MOD_ID, id),
+		ConfiguredStructureFeature<DefaultFeatureConfig, ?> configured = feature.configure(DefaultFeatureConfig.INSTANCE);
+		Identifier identifier = new Identifier(Terrestria.MOD_ID, id);
+
+		LibStructure.registerStructure(identifier,
 				feature,
 				GenerationStep.Feature.SURFACE_STRUCTURES,
 				new StructureConfig(spacing, separation, 21345),
-				feature.configure(new DefaultFeatureConfig()));
-		return feature.configure(new DefaultFeatureConfig());
+				configured);
+
+		return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);
 	}
 }
