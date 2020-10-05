@@ -15,7 +15,7 @@ import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class HemlockRainforestBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.6F)

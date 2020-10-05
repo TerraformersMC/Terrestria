@@ -12,6 +12,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import java.util.Random;
 
 public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOutlinedSurfaceConfig> {
+	public static final BlockState STONE = Blocks.STONE.getDefaultState();
 
 	public ThreeLayerOutlineSurfaceBuilder(Codec<ThreeLayerOutlinedSurfaceConfig> codec) {
 		super(codec);

@@ -14,7 +14,7 @@ import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class LushDesertBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
 				.waterColor(0x3f76e4)
 				.waterFogColor(0x50533)

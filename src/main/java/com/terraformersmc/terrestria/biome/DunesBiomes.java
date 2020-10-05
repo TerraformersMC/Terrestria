@@ -16,7 +16,7 @@ import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 
 public class DunesBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 			.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.temperature(0.9F)

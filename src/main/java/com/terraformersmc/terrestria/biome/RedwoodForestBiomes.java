@@ -15,7 +15,7 @@ import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class RedwoodForestBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.9F)

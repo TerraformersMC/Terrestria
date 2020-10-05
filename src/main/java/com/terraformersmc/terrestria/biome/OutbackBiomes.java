@@ -12,7 +12,7 @@ import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
 public class OutbackBiomes {
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 				.temperature(1.8F)
 				.downfall(0.3F)

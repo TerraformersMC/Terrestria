@@ -12,7 +12,7 @@ import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 public class CanyonBiomes {
 
 	public static void register() {
-		TerraformBiome.Template template = new TerraformBiome.Template(TerraformBiomeBuilder.create()
+		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.depth(0.2F)
 			.scale(0.1F)
