@@ -9,7 +9,9 @@ import com.terraformersmc.terraform.config.BiomeConfigNode;
 import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
 
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
@@ -21,7 +23,7 @@ public class TerrestriaGeneration {
 		// 33% of Mountains will be replaced with Caldera Ridges
 		// 10% of Deep Oceans will be replaced with Volcanic Islands
 
-		addBiomeVariant(Biomes.MOUNTAINS, CALDERA_RIDGE, 0.33, "caldera", config, enabledBiomes);
+		addBiomeVariant(BiomeKeys.MOUNTAINS, CALDERA_RIDGE, 0.33, "caldera", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_FOREST, OverworldClimate.TEMPERATE, 1.0, "cypress_forest", config, enabledBiomes);
 		addContinentalBiome(CYPRESS_SWAMP, OverworldClimate.TEMPERATE, 1.0, "cypress_swamp", config, enabledBiomes);
 		addContinentalBiome(HEMLOCK_RAINFOREST, OverworldClimate.COOL, 1.0, "hemlock_rainforest", config, enabledBiomes);
@@ -30,10 +32,10 @@ public class TerrestriaGeneration {
 		addContinentalBiome(LUSH_REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "lush_redwood_forest", config, enabledBiomes);
 		addContinentalBiome(LUSH_DESERT, OverworldClimate.DRY, 1.0, "lush_desert", config, enabledBiomes);
 		addContinentalBiome(REDWOOD_FOREST, OverworldClimate.TEMPERATE, 1.0, "redwood_forest", config, enabledBiomes);
-		addBiomeVariant(Biomes.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
+		addBiomeVariant(BiomeKeys.JUNGLE, RAINBOW_RAINFOREST, 0.33, "rainbow_rainforest", config, enabledBiomes);
 		addContinentalBiome(SAKURA_FOREST, OverworldClimate.TEMPERATE, 1.0, "sakura_forest", config, enabledBiomes);
 		addContinentalBiome(SNOWY_HEMLOCK_FOREST, OverworldClimate.SNOWY, 2.0, "snowy_hemlock_forest", config, enabledBiomes);
-		addBiomeVariant(Biomes.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
+		addBiomeVariant(BiomeKeys.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE, 0.10, "volcanic_island", config, enabledBiomes);
 		addContinentalBiome(CANYON_CLIFFS, OverworldClimate.DRY, 1.0, "canyon_cliffs", config, enabledBiomes);
 		addContinentalBiome(DUNES, OverworldClimate.DRY, 0.2, "dunes", config, enabledBiomes);
 		addContinentalBiome(OUTBACK, OverworldClimate.DRY, 1.0, "outback", config, enabledBiomes);
@@ -132,7 +134,7 @@ public class TerrestriaGeneration {
 		}
 	}
 
-	private static void addBiomeVariant(Biome parent, Biome biome, double chance, String name, BiomeConfig config, Set<String> enabledBiomes) {
+	private static void addBiomeVariant(RegistryKey<Biome> parent, Biome biome, double chance, String name, BiomeConfig config, Set<String> enabledBiomes) {
 		boolean enable = !config.isFrozen();
 
 		BiomeConfigNode.Variant variant = config.variant(name, new BiomeConfigNode.Variant(enable, chance));

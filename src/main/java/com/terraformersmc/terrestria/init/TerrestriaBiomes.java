@@ -4,7 +4,7 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biome.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
 
@@ -85,6 +85,6 @@ public class TerrestriaBiomes {
 	}
 
 	public static <T extends Biome> T register(String name, T biome) {
-		return Registry.register(Registry.BIOME, new Identifier(Terrestria.MOD_ID, name), biome);
+		return BuiltinRegistries.add(BuiltinRegistries.BIOME, new Identifier(Terrestria.MOD_ID, name), biome);
 	}
 }
