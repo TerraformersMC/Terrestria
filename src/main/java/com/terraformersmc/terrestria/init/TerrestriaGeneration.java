@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria.init;
 
 import java.util.Set;
 
-import com.terraformersmc.terraform.biomeapi.OverworldBiomesExt;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigNode;
 
@@ -42,8 +41,8 @@ public class TerrestriaGeneration {
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
-			OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
-			OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
+			// TODO OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
+			// TODO OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
 
 			OverworldBiomes.setRiverBiome(CALDERA_FOOTHILLS, null);
 			OverworldBiomes.setRiverBiome(CALDERA, null);
@@ -59,7 +58,7 @@ public class TerrestriaGeneration {
 		if(CYPRESS_FOREST != null) {
 			OverworldBiomes.addHillsBiome(CYPRESS_FOREST, WOODED_CYPRESS_HILLS, 1.0);
 
-			FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
+			// TODO FabricBiomes.addSpawnBiome(CYPRESS_FOREST);
 		}
 
 		if(DENSE_WOODLANDS != null) {
@@ -74,7 +73,7 @@ public class TerrestriaGeneration {
 		if(HEMLOCK_RAINFOREST != null) {
 			OverworldBiomes.addHillsBiome(HEMLOCK_RAINFOREST, HEMLOCK_CLEARING, 1.0);
 
-			FabricBiomes.addSpawnBiome(HEMLOCK_RAINFOREST);
+			// TODO FabricBiomes.addSpawnBiome(HEMLOCK_RAINFOREST);
 		}
 
 		if(JAPANESE_MAPLE_FOREST != null) {
@@ -82,28 +81,28 @@ public class TerrestriaGeneration {
 		}
 
 		if(LUSH_DESERT != null) {
-			OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
+			// TODO OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
 		}
 
 		if(LUSH_REDWOOD_FOREST != null) {
 			OverworldBiomes.addHillsBiome(LUSH_REDWOOD_FOREST, LUSH_REDWOOD_CLEARING, 1.0);
 			OverworldBiomes.addEdgeBiome(LUSH_REDWOOD_FOREST, LUSH_REDWOOD_FOREST_EDGE, 1);
 
-			FabricBiomes.addSpawnBiome(LUSH_REDWOOD_FOREST);
+			// TODO FabricBiomes.addSpawnBiome(LUSH_REDWOOD_FOREST);
 		}
 
 		if(RAINBOW_RAINFOREST != null) {
 			OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_LAKE, 0.6);
 			OverworldBiomes.addHillsBiome(RAINBOW_RAINFOREST, RAINBOW_RAINFOREST_MOUNTAINS, 1.0);
 
-			FabricBiomes.addSpawnBiome(RAINBOW_RAINFOREST);
+			// TODO FabricBiomes.addSpawnBiome(RAINBOW_RAINFOREST);
 		}
 
 		if(REDWOOD_FOREST != null) {
 			OverworldBiomes.addHillsBiome(REDWOOD_FOREST, REDWOOD_CLEARING, 1.0);
 			OverworldBiomes.addEdgeBiome(REDWOOD_FOREST, REDWOOD_FOREST_EDGE, 1.0);
 
-			FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
+			// TODO FabricBiomes.addSpawnBiome(REDWOOD_FOREST);
 		}
 
 		if(SAKURA_FOREST != null) {
@@ -115,8 +114,8 @@ public class TerrestriaGeneration {
 		}
 
 		if(VOLCANIC_ISLAND_SHORE != null) {
-			OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
-			OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
+			// TODO OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
+			// TODO OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, 1);
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_BEACH, 1);
 
@@ -127,14 +126,14 @@ public class TerrestriaGeneration {
 
 		if (OUTBACK != null) {
 			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
-			OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
+			/* TODO OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
 				Biome.Category category = b.getCategory();
 				return category != Biome.Category.DESERT && category != Biome.Category.SAVANNA && category != Biome.Category.PLAINS && category != Biome.Category.MESA;
-			});
+			});*/
 		}
 	}
 
-	private static void addBiomeVariant(RegistryKey<Biome> parent, Biome biome, double chance, String name, BiomeConfig config, Set<String> enabledBiomes) {
+	private static void addBiomeVariant(RegistryKey<Biome> parent, RegistryKey<Biome> biome, double chance, String name, BiomeConfig config, Set<String> enabledBiomes) {
 		boolean enable = !config.isFrozen();
 
 		BiomeConfigNode.Variant variant = config.variant(name, new BiomeConfigNode.Variant(enable, chance));
@@ -149,7 +148,7 @@ public class TerrestriaGeneration {
 		}
 	}
 
-	private static void addContinentalBiome(Biome biome, OverworldClimate climate, double weight, String name, BiomeConfig config, Set<String> enabledBiomes) {
+	private static void addContinentalBiome(RegistryKey<Biome> biome, OverworldClimate climate, double weight, String name, BiomeConfig config, Set<String> enabledBiomes) {
 		boolean enable = !config.isFrozen();
 
 		BiomeConfigNode.Continental continental = config.continental(name, new BiomeConfigNode.Continental(enable, weight));
