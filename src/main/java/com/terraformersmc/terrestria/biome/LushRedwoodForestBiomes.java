@@ -4,11 +4,13 @@ import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -55,8 +57,8 @@ public class LushRedwoodForestBiomes {
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
 				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 4)
-				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE, 4)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.MEGA_REDWOOD_TREES)
+				//TODO: this crashes .addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_REDWOOD_LOGS)
 				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 2)
 				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
 				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
