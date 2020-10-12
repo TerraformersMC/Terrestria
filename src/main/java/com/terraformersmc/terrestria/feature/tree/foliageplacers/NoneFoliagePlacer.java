@@ -14,8 +14,9 @@ import java.util.Random;
 import java.util.Set;
 
 public class NoneFoliagePlacer extends FoliagePlacer {
-	public static final Codec<NoneFoliagePlacer> CODEC = Codec.unit(new NoneFoliagePlacer());
 	private static final UniformIntDistribution ZERO = UniformIntDistribution.of(0);
+	// This has to come last, because static initialization order is important!
+	public static final Codec<NoneFoliagePlacer> CODEC = Codec.unit(new NoneFoliagePlacer());
 
 	public NoneFoliagePlacer() {
 		super(ZERO, ZERO);

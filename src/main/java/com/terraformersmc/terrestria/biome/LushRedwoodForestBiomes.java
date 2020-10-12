@@ -3,19 +3,13 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
-import net.minecraft.block.Blocks;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -36,8 +30,7 @@ public class LushRedwoodForestBiomes {
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
 						FROZEN_TOP_LAYER, DEFAULT_FLOWERS)
-				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
-				.addGrassFeature(Blocks.FERN.getDefaultState(), 12)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_LUSH_FERNS)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_MOUNTAIN)
@@ -49,26 +42,26 @@ public class LushRedwoodForestBiomes {
 		);
 
 		TerrestriaBiomes.LUSH_REDWOOD_CLEARING = TerrestriaBiomes.register("lush_redwood_clearing", template.builder()
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_FALLEN_REDWOOD_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_FALLEN_HEMLOCK_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
-				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 4)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FOUR_HEMLOCK_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.MEGA_REDWOOD_TREES)
-				//TODO: this crashes .addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_REDWOOD_LOGS)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_REDWOOD_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_HEMLOCK_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template.builder()
-				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.REDWOOD_TREE, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_HEMLOCK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
 				.build());
 	}
 }

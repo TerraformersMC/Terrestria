@@ -8,18 +8,68 @@ import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 
 public class TerrestriaDecoratedFeatures {
+	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
+
+	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, denser = 4 per chunk, densest = 7-8 per chunk.
+
+	// Fallen logs.
+	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_HEMLOCK_LOGS;
+	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<?, ?> FALLEN_HEMLOCK_LOGS;
 	public static ConfiguredFeature<?, ?> FALLEN_REDWOOD_LOGS;
+
+	// Small spruce-shaped trees.
+	public static ConfiguredFeature<?, ?> SPARSE_SMALL_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> SPARSE_SMALL_REDWOOD_TREES;
+	public static ConfiguredFeature<?, ?> SMALL_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> SMALL_REDWOOD_TREES;
+
+	// Taller and wider spruce-like trees.
+	public static ConfiguredFeature<?, ?> SPARSE_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> SPARSE_REDWOOD_TREES;
+	public static ConfiguredFeature<?, ?> HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> REDWOOD_TREES;
+
+	public static ConfiguredFeature<?, ?> FOUR_HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_REDWOOD_TREES;
+	public static ConfiguredFeature<?, ?> MEGA_HEMLOCK_TREES;
 
 	public static void init() {
+		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
+
+		SPARSE_FALLEN_HEMLOCK_LOGS = decorateTree("sparse_fallen_hemlock_logs", 1, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
+		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		FALLEN_HEMLOCK_LOGS = decorateTree("fallen_hemlock_logs", 2, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		FALLEN_REDWOOD_LOGS = decorateTree("fallen_redwood_logs", 2, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+
+		SPARSE_SMALL_HEMLOCK_TREES = decorateTree("sparse_small_hemlock_trees", 1, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
+		SPARSE_SMALL_REDWOOD_TREES = decorateTree("sparse_small_redwood_trees", 1, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
+		SMALL_HEMLOCK_TREES = decorateTree("small_hemlock_trees", 2, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
+		SMALL_REDWOOD_TREES = decorateTree("small_redwood_trees", 2, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
+
+		SPARSE_HEMLOCK_TREES = decorateTree("sparse_hemlock_trees", 1, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		SPARSE_REDWOOD_TREES = decorateTree("sparse_redwood_trees", 1, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		HEMLOCK_TREES = decorateTree("hemlock_trees", 2, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		REDWOOD_TREES = decorateTree("redwood_trees", 2, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+
+		FOUR_HEMLOCK_TREES = decorateTree("four_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		MEGA_REDWOOD_TREES = decorateTree("mega_redwood_trees", 4, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
+		MEGA_HEMLOCK_TREES = decorateTree("mega_hemlock_trees", 4, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+	}
+
+	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
+		return register(name, Feature.RANDOM_PATCH.configure(config).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).repeat(count));
 	}
 
 	private static ConfiguredFeature<?, ?> decorateTree(String name, int count, ConfiguredFeature<?, ?> base) {
-		ConfiguredFeature<?, ?> decorated = base.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1)));
+		return register(name, base.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))));
+	}
+
+	private static ConfiguredFeature<?, ?> register(String name, ConfiguredFeature<?, ?> decorated) {
 		Identifier id = new Identifier(Terrestria.MOD_ID, name);
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, decorated);

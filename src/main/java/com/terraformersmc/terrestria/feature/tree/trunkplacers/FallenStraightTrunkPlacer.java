@@ -1,6 +1,10 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -20,13 +24,16 @@ import java.util.Random;
 import java.util.Set;
 
 public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
+	public static final Codec<FallenStraightTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+		method_28904(instance).apply(instance, FallenStraightTrunkPlacer::new));
+
 	public FallenStraightTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
 	}
 
 	@Override
 	protected TrunkPlacerType<?> getType() {
-		return super.getType();
+		return TerrestriaTrunkPlacerTypes.FALLEN_STRAIGHT;
 	}
 
 	@Override
