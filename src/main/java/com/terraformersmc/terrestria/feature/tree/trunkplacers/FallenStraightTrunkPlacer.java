@@ -46,22 +46,23 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(direction, trunkHeight / 2 + 1);
 
 		//Determine the Percentage of the ground that the log will lay flat on
-		int numFlat = 0;
 		for (int i = 0; i < trunkHeight; i++) {
-			if (world.testBlockState(currentPosition.move(direction.getOpposite()).down(), blockState -> {
-				Block block = blockState.getBlock();
-				return block != Blocks.AIR;
-			})) {
-				numFlat++;
+			BlockPos localPos = currentPosition.move(direction.getOpposite());
+
+			// If the pos is blocked, then return
+			if (!world.testBlockState(localPos, state -> state.getMaterial().isReplaceable())) {
+				return ImmutableList.of();
+			}
+
+			// If there is air underneath, then return
+			if (world.testBlockState(localPos.down(), BlockState::isAir)) {
+				return ImmutableList.of();
 			}
 		}
 
-		//If 60% of the blocks are supported and flat
-		if ((double)numFlat / trunkHeight > 0.6) {
-			//Place the blocks
-			for (int i = 0; i < trunkHeight; ++i) {
-				checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(PillarBlock.AXIS, direction.getAxis()));
-			}
+		//Place the blocks
+		for (int i = 0; i < trunkHeight; ++i) {
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(PillarBlock.AXIS, direction.getAxis()));
 		}
 
 		//No foliage placer locations needed
