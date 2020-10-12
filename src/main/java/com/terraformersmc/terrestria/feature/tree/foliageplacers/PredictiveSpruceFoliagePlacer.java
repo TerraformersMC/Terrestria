@@ -24,7 +24,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	// PredictiveSpruceFoliagePlacer.
 	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
 		fillFoliagePlacerFields(instance).and(
-				UniformIntDistribution.createValidatedCodec(0, 16, 8)
+				UniformIntDistribution.createValidatedCodec(0, 16, 12)
 						.fieldOf("trunk_height")
 						.forGetter(placer -> placer.trunkHeight)
 		).apply(instance, PredictiveSpruceFoliagePlacer::new)
