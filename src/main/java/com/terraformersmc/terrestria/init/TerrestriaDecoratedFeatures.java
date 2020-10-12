@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
@@ -10,11 +11,14 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.placer.SimpleBlockPlacer;
+import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
+	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
 
-	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, denser = 4 per chunk, densest = 7-8 per chunk.
+	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-8 per chunk.
 
 	// Fallen logs.
 	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_HEMLOCK_LOGS;
@@ -38,8 +42,18 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> MEGA_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_HEMLOCK_TREES;
 
+	// Volcanic island Trees
+	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
+	public static ConfiguredFeature<?, ?> DENSER_JUNGLE_PALM_TREES;
+
 	public static void init() {
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
+		PATCH_VOLCANIC_ISLAND_GRASS = decoratePatch("patch_volcanic_island_grass", 12, new RandomPatchFeatureConfig.Builder(
+				new WeightedBlockStateProvider()
+						.addState(Blocks.GRASS.getDefaultState(), 1)
+						.addState(Blocks.FERN.getDefaultState(), 1)
+						.addState(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
+						.addState(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		SPARSE_FALLEN_HEMLOCK_LOGS = decorateTree("sparse_fallen_hemlock_logs", 1, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
@@ -59,6 +73,9 @@ public class TerrestriaDecoratedFeatures {
 		FOUR_HEMLOCK_TREES = decorateTree("four_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		MEGA_REDWOOD_TREES = decorateTree("mega_redwood_trees", 4, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		MEGA_HEMLOCK_TREES = decorateTree("mega_hemlock_trees", 4, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+
+		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
+		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {

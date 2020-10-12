@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -24,10 +25,8 @@ public class VolcanicIslandBiomes {
 				)
 				.addDefaultFeatures(LAND_CARVERS, /*TODO DEFAULT_UNDERGROUND_STRUCTURES,*/ LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-				.addGrassFeature(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
-				.addGrassFeature(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
-				.addGrassFeature(Blocks.GRASS.getDefaultState(), 1)
-				.addGrassFeature(Blocks.FERN.getDefaultState(), 1)
+				// TODO: Ensure that the grass here works properly
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_VOLCANIC_ISLAND_GRASS)
 				/*
 				TODO: This spams the log with crypting Structure start: Not a JSON object: "minecraft:stronghold" errors. Why, Mojang?
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
@@ -44,14 +43,14 @@ public class VolcanicIslandBiomes {
 				.category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 5)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSER_JUNGLE_PALM_TREES)
 				.addStructureFeature(TerrestriaStructures.VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
 				.depth(0.05F)
 				.scale(0.05F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addRareTreeFeature(TerrestriaConfiguredFeatures.DUM_DUM_HEAD, 15)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
@@ -60,7 +59,7 @@ public class VolcanicIslandBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
 				.depth(0F)
 				.scale(0.05F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 	}
