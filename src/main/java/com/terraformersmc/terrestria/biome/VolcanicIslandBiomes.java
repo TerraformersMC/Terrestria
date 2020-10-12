@@ -42,15 +42,15 @@ public class VolcanicIslandBiomes {
 				.category(Biome.Category.EXTREME_HILLS)
 				.depth(0.1F)
 				.scale(0.2F)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 5)
+				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 5)
 				.addStructureFeature(TerrestriaStructures.VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template.builder()
 				.depth(0.05F)
 				.scale(0.05F)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 2)
-				.addRareTreeFeature(TerrestriaFeatures.DUM_DUM_HEAD.configure(new DefaultFeatureConfig()), 15)
+				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 2)
+				.addRareTreeFeature(TerrestriaConfiguredFeatures.DUM_DUM_HEAD, 15)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 
@@ -58,7 +58,7 @@ public class VolcanicIslandBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
 				.depth(0F)
 				.scale(0.05F)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JUNGLE_PALM_TREE), 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 2)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 	}

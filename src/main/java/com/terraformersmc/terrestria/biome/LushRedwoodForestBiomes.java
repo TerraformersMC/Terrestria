@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -47,26 +47,26 @@ public class LushRedwoodForestBiomes {
 		);
 
 		TerrestriaBiomes.LUSH_REDWOOD_CLEARING = TerrestriaBiomes.register("lush_redwood_clearing", template.builder()
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 1)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 1)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 4)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_REDWOOD_TREE), 4)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_REDWOOD_LOG), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 4)
+				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE, 4)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
 				.build());
 
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template.builder()
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 1)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.REDWOOD_TREE), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_REDWOOD_TREE), 1)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.REDWOOD_TREE, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 2)
 				.build());
 	}
 }

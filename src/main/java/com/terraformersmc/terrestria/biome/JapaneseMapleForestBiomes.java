@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -36,9 +36,9 @@ public class JapaneseMapleForestBiomes {
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
 				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_TREE), 3)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.DARK_JAPANESE_MAPLE_TREE), 3)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.JAPANESE_MAPLE_SHRUB), 3)
+				.addTreeFeature(TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE, 3)
+				.addTreeFeature(TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE, 3)
+				.addTreeFeature(TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB, 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);

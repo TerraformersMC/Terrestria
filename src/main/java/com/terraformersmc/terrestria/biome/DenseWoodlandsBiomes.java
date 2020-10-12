@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
@@ -38,13 +38,13 @@ public class DenseWoodlandsBiomes {
 
 		TerrestriaBiomes.DENSE_WOODLANDS = TerrestriaBiomes.register("dense_woodlands", template.builder()
 				.addTreeFeature(ConfiguredFeatures.FANCY_OAK, 7)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.OAK_SHRUB, 1)
 				.build()
 		);
 
 		TerrestriaBiomes.DENSE_WOODLANDS_EDGE = TerrestriaBiomes.register("dense_woodlands_edge", template.builder()
 				.addTreeFeature(ConfiguredFeatures.FANCY_OAK, 3)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.OAK_SHRUB), 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.OAK_SHRUB, 1)
 				.build()
 		);
 	}

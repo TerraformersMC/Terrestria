@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -30,9 +30,9 @@ public class RainbowRainforestBiomes {
 				.addStructureFeature(ConfiguredStructureFeatures.JUNGLE_PYRAMID)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_JUNGLE)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RAINBOW_EUCALYPTUS_TREE), 5)
+				.addTreeFeature(TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE, 5)
 				.addTreeFeature(ConfiguredFeatures.FANCY_OAK, 5)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RUBBER_TREE), 3)
+				.addTreeFeature(TerrestriaConfiguredFeatures.RUBBER_TREE, 3)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.PARROT, 40, 1, 2))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.OCELOT, 2, 1, 1))

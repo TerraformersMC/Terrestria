@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -30,9 +30,9 @@ public class CypressSwampBiomes {
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
 						DEFAULT_MUSHROOMS, SPRINGS, /*TODO: SEAGRASS, MORE_SEAGRASS,*/ FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
 						DESERT_VEGETATION)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_CYPRESS_TREE), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.RUBBER_TREE), 3)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.WILLOW_TREE), 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.RUBBER_TREE, 3)
+				.addTreeFeature(TerrestriaConfiguredFeatures.WILLOW_TREE, 1)
 				/*TODO:.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 						TerrestriaFeatures.CATTAIL
 							.configure(new ProbabilityConfig(80, 0.3D))

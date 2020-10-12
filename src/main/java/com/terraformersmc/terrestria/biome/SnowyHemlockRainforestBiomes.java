@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaFeatureConfigs;
+import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
@@ -47,16 +47,16 @@ public class SnowyHemlockRainforestBiomes {
 		);
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_FOREST = TerrestriaBiomes.register("snowy_hemlock_forest", template.builder()
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.MEGA_HEMLOCK_TREE), 8)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 8)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 4)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE, 8)
+				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 8)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 4)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
 				.build());
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING = TerrestriaBiomes.register("snowy_hemlock_clearing", template.builder()
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.HEMLOCK_TREE), 1)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.FALLEN_HEMLOCK_LOG), 2)
-				.addTreeFeature(Feature.TREE.configure(TerrestriaFeatureConfigs.SMALL_HEMLOCK_TREE), 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 1)
+				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 2)
+				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
 				.build());
 	}
 }
