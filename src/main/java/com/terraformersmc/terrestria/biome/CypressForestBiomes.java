@@ -3,16 +3,12 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -31,7 +27,7 @@ public class CypressForestBiomes {
 				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, TALL_BIRCH_TREES)
-				.addTreeFeature(TerrestriaConfiguredFeatures.CYPRESS_TREE, 9)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_CYPRESS_TREES)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addDefaultSpawnEntries()

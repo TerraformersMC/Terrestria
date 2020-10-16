@@ -18,7 +18,7 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
 	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
 
-	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-8 per chunk.
+	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-9 per chunk.
 
 	// Fallen logs.
 	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_HEMLOCK_LOGS;
@@ -57,6 +57,9 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_DARK_JAPANESE_MAPLE_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_SHRUBS;
+
+	// Small cypress trees
+	public static ConfiguredFeature<?, ?> DENSEST_CYPRESS_TREES;
 
 	public static void init() {
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
@@ -97,6 +100,8 @@ public class TerrestriaDecoratedFeatures {
 		DENSE_JAPANESE_MAPLE_TREES = decorateTree("dense_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
 		DENSE_DARK_JAPANESE_MAPLE_TREES = decorateTree("dense_dark_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
 		DENSE_JAPANESE_MAPLE_SHRUBS = decorateTree("dense_japanese_maple_shrubs", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
+
+		DENSEST_CYPRESS_TREES = decorateTree("densest_cypress_trees", 9, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
