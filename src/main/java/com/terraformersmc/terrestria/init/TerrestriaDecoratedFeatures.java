@@ -43,12 +43,14 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> DENSEST_HEMLOCK_TREES;
 
+	public static ConfiguredFeature<?, ?> DENSE_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_HEMLOCK_TREES;
 
 	// Gigantic 2x2 spruce-like trees
 	public static ConfiguredFeature<?, ?> SPARSE_MEGA_HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> DENSEST_MEGA_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> DENSEST_MEGA_HEMLOCK_TREES;
 
 	// Volcanic island Trees
@@ -99,12 +101,14 @@ public class TerrestriaDecoratedFeatures {
 		SPARSE_REDWOOD_TREES = decorateTree("sparse_redwood_trees", 1, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 		HEMLOCK_TREES = decorateTree("hemlock_trees", 2, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		REDWOOD_TREES = decorateTree("redwood_trees", 2, TerrestriaConfiguredFeatures.REDWOOD_TREE);
-		DENSE_HEMLOCK_TREES = decorateTree("four_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		DENSE_HEMLOCK_TREES = decorateTree("dense_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		DENSE_REDWOOD_TREES = decorateTree("dense_redwood_trees", 3, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 		DENSEST_HEMLOCK_TREES = decorateTree("densest_hemlock_trees", 8, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
 		SPARSE_MEGA_HEMLOCK_TREES = decorateTree("sparse_mega_hemlock_trees", 1, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 		MEGA_REDWOOD_TREES = decorateTree("mega_redwood_trees", 4, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		MEGA_HEMLOCK_TREES = decorateTree("mega_hemlock_trees", 4, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+		DENSEST_MEGA_REDWOOD_TREES = decorateTree("densest_mega_redwood_trees", 7, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		DENSEST_MEGA_HEMLOCK_TREES = decorateTree("densest_mega_hemlock_trees", 8, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
