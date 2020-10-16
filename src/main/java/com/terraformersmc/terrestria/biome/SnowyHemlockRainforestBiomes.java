@@ -3,18 +3,13 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
-import net.minecraft.block.Blocks;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -35,7 +30,7 @@ public class SnowyHemlockRainforestBiomes {
 				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
 						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY, FROZEN_TOP_LAYER)
-				.addGrassFeature(Blocks.GRASS.getDefaultState(), 4)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_GRASS_NORMAL)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_MOUNTAIN)
@@ -47,16 +42,16 @@ public class SnowyHemlockRainforestBiomes {
 		);
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_FOREST = TerrestriaBiomes.register("snowy_hemlock_forest", template.builder()
-				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE, 8)
-				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 8)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 4)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_MEGA_HEMLOCK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_HEMLOCK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_FALLEN_HEMLOCK_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
 				.build());
 
 		TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING = TerrestriaBiomes.register("snowy_hemlock_clearing", template.builder()
-				.addTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_MEGA_HEMLOCK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_HEMLOCK_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
 				.build());
 	}
 }

@@ -25,6 +25,8 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_REDWOOD_LOGS;
 	public static ConfiguredFeature<?, ?> FALLEN_HEMLOCK_LOGS;
 	public static ConfiguredFeature<?, ?> FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<?, ?> DENSE_FALLEN_HEMLOCK_LOGS;
+	public static ConfiguredFeature<?, ?> DENSE_FALLEN_REDWOOD_LOGS;
 
 	// Small spruce-shaped trees.
 	public static ConfiguredFeature<?, ?> SPARSE_SMALL_HEMLOCK_TREES;
@@ -37,10 +39,15 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> SPARSE_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> REDWOOD_TREES;
+	public static ConfiguredFeature<?, ?> DENSEST_HEMLOCK_TREES;
 
-	public static ConfiguredFeature<?, ?> FOUR_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> DENSE_HEMLOCK_TREES;
+
+	// Gigantic 2x2 spruce-like trees
+	public static ConfiguredFeature<?, ?> SPARSE_MEGA_HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> MEGA_HEMLOCK_TREES;
+	public static ConfiguredFeature<?, ?> DENSEST_MEGA_HEMLOCK_TREES;
 
 	// Volcanic island Trees
 	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
@@ -59,6 +66,8 @@ public class TerrestriaDecoratedFeatures {
 		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 		FALLEN_HEMLOCK_LOGS = decorateTree("fallen_hemlock_logs", 2, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		FALLEN_REDWOOD_LOGS = decorateTree("fallen_redwood_logs", 2, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		DENSE_FALLEN_HEMLOCK_LOGS = decorateTree("dense_fallen_hemlock_logs", 4, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
+		DENSE_FALLEN_REDWOOD_LOGS = decorateTree("dense_fallen_redwood_logs", 4, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 
 		SPARSE_SMALL_HEMLOCK_TREES = decorateTree("sparse_small_hemlock_trees", 1, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 		SPARSE_SMALL_REDWOOD_TREES = decorateTree("sparse_small_redwood_trees", 1, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
@@ -69,10 +78,13 @@ public class TerrestriaDecoratedFeatures {
 		SPARSE_REDWOOD_TREES = decorateTree("sparse_redwood_trees", 1, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 		HEMLOCK_TREES = decorateTree("hemlock_trees", 2, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		REDWOOD_TREES = decorateTree("redwood_trees", 2, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		DENSE_HEMLOCK_TREES = decorateTree("four_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		DENSEST_HEMLOCK_TREES = decorateTree("densest_hemlock_trees", 8, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
-		FOUR_HEMLOCK_TREES = decorateTree("four_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		SPARSE_MEGA_HEMLOCK_TREES = decorateTree("sparse_mega_hemlock_trees", 1, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 		MEGA_REDWOOD_TREES = decorateTree("mega_redwood_trees", 4, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		MEGA_HEMLOCK_TREES = decorateTree("mega_hemlock_trees", 4, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+		DENSEST_MEGA_HEMLOCK_TREES = decorateTree("densest_mega_hemlock_trees", 8, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
