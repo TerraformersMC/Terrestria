@@ -20,6 +20,8 @@ import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
@@ -54,10 +56,13 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 			setLog(world, mutable, set, blockBox, getState(random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.SOUTHWEST), pos, 0, i, 1);
 		}
 
-		// If roots are available, grow them
+		BlockStateProvider wood = treeFeatureConfig.trunkProvider;
+
 		if (treeFeatureConfig instanceof QuarteredMegaTreeConfig) {
-			growRoots(set, world, pos.mutableCopy(), random, blockBox, (QuarteredMegaTreeConfig) treeFeatureConfig);
+			wood = new SimpleBlockStateProvider(((QuarteredMegaTreeConfig) treeFeatureConfig).woodBlock);
 		}
+
+		growRoots(set, world, pos.mutableCopy(), random, blockBox, wood);
 
 		return ImmutableList.of(new FoliagePlacer.TreeNode(pos.up(trunkHeight), 0, true));
 	}
@@ -84,18 +89,18 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		}
 	}
 
-	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, Random random, BlockBox box, QuarteredMegaTreeConfig treeFeatureConfig) {
+	public void growRoots(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable pos, Random random, BlockBox box, BlockStateProvider wood) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
 
-		tryGrowRoot(logs, world, pos.set(x - 1, y, z + random.nextInt(2)), random, box, treeFeatureConfig);
-		tryGrowRoot(logs, world, pos.set(x + 2, y, z + random.nextInt(2)), random, box, treeFeatureConfig);
-		tryGrowRoot(logs, world, pos.set(x + random.nextInt(2), y, z - 1), random, box, treeFeatureConfig);
-		tryGrowRoot(logs, world, pos.set(x + random.nextInt(2), y, z + 2), random, box, treeFeatureConfig);
+		tryGrowRoot(logs, world, pos.set(x - 1, y, z + random.nextInt(2)), random, box, wood);
+		tryGrowRoot(logs, world, pos.set(x + 2, y, z + random.nextInt(2)), random, box, wood);
+		tryGrowRoot(logs, world, pos.set(x + random.nextInt(2), y, z - 1), random, box, wood);
+		tryGrowRoot(logs, world, pos.set(x + random.nextInt(2), y, z + 2), random, box, wood);
 	}
 
-	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, Random random, BlockBox box, QuarteredMegaTreeConfig treeFeatureConfig) {
+	public void tryGrowRoot(Set<BlockPos> logs, ModifiableTestableWorld world, BlockPos.Mutable bottom, Random random, BlockBox box, BlockStateProvider wood) {
 		//Determine the root length
 		if (random.nextInt(5) == 0) {
 			return;
@@ -107,7 +112,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		//Place the root
 		for (int i = 0; i < height; i++) {
 			if (TreeFeature.canTreeReplace(world, bottom) || TreeFeature.canReplace(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				method_27404(world, bottom, treeFeatureConfig.woodBlock, box);
+				method_27404(world, bottom, wood.getBlockState(random, bottom), box);
 				logs.add(bottom.toImmutable());
 			}
 

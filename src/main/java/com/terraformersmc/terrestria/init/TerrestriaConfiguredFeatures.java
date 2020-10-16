@@ -115,7 +115,7 @@ public class TerrestriaConfiguredFeatures {
 		OAK_SHRUB = registerTree("oak_shrub", shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()));
 
 		RAINBOW_EUCALYPTUS_TREE = registerTree("rainbow_eucalyptus_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
 				new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2),
 				new QuarteredMegaCanopyTrunkPlacer(4, 2, 1),
@@ -170,7 +170,7 @@ public class TerrestriaConfiguredFeatures {
 		).build());
 
 		MEGA_CYPRESS_TREE = registerTree("mega_cypress_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
 				new LargeOakFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(2), 2),
 				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
