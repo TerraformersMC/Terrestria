@@ -3,16 +3,12 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
-import com.terraformersmc.terrestria.init.TerrestriaFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -36,9 +32,9 @@ public class JapaneseMapleForestBiomes {
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
 				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE, 3)
-				.addTreeFeature(TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE, 3)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB, 3)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_DARK_JAPANESE_MAPLE_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);
