@@ -51,10 +51,10 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 		// Create our list of foliage nodes
 		ArrayList<FoliagePlacer.TreeNode> foliageNodes = new ArrayList<>();
 
-		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.UP, trunkHeight);
+		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.UP, trunkHeight - 3);
 
 		// Place branches on each branch layer
-		for (int i = 0; i < branchLayers; i++) {
+		for (int i = 0; i < branchLayers + 3; i++) {
 			// Place a branch in a random direction
 			Direction direction = Direction.Type.HORIZONTAL.random(random);
 
@@ -62,17 +62,17 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 			BlockPos branch = placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, direction);
 
 			// Add the end of the branch to the foliage locations
-			foliageNodes.add(new FoliagePlacer.TreeNode(branch, random.nextInt(2) + 4, true));
+			foliageNodes.add(new FoliagePlacer.TreeNode(branch, random.nextInt(2) + 4, false));
 
 			// Move the position up
 			currentPosition.move(Direction.UP);
 		}
 
 		//Make sure the top of the tree has leaf locations
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.NORTH), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.SOUTH), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.EAST), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.WEST), random.nextInt(2) + 4, true));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.NORTH), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.SOUTH), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.EAST), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.WEST), random.nextInt(2) + 4, false));
 
 		// Return an immutable version of the foliage node list
 		return ImmutableList.copyOf(foliageNodes);
@@ -87,6 +87,11 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 
 		//Determine the length of the branch
 		int length = 4 + random.nextInt(3);
+
+		if (diagonalDirection == direction && length >= 3) {
+			// Some branches are a bit long...
+			length /= 2;
+		}
 
 		//Place a branch with length in the diagonalDirection, with an upwards angle
 		for (int i = 0; i < length; i++) {
