@@ -69,10 +69,10 @@ public class QuarteredMegaCanopyTrunkPlacer extends TrunkPlacer {
 		}
 
 		//Make sure the top of the tree has leaf locations
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig), Direction.NORTH), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig), Direction.SOUTH), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig), Direction.EAST), random.nextInt(2) + 4, true));
-		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig), Direction.WEST), random.nextInt(2) + 4, true));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.NORTH), random.nextInt(2) + 4, true));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.SOUTH), random.nextInt(2) + 4, true));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.EAST), random.nextInt(2) + 4, true));
+		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, Direction.WEST), random.nextInt(2) + 4, true));
 
 		//Generate the roots
 		growRoots(set, world, pos.mutableCopy(), random, blockBox, ((QuarteredMegaTreeConfig)treeFeatureConfig));
@@ -98,7 +98,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends TrunkPlacer {
 		}
 	}
 
-	private BlockPos placeBranch(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, QuarteredMegaTreeConfig treeFeatureConfig, Direction direction) {
+	private BlockPos placeBranch(ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig, Direction direction) {
 		//Create the Mutable version of our block position so that we can procedurally create the branch
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 

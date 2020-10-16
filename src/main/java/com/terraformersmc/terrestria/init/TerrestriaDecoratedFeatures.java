@@ -61,6 +61,11 @@ public class TerrestriaDecoratedFeatures {
 	// Small cypress trees
 	public static ConfiguredFeature<?, ?> DENSEST_CYPRESS_TREES;
 
+	// Rainbow Rainforest trees
+	public static ConfiguredFeature<?, ?> DENSER_RAINBOW_EUCALYPTUS_TREES;
+	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
+	public static ConfiguredFeature<?, ?> DENSE_RUBBER_TREES;
+
 	public static void init() {
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
 		PATCH_VOLCANIC_ISLAND_GRASS = decoratePatch("patch_volcanic_island_grass", 12, new RandomPatchFeatureConfig.Builder(
@@ -102,6 +107,10 @@ public class TerrestriaDecoratedFeatures {
 		DENSE_JAPANESE_MAPLE_SHRUBS = decorateTree("dense_japanese_maple_shrubs", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
 
 		DENSEST_CYPRESS_TREES = decorateTree("densest_cypress_trees", 9, TerrestriaConfiguredFeatures.CYPRESS_TREE);
+
+		DENSER_RAINBOW_EUCALYPTUS_TREES = decorateTree("denser_rainbow_eucalyptus_trees", 5, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
+		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
+		DENSE_RUBBER_TREES = decorateTree("dense_rubber_trees", 3, TerrestriaConfiguredFeatures.RUBBER_TREE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
