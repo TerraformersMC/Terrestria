@@ -37,11 +37,14 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	}
 
 	public List<FoliagePlacer.TreeNode> generate(ModifiableTestableWorld world, Random random, int trunkHeight, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
-		BlockPos blockPos = pos.down();
-		method_27400(world, blockPos);
-		method_27400(world, blockPos.east());
-		method_27400(world, blockPos.south());
-		method_27400(world, blockPos.south().east());
+		// Set the blocks below the trunk to dirt
+		BlockPos down = pos.down();
+		method_27400(world, down);
+		method_27400(world, down.east());
+		method_27400(world, down.south());
+		method_27400(world, down.south().east());
+
+		// Place the trunk
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 
 		for(int i = 0; i < trunkHeight; ++i) {
@@ -51,6 +54,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 			setLog(world, mutable, set, blockBox, getState(random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.SOUTHWEST), pos, 0, i, 1);
 		}
 
+		// If roots are available, grow them
 		if (treeFeatureConfig instanceof QuarteredMegaTreeConfig) {
 			growRoots(set, world, pos.mutableCopy(), random, blockBox, (QuarteredMegaTreeConfig) treeFeatureConfig);
 		}
@@ -58,7 +62,8 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		return ImmutableList.of(new FoliagePlacer.TreeNode(pos.up(trunkHeight), 0, true));
 	}
 
-	private static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
+	static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
+		// TODO: Quarter logs aren't generated
 		if (config instanceof QuarteredMegaTreeConfig && TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled()) {
 			return ((QuarteredMegaTreeConfig) config).quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, side);
 		} else {
@@ -72,7 +77,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		setLog(modifiableTestableWorld, mutable, set, blockBox, state);
 	}
 
-	private static void setLog(ModifiableTestableWorld modifiableTestableWorld, BlockPos.Mutable mutable, Set<BlockPos> set, BlockBox blockBox, BlockState state) {
+	protected static void setLog(ModifiableTestableWorld modifiableTestableWorld, BlockPos mutable, Set<BlockPos> set, BlockBox blockBox, BlockState state) {
 		if (TreeFeature.canReplace(modifiableTestableWorld, mutable)) {
 			method_27404(modifiableTestableWorld, mutable, state, blockBox);
 			set.add(mutable.toImmutable());
