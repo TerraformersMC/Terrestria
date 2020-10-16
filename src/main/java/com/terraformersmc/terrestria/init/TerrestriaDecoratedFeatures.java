@@ -17,6 +17,7 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> CATTAILS_WARM;
+	public static ConfiguredFeature<?, ?> SPARSE_OAK_SHRUBS;
 	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
 	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
 
@@ -53,6 +54,11 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> DENSEST_MEGA_REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> DENSEST_MEGA_HEMLOCK_TREES;
 
+	// Fancy / large oak trees
+	public static ConfiguredFeature<?, ?> DENSE_FANCY_OAK_TREES;
+	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
+	public static ConfiguredFeature<?, ?> DENSEST_FANCY_OAK_TREES;
+
 	// Volcanic island Trees
 	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
 	public static ConfiguredFeature<?, ?> DENSER_JUNGLE_PALM_TREES;
@@ -67,7 +73,6 @@ public class TerrestriaDecoratedFeatures {
 
 	// Rainbow Rainforest trees
 	public static ConfiguredFeature<?, ?> DENSER_RAINBOW_EUCALYPTUS_TREES;
-	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_RUBBER_TREES;
 
 	// Cypress Swamp trees
@@ -76,6 +81,8 @@ public class TerrestriaDecoratedFeatures {
 
 	public static void init() {
 		CATTAILS_WARM = register("cattails_warm", TerrestriaFeatures.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
+
+		SPARSE_OAK_SHRUBS = decorateTree("oak_shrubs", 1, TerrestriaConfiguredFeatures.OAK_SHRUB);
 
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
 		PATCH_VOLCANIC_ISLAND_GRASS = decoratePatch("patch_volcanic_island_grass", 12, new RandomPatchFeatureConfig.Builder(
@@ -111,6 +118,10 @@ public class TerrestriaDecoratedFeatures {
 		DENSEST_MEGA_REDWOOD_TREES = decorateTree("densest_mega_redwood_trees", 7, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		DENSEST_MEGA_HEMLOCK_TREES = decorateTree("densest_mega_hemlock_trees", 8, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
+		DENSE_FANCY_OAK_TREES = decorateTree("dense_fancy_oak_trees", 3, ConfiguredFeatures.FANCY_OAK);
+		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
+		DENSEST_FANCY_OAK_TREES = decorateTree("densest_fancy_oak_trees", 7, ConfiguredFeatures.FANCY_OAK);
+
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 
@@ -121,7 +132,6 @@ public class TerrestriaDecoratedFeatures {
 		DENSEST_CYPRESS_TREES = decorateTree("densest_cypress_trees", 9, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 
 		DENSER_RAINBOW_EUCALYPTUS_TREES = decorateTree("denser_rainbow_eucalyptus_trees", 5, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
-		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
 		DENSE_RUBBER_TREES = decorateTree("dense_rubber_trees", 3, TerrestriaConfiguredFeatures.RUBBER_TREE);
 
 		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
