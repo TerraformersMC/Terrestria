@@ -2,11 +2,12 @@ package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
-import net.minecraft.block.Blocks;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
@@ -28,20 +29,17 @@ public class CypressSwampBiomes {
 					.foliageColor(0x619137)
 				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
-						DEFAULT_MUSHROOMS, SPRINGS, /*TODO: SEAGRASS, MORE_SEAGRASS,*/ FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
+						DEFAULT_MUSHROOMS, SPRINGS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
 						DESERT_VEGETATION)
-				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.RUBBER_TREE, 3)
-				.addTreeFeature(TerrestriaConfiguredFeatures.WILLOW_TREE, 1)
-				/*TODO:.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-						TerrestriaFeatures.CATTAIL
-							.configure(new ProbabilityConfig(80, 0.3D))
-							.createDecoratedFeature(Decorator.TOP_SOLID_HEIGHTMAP.configure(DecoratorConfig.DEFAULT)))
-				.addCustomFeature(GenerationStep.Feature.VEGETAL_DECORATION,
-						ConfiguredFeatures.PATCH_WATERLILLY.decorate(ConfiguredFeatures.Decorators.HEIGHTMAP_SPREAD_DOUBLE, Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))))*/
-				.addGrassFeature(Blocks.GRASS.getDefaultState(), 2)
-				.addGrassFeature(Blocks.BROWN_MUSHROOM.getDefaultState(), 1)
-				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.MEGA_CYPRESS_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_RUBBER_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_WILLOW_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.CATTAILS_WARM)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SEAGRASS_WARM)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_WATERLILLY)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_GRASS_FOREST)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_SWAMP)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_TALL_GRASS)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addDefaultSpawnEntries()

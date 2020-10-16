@@ -5,6 +5,7 @@ import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -15,6 +16,7 @@ import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class TerrestriaDecoratedFeatures {
+	public static ConfiguredFeature<?, ?> CATTAILS_WARM;
 	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
 	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
 
@@ -66,7 +68,13 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_RUBBER_TREES;
 
+	// Cypress Swamp trees
+	public static ConfiguredFeature<?, ?> MEGA_CYPRESS_TREES;
+	public static ConfiguredFeature<?, ?> SPARSE_WILLOW_TREES;
+
 	public static void init() {
+		CATTAILS_WARM = register("cattails_warm", TerrestriaFeatures.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
+
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
 		PATCH_VOLCANIC_ISLAND_GRASS = decoratePatch("patch_volcanic_island_grass", 12, new RandomPatchFeatureConfig.Builder(
 				new WeightedBlockStateProvider()
@@ -111,6 +119,9 @@ public class TerrestriaDecoratedFeatures {
 		DENSER_RAINBOW_EUCALYPTUS_TREES = decorateTree("denser_rainbow_eucalyptus_trees", 5, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
 		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
 		DENSE_RUBBER_TREES = decorateTree("dense_rubber_trees", 3, TerrestriaConfiguredFeatures.RUBBER_TREE);
+
+		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
+		SPARSE_WILLOW_TREES = decorateTree("sparse_willow_trees", 1, TerrestriaConfiguredFeatures.WILLOW_TREE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {

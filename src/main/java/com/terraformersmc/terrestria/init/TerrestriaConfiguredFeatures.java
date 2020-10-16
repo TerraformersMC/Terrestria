@@ -176,7 +176,7 @@ public class TerrestriaConfiguredFeatures {
 				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
 				new TwoLayersFeatureSize(1, 1, 1))
 				.ignoreVines()
-				.maxWaterDepth(3)
+				.maxWaterDepth(6)
 				.build(),
 				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.CYPRESS.log.getDefaultState(),
