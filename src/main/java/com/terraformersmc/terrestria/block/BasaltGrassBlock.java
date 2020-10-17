@@ -51,7 +51,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 
 			BlockState state = world.getBlockState(pos);
 
-			// TODO: What about andisol grass???
+			// NB: this just converts short grass to tall grass, this isn't specific to GRASS_BLOCK
 			if (state.getBlock() == Blocks.GRASS && random.nextInt(10) == 0) {
 				((Fertilizable) state.getBlock()).grow(world, random, pos, state);
 			}
