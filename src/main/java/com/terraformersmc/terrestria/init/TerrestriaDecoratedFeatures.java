@@ -97,6 +97,9 @@ public class TerrestriaDecoratedFeatures {
 	// Lush desert trees
 	public static ConfiguredFeature<?, ?> SAGUARO_CACTUSES;
 
+	// Bryce trees
+	public static ConfiguredFeature<?, ?> RARE_BRYCE_TREES;
+
 	public static void init() {
 		CATTAILS_WARM = register("cattails_warm", TerrestriaFeatures.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
 
@@ -187,6 +190,8 @@ public class TerrestriaDecoratedFeatures {
 		OAK_DOT_SHRUBS = decorateTree("oak_dot_shrubs", 2, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
 
 		SAGUARO_CACTUSES = decorateTree("saguaro_cactuses", 2, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
+
+		RARE_BRYCE_TREES = decorateTree("rare_bryce_trees", 0, TerrestriaConfiguredFeatures.BRYCE_TREE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
