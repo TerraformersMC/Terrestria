@@ -8,6 +8,7 @@
     "MixinEatGrassGoal",
     "MixinFeature",
     "MixinFluidBlock",
+    "MixinLandPathNodeMaker",
     "MixinMushroomPlantBlock",
     "MixinPlantBlock",
     "MixinSugarCaneBlock",

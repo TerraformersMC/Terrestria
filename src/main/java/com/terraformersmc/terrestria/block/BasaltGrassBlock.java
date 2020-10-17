@@ -51,6 +51,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 
 			BlockState state = world.getBlockState(pos);
 
+			// TODO: What about andisol grass???
 			if (state.getBlock() == Blocks.GRASS && random.nextInt(10) == 0) {
 				((Fertilizable) state.getBlock()).grow(world, random, pos, state);
 			}
