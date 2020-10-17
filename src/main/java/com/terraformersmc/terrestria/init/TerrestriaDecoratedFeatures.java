@@ -192,7 +192,7 @@ public class TerrestriaDecoratedFeatures {
 
 		SAGUARO_CACTUSES = decorateTree("saguaro_cactuses", 2, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
 
-		RARE_BRYCE_TREES = register("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
+		RARE_BRYCE_TREES = register("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(2))));
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
