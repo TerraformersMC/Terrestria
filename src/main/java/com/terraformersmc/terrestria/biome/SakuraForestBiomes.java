@@ -4,9 +4,12 @@ import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -26,13 +29,13 @@ public class SakuraForestBiomes {
 					.waterFogColor(0x50533)
 				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
-						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
+						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
 				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SAKURA_TREE, 6)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB, 4)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSER_SAKURA_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 		);
