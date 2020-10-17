@@ -3,15 +3,11 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -37,14 +33,14 @@ public class DenseWoodlandsBiomes {
 		);
 
 		TerrestriaBiomes.DENSE_WOODLANDS = TerrestriaBiomes.register("dense_woodlands", template.builder()
-				.addTreeFeature(ConfiguredFeatures.FANCY_OAK, 7)
-				.addTreeFeature(TerrestriaConfiguredFeatures.OAK_SHRUB, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_FANCY_OAK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_OAK_SHRUBS)
 				.build()
 		);
 
 		TerrestriaBiomes.DENSE_WOODLANDS_EDGE = TerrestriaBiomes.register("dense_woodlands_edge", template.builder()
-				.addTreeFeature(ConfiguredFeatures.FANCY_OAK, 3)
-				.addTreeFeature(TerrestriaConfiguredFeatures.OAK_SHRUB, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_FANCY_OAK_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_OAK_SHRUBS)
 				.build()
 		);
 	}

@@ -3,14 +3,14 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
-import net.minecraft.block.Blocks;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -42,30 +42,30 @@ public class RedwoodForestBiomes {
 		TerrestriaBiomes.REDWOOD_FOREST = TerrestriaBiomes.register("redwood_forest", template.builder()
 				.depth(1.2F)
 				.scale(0.3F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE, 7)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 3)
-				.addRareTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 1)
-				.addGrassFeature(Blocks.FERN.getDefaultState(), 4)
-				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 7)
-				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 7)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_MEGA_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_FALLEN_REDWOOD_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_GRASS_TAIGA)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_LARGE_FERN)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_TALL_GRASS)
 				.build());
 
 		TerrestriaBiomes.REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("redwood_forest_edge", template.builder()
 				.depth(0.5F)
 				.scale(0.3F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.REDWOOD_TREE, 3)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
-				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
-				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_LARGE_FERN)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_TALL_GRASS)
 				.build());
 
 		TerrestriaBiomes.REDWOOD_CLEARING = TerrestriaBiomes.register("redwood_clearing", template.builder()
 				.depth(1.2F)
 				.scale(0.3F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 2)
-				.addDoubleGrassFeature(Blocks.LARGE_FERN.getDefaultState(), 4)
-				.addDoubleGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 4)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_REDWOOD_LOGS)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_LARGE_FERN)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_TALL_GRASS)
 				.build());
 	}
 }
