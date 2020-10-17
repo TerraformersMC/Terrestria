@@ -34,7 +34,7 @@ public class OutbackBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.depth(0.125F)
 			.scale(0.05F)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_VEGETATION)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_YUCCA_PALM_TREES)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_DEAD_GRASS)
 			.build());
 
@@ -49,7 +49,7 @@ public class OutbackBiomes {
 			.depth(0.125F)
 			.scale(0.05F)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OAK_DOT_SHRUBS)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_VEGETATION)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.ACACIA_DOT_SHRUBS)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_BUSHLAND_TREES)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_OUTBACK_BUSHLAND_GRASS)
 			.build());

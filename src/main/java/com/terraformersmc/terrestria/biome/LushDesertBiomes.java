@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -48,11 +49,9 @@ public class LushDesertBiomes {
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
 				.depth(0.4F)
 				.scale(0.05F)
-				.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
-				.addGrassFeature(Blocks.DEAD_BUSH.getDefaultState(), 1)
-				.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-				.addRareTreeFeature(TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, 12)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE, 2)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_LUSH_DESERT_VEGETATION)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_YUCCA_PALM_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SAGUARO_CACTUSES)
 				.build()
 		);
 
@@ -60,12 +59,8 @@ public class LushDesertBiomes {
 				.configureSurfaceBuilder(TerrestriaSurfaces.THREE_LAYER_OUTLINE, TerrestriaSurfaces.OASIS_CONFIG)
 				.depth(-0.2F)
 				.scale(0.07F)
-				.addTreeFeature(TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE, 2)
-				.addGrassFeature(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-				.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
-				.addGrassFeature(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)
-				.addGrassFeature(Blocks.TALL_GRASS.getDefaultState(), 2)
-				.addGrassFeature(Blocks.FERN.getDefaultState(), 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_OASIS_VEGETATION)
 				.build()
 		);
 	}

@@ -25,6 +25,8 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
 	public static ConfiguredFeature<?, ?> PATCH_DEAD_GRASS;
 	public static ConfiguredFeature<?, ?> PATCH_OUTBACK_BUSHLAND_GRASS;
+	public static ConfiguredFeature<?, ?> PATCH_OASIS_VEGETATION;
+	public static ConfiguredFeature<?, ?> PATCH_LUSH_DESERT_VEGETATION;
 
 	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-9 per chunk.
 
@@ -87,8 +89,12 @@ public class TerrestriaDecoratedFeatures {
 
 	// Outback trees and shrubs
 	public static ConfiguredFeature<?, ?> OUTBACK_BUSHLAND_TREES;
-	public static ConfiguredFeature<?, ?> OUTBACK_VEGETATION;
+	public static ConfiguredFeature<?, ?> RARE_YUCCA_PALM_TREES;
+	public static ConfiguredFeature<?, ?> ACACIA_DOT_SHRUBS;
 	public static ConfiguredFeature<?, ?> OAK_DOT_SHRUBS;
+
+	// Lush desert trees
+	public static ConfiguredFeature<?, ?> SAGUARO_CACTUSES;
 
 	public static void init() {
 		CATTAILS_WARM = register("cattails_warm", TerrestriaFeatures.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
@@ -110,6 +116,20 @@ public class TerrestriaDecoratedFeatures {
 				new WeightedBlockStateProvider()
 						.addState(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
 						.addState(TerrestriaBlocks.AGAVE.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(4).build());
+
+		PATCH_OASIS_VEGETATION = decoratePatch("patch_oasis_vegetation", 6, new RandomPatchFeatureConfig.Builder(
+				new WeightedBlockStateProvider()
+						.addState(Blocks.FERN.getDefaultState(), 1)
+						.addState(Blocks.GRASS.getDefaultState(), 2)
+						.addState(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
+						.addState(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+						.addState(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(32).build());
+
+		PATCH_LUSH_DESERT_VEGETATION = decoratePatch("patch_lush_desert_vegetation", 4, new RandomPatchFeatureConfig.Builder(
+				new WeightedBlockStateProvider()
+						.addState(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
+						.addState(Blocks.DEAD_BUSH.getDefaultState(), 1)
+						.addState(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		SPARSE_FALLEN_HEMLOCK_LOGS = decorateTree("sparse_fallen_hemlock_logs", 1, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
@@ -160,10 +180,11 @@ public class TerrestriaDecoratedFeatures {
 		OUTBACK_BUSHLAND_TREES = decorateTree("outback_bushland_trees", 2, Feature.RANDOM_SELECTOR.configure(
 				new RandomFeatureConfig(ImmutableList.of(ConfiguredFeatures.ACACIA.withChance(0.95F), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE.withChance(0.75F)), ConfiguredFeatures.FANCY_OAK)));
 
-		OUTBACK_VEGETATION = decorateTree("outback_vegetation", 3, Feature.RANDOM_SELECTOR.configure(
-				new RandomFeatureConfig(ImmutableList.of(TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB.withChance(0.90F)), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE)));
-
+		RARE_YUCCA_PALM_TREES = decorateTree("yucca_palm_trees", 0, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE);
+		ACACIA_DOT_SHRUBS = decorateTree("acacia_dot_shrubs", 2, TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB);
 		OAK_DOT_SHRUBS = decorateTree("oak_dot_shrubs", 2, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
+
+		SAGUARO_CACTUSES = decorateTree("saguaro_cactuses", 2, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
