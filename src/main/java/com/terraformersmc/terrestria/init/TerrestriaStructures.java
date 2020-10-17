@@ -47,7 +47,7 @@ public class TerrestriaStructures {
 		OCEAN_VOLCANO = registerStructure("ocean_volcano_structure", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC).configure(OCEAN_VOLCANO_CONFIG), 24, 8);
 		VOLCANO = registerStructure("volcano_structure", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC).configure(VOLCANO_CONFIG), 10, 5);
 		SHORE_VOLCANO = VOLCANO.feature.configure(SHORE_VOLCANO_CONFIG);
-
+		registerConfiguredStructure("shore_volcano", SHORE_VOLCANO);
 	}
 
 	public static void addToVanillaBiomes() {
@@ -79,5 +79,11 @@ public class TerrestriaStructures {
 				configured);
 
 		return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);
+	}
+
+	private static void registerConfiguredStructure(String id, ConfiguredStructureFeature<?, ?> configured) {
+		Identifier identifier = new Identifier(Terrestria.MOD_ID, id);
+
+		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);
 	}
 }

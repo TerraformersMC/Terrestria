@@ -49,9 +49,7 @@ public class VolcanicIslandBiomes {
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_DUM_DUM_HEADS)
-				// TODO: uncommenting this breaks the structures
-				// [main/ERROR] (Minecraft) Structure start: Not a JSON object: "minecraft:stronghold"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:village_desert"; Not a JSON object: "minecraft:ruined_portal_jungle"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:stronghold"
-				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
+				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
@@ -59,9 +57,7 @@ public class VolcanicIslandBiomes {
 				.depth(0F)
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
-				// TODO: uncommenting this breaks the structures
-				// [main/ERROR] (Minecraft) Structure start: Not a JSON object: "minecraft:stronghold"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:village_desert"; Not a JSON object: "minecraft:ruined_portal_jungle"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:stronghold"
-				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
+				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 	}
 }
