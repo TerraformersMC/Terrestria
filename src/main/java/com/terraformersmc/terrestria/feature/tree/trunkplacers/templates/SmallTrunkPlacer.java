@@ -23,9 +23,14 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 	protected void setBlockStateAndUpdate(TreeFeatureConfig config, Random random, Set<BlockPos> set, ModifiableTestableWorld world, BlockPos origin, Direction direction, BlockBox blockBox) {
 		//Place the block
 		checkAndPlaceSpecificBlockState(world, origin, set, blockBox, config.trunkProvider.getBlockState(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
-		//Fix the one behind it to connect if it's a BareSmallLogBlock
-		if (world.testBlockState(origin.offset(direction.getOpposite()), tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
-			placeSpecificBlockState(world, origin.offset(direction.getOpposite()), set, blockBox, getOriginalState(config, world, origin.offset(direction.getOpposite()), random).with(getPropertyFromDirection(direction), true));
+
+		// Fix the one behind it to connect if it's a BareSmallLogBlock
+		addSmallLogConnection(config, random, set, world, origin.offset(direction.getOpposite()), direction, blockBox);
+	}
+
+	protected void addSmallLogConnection(TreeFeatureConfig config, Random random, Set<BlockPos> set, ModifiableTestableWorld world, BlockPos origin, Direction direction, BlockBox blockBox) {
+		if (world.testBlockState(origin, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
+			placeSpecificBlockState(world, origin, set, blockBox, getOriginalState(config, world, origin, random).with(getPropertyFromDirection(direction), true));
 		}
 	}
 

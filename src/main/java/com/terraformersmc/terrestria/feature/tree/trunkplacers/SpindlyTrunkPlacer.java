@@ -64,12 +64,12 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 				setBlockStateAndUpdate(treeFeatureConfig, random, set, world, currentPosition.move(randDir), randDir, blockBox);
 			}
 
-			// Randomly generate a branch if the height is greater than half and 50% 0f the time assign a leaf location to the end
-			if (i > (height / 2) && random.nextInt(2) == 1) {
-				if (random.nextBoolean()) {
-					placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, direction, 2 + random.nextInt(3));
-				} else {
-					foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, direction, 2 + random.nextInt(3)), 1, false));
+			// Randomly generate a branch if the height is greater than half and 66% of the time assign a leaf location to the end
+			if (i > (height / 2) && random.nextBoolean()) {
+				BlockPos branchEnd = placeBranch(world, random, currentPosition.toImmutable(), set, blockBox, treeFeatureConfig, direction, 2 + random.nextInt(3));
+
+				if (random.nextInt(3) != 0) {
+					foliageNodes.add(new FoliagePlacer.TreeNode(branchEnd, 1, false));
 				}
 			}
 
@@ -121,7 +121,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 				setBlockStateAndUpdate(config, random, set, world, pos, direction, blockBox);
 				if (random.nextBoolean()) {
 					pos.move(Direction.DOWN);
-					setBlockStateAndUpdate(config, random, set, world, pos, Direction.UP, blockBox);
+					setBlockStateAndUpdate(config, random, set, world, pos, Direction.DOWN, blockBox);
 				}
 			} else {
 				break;
@@ -131,8 +131,12 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		for (int j = 0; j < 3; j++) {
 			pos.move(Direction.DOWN);
 			if (isAir(world, pos)) {
+				// Place a single block of the root
 				setBlockStateAndUpdate(config, random, set, world, pos, Direction.DOWN, blockBox);
 			} else {
+				// Connect the root to the ground
+				pos.move(Direction.UP);
+				addSmallLogConnection(config, random, set, world, pos, Direction.DOWN, blockBox);
 				break;
 			}
 		}
