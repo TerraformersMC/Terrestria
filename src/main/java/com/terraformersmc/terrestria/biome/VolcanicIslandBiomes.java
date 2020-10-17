@@ -51,7 +51,7 @@ public class VolcanicIslandBiomes {
 				.depth(0.05F)
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
-				.addRareTreeFeature(TerrestriaConfiguredFeatures.DUM_DUM_HEAD, 15)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_DUM_DUM_HEADS)
 				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 

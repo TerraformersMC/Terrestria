@@ -69,6 +69,7 @@ public class TerrestriaDecoratedFeatures {
 	// Volcanic island Trees
 	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
 	public static ConfiguredFeature<?, ?> DENSER_JUNGLE_PALM_TREES;
+	public static ConfiguredFeature<?, ?> RARE_DUM_DUM_HEADS;
 
 	// Japanese Maple and Sakura trees
 	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_TREES;
@@ -163,6 +164,7 @@ public class TerrestriaDecoratedFeatures {
 
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
+		RARE_DUM_DUM_HEADS = decorateTree("rare_dum_dum_heads", 0, TerrestriaConfiguredFeatures.DUM_DUM_HEAD);
 
 		DENSE_JAPANESE_MAPLE_TREES = decorateTree("dense_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
 		DENSE_DARK_JAPANESE_MAPLE_TREES = decorateTree("dense_dark_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
