@@ -23,16 +23,13 @@ public class VolcanicIslandBiomes {
 					.waterColor(0x54d3c0)
 					.waterFogColor(0x24a0b0)
 				)
-				.addDefaultFeatures(LAND_CARVERS, /*TODO DEFAULT_UNDERGROUND_STRUCTURES,*/ LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
+				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DISKS, DEFAULT_FLOWERS,
 						DEFAULT_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
-				// TODO: Ensure that the grass here works properly
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_VOLCANIC_ISLAND_GRASS)
-				/*
-				TODO: This spams the log with crypting Structure start: Not a JSON object: "minecraft:stronghold" errors. Why, Mojang?
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_JUNGLE)
-				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)*/
+				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4))
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6))
@@ -52,7 +49,9 @@ public class VolcanicIslandBiomes {
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_DUM_DUM_HEADS)
-				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
+				// TODO: uncommenting this breaks the structures
+				// [main/ERROR] (Minecraft) Structure start: Not a JSON object: "minecraft:stronghold"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:village_desert"; Not a JSON object: "minecraft:ruined_portal_jungle"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:stronghold"
+				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template.builder()
@@ -60,7 +59,9 @@ public class VolcanicIslandBiomes {
 				.depth(0F)
 				.scale(0.05F)
 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.JUNGLE_PALM_TREES)
-				.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
+				// TODO: uncommenting this breaks the structures
+				// [main/ERROR] (Minecraft) Structure start: Not a JSON object: "minecraft:stronghold"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:village_desert"; Not a JSON object: "minecraft:ruined_portal_jungle"; Not a JSON object: "minecraft:mineshaft"; Not a JSON object: "minecraft:stronghold"
+				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 	}
 }
