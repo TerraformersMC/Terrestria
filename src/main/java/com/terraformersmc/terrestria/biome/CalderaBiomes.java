@@ -3,13 +3,13 @@ package com.terraformersmc.terrestria.biome;
 import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -61,10 +61,9 @@ public class CalderaBiomes {
 					.waterColor(0x3f76e4)
 					.waterFogColor(0x50533)
 				)
-				.addRareTreeFeature(TerrestriaConfiguredFeatures.REDWOOD_TREE, 2)
-				.addRareTreeFeature(TerrestriaConfiguredFeatures.HEMLOCK_TREE, 2)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_CONIFER_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 				.build());
 
@@ -79,8 +78,8 @@ public class CalderaBiomes {
 					.waterColor(0x3f76e4)
 					.waterFogColor(0x50533)
 				)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE, 1)
-				.addTreeFeature(TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE, 1)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_HEMLOCK_TREES)
 				.build());
 	}
 }

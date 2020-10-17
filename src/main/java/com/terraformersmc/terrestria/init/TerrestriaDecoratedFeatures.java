@@ -48,6 +48,7 @@ public class TerrestriaDecoratedFeatures {
 	// Taller and wider spruce-like trees.
 	public static ConfiguredFeature<?, ?> SPARSE_HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> SPARSE_REDWOOD_TREES;
+	public static ConfiguredFeature<?, ?> SPARSE_CONIFER_TREES;
 	public static ConfiguredFeature<?, ?> HEMLOCK_TREES;
 	public static ConfiguredFeature<?, ?> REDWOOD_TREES;
 	public static ConfiguredFeature<?, ?> DENSEST_HEMLOCK_TREES;
@@ -150,6 +151,8 @@ public class TerrestriaDecoratedFeatures {
 
 		SPARSE_HEMLOCK_TREES = decorateTree("sparse_hemlock_trees", 1, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		SPARSE_REDWOOD_TREES = decorateTree("sparse_redwood_trees", 1, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		SPARSE_CONIFER_TREES = decorateTree("sparse_conifer_trees", 1, Feature.RANDOM_SELECTOR.configure(
+				new RandomFeatureConfig(ImmutableList.of(TerrestriaConfiguredFeatures.HEMLOCK_TREE.withChance(0.50F)), TerrestriaConfiguredFeatures.REDWOOD_TREE)));
 		HEMLOCK_TREES = decorateTree("hemlock_trees", 2, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 		REDWOOD_TREES = decorateTree("redwood_trees", 2, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 		DENSE_HEMLOCK_TREES = decorateTree("dense_hemlock_trees", 4, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
