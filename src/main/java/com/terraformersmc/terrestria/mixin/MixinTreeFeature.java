@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.mixin;
 
-import com.terraformersmc.terrestria.feature.tree.treeconfigs.helpers.ExtendedTreeGeneration;
+import com.terraformersmc.terrestria.feature.tree.extended.ExtendedTreeGeneration;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
@@ -12,8 +12,10 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.gen.Invoker;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
@@ -27,16 +29,32 @@ public abstract class MixinTreeFeature<FC extends FeatureConfig> extends Feature
 	@Shadow
 	protected abstract int method_29963(TestableWorld testableWorld, int i, BlockPos blockPos, TreeFeatureConfig treeFeatureConfig);
 
+	@Shadow
+	private static boolean isDirtOrGrass(TestableWorld world, BlockPos pos) {
+		throw new AssertionError();
+	}
+
 	// Bypasses the "no default constructor" error, will never actually get used
 	private MixinTreeFeature() {
 		super(null);
 		throw new UnsupportedOperationException();
 	}
 
+	// TODO: Not sure if the redirect is better or worse here
+	@Redirect(method = "generate(Lnet/minecraft/world/ModifiableTestableWorld;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/util/math/BlockBox;Lnet/minecraft/world/gen/feature/TreeFeatureConfig;)Z", at = @At(value = "INVOKE", target = "net/minecraft/world/gen/feature/TreeFeature.isDirtOrGrass (Lnet/minecraft/world/TestableWorld;Lnet/minecraft/util/math/BlockPos;)Z"))
+	private boolean terrestria$allowSandyTreeGeneration(TestableWorld world, BlockPos pos) {
+		if ((this instanceof ExtendedTreeGeneration)) {
+			return ((ExtendedTreeGeneration) this).canGenerateOn(world, pos);
+		} else {
+			return isDirtOrGrass(world, pos);
+		}
+	}
+
+	/*Note: old injection preserved here in case it's needed.
 	@Inject(method = "generate(Lnet/minecraft/world/ModifiableTestableWorld;Ljava/util/Random;Lnet/minecraft/util/math/BlockPos;Ljava/util/Set;Ljava/util/Set;Lnet/minecraft/util/math/BlockBox;Lnet/minecraft/world/gen/feature/TreeFeatureConfig;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/TreeFeature;isDirtOrGrass(Lnet/minecraft/world/TestableWorld;Lnet/minecraft/util/math/BlockPos;)Z"), locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
 	private void onGenerate(ModifiableTestableWorld world, Random random, BlockPos pos, Set logPositions, Set leavesPositions, BlockBox box, TreeFeatureConfig config, CallbackInfoReturnable<Boolean> cir, int i, int j, int k, int l, BlockPos blockPos2) {
-		if ((config instanceof ExtendedTreeGeneration)) {
-			if (((ExtendedTreeGeneration) config).canGenerateOn(world, blockPos2.down())) {
+		if ((this instanceof ExtendedTreeGeneration)) {
+			if (((ExtendedTreeGeneration) this).canGenerateOn(world, blockPos2.down())) {
 				OptionalInt minClippedHeight = config.minimumSize.getMinClippedHeight();
 				int r = this.method_29963(world, i, blockPos2, config);
 				if (r >= i || minClippedHeight.isPresent() && r >= minClippedHeight.getAsInt()) {
@@ -50,5 +68,5 @@ public abstract class MixinTreeFeature<FC extends FeatureConfig> extends Feature
 				cir.setReturnValue(false);
 			}
 		}
-	}
+	}*/
 }

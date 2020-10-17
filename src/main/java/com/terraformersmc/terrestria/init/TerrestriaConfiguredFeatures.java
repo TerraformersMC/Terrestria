@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
-import com.terraformersmc.terrestria.feature.tree.treeconfigs.SandyTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
@@ -66,22 +65,22 @@ public class TerrestriaConfiguredFeatures {
 	public static ConfiguredFeature<DefaultFeatureConfig, ?> DUM_DUM_HEAD;
 
 	public static void init() {
-		BRYCE_TREE = registerTree("bryce_tree", new SandyTreeConfig(new TreeFeatureConfig.Builder(
+		BRYCE_TREE = registerSandyTree("bryce_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState()),
 				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
 				new SmallLogSphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new SpindlyTrunkPlacer(10, 0, 0),
 				new TwoLayersFeatureSize(1, 0, 0))
-				.build()));
+				.build());
 
-		JUNGLE_PALM_TREE = registerTree("jungle_palm_tree", new SandyTreeConfig(new TreeFeatureConfig.Builder(
+		JUNGLE_PALM_TREE = registerSandyTree("jungle_palm_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(Blocks.JUNGLE_WOOD.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.JUNGLE_PALM_LEAVES.getDefaultState()),
 				new PalmFanFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(0)),
 				new BentTrunkPlacer(15, 15, 15),
 				new TwoLayersFeatureSize(1, 0, 2))
 				.ignoreVines()
-				.build()));
+				.build());
 
 		SMALL_HEMLOCK_TREE = registerTree("small_hemlock_tree", spruceOf(TerrestriaBlocks.HEMLOCK));
 		SMALL_REDWOOD_TREE = registerTree("small_redwood_tree", spruceOf(TerrestriaBlocks.REDWOOD));
@@ -136,13 +135,13 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.build());
 
-		SAGUARO_CACTUS_FEATURE = registerTree("saguaro_cactus", new SandyTreeConfig(new TreeFeatureConfig.Builder(
+		SAGUARO_CACTUS_FEATURE = registerSandyTree("saguaro_cactus", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState()),
 				new NoneFoliagePlacer(),
 				new SaguaroCactusTrunkPlacer(0,0,0),
 				new TwoLayersFeatureSize(1, 1, 1))
-				.build()));
+				.build());
 
 		SAKURA_TREE = registerTree("sakura_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.log.getDefaultState()),
@@ -183,12 +182,12 @@ public class TerrestriaConfiguredFeatures {
 				TerrestriaBlocks.CYPRESS.wood.getDefaultState()));
 
 		WILLOW_TREE = registerTree("willow_tree", canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState()))));
-		YUCCA_PALM_TREE = registerTree("yucca_palm_tree", new SandyTreeConfig(new TreeFeatureConfig.Builder(
+		YUCCA_PALM_TREE = registerSandyTree("yucca_palm_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState()),
 				new SmallLogSphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new SmallBranchingTrunkPlacer(6, 2, 1),
-				new TwoLayersFeatureSize(1, 1, 1)).build()));
+				new TwoLayersFeatureSize(1, 1, 1)).build());
 
 		OAK_DOT_SHRUB = registerTree("oak_dot_shrub", dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()));
 		ACACIA_DOT_SHRUB = registerTree("acacia_dot_shrub", dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()));
@@ -198,6 +197,15 @@ public class TerrestriaConfiguredFeatures {
 
 	private static ConfiguredFeature<TreeFeatureConfig, ?> registerTree(String name, TreeFeatureConfig config) {
 		ConfiguredFeature<TreeFeatureConfig, ?> configured = Feature.TREE.configure(config);
+		Identifier id = new Identifier(Terrestria.MOD_ID, name);
+
+		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
+
+		return configured;
+	}
+
+	private static ConfiguredFeature<TreeFeatureConfig, ?> registerSandyTree(String name, TreeFeatureConfig config) {
+		ConfiguredFeature<TreeFeatureConfig, ?> configured = TerrestriaFeatures.SANDY_TREE.configure(config);
 		Identifier id = new Identifier(Terrestria.MOD_ID, name);
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
