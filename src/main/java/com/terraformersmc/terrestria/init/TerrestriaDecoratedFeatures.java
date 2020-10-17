@@ -7,6 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.gen.ProbabilityConfig;
+import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
@@ -191,7 +192,7 @@ public class TerrestriaDecoratedFeatures {
 
 		SAGUARO_CACTUSES = decorateTree("saguaro_cactuses", 2, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
 
-		RARE_BRYCE_TREES = decorateTree("rare_bryce_trees", 0, TerrestriaConfiguredFeatures.BRYCE_TREE);
+		RARE_BRYCE_TREES = register("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5))));
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
