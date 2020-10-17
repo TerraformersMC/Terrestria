@@ -4,10 +4,8 @@ import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.ConfiguredFeatures;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
@@ -32,15 +30,12 @@ public class OutbackBiomes {
 					DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
 		);
 
-		// TODO: Will the configureSurfaceBuilder calls later on mess with stuff? Prospector had an issue with this.
-
 		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template.builder()
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.depth(0.125F)
 			.scale(0.05F)
-			.addRareTreeFeature(TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, 12)
-			.addTreeFeature(TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB, 3)
-			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_VEGETATION)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_DEAD_GRASS)
 			.build());
 
 		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", template.builder()
@@ -53,13 +48,10 @@ public class OutbackBiomes {
 			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			.depth(0.125F)
 			.scale(0.05F)
-			.addTreeFeature(TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, 1)
-			.addTreeFeature(TerrestriaConfiguredFeatures.OAK_DOT_SHRUB, 2)
-			.addTreeFeature(TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB, 3)
-			.addRareTreeFeature(ConfiguredFeatures.FANCY_OAK, 24)
-			.addTreeFeature(ConfiguredFeatures.ACACIA, 2)
-			.addGrassFeature(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
-			.addGrassFeature(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OAK_DOT_SHRUBS)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_VEGETATION)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_BUSHLAND_TREES)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_OUTBACK_BUSHLAND_GRASS)
 			.build());
 	}
 }

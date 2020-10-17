@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
+import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.Terrestria;
 
 import net.minecraft.block.Blocks;
@@ -11,8 +12,10 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
+import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class TerrestriaDecoratedFeatures {
@@ -20,6 +23,8 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> SPARSE_OAK_SHRUBS;
 	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
 	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
+	public static ConfiguredFeature<?, ?> PATCH_DEAD_GRASS;
+	public static ConfiguredFeature<?, ?> PATCH_OUTBACK_BUSHLAND_GRASS;
 
 	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-9 per chunk.
 
@@ -79,6 +84,11 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> MEGA_CYPRESS_TREES;
 	public static ConfiguredFeature<?, ?> SPARSE_WILLOW_TREES;
 
+	// Outback trees and shrubs
+	public static ConfiguredFeature<?, ?> OUTBACK_BUSHLAND_TREES;
+	public static ConfiguredFeature<?, ?> OUTBACK_VEGETATION;
+	public static ConfiguredFeature<?, ?> OAK_DOT_SHRUBS;
+
 	public static void init() {
 		CATTAILS_WARM = register("cattails_warm", TerrestriaFeatures.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
 
@@ -91,6 +101,14 @@ public class TerrestriaDecoratedFeatures {
 						.addState(Blocks.FERN.getDefaultState(), 1)
 						.addState(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
 						.addState(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4), SimpleBlockPlacer.INSTANCE).tries(32).build());
+
+		PATCH_DEAD_GRASS = decoratePatch("patch_dead_grass", 12, new RandomPatchFeatureConfig.Builder(
+				new SimpleBlockStateProvider(TerrestriaBlocks.DEAD_GRASS.getDefaultState()), SimpleBlockPlacer.INSTANCE).tries(4).build());
+
+		PATCH_OUTBACK_BUSHLAND_GRASS = decoratePatch("patch_outback_bushland_grass", 12, new RandomPatchFeatureConfig.Builder(
+				new WeightedBlockStateProvider()
+						.addState(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
+						.addState(TerrestriaBlocks.AGAVE.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(4).build());
 
 		SPARSE_FALLEN_HEMLOCK_LOGS = decorateTree("sparse_fallen_hemlock_logs", 1, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
@@ -136,6 +154,14 @@ public class TerrestriaDecoratedFeatures {
 
 		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
 		SPARSE_WILLOW_TREES = decorateTree("sparse_willow_trees", 1, TerrestriaConfiguredFeatures.WILLOW_TREE);
+
+		OUTBACK_BUSHLAND_TREES = decorateTree("outback_bushland_trees", 2, Feature.RANDOM_SELECTOR.configure(
+				new RandomFeatureConfig(ImmutableList.of(ConfiguredFeatures.ACACIA.withChance(0.95F), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE.withChance(0.75F)), ConfiguredFeatures.FANCY_OAK)));
+
+		OUTBACK_VEGETATION = decorateTree("outback_vegetation", 3, Feature.RANDOM_SELECTOR.configure(
+				new RandomFeatureConfig(ImmutableList.of(TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB.withChance(0.90F)), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE)));
+
+		OAK_DOT_SHRUBS = decorateTree("oak_dot_shrubs", 2, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
 	}
 
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
