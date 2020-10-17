@@ -13,6 +13,9 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.ChunkRegion;
+import net.minecraft.world.EmptyBlockView;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.tree.TreeDecorator;
 import net.minecraft.world.gen.tree.TreeDecoratorType;
@@ -28,21 +31,30 @@ public class SakuraTreeDecorator extends TreeDecorator {
 	@Override
 	public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
 		for (BlockPos pos : leavesPositions) {
-			// 1/3 positions have leaf piles
-			if (random.nextInt(3) > 0) continue;
+			// 1/6 positions have leaf piles
+			// As this executes for every single leaf block and there is usually 3-4 leaf blocks in a column, it ends up working out to 50%, usually.
+			if (random.nextInt(6) > 0) {
+				continue;
+			}
 
-			BlockPos.Mutable mutable = pos.down().mutableCopy();
-			if (world.getBlockState(mutable).isAir() || world.getBlockState(mutable).getBlock() instanceof SmallLogBlock) {
-				while(mutable.getY() > 0) {
-					//check for a solid block and place on top
-					if (world.getBlockState(mutable).isOpaque() || world.getFluidState(mutable).isIn(FluidTags.WATER)) {
-						world.setBlockState(mutable.up(), TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), 3);
-						break;
-					}
+			// If we're in initial world gen, use the worldgen height map
+			// Placing a sapling will cause that to fail, so use the regular heightmap instead then.
+			// TODO: This doesn't seem to work for saplings...?
+			Heightmap.Type heightmap = world instanceof ChunkRegion ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.WORLD_SURFACE;
 
-					//move down the column
-					mutable.move(Direction.DOWN);
-				}
+			BlockPos top = world.getTopPosition(heightmap, pos);
+
+			boolean valid = world.testBlockState(top.down(),
+					state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) ||
+							state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
+			);
+
+			if (world.getBlockState(top).getBlock() instanceof SmallLogBlock) {
+				continue;
+			}
+
+			if (valid) {
+				world.setBlockState(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), 3);
 			}
 		}
 	}

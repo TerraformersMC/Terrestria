@@ -57,6 +57,7 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_DARK_JAPANESE_MAPLE_TREES;
 	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_SHRUBS;
+	public static ConfiguredFeature<?, ?> DENSER_SAKURA_TREES;
 
 	// Small cypress trees
 	public static ConfiguredFeature<?, ?> DENSEST_CYPRESS_TREES;
@@ -105,6 +106,7 @@ public class TerrestriaDecoratedFeatures {
 		DENSE_JAPANESE_MAPLE_TREES = decorateTree("dense_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
 		DENSE_DARK_JAPANESE_MAPLE_TREES = decorateTree("dense_dark_japanese_maple_trees", 3, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
 		DENSE_JAPANESE_MAPLE_SHRUBS = decorateTree("dense_japanese_maple_shrubs", 3, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
+		DENSER_SAKURA_TREES = decorateTree("denser_sakura_trees", 6, TerrestriaConfiguredFeatures.SAKURA_TREE);
 
 		DENSEST_CYPRESS_TREES = decorateTree("densest_cypress_trees", 9, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 
