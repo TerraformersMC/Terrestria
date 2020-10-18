@@ -41,6 +41,7 @@ public class RainbowRainforestBiomes {
 		TerrestriaBiomes.RAINBOW_RAINFOREST = TerrestriaBiomes.register("rainbow_rainforest", template.builder()
 				.depth(0.4F)
 				.scale(0.4F)
+				.playerSpawnFriendly()
 				.build());
 
 		TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS = TerrestriaBiomes.register("rainbow_rainforest_mountains", template.builder()

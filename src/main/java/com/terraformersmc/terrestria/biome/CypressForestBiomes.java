@@ -37,6 +37,7 @@ public class CypressForestBiomes {
 		TerrestriaBiomes.CYPRESS_FOREST = TerrestriaBiomes.register("cypress_forest", template.builder()
 				.depth(0.1F)
 				.scale(0.2F)
+				.playerSpawnFriendly()
 				.build());
 
 		TerrestriaBiomes.WOODED_CYPRESS_HILLS = TerrestriaBiomes.register("wooded_cypress_hills", template.builder()
