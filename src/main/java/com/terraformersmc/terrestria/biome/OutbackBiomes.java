@@ -36,6 +36,7 @@ public class OutbackBiomes {
 			.scale(0.05F)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_YUCCA_PALM_TREES)
 			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_DEAD_GRASS)
+			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.ACACIA_DOT_SHRUBS)
 			.build());
 
 		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", template.builder()
