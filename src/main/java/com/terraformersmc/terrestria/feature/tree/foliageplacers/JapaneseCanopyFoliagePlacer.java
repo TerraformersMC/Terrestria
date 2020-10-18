@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.Position;
 import com.terraformersmc.terraform.shapes.impl.Shapes;
+import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.AddLayer;
 import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terraform.shapes.impl.validator.AirValidator;
@@ -39,16 +40,18 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 	@Override
 	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int diameter, Set<BlockPos> leaves, int i, BlockBox blockBox) {
 
-		diameter = treeNode.getFoliageRadius() * 2;
-		BlockPos pos = treeNode.getCenter();
+		double width = treeNode.getFoliageRadius() * 2.25 + (random.nextFloat() - 0.5);
+		double height = width * 1.75 + (random.nextFloat() - 0.5);
+		BlockPos center = treeNode.getCenter();
 
-		Shapes.hemiEllipsoid(diameter, diameter, diameter * 1.8)
-				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(diameter - 2, diameter - 2, diameter - 1)))
-				.applyLayer(TranslateLayer.of(Position.of(pos.down(2))))
-				.stream()
-				.forEach((position) -> {
+		Shapes.hemiEllipsoid(width, width, height)
+				.applyLayer(new AddLayer(Shapes.ellipticalPyramid(width * 0.707, width * 0.707, height / 4) // 0.707 is approximately sqrt(2)/2
+						.applyLayer(new TranslateLayer(Position.of(0, height * 2/3, 0)))))
+				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(width - 2, width - 2, 5)))
+				.applyLayer(TranslateLayer.of(Position.of(center.down(2))))
+				.fill((position) -> {
 					//On the bottom layer only place 50% of the blocks
-					if (position.getY() != (pos.getY() - 1) || random.nextBoolean()) {
+					if (position.getY() - center.getY() >= 0 || random.nextBoolean()) {
 						tryPlaceLeaves(world, position.toBlockPos(), random, config);
 					}
 				});
