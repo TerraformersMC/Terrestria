@@ -34,7 +34,7 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected FoliagePlacerType<?> getType() {
-		return TerrestriaFoliagePlacerTypes.CANOPY;
+		return TerrestriaFoliagePlacerTypes.JAPANESE_CANOPY;
 	}
 
 	@Override
