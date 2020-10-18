@@ -22,7 +22,8 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<FallenStraightTrunkPlacer> FALLEN_STRAIGHT;
 
 	public static void init() {
-		// TODO: Do these need a "trunk_placer" suffix? It's the name of the registry after all.
+		// Do these need a "trunk_placer" suffix? It's the name of the registry after all.
+		// Mojang uses the "trunk_placer" suffix, so we'll use it too.
 		BENT = register("bent_trunk_placer", BentTrunkPlacer.CODEC);
 		CANOPY_4_BRANCHES = register("canopy_tree_4_branch_trunk_placer", CanopyTree4BranchTrunkPlacer.CODEC);
 		QUARTERED_MEGA_CANOPY = register("quartered_mega_canopy_trunk_placer", QuarteredMegaCanopyTrunkPlacer.CODEC);
