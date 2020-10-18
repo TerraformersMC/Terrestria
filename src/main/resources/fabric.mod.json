@@ -30,8 +30,10 @@
     ]
   },
   "depends": {
+    "minecraft": ">=1.16.2",
     "fabricloader": ">=0.7.2",
-    "fabric": ">=0.4.1",
+    "fabric": ">=0.22.1",
+    "terraform-overworld-biome-extensions-v1": ">0.1.0",
     "terraform-biome-builder-api-v1": "*",
     "terraform-legacy-v0": "*",
     "terraform-shapes-api-v1": "*"
