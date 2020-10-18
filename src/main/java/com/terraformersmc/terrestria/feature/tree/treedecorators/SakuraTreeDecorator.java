@@ -17,6 +17,7 @@ import net.minecraft.world.ChunkRegion;
 import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
+import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.tree.TreeDecorator;
 import net.minecraft.world.gen.tree.TreeDecoratorType;
 
@@ -53,7 +54,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 				continue;
 			}
 
-			if (valid) {
+			if (valid && TreeFeature.canReplace(world, top)) {
 				world.setBlockState(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), 3);
 			}
 		}
