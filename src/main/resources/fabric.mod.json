@@ -39,7 +39,8 @@
     "terraform-shapes-api-v1": "*"
   },
   "mixins": [
-    "mixins.terrestria.json"
+    "mixins.terrestria.json",
+    "mixins.terrestria.pathing.json"
   ],
   "custom": {
     "extrapieces:piecepack": "extrapieces.terrestria.json"

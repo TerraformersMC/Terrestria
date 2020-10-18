@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.mixin;
+package com.terraformersmc.terrestria.mixin.pathing;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,8 @@ import net.minecraft.world.BlockView;
 @Mixin(LandPathNodeMaker.class)
 public class MixinLandPathNodeMaker {
 	@Inject(method = "getCommonNodeType(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/entity/ai/pathing/PathNodeType;",
-		at = @At(value = "FIELD", target = "net/minecraft/block/Blocks.CACTUS:Lnet/minecraft/block/Block;"), cancellable = true)
+			at = @At(value = "FIELD", target = "net/minecraft/block/Blocks.CACTUS:Lnet/minecraft/block/Block;"),
+			cancellable = true, require = 0)
 	private static void terrestria$preventPathingIntoCustomCactuses(BlockView blockView, BlockPos blockPos, CallbackInfoReturnable<PathNodeType> callback) {
 		Block block = blockView.getBlockState(blockPos).getBlock();
 
