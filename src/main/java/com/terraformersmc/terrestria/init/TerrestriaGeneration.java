@@ -4,10 +4,12 @@ import java.util.Set;
 
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigNode;
+import com.terraformersmc.terraform.overworldbiomes.OverworldBiomesExt;
 
 import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
 
+import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -41,8 +43,8 @@ public class TerrestriaGeneration {
 
 		if(CALDERA_RIDGE != null) {
 			OverworldBiomes.addEdgeBiome(CALDERA, CALDERA_BEACH, 1);
-			// TODO OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
-			// TODO OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
+			OverworldBiomesExt.addBorderBiome(CALDERA_RIDGE, CALDERA_FOOTHILLS);
+			OverworldBiomesExt.addCenterBiome(CALDERA_RIDGE, CALDERA);
 
 			OverworldBiomes.setRiverBiome(CALDERA_FOOTHILLS, CALDERA_FOOTHILLS);
 			OverworldBiomes.setRiverBiome(CALDERA, CALDERA);
@@ -81,7 +83,7 @@ public class TerrestriaGeneration {
 		}
 
 		if(LUSH_DESERT != null) {
-			// TODO OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
+			OverworldBiomesExt.addCenterBiome(LUSH_DESERT, OASIS);
 		}
 
 		if(LUSH_REDWOOD_FOREST != null) {
@@ -114,8 +116,8 @@ public class TerrestriaGeneration {
 		}
 
 		if(VOLCANIC_ISLAND_SHORE != null) {
-			// TODO OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
-			// TODO OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
+			OverworldBiomesExt.addCenterBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND);
+			OverworldBiomesExt.addBorderBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_SHORE);
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, 1);
 			OverworldBiomes.addShoreBiome(VOLCANIC_ISLAND_SHORE, VOLCANIC_ISLAND_BEACH, 1);
 
@@ -126,10 +128,10 @@ public class TerrestriaGeneration {
 
 		if (OUTBACK != null) {
 			OverworldBiomes.addHillsBiome(OUTBACK, OUTBACK_ULURU, 1);
-			/* TODO OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
-				Biome.Category category = b.getCategory();
+			OverworldBiomesExt.addPredicatedBorderBiome(OUTBACK, OUTBACK_BUSHLAND, b -> {
+				Biome.Category category = BuiltinRegistries.BIOME.get(b).getCategory();
 				return category != Biome.Category.DESERT && category != Biome.Category.SAVANNA && category != Biome.Category.PLAINS && category != Biome.Category.MESA;
-			});*/
+			});
 		}
 	}
 

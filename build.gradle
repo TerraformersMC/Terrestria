@@ -34,6 +34,7 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	includeMod "net.earthcomputer:libstructure:${project.libstructure_version}"
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-overworld-biome-extensions-v1:${project.terraform_overworld_biome_extensions_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_wood_api_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
