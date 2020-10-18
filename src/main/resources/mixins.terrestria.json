@@ -5,6 +5,7 @@
   "mixins": [
     "MixinAlterGroundTreeDecorator",
     "MixinAnimalEntity",
+    "MixinDefaultBiomeCreator",
     "MixinEatGrassGoal",
     "MixinFeature",
     "MixinFluidBlock",

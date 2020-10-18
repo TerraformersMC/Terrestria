@@ -15,6 +15,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.chunk.StructureConfig;
@@ -44,25 +45,20 @@ public class TerrestriaStructures {
 
 		CANYON_ARCH = registerStructure("canyon_arch_structure", new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC).configure(FeatureConfig.DEFAULT), 5, 3);
 
-		OCEAN_VOLCANO = registerStructure("ocean_volcano_structure", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC).configure(OCEAN_VOLCANO_CONFIG), 24, 8);
 		VOLCANO = registerStructure("volcano_structure", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC).configure(VOLCANO_CONFIG), 10, 5);
 		SHORE_VOLCANO = VOLCANO.feature.configure(SHORE_VOLCANO_CONFIG);
 		registerConfiguredStructure("shore_volcano", SHORE_VOLCANO);
 	}
 
-	public static void addToVanillaBiomes() {
-		if (TerrestriaConfigManager.getGeneralConfig().areOceanVolcanoesEnabled()) {
-			addOceanVolcanoesToBiome(BiomeKeys.DEEP_WARM_OCEAN);
-			addOceanVolcanoesToBiome(BiomeKeys.DEEP_LUKEWARM_OCEAN);
-			addOceanVolcanoesToBiome(BiomeKeys.DEEP_OCEAN);
-			addOceanVolcanoesToBiome(BiomeKeys.DEEP_COLD_OCEAN);
-			addOceanVolcanoesToBiome(BiomeKeys.DEEP_FROZEN_OCEAN);
-		}
+	static {
+		// Need this to be ready as early as possible so that it can be injected into existing biomes.
+		OCEAN_VOLCANO = registerStructure("ocean_volcano_structure", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC).configure(OCEAN_VOLCANO_CONFIG), 24, 8);
 	}
 
-	private static void addOceanVolcanoesToBiome(RegistryKey<Biome> biome) {
-		// TODO: Cannot add to an immutable registry!
-		// TODO: BuiltinRegistries.BIOME.get(biome).getGenerationSettings().getStructureFeatures().add(() -> OCEAN_VOLCANO);
+	public static void addOceanVolcanoesToBiome(GenerationSettings.Builder builder) {
+		if (TerrestriaConfigManager.getGeneralConfig().areOceanVolcanoesEnabled()) {
+			builder.structureFeature(TerrestriaStructures.OCEAN_VOLCANO);
+		}
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {

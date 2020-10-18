@@ -17,6 +17,11 @@ public class TerrestriaConfigManager {
 	private static TerrestriaGeneralConfig generalConfig;
 	public static final Gson GSON = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
+	static {
+		// Make sure the configuration is ready
+		initializeGeneralConfig();
+	}
+
 	private static void prepareFiles() {
 		if (directory == null) {
 			directory = new File(FabricLoader.getInstance().getConfigDirectory(), Terrestria.MOD_ID);
