@@ -96,6 +96,9 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> ACACIA_DOT_SHRUBS;
 	public static ConfiguredFeature<?, ?> OAK_DOT_SHRUBS;
 
+	// Spruce trees
+	public static ConfiguredFeature<?, ?> SMALL_OAK_SPRUCE_TREES;
+
 	// Lush desert trees
 	public static ConfiguredFeature<?, ?> SAGUARO_CACTUSES;
 
@@ -165,9 +168,9 @@ public class TerrestriaDecoratedFeatures {
 		DENSEST_MEGA_REDWOOD_TREES = decorateTree("densest_mega_redwood_trees", 7, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		DENSEST_MEGA_HEMLOCK_TREES = decorateTree("densest_mega_hemlock_trees", 8, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-		DENSE_FANCY_OAK_TREES = decorateTree("dense_fancy_oak_trees", 3, ConfiguredFeatures.FANCY_OAK);
+		DENSE_FANCY_OAK_TREES = decorateTree("dense_fancy_oak_trees", 3, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
 		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
-		DENSEST_FANCY_OAK_TREES = decorateTree("densest_fancy_oak_trees", 7, ConfiguredFeatures.FANCY_OAK);
+		DENSEST_FANCY_OAK_TREES = decorateTree("densest_fancy_oak_trees", 7, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
 
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
@@ -185,6 +188,8 @@ public class TerrestriaDecoratedFeatures {
 
 		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
 		SPARSE_WILLOW_TREES = decorateTree("sparse_willow_trees", 1, TerrestriaConfiguredFeatures.WILLOW_TREE);
+
+		SMALL_OAK_SPRUCE_TREES = decorateTree("small_oak_spruce_trees", 2, TerrestriaConfiguredFeatures.SMALL_OAK_SPRUCE);
 
 		OUTBACK_BUSHLAND_TREES = decorateTree("outback_bushland_trees", 2, Feature.RANDOM_SELECTOR.configure(
 				new RandomFeatureConfig(ImmutableList.of(ConfiguredFeatures.ACACIA.withChance(0.95F), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE.withChance(0.75F)), ConfiguredFeatures.FANCY_OAK)));

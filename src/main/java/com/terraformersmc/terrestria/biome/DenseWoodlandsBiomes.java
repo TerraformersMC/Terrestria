@@ -27,6 +27,8 @@ public class DenseWoodlandsBiomes {
 				)
 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, PLAINS_TALL_GRASS, MINEABLES, ORES, DISKS,
 						PLAINS_FEATURES, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER)
+				//TODO: this is a placeholder until we get cedar trees
+				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_OAK_SPRUCE_TREES)
 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
 				.addDefaultSpawnEntries()

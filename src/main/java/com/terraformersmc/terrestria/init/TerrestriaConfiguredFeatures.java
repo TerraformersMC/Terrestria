@@ -16,6 +16,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -23,11 +24,14 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
+import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.tree.TreeDecorator;
+import net.minecraft.world.gen.trunk.LargeOakTrunkPlacer;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 public class TerrestriaConfiguredFeatures {
 
@@ -49,6 +53,8 @@ public class TerrestriaConfiguredFeatures {
 	public static ConfiguredFeature<TreeFeatureConfig, ?> RAINBOW_EUCALYPTUS_TREE;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> SAKURA_TREE;
 
+	public static ConfiguredFeature<TreeFeatureConfig, ?> DENSE_WOODLAND_TREE;
+
 	public static ConfiguredFeature<TreeFeatureConfig, ?> FALLEN_HEMLOCK_LOG;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> FALLEN_REDWOOD_LOG;
 
@@ -61,6 +67,7 @@ public class TerrestriaConfiguredFeatures {
 	public static ConfiguredFeature<TreeFeatureConfig, ?> RUBBER_TREE;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> SAGUARO_CACTUS_FEATURE;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> OAK_SHRUB;
+	public static ConfiguredFeature<TreeFeatureConfig, ?> SMALL_OAK_SPRUCE;
 
 	public static ConfiguredFeature<DefaultFeatureConfig, ?> DUM_DUM_HEAD;
 
@@ -180,6 +187,24 @@ public class TerrestriaConfiguredFeatures {
 				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
 				TerrestriaBlocks.CYPRESS.log.getDefaultState(),
 				TerrestriaBlocks.CYPRESS.wood.getDefaultState()));
+
+		DENSE_WOODLAND_TREE = registerTree("dense_woodland_tree", new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(Blocks.OAK_LOG.getDefaultState()),
+				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
+				new LargeOakFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(2), 2),
+				new DenseWoodlandTrunkPlacer(7, 4, 0),
+				new TwoLayersFeatureSize(1, 1, 1))
+				.ignoreVines()
+				.heightmap(Heightmap.Type.MOTION_BLOCKING).build());
+
+		SMALL_OAK_SPRUCE = registerTree("small_oak_spruce", new TreeFeatureConfig.Builder(
+				new SimpleBlockStateProvider(Blocks.SPRUCE_LOG.getDefaultState()),
+				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
+				new SpruceFoliagePlacer(UniformIntDistribution.of(2, 0), UniformIntDistribution.of(0, 1), UniformIntDistribution.of(1, 1)),
+				new StraightTrunkPlacer(4, 1, 0),
+				new TwoLayersFeatureSize(2, 0, 2))
+				.ignoreVines()
+				.build());
 
 		WILLOW_TREE = registerTree("willow_tree", canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState()))));
 		YUCCA_PALM_TREE = registerSandyTree("yucca_palm_tree", new TreeFeatureConfig.Builder(

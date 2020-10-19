@@ -20,6 +20,7 @@ public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<SmallBranchingTrunkPlacer> SMALL_BRANCHING;
 	public static TrunkPlacerType<RubberTreeTrunkPlacer> RUBBER_TREE;
 	public static TrunkPlacerType<FallenStraightTrunkPlacer> FALLEN_STRAIGHT;
+	public static TrunkPlacerType<DenseWoodlandTrunkPlacer> DENSE_WOODLAND;
 
 	public static void init() {
 		// Do these need a "trunk_placer" suffix? It's the name of the registry after all.
@@ -34,6 +35,7 @@ public class TerrestriaTrunkPlacerTypes {
 		SPINDLY = register("spindly_trunk_placer", SpindlyTrunkPlacer.CODEC);
 		SMALL_BRANCHING = register("small_branching_trunk_placer", SmallBranchingTrunkPlacer.CODEC);
 		FALLEN_STRAIGHT = register("fallen_straight_trunk_placer", FallenStraightTrunkPlacer.CODEC);
+		DENSE_WOODLAND = register("dense_woodland_trunk_placer", DenseWoodlandTrunkPlacer.CODEC);
 	}
 
 	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {
