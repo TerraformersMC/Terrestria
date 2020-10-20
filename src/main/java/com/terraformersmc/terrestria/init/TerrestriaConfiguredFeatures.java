@@ -57,6 +57,7 @@ public class TerrestriaConfiguredFeatures {
 
 	public static ConfiguredFeature<TreeFeatureConfig, ?> FALLEN_HEMLOCK_LOG;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> FALLEN_REDWOOD_LOG;
+	public static ConfiguredFeature<TreeFeatureConfig, ?> FALLEN_OAK_LOG;
 
 	public static ConfiguredFeature<TreeFeatureConfig, ?> JAPANESE_MAPLE_SHRUB;
 	public static ConfiguredFeature<TreeFeatureConfig, ?> JAPANESE_MAPLE_TREE;
@@ -116,6 +117,7 @@ public class TerrestriaConfiguredFeatures {
 
 		FALLEN_HEMLOCK_LOG = registerTree("fallen_hemlock_log", fallenLogOf(TerrestriaBlocks.HEMLOCK, new FallenStraightTrunkPlacer(5, 3, 1)));
 		FALLEN_REDWOOD_LOG = registerTree("fallen_redwood_log", fallenLogOf(TerrestriaBlocks.REDWOOD, new FallenStraightTrunkPlacer(7, 2, 1)));
+		FALLEN_OAK_LOG = registerTree("fallen_oak_log", fallenLogOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), new FallenStraightTrunkPlacer(4, 1, 1)));
 
 		JAPANESE_MAPLE_SHRUB = registerTree("japanese_maple_shrub", shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()));
 		OAK_SHRUB = registerTree("oak_shrub", shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()));
