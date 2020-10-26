@@ -118,11 +118,11 @@ public class TerrestriaItems {
 
 		VOLCANIC_ROCK = StoneItems.register("basalt", TerrestriaBlocks.VOLCANIC_ROCK);
 		BLACK_SAND = TerrestriaRegistry.registerBlockItem("basalt_sand", TerrestriaBlocks.BLACK_SAND);
-		ANDISOL = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.ANDISOL);
-		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
-		ANDISOL_GRASS_PATH = TerrestriaRegistry.registerBlockItem("andisol_grass_path", TerrestriaBlocks.ANDISOL_GRASS_PATH);
-		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.ANDISOL_PODZOL);
-		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL_FARMLAND);
+		ANDISOL = TerrestriaRegistry.registerBlockItem("basalt_dirt", TerrestriaBlocks.ANDISOL.getDirt());
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("basalt_grass_block", TerrestriaBlocks.ANDISOL.getGrassBlock());
+		ANDISOL_GRASS_PATH = TerrestriaRegistry.registerBlockItem("andisol_grass_path", TerrestriaBlocks.ANDISOL.getGrassPath());
+		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("basalt_podzol", TerrestriaBlocks.ANDISOL.getPodzol());
+		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL.getFarmland());
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
 		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
 

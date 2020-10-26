@@ -26,6 +26,7 @@ public class StoneBlocks {
 	public static StoneBlocks register(String name, MaterialColor color) {
 		StoneBlocks blocks = new StoneBlocks();
 
+		// TODO: Need to differentiate stone and cobblestone, because cobblestone breaks a bit slower!
 		blocks.plain = StoneVariantBlocks.register(name, color);
 		blocks.smooth = StoneVariantBlocks.register("smooth_" + name, color);
 		blocks.cobblestone = StoneVariantBlocks.register(name + "_cobblestone", color);

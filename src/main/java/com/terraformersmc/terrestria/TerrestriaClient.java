@@ -130,7 +130,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING
 		);
 
-		addColoredGrass(TerrestriaBlocks.ANDISOL_GRASS_BLOCK);
+		addColoredGrass(TerrestriaBlocks.ANDISOL.getGrassBlock());
 
 		addSigns(
 				TerrestriaBlocks.REDWOOD.sign,

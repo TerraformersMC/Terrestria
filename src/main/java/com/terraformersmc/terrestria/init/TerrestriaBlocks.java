@@ -5,12 +5,14 @@ import com.terraformersmc.terraform.block.LeafPileBlock;
 import com.terraformersmc.terraform.block.SmallLogBlock;
 import com.terraformersmc.terraform.block.TerraformDesertPlantBlock;
 import com.terraformersmc.terraform.block.TerraformDesertSaplingBlock;
-import com.terraformersmc.terraform.block.TerraformFarmlandBlock;
-import com.terraformersmc.terraform.block.TerraformGrassPathBlock;
 import com.terraformersmc.terraform.block.TerraformSaplingBlock;
 import com.terraformersmc.terraform.block.TerraformSeagrassBlock;
-import com.terraformersmc.terraform.block.TerraformSnowyBlock;
-import com.terraformersmc.terraform.util.TillableBlockRegistry;
+import com.terraformersmc.terraform.dirt.DirtBlocks;
+import com.terraformersmc.terraform.dirt.TerraformDirtRegistry;
+import com.terraformersmc.terraform.dirt.block.TerraformFarmlandBlock;
+import com.terraformersmc.terraform.dirt.block.TerraformGrassBlock;
+import com.terraformersmc.terraform.dirt.block.TerraformGrassPathBlock;
+import com.terraformersmc.terraform.dirt.block.TerraformSnowyBlock;
 import com.terraformersmc.terrestria.block.BasaltFlowerBlock;
 import com.terraformersmc.terrestria.block.BasaltGrassBlock;
 import com.terraformersmc.terrestria.block.PricklyDesertPlantBlock;
@@ -92,11 +94,7 @@ public class TerrestriaBlocks {
 
 	// Volcanic Island blocks
 	public static SandBlock BLACK_SAND;
-	public static Block ANDISOL;
-	public static Block ANDISOL_GRASS_BLOCK;
-	public static Block ANDISOL_GRASS_PATH;
-	public static Block ANDISOL_PODZOL;
-	public static Block ANDISOL_FARMLAND;
+	public static DirtBlocks ANDISOL;
 	public static StoneBlocks VOLCANIC_ROCK;
 	public static PlantBlock INDIAN_PAINTBRUSH;
 	public static PlantBlock MONSTERAS;
@@ -171,16 +169,16 @@ public class TerrestriaBlocks {
 		// Volcanic Island Blocks
 
 		BLACK_SAND = TerrestriaRegistry.register("basalt_sand", new SandBlock(0x202020, FabricBlockSettings.copyOf(Blocks.SAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.register("basalt_grass_block", new BasaltGrassBlock(ANDISOL, () -> ANDISOL_GRASS_PATH, FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_GRASS_PATH = TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(ANDISOL, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_PODZOL = TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0)));
-		ANDISOL_FARMLAND = TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), ANDISOL));
-		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
-		TillableBlockRegistry.add(ANDISOL, ANDISOL_FARMLAND.getDefaultState());
-		TillableBlockRegistry.add(ANDISOL_GRASS_BLOCK, ANDISOL_FARMLAND.getDefaultState());
-		TillableBlockRegistry.add(ANDISOL_GRASS_PATH, ANDISOL_FARMLAND.getDefaultState());
+		Block andisolDirt = TerrestriaRegistry.register("basalt_dirt", new Block(FabricBlockSettings.copyOf(Blocks.DIRT).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0)));
+		ANDISOL = TerraformDirtRegistry.register(new DirtBlocks (
+			andisolDirt,
+			TerrestriaRegistry.register("basalt_grass_block", new TerraformGrassBlock(andisolDirt, () -> ANDISOL.getGrassPath(), FabricBlockSettings.copyOf(Blocks.GRASS_BLOCK).breakByTool(FabricToolTags.SHOVELS, 0))),
+			TerrestriaRegistry.register("basalt_grass_path", new TerraformGrassPathBlock(andisolDirt, FabricBlockSettings.copyOf(Blocks.GRASS_PATH).breakByTool(FabricToolTags.SHOVELS, 0))),
+			TerrestriaRegistry.register("basalt_podzol", new TerraformSnowyBlock(FabricBlockSettings.copyOf(Blocks.PODZOL).breakByTool(FabricToolTags.SHOVELS, 0))),
+			TerrestriaRegistry.register("andisol_farmland", new TerraformFarmlandBlock(FabricBlockSettings.copyOf(Blocks.FARMLAND).materialColor(MaterialColor.BLACK).breakByTool(FabricToolTags.SHOVELS, 0), andisolDirt))
+		));
+		VOLCANIC_ROCK = StoneBlocks.register("basalt", MaterialColor.BLACK);
 
 		INDIAN_PAINTBRUSH = TerrestriaRegistry.register("indian_paintbrush", new BasaltFlowerBlock(StatusEffects.SATURATION, 4, FabricBlockSettings.copyOf(Blocks.POPPY)));
 		MONSTERAS = TerrestriaRegistry.register("monsteras", new BasaltFlowerBlock(StatusEffects.REGENERATION, 2, FabricBlockSettings.copyOf(Blocks.TALL_GRASS)));

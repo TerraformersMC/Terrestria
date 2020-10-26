@@ -70,8 +70,8 @@ public class TerrestriaSurfaces {
 		);
 
 		BASALT_CONFIG = new CliffSurfaceConfig(
-				TerrestriaBlocks.ANDISOL_GRASS_BLOCK.getDefaultState(),
-				TerrestriaBlocks.ANDISOL.getDefaultState(),
+				TerrestriaBlocks.ANDISOL.getGrassBlock().getDefaultState(),
+				TerrestriaBlocks.ANDISOL.getDirt().getDefaultState(),
 				Blocks.SAND.getDefaultState(),
 				TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState()
 		);

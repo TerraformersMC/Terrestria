@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.block;
 
-import com.terraformersmc.terraform.block.TerraformGrassBlock;
+import com.terraformersmc.terraform.dirt.block.TerraformGrassBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

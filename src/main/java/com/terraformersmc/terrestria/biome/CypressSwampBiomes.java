@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
+import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 
@@ -45,5 +46,7 @@ public class CypressSwampBiomes {
 				.addDefaultSpawnEntries()
 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4))
 				.build());
+
+		TerraformSlimeSpawnBiomes.addSlimeSpawnBiome(TerrestriaBiomes.CYPRESS_SWAMP);
 	}
 }
