@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terraform.entity.TerraformBoat;
-import com.terraformersmc.terraform.entity.TerraformBoatEntity;
+import com.terraformersmc.terraform.boat.TerraformBoat;
+import com.terraformersmc.terraform.boat.TerraformBoatEntity;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;

@@ -1,12 +1,13 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.entity.TerraformBoatEntity;
-import com.terraformersmc.terraform.item.TerraformBoatItem;
+import java.util.function.Supplier;
+
+import com.terraformersmc.terraform.boat.TerraformBoatEntity;
+import com.terraformersmc.terraform.boat.TerraformBoatItem;
+
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.SignItem;
-
-import java.util.function.Supplier;
 
 public class WoodItems {
 

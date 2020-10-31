@@ -1,13 +1,15 @@
 package com.terraformersmc.terrestria;
 
-import com.terraformersmc.terraform.block.TerraformSignBlock;
-import com.terraformersmc.terraform.entity.TerraformBoatEntity;
-import com.terraformersmc.terraform.registry.SpriteIdentifierRegistry;
+import com.terraformersmc.terraform.boat.TerraformBoatEntity;
+import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
+import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
@@ -26,6 +28,7 @@ import net.minecraft.util.Identifier;
 
 // This class is an entrypoint
 @SuppressWarnings("unused")
+@Environment(EnvType.CLIENT)
 public class TerrestriaClient implements ClientModInitializer {
 	private static final RenderLayer LEAVES_ITEM_LAYER = TexturedRenderLayers.getEntityCutout();
 	private static final RenderLayer GRASS_BLOCK_LAYER = RenderLayer.getCutoutMipped();

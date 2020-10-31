@@ -20,7 +20,7 @@ def ENV = System.getenv()
 version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "custom")
 
 repositories {
-	mavenLocal()
+	//mavenLocal()
 	maven {
 		name = 'Earthcomputer Mods'
 		url = 'https://dl.bintray.com/earthcomputer/mods'
@@ -37,8 +37,11 @@ dependencies {
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-dirt-v1:${project.terraform_dirt_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-overworld-biome-extensions-v1:${project.terraform_overworld_biome_extensions_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
-	includeMod "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_legacy_version}"
 	includeMod "com.terraformersmc.terraform-api-experimental:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+
+	// TODO: Remove legacy
+	includeMod "com.terraformersmc.terraform-api-experimental:terraform-legacy-v0:${project.terraform_legacy_version}"
 }
 
 def includeMod(String dep) {

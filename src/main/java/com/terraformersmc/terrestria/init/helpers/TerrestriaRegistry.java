@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.entity.TerraformBoatEntity;
-import com.terraformersmc.terraform.item.TerraformBoatItem;
-import com.terraformersmc.terraform.util.RecipeUtil;
+import com.terraformersmc.terraform.boat.TerraformBoatEntity;
+import com.terraformersmc.terraform.boat.TerraformBoatItem;
+import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -20,7 +20,7 @@ public class TerrestriaRegistry {
 		BlockItem item = new BlockItem(block, new Item.Settings().group(Terrestria.itemGroup));
 		item.appendBlocks(Item.BLOCK_ITEMS, item);
 
-		RecipeUtil.registerCompostableBlock(block);
+		ComposterRecipes.registerCompostableBlock(block);
 
 		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), item);
 	}
