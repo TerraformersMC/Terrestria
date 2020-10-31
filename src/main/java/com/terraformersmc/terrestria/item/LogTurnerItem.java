@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.item;
 
-import com.terraformersmc.terraform.block.QuarterLogBlock;
+import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;

@@ -7,7 +7,7 @@ import java.util.Set;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.terraform.block.QuarterLogBlock;
+import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 

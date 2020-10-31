@@ -3,7 +3,7 @@
   "id": "terrestria",
   "version": "${version}",
   "name": "Terrestria",
-  "description": "A vibrant biomes mod adding stunning and highly detailed biomes, inspired by aspects of ExtrabiomesXL and Redpower 2",
+  "description": "A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.",
   "authors": [
     "coderbot16",
     "NeusFear",
@@ -33,11 +33,15 @@
     "minecraft": ">=1.16.2",
     "fabricloader": ">=0.7.2",
     "fabric": ">=0.22.1",
-    "terraform-dirt-v1": ">=0.1.0-SNAPSHOT",
-    "terraform-overworld-biome-extensions-v1": ">0.1.0",
-    "terraform-biome-builder-api-v1": "*",
-    "terraform-legacy-v0": "*",
-    "terraform-shapes-api-v1": "*"
+    "libstructure": ">=1.5",
+    "terraform-biome-builder-api-v1": ">=1.0.0",
+    "terraform-config-api-v1": ">=1.0.0",
+    "terraform-dirt-api-v1": ">=1.0.0",
+    "terraform-overworld-biome-extensions-api-v1": ">=1.0.0",
+    "terraform-shapes-api-v1": ">=1.0.0",
+    "terraform-surfaces-api-v1": ">=1.0.0",
+    "terraform-tree-api-v1": ">=1.0.0",
+    "terraform-wood-api-v1": ">=1.0.0"
   },
   "mixins": [
     "mixins.terrestria.json",

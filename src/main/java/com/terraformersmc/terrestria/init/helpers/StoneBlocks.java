@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.block.TerraformPressurePlateBlock;
-import com.terraformersmc.terraform.block.TerraformStoneButtonBlock;
+import com.terraformersmc.terraform.wood.block.TerraformPressurePlateBlock;
+import com.terraformersmc.terraform.wood.block.TerraformStoneButtonBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;

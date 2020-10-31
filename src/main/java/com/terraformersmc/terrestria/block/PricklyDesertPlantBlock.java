@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.block;
 
-import com.terraformersmc.terraform.block.TerraformDesertPlantBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;

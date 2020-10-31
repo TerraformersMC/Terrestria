@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
-import com.terraformersmc.terraform.placer.PlacerTypes;
+import com.terraformersmc.terraform.tree.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import net.minecraft.util.Identifier;

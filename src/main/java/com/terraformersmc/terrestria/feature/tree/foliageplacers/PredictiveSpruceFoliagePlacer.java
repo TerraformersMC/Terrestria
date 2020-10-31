@@ -5,7 +5,7 @@ import java.util.Set;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.terraform.block.ExtendedLeavesBlock;
+import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.block.BlockState;

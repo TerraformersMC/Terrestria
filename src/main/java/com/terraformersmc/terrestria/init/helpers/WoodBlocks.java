@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.leaves.block.TransparentLeavesBlock;
+import com.terraformersmc.terraform.wood.block.*;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terrestria.Terrestria;

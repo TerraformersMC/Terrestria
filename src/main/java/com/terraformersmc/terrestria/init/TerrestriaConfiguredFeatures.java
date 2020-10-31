@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.terraform.tree.feature.TerraformTreeFeatures;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
@@ -205,7 +206,7 @@ public class TerrestriaConfiguredFeatures {
 	}
 
 	private static ConfiguredFeature<TreeFeatureConfig, ?> registerSandyTree(String name, TreeFeatureConfig config) {
-		ConfiguredFeature<TreeFeatureConfig, ?> configured = TerrestriaFeatures.SANDY_TREE.configure(config);
+		ConfiguredFeature<TreeFeatureConfig, ?> configured = TerraformTreeFeatures.SANDY_TREE.configure(config);
 		Identifier id = new Identifier(Terrestria.MOD_ID, name);
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);

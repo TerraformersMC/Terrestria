@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.block;
 
-import com.terraformersmc.terraform.block.BareSmallLogBlock;
+import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

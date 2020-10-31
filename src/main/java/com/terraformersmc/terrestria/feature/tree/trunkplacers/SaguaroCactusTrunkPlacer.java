@@ -3,7 +3,7 @@ package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.terraform.block.BareSmallLogBlock;
+import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.util.math.BlockBox;

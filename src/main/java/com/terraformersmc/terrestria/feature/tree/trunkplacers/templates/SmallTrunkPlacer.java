@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers.templates;
 
-import com.terraformersmc.terraform.block.BareSmallLogBlock;
+import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockBox;

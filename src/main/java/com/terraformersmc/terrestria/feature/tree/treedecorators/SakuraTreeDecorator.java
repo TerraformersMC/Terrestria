@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.mojang.serialization.Codec;
-import com.terraformersmc.terraform.block.SmallLogBlock;
+import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
 

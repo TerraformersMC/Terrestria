@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.block.*;
+import com.terraformersmc.terraform.wood.block.*;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
 
