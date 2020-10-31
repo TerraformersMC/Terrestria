@@ -2,10 +2,10 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.terraformersmc.terraform.util.Shapes;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.util.math.BlockBox;
@@ -52,7 +52,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 				continue;
 			}
 
-			Shapes.circle(pos.mutableCopy(), treeRadius, position -> {
+			circle(pos.mutableCopy(), treeRadius, position -> {
 				if (TreeFeature.isAirOrLeaves(world, position)) {
 					world.setBlockState(position, config.leavesProvider.getBlockState(random, position), 19);
 					box.encompass(new BlockBox(position, position));
@@ -78,5 +78,34 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 
 		// A 3rd-degree polynomial approximating the shape of a cypress tree - increasing rapidly, and then tapering off.
 		return 6.25 * (x * x * x) - 12.5 * (x * x) + 6.25 * x;
+	}
+
+	/**
+	 * Iterates over the positions contained with in a circle defined by origin and radius. The circle is two dimensional,
+	 * perpendicular to the Y axis.
+	 *
+	 * @param origin The center block of the circle; this function clobbers the variable, and it must be reset afterwards
+	 * @param radius The radius of the circle
+	 * @param consumer The target of the positions; it passes the same BlockPos.Mutable object each time
+	 */
+	private static void circle(BlockPos.Mutable origin, double radius, Consumer<BlockPos.Mutable> consumer) {
+		int x = origin.getX();
+		int z = origin.getZ();
+
+		double radiusSq = radius * radius;
+		int radiusCeil = (int) Math.ceil(radius);
+
+		for (int dz = -radiusCeil; dz <= radiusCeil; dz++) {
+			int dzSq = dz * dz;
+
+			for (int dx = -radiusCeil; dx <= radiusCeil; dx++) {
+				int dxSq = dx * dx;
+
+				if (dzSq + dxSq <= radiusSq) {
+					origin.set(x + dx, origin.getY(), z + dz);
+					consumer.accept(origin);
+				}
+			}
+		}
 	}
 }
