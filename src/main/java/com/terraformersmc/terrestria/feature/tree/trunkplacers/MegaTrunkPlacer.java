@@ -41,10 +41,10 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	public List<FoliagePlacer.TreeNode> generate(ModifiableTestableWorld world, Random random, int trunkHeight, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
 		// Set the blocks below the trunk to dirt
 		BlockPos down = pos.down();
-		method_27400(world, down);
-		method_27400(world, down.east());
-		method_27400(world, down.south());
-		method_27400(world, down.south().east());
+		setToDirt(world, down);
+		setToDirt(world, down.east());
+		setToDirt(world, down.south());
+		setToDirt(world, down.south().east());
 
 		// Place the trunk
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
@@ -84,7 +84,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 
 	protected static void setLog(ModifiableTestableWorld modifiableTestableWorld, BlockPos mutable, Set<BlockPos> set, BlockBox blockBox, BlockState state) {
 		if (TreeFeature.canReplace(modifiableTestableWorld, mutable)) {
-			method_27404(modifiableTestableWorld, mutable, state, blockBox);
+			setBlockState(modifiableTestableWorld, mutable, state, blockBox);
 			set.add(mutable.toImmutable());
 		}
 	}
@@ -112,7 +112,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		//Place the root
 		for (int i = 0; i < height; i++) {
 			if (TreeFeature.canTreeReplace(world, bottom) || TreeFeature.canReplace(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				method_27404(world, bottom, wood.getBlockState(random, bottom), box);
+				setBlockState(world, bottom, wood.getBlockState(random, bottom), box);
 				logs.add(bottom.toImmutable());
 			}
 

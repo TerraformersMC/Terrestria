@@ -41,7 +41,7 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 	}
 
 	protected static void placeSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
-		method_27404(modifiableTestableWorld, blockPos, blockState, blockBox);
+		setBlockState(modifiableTestableWorld, blockPos, blockState, blockBox);
 		set.add(blockPos.toImmutable());
 	}
 

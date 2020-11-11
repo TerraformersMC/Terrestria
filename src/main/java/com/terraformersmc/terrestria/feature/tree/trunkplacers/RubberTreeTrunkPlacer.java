@@ -42,7 +42,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		//Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
 		//Instance a direction before the loop so it no be slow mkay
@@ -50,7 +50,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		//Place the rest of the trunk and branches
 		for (int j = 0; j < trunkHeight + 3; j++) {
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 			branchDirection = Direction.Type.HORIZONTAL.random(random);
 			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), branchDirection, set, blockBox, treeFeatureConfig), 1, false));
 			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), set, blockBox, treeFeatureConfig), 1, false));
@@ -66,14 +66,14 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 	private BlockPos placeBranch(ModifiableTestableWorld world, Random random, BlockPos pos, Direction direction, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
 		BlockPos.Mutable currentPosition = pos.mutableCopy();
 		//Place a block in the branch direction
-		method_27402(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig);
+		getAndSetState(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig);
 		//50% of the time place another block in the same general direction
 		if (random.nextBoolean()) {
 			//50% of the time make the branch move upwards
 			if (random.nextBoolean()) {
 				currentPosition.move(Direction.UP);
 			}
-			method_27402(world, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), set, blockBox, treeFeatureConfig);
 		}
 		return currentPosition;
 	}

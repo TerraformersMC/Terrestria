@@ -38,14 +38,14 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 	public List<FoliagePlacer.TreeNode> generate(ModifiableTestableWorld world, Random random, int trunkHeight, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
 
 		//Check and set the block below to dirt
-		method_27400(world, pos.down());
+		setToDirt(world, pos.down());
 
 		//Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 
 		//We vary the base trunk height, but not the top of the tree for simplicity sake so this height does not reflect the actual height of this type of tree
 		for (int i = 0; i < getHeight(random); i++) {
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
 		//Remember the current location for branch placement
@@ -69,8 +69,8 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		currentPosition = origin.mutableCopy();
 
 		//Place 2 more blocks to cap off the tree
-		method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
-		method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+		getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+		getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 
 		//Return the crossing of the branches as the foliage placer's center
 		return ImmutableList.of(new FoliagePlacer.TreeNode(origin, radius, false));
@@ -78,7 +78,7 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 
 	private static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
 		if (TreeFeature.canReplace(modifiableTestableWorld, blockPos)) {
-			method_27404(modifiableTestableWorld, blockPos, blockState, blockBox);
+			setBlockState(modifiableTestableWorld, blockPos, blockState, blockBox);
 			set.add(blockPos.toImmutable());
 		}
 	}

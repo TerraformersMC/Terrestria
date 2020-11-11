@@ -88,10 +88,10 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 		//Place a branch with length in the diagonalDirection, with an upwards angle
 		for (int i = 0; i < length; i++) {
 			if (random.nextBoolean()) {
-				method_27402(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig);
-				method_27402(world, random, currentPosition.move(diagonalDirection), set, blockBox, treeFeatureConfig);
+				getAndSetState(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig);
+				getAndSetState(world, random, currentPosition.move(diagonalDirection), set, blockBox, treeFeatureConfig);
 			}
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
 		//Return the end of the branch as a valid foliage placement location

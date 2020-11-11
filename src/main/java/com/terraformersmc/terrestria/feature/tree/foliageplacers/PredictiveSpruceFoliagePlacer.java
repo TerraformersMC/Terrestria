@@ -44,14 +44,14 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, Set<BlockPos> set, int offsetY, boolean giantTrunk, BlockBox blockBox) {
+	protected void generateSquare(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, Set<BlockPos> set, int offsetY, boolean giantTrunk, BlockBox blockBox) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		int actualDistance;
 
 		for (int offsetX = -radius; offsetX <= radius + giantTrunkOffset; ++offsetX) {
 			for (int offsetZ = -radius; offsetZ <= radius + giantTrunkOffset; ++offsetZ) {
-				if (!this.method_27387(random, offsetX, offsetY, offsetZ, radius, giantTrunk)) {
+				if (!this.isPositionInvalid(random, offsetX, offsetY, offsetZ, radius, giantTrunk)) {
 					mutable.set(blockPos, offsetX, offsetY, offsetZ);
 					if (TreeFeature.canReplace(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);

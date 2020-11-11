@@ -71,7 +71,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 
 	private static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, Random random, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
 		if (TreeFeature.canReplace(modifiableTestableWorld, blockPos)) {
-			method_27404(modifiableTestableWorld, blockPos, blockState, blockBox);
+			setBlockState(modifiableTestableWorld, blockPos, blockState, blockBox);
 			set.add(blockPos.toImmutable());
 		}
 	}

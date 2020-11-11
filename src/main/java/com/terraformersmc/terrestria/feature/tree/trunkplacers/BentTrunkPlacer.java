@@ -37,14 +37,14 @@ public class BentTrunkPlacer extends TrunkPlacer {
 		Direction bendDirection = Direction.Type.HORIZONTAL.random(random);
 
 		//Check and set the block below to dirt
-		method_27400(world, pos.down());
+		setToDirt(world, pos.down());
 
 		//Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 
 		//Place the first few blocks
 		for (int i = 0; i < 4 + random.nextInt(3); i++) {
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
 		//Offset in the lean direction and also move it down to keep the trunk solid
@@ -52,7 +52,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 
 		//Place a few more blocks
 		for (int i = 0; i < 4 + random.nextInt(1); i++) {
-			method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 		}
 
 		//50% of the time make a 3rd set of blocks the same as the step before
@@ -60,7 +60,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 			currentPosition.move(bendDirection).move(Direction.DOWN);
 
 			for (int i = 0; i < 3; i++) {
-				method_27402(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+				getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
 			}
 		}
 
