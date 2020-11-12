@@ -26,7 +26,7 @@ public class TerrestriaRegistry {
 	}
 
 	public static SignItem registerSignItem(String name, Block standing, Block wall) {
-		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new SignItem(new Item.Settings().group(Terrestria.itemGroup), standing, wall));
+		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new SignItem(new Item.Settings().group(Terrestria.itemGroup).maxCount(16), standing, wall));
 	}
 
 	public static TerraformBoatItem registerBoatItem(String name, Supplier<EntityType<TerraformBoatEntity>> boatType) {
