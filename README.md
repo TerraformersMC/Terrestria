@@ -1,62 +1,51 @@
-![Terrestria Header Image](https://i.gyazo.com/c1f9e08c4ab1a6fb2b307be9a0110bd1.png)
+<p style="text-align: center;"><img src="banners/Terrestria-full-2.0.0.png" /></p>
+<p style="text-align: center;">Terrestria is a detailed and vibrant biomes mod for Minecraft running on the Fabric mod loader. Terrestria enhances gameplay through the addition of 17 major biomes supported by 24 component biomes, 9 new wood types, as well as a healthy selection of foliage - providing a refreshing new selection of terrain.</p>
+<p style="text-align: center;"><a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><strong><img src="banners/requires-fabric-api.png" alt="" width="149" height="50" /></strong></a></p>
+<p style="text-align: center;"><span style="font-size: 12px;"><strong>Terrestria requires <a href="https://fabricmc.net/use/">Fabric Loader</a> and <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">Fabric API</a></strong>&nbsp;</span></p>
+<p style="text-align: center;"><strong>Check out the <a href="https://discord.gg/jEGF5fb">Terraformers Discord Server</a> to chat about Terrestria and other Fabric mods!</strong></p>
+<p style="text-align: center;"><strong style="font-size: 1.2rem;">Visit the <a href="https://github.com/TerraformersMC/Terrestria/wiki">Terrestria Wiki</a> to learn more about each biome</strong></p>
+<p>The goal of Terrestria is to be the most polished and visually appealing biomes mod available for Minecraft, and to this end there has been intense focus on selecting, detailing, and refining the biomes until they look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount of biomes and then populating them with large amounts of detail and component biomes. This overall results in a more cohesive experience compared to existing biome mods.</p>
+<h4 style="font-size: 18px; text-align: left;"><strong>Biomes:</strong></h4>
+<h5 style="font-size: 14px;"><strong>v1.0.0 - Initial Release</strong></h5>
+<ul>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Caldera">Caldera</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Forest">Cypress Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Swamp">Cypress Swamp</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Dense-Woodlands">Dense Woodlands</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Hemlock-Rainforest">Hemlock Rainforest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Japanese-Maple-Forest">Japanese Maple Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Lush-Redwood-Forest">Lush Redwood Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Rainbow-Rainforest">Rainbow Rainforest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Redwood-Forest">Redwood Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest">Sakura Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Snowy-Hemlock-Forest">Snowy Hemlock Forest</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Volcanic-Island">Volcanic Island</a></span></li>
+</ul>
+<h5><span style="font-size: 14px;"><strong>v2.0.0 - The Dry Update</strong></span></h5>
+<ul>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Canyon">Canyon</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Dunes">Dunes</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Lush-Desert">Lush Desert</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Oasis">Oasis</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Outback">Outback</a></span></li>
+</ul>
 
-**Terrestria is built for the Fabric mod loader! It will not work on Forge.**
+<p><strong>Some biomes contain variants to increase variety</strong></p>
+<p><strong>Images of the biomes can be found on the <a href="https://www.curseforge.com/minecraft/mc-mods/terrestria/screenshots">Images page</a>.</strong></p>
 
-## About Terrestria
+<br/>
 
-Terrestria is a detailed and vibrant biomes mod for Minecraft 1.14.4 and above running on the Fabric mod loader.
-Terrestria enhances gameplay through the addition of 17 major biomes supported by 24 component biomes, 9 new wood types, 
-as well as a healthy selection of foliage - providing a refreshing new selection of terrain.
+<h4 style="text-align: left;"><span style="font-size: 18px;"><strong>Other Mods by Terraformers:</strong></span></h4>
+<p style="text-align: center;"><span style="font-size: 12px;"><strong>Check out Terrestria's sister mod, <a href="https://www.curseforge.com/minecraft/mc-mods/traverse">Traverse</a>:</strong></span></p>
+<p style="text-align: center;"><a href="https://www.curseforge.com/minecraft/mc-mods/traverse"><img src="banners/Traverse-preview-2.2.9.png" width="267" height="100" /></a></p>
+<p style="text-align: center;">Traverse works well alongside Terrestria if you are looking for a set of biomes that are closer to the Vanilla+ ideal. Traverse has a lot of unique, colorful biomes that embrace the simple vanilla aesthetic instead of trying to overshadow it.</p>
+<p style="text-align: center;"><span style="font-size: 12px;"><strong>Check out the Terraformers Nether biome expansion, <a href="https://www.curseforge.com/minecraft/mc-mods/cinderscapes">Cinderscapes</a>:</strong></span></p>
+<p style="text-align: center;"><a href="https://www.curseforge.com/minecraft/mc-mods/cinderscapes"><img src="banners/Cinderscapes-preview-1.0.0.png" width="267" height="100" /></a></p>
+<p style="text-align: center;">Cinderscapes complements Terrestria by providing an expansion to the nether, much like Terrestria does to the overworld. Cinderscapes brings more life and beauty to the nether, while also keeping it frightening.&nbsp;</p>
+<p style="text-align: center;"><span style="font-size: 12px;"><strong><a href="https://www.curseforge.com/minecraft/mc-mods/campanion">Campanion</a>, your camping companion:</strong></span></p>
+<p style="text-align: center;"><a href="https://www.curseforge.com/minecraft/mc-mods/campanion"><img src="banners/Campanion-preview-1.0.0.png" width="267" height="100" /></a></p>
+<p style="text-align: center;">Campanion adds various tools and utilities to help improve your adventures away from your home. Campanion also works well alongside Terrestria in order to make the exploration of the biomes even more fun.</p>
 
-The goal of Terrestria is to be *the* most polished and visually appealing biomes mod available for Minecraft 1.16,
-and to this end there has been intense focus on selecting, detailing, and refining the biomes until they
-look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount
-of biomes and then populating them with large amounts of detail and component biomes. This overall results in a
-more cohesive experience compared to existing biome mods.
+<br/>
 
-### Biomes
- - [Caldera](https://github.com/TerraformersMC/Terrestria/wiki/Caldera)
- - [Canyon](https://github.com/TerraformersMC/Terrestria/wiki/Canyon)
- - [Cypress Forest](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Forest)
- - [Cypress Swamp](https://github.com/TerraformersMC/Terrestria/wiki/Cypress-Swamp)
- - [Dense Woodlands](https://github.com/TerraformersMC/Terrestria/wiki/Dense-Woodlands)
- - [Dunes](https://github.com/TerraformersMC/Terrestria/wiki/Dunes)
- - [Hemlock Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Hemlock-Rainforest)
- - [Japanese Maple Forest](https://github.com/TerraformersMC/Terrestria/wiki/Japanese-Maple-Forest)
- - [Lush Desert](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Desert)
- - [Lush Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Lush-Redwood-Forest)
- - [Oasis](https://github.com/TerraformersMC/Terrestria/wiki/Oasis)
- - [Outback](https://github.com/TerraformersMC/Terrestria/wiki/Outback)
- - [Rainbow Rainforest](https://github.com/TerraformersMC/Terrestria/wiki/Rainbow-Rainforest)
- - [Redwood Forest](https://github.com/TerraformersMC/Terrestria/wiki/Redwood-Forest)
- - [Sakura Forest](https://github.com/TerraformersMC/Terrestria/wiki/Sakura-Forest)
- - [Snowy Hemlock Forest](https://github.com/TerraformersMC/Terrestria/wiki/Snowy-Hemlock-Forest)
- - [Volcanic Island](https://github.com/TerraformersMC/Terrestria/wiki/Volcanic-Island)
-
-### Links
-
- - Terraformers Website: coming soon!
- - Terraformers Discord: https://discord.gg/jEGF5fb
-
-### Credits
-
- - coderbot: Project lead and lead developer
- - NeusFear: Artist and developer
- - SuperCoder79: Developer
- - Valoeghese: Former Developer
- - Prospector: TerraformersMC organizer, Terraform Developer, and adviser
-
-### Licensing
-
-Terrestria is free software licensed under the GNU LGPLv3 license. To simplify (this is not legal advice), Terrestria may be
-freely distributed in combination with an attribution notice (such as a mod list entry, a way to access this source code 
-(for modpack developers, a link to the Curse or GitHub page; for fork authors, by providing access to the modified code),
-and finally a notice that Terrestria carries the LGPL v3 license, which can be included in the mod list.
-
-### Want more?
-
-Check out Terrestria's sister mod, [Traverse](https://www.curseforge.com/minecraft/mc-mods/traverse):
-
-[![Traverse](https://i.imgur.com/9yLH37E.png)](https://www.curseforge.com/minecraft/mc-mods/traverse)
-
-Traverse works well alongside Terrestria if you are looking for a set of biomes that are closer to the Vanilla+ ideal. Traverse has a lot of unique, colorful biomes that embrace the simple vanilla aesthetic instead of trying to overshadow it.
+<p style="text-align: center;"><span style="font-size: 14px;"><strong>Terrestria is a mod for Fabric, and there are no plans to port this mod to Forge.</strong></span></p>
