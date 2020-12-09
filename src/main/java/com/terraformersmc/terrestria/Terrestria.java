@@ -24,10 +24,10 @@ public class Terrestria implements ModInitializer {
 	public static BiomeConfigHandler biomeConfigHandler;
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
+	private static final TerrestriaConfigManager CONFIG_MANAGER = new TerrestriaConfigManager();
+
 	@Override
 	public void onInitialize() {
-		TerrestriaConfigManager.initializeGeneralConfig();
-
 		itemGroup = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
 		biomeConfigHandler = new BiomeConfigHandler(MOD_ID);
 
@@ -52,5 +52,9 @@ public class Terrestria implements ModInitializer {
 		biomeConfigHandler.save();
 
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
+	}
+
+	public static TerrestriaConfigManager getConfigManager() {
+		return CONFIG_MANAGER;
 	}
 }

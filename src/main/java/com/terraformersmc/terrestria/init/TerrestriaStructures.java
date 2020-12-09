@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoFeatureConfig;
@@ -12,9 +11,6 @@ import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.UniformIntDistribution;
@@ -56,7 +52,7 @@ public class TerrestriaStructures {
 	}
 
 	public static void addOceanVolcanoesToBiome(GenerationSettings.Builder builder) {
-		if (TerrestriaConfigManager.getGeneralConfig().areOceanVolcanoesEnabled()) {
+		if (Terrestria.getConfigManager().getGeneralConfig().areOceanVolcanoesEnabled()) {
 			builder.structureFeature(TerrestriaStructures.OCEAN_VOLCANO);
 		}
 	}
