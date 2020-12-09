@@ -38,12 +38,12 @@ public class SakuraTreeDecorator extends TreeDecorator {
 				continue;
 			}
 
-			// If we're in initial world gen, use the worldgen height map
-			// Placing a sapling will cause that to fail, so use the regular heightmap instead then.
-			// TODO: This doesn't seem to work for saplings...?
-			Heightmap.Type heightmap = world instanceof ChunkRegion ? Heightmap.Type.WORLD_SURFACE_WG : Heightmap.Type.WORLD_SURFACE;
-
-			BlockPos top = world.getTopPosition(heightmap, pos);
+			// We can't use WORLD_SURFACE here, because that includes leaves. MOTION_BLOCKING_NO_LEAVES seems to be what
+			// we want, because it doesn't include leaves, but it will get us the surface of the terrain and the surface
+			// of the water.
+			//
+			// This seems to work in both worldgen and when growing saplings.
+			BlockPos top = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
 
 			boolean valid = world.testBlockState(top.down(),
 					state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) ||
@@ -54,6 +54,8 @@ public class SakuraTreeDecorator extends TreeDecorator {
 				continue;
 			}
 
+			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
+			// Otherwise, you get very destructive sakura trees.
 			if (valid && TreeFeature.canReplace(world, top)) {
 				world.setBlockState(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState(), 3);
 			}
