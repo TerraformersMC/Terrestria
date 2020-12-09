@@ -28,6 +28,9 @@ public class Terrestria implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		// Load the general config if it hasn't been loaded already
+		CONFIG_MANAGER.getGeneralConfig();
+
 		itemGroup = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
 		biomeConfigHandler = new BiomeConfigHandler(MOD_ID);
 

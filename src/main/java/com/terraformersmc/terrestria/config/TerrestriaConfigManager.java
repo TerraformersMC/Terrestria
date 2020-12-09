@@ -77,7 +77,13 @@ public class TerrestriaConfigManager {
 			return GSON.fromJson(content, clazz);
 		} catch (JsonSyntaxException e) {
 			Terrestria.LOGGER.error("Failed to parse Terrestria configuration file at " + configPath, e);
+
+			// Revert the config so that the user has a fresh start if they need it
+			// It's also possible for the user to delete the config to recreate it, but that seems a bit unintuitive
 			Terrestria.LOGGER.error("Reverting to default configuration, ensure that your file has correct syntax");
+			saveConfig(configPath, defaults);
+
+			// There are a few websites like this, but this was the first result that came up.
 			Terrestria.LOGGER.error("In the future, consider using something like https://jsonchecker.com/ to check your syntax");
 
 			// It would be quite annoying if a user just spent 10 minutes editing the file, only for it to be wiped away.

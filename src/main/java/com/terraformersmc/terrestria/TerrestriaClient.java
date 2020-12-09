@@ -45,6 +45,9 @@ public class TerrestriaClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		// Load the client config if it hasn't been loaded already
+		Terrestria.getConfigManager().getClientConfig();
+
 		ColorProviderRegistry.BLOCK.register(
 				FOLIAGE_BLOCK_COLORS,
 				TerrestriaBlocks.RUBBER.leaves,
