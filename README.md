@@ -1,6 +1,5 @@
 <p style="text-align: center;"><img src="banners/Terrestria-full-2.0.0.png" /></p>
 <p style="text-align: center;">Terrestria is a detailed and vibrant biomes mod for Minecraft running on the Fabric mod loader. Terrestria enhances gameplay through the addition of 17 major biomes supported by 24 component biomes, 9 new wood types, as well as a healthy selection of foliage - providing a refreshing new selection of terrain.</p>
-<p style="text-align: center;"><a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><strong><img src="banners/requires-fabric-api.png" alt="" width="149" height="50" /></strong></a></p>
 <p style="text-align: center;"><span style="font-size: 12px;"><strong>Terrestria requires <a href="https://fabricmc.net/use/">Fabric Loader</a> and <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">Fabric API</a></strong>&nbsp;</span></p>
 <p style="text-align: center;"><strong>Check out the <a href="https://discord.gg/jEGF5fb">Terraformers Discord Server</a> to chat about Terrestria and other Fabric mods!</strong></p>
 <p style="text-align: center;"><strong style="font-size: 1.2rem;">Visit the <a href="https://github.com/TerraformersMC/Terrestria/wiki">Terrestria Wiki</a> to learn more about each biome</strong></p>
