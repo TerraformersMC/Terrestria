@@ -46,8 +46,9 @@
   "breaks": {
     "terraform-legacy-v0": "*",
     "terraform": "*",
-    "traverse": "<=3.0.0",
-    "cinderscapes": "<=1.2.3"
+    "campanion": "<1.2.0",
+    "traverse": "<3.0.0",
+    "cinderscapes": "<1.2.3"
   },
   "mixins": [
     "mixins.terrestria.json",
