@@ -46,11 +46,8 @@ public class TerrestriaConfigManager {
 
 	private static <T> T loadConfig(Path configPath, T defaults, Class<T> clazz, Path backupPath) {
 		if (!Files.exists(configPath)) {
-			saveConfig(configPath, defaults);
-
-			if (!Files.exists(configPath)) {
+			if (!saveConfig(configPath, defaults)) {
 				Terrestria.LOGGER.error("Unable to save default configuration values for " + configPath);
-				Terrestria.LOGGER.error("Ensure that you have the correct file permissions and that your disk isn't full!");
 
 				// Not much else to do at this point.
 				return defaults;
@@ -94,21 +91,25 @@ public class TerrestriaConfigManager {
 				Files.write(backupPath, content.getBytes(StandardCharsets.UTF_8));
 			} catch (IOException ioe) {
 				Terrestria.LOGGER.error("Couldn't save previous configuration file content at " + backupPath, ioe);
-				Terrestria.LOGGER.error("This shouldn't happen under normal conditions, ensure that you have the correct permissions");
+				Terrestria.LOGGER.error("This shouldn't happen under normal conditions, ensure that you have the correct permissions and that your disk isn't full!");
 			}
 
 			return defaults;
 		}
 	}
 
-	private static <T> void saveConfig(Path configPath, T instance) {
+	private static <T> boolean saveConfig(Path configPath, T instance) {
 		String jsonString = GSON.toJson(instance);
 
 		try {
 			Files.write(configPath, jsonString.getBytes(StandardCharsets.UTF_8));
+
+			return true;
 		} catch (IOException e) {
 			Terrestria.LOGGER.error("Couldn't save Terrestria configuration file at " + configPath, e);
-			Terrestria.LOGGER.error("This shouldn't happen under normal conditions, ensure that you have the correct permissions");
+			Terrestria.LOGGER.error("This shouldn't happen under normal conditions, ensure that you have the correct permissions and that your disk isn't full!");
+
+			return false;
 		}
 	}
 
