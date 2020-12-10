@@ -45,7 +45,6 @@
     "fabric-crash-report-info-v1": "*",
     "fabric-registry-sync-v0": "*",
     "fabric-resource-loader-v0": "*",
-    "libstructure": ">=1.5",
     "terraform-biome-builder-api-v1": ">=1.0.0",
     "terraform-config-api-v1": ">=1.0.0",
     "terraform-dirt-api-v1": ">=1.1.0",

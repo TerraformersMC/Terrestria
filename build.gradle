@@ -21,10 +21,6 @@ version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "c
 
 repositories {
 	mavenLocal()
-	maven {
-		name = 'Earthcomputer Mods'
-		url = 'https://dl.bintray.com/earthcomputer/mods'
-	}
 }
 
 dependencies {
@@ -88,9 +84,6 @@ dependencies {
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
 
-	// TODO: No longer need libstructure, use fabric-structure-api-v1
-	includeLocal "net.earthcomputer:libstructure:${project.libstructure_version}"
-
 	includeMod "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
 	includeMod "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
 	includeMod "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
@@ -108,11 +101,6 @@ def includeMod(String dep) {
 	} else {
 		dependencies.modImplementation(dep)
 	}
-	dependencies.include(dep)
-}
-
-def includeLocal(String dep) {
-	dependencies.modImplementation(dep)
 	dependencies.include(dep)
 }
 

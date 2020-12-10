@@ -6,7 +6,6 @@ import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureF
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoFeatureConfig;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
-import net.earthcomputer.libstructure.LibStructure;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -19,6 +18,8 @@ import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
+
+import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
 
 public class TerrestriaStructures {
 
@@ -64,11 +65,12 @@ public class TerrestriaStructures {
 	private static <FC extends FeatureConfig, F extends StructureFeature<FC>> ConfiguredStructureFeature<FC, F> registerStructure(String id, ConfiguredStructureFeature<FC, F> configured, int spacing, int separation) {
 		Identifier identifier = new Identifier(Terrestria.MOD_ID, id);
 
-		LibStructure.registerStructure(identifier,
-				configured.feature,
-				GenerationStep.Feature.SURFACE_STRUCTURES,
-				new StructureConfig(spacing, separation, 21345),
-				configured);
+		FabricStructureBuilder
+				.create(identifier, configured.feature)
+				.step(GenerationStep.Feature.SURFACE_STRUCTURES)
+				.defaultConfig(new StructureConfig(spacing, separation, 21345))
+				.superflatFeature(configured)
+				.register();
 
 		return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);
 	}
