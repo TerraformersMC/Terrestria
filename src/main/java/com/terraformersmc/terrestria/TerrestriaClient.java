@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria;
 import com.terraformersmc.terraform.boat.TerraformBoatEntity;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
-import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaEntities;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
@@ -46,7 +45,8 @@ public class TerrestriaClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		TerrestriaConfigManager.initializeClientConfig();
+		// Load the client config if it hasn't been loaded already
+		Terrestria.getConfigManager().getClientConfig();
 
 		ColorProviderRegistry.BLOCK.register(
 				FOLIAGE_BLOCK_COLORS,

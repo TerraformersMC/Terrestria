@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
-import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 
 import net.minecraft.block.BlockState;
@@ -69,7 +69,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 
 	static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
 		// TODO: Quarter logs aren't generated
-		if (config instanceof QuarteredMegaTreeConfig && TerrestriaConfigManager.getGeneralConfig().areQuarterLogsEnabled()) {
+		if (config instanceof QuarteredMegaTreeConfig && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
 			return ((QuarteredMegaTreeConfig) config).quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, side);
 		} else {
 			return config.trunkProvider.getBlockState(random, pos);
