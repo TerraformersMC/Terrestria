@@ -65,11 +65,14 @@ dependencies {
 	// Base module required by most other fabric api modules
 	includeFabricApiModule "fabric-api-base"
 
-	// Uesd by fabric-tool-attribute-api-v1
+	// Used by fabric-tool-attribute-api-v1
 	includeFabricApiModule "fabric-tag-extensions-v0"
 
-	// Uesd by terraform-wood-api-v1
+	// Used by terraform-wood-api-v1
 	includeFabricApiModule "fabric-networking-v0"
+
+	// Used by fabric-content-registries-v1
+	includeFabricApiModule "fabric-lifecycle-events-v1"
 
 	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
 	// === functions just by being loaded in the first place. ===
