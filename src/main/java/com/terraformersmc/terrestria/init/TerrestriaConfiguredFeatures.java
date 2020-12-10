@@ -96,7 +96,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
 				new SphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new RubberTreeTrunkPlacer(6, 2, 2),
-				new TwoLayersFeatureSize(1, 1, 1)
+				new TwoLayersFeatureSize(1, 0, 1)
 				).build());
 
 		CYPRESS_TREE = registerTree("cypress_tree", new TreeFeatureConfig.Builder(
@@ -141,7 +141,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAGUARO_CACTUS.getDefaultState()),
 				new NoneFoliagePlacer(),
 				new SaguaroCactusTrunkPlacer(0,0,0),
-				new TwoLayersFeatureSize(1, 1, 1))
+				new TwoLayersFeatureSize(1, 0, 1))
 				.build());
 
 		SAKURA_TREE = registerTree("sakura_tree", new TreeFeatureConfig.Builder(
@@ -149,7 +149,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.SAKURA.leaves.getDefaultState()),
 				new SmallCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
-				new TwoLayersFeatureSize(1, 1, 1))
+				new TwoLayersFeatureSize(1, 0, 1))
 				.decorators(ImmutableList.of(new SakuraTreeDecorator()))
 				.build());
 
@@ -158,7 +158,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.JAPANESE_MAPLE.leaves.getDefaultState()),
 				new JapaneseCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
-				new TwoLayersFeatureSize(1, 1, 1)
+				new TwoLayersFeatureSize(1, 0, 1)
 		).build());
 
 		DARK_JAPANESE_MAPLE_TREE = registerTree("dark_japanese_maple_tree", new TreeFeatureConfig.Builder(
@@ -166,7 +166,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES.getDefaultState()),
 				new JapaneseCanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
-				new TwoLayersFeatureSize(1, 1, 1)
+				new TwoLayersFeatureSize(1, 0, 1)
 		).build());
 
 		MEGA_CYPRESS_TREE = registerTree("mega_cypress_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
@@ -188,7 +188,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.YUCCA_PALM.leaves.getDefaultState()),
 				new SmallLogSphereFoliagePlacer(UniformIntDistribution.of(1), UniformIntDistribution.of(0)),
 				new SmallBranchingTrunkPlacer(6, 2, 1),
-				new TwoLayersFeatureSize(1, 1, 1)).build());
+				new TwoLayersFeatureSize(1, 0, 1)).build());
 
 		OAK_DOT_SHRUB = registerTree("oak_dot_shrub", dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()));
 		ACACIA_DOT_SHRUB = registerTree("acacia_dot_shrub", dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState()));
@@ -224,7 +224,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(leaves),
 				new CanopyFoliagePlacer(UniformIntDistribution.of(0), UniformIntDistribution.of(0)),
 				trunkPlacer,
-				new TwoLayersFeatureSize(1, 0 , 1))
+				new TwoLayersFeatureSize(3, 0 , 1))
 				.decorators(decorators)
 				.build();
 	}
