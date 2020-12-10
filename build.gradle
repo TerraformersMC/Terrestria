@@ -21,19 +21,71 @@ version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "c
 
 repositories {
 	mavenLocal()
-	maven {
-		name = 'Earthcomputer Mods'
-		url = 'https://dl.bintray.com/earthcomputer/mods'
-	}
 }
 
 dependencies {
+	// Baseline stuff. Needed by all Fabric API mods.
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	includeLocal "net.earthcomputer:libstructure:${project.libstructure_version}"
+	// === Active modules: We use the APIs of these modules, and they need to be loaded. ===
+
+	// Adding our biomes to the overworld biome generator
+	includeFabricApiModule "fabric-biome-api-v1"
+
+	// FabricBlockSettings
+	includeFabricApiModule "fabric-object-builder-api-v1"
+
+	// Custom block render layer registration (such as for leaves)
+	includeFabricApiModule "fabric-blockrenderlayer-v1"
+
+	// FlammableBlockRegistry, FuelRegistry, etc
+	includeFabricApiModule "fabric-content-registries-v0"
+
+	// ToolTags.SHOVELS, ToolTags.HOES
+	includeFabricApiModule "fabric-tool-attribute-api-v1"
+
+	// FabricItemGroupBuilder
+	includeFabricApiModule "fabric-item-groups-v0"
+
+	// ColorProviderRegistry
+	includeFabricApiModule "fabric-rendering-v1"
+
+	// EntityRendererRegistry
+	includeFabricApiModule "fabric-renderer-registries-v1"
+
+	// API for adding structures to Minecraft. It's effectively LibStructure merged into Fabric API.
+	// However, it also includes an important fix to a vanilla bug:
+	// MC-149777 - java.util.ConcurrentModificationException when using Java 11 or above
+	includeFabricApiModule "fabric-structure-api-v1"
+
+	// === Dependency modules: Required by other modules to function ===
+
+	// Base module required by most other fabric api modules
+	includeFabricApiModule "fabric-api-base"
+
+	// Used by fabric-tool-attribute-api-v1
+	includeFabricApiModule "fabric-tag-extensions-v0"
+
+	// Used by terraform-wood-api-v1
+	includeFabricApiModule "fabric-networking-v0"
+
+	// Used by fabric-content-registries-v1
+	includeFabricApiModule "fabric-lifecycle-events-v1"
+
+	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
+	// === functions just by being loaded in the first place. ===
+
+	// Important information in crash reports
+	includeFabricApiModule "fabric-crash-report-info-v1"
+
+	// Ensures consistency of registry content in multiplayer and when loading a saved game
+	// Very important, will result in data loss if removed!
+	includeFabricApiModule "fabric-registry-sync-v0"
+
+	// Loads the Terrestria asset pack and data pack.
+	includeFabricApiModule "fabric-resource-loader-v0"
 
 	includeMod "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
 	includeMod "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
@@ -48,16 +100,18 @@ dependencies {
 def includeMod(String dep) {
 	File file = file('../dev.txt');
 	if (file.exists()) {
-		dependencies.compile(dep)
+		dependencies.implementation(dep)
 	} else {
-		dependencies.modCompile(dep)
+		dependencies.modImplementation(dep)
 	}
 	dependencies.include(dep)
 }
 
-def includeLocal(String dep) {
-	dependencies.modCompile(dep)
-	dependencies.include(dep)
+def includeFabricApiModule(String moduleName) {
+	Object dependency = fabricApi.module(moduleName, project.fabric_version);
+
+	dependencies.modImplementation(dependency);
+	dependencies.include(dependency);
 }
 
 processResources {
