@@ -32,7 +32,6 @@
   "depends": {
     "minecraft": ">=1.16.2",
     "fabricloader": ">=0.7.2",
-    "fabric": ">=0.22.1",
     "libstructure": ">=1.5",
     "terraform-biome-builder-api-v1": ">=1.0.0",
     "terraform-config-api-v1": ">=1.0.0",
