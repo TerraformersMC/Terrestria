@@ -36,7 +36,7 @@
     "libstructure": ">=1.5",
     "terraform-biome-builder-api-v1": ">=1.0.0",
     "terraform-config-api-v1": ">=1.0.0",
-    "terraform-dirt-api-v1": ">=1.0.0",
+    "terraform-dirt-api-v1": ">=1.1.0",
     "terraform-overworld-biome-extensions-api-v1": ">=1.0.0",
     "terraform-shapes-api-v1": ">=1.0.0",
     "terraform-surfaces-api-v1": ">=1.0.0",
