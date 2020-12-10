@@ -4,7 +4,6 @@ plugins {
 	id 'idea'
 	id 'eclipse'
 	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id 'com.wynprice.cursemaven' version '2.1.0'
 	id 'com.matthewprenger.cursegradle' version '1.4.0'
 	id 'net.dumbcode.gradlehook' version '1.3.1'
 }
