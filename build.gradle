@@ -19,7 +19,7 @@ def ENV = System.getenv()
 version = version + "+" + (ENV.BUILD_NUMBER ? ("build." + ENV.BUILD_NUMBER) : "custom")
 
 repositories {
-	mavenLocal()
+	// mavenLocal()
 }
 
 dependencies {
