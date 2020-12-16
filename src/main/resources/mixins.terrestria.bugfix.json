@@ -1,0 +1,11 @@
+{
+  "required": false,
+  "package": "com.terraformersmc.terrestria.mixin.bugfix",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+	"MixinCarversCanCarveRedSand"
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  }
+}
