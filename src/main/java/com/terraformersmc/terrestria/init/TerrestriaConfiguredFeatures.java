@@ -89,8 +89,8 @@ public class TerrestriaConfiguredFeatures {
 		HEMLOCK_TREE = registerTree("hemlock_tree", tallSpruceOf(TerrestriaBlocks.HEMLOCK, 24, 4, 3, 2, 5, 1, 11));
 		REDWOOD_TREE = registerTree("redwood_tree", tallSpruceOf(TerrestriaBlocks.REDWOOD, 24, 4, 3, 5, 2, 12, 7));
 
-		MEGA_HEMLOCK_TREE = registerTree("mega_hemlock_tree", giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 8, 7, 2, 5, 1, 11));
-		MEGA_REDWOOD_TREE = registerTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 8, 7, 2, 5, 12, 7));
+		MEGA_HEMLOCK_TREE = registerQuarteredMegaTree("mega_hemlock_tree", giantSpruceOf(TerrestriaBlocks.HEMLOCK, 32, 8, 7, 2, 5, 1, 11));
+		MEGA_REDWOOD_TREE = registerQuarteredMegaTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, 32, 8, 7, 2, 5, 12, 7));
 		RUBBER_TREE = registerTree("rubber_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.leaves.getDefaultState()),
@@ -114,7 +114,7 @@ public class TerrestriaConfiguredFeatures {
 		JAPANESE_MAPLE_SHRUB = registerTree("japanese_maple_shrub", shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState()));
 		OAK_SHRUB = registerTree("oak_shrub", shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState()));
 
-		RAINBOW_EUCALYPTUS_TREE = registerTree("rainbow_eucalyptus_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+		RAINBOW_EUCALYPTUS_TREE = registerQuarteredMegaTree("rainbow_eucalyptus_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves.getDefaultState()),
 				new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2),
@@ -123,9 +123,8 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.maxWaterDepth(3)
 				.build(),
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState(),
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState(),
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState()));
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood.getDefaultState())));
 
 		SMALL_RAINBOW_EUCALYPTUS_SAPLING_TREE = registerTree("small_rainbow_eucalyptus_tree", (new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log.getDefaultState()),
@@ -169,7 +168,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 1)
 		).build());
 
-		MEGA_CYPRESS_TREE = registerTree("mega_cypress_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+		MEGA_CYPRESS_TREE = registerQuarteredMegaTree("mega_cypress_tree", new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.log.getDefaultState()),
 				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.leaves.getDefaultState()),
 				new LargeOakFoliagePlacer(UniformIntDistribution.of(3), UniformIntDistribution.of(2), 2),
@@ -178,9 +177,8 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.maxWaterDepth(6)
 				.build(),
-				TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState(),
-				TerrestriaBlocks.CYPRESS.log.getDefaultState(),
-				TerrestriaBlocks.CYPRESS.wood.getDefaultState()));
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.quarterLog.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.CYPRESS.wood.getDefaultState())));
 
 		WILLOW_TREE = registerTree("willow_tree", canopyOf(TerrestriaBlocks.WILLOW, new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState()))));
 		YUCCA_PALM_TREE = registerSandyTree("yucca_palm_tree", new TreeFeatureConfig.Builder(
@@ -198,6 +196,15 @@ public class TerrestriaConfiguredFeatures {
 
 	private static ConfiguredFeature<TreeFeatureConfig, ?> registerTree(String name, TreeFeatureConfig config) {
 		ConfiguredFeature<TreeFeatureConfig, ?> configured = Feature.TREE.configure(config);
+		Identifier id = new Identifier(Terrestria.MOD_ID, name);
+
+		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
+
+		return configured;
+	}
+
+	private static ConfiguredFeature<TreeFeatureConfig, ?> registerQuarteredMegaTree(String name, QuarteredMegaTreeConfig config) {
+		ConfiguredFeature<TreeFeatureConfig, ?> configured = TerrestriaFeatures.QUARTERED_MEGA_TREE.configure(config);
 		Identifier id = new Identifier(Terrestria.MOD_ID, name);
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, configured);
@@ -302,18 +309,16 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig giantSpruceOf(QuarteredWoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+	static QuarteredMegaTreeConfig giantSpruceOf(QuarteredWoodBlocks woodBlocks, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
 		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(woodBlocks.log.getDefaultState()),
 				new SimpleBlockStateProvider(woodBlocks.leaves.getDefaultState()),
 				new PredictiveSpruceFoliagePlacer(UniformIntDistribution.of(baseRadius, randomRadius), UniformIntDistribution.of(0, 2), UniformIntDistribution.of(baseBareHeight, randomBareHeight)),
 				new MegaTrunkPlacer(height, randomHeight, extraRandomHeight),
 				new TwoLayersFeatureSize(2, 1, 2))
-
 				.ignoreVines()
 				.build(),
-				woodBlocks.quarterLog.getDefaultState(),
-				woodBlocks.log.getDefaultState(),
-				woodBlocks.wood.getDefaultState());
+				new SimpleBlockStateProvider(woodBlocks.quarterLog.getDefaultState()),
+				new SimpleBlockStateProvider(woodBlocks.wood.getDefaultState()));
 	}
 }

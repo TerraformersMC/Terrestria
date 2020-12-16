@@ -56,13 +56,13 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 			setLog(world, mutable, set, blockBox, getState(random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.SOUTHWEST), pos, 0, i, 1);
 		}
 
-		BlockStateProvider wood = treeFeatureConfig.trunkProvider;
+		BlockStateProvider rootsProvider = treeFeatureConfig.trunkProvider;
 
 		if (treeFeatureConfig instanceof QuarteredMegaTreeConfig) {
-			wood = new SimpleBlockStateProvider(((QuarteredMegaTreeConfig) treeFeatureConfig).woodBlock);
+			rootsProvider = ((QuarteredMegaTreeConfig) treeFeatureConfig).rootsProvider;
 		}
 
-		growRoots(set, world, pos.mutableCopy(), random, blockBox, wood);
+		growRoots(set, world, pos.mutableCopy(), random, blockBox, rootsProvider);
 
 		return ImmutableList.of(new FoliagePlacer.TreeNode(pos.up(trunkHeight), 0, true));
 	}
@@ -70,7 +70,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
 		// TODO: Quarter logs aren't generated
 		if (config instanceof QuarteredMegaTreeConfig && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
-			return ((QuarteredMegaTreeConfig) config).quarterLogBlock.with(QuarterLogBlock.BARK_SIDE, side);
+			return ((QuarteredMegaTreeConfig) config).quarteredTrunkProvider.getBlockState(random, pos).with(QuarterLogBlock.BARK_SIDE, side);
 		} else {
 			return config.trunkProvider.getBlockState(random, pos);
 		}
