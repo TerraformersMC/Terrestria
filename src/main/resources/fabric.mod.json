@@ -63,7 +63,8 @@
   },
   "mixins": [
     "mixins.terrestria.json",
-    "mixins.terrestria.pathing.json"
+    "mixins.terrestria.pathing.json",
+    "mixins.terrestria.bugfix.json"
   ],
   "custom": {
     "extrapieces:piecepack": "extrapieces.terrestria.json"
