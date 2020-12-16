@@ -33,20 +33,20 @@ public class MixinCarversCanCarveRedSand {
 
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "<init>", at = @At("RETURN"))
-	private void terrestria$addRedSandToCarvableList(Codec configCodec, int heightLimit, CallbackInfo ci) {
+	private void terrestria$carveSmoothSandstone(Codec configCodec, int heightLimit, CallbackInfo ci) {
 		// Part 1: Allow smooth sandstone
-		alwaysCarvableBlocks = addToImmutableSet(alwaysCarvableBlocks, Blocks.SMOOTH_SANDSTONE);
+		alwaysCarvableBlocks = terrestria$addToImmutableSet(alwaysCarvableBlocks, Blocks.SMOOTH_SANDSTONE);
 	}
 
 	@Inject(method = "canCarveBlock(Lnet/minecraft/block/BlockState;Lnet/minecraft/block/BlockState;)Z", at = @At("HEAD"), cancellable = true)
-	private void canCarveBlock(BlockState state, BlockState stateAbove, CallbackInfoReturnable<Boolean> ci) {
+	private void terrestria$carveRedSand(BlockState state, BlockState stateAbove, CallbackInfoReturnable<Boolean> ci) {
 		// Part 2: Allow red sand conditionally just like vanilla does for normal sand
 		if (state.isOf(Blocks.RED_SAND) && !stateAbove.getFluidState().isIn(FluidTags.WATER)) {
 			ci.setReturnValue(true);
 		}
 	}
 
-	private static <E> ImmutableSet<E> addToImmutableSet(Set<E> list, E item) {
+	private static <E> ImmutableSet<E> terrestria$addToImmutableSet(Set<E> list, E item) {
 		ImmutableSet.Builder<E> newList = ImmutableSet.builder();
 
 		newList.addAll(list);

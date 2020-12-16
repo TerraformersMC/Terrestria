@@ -3,7 +3,9 @@
   "package": "com.terraformersmc.terrestria.mixin.bugfix",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-	"MixinCarversCanCarveRedSand"
+	"CarverAccessor",
+	"MixinCarversCanCarveRedSand",
+	"MixinUnderwaterCarvers"
   ],
   "injectors": {
 	"defaultRequire": 1
