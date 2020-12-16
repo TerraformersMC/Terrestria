@@ -27,7 +27,7 @@ import net.minecraft.world.gen.carver.Carver;
  * </p>
  */
 @Mixin(Carver.class)
-public class MixinCarversCanCarveRedSand {
+public class MixinCarver {
 	@Shadow
 	protected Set<Block> alwaysCarvableBlocks;
 

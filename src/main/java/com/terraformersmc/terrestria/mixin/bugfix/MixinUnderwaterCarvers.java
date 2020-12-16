@@ -14,6 +14,9 @@ import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.carver.UnderwaterCaveCarver;
 import net.minecraft.world.gen.carver.UnderwaterRavineCarver;
 
+/**
+ * Same as {@link MixinCarver} but for underwater carvers.
+ */
 @Mixin({UnderwaterCaveCarver.class, UnderwaterRavineCarver.class})
 public class MixinUnderwaterCarvers {
 	@SuppressWarnings("rawtypes")
