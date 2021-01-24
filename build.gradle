@@ -78,6 +78,13 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 }
 
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'http://maven.terraformersmc.com/'
+	}
+}
+
 def includeFabricApiModule(String moduleName) {
 	includeMod "fabric-api", fabricApi.module(moduleName, project.fabric_version)
 }
