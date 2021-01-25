@@ -81,7 +81,7 @@ dependencies {
 repositories {
 	maven {
 		name = 'TerraformersMC'
-		url = 'http://maven.terraformersmc.com/'
+		url = 'https://maven.terraformersmc.com/'
 	}
 }
 
