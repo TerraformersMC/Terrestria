@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "terrestria:stripped_redwood_wood"
+    ]
+  },
+  "criteria": {
+    "has_stripped_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "terrestria:stripped_redwood_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "terrestria:stripped_redwood_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_log",
+      "has_the_recipe"
+    ]
+  ]
+}
