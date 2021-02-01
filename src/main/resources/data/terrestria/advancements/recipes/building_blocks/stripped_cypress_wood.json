@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "terrestria:stripped_cypress_wood"
+    ]
+  },
+  "criteria": {
+    "has_stripped_log": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "terrestria:stripped_cypress_log"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "terrestria:stripped_cypress_wood"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stripped_log",
+      "has_the_recipe"
+    ]
+  ]
+}
