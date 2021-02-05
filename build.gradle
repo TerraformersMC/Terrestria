@@ -50,7 +50,7 @@ dependencies {
 	includeFabricApiModule "fabric-tag-extensions-v0"
 
 	// Used by terraform-wood-api-v1
-	includeFabricApiModule "fabric-networking-v0"
+	includeFabricApiModule "fabric-networking-api-v1"
 
 	// Used by fabric-content-registries-v1
 	includeFabricApiModule "fabric-lifecycle-events-v1"
