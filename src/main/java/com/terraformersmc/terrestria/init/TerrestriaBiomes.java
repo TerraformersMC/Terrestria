@@ -22,6 +22,7 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> CYPRESS_FOREST;
 	public static RegistryKey<Biome> CYPRESS_SWAMP;
 	public static RegistryKey<Biome> DENSE_WOODLANDS;
+	public static RegistryKey<Biome> DENSE_WOODLANDS_CLEARING;
 	public static RegistryKey<Biome> DENSE_WOODLANDS_EDGE;
 	public static RegistryKey<Biome> DUNES;
 	public static RegistryKey<Biome> DUNES_EDGE;

@@ -62,6 +62,7 @@ public class TerrestriaGeneration {
 		}
 
 		if(DENSE_WOODLANDS != null) {
+			OverworldBiomes.addHillsBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_CLEARING, 1.0);
 			OverworldBiomes.addEdgeBiome(DENSE_WOODLANDS, DENSE_WOODLANDS_EDGE, 1.0);
 		}
 
