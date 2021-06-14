@@ -8,11 +8,11 @@ import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.chunk.StructureConfig;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
@@ -26,9 +26,9 @@ public class TerrestriaStructures {
 	public static StructurePieceType VOLCANO_PIECE;
 	public static StructurePieceType CANYON_ARCH_PIECE;
 
-	private static final VolcanoFeatureConfig OCEAN_VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntDistribution.of(20, 19), 30, false);
-	private static final VolcanoFeatureConfig SHORE_VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntDistribution.of(48, 31), 45, true);
-	private static final VolcanoFeatureConfig VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntDistribution.of(32, 63), 60, false);
+	private static final VolcanoFeatureConfig OCEAN_VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntProvider.create(19, 20), 30, false);
+	private static final VolcanoFeatureConfig SHORE_VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntProvider.create(31, 48), 45, true);
+	private static final VolcanoFeatureConfig VOLCANO_CONFIG = new VolcanoFeatureConfig(UniformIntProvider.create(32, 63), 60, false);
 
 	public static ConfiguredStructureFeature<DefaultFeatureConfig, ? extends StructureFeature<DefaultFeatureConfig>> CANYON_ARCH;
 	public static ConfiguredStructureFeature<VolcanoFeatureConfig, ? extends StructureFeature<VolcanoFeatureConfig>> OCEAN_VOLCANO;

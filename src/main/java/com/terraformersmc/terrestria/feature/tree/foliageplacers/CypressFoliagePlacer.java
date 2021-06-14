@@ -1,17 +1,17 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.util.math.BlockBox;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -21,7 +21,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	public static final Codec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
 			fillFoliagePlacerFields(instance).apply(instance, CypressFoliagePlacer::new));
 
-	public CypressFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+	public CypressFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
@@ -31,7 +31,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, Set<BlockPos> leaves, int i, BlockBox box) {
+	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 		double maxRadius = 1.5 + 1.5 * random.nextDouble();
 
 		BlockPos.Mutable pos = treeNode.getCenter().mutableCopy();
@@ -54,9 +54,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 
 			circle(pos.mutableCopy(), treeRadius, position -> {
 				if (TreeFeature.isAirOrLeaves(world, position)) {
-					world.setBlockState(position, config.leavesProvider.getBlockState(random, position), 19);
-					box.encompass(new BlockBox(position, position));
-					leaves.add(position.toImmutable());
+					replacer.accept(position.toImmutable(), config.foliageProvider.getBlockState(random, position));
 				}
 			});
 		}

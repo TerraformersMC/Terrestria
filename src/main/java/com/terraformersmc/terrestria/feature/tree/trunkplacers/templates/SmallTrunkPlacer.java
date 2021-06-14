@@ -3,16 +3,15 @@ package com.terraformersmc.terrestria.feature.tree.trunkplacers.templates;
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 public abstract class SmallTrunkPlacer extends TrunkPlacer {
 
@@ -20,32 +19,31 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
 	}
 
-	protected void setBlockStateAndUpdate(TreeFeatureConfig config, Random random, Set<BlockPos> set, ModifiableTestableWorld world, BlockPos origin, Direction direction, BlockBox blockBox) {
+	protected void setBlockStateAndUpdate(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction) {
 		//Place the block
-		checkAndPlaceSpecificBlockState(world, origin, set, blockBox, config.trunkProvider.getBlockState(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
+		checkAndPlaceSpecificBlockState(world, origin, replacer, config.trunkProvider.getBlockState(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
 
 		// Fix the one behind it to connect if it's a BareSmallLogBlock
-		addSmallLogConnection(config, random, set, world, origin.offset(direction.getOpposite()), direction, blockBox);
+		addSmallLogConnection(config, random, replacer, world, origin.offset(direction.getOpposite()), direction);
 	}
 
-	protected void addSmallLogConnection(TreeFeatureConfig config, Random random, Set<BlockPos> set, ModifiableTestableWorld world, BlockPos origin, Direction direction, BlockBox blockBox) {
+	protected void addSmallLogConnection(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction) {
 		if (world.testBlockState(origin, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
-			placeSpecificBlockState(world, origin, set, blockBox, getOriginalState(config, world, origin, random).with(getPropertyFromDirection(direction), true));
+			placeSpecificBlockState(world, replacer, origin, getOriginalState(config, world, origin, random).with(getPropertyFromDirection(direction), true));
 		}
 	}
 
-	protected static void checkAndPlaceSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
-		if (TreeFeature.canReplace(modifiableTestableWorld, blockPos)) {
-			placeSpecificBlockState(modifiableTestableWorld, blockPos, set, blockBox, blockState);
+	protected static void checkAndPlaceSpecificBlockState(TestableWorld testableWorld, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
+		if (TreeFeature.canReplace(testableWorld, blockPos)) {
+			placeSpecificBlockState(testableWorld, replacer, blockPos, blockState);
 		}
 	}
 
-	protected static void placeSpecificBlockState(ModifiableTestableWorld modifiableTestableWorld, BlockPos blockPos, Set<BlockPos> set, BlockBox blockBox, BlockState blockState) {
-		setBlockState(modifiableTestableWorld, blockPos, blockState, blockBox);
-		set.add(blockPos.toImmutable());
+	protected static void placeSpecificBlockState(TestableWorld testableWorld, BiConsumer<BlockPos, BlockState> replacer, BlockPos blockPos, BlockState blockState) {
+		replacer.accept(blockPos.toImmutable(), blockState);
 	}
 
-	protected BlockState getOriginalState(TreeFeatureConfig config, ModifiableTestableWorld world, BlockPos pos, Random random) {
+	protected BlockState getOriginalState(TreeFeatureConfig config, TestableWorld world, BlockPos pos, Random random) {
 
 		if (!world.testBlockState(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
 			return null;

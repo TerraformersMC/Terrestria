@@ -65,7 +65,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	public boolean isSupportedBlock(Block block) {
-		return block == TerrestriaBlocks.SAGUARO_CACTUS || block.isIn(BlockTags.SAND);
+		return block == TerrestriaBlocks.SAGUARO_CACTUS || BlockTags.SAND.contains(block);
 	}
 
 	private boolean isSupported(BlockState state, WorldView world, BlockPos pos) {

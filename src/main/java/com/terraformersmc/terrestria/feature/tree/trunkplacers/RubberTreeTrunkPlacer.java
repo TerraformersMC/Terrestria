@@ -4,10 +4,11 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-import net.minecraft.util.math.BlockBox;
+
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
@@ -16,12 +17,12 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 	public static final Codec<RubberTreeTrunkPlacer> CODEC = RecordCodecBuilder.create(rubberTreeTrunkPlacerInstance ->
-			method_28904(rubberTreeTrunkPlacerInstance).apply(rubberTreeTrunkPlacerInstance, RubberTreeTrunkPlacer::new));
+			fillTrunkPlacerFields(rubberTreeTrunkPlacerInstance).apply(rubberTreeTrunkPlacerInstance, RubberTreeTrunkPlacer::new));
 
 	public RubberTreeTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
@@ -33,7 +34,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.TreeNode> generate(ModifiableTestableWorld world, Random random, int trunkHeight, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
+	public List<FoliagePlacer.TreeNode> generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, int trunkHeight, BlockPos pos, TreeFeatureConfig treeFeatureConfig) {
 		//Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 
@@ -42,7 +43,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		//Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
 		//Instance a direction before the loop so it no be slow mkay
@@ -50,10 +51,10 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		//Place the rest of the trunk and branches
 		for (int j = 0; j < trunkHeight + 3; j++) {
-			getAndSetState(world, random, currentPosition.move(Direction.UP), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 			branchDirection = Direction.Type.HORIZONTAL.random(random);
-			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), branchDirection, set, blockBox, treeFeatureConfig), 1, false));
-			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), set, blockBox, treeFeatureConfig), 1, false));
+			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), branchDirection, replacer, treeFeatureConfig), 1, false));
+			foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), replacer, treeFeatureConfig), 1, false));
 		}
 
 		//Make sure the top gets some love
@@ -63,17 +64,17 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(ModifiableTestableWorld world, Random random, BlockPos pos, Direction direction, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
+	private BlockPos placeBranch(TestableWorld world, Random random, BlockPos pos, Direction direction, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig treeFeatureConfig) {
 		BlockPos.Mutable currentPosition = pos.mutableCopy();
 		//Place a block in the branch direction
-		getAndSetState(world, random, currentPosition.move(direction), set, blockBox, treeFeatureConfig);
+		getAndSetState(world, replacer, random, currentPosition.move(direction), treeFeatureConfig);
 		//50% of the time place another block in the same general direction
 		if (random.nextBoolean()) {
 			//50% of the time make the branch move upwards
 			if (random.nextBoolean()) {
 				currentPosition.move(Direction.UP);
 			}
-			getAndSetState(world, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), set, blockBox, treeFeatureConfig);
+			getAndSetState(world, replacer, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), treeFeatureConfig);
 		}
 		return currentPosition;
 	}

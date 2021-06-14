@@ -1,8 +1,8 @@
 {
-  "parent": "minecraft:block/grass_path",
+  "parent": "minecraft:block/dirt_path",
   "textures": {
     "particle": "terrestria:block/basalt_dirt",
-    "top": "minecraft:block/grass_path_top",
+    "top": "minecraft:block/dirt_path_top",
     "side": "terrestria:block/basalt_grass_path_side",
     "bottom": "terrestria:block/basalt_dirt"
   }

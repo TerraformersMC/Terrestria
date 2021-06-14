@@ -10,8 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.util.FeatureContext;
 
 import java.util.Random;
 
@@ -28,7 +28,10 @@ public class CattailFeature extends Feature<ProbabilityConfig> {
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, ChunkGenerator generator, Random random, BlockPos origin, ProbabilityConfig config) {
+	public boolean generate(FeatureContext<ProbabilityConfig> context) {
+		StructureWorldAccess world = context.getWorld();
+		Random random = context.getRandom();
+		BlockPos origin = context.getOrigin();
 
 		int x = random.nextInt(8) - random.nextInt(8);
 		int z = random.nextInt(8) - random.nextInt(8);
@@ -37,7 +40,7 @@ public class CattailFeature extends Feature<ProbabilityConfig> {
 		BlockPos candidate = new BlockPos(origin.getX() + x, y, origin.getZ() + z);
 
 		if (world.getBlockState(candidate).getBlock() == Blocks.WATER) {
-			boolean tall = random.nextDouble() < config.probability;
+			boolean tall = random.nextDouble() < context.getConfig().probability;
 			BlockState grass = tall ? this.tall.getDefaultState() : this.normal.getDefaultState();
 
 			if (grass.canPlaceAt(world, candidate)) {

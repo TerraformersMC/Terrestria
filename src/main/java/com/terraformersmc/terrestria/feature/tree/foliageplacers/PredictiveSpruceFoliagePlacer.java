@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -10,10 +10,9 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
@@ -24,15 +23,15 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	// PredictiveSpruceFoliagePlacer.
 	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
 		fillFoliagePlacerFields(instance).and(
-				UniformIntDistribution.createValidatedCodec(0, 16, 12)
+				IntProvider.createValidatingCodec(0, 16)
 						.fieldOf("trunk_height")
 						.forGetter(placer -> placer.trunkHeight)
 		).apply(instance, PredictiveSpruceFoliagePlacer::new)
 	);
 
-	private final UniformIntDistribution trunkHeight;
+	private final IntProvider trunkHeight;
 
-	public PredictiveSpruceFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset, UniformIntDistribution trunkHeight) {
+	public PredictiveSpruceFoliagePlacer(IntProvider radius, IntProvider offset, IntProvider trunkHeight) {
 		super(radius, offset, trunkHeight);
 
 		this.trunkHeight = trunkHeight;
@@ -44,7 +43,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void generateSquare(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, Set<BlockPos> set, int offsetY, boolean giantTrunk, BlockBox blockBox) {
+	protected void generateSquare(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		int actualDistance;
@@ -55,12 +54,9 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 					mutable.set(blockPos, offsetX, offsetY, offsetZ);
 					if (TreeFeature.canReplace(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
-						BlockState baseState = config.leavesProvider.getBlockState(random, mutable);
+						BlockState baseState = config.foliageProvider.getBlockState(random, mutable);
 
-						world.setBlockState(mutable, withDistance(baseState, actualDistance), 19);
-
-						blockBox.encompass(new BlockBox(mutable, mutable));
-						set.add(mutable.toImmutable());
+						replacer.accept(mutable.toImmutable(), withDistance(baseState, actualDistance));
 					}
 				}
 			}

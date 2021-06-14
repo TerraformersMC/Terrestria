@@ -2,19 +2,18 @@ package com.terraformersmc.terrestria.feature.tree.treedecorators;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.tree.TreeDecorator;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.TestableWorld;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	public static final Codec<DanglingLeavesTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -32,9 +31,9 @@ public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void generate(StructureWorldAccess world, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions, Set<BlockPos> set, BlockBox box) {
+	public void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions) {
 		for (BlockPos pos : leavesPositions) {
-			if (world.getBlockState(pos.down()).isAir()) {
+			if (world.testBlockState(pos.down(), state -> state.isAir())) {
 				//if there is air below, then make dangling leaves 33% of the time
 				if (random.nextInt(3) == 0) {
 
@@ -42,8 +41,8 @@ public class DanglingLeavesTreeDecorator extends TreeDecorator {
 					BlockPos.Mutable mutable = pos.mutableCopy();
 					for (int i = 0; i < random.nextInt(3) + 1; i++) {
 						mutable.move(Direction.DOWN);
-						if (world.getBlockState(mutable).isAir()) {
-							world.setBlockState(mutable, state, 3);
+						if (world.testBlockState(mutable, state -> state.isAir())) {
+							replacer.accept(mutable, state);
 						} else {
 							break;
 						}

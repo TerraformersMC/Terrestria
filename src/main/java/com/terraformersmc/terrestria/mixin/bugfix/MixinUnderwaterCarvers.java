@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.world.gen.carver.UnderwaterCanyonCarver;
 import net.minecraft.world.gen.carver.UnderwaterCaveCarver;
-import net.minecraft.world.gen.carver.UnderwaterRavineCarver;
 
 /**
  * Same as {@link MixinCarver} but for underwater carvers.
  */
-@Mixin({UnderwaterCaveCarver.class, UnderwaterRavineCarver.class})
+@Mixin({UnderwaterCaveCarver.class, UnderwaterCanyonCarver.class})
 public class MixinUnderwaterCarvers {
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "<init>", at = @At("RETURN"))

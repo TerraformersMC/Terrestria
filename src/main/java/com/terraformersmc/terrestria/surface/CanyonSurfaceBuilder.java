@@ -94,12 +94,12 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, long seed, CliffSurfaceConfig config) {
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, int var12, long seed, CliffSurfaceConfig config) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first
 
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
+			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, var12, seed, config);
 
 			return;
 		}
@@ -151,7 +151,7 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 		if (pos.getY() <= vHeight) {
 			// Prevent exposed stone.
 
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, seed, config);
+			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, var12, seed, config);
 		}
 	}
 }

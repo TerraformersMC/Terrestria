@@ -1,8 +1,12 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.8-SNAPSHOT'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.0/ferry.gradle'
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.1/ferry.gradle'
+
+loom {
+	accessWidener = file("src/main/resources/terrestria.accesswidener")
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"

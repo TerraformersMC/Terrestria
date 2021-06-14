@@ -6,8 +6,8 @@ import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.structure.StructureManager;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Heightmap;
@@ -36,7 +36,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private int centerZ;
 
 	VolcanoGenerator(Random random, int centerX, int centerZ, VolcanoFeatureConfig config) {
-		super(TerrestriaStructures.VOLCANO_PIECE, 0);
+		super(TerrestriaStructures.VOLCANO_PIECE, 0, null);
 		this.setOrientation(null);
 
 		this.centerX = centerX;
@@ -48,7 +48,7 @@ public class VolcanoGenerator extends StructurePiece {
 		chamberOreSeed = random.nextLong();
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		this.height = config.getHeight().getValue(random);
+		this.height = config.getHeight().get(random);
 		this.baseY = config.getBaseY();
 
 		if (height < 48) {
@@ -73,7 +73,7 @@ public class VolcanoGenerator extends StructurePiece {
 		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
 	}
 
-	public VolcanoGenerator(StructureManager manager, CompoundTag tag) {
+	public VolcanoGenerator(ServerWorld world, NbtCompound tag) {
 		super(TerrestriaStructures.VOLCANO_PIECE, tag);
 
 		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN"), 0.75, 0.5);
@@ -136,7 +136,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(ServerWorld world, NbtCompound tag) {
 		tag.putLong("VRN", radiusNoise.getSeed());
 		tag.putLong("VVN", vegetationNoise.getSeed());
 		tag.putLong("VCN", chamberNoise.getSeed());
@@ -155,7 +155,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.maxY < this.boundingBox.maxY || box.minY > this.boundingBox.minY) {
+		if (box.getMaxX() < this.boundingBox.getMaxX() || box.getMinX() > this.boundingBox.getMinX()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
@@ -163,8 +163,8 @@ public class VolcanoGenerator extends StructurePiece {
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = box.minZ; z <= box.maxZ; z++) {
-			for (int x = box.minX; x <= box.maxX; x++) {
+		for (int z = box.getMinY(); z <= box.getMaxY(); z++) {
+			for (int x = box.getMaxZ(); x <= box.getMinZ(); x++) {
 				int dX = x - centerX;
 				int dZ = z - centerZ;
 

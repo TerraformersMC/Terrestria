@@ -16,7 +16,7 @@ public class PatchyGrassSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
 	}
 
 	@Override
-	public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, long seed, TernarySurfaceConfig config) {
+	public void generate(Random random, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState stone, BlockState water, int seaLevel, int minSurfaceLevel, long seed, TernarySurfaceConfig config) {
 		// The random coeffecient is from [1, 2], used for randomizing the values a bit more.
 		// This isn't strictly needed but it increases the randomization overall.
 		double coefficient = random.nextDouble() + 1;
@@ -26,9 +26,9 @@ public class PatchyGrassSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
 
 		// If the noise + random combo is above the threshold, then generate grass.
 		if (gradientNoise > 1.0D) {
-			SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, stone, water, seaLevel, seed, SurfaceBuilder.GRASS_CONFIG);
+			SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, stone, water, seaLevel, minSurfaceLevel, seed, SurfaceBuilder.GRASS_CONFIG);
 		} else {
-			SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, stone, water, seaLevel, seed, config);
+			SurfaceBuilder.DEFAULT.generate(random, chunk, biome, x, z, height, noise, stone, water, seaLevel, minSurfaceLevel, seed, config);
 		}
 	}
 }

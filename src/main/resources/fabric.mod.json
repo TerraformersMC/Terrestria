@@ -67,6 +67,7 @@
     "mixins.terrestria.pathing.json",
     "mixins.terrestria.bugfix.json"
   ],
+  "accessWidener": "terrestria.accesswidener",
   "custom": {
     "extrapieces:piecepack": "extrapieces.terrestria.json"
   }
