@@ -194,6 +194,6 @@ public class TerrestriaClient implements ClientModInitializer {
 	}
 
 	private void addBoatRenderer(EntityType<TerraformBoatEntity> boat) {
-		EntityRendererRegistry.INSTANCE.register(boat, (dispatcher, context) -> new BoatEntityRenderer(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(boat, context -> new BoatEntityRenderer(context));
 	}
 }

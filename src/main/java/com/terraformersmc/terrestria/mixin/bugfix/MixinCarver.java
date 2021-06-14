@@ -33,7 +33,7 @@ public class MixinCarver {
 
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "<init>", at = @At("RETURN"))
-	private void terrestria$carveSmoothSandstone(Codec configCodec, int heightLimit, CallbackInfo ci) {
+	private void terrestria$carveSmoothSandstone(Codec configCodec, CallbackInfo ci) {
 		// Part 1: Allow smooth sandstone
 		alwaysCarvableBlocks = terrestria$addToImmutableSet(alwaysCarvableBlocks, Blocks.SMOOTH_SANDSTONE);
 	}
