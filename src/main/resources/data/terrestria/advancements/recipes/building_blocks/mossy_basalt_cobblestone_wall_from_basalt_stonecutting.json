@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:mossy_basalt_cobblestone"
+            "items": [
+              "terrestria:mossy_basalt_cobblestone"
+            ]
           }
         ]
       }

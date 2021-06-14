@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:rainbow_eucalyptus_log"
+            "items": [
+              "terrestria:rainbow_eucalyptus_log"
+            ]
           }
         ]
       }
