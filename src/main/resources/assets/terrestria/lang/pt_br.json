@@ -46,22 +46,22 @@
   "block.terrestria.stripped_hemlock_quarter_log": "Cerne de tsuga descascado",
   "block.terrestria.jungle_palm_sapling": "Muda de palmeira selvagem",
   "block.terrestria.jungle_palm_leaves": "Folhas de palmeira selvagem",
-  "block.terrestria.rubber_log": "Rubber Log",
-  "block.terrestria.rubber_wood": "Rubber Wood",
-  "block.terrestria.rubber_sapling": "Rubber Sapling",
-  "block.terrestria.rubber_leaves": "Rubber Leaves",
-  "block.terrestria.rubber_planks": "Rubber Wood Planks",
-  "block.terrestria.rubber_slab": "Rubber Wood Slab",
-  "block.terrestria.rubber_stairs": "Rubber Wood Stairs",
-  "block.terrestria.rubber_fence": "Rubber Wood Fence",
-  "block.terrestria.rubber_fence_gate": "Rubber Wood Fence Gate",
-  "block.terrestria.rubber_door": "Rubber Wood Door",
-  "block.terrestria.rubber_pressure_plate": "Rubber Wood Pressure Plate",
-  "block.terrestria.rubber_button": "Rubber Wood Button",
-  "block.terrestria.rubber_sign": "Rubber Wood Sign",
-  "block.terrestria.rubber_trapdoor": "Rubber Wood Trapdoor",
-  "block.terrestria.stripped_rubber_wood": "Stripped Rubber Wood",
-  "block.terrestria.stripped_rubber_log": "Stripped Rubber Log",
+  "block.terrestria.rubber_log": "Rubber Log",*
+  "block.terrestria.rubber_wood": "Rubber Wood",*
+  "block.terrestria.rubber_sapling": "Rubber Sapling",*
+  "block.terrestria.rubber_leaves": "Rubber Leaves",*
+  "block.terrestria.rubber_planks": "Rubber Wood Planks",*
+  "block.terrestria.rubber_slab": "Rubber Wood Slab",*
+  "block.terrestria.rubber_stairs": "Rubber Wood Stairs",*
+  "block.terrestria.rubber_fence": "Rubber Wood Fence",*
+  "block.terrestria.rubber_fence_gate": "Rubber Wood Fence Gate",*
+  "block.terrestria.rubber_door": "Rubber Wood Door",*
+  "block.terrestria.rubber_pressure_plate": "Rubber Wood Pressure Plate",*
+  "block.terrestria.rubber_button": "Rubber Wood Button",*
+  "block.terrestria.rubber_sign": "Rubber Wood Sign",*
+  "block.terrestria.rubber_trapdoor": "Rubber Wood Trapdoor",*
+  "block.terrestria.stripped_rubber_wood": "Stripped Rubber Wood",*
+  "block.terrestria.stripped_rubber_log": "Stripped Rubber Log",*
   "block.terrestria.cypress_log": "Tronco de cipreste",
   "block.terrestria.cypress_wood": "Madeira de cipreste",
   "block.terrestria.cypress_quarter_log": "Cerne de cipreste",
@@ -179,7 +179,7 @@
   "block.terrestria.cracked_basalt_bricks": "Tijolos de rocha vulcânica rachados",
   "block.terrestria.basalt_grass_block": "Andossolo com grama",
   "block.terrestria.basalt_grass_path": "Caminho de andossolo com grama",
-  "block.terrestria.basalt_sand": "Areia vulcânica",
+  "block.terrestria.basalt_sand": "Areia preta",
   "block.terrestria.basalt_dirt": "Andossolo",
   "block.terrestria.basalt_podzol": "Andossolo com podzol",
   "block.terrestria.andisol_farmland": "Andossolo arado",
@@ -224,14 +224,14 @@
   "block.terrestria.yucca_palm_sign": "Placa de yucca",
   "block.terrestria.stripped_yucca_palm_log": "Tronco de yucca descascado",
   "item.terrestria.yucca_palm_boat": "Bote de yucca",
-  "block.terrestria.small_oak_log": "Tronco de carvalho do cânion",
-  "block.terrestria.stripped_small_oak_log": "Tronco de carvalho do cânion descascado",
+  "block.terrestria.small_oak_log": "Tronco de carvalho pequeno",
+  "block.terrestria.stripped_small_oak_log": "Tronco de carvalho pequeno descascado",
   "block.terrestria.saguaro_cactus": "Cacto saguaro",
   "block.terrestria.bryce_sapling": "Muda de carvalho do cânion",
   "block.terrestria.saguaro_cactus_sapling": "Muda de cacto saguaro",
   "block.terrestria.yucca_palm_sapling": "Muda de yucca",
   "item.terrestria.log_turner": "Girador de troncos",
-  "item.terrestria.log_turner.tooltip": "Usado para definir a orientação de troncos e blocos similares.",
+  "item.terrestria.log_turner.tooltip": "Use para mudar o eixo de um tronco\n ou qualquer bloco similar para o lado clicado.\n Quando usado em um cerne, o objeto\n tentará mudar seu eixo, e se\n já estiver como esperado, então\n o lado com casca rotacionará no sentido horário.\n Se usado enquanto agachado, o eixo\n e o lado com casca serão rotacionados.",*
   "biome.terrestria.redwood_forest": "Floresta de sequóias-vermelhas",
   "biome.terrestria.redwood_forest_edge": "Margem da floresta de sequóias-vermelhas",
   "biome.terrestria.redwood_clearing": "Clareira de sequóias-vermelhas",
