@@ -5,12 +5,12 @@
   "item.terrestria.japanese_maple_boat": "Bote de bordo-japonês",
   "item.terrestria.rainbow_eucalyptus_boat": "Bote de eucalipto arco-íris",
   "item.terrestria.redwood_boat": "Bote de sequóia-vermelha",
-  "item.terrestria.rubber_boat": "Rubber Wood Boat",*
+  "item.terrestria.rubber_boat": "Bote de seringueira",
   "item.terrestria.sakura_boat": "Bote de sakura",
   "item.terrestria.willow_boat": "Bote de salgueiro",
   "block.terrestria.redwood_log": "Tronco de sequóia-vermelha",
   "block.terrestria.redwood_wood": "Madeira de sequóia-vermelha",
-  "block.terrestria.redwood_quarter_log": "Cerne de sequóia-vermelha",
+  "block.terrestria.redwood_quarter_log": "Lenho de sequóia-vermelha",
   "block.terrestria.redwood_sapling": "Muda de sequóia-vermelha",
   "block.terrestria.redwood_leaves": "Folhas de sequóia-vermelha",
   "block.terrestria.redwood_planks": "Tábuas de sequóia-vermelha",
@@ -25,10 +25,10 @@
   "block.terrestria.redwood_trapdoor": "Alçapão de sequóia-vermelha",
   "block.terrestria.stripped_redwood_wood": "Madeira de sequóia-vermelha descascado",
   "block.terrestria.stripped_redwood_log": "Tronco de sequóia-vermelha descascado",
-  "block.terrestria.stripped_redwood_quarter_log": "Cerne de sequóia-vermelha descascado",
+  "block.terrestria.stripped_redwood_quarter_log": "Lenho de sequóia-vermelha descascado",
   "block.terrestria.hemlock_log": "Tronco de tsuga",
   "block.terrestria.hemlock_wood": "Madeira de tsuga",
-  "block.terrestria.hemlock_quarter_log": "Cerne de tsuga",
+  "block.terrestria.hemlock_quarter_log": "Lenho de tsuga",
   "block.terrestria.hemlock_sapling": "Muda de tsuga",
   "block.terrestria.hemlock_leaves": "Folhas de tsuga",
   "block.terrestria.hemlock_planks": "Tábuas de tsuga",
@@ -43,28 +43,28 @@
   "block.terrestria.hemlock_trapdoor": "Alçapão de tsuga",
   "block.terrestria.stripped_hemlock_wood": "Madeira de tsuga descascada",
   "block.terrestria.stripped_hemlock_log": "Tronco de tsuga descascado",
-  "block.terrestria.stripped_hemlock_quarter_log": "Cerne de tsuga descascado",
+  "block.terrestria.stripped_hemlock_quarter_log": "Lenho de tsuga descascado",
   "block.terrestria.jungle_palm_sapling": "Muda de palmeira selvagem",
   "block.terrestria.jungle_palm_leaves": "Folhas de palmeira selvagem",
-  "block.terrestria.rubber_log": "Rubber Log",*
-  "block.terrestria.rubber_wood": "Rubber Wood",*
-  "block.terrestria.rubber_sapling": "Rubber Sapling",*
-  "block.terrestria.rubber_leaves": "Rubber Leaves",*
-  "block.terrestria.rubber_planks": "Rubber Wood Planks",*
-  "block.terrestria.rubber_slab": "Rubber Wood Slab",*
-  "block.terrestria.rubber_stairs": "Rubber Wood Stairs",*
-  "block.terrestria.rubber_fence": "Rubber Wood Fence",*
-  "block.terrestria.rubber_fence_gate": "Rubber Wood Fence Gate",*
-  "block.terrestria.rubber_door": "Rubber Wood Door",*
-  "block.terrestria.rubber_pressure_plate": "Rubber Wood Pressure Plate",*
-  "block.terrestria.rubber_button": "Rubber Wood Button",*
-  "block.terrestria.rubber_sign": "Rubber Wood Sign",*
-  "block.terrestria.rubber_trapdoor": "Rubber Wood Trapdoor",*
-  "block.terrestria.stripped_rubber_wood": "Stripped Rubber Wood",*
-  "block.terrestria.stripped_rubber_log": "Stripped Rubber Log",*
+  "block.terrestria.rubber_log": "Tronco de seringueira",
+  "block.terrestria.rubber_wood": "Madeira de seringueira",
+  "block.terrestria.rubber_sapling": "Muda de seringueira",
+  "block.terrestria.rubber_leaves": "Folhas de serigueira",
+  "block.terrestria.rubber_planks": "Tábuas de seringueira",
+  "block.terrestria.rubber_slab": "Laje de seringueira",
+  "block.terrestria.rubber_stairs": "Escadas de seringueira",
+  "block.terrestria.rubber_fence": "Cerca de seringueira",
+  "block.terrestria.rubber_fence_gate": "Portão de seringueira",
+  "block.terrestria.rubber_door": "Porta de seringueira",
+  "block.terrestria.rubber_pressure_plate": "Placa de pressão de seringueira",
+  "block.terrestria.rubber_button": "Botão de seringueira",
+  "block.terrestria.rubber_sign": "Placa de seringueira",
+  "block.terrestria.rubber_trapdoor": "Alçapão de seringueira",
+  "block.terrestria.stripped_rubber_wood": "Madeira de seringueira descascada",
+  "block.terrestria.stripped_rubber_log": "Tronco de seringueira descascado",
   "block.terrestria.cypress_log": "Tronco de cipreste",
   "block.terrestria.cypress_wood": "Madeira de cipreste",
-  "block.terrestria.cypress_quarter_log": "Cerne de cipreste",
+  "block.terrestria.cypress_quarter_log": "Lenho de cipreste",
   "block.terrestria.cypress_sapling": "Muda de cipreste",
   "block.terrestria.cypress_leaves": "Folhas de cipreste",
   "block.terrestria.cypress_planks": "Tábuas de cipreste",
@@ -79,7 +79,7 @@
   "block.terrestria.cypress_trapdoor": "Alçapão de cipreste",
   "block.terrestria.stripped_cypress_wood": "Madeira de cipreste descascada",
   "block.terrestria.stripped_cypress_log": "Tronco de cipreste descascado",
-  "block.terrestria.stripped_cypress_quarter_log": "Cerne de cipreste descascado",
+  "block.terrestria.stripped_cypress_quarter_log": "Lenho de cipreste descascado",
   "block.terrestria.willow_log": "Tronco de salgueiro",
   "block.terrestria.willow_wood": "Madeira de salgueiro",
   "block.terrestria.willow_sapling": "Muda de salgueiro",
@@ -116,7 +116,7 @@
   "block.terrestria.dark_japanese_maple_sapling": "Muda de bordo-japonês escuro",
   "block.terrestria.rainbow_eucalyptus_log": "Tronco de eucalipto arco-íris",
   "block.terrestria.rainbow_eucalyptus_wood": "Madeira de eucalipto arco-íris",
-  "block.terrestria.rainbow_eucalyptus_quarter_log": "Cerne de eucalipto arco-íris",
+  "block.terrestria.rainbow_eucalyptus_quarter_log": "Lenho de eucalipto arco-íris",
   "block.terrestria.rainbow_eucalyptus_sapling": "Muda de eucalipto arco-íris",
   "block.terrestria.rainbow_eucalyptus_leaves": "Folhas de eucalipto arco-íris",
   "block.terrestria.rainbow_eucalyptus_planks": "Tábuas de eucalipto arco-íris",
@@ -131,7 +131,7 @@
   "block.terrestria.rainbow_eucalyptus_trapdoor": "Alçapão de eucalipto arco-íris",
   "block.terrestria.stripped_rainbow_eucalyptus_wood": "Madeira de eucalipto arco-íris descascada",
   "block.terrestria.stripped_rainbow_eucalyptus_log": "Tronco de eucalipto arco-íris descascado",
-  "block.terrestria.stripped_rainbow_eucalyptus_quarter_log": "Cerne de eucalipto arco-íris descascado",
+  "block.terrestria.stripped_rainbow_eucalyptus_quarter_log": "Lenho de eucalipto arco-íris descascado",
   "block.terrestria.sakura_log": "Tronco de sakura",
   "block.terrestria.sakura_sapling": "Muda de sakura",
   "block.terrestria.sakura_leaves": "Folhas de sakura",
@@ -191,7 +191,7 @@
   "block.terrestria.japanese_maple_shrub_leaves": "Folhas de arbusto de bordo-japonês",
   "block.terrestria.potted_redwood_sapling": "Muda de sequóia-vermelha envasada",
   "block.terrestria.potted_hemlock_sapling": "Muda de tsuga envasada",
-  "block.terrestria.potted_rubber_sapling": "Potted Rubber Sapling",*
+  "block.terrestria.potted_rubber_sapling": "Muda de seringueira envasada",
   "block.terrestria.potted_cypress_sapling": "Muda de cipreste envasada",
   "block.terrestria.potted_willow_sapling": "Muda de salgueiro envasada",
   "block.terrestria.potted_japanese_maple_sapling": "Muda de bordo-japonês envasada",
@@ -231,7 +231,7 @@
   "block.terrestria.saguaro_cactus_sapling": "Muda de cacto saguaro",
   "block.terrestria.yucca_palm_sapling": "Muda de yucca",
   "item.terrestria.log_turner": "Girador de troncos",
-  "item.terrestria.log_turner.tooltip": "Use para mudar o eixo de um tronco\n ou qualquer bloco similar para o lado clicado.\n Quando usado em um cerne, o objeto\n tentará mudar seu eixo, e se\n já estiver como esperado, então\n o lado com casca rotacionará no sentido horário.\n Se usado enquanto agachado, o eixo\n e o lado com casca serão rotacionados.",*
+  "item.terrestria.log_turner.tooltip": "Use para mudar o eixo de um tronco\n ou qualquer bloco similar para o lado clicado.\n Quando usado em um lenho, o objeto\n tentará mudar seu eixo, e se\n já estiver como esperado, então\n o lado com casca rotacionará no sentido horário.\n Se usado enquanto agachado, o eixo\n e o lado com casca serão rotacionados.",*
   "biome.terrestria.redwood_forest": "Floresta de sequóias-vermelhas",
   "biome.terrestria.redwood_forest_edge": "Margem da floresta de sequóias-vermelhas",
   "biome.terrestria.redwood_clearing": "Clareira de sequóias-vermelhas",
@@ -276,7 +276,7 @@
   "entity.terrestria.japanese_maple_boat": "Bote de bordo-japonês",
   "entity.terrestria.rainbow_eucalyptus_boat": "Bote de eucalipto arco-íris",
   "entity.terrestria.redwood_boat": "Bote de sequóia-vermelha",
-  "entity.terrestria.rubber_boat": "Rubber Wood Boat",*
+  "entity.terrestria.rubber_boat": "Bote de seringueira",
   "entity.terrestria.sakura_boat": "Bote de sakura",
   "entity.terrestria.willow_boat": "Bote de salgueiro"
 }
