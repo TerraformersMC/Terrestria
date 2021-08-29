@@ -11,6 +11,7 @@ import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 
+import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.util.math.BlockBox;
@@ -35,7 +36,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	}
 
 	protected TrunkPlacerType<?> getType() {
-		return TrunkPlacerType.GIANT_TRUNK_PLACER;
+		return TerrestriaTrunkPlacerTypes.MEGA;
 	}
 
 	public List<FoliagePlacer.TreeNode> generate(ModifiableTestableWorld world, Random random, int trunkHeight, BlockPos pos, Set<BlockPos> set, BlockBox blockBox, TreeFeatureConfig treeFeatureConfig) {
