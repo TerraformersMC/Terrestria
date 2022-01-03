@@ -1,11 +1,16 @@
 plugins {
 	id 'fabric-loom' version '0.8-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
 }
 
 apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.1/ferry.gradle'
 
 loom {
 	accessWidener = file("src/main/resources/terrestria.accesswidener")
+}
+
+quiltflower {
+    addToRuntimeClasspath.set(true)
 }
 
 dependencies {
