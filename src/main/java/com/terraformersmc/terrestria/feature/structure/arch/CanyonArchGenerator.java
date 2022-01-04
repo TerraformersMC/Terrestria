@@ -84,14 +84,14 @@ public class CanyonArchGenerator extends StructurePiece {
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		if (boundingBox.getMaxX() < this.boundingBox.getMaxX() || boundingBox.getMinX() > this.boundingBox.getMinX()) {
+		if (boundingBox.getMaxY() < this.boundingBox.getMaxY() || boundingBox.getMinY() > this.boundingBox.getMinY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = boundingBox.getMinY(); z <= boundingBox.getMaxY(); z++) {
-			for (int x = boundingBox.getMaxZ(); x <= boundingBox.getMinZ(); x++) {
+		for (int z = boundingBox.getMinZ(); z <= boundingBox.getMaxZ(); z++) {
+			for (int x = boundingBox.getMinX(); x <= boundingBox.getMaxX(); x++) {
 
 				double noiseValue = noise.sample(x * 0.05, z * 0.05);
 				double height = maxHeight - Math.abs(noiseValue) * 8;
