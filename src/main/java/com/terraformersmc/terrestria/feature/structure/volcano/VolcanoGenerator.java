@@ -155,7 +155,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.getMaxX() < this.boundingBox.getMaxX() || box.getMinX() > this.boundingBox.getMinX()) {
+		if (box.getMaxY() < this.boundingBox.getMaxY() || box.getMaxY() > this.boundingBox.getMaxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
@@ -163,8 +163,8 @@ public class VolcanoGenerator extends StructurePiece {
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = box.getMinY(); z <= box.getMaxY(); z++) {
-			for (int x = box.getMaxZ(); x <= box.getMinZ(); x++) {
+		for (int z = box.getMinZ(); z <= box.getMaxZ(); z++) {
+			for (int x = box.getMinX(); x <= box.getMaxX(); x++) {
 				int dX = x - centerX;
 				int dZ = z - centerZ;
 
