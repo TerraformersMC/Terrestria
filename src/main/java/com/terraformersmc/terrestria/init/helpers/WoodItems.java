@@ -2,10 +2,9 @@ package com.terraformersmc.terrestria.init.helpers;
 
 import java.util.function.Supplier;
 
-import com.terraformersmc.terraform.boat.TerraformBoatEntity;
-import com.terraformersmc.terraform.boat.TerraformBoatItem;
+import com.terraformersmc.terraform.boat.api.TerraformBoatType;
+import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.SignItem;
 
@@ -31,7 +30,7 @@ public class WoodItems {
 	private WoodItems() {
 	}
 
-	public static WoodItems register(String name, WoodBlocks blocks, Supplier<EntityType<TerraformBoatEntity>> boatType) {
+	public static WoodItems register(String name, WoodBlocks blocks, TerraformBoatItem boatItem) {
 		WoodItems items = new WoodItems();
 
 		items.log = TerrestriaRegistry.registerBlockItem(name + "_log", blocks.log);
@@ -47,7 +46,7 @@ public class WoodItems {
 		items.trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
 		items.sign = TerrestriaRegistry.registerSignItem(name + "_sign", blocks.sign, blocks.wallSign);
 		items.strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);
-		items.boat = TerrestriaRegistry.registerBoatItem(name + "_boat", boatType);
+		items.boat = boatItem;
 
 		if (blocks.log != blocks.wood) {
 			items.wood = TerrestriaRegistry.registerBlockItem(name + "_wood", blocks.wood);

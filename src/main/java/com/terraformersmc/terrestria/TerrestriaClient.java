@@ -1,10 +1,10 @@
 package com.terraformersmc.terrestria;
 
-import com.terraformersmc.terraform.boat.TerraformBoatEntity;
+import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.TerrestriaEntities;
+import com.terraformersmc.terrestria.init.TerrestriaBoats;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -164,16 +164,19 @@ public class TerrestriaClient implements ClientModInitializer {
 				GRASS_ITEM_COLORS,
 				TerrestriaItems.ANDISOL_GRASS_BLOCK
 		);
+		registerEntityRenderers();
+	}
 
-		addBoatRenderer(TerrestriaEntities.REDWOOD_BOAT);
-		addBoatRenderer(TerrestriaEntities.HEMLOCK_BOAT);
-		addBoatRenderer(TerrestriaEntities.RUBBER_BOAT);
-		addBoatRenderer(TerrestriaEntities.CYPRESS_BOAT);
-		addBoatRenderer(TerrestriaEntities.WILLOW_BOAT);
-		addBoatRenderer(TerrestriaEntities.JAPANESE_MAPLE_BOAT);
-		addBoatRenderer(TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
-		addBoatRenderer(TerrestriaEntities.SAKURA_BOAT);
-		addBoatRenderer(TerrestriaEntities.YUCCA_PALM_BOAT);
+	private void registerEntityRenderers() {
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "redwood"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "hemlock"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "rubber"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "cypress"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "willow"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "japanese_maple"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "sakura"));
+		TerraformBoatClientHelper.registerModelLayer(new Identifier(Terrestria.MOD_ID, "yucca_palm"));
 	}
 
 	private void addSigns(TerraformSignBlock... signs) {
@@ -191,9 +194,5 @@ public class TerrestriaClient implements ClientModInitializer {
 	private void addColoredGrass(Block grass) {
 		BlockRenderLayerMap.INSTANCE.putBlock(grass, GRASS_BLOCK_LAYER);
 		ColorProviderRegistry.BLOCK.register(GRASS_BLOCK_COLORS, grass);
-	}
-
-	private void addBoatRenderer(EntityType<TerraformBoatEntity> boat) {
-		EntityRendererRegistry.INSTANCE.register(boat, context -> new BoatEntityRenderer(context));
 	}
 }

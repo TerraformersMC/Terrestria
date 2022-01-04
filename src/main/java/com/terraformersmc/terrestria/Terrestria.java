@@ -39,8 +39,8 @@ public class Terrestria implements ModInitializer {
 		Set<String> enabledBiomes = new HashSet<>();
 
 		TerrestriaBlocks.init();
+		TerrestriaBoats.init();
 		TerrestriaItems.init();
-		TerrestriaEntities.init();
 		TerrestriaFoliagePlacerTypes.init();
 		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaTreeDecorators.init();
