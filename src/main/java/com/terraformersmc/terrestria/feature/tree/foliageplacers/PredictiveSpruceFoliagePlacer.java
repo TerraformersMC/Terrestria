@@ -23,7 +23,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	// PredictiveSpruceFoliagePlacer.
 	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
 		fillFoliagePlacerFields(instance).and(
-				IntProvider.createValidatingCodec(0, 16)
+				IntProvider.createValidatingCodec(0, 28)
 						.fieldOf("trunk_height")
 						.forGetter(placer -> placer.trunkHeight)
 		).apply(instance, PredictiveSpruceFoliagePlacer::new)
@@ -55,6 +55,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 					if (TreeFeature.canReplace(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
 						BlockState baseState = config.foliageProvider.getBlockState(random, mutable);
+						// TODO: https://github.com/TerraformersMC/Terrestria/pull/256/files/bf6e019da7969f01ed15f736fbeb0f796d701034#r651410439
 
 						replacer.accept(mutable.toImmutable(), withDistance(baseState, actualDistance));
 					}
