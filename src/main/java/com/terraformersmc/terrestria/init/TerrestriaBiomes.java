@@ -9,7 +9,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.BiomeKeys;
 
 public class TerrestriaBiomes {
 	public static RegistryKey<Biome> CALDERA;

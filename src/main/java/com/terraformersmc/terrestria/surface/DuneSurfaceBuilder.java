@@ -13,7 +13,6 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 import java.util.Random;
-import java.util.function.Function;
 
 public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 

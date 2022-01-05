@@ -1,8 +1,5 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import java.util.function.Supplier;
-
-import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 
 import net.minecraft.item.BlockItem;

@@ -4,13 +4,11 @@ import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.TerrestriaBoats;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
@@ -20,15 +18,13 @@ import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.render.entity.BoatEntityRenderer;
 import net.minecraft.client.util.SpriteIdentifier;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.Identifier;
 
 // This class is an entrypoint
-@SuppressWarnings("unused")
 @Environment(EnvType.CLIENT)
 public class TerrestriaClient implements ClientModInitializer {
+	@SuppressWarnings("unused")
 	private static final RenderLayer LEAVES_ITEM_LAYER = TexturedRenderLayers.getEntityCutout();
 	private static final RenderLayer GRASS_BLOCK_LAYER = RenderLayer.getCutoutMipped();
 	private static final RenderLayer PLANT_BLOCK_LAYER = RenderLayer.getCutout();
