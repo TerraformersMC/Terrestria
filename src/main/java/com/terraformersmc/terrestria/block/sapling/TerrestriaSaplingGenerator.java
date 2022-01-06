@@ -14,7 +14,8 @@ public class TerrestriaSaplingGenerator extends SaplingGenerator {
 		this.tree = tree;
 	}
 
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
+	@Override
+	protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
 		return this.tree.get();
 	}
 }
