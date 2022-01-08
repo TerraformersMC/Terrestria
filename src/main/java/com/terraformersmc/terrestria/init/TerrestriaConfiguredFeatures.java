@@ -70,7 +70,7 @@ public class TerrestriaConfiguredFeatures {
 				new SimpleBlockStateProvider(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState()),
 				new SpindlyTrunkPlacer(10, 0, 0),
 				new SimpleBlockStateProvider(Blocks.OAK_LEAVES.getDefaultState()),
-				new SimpleBlockStateProvider(Blocks.OAK_SAPLING.getDefaultState()),
+				new SimpleBlockStateProvider(TerrestriaBlocks.BRYCE_SAPLING.getDefaultState()),
 				new SmallLogSphereFoliagePlacer(ConstantIntProvider.create(1), ConstantIntProvider.create(0)),
 				new TwoLayersFeatureSize(1, 0, 0))
 				.build());
