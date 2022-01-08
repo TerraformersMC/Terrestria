@@ -89,10 +89,10 @@ public class TerrestriaConfiguredFeatures {
 		SMALL_REDWOOD_TREE = registerTree("small_redwood_tree", spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
 
 		HEMLOCK_TREE = registerTree("hemlock_tree", tallSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 1, 11));
-		REDWOOD_TREE = registerTree("redwood_tree", tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 7, 12));
+		REDWOOD_TREE = registerTree("redwood_tree", tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 5, 2, 12, 7));
 
 		MEGA_HEMLOCK_TREE = registerQuarteredMegaTree("mega_hemlock_tree", giantSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 1, 11));
-		MEGA_REDWOOD_TREE = registerQuarteredMegaTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 7, 12));
+		MEGA_REDWOOD_TREE = registerQuarteredMegaTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 7));
 		RUBBER_TREE = registerTree("rubber_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new RubberTreeTrunkPlacer(6, 2, 2),
