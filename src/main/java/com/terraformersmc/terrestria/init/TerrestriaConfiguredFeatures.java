@@ -85,8 +85,8 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.build());
 
-				SMALL_HEMLOCK_TREE = registerTree("small_hemlock_tree", spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState()));
-				SMALL_REDWOOD_TREE = registerTree("small_redwood_tree", spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
+		SMALL_HEMLOCK_TREE = registerTree("small_hemlock_tree", spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState()));
+		SMALL_REDWOOD_TREE = registerTree("small_redwood_tree", spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
 
 		// Hemlock and Redwood trees are supposed to be different, don't change their stats just to bring them more in line!
 		HEMLOCK_TREE = registerTree("hemlock_tree", tallSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 1, 11));
