@@ -88,12 +88,11 @@ public class TerrestriaConfiguredFeatures {
 		SMALL_HEMLOCK_TREE = registerTree("small_hemlock_tree", spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState()));
 		SMALL_REDWOOD_TREE = registerTree("small_redwood_tree", spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
 
-		// Hemlock and Redwood trees are supposed to be different, don't change their stats just to bring them more in line!
 		HEMLOCK_TREE = registerTree("hemlock_tree", tallSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 1, 11));
-		REDWOOD_TREE = registerTree("redwood_tree", tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 5, 2, 12, 7));
+		REDWOOD_TREE = registerTree("redwood_tree", tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 5, 7, 12, 19));
 
 		MEGA_HEMLOCK_TREE = registerQuarteredMegaTree("mega_hemlock_tree", giantSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 1, 11));
-		MEGA_REDWOOD_TREE = registerQuarteredMegaTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 7));
+		MEGA_REDWOOD_TREE = registerQuarteredMegaTree("mega_redwood_tree", giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 19));
 		RUBBER_TREE = registerTree("rubber_tree", new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.RUBBER.log.getDefaultState()),
 				new RubberTreeTrunkPlacer(6, 2, 2),
@@ -307,30 +306,30 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
-		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling, height, randomHeight, extraRandomHeight, baseRadius, randomRadius, baseBareHeight, randomBareHeight);
+	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
+		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling, minHeight, extraRandomHeight1, extraRandomHeight2, minLeavesRadius, maxLeavesRadius, minBareHeight, maxBareHeight);
 	}
 
-	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, BlockState sapling, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
 		return new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(log),
-				new StraightTrunkPlacer(height, randomHeight, extraRandomHeight),
+				new StraightTrunkPlacer(minHeight, extraRandomHeight1, extraRandomHeight2),
 				new SimpleBlockStateProvider(leaves),
 				new SimpleBlockStateProvider(sapling),
-				new PredictiveSpruceFoliagePlacer(UniformIntProvider.create(baseRadius, randomRadius), UniformIntProvider.create(0, 2), UniformIntProvider.create(baseBareHeight, randomBareHeight)),
+				new PredictiveSpruceFoliagePlacer(UniformIntProvider.create(minLeavesRadius, maxLeavesRadius), UniformIntProvider.create(0, 2), UniformIntProvider.create(minBareHeight, maxBareHeight)),
 				new TwoLayersFeatureSize(2, 0, 2))
 
 				.ignoreVines()
 				.build();
 	}
 
-	static QuarteredMegaTreeConfig giantSpruceOf(QuarteredWoodBlocks woodBlocks, BlockState sapling, int height, int randomHeight, int extraRandomHeight, int baseRadius, int randomRadius, int baseBareHeight, int randomBareHeight) {
+	static QuarteredMegaTreeConfig giantSpruceOf(QuarteredWoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
 		return new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				new SimpleBlockStateProvider(woodBlocks.log.getDefaultState()),
-				new MegaTrunkPlacer(height, randomHeight, extraRandomHeight),
+				new MegaTrunkPlacer(minHeight, extraRandomHeight1, extraRandomHeight2),
 				new SimpleBlockStateProvider(woodBlocks.leaves.getDefaultState()),
 				new SimpleBlockStateProvider(sapling),
-				new PredictiveSpruceFoliagePlacer(UniformIntProvider.create(baseRadius, randomRadius), UniformIntProvider.create(0, 2), UniformIntProvider.create(baseBareHeight, randomBareHeight)),
+				new PredictiveSpruceFoliagePlacer(UniformIntProvider.create(minLeavesRadius, maxLeavesRadius), UniformIntProvider.create(0, 2), UniformIntProvider.create(minBareHeight, maxBareHeight)),
 				new TwoLayersFeatureSize(2, 1, 2))
 				.ignoreVines()
 				.build(),
