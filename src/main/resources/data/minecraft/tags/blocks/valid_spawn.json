@@ -1,7 +1,6 @@
 {
+  "replace": false,
   "values": [
-    "minecraft:grass_block",
-    "minecraft:podzol",
     "terrestria:basalt_grass_block",
     "terrestria:basalt_podzol"
   ]
