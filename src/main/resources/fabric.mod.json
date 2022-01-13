@@ -32,7 +32,7 @@
     ]
   },
   "depends": {
-    "minecraft": ">=1.17",
+    "minecraft": ">=1.18",
     "fabricloader": ">=0.12.9",
     "fabric-biome-api-v1": ">=3.1.0",
     "fabric-object-builder-api-v1": ">=1.9.2",
