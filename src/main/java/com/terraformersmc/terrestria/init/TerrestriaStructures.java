@@ -69,7 +69,7 @@ public class TerrestriaStructures {
 				.create(identifier, configured.feature)
 				.step(GenerationStep.Feature.SURFACE_STRUCTURES)
 				.defaultConfig(new StructureConfig(spacing, separation, 21345))
-				.superflatFeature(configured)
+				.enableSuperflat()
 				.register();
 
 		return BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);

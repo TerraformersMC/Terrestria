@@ -19,6 +19,7 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
+import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
@@ -120,7 +121,7 @@ public class TerrestriaDecoratedFeatures {
 						.build()), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		PATCH_DEAD_GRASS = decoratePatch("patch_dead_grass", 12, new RandomPatchFeatureConfig.Builder(
-				new SimpleBlockStateProvider(TerrestriaBlocks.DEAD_GRASS.getDefaultState()), SimpleBlockPlacer.INSTANCE).tries(4).build());
+				BlockStateProvider.of(TerrestriaBlocks.DEAD_GRASS.getDefaultState()), SimpleBlockPlacer.INSTANCE).tries(4).build());
 
 		PATCH_OUTBACK_BUSHLAND_GRASS = decoratePatch("patch_outback_bushland_grass", 12, new RandomPatchFeatureConfig.Builder(
 				new WeightedBlockStateProvider(createStatePoolBuilder()
