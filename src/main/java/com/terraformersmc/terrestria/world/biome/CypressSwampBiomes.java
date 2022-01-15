@@ -1,4 +1,4 @@
-package com.terraformersmc.terrestria.biome;
+package com.terraformersmc.terrestria.world.biome;
 
 // TODO: Update to 1.18
 // import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;

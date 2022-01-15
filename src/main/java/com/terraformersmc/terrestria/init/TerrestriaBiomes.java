@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.biome.*;
+import com.terraformersmc.terrestria.world.biome.*;
+
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;

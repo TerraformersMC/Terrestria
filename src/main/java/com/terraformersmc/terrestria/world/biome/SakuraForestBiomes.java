@@ -1,10 +1,11 @@
-package com.terraformersmc.terrestria.biome;
+package com.terraformersmc.terrestria.world.biome;
 
 // TODO: Update to 1.18
 // import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 // import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+
 // import net.minecraft.entity.EntityType;
 // import net.minecraft.world.biome.Biome;
 // import net.minecraft.world.biome.SpawnSettings;
@@ -14,35 +15,36 @@ import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
 
 // import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
-// public class CypressForestBiomes {
+// public class SakuraForestBiomes {
 // 	public static void register() {
 // 		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
 // 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 // 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
-// 				.temperature(0.7F)
-// 				.downfall(0.8F)
+// 				.temperature(0.8F)
+// 				.downfall(1.0F)
 // 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
 // 					.waterColor(0x3f76e4)
 // 					.waterFogColor(0x50533)
-// 					.grassColor(0x7ecc41)
 // 				)
-// 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, FOREST_FLOWERS, MINEABLES, ORES, DISKS,
-// 						DEFAULT_FLOWERS, DEFAULT_MUSHROOMS, FOREST_GRASS, DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, TALL_BIRCH_TREES)
-// 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSEST_CYPRESS_TREES)
+// 				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
+// 						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
 // 				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
 // 				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
+// 				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
+// 				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
+// 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSER_SAKURA_TREES)
+// 				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS)
 // 				.addDefaultSpawnEntries()
 // 				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 // 		);
 
-// 		TerrestriaBiomes.CYPRESS_FOREST = TerrestriaBiomes.register("cypress_forest", template.builder()
-// 				.depth(0.1F)
-// 				.scale(0.2F)
-// 				.playerSpawnFriendly()
+// 		TerrestriaBiomes.SAKURA_FOREST = TerrestriaBiomes.register("sakura_forest", template.builder()
+// 				.depth(0.05F)
+// 				.scale(0.1F)
 // 				.build());
 
-// 		TerrestriaBiomes.WOODED_CYPRESS_HILLS = TerrestriaBiomes.register("wooded_cypress_hills", template.builder()
-// 				.depth(0.45F)
+// 		TerrestriaBiomes.WOODED_SAKURA_HILLS = TerrestriaBiomes.register("wooded_sakura_hills", template.builder()
+// 				.depth(0.4F)
 // 				.scale(0.3F)
 // 				.build());
 // 	}

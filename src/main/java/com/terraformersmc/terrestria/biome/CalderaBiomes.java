@@ -3,9 +3,9 @@ package com.terraformersmc.terrestria.biome;
 // TODO: Update to 1.18
 // import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 // import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
-// import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-// import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
-// import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
+import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 // import net.minecraft.entity.EntityType;
 // import net.minecraft.world.biome.Biome;
 // import net.minecraft.world.biome.SpawnSettings;
