@@ -1,11 +1,12 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
-import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoFeatureConfig;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
+import com.terraformersmc.terrestria.world.gen.feature.structure.arch.CanyonArchGenerator;
+import com.terraformersmc.terrestria.world.gen.feature.structure.arch.CanyonArchStructureFeature;
+import com.terraformersmc.terrestria.world.gen.feature.structure.volcano.VolcanoFeatureConfig;
+import com.terraformersmc.terrestria.world.gen.feature.structure.volcano.VolcanoGenerator;
+import com.terraformersmc.terrestria.world.gen.feature.structure.volcano.VolcanoStructureFeature;
+
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;

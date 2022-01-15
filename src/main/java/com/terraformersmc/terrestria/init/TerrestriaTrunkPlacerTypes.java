@@ -3,7 +3,8 @@ package com.terraformersmc.terrestria.init;
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.tree.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
+import com.terraformersmc.terrestria.world.gen.feature.tree.trunkplacers.*;
+
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;

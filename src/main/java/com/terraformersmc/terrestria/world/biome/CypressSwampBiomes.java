@@ -4,7 +4,7 @@ package com.terraformersmc.terrestria.world.biome;
 // import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 // import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeDecoratedFeatures;
 
 // import net.minecraft.entity.EntityType;
 // import net.minecraft.world.biome.Biome;

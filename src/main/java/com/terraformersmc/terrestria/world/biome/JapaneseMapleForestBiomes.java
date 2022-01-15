@@ -4,13 +4,7 @@ package com.terraformersmc.terrestria.world.biome;
 // import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
 // import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
-// import net.minecraft.entity.EntityType;
-// import net.minecraft.world.biome.Biome;
-// import net.minecraft.world.biome.SpawnSettings;
-// import net.minecraft.world.gen.GenerationStep;
-// import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-// import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeDecoratedFeatures;
 
 // import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
 
