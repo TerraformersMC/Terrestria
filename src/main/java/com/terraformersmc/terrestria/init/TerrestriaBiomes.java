@@ -68,22 +68,23 @@ public class TerrestriaBiomes {
 	}
 
 	public static void init() {
-		CalderaBiomes.register();
-		CanyonBiomes.register();
-		CypressForestBiomes.register();
-		CypressSwampBiomes.register();
-		DenseWoodlandsBiomes.register();
-		DunesBiomes.register();
-		HemlockRainforestBiomes.register();
-		LushRedwoodForestBiomes.register();
-		LushDesertBiomes.register();
-		RainbowRainforestBiomes.register();
-		RedwoodForestBiomes.register();
-		SakuraForestBiomes.register();
-		SnowyHemlockRainforestBiomes.register();
-		JapaneseMapleForestBiomes.register();
-		VolcanicIslandBiomes.register();
-		OutbackBiomes.register();
+		// TODO: Update to 1.18
+		// CalderaBiomes.register();
+		// CanyonBiomes.register();
+		// CypressForestBiomes.register();
+		// CypressSwampBiomes.register();
+		// DenseWoodlandsBiomes.register();
+		// DunesBiomes.register();
+		// HemlockRainforestBiomes.register();
+		// LushRedwoodForestBiomes.register();
+		// LushDesertBiomes.register();
+		// RainbowRainforestBiomes.register();
+		// RedwoodForestBiomes.register();
+		// SakuraForestBiomes.register();
+		// SnowyHemlockRainforestBiomes.register();
+		// JapaneseMapleForestBiomes.register();
+		// VolcanicIslandBiomes.register();
+		// OutbackBiomes.register();
 	}
 
 	public static RegistryKey<Biome> register(String name, Biome biome) {
