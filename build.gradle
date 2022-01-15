@@ -77,14 +77,19 @@ dependencies {
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
 
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-overworld-biome-extensions-api-v1:${project.terraform_overworld_biome_extensions_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-overworld-biome-extensions-api-v1:${project.terraform_overworld_biome_extensions_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	include modImplementation(files("libs/terraform-config-api-v1-${project.terraform_config_api_version}.jar"))
+	include modImplementation(files("libs/terraform-dirt-api-v1-${project.terraform_dirt_version}.jar"))
+	include modImplementation(files("libs/terraform-shapes-api-v1-${project.terraform_shapes_api_version}.jar"))
+	include modImplementation(files("libs/terraform-tree-api-v1-${project.terraform_tree_api_version}.jar"))
+	include modImplementation(files("libs/terraform-wood-api-v1-${project.terraform_wood_api_version}.jar"))
 }
 
 repositories {
