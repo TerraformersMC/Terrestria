@@ -7,6 +7,7 @@ import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeDecoratedFeatures;
 import com.terraformersmc.terrestria.world.gen.feature.TerrestriaFeature;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaMiscConfiguredFeatures;
 import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeConfiguredFeatures;
 
 import net.fabricmc.api.ModInitializer;
@@ -49,6 +50,7 @@ public class Terrestria implements ModInitializer {
 		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaTreeDecorators.init();
 		TerrestriaFeature.init();
+		TerrestriaMiscConfiguredFeatures.init();
 		TerrestriaTreeConfiguredFeatures.init();
 		TerrestriaTreeDecoratedFeatures.init();
 		TerrestriaStructures.init();
