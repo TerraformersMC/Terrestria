@@ -2,14 +2,14 @@ package com.terraformersmc.terrestria.init;
 
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
-import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 import com.terraformersmc.terrestria.mixin.TreeDecoratorTypeAccessor;
+import com.terraformersmc.terrestria.world.gen.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
+import com.terraformersmc.terrestria.world.gen.feature.tree.treedecorators.SakuraTreeDecorator;
 
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.tree.TreeDecorator;
-import net.minecraft.world.gen.tree.TreeDecoratorType;
+import net.minecraft.world.gen.treedecorator.TreeDecorator;
+import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class TerrestriaTreeDecorators {
 

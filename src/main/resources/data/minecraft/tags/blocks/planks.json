@@ -1,11 +1,6 @@
 {
+  "replace": false,
   "values": [
-    "minecraft:oak_planks",
-    "minecraft:spruce_planks",
-    "minecraft:birch_planks",
-    "minecraft:jungle_planks",
-    "minecraft:acacia_planks",
-    "minecraft:dark_oak_planks",
     "terrestria:redwood_planks",
     "terrestria:hemlock_planks",
     "terrestria:rubber_planks",
@@ -14,6 +9,6 @@
     "terrestria:rainbow_eucalyptus_planks",
     "terrestria:sakura_planks",
     "terrestria:willow_planks",
-	"terrestria:yucca_palm_planks"
+	  "terrestria:yucca_palm_planks"
   ]
 }

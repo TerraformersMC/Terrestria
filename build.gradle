@@ -1,8 +1,21 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.0/ferry.gradle'
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.1/ferry.gradle'
+
+loom {
+	accessWidener = file("src/main/resources/terrestria.accesswidener")
+}
+
+quiltflower {
+    addToRuntimeClasspath.set(true)
+}
+
+repositories {
+	maven { url = 'https://maven.minecraftforge.net/' }
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -24,9 +37,6 @@ dependencies {
 	// FlammableBlockRegistry, FuelRegistry, etc
 	includeFabricApiModule "fabric-content-registries-v0"
 
-	// ToolTags.SHOVELS, ToolTags.HOES
-	includeFabricApiModule "fabric-tool-attribute-api-v1"
-
 	// FabricItemGroupBuilder
 	includeFabricApiModule "fabric-item-groups-v0"
 
@@ -39,20 +49,17 @@ dependencies {
 	// API for adding structures to Minecraft. It's effectively LibStructure merged into Fabric API.
 	// However, it also includes an important fix to a vanilla bug:
 	// MC-149777 - java.util.ConcurrentModificationException when using Java 11 or above
-	includeFabricApiModule "fabric-structure-api-v1"
+	// includeFabricApiModule "fabric-structure-api-v1"
 
 	// === Dependency modules: Required by other modules to function ===
 
 	// Base module required by most other fabric api modules
 	includeFabricApiModule "fabric-api-base"
 
-	// Used by fabric-tool-attribute-api-v1
-	includeFabricApiModule "fabric-tag-extensions-v0"
-
 	// Used by terraform-wood-api-v1
 	includeFabricApiModule "fabric-networking-api-v1"
 
-	// Used by fabric-content-registries-v1
+	// Used by fabric-content-registries-v0
 	includeFabricApiModule "fabric-lifecycle-events-v1"
 
 	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
@@ -68,14 +75,22 @@ dependencies {
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
 
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-overworld-biome-extensions-api-v1:${project.terraform_overworld_biome_extensions_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	
+    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
+
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-overworld-biome-extensions-api-v1:${project.terraform_overworld_biome_extensions_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
+	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	include modImplementation(files("libs/terraform-config-api-v1-${project.terraform_config_api_version}.jar"))
+	include modImplementation(files("libs/terraform-dirt-api-v1-${project.terraform_dirt_version}.jar"))
+	include modImplementation(files("libs/terraform-shapes-api-v1-${project.terraform_shapes_api_version}.jar"))
+	include modImplementation(files("libs/terraform-tree-api-v1-${project.terraform_tree_api_version}.jar"))
+	include modImplementation(files("libs/terraform-wood-api-v1-${project.terraform_wood_api_version}.jar"))
 }
 
 repositories {

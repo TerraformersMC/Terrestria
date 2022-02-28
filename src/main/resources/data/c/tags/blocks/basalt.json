@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "terrestria:basalt",
     "terrestria:smooth_basalt",
@@ -10,4 +11,3 @@
     "terrestria:mossy_basalt_bricks"
   ]
 }
-

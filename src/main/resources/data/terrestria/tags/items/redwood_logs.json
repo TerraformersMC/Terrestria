@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "terrestria:redwood_log",
     "terrestria:redwood_wood",

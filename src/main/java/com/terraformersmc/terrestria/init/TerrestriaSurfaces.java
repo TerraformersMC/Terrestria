@@ -4,12 +4,13 @@ import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import com.terraformersmc.terraform.surface.FloodingBeachSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.DuneSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.surface.CanyonSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.PatchyGrassSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.ThreeLayerOutlineSurfaceBuilder;
-import com.terraformersmc.terrestria.surface.ThreeLayerOutlinedSurfaceConfig;
+import com.terraformersmc.terrestria.world.gen.surfacebuilder.CanyonSurfaceBuilder;
+import com.terraformersmc.terrestria.world.gen.surfacebuilder.DuneSurfaceBuilder;
+import com.terraformersmc.terrestria.world.gen.surfacebuilder.PatchyGrassSurfaceBuilder;
+import com.terraformersmc.terrestria.world.gen.surfacebuilder.ThreeLayerOutlineSurfaceBuilder;
+import com.terraformersmc.terrestria.world.gen.surfacebuilder.ThreeLayerOutlinedSurfaceConfig;
+
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;

@@ -1,7 +1,7 @@
 {
   "required": false,
   "package": "com.terraformersmc.terrestria.mixin.pathing",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "plugin": "com.terraformersmc.terrestria.mixin.pathing.TerrestriaMixinPlugin",
   "mixins": [
 	"MixinLandPathNodeMaker"

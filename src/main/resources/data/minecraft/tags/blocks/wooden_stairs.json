@@ -1,11 +1,6 @@
 {
+  "replace": false,
   "values": [
-    "minecraft:oak_stairs",
-    "minecraft:spruce_stairs",
-    "minecraft:birch_stairs",
-    "minecraft:jungle_stairs",
-    "minecraft:acacia_stairs",
-    "minecraft:dark_oak_stairs",
     "terrestria:redwood_stairs",
     "terrestria:hemlock_stairs",
     "terrestria:rubber_stairs",

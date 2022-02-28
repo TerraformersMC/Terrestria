@@ -5,6 +5,11 @@ import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeDecoratedFeatures;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaFeature;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaMiscConfiguredFeatures;
+import com.terraformersmc.terrestria.world.gen.feature.TerrestriaTreeConfiguredFeatures;
+
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.Item;
@@ -39,18 +44,19 @@ public class Terrestria implements ModInitializer {
 		Set<String> enabledBiomes = new HashSet<>();
 
 		TerrestriaBlocks.init();
+		TerrestriaBoats.init();
 		TerrestriaItems.init();
-		TerrestriaEntities.init();
 		TerrestriaFoliagePlacerTypes.init();
 		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaTreeDecorators.init();
-		TerrestriaFeatures.init();
-		TerrestriaConfiguredFeatures.init();
-		TerrestriaDecoratedFeatures.init();
+		TerrestriaFeature.init();
+		TerrestriaMiscConfiguredFeatures.init();
+		TerrestriaTreeConfiguredFeatures.init();
+		TerrestriaTreeDecoratedFeatures.init();
 		TerrestriaStructures.init();
 		TerrestriaSurfaces.init();
-		TerrestriaBiomes.init();
-		TerrestriaGeneration.init(config, enabledBiomes);
+		// TerrestriaBiomes.init();
+		// TerrestriaGeneration.init(config, enabledBiomes);
 		TerrestriaVillagerTypes.init();
 
 		biomeConfigHandler.save();
