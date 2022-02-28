@@ -13,6 +13,10 @@ quiltflower {
     addToRuntimeClasspath.set(true)
 }
 
+repositories {
+	maven { url = 'https://maven.minecraftforge.net/' }
+}
+
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
 	mappings "net.fabricmc:yarn:$project.yarn_mappings:v2"
@@ -45,7 +49,7 @@ dependencies {
 	// API for adding structures to Minecraft. It's effectively LibStructure merged into Fabric API.
 	// However, it also includes an important fix to a vanilla bug:
 	// MC-149777 - java.util.ConcurrentModificationException when using Java 11 or above
-	includeFabricApiModule "fabric-structure-api-v1"
+	// includeFabricApiModule "fabric-structure-api-v1"
 
 	// === Dependency modules: Required by other modules to function ===
 
@@ -70,6 +74,9 @@ dependencies {
 
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
+
+	
+    modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
 	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-builder-api-v1:${project.terraform_biome_builder_api_version}"
 	// includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
