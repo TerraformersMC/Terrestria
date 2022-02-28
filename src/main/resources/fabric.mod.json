@@ -38,7 +38,6 @@
     "fabric-object-builder-api-v1": ">=1.9.2",
     "fabric-blockrenderlayer-v1": ">=1.1.4",
     "fabric-content-registries-v0": ">=0.2.0",
-    "fabric-tool-attribute-api-v1": ">=1.2.5",
     "fabric-item-groups-v0": ">=0.2.1",
     "fabric-rendering-v1": ">=1.4.0",
     "fabric-renderer-registries-v1": ">=2.2.0",

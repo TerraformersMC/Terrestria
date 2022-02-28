@@ -33,9 +33,6 @@ dependencies {
 	// FlammableBlockRegistry, FuelRegistry, etc
 	includeFabricApiModule "fabric-content-registries-v0"
 
-	// ToolTags.SHOVELS, ToolTags.HOES
-	includeFabricApiModule "fabric-tool-attribute-api-v1"
-
 	// FabricItemGroupBuilder
 	includeFabricApiModule "fabric-item-groups-v0"
 
@@ -55,13 +52,10 @@ dependencies {
 	// Base module required by most other fabric api modules
 	includeFabricApiModule "fabric-api-base"
 
-	// Used by fabric-tool-attribute-api-v1
-	includeFabricApiModule "fabric-tag-extensions-v0"
-
 	// Used by terraform-wood-api-v1
 	includeFabricApiModule "fabric-networking-api-v1"
 
-	// Used by fabric-content-registries-v1
+	// Used by fabric-content-registries-v0
 	includeFabricApiModule "fabric-lifecycle-events-v1"
 
 	// === Passive modules: While we don't use the public APIs of these modules (if any), they provide important ===
