@@ -19,7 +19,6 @@ public class QuarteredMegaTreeConfig extends TreeFeatureConfig {
 			BlockStateProvider.TYPE_CODEC.fieldOf("trunk_provider").forGetter(config -> config.trunkProvider),
 			TrunkPlacer.TYPE_CODEC.fieldOf("trunk_placer").forGetter(config -> config.trunkPlacer),
 			BlockStateProvider.TYPE_CODEC.fieldOf("foliage_provider").forGetter(config -> config.foliageProvider),
-			BlockStateProvider.TYPE_CODEC.fieldOf("sapling_provider").forGetter(config -> config.saplingProvider),
 			FoliagePlacer.TYPE_CODEC.fieldOf("foliage_placer").forGetter(config -> config.foliagePlacer),
 			BlockStateProvider.TYPE_CODEC.fieldOf("dirt_provider").forGetter(config -> config.dirtProvider),
 			FeatureSize.TYPE_CODEC.fieldOf("minimum_size").forGetter(config -> config.minimumSize),
@@ -35,14 +34,20 @@ public class QuarteredMegaTreeConfig extends TreeFeatureConfig {
 	public final BlockStateProvider quarteredTrunkProvider;
 	public final BlockStateProvider rootsProvider;
 
-	protected QuarteredMegaTreeConfig(BlockStateProvider trunkProvider, TrunkPlacer trunkPlacer,
-								BlockStateProvider foliageProvider, BlockStateProvider saplingProvider,
-								FoliagePlacer foliagePlacer, BlockStateProvider dirtProvider,
-								FeatureSize minimumSize, List<TreeDecorator> decorators,
-								boolean ignoreVines, boolean forceDirt, 
-								BlockStateProvider quarteredTrunkProvider,
-								BlockStateProvider rootsProvider) {
-		super(trunkProvider, trunkPlacer, foliageProvider, saplingProvider, foliagePlacer, dirtProvider,
+	protected QuarteredMegaTreeConfig(
+		BlockStateProvider trunkProvider,
+		TrunkPlacer trunkPlacer,
+		BlockStateProvider foliageProvider,
+		FoliagePlacer foliagePlacer,
+		BlockStateProvider dirtProvider,
+		FeatureSize minimumSize,
+		List<TreeDecorator> decorators,
+		boolean ignoreVines,
+		boolean forceDirt,
+		BlockStateProvider quarteredTrunkProvider,
+		BlockStateProvider rootsProvider
+	) {
+		super(trunkProvider, trunkPlacer, foliageProvider, foliagePlacer, dirtProvider,
 				minimumSize, decorators, ignoreVines, forceDirt);
 
 		this.quarteredTrunkProvider = quarteredTrunkProvider;
@@ -50,7 +55,7 @@ public class QuarteredMegaTreeConfig extends TreeFeatureConfig {
 	}
 	
 	public QuarteredMegaTreeConfig(TreeFeatureConfig config, BlockStateProvider quarteredTrunkProvider, BlockStateProvider rootsProvider) {
-		super(config.trunkProvider, config.trunkPlacer, config.foliageProvider, config.saplingProvider, config.foliagePlacer, config.dirtProvider, config.minimumSize, config.decorators, config.ignoreVines, config.forceDirt);
+		super(config.trunkProvider, config.trunkPlacer, config.foliageProvider, config.foliagePlacer, config.dirtProvider, config.minimumSize, config.decorators, config.ignoreVines, config.forceDirt);
 
 		this.quarteredTrunkProvider = quarteredTrunkProvider;
 		this.rootsProvider = rootsProvider;

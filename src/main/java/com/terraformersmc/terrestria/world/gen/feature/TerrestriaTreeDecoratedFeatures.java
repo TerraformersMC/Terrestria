@@ -10,102 +10,99 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.WaterDepthThresholdDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.RandomBooleanFeatureConfig;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
+import net.minecraft.world.gen.feature.RandomFeatureEntry;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.BlockStateProvider;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 
 public class TerrestriaTreeDecoratedFeatures {
-	public static ConfiguredFeature<?, ?> CATTAILS_WARM;
-	public static ConfiguredFeature<?, ?> SPARSE_OAK_SHRUBS;
-	public static ConfiguredFeature<?, ?> PATCH_LUSH_FERNS;
-	public static ConfiguredFeature<?, ?> PATCH_VOLCANIC_ISLAND_GRASS;
-	public static ConfiguredFeature<?, ?> PATCH_DEAD_GRASS;
-	public static ConfiguredFeature<?, ?> PATCH_OUTBACK_BUSHLAND_GRASS;
-	public static ConfiguredFeature<?, ?> PATCH_OASIS_VEGETATION;
-	public static ConfiguredFeature<?, ?> PATCH_LUSH_DESERT_VEGETATION;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> CATTAILS_WARM;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_OAK_SHRUBS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_LUSH_FERNS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_VOLCANIC_ISLAND_GRASS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_DEAD_GRASS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_OUTBACK_BUSHLAND_GRASS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_OASIS_VEGETATION;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> PATCH_LUSH_DESERT_VEGETATION;
 
 	// Terminology: Sparse = 1 per chunk, normal = 2 per chunk, dense = 3-4 per chunk, denser = 5-6 per chunk, densest = 7-9 per chunk.
 
 	// Fallen logs.
-	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_HEMLOCK_LOGS;
-	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_REDWOOD_LOGS;
-	public static ConfiguredFeature<?, ?> FALLEN_HEMLOCK_LOGS;
-	public static ConfiguredFeature<?, ?> FALLEN_REDWOOD_LOGS;
-	public static ConfiguredFeature<?, ?> DENSE_FALLEN_HEMLOCK_LOGS;
-	public static ConfiguredFeature<?, ?> DENSE_FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_FALLEN_HEMLOCK_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> FALLEN_HEMLOCK_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_FALLEN_HEMLOCK_LOGS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_FALLEN_REDWOOD_LOGS;
 
 	// Small spruce-shaped trees.
-	public static ConfiguredFeature<?, ?> SPARSE_SMALL_HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> SPARSE_SMALL_REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> SMALL_HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> SMALL_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_SMALL_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_SMALL_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SMALL_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SMALL_REDWOOD_TREES;
 
 	// Taller and wider spruce-like trees.
-	public static ConfiguredFeature<?, ?> SPARSE_HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> SPARSE_REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> SPARSE_CONIFER_TREES;
-	public static ConfiguredFeature<?, ?> HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> DENSEST_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_CONIFER_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSEST_HEMLOCK_TREES;
 
-	public static ConfiguredFeature<?, ?> DENSE_REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> DENSE_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_HEMLOCK_TREES;
 
 	// Gigantic 2x2 spruce-like trees
-	public static ConfiguredFeature<?, ?> SPARSE_MEGA_HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> MEGA_REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> MEGA_HEMLOCK_TREES;
-	public static ConfiguredFeature<?, ?> DENSEST_MEGA_REDWOOD_TREES;
-	public static ConfiguredFeature<?, ?> DENSEST_MEGA_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_MEGA_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> MEGA_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> MEGA_HEMLOCK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSEST_MEGA_REDWOOD_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSEST_MEGA_HEMLOCK_TREES;
 
 	// Fancy / large oak trees
-	public static ConfiguredFeature<?, ?> DENSE_FANCY_OAK_TREES;
-	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
-	public static ConfiguredFeature<?, ?> DENSEST_FANCY_OAK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_FANCY_OAK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSER_FANCY_OAK_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSEST_FANCY_OAK_TREES;
 
 	// Volcanic island Trees
-	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
-	public static ConfiguredFeature<?, ?> DENSER_JUNGLE_PALM_TREES;
-	public static ConfiguredFeature<?, ?> RARE_DUM_DUM_HEADS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> JUNGLE_PALM_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSER_JUNGLE_PALM_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> RARE_DUM_DUM_HEADS;
 
 	// Japanese Maple and Sakura trees
-	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_TREES;
-	public static ConfiguredFeature<?, ?> DENSE_DARK_JAPANESE_MAPLE_TREES;
-	public static ConfiguredFeature<?, ?> DENSE_JAPANESE_MAPLE_SHRUBS;
-	public static ConfiguredFeature<?, ?> DENSER_SAKURA_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_JAPANESE_MAPLE_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_DARK_JAPANESE_MAPLE_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_JAPANESE_MAPLE_SHRUBS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSER_SAKURA_TREES;
 
 	// Small cypress trees
-	public static ConfiguredFeature<?, ?> DENSEST_CYPRESS_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSEST_CYPRESS_TREES;
 
 	// Rainbow Rainforest trees
-	public static ConfiguredFeature<?, ?> DENSER_RAINBOW_EUCALYPTUS_TREES;
-	public static ConfiguredFeature<?, ?> DENSE_RUBBER_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSER_RAINBOW_EUCALYPTUS_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> DENSE_RUBBER_TREES;
 
 	// Cypress Swamp trees
-	public static ConfiguredFeature<?, ?> MEGA_CYPRESS_TREES;
-	public static ConfiguredFeature<?, ?> SPARSE_WILLOW_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> MEGA_CYPRESS_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SPARSE_WILLOW_TREES;
 
 	// Outback trees and shrubs
-	public static ConfiguredFeature<?, ?> OUTBACK_BUSHLAND_TREES;
-	public static ConfiguredFeature<?, ?> RARE_YUCCA_PALM_TREES;
-	public static ConfiguredFeature<?, ?> ACACIA_DOT_SHRUBS;
-	public static ConfiguredFeature<?, ?> OAK_DOT_SHRUBS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> OUTBACK_BUSHLAND_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> RARE_YUCCA_PALM_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> ACACIA_DOT_SHRUBS;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> OAK_DOT_SHRUBS;
 
 	// Lush desert trees
-	public static ConfiguredFeature<?, ?> SAGUARO_CACTUSES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> SAGUARO_CACTUSES;
 
 	// Bryce trees
-	public static ConfiguredFeature<?, ?> RARE_BRYCE_TREES;
+	public static ConfiguredFeature<RandomFeatureConfig, ?> RARE_BRYCE_TREES;
 
 	public static void init() {
 		CATTAILS_WARM = register("cattails_warm", TerrestriaFeature.CATTAIL.configure(new ProbabilityConfig(0.3F)).repeat(80).decorate(ConfiguredFeatures.Decorators.SQUARE_TOP_SOLID_HEIGHTMAP));
@@ -209,22 +206,33 @@ public class TerrestriaTreeDecoratedFeatures {
 		return DataPool.builder();
 	}
 
-	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
-		return register(name, Feature.RANDOM_PATCH.configure(config).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).repeat(count));
+	private static ConfiguredFeature<RandomFeatureConfig, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
+		return register(name, Feature.RANDOM_PATCH.configure(config)
+				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
+				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE)
+				.repeat(count));
 	}
 
-	private static ConfiguredFeature<?, ?> decorateTree(String name, int count, ConfiguredFeature<?, ?> base) {
-		return register(name, base.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))));
+	private static ConfiguredFeature<RandomFeatureConfig, ?> decorateTree(String name, int count, ConfiguredFeature<RandomFeatureConfig, ?> base) {
+		return register(name, base
+				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
+				.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))));
 	}
 
-	private static ConfiguredFeature<?, ?> decorateTree(String name, int count, int maxWaterDepth, ConfiguredFeature<?, ?> base) {
+	private static ConfiguredFeature<RandomFeatureConfig, ?> decorateTree(String name, int count, int maxWaterDepth, ConfiguredFeature<RandomFeatureConfig, ?> base) {
+		// Why did I add this? It's been a month since then, and I can't remember what it was supposed to do :/
+		// return register(name, Feature.RANDOM_SELECTOR.configure(
+		// 		new RandomBooleanFeatureConfig(List.of(new RandomFeatureEntry(base))))
+		// 		.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
+		// 		.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))
+		// 		.decorate(Decorator.WATER_DEPTH_THRESHOLD.configure(new WaterDepthThresholdDecoratorConfig(maxWaterDepth)))));
 		return register(name, base
 				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
 				.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))
 				.decorate(Decorator.WATER_DEPTH_THRESHOLD.configure(new WaterDepthThresholdDecoratorConfig(maxWaterDepth)))));
 	}
 
-	private static ConfiguredFeature<?, ?> register(String name, ConfiguredFeature<?, ?> decorated) {
+	private static ConfiguredFeature<RandomFeatureConfig, ?> register(String name, ConfiguredFeature<RandomFeatureConfig, ?> decorated) {
 		Identifier id = new Identifier(Terrestria.MOD_ID, name);
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_FEATURE, id, decorated);
