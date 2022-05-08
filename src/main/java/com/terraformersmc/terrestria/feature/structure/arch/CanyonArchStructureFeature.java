@@ -35,7 +35,7 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 			CanyonArchGenerator canyonArch = new CanyonArchGenerator(this.random, pos.getStartX() * 16, pos.getStartZ() * 16);
 
 			this.children.add(canyonArch);
-			this.setBoundingBoxFromChildren();
+			this.getBoundingBox();
 		}
 	}
 }

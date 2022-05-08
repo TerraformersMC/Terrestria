@@ -32,8 +32,8 @@
     ]
   },
   "depends": {
-    "minecraft": ">=1.17",
-    "fabricloader": ">=0.12.9",
+    "minecraft": ">=1.18.2",
+    "fabricloader": ">=0.12.12",
     "fabric-biome-api-v1": ">=3.1.0",
     "fabric-object-builder-api-v1": ">=1.9.2",
     "fabric-blockrenderlayer-v1": ">=1.1.4",
@@ -47,14 +47,12 @@
     "fabric-crash-report-info-v1": ">=0.1.2",
     "fabric-registry-sync-v0": ">=0.7.1",
     "fabric-resource-loader-v0": ">=0.3.2",
-    "terraform-biome-builder-api-v1": ">=2.0.0",
-    "terraform-config-api-v1": ">=2.0.0",
-    "terraform-dirt-api-v1": ">=2.0.0",
-    "terraform-overworld-biome-extensions-api-v1": ">=2.0.0",
-    "terraform-shapes-api-v1": ">=2.1.0",
-    "terraform-surfaces-api-v1": ">=2.0.0",
-    "terraform-tree-api-v1": ">=2.0.0",
-    "terraform-wood-api-v1": ">=2.0.2"
+    "terraform-config-api-v1": ">=3.0.0",
+    "terraform-dirt-api-v1": ">=3.0.0",
+    "terraform-shapes-api-v1": ">=3.0.0",
+    "terraform-surfaces-api-v1": ">=3.0.0",
+    "terraform-tree-api-v1": ">=3.0.0",
+    "terraform-wood-api-v1": ">=3.0.0"
   },
   "breaks": {
     "terraform-legacy-v0": "*",

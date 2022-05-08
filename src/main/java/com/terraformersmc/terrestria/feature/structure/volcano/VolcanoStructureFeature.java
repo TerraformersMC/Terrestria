@@ -31,7 +31,7 @@ public class VolcanoStructureFeature extends StructureFeature<VolcanoFeatureConf
 			VolcanoGenerator volcano = new VolcanoGenerator(this.random, pos.getStartX() * 16, pos.getStartZ() * 16, config);
 
 			this.children.add(volcano);
-			this.setBoundingBoxFromChildren();
+			this.getBoundingBox();
 		}
 	}
 }

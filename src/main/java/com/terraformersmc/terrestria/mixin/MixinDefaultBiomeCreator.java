@@ -7,11 +7,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.DefaultBiomeCreator;
 import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.OverworldBiomeCreator;
 import net.minecraft.world.biome.SpawnSettings;
 
-@Mixin(DefaultBiomeCreator.class)
+@Mixin(OverworldBiomeCreator.class)
 public class MixinDefaultBiomeCreator {
 	@Inject(method = "createOcean(Lnet/minecraft/world/biome/SpawnSettings$Builder;IIZLnet/minecraft/world/biome/GenerationSettings$Builder;)Lnet/minecraft/world/biome/Biome;",
 			at = @At("HEAD"))
