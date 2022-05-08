@@ -56,7 +56,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState state, Direction facing, BlockState neighborState, WorldAccess world, BlockPos pos, BlockPos neighborPos) {
 		if (!isSupported(state, world, pos)) {
-			world.getBlockTickScheduler().schedule(pos, this, 1);
+			world.createAndScheduleBlockTick(pos, this, 1);
 		}
 
 		return super.getStateForNeighborUpdate(state, facing, neighborState, world, pos, neighborPos);
