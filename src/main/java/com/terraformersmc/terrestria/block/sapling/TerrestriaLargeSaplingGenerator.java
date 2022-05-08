@@ -17,7 +17,7 @@ public class TerrestriaLargeSaplingGenerator extends LargeTreeSaplingGenerator {
 	}
 
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
+	protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bees) {
 		return this.tree.get();
 	}
 
