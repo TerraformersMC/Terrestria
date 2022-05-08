@@ -12,12 +12,12 @@ import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.WaterDepthThresholdDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
+import net.minecraft.world.gen.placementmodifier.SurfaceWaterDepthFilterPlacementModifier;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
@@ -219,7 +219,7 @@ public class TerrestriaDecoratedFeatures {
 		return register(name, base
 				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
 				.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))
-				.decorate(Decorator.WATER_DEPTH_THRESHOLD.configure(new WaterDepthThresholdDecoratorConfig(maxWaterDepth)))));
+				.decorate(Decorator.WATER_DEPTH_THRESHOLD.configure(new SurfaceWaterDepthFilterPlacementModifier(maxWaterDepth)))));
 	}
 
 	private static ConfiguredFeature<?, ?> register(String name, ConfiguredFeature<?, ?> decorated) {
