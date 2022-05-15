@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.surface;
-
+/*
 import java.util.Random;
 
 import com.mojang.serialization.Codec;
@@ -32,3 +32,4 @@ public class PatchyGrassSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConf
 		}
 	}
 }
+*/

@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.init;
-
+/*
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
@@ -20,9 +20,9 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 import net.fabricmc.fabric.api.structure.v1.FabricStructureBuilder;
-
+*/
 public class TerrestriaStructures {
-
+/*
 	public static StructurePieceType VOLCANO_PIECE;
 	public static StructurePieceType CANYON_ARCH_PIECE;
 
@@ -80,4 +80,5 @@ public class TerrestriaStructures {
 
 		BuiltinRegistries.add(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, identifier, configured);
 	}
+*/
 }

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "terrestria:cypress_forest",
+    "terrestria:wooded_cypress_hills",
+    "terrestria:japanese_maple_forest",
+    "terrestria:wooded_japanese_maple_hills",
+    "terrestria:sakura_forest",
+    "terrestria:wooded_sakura_hills"
+  ]
+}

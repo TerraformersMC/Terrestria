@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.surface;
-
+/*
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
@@ -43,12 +43,13 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 
 		return underLayers;
 	}
-
+*/
 	/**
 	 * "terraces" the input noise (from 0.0 to 1.0) returning an integer from 1 to 40, inclusive
 	 * Domain: [-1.0, 1.0]
 	 * Range: [1, 40]
 	 */
+/*
 	private static int cliffNoiseToLayers(double noise) {
 		// Domain transformation:
 		// [0.0, 1.0] -> [0, 60]
@@ -155,3 +156,4 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 		}
 	}
 }
+*/

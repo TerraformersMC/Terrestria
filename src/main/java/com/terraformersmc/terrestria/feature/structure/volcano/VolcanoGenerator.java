@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
-
+/*
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
@@ -349,3 +349,4 @@ public class VolcanoGenerator extends StructurePiece {
 		}
 	}
 }
+*/

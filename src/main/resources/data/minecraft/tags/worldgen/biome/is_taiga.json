@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "terrestria:dense_woodlands",
+    "terrestria:dense_woodlands_edge",
+    "terrestria:hemlock_clearing",
+    "terrestria:hemlock_rainforest",
+    "terrestria:lush_redwood_clearing",
+    "terrestria:lush_redwood_forest",
+    "terrestria:lush_redwood_forest_edge",
+    "terrestria:redwood_forest",
+    "terrestria:redwood_forest_edge",
+    "terrestria:redwood_clearing",
+    "terrestria:snowy_hemlock_forest",
+    "terrestria:snowy_hemlock_clearing"
+  ]
+}

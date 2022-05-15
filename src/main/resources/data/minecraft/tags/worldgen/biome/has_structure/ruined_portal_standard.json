@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "terrestria:hemlock_clearing",
+    "terrestria:hemlock_rainforest",
+    "terrestria:japanese_maple_forest",
+    "terrestria:wooded_japanese_maple_hills",
+    "terrestria:sakura_forest",
+    "terrestria:wooded_sakura_hills"
+  ]
+}

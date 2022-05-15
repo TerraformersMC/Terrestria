@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
-
+/*
 import com.mojang.serialization.Codec;
 import net.minecraft.structure.StructureManager;
 import net.minecraft.structure.StructureStart;
@@ -39,3 +39,4 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 		}
 	}
 }
+*/

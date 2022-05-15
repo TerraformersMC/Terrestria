@@ -1,58 +1,113 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
-import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class OutbackBiomes {
 	public static void register() {
-		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
+		final Biome.Builder template = new Biome.Builder()
 				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
 				.temperature(1.8F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
 					.waterColor(0x3f76e4)
 					.waterFogColor(0x50533)
-				)
-				.addDefaultSpawnEntries()
-				.setSpawnChance(0.03F)
-				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
-				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
-				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_DESERT)
-				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_DESERT)
-				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, DESERT_LAKES, DUNGEONS, MINEABLES, ORES, CLAY, SAVANNA_GRASS,
-					DEFAULT_MUSHROOMS, DESERT_DEAD_BUSHES, SPRINGS, FOSSILS, FROZEN_TOP_LAYER)
-		);
+					.build()
+				);
 
-		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template.builder()
-			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
-			.depth(0.125F)
-			.scale(0.05F)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.RARE_YUCCA_PALM_TREES)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_DEAD_GRASS)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.ACACIA_DOT_SHRUBS)
+		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template
+			.generationSettings(outbackGenerationSettings().build())
+			.spawnSettings(defaultSpawnSettings().build())
+			//.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
+			//.depth(0.125F)
+			//.scale(0.05F)
 			.build());
 
-		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", template.builder()
-			.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, TerrestriaSurfaces.OUTBACK_ULURU_CONFIG)
-			.depth(2.2F)
-			.scale(0.18F)
+		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", template
+			.generationSettings(outbackUluruGenerationSettings().build())
+			.spawnSettings(defaultSpawnSettings().build())
+			//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, TerrestriaSurfaces.OUTBACK_ULURU_CONFIG)
+			//.depth(2.2F)
+			//.scale(0.18F)
 			.build());
 
-		TerrestriaBiomes.OUTBACK_BUSHLAND = TerrestriaBiomes.register("outback_bushland", template.builder()
-			.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
-			.depth(0.125F)
-			.scale(0.05F)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OAK_DOT_SHRUBS)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.ACACIA_DOT_SHRUBS)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.OUTBACK_BUSHLAND_TREES)
-			.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_OUTBACK_BUSHLAND_GRASS)
+		TerrestriaBiomes.OUTBACK_BUSHLAND = TerrestriaBiomes.register("outback_bushland", template
+			.generationSettings(outbackBushlandGenerationSettings().build())
+			.spawnSettings(defaultSpawnSettings().build())
+			//.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
+			//.depth(0.125F)
+			//.scale(0.05F)
 			.build());
+	}
+
+	private static GenerationSettings.Builder outbackGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		DefaultBiomeFeatures.addFossils(builder);
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addClayOre(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_DEAD_GRASS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
+		DefaultBiomeFeatures.addDesertDeadBushes(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
+		DefaultBiomeFeatures.addDesertFeatures(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder outbackUluruGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		DefaultBiomeFeatures.addFossils(builder);
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addClayOre(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
+		DefaultBiomeFeatures.addDesertDeadBushes(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
+		DefaultBiomeFeatures.addDesertFeatures(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder outbackBushlandGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		DefaultBiomeFeatures.addFossils(builder);
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addClayOre(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.OAK_DOT_SHRUBS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.OUTBACK_BUSHLAND_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_OUTBACK_BUSHLAND_GRASS);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
+		DefaultBiomeFeatures.addDesertDeadBushes(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
+		DefaultBiomeFeatures.addDesertFeatures(builder);
+		return builder;
+	}
+
+	private static SpawnSettings.Builder defaultSpawnSettings() {
+		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.creatureSpawnProbability(0.03F);
+		return builder;
 	}
 }

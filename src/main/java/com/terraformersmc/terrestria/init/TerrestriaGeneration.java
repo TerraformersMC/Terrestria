@@ -1,25 +1,80 @@
 package com.terraformersmc.terrestria.init;
 
 import java.util.Set;
+import java.util.function.Consumer;
 
+import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.config.BiomeConfig;
 import com.terraformersmc.terraform.config.BiomeConfigNode;
-import com.terraformersmc.terraform.overworldbiomes.OverworldBiomesExt;
-
-import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
-import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
-
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.biome.source.util.MultiNoiseUtil;
+import terrablender.api.Region;
+import terrablender.api.RegionType;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
-public class TerrestriaGeneration {
-	// Note: This can handle the cases of biomes not registered, but currently biomes are always registered
+public class TerrestriaGeneration extends Region {
+	public TerrestriaGeneration(Identifier name, int weight) {
+		super(name, RegionType.OVERWORLD, weight);
+	}
+
+	@Override
+	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
+		//this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_PEAKS, CALDERA_RIDGE);
+		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
+		this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
+		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, LUSH_REDWOOD_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT);
+		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.JUNGLE, RAINBOW_RAINFOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, SNOWY_HEMLOCK_CLEARING);
+		//this.addBiomeSimilar(mapper, BiomeKeys.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE);
+		//this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON_CLIFFS);
+		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, DUNES);
+		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK);
+
+		// Balancing low-utilization areas with vanilla biomes.
+		this.addBiomeSimilar(mapper, BiomeKeys.RIVER, BiomeKeys.RIVER);
+		this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_RIVER, BiomeKeys.FROZEN_RIVER);
+		this.addBiomeSimilar(mapper, BiomeKeys.BEACH, BiomeKeys.BEACH);
+		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_BEACH, BiomeKeys.SNOWY_BEACH);
+		this.addBiomeSimilar(mapper, BiomeKeys.STONY_SHORE, BiomeKeys.STONY_SHORE);
+		this.addBiomeSimilar(mapper, BiomeKeys.OCEAN, BiomeKeys.OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.LUKEWARM_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.COLD_OCEAN, BiomeKeys.COLD_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_OCEAN, BiomeKeys.FROZEN_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_OCEAN, BiomeKeys.DEEP_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_LUKEWARM_OCEAN, BiomeKeys.DEEP_LUKEWARM_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN);
+		this.addBiomeSimilar(mapper, BiomeKeys.JUNGLE, BiomeKeys.JUNGLE);
+		this.addBiomeSimilar(mapper, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.BAMBOO_JUNGLE);
+		this.addBiomeSimilar(mapper, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.SPARSE_JUNGLE);
+		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, BiomeKeys.SAVANNA);
+		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA_PLATEAU, BiomeKeys.SAVANNA_PLATEAU);
+		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_SAVANNA, BiomeKeys.WINDSWEPT_SAVANNA);
+		this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_PEAKS, BiomeKeys.FROZEN_PEAKS);
+		this.addBiomeSimilar(mapper, BiomeKeys.STONY_PEAKS, BiomeKeys.STONY_PEAKS);
+		this.addBiomeSimilar(mapper, BiomeKeys.PLAINS, BiomeKeys.PLAINS);
+		this.addBiomeSimilar(mapper, BiomeKeys.SUNFLOWER_PLAINS, BiomeKeys.SUNFLOWER_PLAINS);
+		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS);
+		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_PLAINS, BiomeKeys.SNOWY_PLAINS);
+		this.addBiomeSimilar(mapper, BiomeKeys.ICE_SPIKES, BiomeKeys.ICE_SPIKES);
+	}
 
 	public static void init(BiomeConfig config, Set<String> enabledBiomes) {
+		/*
 		// 33% of Jungles will be replaced by Rainforest biomes
 		// 33% of Mountains will be replaced with Caldera Ridges
 		// 10% of Deep Oceans will be replaced with Volcanic Islands
@@ -153,5 +208,6 @@ public class TerrestriaGeneration {
 		if(biome != null && enable && continental.getWeight() > 0.0) {
 			OverworldBiomes.addContinentalBiome(biome, climate, continental.getWeight());
 		}
+	 */
 	}
 }

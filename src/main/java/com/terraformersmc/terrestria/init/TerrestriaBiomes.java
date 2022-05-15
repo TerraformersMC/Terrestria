@@ -2,6 +2,8 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biome.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -9,6 +11,9 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.GenerationSettings;
+import net.minecraft.world.biome.SpawnSettings;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 public class TerrestriaBiomes {
 	public static RegistryKey<Biome> CALDERA;
@@ -50,6 +55,60 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> WOODED_CYPRESS_HILLS;
 	public static RegistryKey<Biome> WOODED_JAPANESE_MAPLE_HILLS;
 	public static RegistryKey<Biome> WOODED_SAKURA_HILLS;
+
+
+	public static GenerationSettings.Builder createDefaultGenerationSettings(){
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		DefaultBiomeFeatures.addLandCarvers(builder);
+		DefaultBiomeFeatures.addDungeons(builder);
+		DefaultBiomeFeatures.addMineables(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSprings(builder);
+		DefaultBiomeFeatures.addFrozenTopLayer(builder);
+		return builder;
+	}
+
+	public static void addBasicFeatures(GenerationSettings.Builder generationSettings) {
+		DefaultBiomeFeatures.addLandCarvers(generationSettings);
+		DefaultBiomeFeatures.addAmethystGeodes(generationSettings);
+		DefaultBiomeFeatures.addDungeons(generationSettings);
+		DefaultBiomeFeatures.addMineables(generationSettings);
+		DefaultBiomeFeatures.addSprings(generationSettings);
+		DefaultBiomeFeatures.addFrozenTopLayer(generationSettings);
+	}
+
+	public static SpawnSettings.Builder createDefaultSpawnSettings() {
+		SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
+		addDefaultCreatureSpawnEntries(spawnSettings);
+		addDefaultAmbientSpawnEntries(spawnSettings);
+		addDefaultMonsterSpawnEntries(spawnSettings);
+		return spawnSettings;
+	}
+
+	public static void addDefaultCreatureSpawnEntries(SpawnSettings.Builder builder) {
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.PIG, 10, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.CHICKEN, 10, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.COW, 8, 4, 4));
+	}
+
+	public static void addDefaultAmbientSpawnEntries(SpawnSettings.Builder builder) {
+		builder.spawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));
+	}
+
+	public static void addDefaultMonsterSpawnEntries(SpawnSettings.Builder builder) {
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 100, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 100, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
+	}
 
 	// Copied from Traverse
 	public static BiomeEffects.Builder createDefaultBiomeEffects() {

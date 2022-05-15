@@ -1,22 +1,21 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
-import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
-import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class JapaneseMapleForestBiomes {
 	public static void register() {
-		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
-				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+		final Biome.Builder template = new Biome.Builder()
+				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.8F)
 				.downfall(0.5F)
@@ -25,28 +24,41 @@ public class JapaneseMapleForestBiomes {
 					.waterFogColor(0x50533)
 					.grassColor(0x7aab1a)
 					.foliageColor(0x7aab1a)
-				)
-				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, DEFAULT_MUSHROOMS,
-						DEFAULT_VEGETATION, SPRINGS, FROZEN_TOP_LAYER, FOREST_GRASS)
-				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
-				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
-				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL)
-				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_DARK_JAPANESE_MAPLE_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS)
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
-		);
+					.build()
+				);
 
-		TerrestriaBiomes.JAPANESE_MAPLE_FOREST = TerrestriaBiomes.register("japanese_maple_forest", template.builder()
-				.depth(0.05F)
-				.scale(0.2F)
+		TerrestriaBiomes.JAPANESE_MAPLE_FOREST = TerrestriaBiomes.register("japanese_maple_forest", template
+				.generationSettings(japaneseMapleForestGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
+				//.depth(0.05F)
+				//.scale(0.2F)
 				.build());
 
-		TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS = TerrestriaBiomes.register("wooded_japanese_maple_hills", template.builder()
-				.depth(0.45F)
-				.scale(0.5F)
+		TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS = TerrestriaBiomes.register("wooded_japanese_maple_hills", template
+				.generationSettings(japaneseMapleForestGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
+				//.depth(0.45F)
+				//.scale(0.5F)
 				.build());
+	}
+
+	private static GenerationSettings.Builder japaneseMapleForestGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_JAPANESE_MAPLE_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_DARK_JAPANESE_MAPLE_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS);
+		DefaultBiomeFeatures.addForestGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		return builder;
+	}
+
+	private static SpawnSettings.Builder defaultSpawnSettings() {
+		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
+		return builder;
 	}
 }
