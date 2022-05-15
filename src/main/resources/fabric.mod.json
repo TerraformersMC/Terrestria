@@ -26,9 +26,6 @@
   "entrypoints": {
     "main": [
       "com.terraformersmc.terrestria.Terrestria"
-    ],
-    "terrablender": [
-      "com.terraformersmc.terrestria.Terrestria"
     ],    "client": [
       "com.terraformersmc.terrestria.TerrestriaClient"
     ]
