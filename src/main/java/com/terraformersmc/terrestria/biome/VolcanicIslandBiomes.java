@@ -23,7 +23,7 @@ public class VolcanicIslandBiomes {
 					.waterFogColor(0x24a0b0)
 					.build()
 				);
-
+/*
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template
 				.generationSettings(volcanicIslandGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
@@ -49,6 +49,7 @@ public class VolcanicIslandBiomes {
 				//.scale(0.05F)
 				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
+*/
 	}
 
 	private static GenerationSettings.Builder volcanicIslandGenerationSettings() {

@@ -27,20 +27,10 @@ public class LushRedwoodForestBiomes {
 					.build()
 				);
 
-		TerrestriaBiomes.LUSH_REDWOOD_CLEARING = TerrestriaBiomes.register("lush_redwood_clearing", template
-				.generationSettings(lushRedwoodClearingGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
-
 		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template
 				.generationSettings(lushRedwoodForestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
 				//.playerSpawnFriendly()
-				.build());
-
-		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template
-				.generationSettings(lushRedwoodForestEdgeGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
 				.build());
 	}
 

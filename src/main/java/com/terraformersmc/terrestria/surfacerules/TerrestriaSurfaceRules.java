@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.surfacerules;
 
-import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.Terrestria;
@@ -11,7 +10,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.BiomeKeys;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.noise.NoiseParametersKeys;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
@@ -28,7 +26,6 @@ public class TerrestriaSurfaceRules {
 
 	public static MaterialRule createRules() {
 		MaterialRule defaultGrass = VanillaSurfaceRules.createDefaultRule(true, false, true);
-//		MaterialRule sandAndSandstone = sequence(condition(MaterialRules.STONE_DEPTH_CEILING, block(Blocks.SANDSTONE)), block(Blocks.SAND));
 		MaterialRule sandAndSandstone = sequence(condition(MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, block(Blocks.SAND)), block(Blocks.SANDSTONE));
 		MaterialRule deepSandAndSandstone = sequence(condition(MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_30, block(Blocks.SAND)), block(Blocks.SANDSTONE));
 		MaterialRule redSandAndSandstone = sequence(condition(MaterialRules.STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, block(Blocks.RED_SAND)), block(Blocks.RED_SANDSTONE));

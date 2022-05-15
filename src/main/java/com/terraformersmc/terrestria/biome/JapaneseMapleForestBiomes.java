@@ -33,13 +33,6 @@ public class JapaneseMapleForestBiomes {
 				//.depth(0.05F)
 				//.scale(0.2F)
 				.build());
-
-		TerrestriaBiomes.WOODED_JAPANESE_MAPLE_HILLS = TerrestriaBiomes.register("wooded_japanese_maple_hills", template
-				.generationSettings(japaneseMapleForestGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.45F)
-				//.scale(0.5F)
-				.build());
 	}
 
 	private static GenerationSettings.Builder japaneseMapleForestGenerationSettings() {

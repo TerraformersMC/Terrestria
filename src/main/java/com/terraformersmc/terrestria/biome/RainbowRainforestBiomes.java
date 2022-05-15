@@ -32,20 +32,6 @@ public class RainbowRainforestBiomes {
 				//.scale(0.4F)
 				//.playerSpawnFriendly()
 				.build());
-
-		TerrestriaBiomes.RAINBOW_RAINFOREST_MOUNTAINS = TerrestriaBiomes.register("rainbow_rainforest_mountains", template
-				.generationSettings(rainbowRainforestGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(1.0F)
-				//.scale(0.5F)
-				.build());
-
-		TerrestriaBiomes.RAINBOW_RAINFOREST_LAKE = TerrestriaBiomes.register("rainbow_rainforest_lake", template
-				.generationSettings(rainbowRainforestGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(-0.2F)
-				//.scale(0.0F)
-				.build());
 	}
 
 	private static GenerationSettings.Builder rainbowRainforestGenerationSettings() {
