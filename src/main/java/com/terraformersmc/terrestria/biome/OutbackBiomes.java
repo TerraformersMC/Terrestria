@@ -1,15 +1,11 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
@@ -27,22 +23,6 @@ public class OutbackBiomes {
 
 		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template
 			.generationSettings(outbackGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			//.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
-			//.depth(0.125F)
-			//.scale(0.05F)
-			.build());
-
-		TerrestriaBiomes.OUTBACK_ULURU = TerrestriaBiomes.register("outback_uluru", template
-			.generationSettings(outbackUluruGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, TerrestriaSurfaces.OUTBACK_ULURU_CONFIG)
-			//.depth(2.2F)
-			//.scale(0.18F)
-			.build());
-
-		TerrestriaBiomes.OUTBACK_BUSHLAND = TerrestriaBiomes.register("outback_bushland", template
-			.generationSettings(outbackBushlandGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
 			//.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
 			//.depth(0.125F)

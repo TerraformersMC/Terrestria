@@ -33,13 +33,6 @@ public class CypressForestBiomes {
 				//.scale(0.2F)
 				//.playerSpawnFriendly()
 				.build());
-
-		TerrestriaBiomes.WOODED_CYPRESS_HILLS = TerrestriaBiomes.register("wooded_cypress_hills", template
-				.generationSettings(cypressGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.45F)
-				//.scale(0.3F)
-				.build());
 	}
 
 	private static GenerationSettings.Builder cypressGenerationSettings() {

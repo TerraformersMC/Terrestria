@@ -1,13 +1,9 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
@@ -29,14 +25,6 @@ public class DunesBiomes {
 			.generationSettings(dunesGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
 			//.depth(0.3F)
-			//.scale(0.0F)
-			.build()
-		);
-
-		TerrestriaBiomes.DUNES_EDGE = TerrestriaBiomes.register("dunes_edge", template
-			.generationSettings(dunesGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			//.depth(-1F)
 			//.scale(0.0F)
 			.build()
 		);

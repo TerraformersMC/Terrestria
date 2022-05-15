@@ -31,13 +31,6 @@ public class SakuraForestBiomes {
 				//.depth(0.05F)
 				//.scale(0.1F)
 				.build());
-
-		TerrestriaBiomes.WOODED_SAKURA_HILLS = TerrestriaBiomes.register("wooded_sakura_hills", template
-				.generationSettings(sakuraForestGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.4F)
-				//.scale(0.3F)
-				.build());
 	}
 
 	private static GenerationSettings.Builder sakuraForestGenerationSettings() {

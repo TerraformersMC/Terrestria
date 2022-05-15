@@ -30,12 +30,6 @@ public class DenseWoodlandsBiomes {
 				.spawnSettings(defaultSpawnSettings().build())
 				.build()
 		);
-
-		TerrestriaBiomes.DENSE_WOODLANDS_EDGE = TerrestriaBiomes.register("dense_woodlands_edge", template
-				.generationSettings(denseWoodlandsEdgeGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build()
-		);
 	}
 
 	private static GenerationSettings.Builder denseWoodlandsGenerationSettings() {

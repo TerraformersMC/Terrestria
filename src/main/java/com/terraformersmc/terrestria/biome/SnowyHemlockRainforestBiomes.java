@@ -33,11 +33,6 @@ public class SnowyHemlockRainforestBiomes {
 				.generationSettings(snowyHemlockForestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
 				.build());
-
-		TerrestriaBiomes.SNOWY_HEMLOCK_CLEARING = TerrestriaBiomes.register("snowy_hemlock_clearing", template
-				.generationSettings(snowyHemlockForestClearingGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				.build());
 	}
 
 	private static GenerationSettings.Builder snowyHemlockForestGenerationSettings() {

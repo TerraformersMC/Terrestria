@@ -26,13 +26,6 @@ public class HemlockRainforestBiomes {
 					.build()
 				);
 
-		TerrestriaBiomes.HEMLOCK_CLEARING = TerrestriaBiomes.register("hemlock_clearing", template
-				.generationSettings(hemlockClearingGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.95F)
-				//.scale(0.2F)
-				.build());
-
 		TerrestriaBiomes.HEMLOCK_RAINFOREST = TerrestriaBiomes.register("hemlock_rainforest", template
 				.generationSettings(hemlockRainforestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())

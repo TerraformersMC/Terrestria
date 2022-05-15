@@ -1,8 +1,6 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -27,6 +25,7 @@ public class CanyonBiomes {
 				.build()
 			);
 
+/*
 		TerrestriaBiomes.CANYON_ARCHES = TerrestriaBiomes.register("canyon_arches", template
 			.generationSettings(canyonGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
@@ -45,6 +44,7 @@ public class CanyonBiomes {
 			.spawnSettings(defaultSpawnSettings().build())
 			//.configureSurfaceBuilder(TerrestriaSurfaces.SANDSTONE_CLIFF, TerrestriaSurfaces.SANDSTONE_CONFIG)
 			.build());
+*/
 	}
 
 	private static GenerationSettings.Builder canyonGenerationSettings() {

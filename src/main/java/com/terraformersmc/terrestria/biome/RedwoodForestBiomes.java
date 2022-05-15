@@ -33,20 +33,6 @@ public class RedwoodForestBiomes {
 				//.scale(0.3F)
 				//.playerSpawnFriendly()
 				.build());
-
-		TerrestriaBiomes.REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("redwood_forest_edge", template
-				.generationSettings(redwoodForestEdgeGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.5F)
-				//.scale(0.3F)
-				.build());
-
-		TerrestriaBiomes.REDWOOD_CLEARING = TerrestriaBiomes.register("redwood_clearing", template
-				.generationSettings(redwoodClearingGenerationSettings().build())
-				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(1.2F)
-				//.scale(0.3F)
-				.build());
 	}
 
 	private static GenerationSettings.Builder redwoodForestGenerationSettings() {
