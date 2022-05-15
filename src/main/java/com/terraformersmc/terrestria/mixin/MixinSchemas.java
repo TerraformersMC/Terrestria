@@ -31,7 +31,7 @@ public class MixinSchemas {
 				.put("terrestria:canyon_arches", "minecraft:desert")
 				.put("terrestria:canyon_cliffs", "minecraft:desert")
 				.put("terrestria:canyon_edge", "minecraft:desert")
-				.put("terrestria:dense_woodlands_edge", "minecraft_forest")
+				.put("terrestria:dense_woodlands_edge", "minecraft:forest")
 				.put("terrestria:dunes_edge", "minecraft:desert")
 				.put("terrestria:hemlock_clearing", "terrestria:hemlock_rainforest")
 				.put("terrestria:lush_redwood_clearing", "terrestria:lush_redwood_forest")
