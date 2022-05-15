@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.surface;
-
+/*
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.block.BlockState;
@@ -46,3 +46,4 @@ public class ThreeLayerOutlinedSurfaceConfig extends TernarySurfaceConfig {
 			BlockState.CODEC.fieldOf("underwater_material").forGetter(TernarySurfaceConfig::getUnderwaterMaterial))
 			.apply(instance, ThreeLayerOutlinedSurfaceConfig::new));
 }
+*/

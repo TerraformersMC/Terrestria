@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "terrestria:lush_desert",
+    "terrestria:oasis",
+    "terrestria:outback",
+    "terrestria:outback_uluru",
+    "terrestria:outback_bushland"
+  ]
+}

@@ -3,9 +3,7 @@
   "package": "com.terraformersmc.terrestria.mixin.bugfix",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "CarverAccessor",
-    "MixinCarver",
-    "MixinUnderwaterCarvers"
+    "MixinCarver"
   ],
   "injectors": {
     "defaultRequire": 1

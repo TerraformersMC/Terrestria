@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
-
+/*
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
@@ -167,3 +167,4 @@ public class CanyonArchGenerator extends StructurePiece {
 		}
 	}
 }
+*/

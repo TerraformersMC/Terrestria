@@ -1,68 +1,113 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biomebuilder.BiomeTemplate;
-import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
-
+import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
-import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class LushRedwoodForestBiomes {
 	public static void register() {
-		BiomeTemplate template = new BiomeTemplate(TerraformBiomeBuilder.create()
-				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+		final Biome.Builder template = new Biome.Builder()
+				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
-				.depth(1.2F)
-				.scale(0.3F)
+				//.depth(1.2F)
+				//.scale(0.3F)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
 					.waterColor(0x3f76e4)
 					.waterFogColor(0x50533)
-				)
-				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, LARGE_FERNS, MINEABLES, ORES, DISKS,
-						TAIGA_GRASS, DEFAULT_MUSHROOMS, DEFAULT_VEGETATION, SPRINGS, SWEET_BERRY_BUSHES_SNOWY,
-						FROZEN_TOP_LAYER, DEFAULT_FLOWERS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.PATCH_LUSH_FERNS)
-				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
-				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
-				.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_MOUNTAIN)
-				.addStructureFeature(ConfiguredStructureFeatures.VILLAGE_PLAINS)
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4))
-				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3))
-				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4))
-		);
+					.build()
+				);
 
-		TerrestriaBiomes.LUSH_REDWOOD_CLEARING = TerrestriaBiomes.register("lush_redwood_clearing", template.builder()
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_FALLEN_REDWOOD_LOGS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_FALLEN_HEMLOCK_LOGS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
+		TerrestriaBiomes.LUSH_REDWOOD_CLEARING = TerrestriaBiomes.register("lush_redwood_clearing", template
+				.generationSettings(lushRedwoodClearingGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
 				.build());
 
-		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template.builder()
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_HEMLOCK_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.MEGA_REDWOOD_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_REDWOOD_LOGS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.FALLEN_HEMLOCK_LOGS)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_REDWOOD_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
-				.playerSpawnFriendly()
+		TerrestriaBiomes.LUSH_REDWOOD_FOREST = TerrestriaBiomes.register("lush_redwood_forest", template
+				.generationSettings(lushRedwoodForestGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
+				//.playerSpawnFriendly()
 				.build());
 
-		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template.builder()
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_HEMLOCK_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.REDWOOD_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_SMALL_REDWOOD_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SMALL_HEMLOCK_TREES)
+		TerrestriaBiomes.LUSH_REDWOOD_FOREST_EDGE = TerrestriaBiomes.register("lush_redwood_forest_edge", template
+				.generationSettings(lushRedwoodForestEdgeGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
 				.build());
+	}
+
+	private static GenerationSettings.Builder lushRedwoodClearingGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addLargeFerns(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_REDWOOD_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_HEMLOCK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
+		DefaultBiomeFeatures.addDefaultFlowers(builder);
+		DefaultBiomeFeatures.addTaigaGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder lushRedwoodForestGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addLargeFerns(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.MEGA_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_REDWOOD_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_HEMLOCK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
+		DefaultBiomeFeatures.addDefaultFlowers(builder);
+		DefaultBiomeFeatures.addTaigaGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder lushRedwoodForestEdgeGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addLargeFerns(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
+		DefaultBiomeFeatures.addDefaultFlowers(builder);
+		DefaultBiomeFeatures.addTaigaGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
+		return builder;
+	}
+
+	private static SpawnSettings.Builder defaultSpawnSettings() {
+		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3));
+		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4));
+		return builder;
 	}
 }

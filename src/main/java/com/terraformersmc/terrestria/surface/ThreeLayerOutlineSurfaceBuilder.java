@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.surface;
-
+/*
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -61,3 +61,4 @@ public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOu
 	}
 
 }
+*/

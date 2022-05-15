@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.surface;
-
+/*
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
@@ -49,3 +49,4 @@ public class DuneSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfig> {
 		}
 	}
 }
+*/

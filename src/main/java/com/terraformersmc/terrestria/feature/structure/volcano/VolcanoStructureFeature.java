@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
-
+/*
 import com.mojang.serialization.Codec;
 
 import net.minecraft.structure.StructureManager;
@@ -35,3 +35,4 @@ public class VolcanoStructureFeature extends StructureFeature<VolcanoFeatureConf
 		}
 	}
 }
+*/

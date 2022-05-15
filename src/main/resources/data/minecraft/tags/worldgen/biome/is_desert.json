@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "terrestria:canyon_arches",
+    "terrestria:canyon_cliffs",
+    "terrestria:canyon_edge",
+    "terrestria:dunes",
+    "terrestria:dunes_edge",
+    "terrestria:lush_desert",
+    "terrestria:oasis"
+  ]
+}

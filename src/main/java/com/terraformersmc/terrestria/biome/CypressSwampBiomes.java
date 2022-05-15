@@ -1,26 +1,24 @@
 package com.terraformersmc.terrestria.biome;
 
-import com.terraformersmc.terraform.biomebuilder.TerraformBiomeBuilder;
-import com.terraformersmc.terraform.biomebuilder.TerraformSlimeSpawnBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaDecoratedFeatures;
-
+import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
+import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class CypressSwampBiomes {
 	public static void register() {
-		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", TerraformBiomeBuilder.create()
-				.configureSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
+		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", new Biome.Builder()
+				//.configureSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
-				.depth(-0.25F)
-				.scale(0.05F)
+				//.depth(-0.25F)
+				//.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
@@ -28,25 +26,41 @@ public class CypressSwampBiomes {
 					.waterFogColor(0x053305)
 					.grassColor(0x699e3c)
 					.foliageColor(0x619137)
+					.build()
 				)
-				.addDefaultFeatures(LAND_CARVERS, DEFAULT_UNDERGROUND_STRUCTURES, LAKES, DUNGEONS, MINEABLES, ORES, CLAY, DEFAULT_GRASS,
-						DEFAULT_MUSHROOMS, SPRINGS, FOSSILS, FROZEN_TOP_LAYER, SWAMP_VEGETATION,
-						DESERT_VEGETATION)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.MEGA_CYPRESS_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.DENSE_RUBBER_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.SPARSE_WILLOW_TREES)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaDecoratedFeatures.CATTAILS_WARM)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SEAGRASS_WARM)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_WATERLILLY)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_GRASS_FOREST)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_SWAMP)
-				.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.PATCH_TALL_GRASS)
-				.addStructureFeature(ConfiguredStructureFeatures.STRONGHOLD)
-				.addStructureFeature(ConfiguredStructureFeatures.MINESHAFT)
-				.addDefaultSpawnEntries()
-				.addSpawnEntry(new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4))
+				.generationSettings(cypressSwampGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
 				.build());
 
-		TerraformSlimeSpawnBiomes.addSlimeSpawnBiome(TerrestriaBiomes.CYPRESS_SWAMP);
+		//TerraformSlimeSpawnBiomes.addSlimeSpawnBiome(TerrestriaBiomes.CYPRESS_SWAMP);
+	}
+
+	private static GenerationSettings.Builder cypressSwampGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		DefaultBiomeFeatures.addFossils(builder);
+		addBasicFeatures(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addClayOre(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.MEGA_CYPRESS_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_RUBBER_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_WILLOW_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.CATTAILS_WARM);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_FOREST);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_WATERLILY);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.BROWN_MUSHROOM_SWAMP);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addSwampVegetation(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
+
+		return builder;
+	}
+
+	private static SpawnSettings.Builder defaultSpawnSettings() {
+		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4));
+		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1, 1));
+		return builder;
 	}
 }

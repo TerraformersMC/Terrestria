@@ -27,22 +27,24 @@
     "main": [
       "com.terraformersmc.terrestria.Terrestria"
     ],
-    "client": [
+    "terrablender": [
+      "com.terraformersmc.terrestria.Terrestria"
+    ],    "client": [
       "com.terraformersmc.terrestria.TerrestriaClient"
     ]
   },
   "depends": {
     "minecraft": ">=1.18.2",
+    "java": ">=17",
+    "terrablender": "*",
     "fabricloader": ">=0.12.12",
     "fabric-biome-api-v1": ">=3.1.0",
     "fabric-object-builder-api-v1": ">=1.9.2",
     "fabric-blockrenderlayer-v1": ">=1.1.4",
     "fabric-content-registries-v0": ">=0.2.0",
-    "fabric-tool-attribute-api-v1": ">=1.2.5",
     "fabric-item-groups-v0": ">=0.2.1",
     "fabric-rendering-v1": ">=1.4.0",
     "fabric-renderer-registries-v1": ">=2.2.0",
-    "fabric-structure-api-v1": ">=1.1.1",
     "fabric-api-base": ">=0.2.0",
     "fabric-crash-report-info-v1": ">=0.1.2",
     "fabric-registry-sync-v0": ">=0.7.1",

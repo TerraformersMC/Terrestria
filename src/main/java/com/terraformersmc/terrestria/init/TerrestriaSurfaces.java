@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.init;
-
+/*
 import com.terraformersmc.terraform.surface.BeachSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceBuilder;
 import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
@@ -16,10 +16,12 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+*/
 
 // This class exports public surface constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaSurfaces {
+/*
 	public static ThreeLayerOutlineSurfaceBuilder THREE_LAYER_OUTLINE;
 	public static FloodingBeachSurfaceBuilder CALDERA;
 	public static BeachSurfaceBuilder BASALT_BEACH;
@@ -37,8 +39,10 @@ public class TerrestriaSurfaces {
 	public static TernarySurfaceConfig OUTBACK_ULURU_CONFIG;
 	public static PatchyGrassSurfaceBuilder PATCHY_GRASS;
 	public static TernarySurfaceConfig OUTBACK_CONFIG;
+*/
 
 	public static void init() {
+/*
 		CALDERA = register("caldera", new FloodingBeachSurfaceBuilder(TernarySurfaceConfig.CODEC, 100, v -> Blocks.SAND.getDefaultState()));
 
 		BASALT_BEACH = register("basalt_beach", new BeachSurfaceBuilder(
@@ -113,9 +117,12 @@ public class TerrestriaSurfaces {
 			Blocks.RED_SANDSTONE.getDefaultState(),
 			Blocks.RED_SAND.getDefaultState()
 		);
+
 	}
 
 	public static <T extends SurfaceBuilder<SC>, SC extends SurfaceConfig> T register(String name, T surface) {
 		return Registry.register(Registry.SURFACE_BUILDER, new Identifier(Terrestria.MOD_ID, name), surface);
+*/
 	}
+
 }
