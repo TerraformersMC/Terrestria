@@ -23,22 +23,21 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 
 	@Override
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-		//this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_PEAKS, CALDERA_RIDGE);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
 		this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, LUSH_REDWOOD_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST);
+		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.JUNGLE, RAINBOW_RAINFOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, SNOWY_HEMLOCK_TREELINE);
-		//this.addBiomeSimilar(mapper, BiomeKeys.DEEP_OCEAN, VOLCANIC_ISLAND_SHORE);
-		//this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON_CLIFFS);
+		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, DUNES);
 		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK);
 

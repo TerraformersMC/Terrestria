@@ -15,7 +15,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class RainbowRainforestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
 				.temperature(0.95F)
 				.downfall(0.9F)
@@ -28,9 +27,6 @@ public class RainbowRainforestBiomes {
 		TerrestriaBiomes.RAINBOW_RAINFOREST = TerrestriaBiomes.register("rainbow_rainforest", template
 				.generationSettings(rainbowRainforestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.4F)
-				//.scale(0.4F)
-				//.playerSpawnFriendly()
 				.build());
 	}
 
@@ -46,7 +42,6 @@ public class RainbowRainforestBiomes {
 		DefaultBiomeFeatures.addJungleGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		//DefaultBiomeFeatures.addJungleVegetation(builder);
 		return builder;
 	}
 

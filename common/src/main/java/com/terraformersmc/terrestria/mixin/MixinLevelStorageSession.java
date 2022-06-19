@@ -26,7 +26,7 @@ import java.nio.file.Path;
 public class MixinLevelStorageSession {
 	@Shadow
 	@Final
-	private Path directory;
+	Path directory;
 
 	@Unique
 	private static final Logger TERRESTRIA_LOGGER = LoggerFactory.getLogger("TerrestriaRegistrySyncFix");
@@ -50,7 +50,7 @@ public class MixinLevelStorageSession {
 	}
 
 	@Inject(method = "readLevelProperties", at = @At("HEAD"))
-	public void readWorldProperties(CallbackInfoReturnable<SaveProperties> callbackInfo) {
+	public void terrestria$readWorldProperties(CallbackInfoReturnable<SaveProperties> callbackInfo) {
 		try {
 			if (terrestria_readIdMapFile(new File(new File(directory.toFile(), "data"), "fabricDynamicRegistry.dat"))) {
 				TERRESTRIA_LOGGER.info("[Terrestria - Registry Sync Fix] Loaded registry data");

@@ -11,7 +11,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class DunesBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-			//.configureSurfaceBuilder(TerrestriaSurfaces.DUNES, TerrestriaSurfaces.DUNES_CONFIG)
 			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
 			.temperature(0.9F)
 			.downfall(0.1F)
@@ -24,8 +23,6 @@ public class DunesBiomes {
 		TerrestriaBiomes.DUNES = TerrestriaBiomes.register("dunes", template
 			.generationSettings(dunesGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
-			//.depth(0.3F)
-			//.scale(0.0F)
 			.build()
 		);
 	}

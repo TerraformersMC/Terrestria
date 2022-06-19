@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ChunkHeightAndBiomeFix.class)
 public class MixinChunkHeightAndBiomeFix {
 	@Redirect(method = "method_38804", at = @At(value = "INVOKE", target = "Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;getOrDefault(ILjava/lang/Object;)Ljava/lang/Object;"))
-	private static <V> V readWorldProperties(Int2ObjectMap<V> instance, int rawId, V defaultValue) {
+	private static <V> V terrestria$readWorldProperties(Int2ObjectMap<V> instance, int rawId, V defaultValue) {
 		if (defaultValue instanceof String) {
 			var map = BiomeIdFixData.ACTIVE_BIOME_RAW_ID_MAP;
 			if (map != null && map.containsKey(rawId)) {

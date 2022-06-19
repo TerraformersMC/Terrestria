@@ -15,7 +15,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class HemlockRainforestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.6F)
 				.downfall(0.9F)
@@ -29,27 +28,13 @@ public class HemlockRainforestBiomes {
 		TerrestriaBiomes.HEMLOCK_RAINFOREST = TerrestriaBiomes.register("hemlock_rainforest", template
 				.generationSettings(hemlockRainforestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.95F)
-				//.scale(0.55F)
-				//.playerSpawnFriendly()
 				.build());
-	}
 
-	private static GenerationSettings.Builder hemlockClearingGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		addBasicFeatures(builder);
-		DefaultBiomeFeatures.addLargeFerns(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_MEGA_HEMLOCK_TREES);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_HEMLOCK_LOGS);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
-		DefaultBiomeFeatures.addTaigaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
-		return builder;
+
+		TerrestriaBiomes.HEMLOCK_TREELINE = TerrestriaBiomes.register("hemlock_treeline", template
+				.generationSettings(hemlockTreelineGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
+				.build());
 	}
 
 	private static GenerationSettings.Builder hemlockRainforestGenerationSettings() {
@@ -61,6 +46,23 @@ public class HemlockRainforestBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_MEGA_HEMLOCK_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_HEMLOCK_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_FALLEN_HEMLOCK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
+		DefaultBiomeFeatures.addTaigaGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder hemlockTreelineGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addLargeFerns(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_HEMLOCK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_MEGA_HEMLOCK_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
 		DefaultBiomeFeatures.addTaigaGrass(builder);

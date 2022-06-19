@@ -15,7 +15,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class SakuraForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.8F)
 				.downfall(1.0F)
@@ -28,8 +27,6 @@ public class SakuraForestBiomes {
 		TerrestriaBiomes.SAKURA_FOREST = TerrestriaBiomes.register("sakura_forest", template
 				.generationSettings(sakuraForestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.05F)
-				//.scale(0.1F)
 				.build());
 	}
 

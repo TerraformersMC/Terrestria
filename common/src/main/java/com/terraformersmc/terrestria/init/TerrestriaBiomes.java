@@ -16,18 +16,19 @@ import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 public class TerrestriaBiomes {
-	//public static RegistryKey<Biome> CALDERA;
-	//public static RegistryKey<Biome> CALDERA_BEACH;
-	//public static RegistryKey<Biome> CALDERA_FOOTHILLS;
-	//public static RegistryKey<Biome> CALDERA_RIDGE;
-	//public static RegistryKey<Biome> CANYON_ARCHES;
-	//public static RegistryKey<Biome> CANYON_CLIFFS;
-	//public static RegistryKey<Biome> CANYON_EDGE;
+	public static RegistryKey<Biome> CALDERA;
+	public static RegistryKey<Biome> CALDERA_BEACH;
+	public static RegistryKey<Biome> CALDERA_FOOTHILLS;
+	public static RegistryKey<Biome> CALDERA_RIDGE;
+	public static RegistryKey<Biome> CANYON_ARCHES;
+	public static RegistryKey<Biome> CANYON_CLIFFS;
+	public static RegistryKey<Biome> CANYON_EDGE;
 	public static RegistryKey<Biome> CYPRESS_FOREST;
 	public static RegistryKey<Biome> CYPRESS_SWAMP;
 	public static RegistryKey<Biome> DENSE_WOODLANDS;
 	public static RegistryKey<Biome> DUNES;
 	public static RegistryKey<Biome> HEMLOCK_RAINFOREST;
+	public static RegistryKey<Biome> HEMLOCK_TREELINE;
 	public static RegistryKey<Biome> JAPANESE_MAPLE_FOREST;
 	public static RegistryKey<Biome> LUSH_REDWOOD_FOREST;
 	public static RegistryKey<Biome> LUSH_DESERT;
@@ -35,27 +36,14 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> OUTBACK;
 	public static RegistryKey<Biome> RAINBOW_RAINFOREST;
 	public static RegistryKey<Biome> REDWOOD_FOREST;
+	public static RegistryKey<Biome> WINDSWEPT_REDWOOD_FOREST;
 	public static RegistryKey<Biome> SAKURA_FOREST;
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_FOREST;
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_TREELINE;
-	//public static RegistryKey<Biome> VOLCANIC_ISLAND;
-	//public static RegistryKey<Biome> VOLCANIC_ISLAND_BEACH;
-	//public static RegistryKey<Biome> VOLCANIC_ISLAND_SHORE;
+	public static RegistryKey<Biome> VOLCANIC_ISLAND;
+	public static RegistryKey<Biome> VOLCANIC_ISLAND_BEACH;
+	public static RegistryKey<Biome> VOLCANIC_ISLAND_SHORE;
 
-
-	public static GenerationSettings.Builder createDefaultGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		DefaultBiomeFeatures.addLandCarvers(builder);
-		DefaultBiomeFeatures.addDungeons(builder);
-		DefaultBiomeFeatures.addMineables(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		DefaultBiomeFeatures.addSprings(builder);
-		DefaultBiomeFeatures.addFrozenTopLayer(builder);
-		return builder;
-	}
 
 	public static void addBasicFeatures(GenerationSettings.Builder generationSettings) {
 		DefaultBiomeFeatures.addLandCarvers(generationSettings);
@@ -113,8 +101,8 @@ public class TerrestriaBiomes {
 	}
 
 	public static void init() {
-		//CalderaBiomes.register();
-		//CanyonBiomes.register();
+		CalderaBiomes.register();
+		CanyonBiomes.register();
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
 		DenseWoodlandsBiomes.register();
@@ -127,7 +115,7 @@ public class TerrestriaBiomes {
 		SakuraForestBiomes.register();
 		SnowyHemlockRainforestBiomes.register();
 		JapaneseMapleForestBiomes.register();
-		//VolcanicIslandBiomes.register();
+		VolcanicIslandBiomes.register();
 		OutbackBiomes.register();
 	}
 

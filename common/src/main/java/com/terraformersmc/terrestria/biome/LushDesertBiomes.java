@@ -26,18 +26,12 @@ public class LushDesertBiomes {
 		TerrestriaBiomes.LUSH_DESERT = TerrestriaBiomes.register("lush_desert", template
 				.generationSettings(lushDesertGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.SAND_CONFIG)
-				//.depth(0.4F)
-				//.scale(0.05F)
 				.build()
 		);
 
 		TerrestriaBiomes.OASIS = TerrestriaBiomes.register("oasis", template
 				.generationSettings(oasisGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(TerrestriaSurfaces.THREE_LAYER_OUTLINE, TerrestriaSurfaces.OASIS_CONFIG)
-				//.depth(-0.2F)
-				//.scale(0.07F)
 				.build()
 		);
 	}

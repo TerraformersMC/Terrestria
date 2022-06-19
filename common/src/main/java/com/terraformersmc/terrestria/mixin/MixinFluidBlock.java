@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(FluidBlock.class)
 public class MixinFluidBlock {
 	@Inject(method = "receiveNeighborFluids", at = @At("RETURN"))
-	public void formBasaltCobblestone(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> callback) {
+	public void terrestria$formBasaltCobblestone(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> callback) {
 		// Either Cobblestone or Obsidian formed
 
 		if(!callback.getReturnValueZ()) {

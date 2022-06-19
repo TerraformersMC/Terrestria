@@ -24,9 +24,6 @@ public class OutbackBiomes {
 		TerrestriaBiomes.OUTBACK = TerrestriaBiomes.register("outback", template
 			.generationSettings(outbackGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
-			//.configureSurfaceBuilder(TerrestriaSurfaces.PATCHY_GRASS, TerrestriaSurfaces.OUTBACK_CONFIG)
-			//.depth(0.125F)
-			//.scale(0.05F)
 			.build());
 	}
 
@@ -44,43 +41,6 @@ public class OutbackBiomes {
 		DefaultBiomeFeatures.addDesertDeadBushes(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
-		DefaultBiomeFeatures.addDesertFeatures(builder);
-		return builder;
-	}
-
-	private static GenerationSettings.Builder outbackUluruGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		DefaultBiomeFeatures.addFossils(builder);
-		addBasicFeatures(builder);
-		DefaultBiomeFeatures.addClayOre(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		DefaultBiomeFeatures.addSavannaGrass(builder);
-		DefaultBiomeFeatures.addDesertDeadBushes(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
-		DefaultBiomeFeatures.addDesertFeatures(builder);
-		return builder;
-	}
-
-	private static GenerationSettings.Builder outbackBushlandGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		DefaultBiomeFeatures.addFossils(builder);
-		addBasicFeatures(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addClayOre(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.OAK_DOT_SHRUBS);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.OUTBACK_BUSHLAND_TREES);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_OUTBACK_BUSHLAND_GRASS);
-		DefaultBiomeFeatures.addSavannaGrass(builder);
-		DefaultBiomeFeatures.addDesertDeadBushes(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		//DefaultBiomeFeatures.addDesertLakes(builder);  (vv addDesertFeatures instead?)
 		DefaultBiomeFeatures.addDesertFeatures(builder);
 		return builder;
 	}

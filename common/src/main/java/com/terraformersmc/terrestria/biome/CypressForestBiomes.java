@@ -15,7 +15,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class CypressForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
 				.temperature(0.7F)
 				.downfall(0.8F)
@@ -29,9 +28,6 @@ public class CypressForestBiomes {
 		TerrestriaBiomes.CYPRESS_FOREST = TerrestriaBiomes.register("cypress_forest", template
 				.generationSettings(cypressGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.1F)
-				//.scale(0.2F)
-				//.playerSpawnFriendly()
 				.build());
 	}
 
