@@ -1,0 +1,13 @@
+archivesBaseName = "terrestria-worldgen"
+version = formatVersion(project, "4.0.0")
+
+loom {
+	accessWidenerPath = file("src/main/resources/terrestria-worldgen.accesswidener")
+}
+
+dependencies {
+	// TerraBlender is our biome API overlord.
+	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
+
+	implementation project(path: ':common')
+}
