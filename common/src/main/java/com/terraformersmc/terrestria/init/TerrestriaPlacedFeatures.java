@@ -229,5 +229,4 @@ public class TerrestriaPlacedFeatures {
 
 		return BuiltinRegistries.add(BuiltinRegistries.PLACED_FEATURE, realID, new PlacedFeature(RegistryEntry.upcast(feature), List.copyOf(placementModifiers)));
 	}
-
 }

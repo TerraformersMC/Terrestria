@@ -18,7 +18,7 @@ import net.minecraft.world.WorldView;
 @Mixin(SugarCaneBlock.class)
 public class MixinSugarCaneBlock {
 	@Inject(method = "canPlaceAt", at = @At("HEAD"), cancellable = true)
-	private void canPlaceAt(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
+	private void terrestria$canPlaceAt(BlockState state, WorldView world, BlockPos pos, CallbackInfoReturnable<Boolean> info) {
 		BlockPos downPos = pos.down();
 
 		if (world.getBlockState(downPos).isOf(TerrestriaBlocks.BLACK_SAND)) {

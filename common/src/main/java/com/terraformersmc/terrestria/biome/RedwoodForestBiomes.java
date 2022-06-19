@@ -16,7 +16,6 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class RedwoodForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.GIANT_TREE_TAIGA, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
 				.temperature(0.9F)
 				.downfall(0.9F)
@@ -29,9 +28,11 @@ public class RedwoodForestBiomes {
 		TerrestriaBiomes.REDWOOD_FOREST = TerrestriaBiomes.register("redwood_forest", template
 				.generationSettings(redwoodForestGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(1.2F)
-				//.scale(0.3F)
-				//.playerSpawnFriendly()
+				.build());
+
+		TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST = TerrestriaBiomes.register("windswept_redwood_forest", template
+				.generationSettings(windsweptRedwoodForestGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
 				.build());
 	}
 
@@ -45,8 +46,6 @@ public class RedwoodForestBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_MEGA_REDWOOD_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_FALLEN_REDWOOD_LOGS);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_REDWOOD_TREES);
-		//builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_TAIGA);
-		//builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_LARGE_FERN);
 		DefaultBiomeFeatures.addTaigaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
@@ -54,33 +53,20 @@ public class RedwoodForestBiomes {
 		return builder;
 	}
 
-	private static GenerationSettings.Builder redwoodForestEdgeGenerationSettings() {
+	private static GenerationSettings.Builder windsweptRedwoodForestGenerationSettings() {
 		GenerationSettings.Builder builder = new GenerationSettings.Builder();
 		addBasicFeatures(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);
 		DefaultBiomeFeatures.addLargeFerns(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_REDWOOD_TREES);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_REDWOOD_TREES);
-		//builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_LARGE_FERN);
-		DefaultBiomeFeatures.addTaigaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
-		return builder;
-	}
-
-	private static GenerationSettings.Builder redwoodClearingGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		addBasicFeatures(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);
-		DefaultBiomeFeatures.addLargeFerns(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.FALLEN_REDWOOD_LOGS);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_REDWOOD_TREES);
-		//builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_LARGE_FERN);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_REDWOOD_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_HEMLOCK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_SMALL_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_HEMLOCK_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_REDWOOD_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_LUSH_FERNS);
 		DefaultBiomeFeatures.addTaigaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);

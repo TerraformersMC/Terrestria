@@ -11,10 +11,14 @@ import net.minecraft.world.gen.feature.*;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
+/*
+ * Volcanic Islands do not generate in 1.18.2 but the biomes exist to allow enjoying them if generated in a prior version.
+ * The biomes are deprecated and may be removed or replaced in 1.19.
+ */
+
 public class VolcanicIslandBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				//.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_CLIFF, TerrestriaSurfaces.BASALT_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
 				.temperature(0.9F)
 				.downfall(0.9F)
@@ -23,33 +27,23 @@ public class VolcanicIslandBiomes {
 					.waterFogColor(0x24a0b0)
 					.build()
 				);
-/*
+
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template
 				.generationSettings(volcanicIslandGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
 				.category(Biome.Category.EXTREME_HILLS)
-				//.depth(0.1F)
-				//.scale(0.2F)
-				//.addStructureFeature(TerrestriaStructures.VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_SHORE = TerrestriaBiomes.register("volcanic_island_shore", template
 				.generationSettings(volcanicIslandShoreGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.depth(0.05F)
-				//.scale(0.05F)
-				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
 
 		TerrestriaBiomes.VOLCANIC_ISLAND_BEACH = TerrestriaBiomes.register("volcanic_island_beach", template
 				.generationSettings(volcanicIslandBeachGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(TerrestriaSurfaces.BASALT_BEACH, TerrestriaSurfaces.BASALT_CONFIG)
-				//.depth(0F)
-				//.scale(0.05F)
-				//.addStructureFeature(TerrestriaStructures.SHORE_VOLCANO)
 				.build());
-*/
+
 	}
 
 	private static GenerationSettings.Builder volcanicIslandGenerationSettings() {

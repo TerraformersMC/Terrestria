@@ -11,6 +11,11 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
+/*
+ * Calderas do not generate in 1.18.2 but the biomes exist to allow enjoying them if generated in a prior version.
+ * The biomes are deprecated and may be removed or replaced in 1.19.
+ */
+
 public class CalderaBiomes {
 
 	public static void register() {
@@ -21,14 +26,11 @@ public class CalderaBiomes {
 					.build()
 				);
 
-/*
+
 		TerrestriaBiomes.CALDERA = TerrestriaBiomes.register("caldera", template
 				.generationSettings(calderaGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.OCEAN)
-				//.depth(1.5F)
-				//.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.build());
@@ -36,10 +38,7 @@ public class CalderaBiomes {
 		TerrestriaBiomes.CALDERA_BEACH = TerrestriaBiomes.register("caldera_beach", template
 				.generationSettings(calderaGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(TerrestriaSurfaces.CALDERA, SurfaceBuilder.GRASS_SAND_UNDERWATER_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
-				//.depth(2.25F)
-				//.scale(0F)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.build());
@@ -49,10 +48,7 @@ public class CalderaBiomes {
 				.spawnSettings(defaultSpawnSettings()
 					.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4))
 					.build())
-				//.configureSurfaceBuilder(SurfaceBuilder.MOUNTAIN, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.EXTREME_HILLS)
-				//.depth(1.7F)
-				//.scale(0.4F)
 				.temperature(0.0F)
 				.downfall(0.1F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
@@ -65,10 +61,7 @@ public class CalderaBiomes {
 		TerrestriaBiomes.CALDERA_RIDGE = TerrestriaBiomes.register("caldera_ridge", template
 				.generationSettings(calderaRidgeGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				//.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.MOUNTAIN)
-				//.depth(4F)
-				//.scale(0F)
 				.temperature(0F)
 				.downfall(1F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
@@ -77,7 +70,7 @@ public class CalderaBiomes {
 					.build()
 				)
 				.build());
-*/
+
 	}
 
 	private static GenerationSettings.Builder calderaGenerationSettings() {

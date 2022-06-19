@@ -15,10 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class CypressSwampBiomes {
 	public static void register() {
 		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", new Biome.Builder()
-				//.configureSurfaceBuilder(SurfaceBuilder.SWAMP, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
-				//.depth(-0.25F)
-				//.scale(0.05F)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
@@ -31,8 +28,6 @@ public class CypressSwampBiomes {
 				.generationSettings(cypressSwampGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
 				.build());
-
-		//TerraformSlimeSpawnBiomes.addSlimeSpawnBiome(TerrestriaBiomes.CYPRESS_SWAMP);
 	}
 
 	private static GenerationSettings.Builder cypressSwampGenerationSettings() {

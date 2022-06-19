@@ -10,7 +10,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
 public class TerrestriaVillagerTypes {
 	public static void init() {
-		//register(VillagerType.TAIGA, CALDERA, CALDERA_BEACH, CALDERA_FOOTHILLS, CALDERA_RIDGE);
+		register(VillagerType.TAIGA, CALDERA, CALDERA_BEACH, CALDERA_FOOTHILLS, CALDERA_RIDGE);
 		// Plains: Cypress Forest
 		register(VillagerType.SWAMP, CYPRESS_SWAMP);
 		// Plains: Dense Woodlands
@@ -21,8 +21,8 @@ public class TerrestriaVillagerTypes {
 		// Plains: Redwood Forest
 		// Plains: Sakura Forest
 		register(VillagerType.TAIGA, SNOWY_HEMLOCK_FOREST);
-		//register(VillagerType.DESERT, VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, VOLCANIC_ISLAND_SHORE);
-		//register(VillagerType.DESERT, CANYON_ARCHES, CANYON_CLIFFS, CANYON_EDGE);
+		register(VillagerType.DESERT, VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, VOLCANIC_ISLAND_SHORE);
+		register(VillagerType.DESERT, CANYON_ARCHES, CANYON_CLIFFS, CANYON_EDGE);
 		register(VillagerType.DESERT, DUNES);
 		register(VillagerType.DESERT, LUSH_DESERT);
 		register(VillagerType.DESERT, OASIS);
