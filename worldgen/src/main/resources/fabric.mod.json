@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "terrestria",
+  "id": "terrestria-worldgen",
   "version": "${version}",
-  "name": "Terrestria",
+  "name": "Terrestria worldgen module",
   "description": "A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.",
   "authors": [
     "coderbot16",
@@ -23,6 +23,28 @@
   "license": "LGPL-3.0-only",
   "icon": "assets/terrestria/icon.png",
   "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.terraformersmc.terrestria.TerrestriaWorldgen"
+    ],
+    "terrablender": [
+      "com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration"
+    ]
+  },
+  "accessWidener": "terrestria-worldgen.accesswidener",
+  "mixins": [
+  ],
+  "custom": {
+    "parent": {
+      "id": "terrestria",
+      "name": "Terrestria",
+      "description": "A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.",
+      "icon": "assets/terrestria/icon.png"
+    },
+    "modmenu": {
+      "badges": [ "library" ]
+    }
+  },
   "depends": {
     "minecraft": ">=1.18.2",
     "java": ">=17",

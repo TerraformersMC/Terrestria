@@ -14,3 +14,6 @@ pluginManagement {
 }
 
 rootProject.name = "terrestria"
+include "client"
+include "common"
+include "worldgen"
