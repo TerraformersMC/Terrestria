@@ -79,6 +79,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 	}
 
 	// Initialize TerraBlender as our biome placement provider.
+	@Override
 	public void run() {
 		// Register the Terrestria surface rules; this must happen before we call addSurfaceRules().
 		TerrestriaSurfaceRules.register();
