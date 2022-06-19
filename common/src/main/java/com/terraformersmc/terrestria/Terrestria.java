@@ -7,6 +7,7 @@ import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -58,6 +59,10 @@ public class Terrestria implements ModInitializer {
 		biomeConfigHandler.save();
 
 		Registry.register(Registry.ITEM, new Identifier(MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(itemGroup)));
+
+		if (!FabricLoader.getInstance().isModLoaded("terrestria-worldgen")) {
+			Terrestria.LOGGER.info("No Terrestria worldgen module present; Terrestria biomes will not generate.");
+		}
 
 		// At this point Terrestria is completely initialized.
 		initialized = true;
