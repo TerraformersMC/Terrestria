@@ -31,6 +31,9 @@
   "entrypoints": {
     "main": [
       "com.terraformersmc.terrestria.Terrestria"
+    ],
+    "fabric-datagen": [
+      "com.terraformersmc.terrestria.data.TerrestriaDatagen"
     ]
   },
   "custom": {
