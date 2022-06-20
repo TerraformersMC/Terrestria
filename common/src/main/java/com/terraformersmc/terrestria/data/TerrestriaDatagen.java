@@ -8,7 +8,7 @@ public class TerrestriaDatagen implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
 		dataGenerator.addProvider(TerrestriaBiomeTagProvider::new);
 		dataGenerator.addProvider(TerrestriaBlockLootTableProvider::new);
-		//dataGenerator.addProvider(TerrestriaBlockTagProvider::new);
+		dataGenerator.addProvider(TerrestriaBlockTagProvider::new);
 		//dataGenerator.addProvider(TerrestriaItemTagProvider::new);
 		//dataGenerator.addProvider(TerrestriaRecipeProvider::new);
 	}
