@@ -7,11 +7,7 @@ plugins {
 	// id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.1/ferry.gradle'
-
-static def formatVersion(project, version) {
-	return version;
-}
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.4/ferry.gradle'
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -170,6 +166,8 @@ subprojects {
 		modImplementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
 		modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 	}
+
+	version = rootProject.version
 
 	runClient.enabled = false
 }

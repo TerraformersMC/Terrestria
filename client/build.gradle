@@ -1,5 +1,4 @@
 archivesBaseName = "terrestria-client"
-version = formatVersion(project, "4.0.0")
 
 loom {
 }

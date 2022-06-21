@@ -1,5 +1,4 @@
 archivesBaseName = "terrestria-common"
-version = formatVersion(project, "4.0.0")
 
 loom {
 	runs {
@@ -14,18 +13,6 @@ loom {
 		}
 	}
 }
-
-// This is a sad, janky thing that Minecraft makes me do.
-tasks.register('copyCommon', Copy) {
-	from "src/main/generated/data/terrestria-common"
-	into "src/main/generated/data/terrestria"
-}
-tasks.register('removeCommon', Delete) {
-	delete "src/main/generated/data/terrestria-common"
-}
-copyCommon.dependsOn(runDatagen)
-removeCommon.dependsOn(copyCommon)
-assemble.dependsOn(removeCommon)
 
 sourceSets {
 	main {
