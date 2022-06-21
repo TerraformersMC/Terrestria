@@ -9,7 +9,7 @@ public class TerrestriaDatagen implements DataGeneratorEntrypoint {
 		dataGenerator.addProvider(TerrestriaBiomeTagProvider::new);
 		dataGenerator.addProvider(TerrestriaBlockLootTableProvider::new);
 		dataGenerator.addProvider(TerrestriaBlockTagProvider::new);
-		//dataGenerator.addProvider(TerrestriaItemTagProvider::new);
+		dataGenerator.addProvider(TerrestriaItemTagProvider::new);
 		//dataGenerator.addProvider(TerrestriaRecipeProvider::new);
 	}
 }
