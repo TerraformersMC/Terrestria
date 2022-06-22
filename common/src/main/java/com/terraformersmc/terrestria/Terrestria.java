@@ -1,26 +1,21 @@
 package com.terraformersmc.terrestria;
 
-import com.terraformersmc.terraform.config.BiomeConfig;
-import com.terraformersmc.terraform.config.BiomeConfigHandler;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
+import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Terrestria implements ModInitializer {
 	public static final String MOD_ID = "terrestria";
-	public static ItemGroup itemGroup;
-	public static BiomeConfigHandler biomeConfigHandler;
 	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
 
 	private static final TerrestriaConfigManager CONFIG_MANAGER = new TerrestriaConfigManager();
@@ -28,17 +23,9 @@ public class Terrestria implements ModInitializer {
 	private static Boolean initialized = false;
 	private static final ArrayList<Runnable> runnables = new ArrayList<>(1);
 
-	@Override
-	public void onInitialize() {
+	private static void register() {
 		// Load the general config if it hasn't been loaded already
 		CONFIG_MANAGER.getGeneralConfig();
-
-		itemGroup = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "items"), () -> new ItemStack(TerrestriaItems.RUBBER_SAPLING));
-		biomeConfigHandler = new BiomeConfigHandler(MOD_ID);
-
-		BiomeConfig config = biomeConfigHandler.getBiomeConfig();
-
-		Set<String> enabledBiomes = new HashSet<>();
 
 		TerrestriaBlocks.init();
 		TerrestriaBoats.init();
@@ -53,7 +40,16 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
 
-		biomeConfigHandler.save();
+		FabricItemGroupBuilder.create(new Identifier(MOD_ID, "items")).icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack()).appendItems(stacks -> Registry.ITEM.forEach(item -> {
+			if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
+				item.appendStacks(item.getGroup(), (DefaultedList<ItemStack>) stacks);
+			}
+		})).build();
+	}
+
+	@Override
+	public void onInitialize() {
+		register();
 
 		if (!FabricLoader.getInstance().isModLoaded("terrestria-worldgen")) {
 			Terrestria.LOGGER.info("No Terrestria worldgen module present; Terrestria biomes will not generate.");
