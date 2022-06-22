@@ -6,6 +6,7 @@ import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 import com.terraformersmc.terrestria.Terrestria;
 
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -32,15 +33,15 @@ public class TerrestriaBoats {
 
 
 	public static void init() {
-		REDWOOD_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "redwood_boat"), () -> REDWOOD_BOAT_TYPE, Terrestria.itemGroup);
-		HEMLOCK_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "hemlock_boat"), () -> HEMLOCK_BOAT_TYPE, Terrestria.itemGroup);
-		RUBBER_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "rubber_boat"), () -> RUBBER_BOAT_TYPE, Terrestria.itemGroup);
-		CYPRESS_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "cypress_boat"), () -> CYPRESS_BOAT_TYPE, Terrestria.itemGroup);
-		WILLOW_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "willow_boat"), () -> WILLOW_BOAT_TYPE, Terrestria.itemGroup);
-		JAPANESE_MAPLE_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "japanese_maple_boat"), () -> JAPANESE_MAPLE_BOAT_TYPE, Terrestria.itemGroup);
-		RAINBOW_EUCALYPTUS_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus_boat"), () -> RAINBOW_EUCALYPTUS_BOAT_TYPE, Terrestria.itemGroup);
-		SAKURA_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "sakura_boat"), () -> SAKURA_BOAT_TYPE, Terrestria.itemGroup);
-		YUCCA_PALM_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "yucca_palm_boat"), () -> YUCCA_PALM_BOAT_TYPE, Terrestria.itemGroup);
+		REDWOOD_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "redwood_boat"), () -> REDWOOD_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		HEMLOCK_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "hemlock_boat"), () -> HEMLOCK_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		RUBBER_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "rubber_boat"), () -> RUBBER_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		CYPRESS_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "cypress_boat"), () -> CYPRESS_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		WILLOW_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "willow_boat"), () -> WILLOW_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		JAPANESE_MAPLE_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "japanese_maple_boat"), () -> JAPANESE_MAPLE_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		RAINBOW_EUCALYPTUS_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus_boat"), () -> RAINBOW_EUCALYPTUS_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		SAKURA_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "sakura_boat"), () -> SAKURA_BOAT_TYPE, ItemGroup.TRANSPORTATION);
+		YUCCA_PALM_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "yucca_palm_boat"), () -> YUCCA_PALM_BOAT_TYPE, ItemGroup.TRANSPORTATION);
 
 		REDWOOD_BOAT_TYPE = new TerraformBoatType.Builder().item(REDWOOD_BOAT).build();
 		HEMLOCK_BOAT_TYPE = new TerraformBoatType.Builder().item(HEMLOCK_BOAT).build();
