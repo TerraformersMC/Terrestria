@@ -1,10 +1,15 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 
+import com.terraformersmc.terrestria.item.LogTurnerItem;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -69,6 +74,8 @@ public class TerrestriaItems {
 	public static BlockItem ALOE_VERA;
 	public static BlockItem DEAD_GRASS;
 
+	public static LogTurnerItem LOG_TURNER;
+
 	public static void init() {
 		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD, TerrestriaBoats.REDWOOD_BOAT);
 		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK, TerrestriaBoats.HEMLOCK_BOAT);
@@ -91,7 +98,7 @@ public class TerrestriaItems {
 
 		CATTAIL = TerrestriaRegistry.registerBlockItem("cattail", TerrestriaBlocks.CATTAIL);
 
-		//TODO make this automatic with a new QuarteredWoodItems like QuarteredWoodBlocks
+		// TODO: make this automatic with a new QuarteredWoodItems like QuarteredWoodBlocks
 		REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("redwood_quarter_log", TerrestriaBlocks.REDWOOD.quarterLog);
 		HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK.quarterLog);
 		CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBlockItem("cypress_quarter_log", TerrestriaBlocks.CYPRESS.quarterLog);
@@ -131,5 +138,7 @@ public class TerrestriaItems {
 		AGAVE = TerrestriaRegistry.registerBlockItem("agave", TerrestriaBlocks.AGAVE);
 		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
 		DEAD_GRASS = TerrestriaRegistry.registerBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
+
+		LOG_TURNER = Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, "log_turner"), new LogTurnerItem(new Item.Settings().group(Terrestria.itemGroup)));
 	}
 }

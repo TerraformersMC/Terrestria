@@ -1,8 +1,0 @@
-{
-  "type": "minecraft:stonecutting",
-  "ingredient": {
-    "item": "terrestria:basalt"
-  },
-  "result": "terrestria:basalt_brick_slab",
-  "count": 2
-}
