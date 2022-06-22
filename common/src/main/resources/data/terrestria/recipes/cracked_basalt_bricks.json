@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "terrestria:basalt_bricks"
-  },
-  "result": "terrestria:cracked_basalt_bricks",
-  "experience": 0.1,
-  "cookingtime": 200
-}
