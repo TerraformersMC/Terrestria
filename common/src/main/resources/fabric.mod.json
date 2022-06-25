@@ -32,6 +32,9 @@
     "main": [
       "com.terraformersmc.terrestria.Terrestria"
     ],
+    "terraform-biome-remapper": [
+      "com.terraformersmc.terrestria.init.helpers.TerrestriaBiomeRemappings"
+    ],
     "fabric-datagen": [
       "com.terraformersmc.terrestria.data.TerrestriaDatagen"
     ]

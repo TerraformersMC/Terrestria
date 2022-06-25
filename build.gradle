@@ -63,6 +63,7 @@ dependencies {
 	// Loads the Terrestria asset pack and data pack.
 	includeFabricApiModule "fabric-resource-loader-v0"
 
+	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
@@ -159,6 +160,7 @@ subprojects {
 		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
+		modImplementation "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
 		modImplementation "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
 		modImplementation "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
 		modImplementation "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
