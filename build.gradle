@@ -72,7 +72,7 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
 	if (findProject(':worldgen') != null) {
-		modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
+		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 	}
 
 	afterEvaluate {
