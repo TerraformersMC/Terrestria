@@ -2,24 +2,7 @@
   "schemaVersion": 1,
   "id": "terrestria-client",
   "version": "${version}",
-  "name": "Terrestria client module",
-  "description": "A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.",
-  "authors": [
-    "coderbot16",
-    "NeusFear",
-    "TerraformersMC"
-  ],
-  "contributors": [
-    "Valoeghese",
-    "SuperCoder79",
-    "Prospector",
-    "NebelNidas"
-  ],
-  "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/terrestria",
-    "sources": "https://github.com/TerraformersMC/Terrestria",
-    "issues": "https://github.com/TerraformersMC/Terrestria/issues"
-  },
+  "name": "Terrestria: Client",
   "license": "LGPL-3.0-only",
   "icon": "assets/terrestria/icon.png",
   "environment": "client",
@@ -32,43 +15,8 @@
     ]
   },
   "custom": {
-    "parent": {
-      "id": "terrestria",
-      "name": "Terrestria",
-      "description": "A mod enhancing the detail of Minecraft with unique and vibrant biomes. Inspired by ExtrabiomesXL.",
-      "icon": "assets/terrestria/icon.png"
-    },
     "modmenu": {
-      "badges": [ "library" ]
+      "parent": "terrestria"
     }
-  },
-  "depends": {
-    "minecraft": ">=1.18.2",
-    "java": ">=17",
-    "fabricloader": ">=0.12.12",
-    "fabric-biome-api-v1": ">=3.1.0",
-    "fabric-object-builder-api-v1": ">=1.9.2",
-    "fabric-blockrenderlayer-v1": ">=1.1.4",
-    "fabric-content-registries-v0": ">=0.2.0",
-    "fabric-item-groups-v0": ">=0.2.1",
-    "fabric-rendering-v1": ">=1.4.0",
-    "fabric-renderer-registries-v1": ">=2.2.0",
-    "fabric-api-base": ">=0.2.0",
-    "fabric-crash-report-info-v1": ">=0.1.2",
-    "fabric-registry-sync-v0": ">=0.7.1",
-    "fabric-resource-loader-v0": ">=0.3.2",
-    "terraform-config-api-v1": ">=3.0.0",
-    "terraform-dirt-api-v1": ">=3.0.0",
-    "terraform-shapes-api-v1": ">=3.0.0",
-    "terraform-surfaces-api-v1": ">=3.0.0",
-    "terraform-tree-api-v1": ">=3.0.0",
-    "terraform-wood-api-v1": ">=3.0.0"
-  },
-  "breaks": {
-    "terraform-legacy-v0": "*",
-    "terraform": "*",
-    "campanion": "<1.2.0",
-    "traverse": "<3.0.0",
-    "cinderscapes": "<1.2.3"
   }
 }
