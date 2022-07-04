@@ -12,6 +12,6 @@
     "thinIfTall": true
   },
   "biomes": "terrestria:volcanic_island",
-  "adapt_noise": true,
+  "adapt_noise": false,
   "spawn_overrides": {}
 }
