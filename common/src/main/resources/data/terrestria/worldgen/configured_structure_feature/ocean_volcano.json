@@ -12,6 +12,6 @@
     "thinIfTall": false
   },
   "biomes": "#minecraft:is_ocean",
-  "adapt_noise": true,
+  "adapt_noise": false,
   "spawn_overrides": {}
 }
