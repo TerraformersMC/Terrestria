@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.surfacerules;
 
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
@@ -24,36 +25,56 @@ public class TerrestriaSurfaceRules {
 	public static MaterialRule createRules() {
 		MaterialRule defaultGrass = VanillaSurfaceRules.createDefaultRule(true, false, true);
 
-		MaterialRule sandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, block(Blocks.SAND)), block(Blocks.SANDSTONE));
-		MaterialRule deepSandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_30, block(Blocks.SAND)), block(Blocks.SANDSTONE));
-		MaterialRule redSandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH, block(Blocks.RED_SAND)), block(Blocks.RED_SANDSTONE));
+		// Sandy surface rules
+		MaterialRule sandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH,
+			block(Blocks.SAND)), block(Blocks.SANDSTONE));
+		MaterialRule deepSandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_30,
+			block(Blocks.SAND)), block(Blocks.SANDSTONE));
+		MaterialRule redSandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH,
+			block(Blocks.RED_SAND)), block(Blocks.RED_SANDSTONE));
 
-		MaterialRule blackSandAndBasalt = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_6, block(TerrestriaBlocks.BLACK_SAND)), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full));
-		MaterialRule deepBlackGrassAndBasalt = sequence(condition(STONE_DEPTH_FLOOR, condition(aboveY(YOffset.fixed(62), 0), condition(water(0, 0), block(TerrestriaBlocks.ANDISOL.getGrassBlock())))), condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_6, block(TerrestriaBlocks.ANDISOL.getDirt())), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full));
+		// Volcanic surface rules
+		MaterialRule blackSandAndBasalt = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_6,
+			block(TerrestriaBlocks.BLACK_SAND)), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full));
+		MaterialRule deepBlackGrassAndBasalt = sequence(condition(STONE_DEPTH_FLOOR,
+			condition(aboveY(YOffset.fixed(62), 0),
+				condition(water(0, 0),
+					block(TerrestriaBlocks.ANDISOL.getGrassBlock())))),
+			condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH_RANGE_6,
+				block(TerrestriaBlocks.ANDISOL.getDirt())), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full));
 
 		// Biome-level rules
-		MaterialRule canyon = condition(MaterialRules.biome(TerrestriaBiomes.CANYON), sandAndSandstone);
-		MaterialRule cypressSwamp = condition(MaterialRules.biome(TerrestriaBiomes.CYPRESS_SWAMP),
-				condition(MaterialRules.STONE_DEPTH_FLOOR,
-						condition(MaterialRules.aboveY(YOffset.fixed(62), 0),
-								condition(MaterialRules.not(MaterialRules.aboveY(YOffset.fixed(63), 0)),
-										condition(MaterialRules.noiseThreshold(NoiseParametersKeys.SURFACE_SWAMP, 0.0D), block(Blocks.WATER))))));
-		MaterialRule dunes = condition(MaterialRules.biome(TerrestriaBiomes.DUNES), deepSandAndSandstone);
-		MaterialRule lushDesert = condition(MaterialRules.biome(TerrestriaBiomes.LUSH_DESERT),
-				new SandWithPatchesSurfaceRule(-0.75D, NoiseParametersKeys.SURFACE, sandAndSandstone, defaultGrass));
-		MaterialRule outback = condition(MaterialRules.biome(TerrestriaBiomes.OUTBACK),
-				new SandWithPatchesSurfaceRule(-0.12D, NoiseParametersKeys.BADLANDS_SURFACE, redSandAndSandstone, defaultGrass));
-		MaterialRule volcanicIsland = condition(MaterialRules.biome(TerrestriaBiomes.VOLCANIC_ISLAND),
-				new VolcanicIslandSurfaceRule(0.05D, NoiseParametersKeys.CONTINENTALNESS, deepBlackGrassAndBasalt, blackSandAndBasalt));
+		MaterialRule canyon = condition(biome(TerrestriaBiomes.CANYON), sandAndSandstone);
+		MaterialRule cypressSwamp = condition(biome(TerrestriaBiomes.CYPRESS_SWAMP),
+			condition(STONE_DEPTH_FLOOR,
+				condition(aboveY(YOffset.fixed(62), 0),
+					condition(not(aboveY(YOffset.fixed(63), 0)),
+						condition(noiseThreshold(NoiseParametersKeys.SURFACE_SWAMP, 0.0D),
+							block(Blocks.WATER))))));
+		MaterialRule dunes = condition(biome(TerrestriaBiomes.DUNES), deepSandAndSandstone);
+		MaterialRule lushDesert = condition(biome(TerrestriaBiomes.LUSH_DESERT),
+			new SandWithPatchesSurfaceRule(-0.75D, NoiseParametersKeys.SURFACE, sandAndSandstone, defaultGrass));
+		MaterialRule outback = condition(biome(TerrestriaBiomes.OUTBACK),
+			new SandWithPatchesSurfaceRule(-0.12D, NoiseParametersKeys.BADLANDS_SURFACE, redSandAndSandstone, defaultGrass));
+		MaterialRule volcanicIsland = condition(biome(TerrestriaBiomes.VOLCANIC_ISLAND),
+			new VolcanicIslandSurfaceRule(0.05D, NoiseParametersKeys.CONTINENTALNESS, deepBlackGrassAndBasalt, blackSandAndBasalt));
 
 		// Volcanic rock all the way down to the deepslate.
-		MaterialRule volcanicIslandSubSurface = condition(biome(TerrestriaBiomes.VOLCANIC_ISLAND), sequence(MaterialRules.condition(MaterialRules.verticalGradient("deepslate", YOffset.fixed(0), YOffset.fixed(8)), block(Blocks.DEEPSLATE)), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full)));
+		MaterialRule volcanicIslandSubSurface = condition(biome(TerrestriaBiomes.VOLCANIC_ISLAND),
+			sequence(condition(verticalGradient("deepslate", YOffset.fixed(0), YOffset.fixed(8)),
+				block(Blocks.DEEPSLATE)), block(TerrestriaBlocks.VOLCANIC_ROCK.plain.full)));
 
-		return sequence(condition(MaterialRules.surface(), sequence(canyon, cypressSwamp, dunes, lushDesert, outback, volcanicIsland, defaultGrass)), volcanicIslandSubSurface, defaultGrass);
+		return sequence(condition(surface(),
+				sequence(canyon, cypressSwamp, dunes, lushDesert, outback, volcanicIsland, defaultGrass)),
+			volcanicIslandSubSurface, defaultGrass);
 	}
 
-	public static void register() {
-		Registry.register(Registry.MATERIAL_RULE, new Identifier(Terrestria.MOD_ID,"sand_with_patches_rule"), SandWithPatchesSurfaceRule.CONDITION_CODEC);
-		Registry.register(Registry.MATERIAL_RULE, new Identifier(Terrestria.MOD_ID,"volcanic_island_rule"), VolcanicIslandSurfaceRule.CONDITION_CODEC);
+	public static void init() {
+		register("sand_with_patches_rule", SandWithPatchesSurfaceRule.CONDITION_CODEC);
+		register("volcanic_island_rule", VolcanicIslandSurfaceRule.CONDITION_CODEC);
+	}
+
+	public static <T extends MaterialRule> Codec<T> register(String id, Codec<T> ruleCodec) {
+		return Registry.register(Registry.MATERIAL_RULE, new Identifier(Terrestria.MOD_ID, id), ruleCodec);
 	}
 }
