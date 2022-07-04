@@ -82,7 +82,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 	@Override
 	public void run() {
 		// Register the Terrestria surface rules; this must happen before we call addSurfaceRules().
-		TerrestriaSurfaceRules.register();
+		TerrestriaSurfaceRules.init();
 
 		// Add the Terrestria Overworld surface rules via TerraBlender.
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Terrestria.MOD_ID, TerrestriaSurfaceRules.createRules());
