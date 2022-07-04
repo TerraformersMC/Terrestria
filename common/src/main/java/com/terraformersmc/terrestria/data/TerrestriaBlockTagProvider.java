@@ -121,6 +121,11 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	}
 
 	private void addDirt(DirtBlocks dirtBlock) {
+		getOrCreateTagBuilder(BlockTags.DIRT)
+			.add(dirtBlock.getDirt())
+			.add(dirtBlock.getGrassBlock())
+			.add(dirtBlock.getPodzol());
+
 		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE)
 			.add(dirtBlock.getDirt())
 			.add(dirtBlock.getGrassBlock())

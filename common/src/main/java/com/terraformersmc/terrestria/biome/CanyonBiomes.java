@@ -9,11 +9,6 @@ import net.minecraft.world.gen.feature.*;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
-/*
- * Canyons do not generate in 1.18.2 but the biomes exist to allow enjoying them if generated in a prior version.
- * The biomes are deprecated and may be removed or replaced in 1.19.
- */
-
 public class CanyonBiomes {
 
 	public static void register() {
@@ -28,38 +23,13 @@ public class CanyonBiomes {
 				.build()
 			);
 
-
-		TerrestriaBiomes.CANYON_ARCHES = TerrestriaBiomes.register("canyon_arches", template
+		TerrestriaBiomes.CANYON = TerrestriaBiomes.register("canyon", template
 			.generationSettings(canyonGenerationSettings().build())
 			.spawnSettings(defaultSpawnSettings().build())
 			.build());
-
-		TerrestriaBiomes.CANYON_CLIFFS = TerrestriaBiomes.register("canyon_cliffs", template
-			.generationSettings(canyonCliffsGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			.build());
-
-		TerrestriaBiomes.CANYON_EDGE = TerrestriaBiomes.register("canyon_edge", template
-			.generationSettings(canyonGenerationSettings().build())
-			.spawnSettings(defaultSpawnSettings().build())
-			.build());
-
 	}
 
 	private static GenerationSettings.Builder canyonGenerationSettings() {
-		GenerationSettings.Builder builder = new GenerationSettings.Builder();
-		addBasicFeatures(builder);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		DefaultBiomeFeatures.addDefaultGrass(builder);
-		DefaultBiomeFeatures.addDesertDeadBushes(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		DefaultBiomeFeatures.addDesertFeatures(builder);
-		return builder;
-	}
-
-	private static GenerationSettings.Builder canyonCliffsGenerationSettings() {
 		GenerationSettings.Builder builder = new GenerationSettings.Builder();
 		addBasicFeatures(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);

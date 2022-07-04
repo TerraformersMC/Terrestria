@@ -1,42 +1,34 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
-/*
+
 import com.mojang.serialization.Codec;
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.world.HeightLimitView;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.structure.*;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureConfig> {
 
 	public CanyonArchStructureFeature(Codec<DefaultFeatureConfig> codec) {
-		super(codec);
+		super(codec, StructureGeneratorFactory.simple(CanyonArchStructureFeature::canGenerate, CanyonArchStructureFeature::addPieces));
 	}
 
-	public StructureFeature.StructureStartFactory<DefaultFeatureConfig> getStructureStartFactory() {
-		return CanyonArchStructureStart::new;
+	// TODO: Should this be more restrictive?
+	private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
+		return context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG);
+	}
+
+	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
+		collector.addPiece(new CanyonArchGenerator(context.random(), context.chunkPos().getStartX(), context.chunkPos().getStartZ()));
+	}
+
+	@Override
+	public GenerationStep.Feature getGenerationStep() {
+		return GenerationStep.Feature.SURFACE_STRUCTURES;
 	}
 
 	public int getRadius() {
 		return 12;
 	}
-
-	public static class CanyonArchStructureStart extends StructureStart<DefaultFeatureConfig> {
-		CanyonArchStructureStart(StructureFeature<DefaultFeatureConfig> feature, ChunkPos pos, int references, long baseSeed) {
-			super(feature, pos, references, baseSeed);
-		}
-
-		@Override
-		public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, ChunkPos pos, Biome biome, DefaultFeatureConfig config, HeightLimitView heightLimitView) {
-			CanyonArchGenerator canyonArch = new CanyonArchGenerator(this.random, pos.getStartX() * 16, pos.getStartZ() * 16);
-
-			this.children.add(canyonArch);
-			this.getBoundingBox();
-		}
-	}
 }
-*/

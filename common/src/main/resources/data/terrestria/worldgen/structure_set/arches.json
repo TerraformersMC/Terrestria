@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "terrestria:canyon_arch",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 7,
+    "separation": 5,
+    "salt": 21345
+  }
+}

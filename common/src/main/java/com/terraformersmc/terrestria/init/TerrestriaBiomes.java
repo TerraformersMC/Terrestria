@@ -20,9 +20,7 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> CALDERA_BEACH;
 	public static RegistryKey<Biome> CALDERA_FOOTHILLS;
 	public static RegistryKey<Biome> CALDERA_RIDGE;
-	public static RegistryKey<Biome> CANYON_ARCHES;
-	public static RegistryKey<Biome> CANYON_CLIFFS;
-	public static RegistryKey<Biome> CANYON_EDGE;
+	public static RegistryKey<Biome> CANYON;
 	public static RegistryKey<Biome> CYPRESS_FOREST;
 	public static RegistryKey<Biome> CYPRESS_SWAMP;
 	public static RegistryKey<Biome> DENSE_WOODLANDS;
@@ -41,8 +39,6 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_FOREST;
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_TREELINE;
 	public static RegistryKey<Biome> VOLCANIC_ISLAND;
-	public static RegistryKey<Biome> VOLCANIC_ISLAND_BEACH;
-	public static RegistryKey<Biome> VOLCANIC_ISLAND_SHORE;
 
 
 	public static void addBasicFeatures(GenerationSettings.Builder generationSettings) {

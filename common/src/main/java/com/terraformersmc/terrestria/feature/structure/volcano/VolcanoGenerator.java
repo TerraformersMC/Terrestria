@@ -1,5 +1,5 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
-/*
+
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
@@ -7,33 +7,34 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.tick.OrderedTick;
 
 import java.util.Random;
 
 public class VolcanoGenerator extends StructurePiece {
-	private SimpleRadialNoise radiusNoise;
-	private SimpleRadialNoise vegetationNoise;
-	private SimpleRadialNoise chamberNoise;
-	private OpenSimplexNoise chamberOreNoise;
+	private final SimpleRadialNoise radiusNoise;
+	private final SimpleRadialNoise vegetationNoise;
+	private final SimpleRadialNoise chamberNoise;
+	private final OpenSimplexNoise chamberOreNoise;
 
-	private int height;
-	private int radius;
-	private int lavaHeight;
-	private int lavaTubeLength;
-	private int baseY;
-	private int chamberHeight;
-	private boolean underwater;
-	private long chamberOreSeed;
+	private final int height;
+	private final int radius;
+	private final int lavaHeight;
+	private final int lavaTubeLength;
+	private final int baseY;
+	private final int chamberHeight;
+	private final boolean underwater;
+	private final long chamberOreSeed;
 
-	private int centerX;
-	private int centerZ;
+	private final int centerX;
+	private final int centerZ;
 
 	VolcanoGenerator(Random random, int centerX, int centerZ, VolcanoFeatureConfig config) {
 		super(TerrestriaStructures.VOLCANO_PIECE, 0, null); // TODO: Check if the `null` here causes issues
@@ -48,12 +49,12 @@ public class VolcanoGenerator extends StructurePiece {
 		chamberOreSeed = random.nextLong();
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		this.height = config.getHeight().get(random);
-		this.baseY = config.getBaseY();
+		this.height = config.height().get(random);
+		this.baseY = config.baseY();
 
 		if (height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if (config.isThinIfTall()) {
+		} else if (config.thinIfTall()) {
 			radius = random.nextInt(height / 3) + height / 4;
 		} else {
 			radius = random.nextInt(height * 3 / 4) + height / 2;
@@ -73,7 +74,7 @@ public class VolcanoGenerator extends StructurePiece {
 		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
 	}
 
-	public VolcanoGenerator(ServerWorld world, NbtCompound tag) {
+	public VolcanoGenerator(StructureContext context, NbtCompound tag) {
 		super(TerrestriaStructures.VOLCANO_PIECE, tag);
 
 		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN"), 0.75, 0.5);
@@ -136,7 +137,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	protected void writeNbt(ServerWorld world, NbtCompound tag) {
+	protected void writeNbt(StructureContext context, NbtCompound tag) {
 		tag.putLong("VRN", radiusNoise.getSeed());
 		tag.putLong("VVN", vegetationNoise.getSeed());
 		tag.putLong("VCN", chamberNoise.getSeed());
@@ -154,8 +155,8 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.getMaxY() < this.boundingBox.getMaxY() || box.getMaxY() > this.boundingBox.getMaxY()) {
+	public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
+		if (box.getMinY() > this.boundingBox.getMinY() || box.getMaxY() < this.boundingBox.getMaxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
@@ -186,7 +187,7 @@ public class VolcanoGenerator extends StructurePiece {
 					for (int dY = -chamberDY; dY <= chamberDY; dY++) {
 						pos.set(x, chamberMiddle + dY, z);
 						world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
-						world.getFluidTickScheduler().schedule(pos, world.getFluidState(pos).getFluid(), 0);
+						world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));
 					}
 				} else if (chamberShape > -0.1) {
 					pos.set(x, chamberMiddle, z);
@@ -205,7 +206,7 @@ public class VolcanoGenerator extends StructurePiece {
 							world.setBlockState(pos, state, 2);
 						} else {
 							world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
-							world.getFluidTickScheduler().schedule(pos, world.getFluidState(pos).getFluid(), 0);
+							world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));;
 						}
 					}
 
@@ -305,7 +306,7 @@ public class VolcanoGenerator extends StructurePiece {
 					world.setBlockState(pos, top, 2);
 
 					if (lava) {
-						world.getFluidTickScheduler().schedule(pos, world.getFluidState(pos).getFluid(), 0);
+						world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));
 					}
 				}
 
@@ -327,8 +328,6 @@ public class VolcanoGenerator extends StructurePiece {
 				}
 			}
 		}
-
-		return true;
 	}
 
 	private BlockState pickRandomChamberBlock(boolean top, int dX, int dZ) {
@@ -349,4 +348,4 @@ public class VolcanoGenerator extends StructurePiece {
 		}
 	}
 }
-*/
+

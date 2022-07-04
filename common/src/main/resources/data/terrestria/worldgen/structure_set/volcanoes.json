@@ -1,0 +1,18 @@
+{
+  "structures": [
+    {
+      "structure": "terrestria:volcano",
+      "weight": 1
+    },
+    {
+      "structure": "terrestria:shore_volcano",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "spacing": 9,
+    "separation": 5,
+    "salt": 21345
+  }
+}

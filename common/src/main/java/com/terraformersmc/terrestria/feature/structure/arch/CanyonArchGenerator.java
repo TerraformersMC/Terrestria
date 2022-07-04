@@ -1,11 +1,11 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
-/*
+
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -18,16 +18,16 @@ import java.util.Random;
 
 public class CanyonArchGenerator extends StructurePiece {
 
-	private OpenSimplexNoise noise;
+	private final OpenSimplexNoise noise;
 
-	private float a;
-	private float b;
-	private int maxHeight;
-	private int radius;
-	private int yStart;
+	private final float a;
+	private final float b;
+	private final int maxHeight;
+	private final int radius;
+	private final int yStart;
 
-	private int centerX;
-	private int centerZ;
+	private final int centerX;
+	private final int centerZ;
 
 	CanyonArchGenerator(Random random, int centerX, int centerZ) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null); // TODO: Check if the `null` here causes issues
@@ -53,7 +53,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		this.boundingBox = new BlockBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
 	}
 
-	public CanyonArchGenerator(ServerWorld world, NbtCompound tag) {
+	public CanyonArchGenerator(StructureContext context, NbtCompound tag) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, tag);
 
 		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
@@ -69,7 +69,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	protected void writeNbt(ServerWorld world, NbtCompound tag) {
+	protected void writeNbt(StructureContext context, NbtCompound tag) {
 		tag.putLong("NoiseSeed", noise.getSeed());
 
 		tag.putFloat("a", a);
@@ -83,15 +83,15 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		if (boundingBox.getMaxY() < this.boundingBox.getMaxY() || boundingBox.getMinY() > this.boundingBox.getMinY()) {
-			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
+	public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
+		if (box.getMinY() > this.boundingBox.getMinY() || box.getMaxY() < this.boundingBox.getMaxY()) {
+			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = boundingBox.getMinZ(); z <= boundingBox.getMaxZ(); z++) {
-			for (int x = boundingBox.getMinX(); x <= boundingBox.getMaxX(); x++) {
+		for (int z = box.getMinZ(); z <= box.getMaxZ(); z++) {
+			for (int x = box.getMinX(); x <= box.getMaxX(); x++) {
 
 				double noiseValue = noise.sample(x * 0.05, z * 0.05);
 				double height = maxHeight - Math.abs(noiseValue) * 8;
@@ -104,8 +104,6 @@ public class CanyonArchGenerator extends StructurePiece {
 				}
 			}
 		}
-
-		return true;
 	}
 
 	// Circle distance and line distance to create an arch shape
@@ -167,4 +165,3 @@ public class CanyonArchGenerator extends StructurePiece {
 		}
 	}
 }
-*/

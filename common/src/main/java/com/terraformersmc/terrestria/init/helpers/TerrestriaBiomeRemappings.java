@@ -8,6 +8,9 @@ import com.terraformersmc.terrestria.Terrestria;
 public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
 	public void init() {
 		register(Terrestria.MOD_ID, DataVersions.V_1_18_2, ImmutableMap.<String, String>builder()
+				.put("terrestria:canyon_arches", "terrestria:canyon")
+				.put("terrestria:canyon_cliffs", "terrestria:canyon")
+				.put("terrestria:canyon_edge", "terrestria:canyon")
 				.put("terrestria:dense_woodlands_edge", "minecraft:forest")
 				.put("terrestria:dunes_edge", "minecraft:desert")
 				.put("terrestria:hemlock_clearing", "terrestria:hemlock_treeline")
@@ -23,6 +26,8 @@ public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
 				.put("terrestria:wooded_cypress_hills", "terrestria:cypress_forest")
 				.put("terrestria:wooded_japanese_maple_hills", "terrestria:japanese_maple_forest")
 				.put("terrestria:wooded_sakura_hills", "terrestria:sakura_forest")
+				.put("terrestria:volcanic_island_beach", "terrestria:volcanic_island")
+				.put("terrestria:volcanic_island_shore", "terrestria:volcanic_island")
 				.build());
 	}
 }

@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
+import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.loader.api.FabricLoader;
@@ -9,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.StructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,13 +32,15 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBlocks.init();
 		TerrestriaBoats.init();
 		TerrestriaItems.init();
+		TerrestriaPlacementModifierType.init();
 		TerrestriaFoliagePlacerTypes.init();
 		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaTreeDecorators.init();
 		TerrestriaFeatures.init();
 		TerrestriaConfiguredFeatures.init();
 		TerrestriaPlacedFeatures.init();
-		//TerrestriaStructures.init();
+		TerrestriaStructures.init();
+		StructureFeature.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
 
