@@ -67,7 +67,6 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	}
 
 	static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
-		// TODO: Quarter logs aren't generated
 		if (config instanceof QuarteredMegaTreeConfig && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
 			return ((QuarteredMegaTreeConfig) config).quarteredTrunkProvider.getBlockState(random, pos).with(QuarterLogBlock.BARK_SIDE, side);
 		} else {
