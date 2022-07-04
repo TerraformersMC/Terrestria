@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.feature.structure.volcano;
 
 import com.mojang.serialization.Codec;
 
+import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.structure.*;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.GenerationStep;
@@ -14,9 +15,9 @@ public class VolcanoStructureFeature extends StructureFeature<VolcanoFeatureConf
 		super(codec, StructureGeneratorFactory.simple(VolcanoStructureFeature::canGenerate, VolcanoStructureFeature::addPieces));
 	}
 
-	// TODO: Should this be more restrictive?
 	private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
-		return context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG);
+		return Terrestria.getConfigManager().getGeneralConfig().areOceanVolcanoesEnabled() &&
+				context.isBiomeValid(Heightmap.Type.OCEAN_FLOOR_WG);
 	}
 
 	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<VolcanoFeatureConfig> context) {
