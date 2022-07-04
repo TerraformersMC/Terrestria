@@ -1,38 +1,30 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
-/*
+
 import com.mojang.serialization.Codec;
 
-import net.minecraft.structure.StructureManager;
-import net.minecraft.structure.StructureStart;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.DynamicRegistryManager;
-import net.minecraft.world.HeightLimitView;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.structure.*;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 
 public class VolcanoStructureFeature extends StructureFeature<VolcanoFeatureConfig> {
 
 	public VolcanoStructureFeature(Codec<VolcanoFeatureConfig> codec) {
-		super(codec);
+		super(codec, StructureGeneratorFactory.simple(VolcanoStructureFeature::canGenerate, VolcanoStructureFeature::addPieces));
 	}
 
-	public StructureFeature.StructureStartFactory<VolcanoFeatureConfig> getStructureStartFactory() {
-		return VolcanoStructureStart::new;
+	// TODO: Should this be more restrictive?
+	private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
+		return context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG);
 	}
 
-	public static class VolcanoStructureStart extends StructureStart<VolcanoFeatureConfig> {
-		VolcanoStructureStart(StructureFeature<VolcanoFeatureConfig> feature, ChunkPos pos, int references, long baseSeed) {
-			super(feature, pos, references, baseSeed);
-		}
+	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<VolcanoFeatureConfig> context) {
+		collector.addPiece(new VolcanoGenerator(context.random(), context.chunkPos().getStartX(), context.chunkPos().getStartZ(), context.config()));
+	}
 
-		@Override
-		public void init(DynamicRegistryManager registryManager, ChunkGenerator chunkGenerator, StructureManager manager, ChunkPos pos, Biome biome, VolcanoFeatureConfig config, HeightLimitView heightLimitView) {
-			VolcanoGenerator volcano = new VolcanoGenerator(this.random, pos.getStartX() * 16, pos.getStartZ() * 16, config);
-
-			this.children.add(volcano);
-			this.getBoundingBox();
-		}
+	@Override
+	public GenerationStep.Feature getGenerationStep() {
+		return GenerationStep.Feature.SURFACE_STRUCTURES;
 	}
 }
-*/

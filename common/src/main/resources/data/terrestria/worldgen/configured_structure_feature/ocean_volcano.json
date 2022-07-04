@@ -1,0 +1,17 @@
+{
+  "type": "terrestria:volcano",
+  "config": {
+    "height": {
+      "type": "uniform",
+      "value": {
+        "min_inclusive": 19,
+        "max_inclusive":20
+      }
+    },
+    "baseY": 30,
+    "thinIfTall": false
+  },
+  "biomes": "#minecraft:is_ocean",
+  "adapt_noise": true,
+  "spawn_overrides": {}
+}

@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.init.helpers.SurfaceLevelFilterPlacementModifier;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
@@ -10,6 +11,7 @@ import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.RegistryEntry;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.gen.blockpredicate.BlockPredicate;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.placementmodifier.*;
@@ -149,9 +151,27 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryEntry<PlacedFeature> DENSER_FANCY_OAK_TREES = createPlacedTreeFeature("denser_fancy_oak_trees", 5, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
 	public static final RegistryEntry<PlacedFeature> DENSEST_FANCY_OAK_TREES = createPlacedTreeFeature("densest_fancy_oak_trees", 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
 
-	public static final RegistryEntry<PlacedFeature> JUNGLE_PALM_TREES = createPlacedTreeFeature("jungle_palm_trees", 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
-	public static final RegistryEntry<PlacedFeature> DENSER_JUNGLE_PALM_TREES = createPlacedTreeFeature("denser_jungle_palm_trees", 5, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
-	public static final RegistryEntry<PlacedFeature> RARE_DUM_DUM_HEADS = createPlacedTreeFeature("rare_dum_dum_heads", 0, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.DUM_DUM_HEAD);
+	public static final RegistryEntry<PlacedFeature> JUNGLE_PALM_TREES = createPlacedFeature("jungle_palm_trees",
+			TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+			PlacedFeatures.createCountExtraModifier(2, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 71),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND));
+	public static final RegistryEntry<PlacedFeature> DENSER_JUNGLE_PALM_TREES = createPlacedFeature("denser_jungle_palm_trees",
+			TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+			PlacedFeatures.createCountExtraModifier(5, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 72, 320),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND));
+	public static final RegistryEntry<PlacedFeature> RARE_DUM_DUM_HEADS = createPlacedFeature("rare_dum_dum_heads",
+			TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
+			PlacedFeatures.createCountExtraModifier(0, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 64),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND));
 
 	public static final RegistryEntry<PlacedFeature> DENSE_JAPANESE_MAPLE_TREES = createPlacedTreeFeature("dense_japanese_maple_trees", 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
 	public static final RegistryEntry<PlacedFeature> DENSE_DARK_JAPANESE_MAPLE_TREES = createPlacedTreeFeature("dense_dark_japanese_maple_trees", 3, ON_DIRT, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
@@ -179,15 +199,19 @@ public class TerrestriaPlacedFeatures {
 
 	public static final RegistryEntry<PlacedFeature> SAGUARO_CACTUSES = createPlacedTreeFeature("saguaro_cactuses", 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
 
-
-	public static void init() {
-	}
-
+	// Rare bryce trees is a placement used for the Canyon biome and
+	// we modify the placement so the trees don't place below y == 80.
+	// TODO: It could be this would be better if set even higher.  Pondering...
 	public static final RegistryEntry<PlacedFeature> RARE_BRYCE_TREES = createPlacedFeature("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE,
 			RarityFilterPlacementModifier.of(2),
 			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND));
+
+
+	public static void init() {
+	}
 
 
 	private static DataPool.Builder<BlockState> createStatePoolBuilder() {

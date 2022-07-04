@@ -17,9 +17,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 	protected void generateTags() {
 		// biome categories
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_BEACH.id()))
-			.add(TerrestriaBiomes.CALDERA_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_SHORE);
+			.add(TerrestriaBiomes.CALDERA_BEACH);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_FOREST.id()))
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
@@ -63,9 +61,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 			.add(TerrestriaBiomes.CALDERA_BEACH)
 			.add(TerrestriaBiomes.CALDERA_FOOTHILLS)
 			.add(TerrestriaBiomes.CALDERA_RIDGE)
-			.add(TerrestriaBiomes.CANYON_ARCHES)
-			.add(TerrestriaBiomes.CANYON_CLIFFS)
-			.add(TerrestriaBiomes.CANYON_EDGE)
+			.add(TerrestriaBiomes.CANYON)
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
 			.add(TerrestriaBiomes.CYPRESS_SWAMP)
 			.add(TerrestriaBiomes.DENSE_WOODLANDS)
@@ -83,8 +79,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 			.add(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_SHORE)
 			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE.id()))
@@ -94,9 +88,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_JUNGLE_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.RAINBOW_RAINFOREST)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_SHORE);
+			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.RUINED_PORTAL_MOUNTAIN_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.HEMLOCK_TREELINE)
@@ -123,9 +115,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 			.add(TerrestriaBiomes.CALDERA_BEACH)
 			.add(TerrestriaBiomes.CALDERA_FOOTHILLS)
 			.add(TerrestriaBiomes.CALDERA_RIDGE)
-			.add(TerrestriaBiomes.CANYON_ARCHES)
-			.add(TerrestriaBiomes.CANYON_CLIFFS)
-			.add(TerrestriaBiomes.CANYON_EDGE)
+			.add(TerrestriaBiomes.CANYON)
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
 			.add(TerrestriaBiomes.CYPRESS_SWAMP)
 			.add(TerrestriaBiomes.DENSE_WOODLANDS)
@@ -143,16 +133,12 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 			.add(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 			.add(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_SHORE)
 			.add(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.LUSH_DESERT)
 			.add(TerrestriaBiomes.OASIS)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_BEACH)
-			.add(TerrestriaBiomes.VOLCANIC_ISLAND_SHORE);
+			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.HEMLOCK_RAINFOREST)

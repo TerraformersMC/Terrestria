@@ -21,8 +21,8 @@ public class TerrestriaVillagerTypes {
 		// Plains: Redwood Forest
 		// Plains: Sakura Forest
 		register(VillagerType.TAIGA, SNOWY_HEMLOCK_FOREST);
-		register(VillagerType.DESERT, VOLCANIC_ISLAND, VOLCANIC_ISLAND_BEACH, VOLCANIC_ISLAND_SHORE);
-		register(VillagerType.DESERT, CANYON_ARCHES, CANYON_CLIFFS, CANYON_EDGE);
+		register(VillagerType.DESERT, VOLCANIC_ISLAND);
+		register(VillagerType.DESERT, CANYON);
 		register(VillagerType.DESERT, DUNES);
 		register(VillagerType.DESERT, LUSH_DESERT);
 		register(VillagerType.DESERT, OASIS);

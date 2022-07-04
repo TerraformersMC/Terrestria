@@ -1,0 +1,7 @@
+{
+  "type": "terrestria:canyon_arch",
+  "config": {},
+  "biomes": "terrestria:canyon",
+  "adapt_noise": true,
+  "spawn_overrides": {}
+}
