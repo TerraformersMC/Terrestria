@@ -47,7 +47,7 @@ jobs:
       - name: Data Gen
         run: ./gradlew runDatagen --stacktrace -PcurrentTag="v${{ github.event.inputs.version }}"
       - name: Build
-        run: ./gradlew generateChangelog build publish curseforge github publishModrinth --stacktrace -x runDatagen -PlastTag="v${{ github.event.inputs.previousVersion }}" -PcurrentTag="v${{ github.event.inputs.version }}"
+        run: ./gradlew generateChangelog build publish curseforge github modrinth --stacktrace -x runDatagen -PlastTag="v${{ github.event.inputs.previousVersion }}" -PcurrentTag="v${{ github.event.inputs.version }}"
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}

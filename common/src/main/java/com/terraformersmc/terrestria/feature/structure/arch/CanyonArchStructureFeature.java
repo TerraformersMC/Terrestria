@@ -14,9 +14,14 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 		super(codec, StructureGeneratorFactory.simple(CanyonArchStructureFeature::canGenerate, CanyonArchStructureFeature::addPieces));
 	}
 
-	// TODO: Should this be more restrictive?
 	private static <C extends FeatureConfig> boolean canGenerate(StructureGeneratorFactory.Context<C> context) {
-		return context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG);
+		if (!context.isBiomeValid(Heightmap.Type.WORLD_SURFACE_WG)) {
+			return false;
+		}
+
+		// Try to ensure the arch feet are not in water.  96 doesn't guarantee it, but makes it likely.
+		// Increasing the bounds checked here makes arches significantly less common.
+		return getMinCenteredCornerHeight(context, 96, 96) >= context.chunkGenerator().getSeaLevel();
 	}
 
 	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
@@ -26,6 +31,23 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 	@Override
 	public GenerationStep.Feature getGenerationStep() {
 		return GenerationStep.Feature.SURFACE_STRUCTURES;
+	}
+
+	// Centered version of StructureGeneratorFactory.Context.getMinCornerHeight(), considers ocean depth.
+	public static <C extends FeatureConfig> int getMinCenteredCornerHeight(StructureGeneratorFactory.Context<C> context, int width, int length) {
+		int x = context.chunkPos().getCenterX() - width / 2;
+		int z = context.chunkPos().getCenterZ() - length / 2;
+
+		return Math.min(
+			Math.min(
+				context.chunkGenerator().getHeightInGround(x, z, Heightmap.Type.OCEAN_FLOOR_WG, context.world()),
+				context.chunkGenerator().getHeightInGround(x, z + length, Heightmap.Type.OCEAN_FLOOR_WG, context.world())
+			),
+			Math.min(
+				context.chunkGenerator().getHeightInGround(x + width, z, Heightmap.Type.OCEAN_FLOOR_WG, context.world()),
+				context.chunkGenerator().getHeightInGround(x + width, z + length, Heightmap.Type.OCEAN_FLOOR_WG, context.world())
+			)
+		);
 	}
 
 	public int getRadius() {
