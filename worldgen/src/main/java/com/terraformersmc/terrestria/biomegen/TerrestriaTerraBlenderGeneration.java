@@ -23,7 +23,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 
 	@Override
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-		this.addBiomeSimilar(mapper, BiomeKeys.BADLANDS, CANYON);
+		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
