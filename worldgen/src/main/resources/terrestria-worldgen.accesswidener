@@ -4,4 +4,5 @@ accessible  class   net/minecraft/world/gen/surfacebuilder/MaterialRules$BlockSt
 accessible  class   net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext
 accessible  class   net/minecraft/world/gen/surfacebuilder/MaterialRules$BooleanSupplier
 accessible  field   net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext surfaceBuilder Lnet/minecraft/world/gen/surfacebuilder/SurfaceBuilder;
+accessible  method  net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext method_39551 ()I
 accessible  method  net/minecraft/world/gen/surfacebuilder/SurfaceBuilder getNoiseSampler (Lnet/minecraft/util/registry/RegistryKey;)Lnet/minecraft/util/math/noise/DoublePerlinNoiseSampler;

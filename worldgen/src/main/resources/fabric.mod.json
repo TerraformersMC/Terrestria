@@ -16,6 +16,7 @@
   },
   "accessWidener": "terrestria-worldgen.accesswidener",
   "mixins": [
+    "mixins.terrestria-worldgen.json"
   ],
   "custom": {
     "modmenu": {

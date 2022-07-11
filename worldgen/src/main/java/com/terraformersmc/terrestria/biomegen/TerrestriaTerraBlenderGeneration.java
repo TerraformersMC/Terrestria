@@ -27,7 +27,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
-		this.addBiomeSimilar(mapper, BiomeKeys.STONY_SHORE, DUNES);
+		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, DUNES);
 		this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST);
@@ -41,13 +41,14 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.MUSHROOM_FIELDS, VOLCANIC_ISLAND);
+		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_LUKEWARM_OCEAN, VOLCANIC_ISLAND);
 
 		// Balancing low-utilization areas with vanilla biomes.
 		this.addBiomeSimilar(mapper, BiomeKeys.RIVER, BiomeKeys.RIVER);
 		this.addBiomeSimilar(mapper, BiomeKeys.FROZEN_RIVER, BiomeKeys.FROZEN_RIVER);
 		this.addBiomeSimilar(mapper, BiomeKeys.BEACH, BiomeKeys.BEACH);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_BEACH, BiomeKeys.SNOWY_BEACH);
+		this.addBiomeSimilar(mapper, BiomeKeys.STONY_SHORE, BiomeKeys.STONY_SHORE);
 		this.addBiomeSimilar(mapper, BiomeKeys.OCEAN, BiomeKeys.OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.LUKEWARM_OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.COLD_OCEAN, BiomeKeys.COLD_OCEAN);
@@ -69,6 +70,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS, BiomeKeys.WINDSWEPT_GRAVELLY_HILLS);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_PLAINS, BiomeKeys.SNOWY_PLAINS);
 		this.addBiomeSimilar(mapper, BiomeKeys.ICE_SPIKES, BiomeKeys.ICE_SPIKES);
+		this.addBiomeSimilar(mapper, BiomeKeys.MUSHROOM_FIELDS, BiomeKeys.MUSHROOM_FIELDS);
 	}
 
 	@Override
