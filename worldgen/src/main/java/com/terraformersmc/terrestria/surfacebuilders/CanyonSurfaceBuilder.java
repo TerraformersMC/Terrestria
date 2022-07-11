@@ -1,29 +1,26 @@
-package com.terraformersmc.terrestria.surface;
-/*
-import com.mojang.serialization.Codec;
+package com.terraformersmc.terrestria.surfacebuilders;
+
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terraform.surface.CliffSurfaceConfig;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
+import net.minecraft.world.gen.chunk.BlockColumn;
+import net.minecraft.world.gen.random.AbstractRandom;
 
-import java.util.Random;
-
-public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
+public class CanyonSurfaceBuilder extends TerrestriaSurfaceBuilder {
 
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
-	private int seaLevel;
-	private SurfaceBuilder<TernarySurfaceConfig> parent;
 
-	public CanyonSurfaceBuilder(Codec<CliffSurfaceConfig> codec, int seaLevel, SurfaceBuilder<TernarySurfaceConfig> parent) {
-		super(codec);
-		this.seaLevel = seaLevel;
-		this.parent = parent;
+	private final BlockState cliffMaterial;
+	private final BlockState topMaterial;
+	private final BlockState underMaterial;
+
+	public CanyonSurfaceBuilder(BlockState cliffMaterial, BlockState topMaterial, BlockState underMaterial) {
+		this.cliffMaterial = cliffMaterial;
+		this.topMaterial = topMaterial;
+		this.underMaterial = underMaterial;
 	}
 
 	private static int underNoiseToLayers(double noise, int cliffLayers) {
@@ -43,13 +40,13 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 
 		return underLayers;
 	}
-*/
+
 	/**
 	 * "terraces" the input noise (from 0.0 to 1.0) returning an integer from 1 to 40, inclusive
 	 * Domain: [-1.0, 1.0]
 	 * Range: [1, 40]
 	 */
-/*
+
 	private static int cliffNoiseToLayers(double noise) {
 		// Domain transformation:
 		// [0.0, 1.0] -> [0, 60]
@@ -95,17 +92,15 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, double noise, BlockState stone, BlockState water, int var11, int var12, long seed, CliffSurfaceConfig config) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first
 
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, var12, seed, config);
-
 			return;
 		}
 
-		BlockPos.Mutable pos = new BlockPos.Mutable(x, seaLevel - 1, z);
+		int y = seaLevel - 1;
 
 		// Generate noise values
 
@@ -130,30 +125,22 @@ public class CanyonSurfaceBuilder extends SurfaceBuilder<CliffSurfaceConfig> {
 		// Place cliff material
 
 		for (int i = 0; i < cliffLayers; i++) {
-			chunk.setBlockState(pos, config.getCliffMaterial(), false);
-
-			pos.move(Direction.UP);
+			column.setState(y, cliffMaterial);
+			++y;
 		}
 
 		// Place under material
 
 		for (int i = 0; i < underLayers; i++) {
-			chunk.setBlockState(pos, config.getUnderMaterial(), false);
-			pos.move(Direction.UP);
+			column.setState(y, underMaterial);
+			++y;
 		}
 
 		// Place top material
 
 		for (int i = 0; i < topLayers; i++) {
-			chunk.setBlockState(pos, config.getTopMaterial(), false);
-			pos.move(Direction.UP);
-		}
-
-		if (pos.getY() <= vHeight) {
-			// Prevent exposed stone.
-
-			parent.generate(rand, chunk, biome, x, z, vHeight, noise, stone, water, var11, var12, seed, config);
+			column.setState(y, topMaterial);
+			++y;
 		}
 	}
 }
-*/

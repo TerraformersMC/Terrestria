@@ -37,7 +37,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private final int centerZ;
 
 	VolcanoGenerator(Random random, int centerX, int centerZ, VolcanoFeatureConfig config) {
-		super(TerrestriaStructures.VOLCANO_PIECE, 0, null); // TODO: Check if the `null` here causes issues
+		super(TerrestriaStructures.VOLCANO_PIECE, 0, null);
 		this.setOrientation(null);
 
 		this.centerX = centerX;

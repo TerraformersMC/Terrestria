@@ -30,7 +30,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private final int centerZ;
 
 	CanyonArchGenerator(Random random, int centerX, int centerZ) {
-		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null); // TODO: Check if the `null` here causes issues
+		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null);
 		this.setOrientation(null);
 
 		this.centerX = centerX;
