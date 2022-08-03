@@ -6,3 +6,6 @@ accessible  class   net/minecraft/world/gen/surfacebuilder/MaterialRules$Boolean
 accessible  field   net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext surfaceBuilder Lnet/minecraft/world/gen/surfacebuilder/SurfaceBuilder;
 accessible  method  net/minecraft/world/gen/surfacebuilder/MaterialRules$MaterialRuleContext method_39551 ()I
 accessible  method  net/minecraft/world/gen/surfacebuilder/SurfaceBuilder getNoiseSampler (Lnet/minecraft/util/registry/RegistryKey;)Lnet/minecraft/util/math/noise/DoublePerlinNoiseSampler;
+accessible  method  net/minecraft/util/math/Vec3i setX (I)Lnet/minecraft/util/math/Vec3i;
+accessible  method  net/minecraft/util/math/Vec3i setY (I)Lnet/minecraft/util/math/Vec3i;
+accessible  method  net/minecraft/util/math/Vec3i setZ (I)Lnet/minecraft/util/math/Vec3i;

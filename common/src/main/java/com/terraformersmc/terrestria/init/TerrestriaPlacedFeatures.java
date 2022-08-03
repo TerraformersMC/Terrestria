@@ -125,16 +125,41 @@ public class TerrestriaPlacedFeatures {
 
 	public static final RegistryEntry<PlacedFeature> SPARSE_SMALL_HEMLOCK_TREES = createPlacedTreeFeature("sparse_small_hemlock_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 	public static final RegistryEntry<PlacedFeature> SPARSE_SMALL_REDWOOD_TREES = createPlacedTreeFeature("sparse_small_redwood_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
+	public static final RegistryEntry<PlacedFeature> CALDERA_SMALL_HEMLOCK_TREES = createPlacedFeature("caldera_small_hemlock_trees",
+			TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
+			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT));
+	public static final RegistryEntry<PlacedFeature> CALDERA_SMALL_REDWOOD_TREES = createPlacedFeature("caldera_small_redwood_trees",
+			TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
+			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT));
+
 	public static final RegistryEntry<PlacedFeature> SMALL_HEMLOCK_TREES = createPlacedTreeFeature("small_hemlock_trees", 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 	public static final RegistryEntry<PlacedFeature> SMALL_REDWOOD_TREES = createPlacedTreeFeature("small_redwood_trees", 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
 
 	public static final RegistryEntry<PlacedFeature> SPARSE_HEMLOCK_TREES = createPlacedTreeFeature("sparse_hemlock_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 	public static final RegistryEntry<PlacedFeature> SPARSE_REDWOOD_TREES = createPlacedTreeFeature("sparse_redwood_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
-	private static final RegistryEntry<ConfiguredFeature<RandomFeatureConfig, ?>> SPARSE_CONIFER_TREES_CONFIGURED = TerrestriaConfiguredFeatures.register("sparse_conifer_trees", Feature.RANDOM_SELECTOR,
-			new RandomFeatureConfig(ImmutableList.of(
-					new RandomFeatureEntry(createPlacedFeature("hemlock_tree", TerrestriaConfiguredFeatures.HEMLOCK_TREE), 0.5F)
-			), createPlacedFeature("redwood_tree", TerrestriaConfiguredFeatures.REDWOOD_TREE)));
-	public static final RegistryEntry<PlacedFeature> SPARSE_CONIFER_TREES = createPlacedTreeFeature("sparse_conifer_trees", 1, ON_DIRT, SPARSE_CONIFER_TREES_CONFIGURED);
+	public static final RegistryEntry<PlacedFeature> CALDERA_HEMLOCK_TREES = createPlacedFeature("caldera_hemlock_trees",
+			TerrestriaConfiguredFeatures.HEMLOCK_TREE,
+			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT));
+	public static final RegistryEntry<PlacedFeature> CALDERA_REDWOOD_TREES = createPlacedFeature("caldera_redwood_trees",
+			TerrestriaConfiguredFeatures.REDWOOD_TREE,
+			PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
+			SquarePlacementModifier.of(),
+			SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT));
+
 	public static final RegistryEntry<PlacedFeature> HEMLOCK_TREES = createPlacedTreeFeature("hemlock_trees", 2, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 	public static final RegistryEntry<PlacedFeature> REDWOOD_TREES = createPlacedTreeFeature("redwood_trees", 2, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 	public static final RegistryEntry<PlacedFeature> DENSE_HEMLOCK_TREES = createPlacedTreeFeature("dense_hemlock_trees", 4, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);

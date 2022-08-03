@@ -1,10 +1,10 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
+import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
@@ -16,6 +16,7 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	private static final OpenSimplexNoise ISLAND_NOISE = new OpenSimplexNoise(346987);
 	private static final int DEEP_DEPTH = 32;
 	private static final int SHALLOW_DEPTH = 16;
+	private static final double HEIGHT_FACTOR = 1.1;
 
 	private final BlockState topMaterial;
 	private final BlockState midMaterial;
@@ -23,7 +24,6 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	private final BlockState beachMaterial;
 	private final BlockState underwaterMaterial;
 	private final boolean deepOcean;
-	private final double heightFactor = 1.1;
 
 	public OceanIslandSurfaceBuilder(BlockState topMaterial, BlockState midMaterial, BlockState lowMaterial, BlockState beachMaterial, BlockState underwaterMaterial, boolean deepOcean) {
 		this.topMaterial = topMaterial;
@@ -36,7 +36,7 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 
 	@Override
 	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
-		int delta = (int)((deepOcean ? DEEP_DEPTH : SHALLOW_DEPTH) * heightFactor);
+		int delta = (int)((deepOcean ? DEEP_DEPTH : SHALLOW_DEPTH) * HEIGHT_FACTOR);
 
 		// We are going to accept the ocean surface noise and just raise it so we need the ocean surface.
 		vHeight = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
@@ -46,8 +46,9 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 			vHeight = seaLevel - delta;
 		}
 
-		// Delta is how much we are raising the surface.  Reduce it as we approach an ocean biome.
-		int borderAdjustment = checkBiomeAdjacency(biomeAccess, biome, x, z);
+		// Delta is how much we are raising the surface.  Reduce it as we approach the edge of the island biome.
+		int borderAdjustment = BiomePerimeters.getOrCreateInstance(biome, 40)
+				.getPerimeterDistance(biomeAccess, new BlockPos(x, 62, z));
 		if (borderAdjustment < 32) {
 			delta = delta * borderAdjustment / 32;
 		}
@@ -96,84 +97,5 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 				}
 			}
 		}
-	}
-
-	// Very hackish game of pin the tail on any other biome.
-	private int checkBiomeAdjacency(BiomeAccess biomeAccess, Biome biome, int x, int z) {
-		BlockPos pos = new BlockPos.Mutable(x, 62, z);
-
-		int dxn = 32;
-		int dxp = 32;
-		int dzn = 32;
-		int dzp = 32;
-
-		int dxnzn = 32;
-		int dxpzn = 32;
-		int dxnzp = 32;
-		int dxpzp = 32;
-
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -32)).value().equals(biome)) {
-			for (dxn = 1; dxn <= 32; dxn++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -dxn)).value().equals(biome)) {
-					break;
-				}
-			}
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, 32)).value().equals(biome)) {
-			for (dxp = 1; dxp <= 32; dxp++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, dxp)).value().equals(biome)) {
-					break;
-				}
-			}
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.Z, -32)).value().equals(biome)) {
-			for (dzn = 1; dzn <= 32; dzn++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.Z, -dzn)).value().equals(biome)) {
-					break;
-				}
-			}
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.Z, 32)).value().equals(biome)) {
-			for (dzp = 1; dzp <= 32; dzp++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.Z, dzp)).value().equals(biome)) {
-					break;
-				}
-			}
-		}
-
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -23).offset(Direction.Axis.Z, -23)).value().equals(biome)) {
-			for (dxnzn = 1; dxnzn <= 23; dxnzn++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -dxnzn).offset(Direction.Axis.Z, -dxnzn)).value().equals(biome)) {
-					break;
-				}
-			}
-			dxnzn *= Math.sqrt(2);
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, 23).offset(Direction.Axis.Z, -23)).value().equals(biome)) {
-			for (dxpzn = 1; dxpzn <= 23; dxpzn++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, dxpzn).offset(Direction.Axis.Z, -dxpzn)).value().equals(biome)) {
-					break;
-				}
-			}
-			dxpzn *= Math.sqrt(2);
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -23).offset(Direction.Axis.Z, 23)).value().equals(biome)) {
-			for (dxnzp = 1; dxnzp <= 23; dxnzp++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, -dxnzp).offset(Direction.Axis.Z, dxnzp)).value().equals(biome)) {
-					break;
-				}
-			}
-			dxnzp *= Math.sqrt(2);
-		}
-		if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, 23).offset(Direction.Axis.Z, 23)).value().equals(biome)) {
-			for (dxpzp = 1; dxpzp <= 23; dxpzp++) {
-				if (!biomeAccess.getBiome(pos.offset(Direction.Axis.X, dxpzp).offset(Direction.Axis.Z, dxpzp)).value().equals(biome)) {
-					break;
-				}
-			}
-			dxpzp *= Math.sqrt(2);
-		}
-
-		return Math.min(Math.min(Math.min(dxn, dxp), Math.min(dzn, dzp)), Math.min(Math.min(dxnzn, dxpzn), Math.min(dxnzp, dxpzp)));
 	}
 }

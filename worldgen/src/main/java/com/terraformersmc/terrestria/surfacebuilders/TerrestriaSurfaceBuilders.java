@@ -10,6 +10,13 @@ public class TerrestriaSurfaceBuilders {
 	private static final ArrayList<TerrestriaSurfaceBuilder> builders = new ArrayList<>(2);
 
 	public static void init() {
+		builders.add(new CalderaSurfaceBuilder(
+				Blocks.GRASS_BLOCK.getDefaultState(),
+				Blocks.DIRT.getDefaultState(),
+				Blocks.STONE.getDefaultState(),
+				Blocks.SAND.getDefaultState()
+			).setBiomeKey(TerrestriaBiomes.CALDERA));
+
 		builders.add(new CanyonSurfaceBuilder(
 				Blocks.SMOOTH_SANDSTONE.getDefaultState(),
 				Blocks.SAND.getDefaultState(),

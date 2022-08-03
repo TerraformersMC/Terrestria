@@ -275,6 +275,10 @@ public class VolcanoGenerator extends StructurePiece {
 
 						world.setBlockState(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(), 2);
 					}
+
+					// The bowl fill logic can miss placing lava directly above the center columns.
+					pos.move(Direction.UP);
+					world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
 				}
 
 				// Some complex top block logic:
