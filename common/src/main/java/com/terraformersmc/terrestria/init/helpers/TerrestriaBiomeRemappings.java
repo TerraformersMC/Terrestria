@@ -8,6 +8,9 @@ import com.terraformersmc.terrestria.Terrestria;
 public class TerrestriaBiomeRemappings implements BiomeRemapperApi {
 	public void init() {
 		register(Terrestria.MOD_ID, DataVersions.V_1_18_2, ImmutableMap.<String, String>builder()
+				.put("terrestria:caldera_beach", "terrestria:caldera")
+				.put("terrestria:caldera_foothills", "terrestria:caldera")
+				.put("terrestria:caldera_ridge", "terrestria:caldera")
 				.put("terrestria:canyon_arches", "terrestria:canyon")
 				.put("terrestria:canyon_cliffs", "terrestria:canyon")
 				.put("terrestria:canyon_edge", "terrestria:canyon")

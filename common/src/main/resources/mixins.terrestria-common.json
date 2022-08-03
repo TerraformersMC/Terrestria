@@ -7,6 +7,7 @@
     "MixinFluidBlock",
     "MixinSlimeEntity",
     "MixinSugarCaneBlock",
+    "MixinWaterCreatureEntity",
     "TreeDecoratorTypeAccessor"
   ],
   "injectors": {

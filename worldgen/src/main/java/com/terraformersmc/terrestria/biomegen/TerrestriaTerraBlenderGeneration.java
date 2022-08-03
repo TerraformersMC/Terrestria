@@ -18,30 +18,27 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 public class TerrestriaTerraBlenderGeneration extends Region implements Runnable, TerraBlenderApi {
 
 	public TerrestriaTerraBlenderGeneration() {
-		super(new Identifier(Terrestria.MOD_ID, "overworld"), RegionType.OVERWORLD, 10);
+		super(new Identifier(Terrestria.MOD_ID, "overworld"), RegionType.OVERWORLD, 13);
 	}
 
 	@Override
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
+		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, CALDERA);
 		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
-		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, DUNES);
 		this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, LUSH_REDWOOD_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT);
 		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK);
-		this.addBiomeSimilar(mapper, BiomeKeys.JUNGLE, RAINBOW_RAINFOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE);
 		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_LUKEWARM_OCEAN, VOLCANIC_ISLAND);
 
 		// Balancing low-utilization areas with vanilla biomes.
 		this.addBiomeSimilar(mapper, BiomeKeys.RIVER, BiomeKeys.RIVER);
@@ -49,6 +46,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.BEACH, BiomeKeys.BEACH);
 		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_BEACH, BiomeKeys.SNOWY_BEACH);
 		this.addBiomeSimilar(mapper, BiomeKeys.STONY_SHORE, BiomeKeys.STONY_SHORE);
+		this.addBiomeSimilar(mapper, BiomeKeys.WARM_OCEAN, BiomeKeys.WARM_OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.OCEAN, BiomeKeys.OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.LUKEWARM_OCEAN, BiomeKeys.LUKEWARM_OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.COLD_OCEAN, BiomeKeys.COLD_OCEAN);
@@ -91,5 +89,6 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 
 		// Add the biomes to Overworld generation via TerraBlender.
 		Regions.register(this);
+		Regions.register(new TerrestriaRareGeneration());
 	}
 }

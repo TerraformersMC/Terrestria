@@ -17,7 +17,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 	protected void generateTags() {
 		// biome categories
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_BEACH.id()))
-			.add(TerrestriaBiomes.CALDERA_BEACH);
+				.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_FOREST.id()))
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
@@ -25,16 +25,12 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 			.add(TerrestriaBiomes.SAKURA_FOREST);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_HILL.id()))
-			.add(TerrestriaBiomes.CALDERA_FOOTHILLS)
 			.add(TerrestriaBiomes.VOLCANIC_ISLAND);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_JUNGLE.id()))
 			.add(TerrestriaBiomes.RAINBOW_RAINFOREST);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_MOUNTAIN.id()))
-			.add(TerrestriaBiomes.CALDERA_RIDGE);
-
-		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_OCEAN.id()))
 			.add(TerrestriaBiomes.CALDERA);
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.IS_TAIGA.id()))
@@ -58,9 +54,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.MINESHAFT_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.CALDERA)
-			.add(TerrestriaBiomes.CALDERA_BEACH)
-			.add(TerrestriaBiomes.CALDERA_FOOTHILLS)
-			.add(TerrestriaBiomes.CALDERA_RIDGE)
 			.add(TerrestriaBiomes.CANYON)
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
 			.add(TerrestriaBiomes.CYPRESS_SWAMP)
@@ -112,9 +105,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider.DynamicRegistr
 
 		this.getOrCreateTagBuilder(TagKey.of(this.registry.getKey(), BiomeTags.STRONGHOLD_HAS_STRUCTURE.id()))
 			.add(TerrestriaBiomes.CALDERA)
-			.add(TerrestriaBiomes.CALDERA_BEACH)
-			.add(TerrestriaBiomes.CALDERA_FOOTHILLS)
-			.add(TerrestriaBiomes.CALDERA_RIDGE)
 			.add(TerrestriaBiomes.CANYON)
 			.add(TerrestriaBiomes.CYPRESS_FOREST)
 			.add(TerrestriaBiomes.CYPRESS_SWAMP)
