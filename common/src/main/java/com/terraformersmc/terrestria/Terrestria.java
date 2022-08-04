@@ -44,6 +44,9 @@ public class Terrestria implements ModInitializer {
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
 
+		// This must be after TerrestriaBiomes.init()
+		CONFIG_MANAGER.getBiomeConfig();
+
 		FabricItemGroupBuilder.create(new Identifier(MOD_ID, "items")).icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack()).appendItems(stacks -> Registry.ITEM.forEach(item -> {
 			if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
 				item.appendStacks(item.getGroup(), (DefaultedList<ItemStack>) stacks);
