@@ -13,10 +13,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class TerrestriaConfigManager {
+	private final Path biomeConfigPath;
+	private final Path biomeConfigBackupPath;
 	private final Path clientConfigPath;
 	private final Path clientConfigBackupPath;
 	private final Path generalConfigPath;
 	private final Path generalConfigBackupPath;
+	private TerrestriaBiomeConfig biomeConfig;
 	private TerrestriaClientConfig clientConfig;
 	private TerrestriaGeneralConfig generalConfig;
 
@@ -30,6 +33,9 @@ public class TerrestriaConfigManager {
 		} catch (IOException e) {
 			Terrestria.LOGGER.error("Failed to create config directory at " + configDirectory, e);
 		}
+
+		biomeConfigPath = configDirectory.resolve("biome.json");
+		biomeConfigBackupPath = configDirectory.resolve("biome-invalid-syntax.json");
 
 		if (FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT) {
 			clientConfigPath = configDirectory.resolve("client.json");
@@ -107,6 +113,14 @@ public class TerrestriaConfigManager {
 
 			return false;
 		}
+	}
+
+	public TerrestriaBiomeConfig getBiomeConfig() {
+		if (biomeConfig == null) {
+			biomeConfig = loadConfig(biomeConfigPath, new TerrestriaBiomeConfig(), TerrestriaBiomeConfig.class, biomeConfigBackupPath);
+		}
+
+		return biomeConfig;
 	}
 
 	public TerrestriaClientConfig getClientConfig() {

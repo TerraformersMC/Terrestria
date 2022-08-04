@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.biomegen;
 
 import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terrestria.Terrestria;
+import com.terraformersmc.terrestria.config.TerrestriaBiomeConfig;
 import com.terraformersmc.terrestria.surfacerules.TerrestriaSurfaceRules;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -16,6 +17,7 @@ import java.util.function.Consumer;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
 public class TerrestriaTerraBlenderGeneration extends Region implements Runnable, TerraBlenderApi {
+	TerrestriaBiomeConfig BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
 
 	public TerrestriaTerraBlenderGeneration() {
 		super(new Identifier(Terrestria.MOD_ID, "overworld"), RegionType.OVERWORLD, 13);
@@ -23,22 +25,22 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 
 	@Override
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
-		this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, CALDERA);
-		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON);
-		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP);
-		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS);
-		this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, LUSH_REDWOOD_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT);
-		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK);
-		this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST);
-		this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE);
-		this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST);
+		if (BIOME_CONFIG.isBiomeEnabled(CALDERA))                  { this.addBiomeSimilar(mapper, BiomeKeys.MEADOW, CALDERA); }
+		if (BIOME_CONFIG.isBiomeEnabled(CANYON))                   { this.addBiomeSimilar(mapper, BiomeKeys.DESERT, CANYON); }
+		if (BIOME_CONFIG.isBiomeEnabled(CYPRESS_FOREST))           { this.addBiomeSimilar(mapper, BiomeKeys.FOREST, CYPRESS_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(CYPRESS_SWAMP))            { this.addBiomeSimilar(mapper, BiomeKeys.SWAMP, CYPRESS_SWAMP); }
+		if (BIOME_CONFIG.isBiomeEnabled(DENSE_WOODLANDS))          { this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, DENSE_WOODLANDS); }
+		if (BIOME_CONFIG.isBiomeEnabled(HEMLOCK_RAINFOREST))       { this.addBiomeSimilar(mapper, BiomeKeys.TAIGA, HEMLOCK_RAINFOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(JAPANESE_MAPLE_FOREST))    { this.addBiomeSimilar(mapper, BiomeKeys.FOREST, JAPANESE_MAPLE_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(LUSH_REDWOOD_FOREST))      { this.addBiomeSimilar(mapper, BiomeKeys.OLD_GROWTH_BIRCH_FOREST, LUSH_REDWOOD_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(LUSH_DESERT))              { this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT); }
+		if (BIOME_CONFIG.isBiomeEnabled(OUTBACK))                  { this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK); }
+		if (BIOME_CONFIG.isBiomeEnabled(REDWOOD_FOREST))           { this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(SAKURA_FOREST))            { this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_FOREST))     { this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_FOREST))     { this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_TREELINE))   { this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE); }
+		if (BIOME_CONFIG.isBiomeEnabled(WINDSWEPT_REDWOOD_FOREST)) { this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST); }
 
 		// Balancing low-utilization areas with vanilla biomes.
 		this.addBiomeSimilar(mapper, BiomeKeys.RIVER, BiomeKeys.RIVER);

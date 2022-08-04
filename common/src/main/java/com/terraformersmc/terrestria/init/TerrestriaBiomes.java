@@ -15,11 +15,13 @@ import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TerrestriaBiomes {
+	public static final Map<String, RegistryKey<Biome>> biomes = new HashMap<>();
+
 	public static RegistryKey<Biome> CALDERA;
-	public static RegistryKey<Biome> CALDERA_BEACH;
-	public static RegistryKey<Biome> CALDERA_FOOTHILLS;
-	public static RegistryKey<Biome> CALDERA_RIDGE;
 	public static RegistryKey<Biome> CANYON;
 	public static RegistryKey<Biome> CYPRESS_FOREST;
 	public static RegistryKey<Biome> CYPRESS_SWAMP;
@@ -117,9 +119,11 @@ public class TerrestriaBiomes {
 
 	public static RegistryKey<Biome> register(String name, Biome biome) {
 		Identifier identifier = new Identifier(Terrestria.MOD_ID, name);
+		RegistryKey<Biome> biomeKey = RegistryKey.of(Registry.BIOME_KEY, identifier);
 
 		BuiltinRegistries.add(BuiltinRegistries.BIOME, identifier, biome);
+		biomes.put(name, biomeKey);
 
-		return RegistryKey.of(Registry.BIOME_KEY, identifier);
+		return biomeKey;
 	}
 }
