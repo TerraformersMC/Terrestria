@@ -39,8 +39,8 @@ public class VolcanoGenerator extends StructurePiece {
 		super(TerrestriaStructures.VOLCANO_PIECE, 0, null); // TODO: Check if the `null` here causes issues
 		this.setOrientation(null);
 
-		this.centerX = centerX;
-		this.centerZ = centerZ;
+		this.centerX = centerX >> 4;
+		this.centerZ = centerZ >> 4;
 
 		radiusNoise = new SimpleRadialNoise(16, random.nextLong(), 0.75, 0.5);
 		vegetationNoise = new SimpleRadialNoise(16, random.nextLong(), 0.25, 0.5);
@@ -70,7 +70,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 		int radiusBound = MathHelper.ceil(radius * 1.5);
 
-		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
+		this.boundingBox = new BlockBox(this.centerX - radiusBound, 1, this.centerZ - radiusBound, this.centerX + radiusBound, 62 + height, this.centerZ + radiusBound);
 	}
 
 	public VolcanoGenerator(ServerWorld world, NbtCompound tag) {
@@ -155,7 +155,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.getMaxY() < this.boundingBox.getMaxY() || box.getMaxY() > this.boundingBox.getMaxY()) {
+		if (box.getMinY() > this.boundingBox.getMinY() || box.getMaxY() < this.boundingBox.getMaxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 

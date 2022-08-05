@@ -33,8 +33,8 @@ public class CanyonArchGenerator extends StructurePiece {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null); // TODO: Check if the `null` here causes issues
 		this.setOrientation(null);
 
-		this.centerX = centerX;
-		this.centerZ = centerZ;
+		this.centerX = centerX >> 4;
+		this.centerZ = centerZ >> 4;
 
 		int seed = random.nextInt(10000);
 
@@ -50,7 +50,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		// Just to be sure.
 		int radiusBound = radius + 5;
 
-		this.boundingBox = new BlockBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
+		this.boundingBox = new BlockBox(this.centerX - radiusBound, yStart, this.centerZ - radiusBound, this.centerX + radiusBound, yStart + maxHeight, this.centerZ + radiusBound);
 	}
 
 	public CanyonArchGenerator(ServerWorld world, NbtCompound tag) {
