@@ -12,8 +12,8 @@ public class TerrestriaBiomeConfig {
 	private final Map<String, Boolean> biomes;
 
 	TerrestriaBiomeConfig() {
-		biomes = TerrestriaBiomes.biomes.keySet().stream().collect(Collectors.toMap(k -> k,
-			k -> !(k.equals("caldera") || k.equals("volcanic_island"))));
+		// This is where to set biomes to default disabled if needed (replace "k -> true").
+		biomes = TerrestriaBiomes.biomes.keySet().stream().collect(Collectors.toMap(k -> k, k -> true));
 	}
 
 	public boolean isBiomeEnabled(String name) {
