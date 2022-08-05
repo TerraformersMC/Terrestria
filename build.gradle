@@ -4,6 +4,8 @@ plugins {
 }
 
 apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.5/ferry.gradle'
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 loom {
 	accessWidener = file("src/main/resources/terrestria.accesswidener")
