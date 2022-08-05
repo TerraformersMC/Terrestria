@@ -9,12 +9,10 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 
 /**
  * BiomePerimeters
@@ -29,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * to call getPerimeterDistance() for every individual block column during generation, but on the other hand,
  * minor discontinuities and variations may occasionally occur in the distance values.
  */
- public class BiomePerimeters {
+public class BiomePerimeters {
 	private static final Hashtable<Biome, BiomePerimeters> instances = new Hashtable<>(4);
 
 	private final Biome biome;
@@ -39,7 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 	public static final int MAX_HORIZON = 256;
 
-	private final ConcurrentHashMap<BlockPos, BiomePerimeters.BiomePerimeterPoint> perimeters;
+	private final HashMap<BlockPos, BiomePerimeterPoint> perimeters;
 	private static final int COMPACTION_RUN_LIMIT = 256;
 	private static final long COMPACTION_TIMER_TICKS = 300;
 
@@ -69,7 +67,7 @@ import java.util.concurrent.ConcurrentHashMap;
 		this.ordinalHorizon = (int) (horizon / Math.sqrt(2));
 		this.checkDistance = (int) (horizon * 0.89f);
 
-		this.perimeters = new ConcurrentHashMap<>(4096);
+		this.perimeters = new HashMap<>(4096);
 
 		this.biomeCache = new LinkedHashMap<>(BIOME_CACHE_SIZE, 0.5f, true) {
 			@Override
@@ -90,7 +88,7 @@ import java.util.concurrent.ConcurrentHashMap;
 	 * @param pos BlockPos - The voxel being evaluated for perimeter distance; the Y value is used for biome checks.
 	 * @return int - The perimeter distance value resolved for the target voxel.
 	 */
-	public int getPerimeterDistance(BiomeAccess biomeAccess, BlockPos pos) {
+	public synchronized int getPerimeterDistance(BiomeAccess biomeAccess, BlockPos pos) {
 		float minimum = cardinalHorizon + 1;
 		BlockPos iterPos;
 		int horizon;
@@ -311,8 +309,7 @@ import java.util.concurrent.ConcurrentHashMap;
 		long start = System.currentTimeMillis();
 		if (perimeters.size() > 0) {
 			int count = 0;
-			for (Iterator<BlockPos> it = perimeters.keys().asIterator(); it.hasNext(); ) {
-				BlockPos key = it.next();
+			for (BlockPos key : perimeters.keySet()) {
 				BiomePerimeterPoint value = perimeters.get(key);
 
 				// Wait until perimeter points are ten minutes old to reclaim them.
@@ -337,7 +334,7 @@ import java.util.concurrent.ConcurrentHashMap;
 		return false;
 	}
 
-	public static long compactAll() {
+	public synchronized static long compactAll() {
 		boolean incomplete = false;
 
 		// Compact all the currently defined BiomePerimeters instances.

@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
 public class TerrestriaTerraBlenderGeneration extends Region implements Runnable, TerraBlenderApi {
-	TerrestriaBiomeConfig BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
+	TerrestriaBiomeConfig BIOME_CONFIG;
 
 	public TerrestriaTerraBlenderGeneration() {
 		super(new Identifier(Terrestria.MOD_ID, "overworld"), RegionType.OVERWORLD, 13);
@@ -90,6 +90,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Terrestria.MOD_ID, TerrestriaSurfaceRules.createRules());
 
 		// Add the biomes to Overworld generation via TerraBlender.
+		BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
 		Regions.register(this);
 		Regions.register(new TerrestriaRareGeneration());
 	}
