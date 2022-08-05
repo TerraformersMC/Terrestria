@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
+
 import net.minecraft.item.BlockItem;
 
 // This class exports public item constants, these fields have to be public
@@ -69,15 +70,15 @@ public class TerrestriaItems {
 	public static BlockItem DEAD_GRASS;
 
 	public static void init() {
-		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD, () -> TerrestriaEntities.REDWOOD_BOAT);
-		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK, () -> TerrestriaEntities.HEMLOCK_BOAT);
-		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER, () -> TerrestriaEntities.RUBBER_BOAT);
-		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS, () -> TerrestriaEntities.CYPRESS_BOAT);
-		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW, () -> TerrestriaEntities.WILLOW_BOAT);
-		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE, () -> TerrestriaEntities.JAPANESE_MAPLE_BOAT);
-		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS, () -> TerrestriaEntities.RAINBOW_EUCALYPTUS_BOAT);
-		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA, () -> TerrestriaEntities.SAKURA_BOAT);
-		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM, () -> TerrestriaEntities.YUCCA_PALM_BOAT);
+		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD, TerrestriaBoats.REDWOOD_BOAT);
+		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK, TerrestriaBoats.HEMLOCK_BOAT);
+		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER, TerrestriaBoats.RUBBER_BOAT);
+		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS, TerrestriaBoats.CYPRESS_BOAT);
+		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW, TerrestriaBoats.WILLOW_BOAT);
+		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE, TerrestriaBoats.JAPANESE_MAPLE_BOAT);
+		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS, TerrestriaBoats.RAINBOW_EUCALYPTUS_BOAT);
+		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA, TerrestriaBoats.SAKURA_BOAT);
+		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM, TerrestriaBoats.YUCCA_PALM_BOAT);
 
 		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);

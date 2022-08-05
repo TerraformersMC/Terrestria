@@ -1,8 +1,17 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
+    id 'io.github.juuxel.loom-quiltflower-mini' version '1.2.1'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.0/ferry.gradle'
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.1/ferry.gradle'
+
+loom {
+	accessWidener = file("src/main/resources/terrestria.accesswidener")
+}
+
+quiltflower {
+    addToRuntimeClasspath.set(true)
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"

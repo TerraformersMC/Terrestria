@@ -9,23 +9,22 @@ import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.gen.UniformIntDistribution;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 import java.util.Random;
-import java.util.Set;
+import java.util.function.BiConsumer;
 
 public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 
 	public static final Codec<JapaneseCanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
 			fillFoliagePlacerFields(instance).apply(instance, JapaneseCanopyFoliagePlacer::new));
 
-	public JapaneseCanopyFoliagePlacer(UniformIntDistribution radius, UniformIntDistribution offset) {
+	public JapaneseCanopyFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
@@ -35,7 +34,7 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int diameter, Set<BlockPos> leaves, int i, BlockBox blockBox) {
+	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
 		double width = treeNode.getFoliageRadius() * 2.25 + (random.nextFloat() - 0.5);
 		double height = width * 1.75 + (random.nextFloat() - 0.5);
@@ -49,14 +48,14 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 				.fill((position) -> {
 					//On the bottom layer only place 50% of the blocks
 					if (position.getY() - center.getY() >= 0 || random.nextBoolean()) {
-						tryPlaceLeaves(world, position.toBlockPos(), random, config);
+						tryPlaceLeaves(world, position.toBlockPos(), random, replacer, config);
 					}
 				});
 	}
 
-	protected void tryPlaceLeaves(ModifiableTestableWorld world, BlockPos pos, Random random, TreeFeatureConfig config) {
+	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, BlockState::isAir)) {
-			world.setBlockState(pos, config.leavesProvider.getBlockState(random, pos), 0);
+			replacer.accept(pos, config.foliageProvider.getBlockState(random, pos));
 		}
 	}
 

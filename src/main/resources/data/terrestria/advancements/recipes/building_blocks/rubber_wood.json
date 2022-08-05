@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:rubber_log"
+            "items": [
+              "terrestria:rubber_log"
+            ]
           }
         ]
       }

@@ -4,8 +4,8 @@ import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.structure.StructureManager;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +30,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private int centerZ;
 
 	CanyonArchGenerator(Random random, int centerX, int centerZ) {
-		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0);
+		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null); // TODO: Check if the `null` here causes issues
 		this.setOrientation(null);
 
 		this.centerX = centerX;
@@ -53,7 +53,7 @@ public class CanyonArchGenerator extends StructurePiece {
 		this.boundingBox = new BlockBox(centerX - radiusBound, yStart, centerZ - radiusBound, centerX + radiusBound, yStart + maxHeight, centerZ + radiusBound);
 	}
 
-	public CanyonArchGenerator(StructureManager manager, CompoundTag tag) {
+	public CanyonArchGenerator(ServerWorld world, NbtCompound tag) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, tag);
 
 		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
@@ -69,7 +69,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	protected void toNbt(CompoundTag tag) {
+	protected void writeNbt(ServerWorld world, NbtCompound tag) {
 		tag.putLong("NoiseSeed", noise.getSeed());
 
 		tag.putFloat("a", a);
@@ -84,14 +84,14 @@ public class CanyonArchGenerator extends StructurePiece {
 
 	@Override
 	public boolean generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox boundingBox, ChunkPos chunkPos, BlockPos blockPos) {
-		if (boundingBox.maxY < this.boundingBox.maxY || boundingBox.minY > this.boundingBox.minY) {
+		if (boundingBox.getMaxY() < this.boundingBox.getMaxY() || boundingBox.getMinY() > this.boundingBox.getMinY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + boundingBox + ", the Y range is smaller than the one we expected");
 		}
 
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		for (int z = boundingBox.minZ; z <= boundingBox.maxZ; z++) {
-			for (int x = boundingBox.minX; x <= boundingBox.maxX; x++) {
+		for (int z = boundingBox.getMinZ(); z <= boundingBox.getMaxZ(); z++) {
+			for (int x = boundingBox.getMinX(); x <= boundingBox.getMaxX(); x++) {
 
 				double noiseValue = noise.sample(x * 0.05, z * 0.05);
 				double height = maxHeight - Math.abs(noiseValue) * 8;

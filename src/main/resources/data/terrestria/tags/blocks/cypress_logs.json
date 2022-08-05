@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "terrestria:cypress_log",
     "terrestria:cypress_quarter_log",

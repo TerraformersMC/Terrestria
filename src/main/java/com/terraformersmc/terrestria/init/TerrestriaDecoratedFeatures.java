@@ -3,13 +3,16 @@ package com.terraformersmc.terrestria.init;
 import com.google.common.collect.ImmutableList;
 import com.terraformersmc.terrestria.Terrestria;
 
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DataPool;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.WaterDepthThresholdDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.ConfiguredFeatures;
 import net.minecraft.world.gen.feature.Feature;
@@ -109,33 +112,35 @@ public class TerrestriaDecoratedFeatures {
 
 		PATCH_LUSH_FERNS = decoratePatch("patch_lush_ferns", 16, ConfiguredFeatures.Configs.TAIGA_GRASS_CONFIG);
 		PATCH_VOLCANIC_ISLAND_GRASS = decoratePatch("patch_volcanic_island_grass", 12, new RandomPatchFeatureConfig.Builder(
-				new WeightedBlockStateProvider()
-						.addState(Blocks.GRASS.getDefaultState(), 1)
-						.addState(Blocks.FERN.getDefaultState(), 1)
-						.addState(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
-						.addState(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4), SimpleBlockPlacer.INSTANCE).tries(32).build());
+				new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(Blocks.GRASS.getDefaultState(), 1)
+						.add(Blocks.FERN.getDefaultState(), 1)
+						.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
+						.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
+						.build()), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		PATCH_DEAD_GRASS = decoratePatch("patch_dead_grass", 12, new RandomPatchFeatureConfig.Builder(
 				new SimpleBlockStateProvider(TerrestriaBlocks.DEAD_GRASS.getDefaultState()), SimpleBlockPlacer.INSTANCE).tries(4).build());
 
 		PATCH_OUTBACK_BUSHLAND_GRASS = decoratePatch("patch_outback_bushland_grass", 12, new RandomPatchFeatureConfig.Builder(
-				new WeightedBlockStateProvider()
-						.addState(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
-						.addState(TerrestriaBlocks.AGAVE.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(4).build());
+				new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
+						.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+						.build()), SimpleBlockPlacer.INSTANCE).tries(4).build());
 
 		PATCH_OASIS_VEGETATION = decoratePatch("patch_oasis_vegetation", 6, new RandomPatchFeatureConfig.Builder(
-				new WeightedBlockStateProvider()
-						.addState(Blocks.FERN.getDefaultState(), 1)
-						.addState(Blocks.GRASS.getDefaultState(), 2)
-						.addState(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
-						.addState(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
-						.addState(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(32).build());
+				new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(Blocks.FERN.getDefaultState(), 1)
+						.add(Blocks.GRASS.getDefaultState(), 2)
+						.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
+						.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
+						.add(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		PATCH_LUSH_DESERT_VEGETATION = decoratePatch("patch_lush_desert_vegetation", 4, new RandomPatchFeatureConfig.Builder(
-				new WeightedBlockStateProvider()
-						.addState(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
-						.addState(Blocks.DEAD_BUSH.getDefaultState(), 1)
-						.addState(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1), SimpleBlockPlacer.INSTANCE).tries(32).build());
+				new WeightedBlockStateProvider(createStatePoolBuilder()
+						.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
+						.add(Blocks.DEAD_BUSH.getDefaultState(), 1)
+						.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)), SimpleBlockPlacer.INSTANCE).tries(32).build());
 
 		SPARSE_FALLEN_HEMLOCK_LOGS = decorateTree("sparse_fallen_hemlock_logs", 1, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		SPARSE_FALLEN_REDWOOD_LOGS = decorateTree("sparse_fallen_redwood_logs", 1, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
@@ -180,10 +185,10 @@ public class TerrestriaDecoratedFeatures {
 
 		DENSEST_CYPRESS_TREES = decorateTree("densest_cypress_trees", 9, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 
-		DENSER_RAINBOW_EUCALYPTUS_TREES = decorateTree("denser_rainbow_eucalyptus_trees", 5, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
+		DENSER_RAINBOW_EUCALYPTUS_TREES = decorateTree("denser_rainbow_eucalyptus_trees", 5, 3, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
 		DENSE_RUBBER_TREES = decorateTree("dense_rubber_trees", 3, TerrestriaConfiguredFeatures.RUBBER_TREE);
 
-		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
+		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, 6, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
 		SPARSE_WILLOW_TREES = decorateTree("sparse_willow_trees", 1, TerrestriaConfiguredFeatures.WILLOW_TREE);
 
 		OUTBACK_BUSHLAND_TREES = decorateTree("outback_bushland_trees", 2, Feature.RANDOM_SELECTOR.configure(
@@ -198,12 +203,23 @@ public class TerrestriaDecoratedFeatures {
 		RARE_BRYCE_TREES = register("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(2))));
 	}
 
+	private static DataPool.Builder<BlockState> createStatePoolBuilder() {
+		return DataPool.builder();
+	}
+
 	private static ConfiguredFeature<?, ?> decoratePatch(String name, int count, RandomPatchFeatureConfig config) {
 		return register(name, Feature.RANDOM_PATCH.configure(config).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).repeat(count));
 	}
 
 	private static ConfiguredFeature<?, ?> decorateTree(String name, int count, ConfiguredFeature<?, ?> base) {
 		return register(name, base.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))));
+	}
+
+	private static ConfiguredFeature<?, ?> decorateTree(String name, int count, int maxWaterDepth, ConfiguredFeature<?, ?> base) {
+		return register(name, base
+				.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP)
+				.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(count, 0.1F, 1))
+				.decorate(Decorator.WATER_DEPTH_THRESHOLD.configure(new WaterDepthThresholdDecoratorConfig(maxWaterDepth)))));
 	}
 
 	private static ConfiguredFeature<?, ?> register(String name, ConfiguredFeature<?, ?> decorated) {

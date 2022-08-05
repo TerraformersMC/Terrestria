@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 
 public class WoodColors {
 	public static final WoodColors REDWOOD;
@@ -15,47 +15,47 @@ public class WoodColors {
 
 	static {
 		REDWOOD = new WoodColors();
-		REDWOOD.bark = MaterialColor.RED_TERRACOTTA;
-		REDWOOD.planks = MaterialColor.WOOD;
+		REDWOOD.bark = MapColor.TERRACOTTA_RED;
+		REDWOOD.planks = MapColor.OAK_TAN;
 
 		HEMLOCK = new WoodColors();
-		HEMLOCK.bark = MaterialColor.BROWN;
-		HEMLOCK.planks = MaterialColor.WOOD;
+		HEMLOCK.bark = MapColor.BROWN;
+		HEMLOCK.planks = MapColor.OAK_TAN;
 
 		RUBBER = new WoodColors();
-		RUBBER.bark = MaterialColor.WHITE_TERRACOTTA;
-		RUBBER.planks = MaterialColor.SAND;
+		RUBBER.bark = MapColor.TERRACOTTA_WHITE;
+		RUBBER.planks = MapColor.PALE_YELLOW;
 
 		CYPRESS = new WoodColors();
-		CYPRESS.bark = MaterialColor.WHITE_TERRACOTTA;
-		CYPRESS.planks = MaterialColor.LIGHT_GRAY;
+		CYPRESS.bark = MapColor.TERRACOTTA_WHITE;
+		CYPRESS.planks = MapColor.LIGHT_GRAY;
 
 		WILLOW = new WoodColors();
-		WILLOW.bark = MaterialColor.WHITE_TERRACOTTA;
-		WILLOW.planks = MaterialColor.GRAY;
-		WILLOW.leaves = MaterialColor.LIGHT_GRAY;
+		WILLOW.bark = MapColor.TERRACOTTA_WHITE;
+		WILLOW.planks = MapColor.GRAY;
+		WILLOW.leaves = MapColor.LIGHT_GRAY;
 
 		JAPANESE_MAPLE = new WoodColors();
-		JAPANESE_MAPLE.bark = MaterialColor.BROWN;
-		JAPANESE_MAPLE.planks = MaterialColor.MAGENTA_TERRACOTTA;
-		JAPANESE_MAPLE.leaves = MaterialColor.RED;
+		JAPANESE_MAPLE.bark = MapColor.BROWN;
+		JAPANESE_MAPLE.planks = MapColor.TERRACOTTA_MAGENTA;
+		JAPANESE_MAPLE.leaves = MapColor.RED;
 
 		RAINBOW_EUCALYPTUS = new WoodColors();
-		RAINBOW_EUCALYPTUS.bark = MaterialColor.BLUE;
-		RAINBOW_EUCALYPTUS.planks = MaterialColor.LAPIS;
+		RAINBOW_EUCALYPTUS.bark = MapColor.BLUE;
+		RAINBOW_EUCALYPTUS.planks = MapColor.LAPIS_BLUE;
 
 		SAKURA = new WoodColors();
-		SAKURA.bark = MaterialColor.SPRUCE;
-		SAKURA.planks = MaterialColor.BROWN;
-		SAKURA.leaves = MaterialColor.PINK;
+		SAKURA.bark = MapColor.SPRUCE_BROWN;
+		SAKURA.planks = MapColor.BROWN;
+		SAKURA.leaves = MapColor.PINK;
 
 		YUCCA_PALM = new WoodColors();
-		YUCCA_PALM.bark = MaterialColor.GRAY;
-		YUCCA_PALM.planks = MaterialColor.YELLOW_TERRACOTTA;
-		YUCCA_PALM.leaves = MaterialColor.LIGHT_GRAY;
+		YUCCA_PALM.bark = MapColor.GRAY;
+		YUCCA_PALM.planks = MapColor.TERRACOTTA_YELLOW;
+		YUCCA_PALM.leaves = MapColor.LIGHT_GRAY;
 	}
 
-	public MaterialColor bark;
-	public MaterialColor planks;
-	public MaterialColor leaves = MaterialColor.FOLIAGE;
+	public MapColor bark;
+	public MapColor planks;
+	public MapColor leaves = MapColor.DARK_GREEN;
 }

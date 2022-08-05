@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "terrestria:hemlock_planks"
+            "items": [
+              "terrestria:hemlock_planks"
+            ]
           }
         ]
       }

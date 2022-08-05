@@ -6,14 +6,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaSurfaces;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.feature.ConfiguredStructureFeatures;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 import static com.terraformersmc.terraform.biomebuilder.DefaultFeature.*;
-import static net.minecraft.world.gen.feature.MineshaftFeature.Type.NORMAL;
 
 public class DunesBiomes {
 	public static void register() {

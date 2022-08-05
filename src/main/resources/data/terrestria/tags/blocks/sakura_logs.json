@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "terrestria:sakura_log",
     "terrestria:stripped_sakura_log"

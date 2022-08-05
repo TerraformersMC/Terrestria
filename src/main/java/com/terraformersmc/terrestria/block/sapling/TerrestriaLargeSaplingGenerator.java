@@ -16,11 +16,13 @@ public class TerrestriaLargeSaplingGenerator extends LargeTreeSaplingGenerator {
 		this.largeTree = largeTree;
 	}
 
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl) {
+	@Override
+	protected ConfiguredFeature<TreeFeatureConfig, ?> getTreeFeature(Random random, boolean bl) {
 		return this.tree.get();
 	}
 
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createLargeTreeFeature(Random random) {
+	@Override
+	protected ConfiguredFeature<TreeFeatureConfig, ?> getLargeTreeFeature(Random random) {
 		return this.largeTree.get();
 	}
 }

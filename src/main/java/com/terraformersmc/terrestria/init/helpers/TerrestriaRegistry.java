@@ -1,18 +1,14 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.boat.TerraformBoatEntity;
-import com.terraformersmc.terraform.boat.TerraformBoatItem;
 import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
+
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.SignItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-
-import java.util.function.Supplier;
 
 public class TerrestriaRegistry {
 
@@ -27,10 +23,6 @@ public class TerrestriaRegistry {
 
 	public static SignItem registerSignItem(String name, Block standing, Block wall) {
 		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new SignItem(new Item.Settings().group(Terrestria.itemGroup).maxCount(16), standing, wall));
-	}
-
-	public static TerraformBoatItem registerBoatItem(String name, Supplier<EntityType<TerraformBoatEntity>> boatType) {
-		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), new TerraformBoatItem(boatType, new Item.Settings().group(Terrestria.itemGroup).maxCount(1)));
 	}
 
 	public static <T extends Block> T register(String name, T block) {

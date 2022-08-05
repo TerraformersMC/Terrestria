@@ -19,7 +19,7 @@ public class ThreeLayerOutlineSurfaceBuilder extends SurfaceBuilder<ThreeLayerOu
 	}
 
 	@Override
-	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, long seed, ThreeLayerOutlinedSurfaceConfig config) {
+	public void generate(Random rand, Chunk chunk, Biome biome, int x, int z, int height, double noise, BlockState deprecated, BlockState deprecated_2, int seaLevel, int minSurfaceLevel, long seed, ThreeLayerOutlinedSurfaceConfig config) {
 		int localX = x & 15;
 		int localZ = z & 15;
 

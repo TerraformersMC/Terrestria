@@ -5,7 +5,7 @@ import com.terraformersmc.terraform.wood.block.TerraformStoneButtonBlock;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MapColor;
 import net.minecraft.block.PressurePlateBlock;
 
 public class StoneBlocks {
@@ -23,7 +23,7 @@ public class StoneBlocks {
 
 	private StoneBlocks() {}
 
-	public static StoneBlocks register(String name, MaterialColor color) {
+	public static StoneBlocks register(String name, MapColor color) {
 		StoneBlocks blocks = new StoneBlocks();
 
 		// TODO: Need to differentiate stone and cobblestone, because cobblestone breaks a bit slower!
@@ -34,10 +34,10 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformStoneButtonBlock(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(color)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copyOf(Blocks.STONE).materialColor(color)));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(color)));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).materialColor(color)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new TerraformStoneButtonBlock(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new TerraformPressurePlateBlock(PressurePlateBlock.ActivationRule.MOBS, FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
+		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
+		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.STONE).mapColor(color)));
 
 		return blocks;
 	}
