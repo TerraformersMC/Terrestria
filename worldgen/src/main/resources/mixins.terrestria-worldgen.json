@@ -3,7 +3,6 @@
   "package": "com.terraformersmc.terrestria.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MixinMinecraftServer",
     "MixinSurfaceBuilder"
   ],
   "injectors": {

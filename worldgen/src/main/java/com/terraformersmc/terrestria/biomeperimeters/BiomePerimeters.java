@@ -25,12 +25,12 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * BiomePerimeters
- * <p>
+ * <p/>
  * This class builds a bidirectional hashed list of the points (voxels) on the perimeter of a biome instance.
  * The points are used to provide an estimate of how far "in-biome" a given biome voxel is.  This can allow
  * biome generation (f.e. surface builders) to blend with surrounding biomes or generate context-sensitive
  * terrain heights within a particular biome.
- * <p>
+ * <p/>
  * Note:  In order to achieve acceptable performance in-game, BiomePerimeters makes heavy use of caching and
  * also accepts certain compromises with respect to the accuracy of the perimeter distance values.  It is safe
  * to call getPerimeterDistance() for every individual block column during generation, but on the other hand,
@@ -85,7 +85,7 @@ public class BiomePerimeters {
 
 	/**
 	 * new BiomePerimeters()
-	 * <p>
+	 * <p/>
 	 * Construct a new BiomePerimeters instance for the given Biome.
 	 *
 	 * @param biome   Biome - The Biome for which this BiomePerimeters will compute perimeter distances.
@@ -105,7 +105,7 @@ public class BiomePerimeters {
 
 	/**
 	 * BiomePerimeteres.getPerimeterDistance()
-	 * <p>
+	 * <p/>
 	 * Call this method when you need to know how far in-biome a block column is.  The returned int will give the
 	 * distance to the perimeter if it is less than the instance's configured horizon, and a value greater than or
 	 * equal to the configured horizon if it is not.
@@ -336,28 +336,9 @@ public class BiomePerimeters {
 		return distance;
 	}
 
-	private boolean compact() {
-
-		caches.cleanUp();
-
-		return false;
-	}
-
-	public synchronized static long compactAll() {
-		boolean incomplete = false;
-
-		// Compact all the currently defined BiomePerimeters instances.
-		for (BiomePerimeters instance : instances.values()) {
-			incomplete |= instance.compact();
-		}
-
-		// If more compaction is pending, wait fifteen seconds; otherwise wait five minutes.
-		return incomplete ? COMPACTION_TIMER_TICKS : 20 * COMPACTION_TIMER_TICKS;
-	}
-
 	/**
 	 * BiomePerimeters.getOrCreateInstance()
-	 * <p>
+	 * <p/>
 	 * Each Biome must have a separate instance of BiomePerimeters.  An instance of BiomePerimeters
 	 * will be created if one does not already exist, and subsequently the same instance will always
 	 * be returned for the given Biome during the same game session.
@@ -372,7 +353,7 @@ public class BiomePerimeters {
 
 	/**
 	 * BiomePerimeters.BiomePerimeterPoint
-	 * <p>
+	 * <p/>
 	 * This class essentially defines a mutable record we use to store data about the perimeter of a Biome.
 	 * A future implementation of BiomePerimeters may expose BiomePerimeterPoints in some manner if useful.
 	 */
@@ -439,6 +420,8 @@ public class BiomePerimeters {
 		}
 
 		/**
+		 * BiomePerimeters.BiomePerimeterPoint.getDistance()
+		 * <p/>
 		 * Calculate the straight-line distance between a biome perimeter point and another position.
 		 *
 		 * @param pos BlockPos - The position to calculate the distance to
@@ -449,6 +432,8 @@ public class BiomePerimeters {
 		}
 
 		/**
+		 * BiomePerimeters.BiomePerimeterPoint.getTaxicab()
+		 * <p/>
 		 * Calculate the taxi-cab (or "Manhattan") distance between a biome perimeter point and another position.
 		 * This is the sum of the difference between the X and Z coordinates of the two points.
 		 *
