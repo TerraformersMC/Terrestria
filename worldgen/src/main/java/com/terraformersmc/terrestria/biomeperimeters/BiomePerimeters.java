@@ -65,13 +65,17 @@ public class BiomePerimeters {
 
 	private CacheRecord getCache(Object2ObjectLinkedOpenHashMap<ChunkPos, CacheRecord> threadLocal, ChunkPos pos) {
 		final CacheRecord cached = threadLocal.getAndMoveToFirst(pos);
-		if (cached != null) return cached;
+
+		if (cached != null) {
+			return cached;
+		}
 
 		final CacheRecord newOne = caches.getUnchecked(pos);
 		threadLocal.putAndMoveToFirst(pos, newOne);
 		if (threadLocal.size() > MAX_THREAD_LOCAL_CACHE_SIZE) {
 			threadLocal.removeLast();
 		}
+
 		return newOne;
 	}
 
@@ -316,8 +320,8 @@ public class BiomePerimeters {
 		float upper = MAX_HORIZON;
 
 		for (EightWayDirection direction : EightWayDirection.values()) {
-			final BlockPos pos1 = pos.add(direction.method_42015(), 0, direction.method_42016());
-			int neighbor = getCache(threadLocalCache, new ChunkPos(pos1)).biomeCache.getOrDefault(CacheRecord.getIndex(pos1), -1);
+			final BlockPos neighborPos = pos.add(direction.method_42015(), 0, direction.method_42016());
+			int neighbor = getCache(threadLocalCache, new ChunkPos(neighborPos)).biomeCache.getOrDefault(CacheRecord.getIndex(neighborPos), -1);
 
 			if (neighbor > 0) {
 				// TODO: Leaving the lower bound out gives better results for Calderas ... could use some thought.

@@ -4,7 +4,6 @@ import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
@@ -34,8 +33,6 @@ public class DuneSurfaceBuilder extends TerrestriaSurfaceBuilder {
 				.getPerimeterDistance(biomeAccess, new BlockPos(x, 62, z));
 		if (borderAdjustment < 16) {
 			height *= borderAdjustment / 16.0D;
-		} else {
-			height *= MathHelper.clamp((vHeight - seaLevel) * 0.125, 0, 1);
 		}
 
 		height = Math.abs(height);
