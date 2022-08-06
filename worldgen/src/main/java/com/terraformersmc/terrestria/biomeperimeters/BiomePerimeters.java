@@ -130,7 +130,7 @@ public class BiomePerimeters {
 	 * @param pos         BlockPos - The voxel being evaluated for perimeter distance; the Y value is used for biome checks.
 	 * @return int - The perimeter distance value resolved for the target voxel.
 	 */
-	public synchronized int getPerimeterDistance(BiomeAccess biomeAccess, BlockPos pos) {
+	public int getPerimeterDistance(BiomeAccess biomeAccess, BlockPos pos) {
 		float minimum = cardinalHorizon + 1;
 		BlockPos iterPos;
 		int horizon;
@@ -166,7 +166,7 @@ public class BiomePerimeters {
 
 			for (int radius = 0; radius < horizon; radius++) {
 				iterPos = pos.add(dx * radius, 0, dz * radius);
-				final CacheRecord cache = getCache(threadLocalCache, new ChunkPos(pos));
+				final CacheRecord cache = getCache(threadLocalCache, new ChunkPos(iterPos));
 				if (cache.perimeters.containsKey(CacheRecord.getIndex(iterPos)) || !checkBiome(biomeAccess, iterPos.add(dx, 0, dz), threadLocalCache)) {
 					int localMinimum = this.checkPerimeter(biomeAccess, pos, iterPos, direction, threadLocalCache);
 					if (localMinimum >= 0) {
@@ -215,7 +215,7 @@ public class BiomePerimeters {
 					if (!checkBiome(biomeAccess, current.pos.add(orientation.method_42015(), 0, orientation.method_42016()), threadLocalCache)) {
 						orientation = getEightWayClockwiseRotation(orientation, -1);
 						BlockPos prospect = current.pos.add(orientation.method_42015(), 0, orientation.method_42016());
-						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(perimeterPos)).perimeters.get(CacheRecord.getIndex(prospect));
+						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(prospect)).perimeters.get(CacheRecord.getIndex(prospect));
 						if (prospectPoint != null) {
 							prospectPoint.setRight(current);
 							current.setLeft(prospectPoint);
@@ -261,7 +261,7 @@ public class BiomePerimeters {
 					if (!checkBiome(biomeAccess, current.pos.add(orientation.method_42015(), 0, orientation.method_42016()), threadLocalCache)) {
 						orientation = getEightWayClockwiseRotation(orientation, 1);
 						BlockPos prospect = current.pos.add(orientation.method_42015(), 0, orientation.method_42016());
-						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(perimeterPos)).perimeters.get(CacheRecord.getIndex(prospect));
+						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(prospect)).perimeters.get(CacheRecord.getIndex(prospect));
 						if (prospectPoint != null) {
 							// Detect when we are passing through the same path we passed through on the left.
 							if (current.equals(prospectPoint.right)) {
