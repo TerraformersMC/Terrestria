@@ -1,11 +1,11 @@
 <p style="text-align: center;"><img src="banners/Terrestria-full-2.0.0.png" /></p>
-<p style="text-align: center;"><b>NOTE</b>: Terrestria for 1.18.2 is in ALPHA. Biomes are not currently generating in new chunks, but the alpha should allow you to upgrade your existing Terrestria worlds to 1.18.2. As always, make sure to make backups and report any issues you find.</p>
-<p style="text-align: center;">Terrestria is a detailed and vibrant biomes mod for Minecraft running on the Fabric mod loader. Terrestria enhances gameplay through the addition of 17 major biomes supported by 24 component biomes, 9 new wood types, as well as a healthy selection of foliage - providing a refreshing new selection of terrain.</p>
+<p style="text-align: center;"><b>NOTE</b>: Terrestria for 1.18.2 is in ALPHA. Most biomes are now generating in new chunks, or this release should allow you to upgrade your existing Terrestria worlds to 1.18.2. As always, make sure to make backups and report any issues you find.</p>
+<p style="text-align: center;">Terrestria is a detailed and vibrant biomes mod for Minecraft running on the Fabric mod loader. Terrestria enhances gameplay through the addition of 16 major biomes with several derivative biomes, 9 new wood types, as well as a healthy selection of foliage - providing a refreshing new selection of terrain.</p>
 <p style="text-align: center;"><span style="font-size: 14px;"><strong>Terrestria requires <a href="https://fabricmc.net/use/"><img src="banners/fabric-logo.png" height="14"></img> Fabric Loader</a></strong></span></p>
 <p style="text-align: center;"><span style="font-size: 12px;">Note that older versions of Terrestria required you to download <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">Fabric API</a> separately, but now the required parts are bundled/included inside Terrestria.</span></p>
 <p style="text-align: center;"><strong>Check out the <a href="https://discord.gg/jEGF5fb">Terraformers Discord Server</a> to chat about Terrestria and other Fabric mods!</strong></p>
 <p style="text-align: center;"><strong style="font-size: 1.2rem;">Visit the <a href="https://github.com/TerraformersMC/Terrestria/wiki">Terrestria Wiki</a> to learn more about each biome</strong></p>
-<p>The goal of Terrestria is to be the most polished and visually appealing biomes mod available for Minecraft, and to this end there has been intense focus on selecting, detailing, and refining the biomes until they look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount of biomes and then populating them with large amounts of detail and component biomes. This overall results in a more cohesive experience compared to existing biome mods.</p>
+<p>The goal of Terrestria is to be the most polished and visually appealing biomes mod available for Minecraft, and to this end there has been intense focus on selecting, detailing, and refining the biomes until they look absolutely amazing. Rather than add tons of different biomes, focus has been put into adding a rather small amount of biomes and then populating them with large amounts of detail. This overall results in a more cohesive experience compared to existing biome mods.</p>
 <h4 style="font-size: 18px; text-align: left;"><strong>Biomes:</strong></h4>
 <h5 style="font-size: 14px;"><strong>v1.0.0 - Initial Release</strong></h5>
 <ul>
@@ -27,7 +27,7 @@
 	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Canyon">Canyon</a></span></li>
 	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Dunes">Dunes</a></span></li>
 	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Lush-Desert">Lush Desert</a></span></li>
-	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Oasis">Oasis</a></span></li>
+	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Oasis"><strike>Oasis</strike></a></span></li>
 	<li style="text-align: left;"><span style="font-size: 14px;"><a href="https://github.com/TerraformersMC/Terrestria/wiki/Outback">Outback</a></span></li>
 </ul>
 
