@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.biomegen;
 import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.config.TerrestriaBiomeConfig;
-import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;

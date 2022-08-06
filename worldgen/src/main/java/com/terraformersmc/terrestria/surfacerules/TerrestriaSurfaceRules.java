@@ -38,13 +38,14 @@ public class TerrestriaSurfaceRules {
 					condition(not(aboveY(YOffset.fixed(63), 0)),
 						condition(noiseThreshold(NoiseParametersKeys.SURFACE_SWAMP, 0.0D),
 							block(Blocks.WATER))))));
+		MaterialRule dunes = condition(biome(TerrestriaBiomes.DUNES), sandAndSandstone);
 		MaterialRule lushDesert = condition(biome(TerrestriaBiomes.LUSH_DESERT),
 			new SandWithPatchesSurfaceRule(-0.75D, NoiseParametersKeys.SURFACE, sandAndSandstone, defaultGrass));
 		MaterialRule outback = condition(biome(TerrestriaBiomes.OUTBACK),
 			new SandWithPatchesSurfaceRule(-0.12D, NoiseParametersKeys.BADLANDS_SURFACE, redSandAndSandstone, defaultGrass));
 
 		return sequence(condition(surface(),
-				sequence(canyon, cypressSwamp, lushDesert, outback, defaultGrass)), defaultGrass);
+				sequence(canyon, cypressSwamp, dunes, lushDesert, outback, defaultGrass)), defaultGrass);
 	}
 
 	public static void init() {

@@ -1,7 +1,9 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
+import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
@@ -22,13 +24,19 @@ public class DuneSurfaceBuilder extends TerrestriaSurfaceBuilder {
 
 	@Override
 	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
-		vHeight = chunk.getHeightmap(Heightmap.Type.OCEAN_FLOOR_WG).get(x & 15, z & 15);
+		vHeight = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
 		int y = vHeight - 8;
 
-		// TODO: Blending doesn't work some of the time
-		double blend = MathHelper.clamp((vHeight - seaLevel) * 0.125, 0, 1);
+		double height = (NOISE.sample(x * 0.01 , z * 0.015) * 30);
 
-		double height = (NOISE.sample(x * 0.01 , z * 0.015) * 30) * blend;
+		// Height is how much we are raising the surface.  Reduce it as we approach the edge of the Dunes biome.
+		int borderAdjustment = BiomePerimeters.getOrCreateInstance(biome, 20)
+				.getPerimeterDistance(biomeAccess, new BlockPos(x, 62, z));
+		if (borderAdjustment < 16) {
+			height *= borderAdjustment / 16.0D;
+		} else {
+			height *= MathHelper.clamp((vHeight - seaLevel) * 0.125, 0, 1);
+		}
 
 		height = Math.abs(height);
 
