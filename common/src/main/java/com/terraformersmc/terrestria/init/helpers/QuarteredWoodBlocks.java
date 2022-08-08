@@ -12,24 +12,26 @@ public class QuarteredWoodBlocks extends WoodBlocks {
 	public QuarteredWoodBlocks() {
 	}
 
+	@Override
+	public void addTreeFireInfo(FlammableBlockRegistry registry) {
+		super.addTreeFireInfo(registry);
+
+		registry.add(quarterLog, 5, 5);
+		registry.add(strippedQuarterLog, 5, 5);
+	}
+
 	public static QuarteredWoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry, boolean useExtendedLeaves) {
 		QuarteredWoodBlocks blocks = QuarteredWoodBlocks.copyOf(WoodBlocks.register(name, colors, registry, LogSize.NORMAL, useExtendedLeaves));
 		blocks.strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", new QuarterLogBlock(null, colors.planks, Block.Settings.copy(blocks.strippedLog)));
 		blocks.quarterLog = TerrestriaRegistry.register(name + "_quarter_log", new QuarterLogBlock(() -> blocks.strippedQuarterLog, colors.planks, Block.Settings.copy(blocks.log)));
-		registry.add(blocks.strippedQuarterLog, 5,20);
-		registry.add(blocks.quarterLog, 5,20);
+
 		return blocks;
 	}
 
 	public static QuarteredWoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
-		QuarteredWoodBlocks blocks = QuarteredWoodBlocks.copyOf(WoodBlocks.register(name, colors, registry));
-		blocks.strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", new QuarterLogBlock(null, colors.planks, Block.Settings.copy(blocks.strippedLog)));
-		blocks.quarterLog = TerrestriaRegistry.register(name + "_quarter_log", new QuarterLogBlock(() -> blocks.strippedQuarterLog, colors.planks, Block.Settings.copy(blocks.log)));
-		registry.add(blocks.strippedQuarterLog, 5,20);
-		registry.add(blocks.quarterLog, 5,20);
-		return blocks;
+		return register(name, colors, registry, false);
 	}
-	
+
 	private static QuarteredWoodBlocks copyOf(WoodBlocks woodBlocks) {
 		QuarteredWoodBlocks blocks = new QuarteredWoodBlocks();
 		blocks.name = woodBlocks.name;
