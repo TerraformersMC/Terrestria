@@ -29,6 +29,7 @@ public class QuarteredWoodBlocks extends WoodBlocks {
 		registry.add(blocks.quarterLog, 5,20);
 		return blocks;
 	}
+	
 	private static QuarteredWoodBlocks copyOf(WoodBlocks woodBlocks) {
 		QuarteredWoodBlocks blocks = new QuarteredWoodBlocks();
 		blocks.name = woodBlocks.name;
