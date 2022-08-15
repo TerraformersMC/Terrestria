@@ -38,6 +38,8 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> FALLEN_REDWOOD_LOGS;
 	public static ConfiguredFeature<?, ?> DENSE_FALLEN_HEMLOCK_LOGS;
 	public static ConfiguredFeature<?, ?> DENSE_FALLEN_REDWOOD_LOGS;
+	public static ConfiguredFeature<?, ?> SPARSE_FALLEN_OAK_LOGS;
+	public static ConfiguredFeature<?, ?> DENSE_FALLEN_OAK_LOGS;
 
 	// Small spruce-shaped trees.
 	public static ConfiguredFeature<?, ?> SPARSE_SMALL_HEMLOCK_TREES;
@@ -64,9 +66,12 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> DENSEST_MEGA_HEMLOCK_TREES;
 
 	// Fancy / large oak trees
-	public static ConfiguredFeature<?, ?> DENSE_FANCY_OAK_TREES;
 	public static ConfiguredFeature<?, ?> DENSER_FANCY_OAK_TREES;
-	public static ConfiguredFeature<?, ?> DENSEST_FANCY_OAK_TREES;
+
+	// Dense woodlands trees
+	public static ConfiguredFeature<?, ?> SPARSE_DENSE_WOODLANDS_TREES;
+	public static ConfiguredFeature<?, ?> DENSE_DENSE_WOODLANDS_TREES;
+	public static ConfiguredFeature<?, ?> DENSEST_DENSE_WOODLANDS_TREES;
 
 	// Volcanic island Trees
 	public static ConfiguredFeature<?, ?> JUNGLE_PALM_TREES;
@@ -95,6 +100,9 @@ public class TerrestriaDecoratedFeatures {
 	public static ConfiguredFeature<?, ?> RARE_YUCCA_PALM_TREES;
 	public static ConfiguredFeature<?, ?> ACACIA_DOT_SHRUBS;
 	public static ConfiguredFeature<?, ?> OAK_DOT_SHRUBS;
+
+	// Spruce trees
+	public static ConfiguredFeature<?, ?> SMALL_OAK_SPRUCE_TREES;
 
 	// Lush desert trees
 	public static ConfiguredFeature<?, ?> SAGUARO_CACTUSES;
@@ -143,6 +151,8 @@ public class TerrestriaDecoratedFeatures {
 		FALLEN_REDWOOD_LOGS = decorateTree("fallen_redwood_logs", 2, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 		DENSE_FALLEN_HEMLOCK_LOGS = decorateTree("dense_fallen_hemlock_logs", 4, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 		DENSE_FALLEN_REDWOOD_LOGS = decorateTree("dense_fallen_redwood_logs", 4, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		SPARSE_FALLEN_OAK_LOGS = decorateTree("sparse_fallen_oak_logs", 1, TerrestriaConfiguredFeatures.FALLEN_OAK_LOG);
+		DENSE_FALLEN_OAK_LOGS = decorateTree("dense_fallen_oak_logs", 3, TerrestriaConfiguredFeatures.FALLEN_OAK_LOG);
 
 		SPARSE_SMALL_HEMLOCK_TREES = decorateTree("sparse_small_hemlock_trees", 1, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 		SPARSE_SMALL_REDWOOD_TREES = decorateTree("sparse_small_redwood_trees", 1, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
@@ -165,9 +175,11 @@ public class TerrestriaDecoratedFeatures {
 		DENSEST_MEGA_REDWOOD_TREES = decorateTree("densest_mega_redwood_trees", 7, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 		DENSEST_MEGA_HEMLOCK_TREES = decorateTree("densest_mega_hemlock_trees", 8, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-		DENSE_FANCY_OAK_TREES = decorateTree("dense_fancy_oak_trees", 3, ConfiguredFeatures.FANCY_OAK);
 		DENSER_FANCY_OAK_TREES = decorateTree("denser_fancy_oak_trees", 5, ConfiguredFeatures.FANCY_OAK);
-		DENSEST_FANCY_OAK_TREES = decorateTree("densest_fancy_oak_trees", 7, ConfiguredFeatures.FANCY_OAK);
+
+		SPARSE_DENSE_WOODLANDS_TREES = decorateTree("sparse_dense_woodlands_trees", 1, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
+		DENSE_DENSE_WOODLANDS_TREES = decorateTree("dense_dense_woodlands_trees", 3, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
+		DENSEST_DENSE_WOODLANDS_TREES = decorateTree("densest_dense_woodlands_trees", 7, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
 
 		JUNGLE_PALM_TREES = decorateTree("jungle_palm_trees", 2, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
 		DENSER_JUNGLE_PALM_TREES = decorateTree("denser_jungle_palm_trees", 5, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE);
@@ -185,6 +197,8 @@ public class TerrestriaDecoratedFeatures {
 
 		MEGA_CYPRESS_TREES = decorateTree("mega_cypress_trees", 2, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
 		SPARSE_WILLOW_TREES = decorateTree("sparse_willow_trees", 1, TerrestriaConfiguredFeatures.WILLOW_TREE);
+
+		SMALL_OAK_SPRUCE_TREES = decorateTree("small_oak_spruce_trees", 2, TerrestriaConfiguredFeatures.SMALL_OAK_SPRUCE);
 
 		OUTBACK_BUSHLAND_TREES = decorateTree("outback_bushland_trees", 2, Feature.RANDOM_SELECTOR.configure(
 				new RandomFeatureConfig(ImmutableList.of(ConfiguredFeatures.ACACIA.withChance(0.95F), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE.withChance(0.75F)), ConfiguredFeatures.FANCY_OAK)));
