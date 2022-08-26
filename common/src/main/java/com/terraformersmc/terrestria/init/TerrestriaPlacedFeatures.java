@@ -226,7 +226,6 @@ public class TerrestriaPlacedFeatures {
 
 	// Rare bryce trees is a placement used for the Canyon biome and
 	// we modify the placement so the trees don't place below y == 80.
-	// TODO: It could be this would be better if set even higher.  Pondering...
 	public static final RegistryEntry<PlacedFeature> RARE_BRYCE_TREES = createPlacedFeature("rare_bryce_trees", TerrestriaConfiguredFeatures.BRYCE_TREE,
 			RarityFilterPlacementModifier.of(2),
 			SquarePlacementModifier.of(),

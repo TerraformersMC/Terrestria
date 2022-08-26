@@ -66,7 +66,6 @@ public class TerrestriaConfiguredFeatures {
 	public static RegistryEntry<ConfiguredFeature<DefaultFeatureConfig, ?>> DUM_DUM_HEAD;
 
 	public static void init() {
-// TODO: sandy?		BRYCE_TREE = register("bryce_tree", TerraformTreeFeatures.SANDY_TREE, new TreeFeatureConfig.Builder(
 		BRYCE_TREE = register("bryce_tree", Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SMALL_OAK_LOG),
 				new SpindlyTrunkPlacer(10, 0, 0),
@@ -75,7 +74,6 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 0))
 				.build());
 
-// TODO: sandy?		JUNGLE_PALM_TREE = register("jungle_palm_tree", TerraformTreeFeatures.SANDY_TREE, new TreeFeatureConfig.Builder(
 		JUNGLE_PALM_TREE = register("jungle_palm_tree", Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(Blocks.JUNGLE_WOOD),
 				new BentTrunkPlacer(15, 15, 15),
