@@ -1,0 +1,41 @@
+{
+  "dunes": {
+    "musicSound": {
+      "sound": "minecraft:music.menu"
+    },
+    "cubemaps": [
+      {
+        "cubemapId": "terrestria:textures/gui/panorama/dunes",
+        "visualControl": {
+          "addedY": 0.0
+        }
+      }
+    ]
+  },
+  "snowy_wasteland": {
+    "musicSound": {
+      "sound": "minecraft:music.menu"
+    },
+    "cubemaps": [
+      {
+        "cubemapId": "terrestria:textures/gui/panorama/snowy_wasteland",
+        "visualControl": {
+          "addedY": 0.0
+        }
+      }
+    ]
+  },
+  "swamplands": {
+    "musicSound": {
+      "sound": "minecraft:music.menu"
+    },
+    "cubemaps": [
+      {
+        "cubemapId": "terrestria:textures/gui/panorama/swamplands",
+        "visualControl": {
+          "addedY": 0.0
+        }
+      }
+    ]
+  }
+}
