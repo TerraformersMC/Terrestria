@@ -12,6 +12,19 @@
       }
     ]
   },
+  "mountain_living": {
+    "musicSound": {
+      "sound": "minecraft:music.menu"
+    },
+    "cubemaps": [
+      {
+        "cubemapId": "terrestria:textures/gui/panorama/mountain_living",
+        "visualControl": {
+          "addedY": 0.0
+        }
+      }
+    ]
+  },
   "snowy_wasteland": {
     "musicSound": {
       "sound": "minecraft:music.menu"
