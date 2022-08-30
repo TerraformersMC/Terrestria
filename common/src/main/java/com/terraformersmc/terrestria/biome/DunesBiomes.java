@@ -11,7 +11,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class DunesBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-			.precipitation(Biome.Precipitation.NONE).category(Biome.Category.DESERT)
+			.precipitation(Biome.Precipitation.NONE)
 			.temperature(0.9F)
 			.downfall(0.1F)
 			.effects(TerrestriaBiomes.createDefaultBiomeEffects()

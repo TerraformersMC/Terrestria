@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.*;
 public class VolcanicIslandBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.BEACH)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
@@ -24,7 +24,6 @@ public class VolcanicIslandBiomes {
 		TerrestriaBiomes.VOLCANIC_ISLAND = TerrestriaBiomes.register("volcanic_island", template
 				.generationSettings(volcanicIslandGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				.category(Biome.Category.EXTREME_HILLS)
 				.build());
 	}
 

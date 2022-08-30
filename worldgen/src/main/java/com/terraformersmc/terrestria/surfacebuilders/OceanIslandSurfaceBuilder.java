@@ -5,12 +5,12 @@ import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.random.AbstractRandom;
 
 public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	private static final OpenSimplexNoise ISLAND_NOISE = new OpenSimplexNoise(346987);
@@ -35,7 +35,7 @@ public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		int delta = (int)((deepOcean ? DEEP_DEPTH : SHALLOW_DEPTH) * HEIGHT_FACTOR);
 
 		// We are going to accept the ocean surface noise and just raise it so we need the ocean surface.

@@ -10,14 +10,12 @@ import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 
-import java.util.Random;
-
 public class CanyonArchGenerator extends StructurePiece {
-
 	private final OpenSimplexNoise noise;
 
 	private final float a;
@@ -33,8 +31,8 @@ public class CanyonArchGenerator extends StructurePiece {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null);
 		this.setOrientation(null);
 
-		this.centerX = centerX >> 4;
-		this.centerZ = centerZ >> 4;
+		this.centerX = centerX;
+		this.centerZ = centerZ;
 
 		int seed = random.nextInt(10000);
 

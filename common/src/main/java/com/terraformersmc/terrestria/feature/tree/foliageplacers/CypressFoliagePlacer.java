@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -11,6 +10,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;

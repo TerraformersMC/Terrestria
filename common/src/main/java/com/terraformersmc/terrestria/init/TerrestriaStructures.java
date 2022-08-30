@@ -1,31 +1,38 @@
 package com.terraformersmc.terrestria.init;
 
+import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
-import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructureFeature;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoFeatureConfig;
+import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructure;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
-import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructureFeature;
+import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructure;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.*;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.structure.Structure;
+import net.minecraft.world.gen.structure.StructureType;
 
+/**
+ * Terrestria structures are procedurally generated, but configured and placed via JSON.
+ * generation:    (starts here)
+ * configuration: resources/data/terrestria/worldgen/structure
+ * placement:     resources/data/terrestria/worldgen/structure_set
+ */
 public class TerrestriaStructures {
+	public static final StructureType<CanyonArchStructure> CANYON_ARCH_STRUCTURE_TYPE = registerStructureType("canyon_arch", CanyonArchStructure.CODEC);
+	public static final StructureType<VolcanoStructure> VOLCANO_STRUCTURE_TYPE = registerStructureType("volcano", VolcanoStructure.CODEC);
+
 	public static final StructurePieceType CANYON_ARCH_PIECE = registerStructurePiece("canyon_arch", CanyonArchGenerator::new);
 	public static final StructurePieceType VOLCANO_PIECE = registerStructurePiece("volcano", VolcanoGenerator::new);
-
-	public static final StructureFeature<DefaultFeatureConfig> CANYON_ARCH_FEATURE = registerStructureFeature("canyon_arch", new CanyonArchStructureFeature(DefaultFeatureConfig.CODEC));
-	public static final StructureFeature<VolcanoFeatureConfig> VOLCANO_FEATURE = registerStructureFeature("volcano", new VolcanoStructureFeature(VolcanoFeatureConfig.CODEC));
 
 	public static void init() {
 	}
 
-	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
-		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
+	private static <S extends Structure> StructureType<S> registerStructureType(String id, Codec<S> codec) {
+		return Registry.register(Registry.STRUCTURE_TYPE, new Identifier(Terrestria.MOD_ID, id), () -> codec);
 	}
 
-	private static <T extends FeatureConfig> StructureFeature<T> registerStructureFeature(String id, StructureFeature<T> feature) {
-		return Registry.register(Registry.STRUCTURE_FEATURE, new Identifier(Terrestria.MOD_ID, id), feature);
+	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
+		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
 	}
 }

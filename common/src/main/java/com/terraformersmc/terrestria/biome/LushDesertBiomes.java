@@ -14,7 +14,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class LushDesertBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.DESERT)
+				.precipitation(Biome.Precipitation.RAIN)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
 					.waterColor(0x3f76e4)
 					.waterFogColor(0x50533)

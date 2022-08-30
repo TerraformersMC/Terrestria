@@ -8,6 +8,7 @@ import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -15,7 +16,6 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
@@ -61,7 +61,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 			currentPosition.move(Direction.UP);
 		}
 
-		//Make sure the top of the tree has leaf locations
+		// Make sure the top of the tree has leaf locations
 		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), replacer, treeFeatureConfig, Direction.NORTH), random.nextInt(2) + 4, false));
 		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), replacer, treeFeatureConfig, Direction.SOUTH), random.nextInt(2) + 4, false));
 		foliageNodes.add(new FoliagePlacer.TreeNode(placeBranch(world, random, currentPosition.toImmutable(), replacer, treeFeatureConfig, Direction.EAST), random.nextInt(2) + 4, false));
@@ -72,13 +72,13 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 	}
 
 	private BlockPos placeBranch(TestableWorld world, Random random, BlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig treeFeatureConfig, Direction direction) {
-		//Create the Mutable version of our block position so that we can procedurally create the branch
+		// Create the Mutable version of our block position so that we can procedurally create the branch
 		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
 
-		//Pick weather this branch should go diagonal or straight
+		// Pick weather this branch should go diagonal or straight
 		Direction diagonalDirection = DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite());
 
-		//Determine the length of the branch
+		// Determine the length of the branch
 		int length = 4 + random.nextInt(3);
 
 		if (diagonalDirection == direction && length >= 3) {
@@ -86,7 +86,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 			length /= 2;
 		}
 
-		//Place a branch with length in the diagonalDirection, with an upwards angle
+		// Place a branch with length in the diagonalDirection, with an upwards angle
 		for (int i = 0; i < length; i++) {
 			if (random.nextBoolean()) {
 				getAndSetState(world, replacer, random, currentPosition.move(direction), treeFeatureConfig);
@@ -95,7 +95,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 			getAndSetState(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
-		//Return the end of the branch as a valid foliage placement location
+		// Return the end of the branch as a valid foliage placement location
 		return currentPosition.toImmutable();
 	}
 }

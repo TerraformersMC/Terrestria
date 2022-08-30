@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class SakuraForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.8F)
 				.downfall(1.0F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

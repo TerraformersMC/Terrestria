@@ -7,12 +7,11 @@ import net.minecraft.block.Blocks;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-
-import java.util.Random;
 
 public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 
@@ -30,17 +29,17 @@ public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 		Random random = context.getRandom();
 		BlockPos blockPos = context.getOrigin();
 
-		//Check that we wont pass build height
+		// Check that we wont pass build height
 		if (blockPos.getY() + 8 > 256 || blockPos.getY() < 1) {
 			return false;
 		}
 
-		//Check to see if the block underneath is good for placement
+		// Check to see if the block underneath is good for placement
 		if (!world.testBlockState(blockPos.down(), blockState -> blockState.isIn(BlockTags.SAND))) {
 			return false;
 		}
 
-		//Generate the head base rectangle prism
+		// Generate the head base rectangle prism
 		BlockPos.Mutable pos = blockPos.mutableCopy();
 		pos.move(-1, 0, -1);
 		for (int y = 0; y < 6; y++) {
@@ -61,17 +60,17 @@ public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 		}
 
 
-		//Put a face on it
+		// Put a face on it
 		pos = blockPos.mutableCopy();
 		pos.move(Direction.UP, 4);
 
-		//Get a random Direction for the face to be placed on
+		// Get a random Direction for the face to be placed on
 		Direction direction;
 		do {
 			direction = Direction.random(random);
 		} while (direction.getAxis().equals(Direction.Axis.Y));
 
-		//Get the opposite axis for generating features on the directed face
+		// Get the opposite axis for generating features on the directed face
 		Direction invAxisDirection;
 		if (direction.getAxis().equals(Direction.Axis.X)) {
 			invAxisDirection = Direction.NORTH;
@@ -79,7 +78,7 @@ public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 			invAxisDirection = Direction.WEST;
 		}
 
-		//Generate Brow
+		// Generate Brow
 		pos.move(direction);
 		pos.move(invAxisDirection.getOpposite(), 2);
 		for (int i = 0; i < 3; i++) {
@@ -87,13 +86,13 @@ public class DumDumHeadFeature extends Feature<DefaultFeatureConfig> {
 			world.setBlockState(pos, FEATURE_BLOCK, 1);
 		}
 
-		//Generate Eyes
+		// Generate Eyes
 		pos.move(Direction.DOWN);
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
 		pos.move(invAxisDirection.getOpposite(), 2);
 		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 0);
 
-		//Generate Nose
+		// Generate Nose
 		pos.move(direction);
 		pos.move(invAxisDirection);
 		pos.move(Direction.DOWN);

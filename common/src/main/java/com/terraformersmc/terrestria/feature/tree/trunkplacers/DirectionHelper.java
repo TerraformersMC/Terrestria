@@ -1,8 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import net.minecraft.util.math.Direction;
-
-import java.util.Random;
+import net.minecraft.util.math.random.Random;
 
 public class DirectionHelper {
 

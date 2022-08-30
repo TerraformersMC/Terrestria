@@ -12,17 +12,12 @@ public class BasaltFlowerBlock extends FlowerBlock {
 	public static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public BasaltFlowerBlock(StatusEffect stewEffect, int effectSeconds, Settings settings) {
-		super(stewEffect, effectSeconds, settings);
+		super(stewEffect, effectSeconds, settings.offsetType(AbstractBlock.OffsetType.XZ));
 	}
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		Vec3d vec3d = state.getModelOffset(world, pos);
 		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
-	}
-
-	@Override
-	public AbstractBlock.OffsetType getOffsetType() {
-		return AbstractBlock.OffsetType.XZ;
 	}
 }

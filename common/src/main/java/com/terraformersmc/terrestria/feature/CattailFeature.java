@@ -7,13 +7,12 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.util.FeatureContext;
-
-import java.util.Random;
 
 public class CattailFeature extends Feature<ProbabilityConfig> {
 	private Block normal;

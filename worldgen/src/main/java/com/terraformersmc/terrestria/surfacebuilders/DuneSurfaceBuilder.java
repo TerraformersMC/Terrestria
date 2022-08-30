@@ -4,12 +4,12 @@ import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.random.AbstractRandom;
 
 public class DuneSurfaceBuilder extends TerrestriaSurfaceBuilder {
 
@@ -22,7 +22,7 @@ public class DuneSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		vHeight = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
 		int y = vHeight - 8;
 

@@ -7,6 +7,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.Monster;
 import net.minecraft.entity.mob.SlimeEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
@@ -15,15 +16,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import java.util.Random;
-
 @Mixin(SlimeEntity.class)
 public abstract class MixinSlimeEntity extends MobEntity implements Monster {
 	public MixinSlimeEntity(EntityType<? extends MobEntity> type, World world) {
 		super(type, world);
 	}
 
-	@Inject(method = "canSpawn(Lnet/minecraft/entity/EntityType;Lnet/minecraft/world/WorldAccess;Lnet/minecraft/entity/SpawnReason;Lnet/minecraft/util/math/BlockPos;Ljava/util/Random;)Z", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "canSpawn", at = @At(value = "HEAD"), cancellable = true)
 	private static void terrestria$canSpawnSlimes(EntityType<SlimeEntity> type, WorldAccess world, SpawnReason reason, BlockPos pos, Random random, CallbackInfoReturnable<Boolean> info) {
 		if (world.getDifficulty() == Difficulty.PEACEFUL) {
 			return; // Delegate back to vanilla

@@ -5,12 +5,12 @@ import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.random.AbstractRandom;
 
 public class CalderaSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	private static final OpenSimplexNoise CALDERA_NOISE = new OpenSimplexNoise(27438);
@@ -31,7 +31,7 @@ public class CalderaSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		int surfaceNoise = (int) (4.6D * CALDERA_NOISE.sample(x * 0.05D, z * 0.05D));
 		int inBiomeDistance = BiomePerimeters.getOrCreateInstance(biome, 80).getPerimeterDistance(biomeAccess, new BlockPos.Mutable(x, RIM_HEIGHT, z));
 		int top;

@@ -10,13 +10,13 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.structure.StructureContext;
 import net.minecraft.structure.StructurePiece;
 import net.minecraft.util.math.*;
+import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.tick.OrderedTick;
-
-import java.util.Random;
 
 public class VolcanoGenerator extends StructurePiece {
 	private final SimpleRadialNoise radiusNoise;
@@ -36,7 +36,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private final int centerX;
 	private final int centerZ;
 
-	VolcanoGenerator(Random random, int centerX, int centerZ, VolcanoFeatureConfig config) {
+	VolcanoGenerator(Random random, int centerX, int centerZ, IntProvider heightProvider, int baseY, boolean thinIfTall) {
 		super(TerrestriaStructures.VOLCANO_PIECE, 0, null);
 		this.setOrientation(null);
 
@@ -49,12 +49,12 @@ public class VolcanoGenerator extends StructurePiece {
 		chamberOreSeed = random.nextLong();
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		this.height = config.height().get(random);
-		this.baseY = config.baseY();
+		this.height = heightProvider.get(random);
+		this.baseY = baseY;
 
 		if (height < 48) {
 			radius = random.nextInt(height / 2) + height * 2;
-		} else if (config.thinIfTall()) {
+		} else if (thinIfTall) {
 			radius = random.nextInt(height / 3) + height / 4;
 		} else {
 			radius = random.nextInt(height * 3 / 4) + height / 2;

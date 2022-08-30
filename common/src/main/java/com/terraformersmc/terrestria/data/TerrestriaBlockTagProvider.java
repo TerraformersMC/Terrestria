@@ -10,6 +10,7 @@ import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SandBlock;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.TagKey;
@@ -23,12 +24,6 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	@Override
 	protected void generateTags() {
 		// basic block tags
-		this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
-			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
-			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
-			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES)
-			.add(TerrestriaBlocks.SAKURA_LEAF_PILE);
-
 		this.getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
 			.add(TerrestriaBlocks.POTTED_AGAVE)
 			.add(TerrestriaBlocks.POTTED_ALOE_VERA)
@@ -50,6 +45,12 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.add(TerrestriaBlocks.POTTED_WILLOW_SAPLING)
 			.add(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
 
+		this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
+			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
+			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
+			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES)
+			.add(TerrestriaBlocks.SAKURA_LEAF_PILE);
+
 		this.getOrCreateTagBuilder(BlockTags.LEAVES)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
@@ -57,6 +58,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 
 		this.getOrCreateTagBuilder(BlockTags.OAK_LOGS)
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
+
+		this.getOrCreateTagBuilder(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
+			.add(Blocks.SMOOTH_SANDSTONE);
 
 		this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
 			.add(TerrestriaBlocks.BRYCE_SAPLING)

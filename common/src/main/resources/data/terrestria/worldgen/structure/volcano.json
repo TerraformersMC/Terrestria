@@ -1,0 +1,17 @@
+{
+  "type": "terrestria:volcano",
+  "biomes": "#terrestria:volcano_has_structure",
+  "step": "surface_structures",
+  "terrain_adaptation": "none",
+  "spawn_overrides": {},
+  "config": {},
+  "height": {
+    "type": "uniform",
+    "value": {
+      "min_inclusive": 32,
+      "max_inclusive": 63
+    }
+  },
+  "base_y": 60,
+  "thin_if_tall": false
+}

@@ -36,9 +36,6 @@ dependencies {
 	// ColorProviderRegistry
 	includeFabricApiModule "fabric-rendering-v1"
 
-	// EntityRendererRegistry
-	includeFabricApiModule "fabric-renderer-registries-v1"
-
 	// === Dependency modules: Required by other modules to function ===
 
 	// Base module required by most other fabric api modules

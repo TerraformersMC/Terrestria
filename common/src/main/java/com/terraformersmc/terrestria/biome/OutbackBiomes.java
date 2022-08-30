@@ -12,7 +12,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class OutbackBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.NONE).category(Biome.Category.SAVANNA)
+				.precipitation(Biome.Precipitation.NONE)
 				.temperature(1.8F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

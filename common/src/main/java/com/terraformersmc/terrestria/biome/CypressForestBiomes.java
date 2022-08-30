@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class CypressForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.FOREST)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.7F)
 				.downfall(0.8F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

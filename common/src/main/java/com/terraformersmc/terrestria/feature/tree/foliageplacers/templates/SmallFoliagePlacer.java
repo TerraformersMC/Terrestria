@@ -5,11 +5,11 @@ import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public abstract class SmallFoliagePlacer extends FoliagePlacer {

@@ -3,11 +3,11 @@ package com.terraformersmc.terrestria.surfacebuilders;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.random.AbstractRandom;
 
 public class CanyonSurfaceBuilder extends TerrestriaSurfaceBuilder {
 
@@ -92,7 +92,7 @@ public class CanyonSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first

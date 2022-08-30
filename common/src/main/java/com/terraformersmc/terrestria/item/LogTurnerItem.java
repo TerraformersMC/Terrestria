@@ -10,7 +10,6 @@ import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
@@ -83,7 +82,7 @@ public class LogTurnerItem extends Item {
 		String translation = Language.getInstance().get("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 
 		for(String line: translation.split("\n")) {
-			tooltip.add(new LiteralText(line.trim()).formatted(Formatting.GRAY));
+			tooltip.add(Text.literal(line.trim()).formatted(Formatting.GRAY));
 		}
 	}
 }
