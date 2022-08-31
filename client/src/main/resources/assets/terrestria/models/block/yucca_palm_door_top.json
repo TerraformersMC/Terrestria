@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top",
-  "textures": {
-    "bottom": "terrestria:block/yucca_palm_door_bottom",
-    "top": "terrestria:block/yucca_palm_door_top"
-  }
-}

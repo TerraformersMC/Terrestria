@@ -6,9 +6,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
@@ -16,10 +18,7 @@ import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.BiConsumer;
-
-import static net.minecraft.world.gen.feature.Feature.isAir;
 
 public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 
@@ -93,11 +92,11 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		for (int i = 0; i < length; i++) {
 			offset = DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite());
 			pos.move(offset);
-			if (isAir(world, pos)) {
+			if (world.testBlockState(pos, AbstractBlock.AbstractBlockState::isAir)) {
 				setBlockStateAndUpdate(config, random, replacer, world, pos, offset);
 				if (random.nextBoolean()) {
 					pos.move(Direction.UP);
-					if (isAir(world, pos)) {
+					if (world.testBlockState(pos, AbstractBlock.AbstractBlockState::isAir)) {
 						setBlockStateAndUpdate(config, random, replacer, world, pos, Direction.UP);
 					} else {
 						pos.move(Direction.DOWN);
@@ -117,7 +116,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 			// Place block and block down and to the side
 			direction = DirectionHelper.randomHorizontalDirectionAwayFrom(random, originalDirection.getOpposite());
 			pos.move(direction);
-			if (isAir(world, pos)) {
+			if (world.testBlockState(pos, AbstractBlock.AbstractBlockState::isAir)) {
 				setBlockStateAndUpdate(config, random, replacer, world, pos, direction);
 				if (random.nextBoolean()) {
 					pos.move(Direction.DOWN);
@@ -130,7 +129,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 
 		for (int j = 0; j < 3; j++) {
 			pos.move(Direction.DOWN);
-			if (isAir(world, pos)) {
+			if (world.testBlockState(pos, AbstractBlock.AbstractBlockState::isAir)) {
 				// Place a single block of the root
 				setBlockStateAndUpdate(config, random, replacer, world, pos, Direction.DOWN);
 			} else {

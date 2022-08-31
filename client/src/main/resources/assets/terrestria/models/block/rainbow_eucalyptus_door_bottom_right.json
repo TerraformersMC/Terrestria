@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right",
+  "textures": {
+    "bottom": "terrestria:block/rainbow_eucalyptus_door_bottom",
+    "top": "terrestria:block/rainbow_eucalyptus_door_top"
+  }
+}

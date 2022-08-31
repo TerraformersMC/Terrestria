@@ -22,8 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TerrestriaPlacedFeatures {
-	private static final BlockPredicate ON_DIRT = BlockPredicate.matchingBlockTag(BlockTags.DIRT, Direction.DOWN.getVector());
-	private static final BlockPredicate ON_SAND = BlockPredicate.matchingBlockTag(BlockTags.SAND, Direction.DOWN.getVector());
+	private static final BlockPredicate ON_DIRT = BlockPredicate.matchingBlockTag(Direction.DOWN.getVector(), BlockTags.DIRT);
+	private static final BlockPredicate ON_SAND = BlockPredicate.matchingBlockTag(Direction.DOWN.getVector(), BlockTags.SAND);
 	private static final BlockPredicate ON_DIRT_OR_SAND = BlockPredicate.eitherOf(ON_DIRT, ON_SAND);
 
 	// Terrestria Decorated Features

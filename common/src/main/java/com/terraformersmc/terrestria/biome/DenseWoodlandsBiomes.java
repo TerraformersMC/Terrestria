@@ -13,7 +13,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class DenseWoodlandsBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.9F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

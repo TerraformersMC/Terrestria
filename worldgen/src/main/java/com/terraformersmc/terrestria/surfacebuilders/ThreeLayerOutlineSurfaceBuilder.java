@@ -4,11 +4,11 @@ import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.random.AbstractRandom;
 
 public class ThreeLayerOutlineSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	private static final OpenSimplexNoise TLO_NOISE = new OpenSimplexNoise(8675309);
@@ -34,7 +34,7 @@ public class ThreeLayerOutlineSurfaceBuilder extends TerrestriaSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, AbstractRandom rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		double noise = TLO_NOISE.sample(x, z);
 		int run = -1;
 

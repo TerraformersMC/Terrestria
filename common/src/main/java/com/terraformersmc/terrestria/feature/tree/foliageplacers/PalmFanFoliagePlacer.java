@@ -8,13 +8,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
@@ -34,30 +34,30 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	@Override
 	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
-		//The origin of this leaf piece
+		// The origin of this leaf piece
 		BlockPos center = treeNode.getCenter().toImmutable();
 
-		//The working mutable position
+		// The working mutable position
 		BlockPos.Mutable pos = new BlockPos.Mutable();
 
-		//Determine weather this tree should have it's spiral flipped to make it have more variation among trees
+		// Determine weather this tree should have it's spiral flipped to make it have more variation among trees
 		boolean flipSpiral = random.nextBoolean();
 
-		//Place the top blocks
+		// Place the top blocks
 		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 0), replacer, config);
 		checkAndSetBlockState(world, random, pos.set(center).move(1, 1, 0), replacer, config);
 		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 1), replacer, config);
 		checkAndSetBlockState(world, random, pos.set(center).move(-1, 1, 0), replacer, config);
 		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, -1), replacer, config);
 
-		//Place supports for dangly bits
+		// Place supports for dangly bits
 		for (int dZ = -1; dZ < 2; dZ++) {
 			for (int dX = -1; dX < 2; dX++) {
 				checkAndSetBlockState(world, random, pos.set(center).move(dZ, 0, dX), replacer, config);
 			}
 		}
 
-		//Place 2 dangly bits in each direction
+		// Place 2 dangly bits in each direction
 		for (int d = 0; d < 4; d++) {
 			Direction direction = Direction.fromHorizontal(d);
 
@@ -70,14 +70,14 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	private void placeSpiral(TestableWorld world, Random rand, BlockPos.Mutable pos, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
-		//Base of dangly bit
+		// Base of dangly bit
 		checkAndSetBlockState(world, rand, pos, replacer, config);
 
-		//Get the direction of the twist from the direction of the branch then place a block there
+		// Get the direction of the twist from the direction of the branch then place a block there
 		Direction spiral = spiral(direction, invertLeafSpiral);
 		checkAndSetBlockState(world, rand, pos.move(spiral), replacer, config);
 
-		//Continue the branch all the way down
+		// Continue the branch all the way down
 		for (int i = 0; i < 2; i++) {
 			checkAndSetBlockState(world, rand, pos.move(Direction.DOWN), replacer, config);
 		}

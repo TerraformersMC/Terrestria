@@ -8,8 +8,7 @@
   "environment": "*",
   "mixins": [
     "mixins.terrestria-common.json",
-    "mixins.terrestria-common.pathing.json",
-    "mixins.terrestria-common.bugfix.json"
+    "mixins.terrestria-common.pathing.json"
   ],
   "entrypoints": {
     "main": [

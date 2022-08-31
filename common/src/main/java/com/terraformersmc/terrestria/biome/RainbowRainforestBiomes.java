@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class RainbowRainforestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.JUNGLE)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.95F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

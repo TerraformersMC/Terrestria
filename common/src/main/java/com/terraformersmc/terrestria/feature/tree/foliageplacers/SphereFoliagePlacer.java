@@ -10,13 +10,13 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class SphereFoliagePlacer extends FoliagePlacer {
@@ -36,7 +36,7 @@ public class SphereFoliagePlacer extends FoliagePlacer {
 	@Override
 	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
-		//I add 0.5 to make it not a square and also not a single block
+		// Add 0.25 to make it not a square and also not a single block
 		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)
 				.applyLayer(TranslateLayer.of(Position.of(treeNode.getCenter())))
 				.stream()

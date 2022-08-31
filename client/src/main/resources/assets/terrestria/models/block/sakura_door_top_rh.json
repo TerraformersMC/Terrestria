@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_rh",
-  "textures": {
-    "bottom": "terrestria:block/sakura_door_bottom",
-    "top": "terrestria:block/sakura_door_top"
-  }
-}

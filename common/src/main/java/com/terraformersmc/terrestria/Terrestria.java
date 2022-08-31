@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.StructureFeature;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,7 +39,6 @@ public class Terrestria implements ModInitializer {
 		TerrestriaConfiguredFeatures.init();
 		TerrestriaPlacedFeatures.init();
 		TerrestriaStructures.init();
-		StructureFeature.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
 

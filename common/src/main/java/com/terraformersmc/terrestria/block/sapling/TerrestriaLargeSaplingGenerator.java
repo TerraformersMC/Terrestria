@@ -1,12 +1,12 @@
 package com.terraformersmc.terrestria.block.sapling;
 
-import java.util.Random;
-import java.util.function.Supplier;
-
 import net.minecraft.block.sapling.LargeTreeSaplingGenerator;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+
+import java.util.function.Supplier;
 
 public class TerrestriaLargeSaplingGenerator extends LargeTreeSaplingGenerator {
 	public final Supplier<RegistryEntry<ConfiguredFeature<TreeFeatureConfig, ?>>> tree;

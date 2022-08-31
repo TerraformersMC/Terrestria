@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class HemlockRainforestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.6F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

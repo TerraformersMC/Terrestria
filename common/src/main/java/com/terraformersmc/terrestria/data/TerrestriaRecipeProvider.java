@@ -71,6 +71,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
 		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
+		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
 
 		new ShapelessRecipeJsonBuilder(woodItem.button, 1)
 			.group("wooden_button")
@@ -79,23 +80,23 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.offerTo(exporter);
 
 		createDoorRecipe(woodItem.door, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
-				.offerTo(exporter);
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.offerTo(exporter);
 
 		createFenceRecipe(woodItem.fence, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
-				.offerTo(exporter);
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.offerTo(exporter);
 
 		createFenceGateRecipe(woodItem.fenceGate, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
 		offerPlanksRecipe(exporter, woodItem.planks, logsTag);
 
-		createPressurePlateRecipe(exporter, woodItem.pressurePlate, woodItem.planks);
+		offerPressurePlateRecipe(exporter, woodItem.pressurePlate, woodItem.planks);
 
 		createSignRecipe(woodItem.sign, Ingredient.ofItems(woodItem.planks))
-				.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
+			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
 		offerSlabRecipe(exporter, woodItem.slab, woodItem.planks);

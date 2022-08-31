@@ -246,13 +246,5 @@
   "biome.terrestria.lush_desert": "Bujna pustynia",
   "biome.terrestria.oasis": "Oaza",
   "biome.terrestria.dunes": "Wydmy",
-  "biome.terrestria.outback": "Odludzie",
-  "entity.terrestria.cypress_boat": "Cyprysowa łódka",
-  "entity.terrestria.hemlock_boat": "Choinowa łódka",
-  "entity.terrestria.japanese_maple_boat": "Japońska klonowa łódka",
-  "entity.terrestria.rainbow_eucalyptus_boat": "Tęczowa eukaliptusowa łódka",
-  "entity.terrestria.redwood_boat": "Sekwojowa łódka",
-  "entity.terrestria.rubber_boat": "Gumowa łódka",
-  "entity.terrestria.sakura_boat": "Sakurowa łódka",
-  "entity.terrestria.willow_boat": "Wierzbowa łódka"
+  "biome.terrestria.outback": "Odludzie"
 }

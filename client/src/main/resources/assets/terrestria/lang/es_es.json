@@ -247,13 +247,5 @@
   "biome.terrestria.lush_desert": "Desierto exuberante",
   "biome.terrestria.oasis": "Oasis",
   "biome.terrestria.dunes": "Dunas",
-  "biome.terrestria.outback": "Outback",
-  "entity.terrestria.cypress_boat": "Barca de ciprés",
-  "entity.terrestria.hemlock_boat": "Barca de tsuga",
-  "entity.terrestria.japanese_maple_boat": "Barca de arce japonés",
-  "entity.terrestria.rainbow_eucalyptus_boat": "Barca de eucalipto arcoíris",
-  "entity.terrestria.redwood_boat": "Barca de secoya",
-  "entity.terrestria.rubber_boat": "Barca de madera de caucho",
-  "entity.terrestria.sakura_boat": "Barca de sakura",
-  "entity.terrestria.willow_boat": "Barca de sauce"
+  "biome.terrestria.outback": "Outback"
 }

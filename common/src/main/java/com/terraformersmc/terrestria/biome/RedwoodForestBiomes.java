@@ -16,7 +16,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class RedwoodForestBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.TAIGA)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

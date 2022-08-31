@@ -15,7 +15,7 @@ import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatur
 public class CypressSwampBiomes {
 	public static void register() {
 		TerrestriaBiomes.CYPRESS_SWAMP = TerrestriaBiomes.register("cypress_swamp", new Biome.Builder()
-				.precipitation(Biome.Precipitation.RAIN).category(Biome.Category.SWAMP)
+				.precipitation(Biome.Precipitation.RAIN)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

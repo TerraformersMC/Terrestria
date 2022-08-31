@@ -1,7 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import java.util.List;
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 import com.google.common.collect.ImmutableList;
@@ -16,6 +15,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.TallSeagrassBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -98,17 +98,17 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	}
 
 	public void tryGrowRoot(BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos.Mutable bottom, Random random, BlockStateProvider wood) {
-		//Determine the root length
+		// Determine the root length
 		if (random.nextInt(5) == 0) {
 			return;
 		}
 
-		//Determine how high up on the tree it should be placed
+		// Determine how high up on the tree it should be placed
 		int height = random.nextInt(4) + 1;
 
-		//Place the root
+		// Place the root
 		for (int i = 0; i < height; i++) {
-			if (TreeFeature.canTreeReplace(world, bottom) || TreeFeature.canReplace(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
+			if (TreeFeature.canReplace(world, bottom) || TreeFeature.canReplace(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
 				replacer.accept(bottom.toImmutable(), wood.getBlockState(random, bottom));
 			}
 

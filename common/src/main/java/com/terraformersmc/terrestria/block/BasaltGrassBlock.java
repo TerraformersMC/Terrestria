@@ -8,8 +8,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 
-import java.util.Random;
 import java.util.function.Supplier;
 
 public class BasaltGrassBlock extends TerraformGrassBlock {

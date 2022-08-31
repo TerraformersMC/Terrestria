@@ -1,18 +1,13 @@
 package com.terraformersmc.terrestria.feature.tree.treedecorators;
 
-import java.util.List;
-import java.util.Random;
-import java.util.function.BiConsumer;
-
 import com.mojang.serialization.Codec;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
-
-import net.minecraft.block.BlockState;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.EmptyBlockView;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.TestableWorld;
@@ -29,8 +24,11 @@ public class SakuraTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	public void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, List<BlockPos> logPositions, List<BlockPos> leavesPositions) {
-		for (BlockPos pos : leavesPositions) {
+	public void generate(Generator generator) {
+		Random random = generator.getRandom();
+		TestableWorld world = generator.getWorld();
+
+		for (BlockPos pos : generator.getLeavesPositions()) {
 			// 1/6 positions have leaf piles
 			// As this executes for every single leaf block and there is usually 3-4 leaf blocks in a column, it ends up working out to 50%, usually.
 			if (random.nextInt(6) > 0) {
@@ -56,7 +54,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
 			if (valid && TreeFeature.canReplace(world, top)) {
-				replacer.accept(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState());
+				generator.replace(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState());
 			}
 		}
 	}

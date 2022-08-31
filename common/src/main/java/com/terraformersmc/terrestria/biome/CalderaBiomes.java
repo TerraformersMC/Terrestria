@@ -24,7 +24,7 @@ public class CalderaBiomes {
 		TerrestriaBiomes.CALDERA = TerrestriaBiomes.register("caldera", template
 				.generationSettings(calderaGenerationSettings().build())
 				.spawnSettings(defaultSpawnSettings().build())
-				.precipitation(Biome.Precipitation.SNOW).category(Biome.Category.MOUNTAIN)
+				.precipitation(Biome.Precipitation.SNOW)
 				.temperature(0.2F)
 				.downfall(0.7F)
 				.build());

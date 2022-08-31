@@ -11,12 +11,12 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.intprovider.IntProvider;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
-import java.util.Random;
 import java.util.function.BiConsumer;
 
 public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
@@ -46,7 +46,7 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(width - 2, width - 2, 5)))
 				.applyLayer(TranslateLayer.of(Position.of(center.down(2))))
 				.fill((position) -> {
-					//On the bottom layer only place 50% of the blocks
+					// On the bottom layer only place 50% of the blocks
 					if (position.getY() - center.getY() >= 0 || random.nextBoolean()) {
 						tryPlaceLeaves(world, position.toBlockPos(), random, replacer, config);
 					}

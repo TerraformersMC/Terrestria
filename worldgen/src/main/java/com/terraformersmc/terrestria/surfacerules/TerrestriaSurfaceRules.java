@@ -40,16 +40,16 @@ public class TerrestriaSurfaceRules {
 							block(Blocks.WATER))))));
 		MaterialRule dunes = condition(biome(TerrestriaBiomes.DUNES), sandAndSandstone);
 		MaterialRule lushDesert = condition(biome(TerrestriaBiomes.LUSH_DESERT),
-			new SandWithPatchesSurfaceRule(-0.75D, NoiseParametersKeys.SURFACE, sandAndSandstone, defaultGrass));
+			sequence(condition(noiseThreshold(NoiseParametersKeys.SURFACE, -0.75D), sandAndSandstone), defaultGrass));
 		MaterialRule outback = condition(biome(TerrestriaBiomes.OUTBACK),
-			new SandWithPatchesSurfaceRule(-0.12D, NoiseParametersKeys.BADLANDS_SURFACE, redSandAndSandstone, defaultGrass));
+			sequence(condition(noiseThreshold(NoiseParametersKeys.BADLANDS_SURFACE, -0.12D), redSandAndSandstone), defaultGrass));
 
+		// TODO: Can we get rid of both these defaultGrass?
 		return sequence(condition(surface(),
 				sequence(canyon, cypressSwamp, dunes, lushDesert, outback, defaultGrass)), defaultGrass);
 	}
 
 	public static void init() {
-		register("sand_with_patches_rule", SandWithPatchesSurfaceRule.CONDITION_CODEC);
 	}
 
 	public static <T extends MaterialRule> Codec<T> register(String id, Codec<T> ruleCodec) {
