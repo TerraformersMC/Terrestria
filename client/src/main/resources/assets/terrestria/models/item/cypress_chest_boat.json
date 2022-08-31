@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "terrestria:item/cypress_chest_boat"
+  }
+}

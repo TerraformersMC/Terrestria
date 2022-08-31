@@ -71,6 +71,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
 		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
+		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
 
 		new ShapelessRecipeJsonBuilder(woodItem.button, 1)
 			.group("wooden_button")

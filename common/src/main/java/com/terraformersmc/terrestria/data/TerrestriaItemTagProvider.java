@@ -31,6 +31,17 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 			.add(TerrestriaBoats.WILLOW_BOAT_TYPE.getItem())
 			.add(TerrestriaBoats.YUCCA_PALM_BOAT_TYPE.getItem());
 
+		this.getOrCreateTagBuilder(ItemTags.CHEST_BOATS)
+			.add(TerrestriaBoats.CYPRESS_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.HEMLOCK_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.JAPANESE_MAPLE_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.RAINBOW_EUCALYPTUS_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.REDWOOD_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.RUBBER_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.SAKURA_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.WILLOW_BOAT_TYPE.getChestItem())
+			.add(TerrestriaBoats.YUCCA_PALM_BOAT_TYPE.getChestItem());
+
 		this.getOrCreateTagBuilder(ItemTags.LEAVES)
 			.add(TerrestriaItems.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaItems.JAPANESE_MAPLE_SHRUB_LEAVES)

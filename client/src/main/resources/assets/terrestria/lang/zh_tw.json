@@ -246,13 +246,5 @@
  "biome.terrestria.lush_desert": "繁茂的沙漠",
  "biome.terrestria.oasis": "沙漠綠洲",
  "biome.terrestria.dunes": "沙丘",
- "biome.terrestria.outback": "內陸",
- "entity.terrestria.cypress_boat": "柏木船",
- "entity.terrestria.hemlock_boat": "鐵杉木船",
- "entity.terrestria.japanese_maple_boat": "日本楓木船",
- "entity.terrestria.rainbow_eucalyptus_boat": "彩虹案木船",
- "entity.terrestria.redwood_boat": "紅杉木船",
- "entity.terrestria.rubber_boat": "橡膠木船",
- "entity.terrestria.sakura_boat": "櫻花木船",
- "entity.terrestria.willow_boat": "柳木船"
+ "biome.terrestria.outback": "內陸"
 }

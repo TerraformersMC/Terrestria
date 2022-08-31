@@ -62,15 +62,15 @@ public class TerrestriaBoats {
 		SAKURA_CHEST_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "sakura_chest_boat"), () -> SAKURA_BOAT_TYPE, true);
 		YUCCA_PALM_CHEST_BOAT = (TerraformBoatItem) TerraformBoatItemHelper.registerBoatItem(new Identifier(Terrestria.MOD_ID, "yucca_palm_chest_boat"), () -> YUCCA_PALM_BOAT_TYPE, true);
 
-		REDWOOD_BOAT_TYPE = new TerraformBoatType.Builder().item(REDWOOD_BOAT).build();
-		HEMLOCK_BOAT_TYPE = new TerraformBoatType.Builder().item(HEMLOCK_BOAT).build();
-		RUBBER_BOAT_TYPE = new TerraformBoatType.Builder().item(RUBBER_BOAT).build();
-		CYPRESS_BOAT_TYPE = new TerraformBoatType.Builder().item(CYPRESS_BOAT).build();
-		WILLOW_BOAT_TYPE = new TerraformBoatType.Builder().item(WILLOW_BOAT).build();
-		JAPANESE_MAPLE_BOAT_TYPE = new TerraformBoatType.Builder().item(JAPANESE_MAPLE_BOAT).build();
-		RAINBOW_EUCALYPTUS_BOAT_TYPE = new TerraformBoatType.Builder().item(RAINBOW_EUCALYPTUS_BOAT).build();
-		SAKURA_BOAT_TYPE = new TerraformBoatType.Builder().item(SAKURA_BOAT).build();
-		YUCCA_PALM_BOAT_TYPE = new TerraformBoatType.Builder().item(YUCCA_PALM_BOAT).build();
+		REDWOOD_BOAT_TYPE = new TerraformBoatType.Builder().item(REDWOOD_BOAT).chestItem(REDWOOD_CHEST_BOAT).build();
+		HEMLOCK_BOAT_TYPE = new TerraformBoatType.Builder().item(HEMLOCK_BOAT).chestItem(HEMLOCK_CHEST_BOAT).build();
+		RUBBER_BOAT_TYPE = new TerraformBoatType.Builder().item(RUBBER_BOAT).chestItem(RUBBER_CHEST_BOAT).build();
+		CYPRESS_BOAT_TYPE = new TerraformBoatType.Builder().item(CYPRESS_BOAT).chestItem(CYPRESS_CHEST_BOAT).build();
+		WILLOW_BOAT_TYPE = new TerraformBoatType.Builder().item(WILLOW_BOAT).chestItem(WILLOW_CHEST_BOAT).build();
+		JAPANESE_MAPLE_BOAT_TYPE = new TerraformBoatType.Builder().item(JAPANESE_MAPLE_BOAT).chestItem(JAPANESE_MAPLE_CHEST_BOAT).build();
+		RAINBOW_EUCALYPTUS_BOAT_TYPE = new TerraformBoatType.Builder().item(RAINBOW_EUCALYPTUS_BOAT).chestItem(RAINBOW_EUCALYPTUS_CHEST_BOAT).build();
+		SAKURA_BOAT_TYPE = new TerraformBoatType.Builder().item(SAKURA_BOAT).chestItem(SAKURA_CHEST_BOAT).build();
+		YUCCA_PALM_BOAT_TYPE = new TerraformBoatType.Builder().item(YUCCA_PALM_BOAT).chestItem(YUCCA_PALM_CHEST_BOAT).build();
 
 		Registry.register(TerraformBoatTypeRegistry.INSTANCE, new Identifier(Terrestria.MOD_ID, "redwood"), REDWOOD_BOAT_TYPE);
 		Registry.register(TerraformBoatTypeRegistry.INSTANCE, new Identifier(Terrestria.MOD_ID, "hemlock"), HEMLOCK_BOAT_TYPE);
@@ -82,5 +82,4 @@ public class TerrestriaBoats {
 		Registry.register(TerraformBoatTypeRegistry.INSTANCE, new Identifier(Terrestria.MOD_ID, "sakura"), SAKURA_BOAT_TYPE);
 		Registry.register(TerraformBoatTypeRegistry.INSTANCE, new Identifier(Terrestria.MOD_ID, "yucca_palm"), YUCCA_PALM_BOAT_TYPE);
 	}
-
 }

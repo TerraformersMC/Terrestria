@@ -246,13 +246,5 @@
   "biome.terrestria.lush_desert": "Пышная пустыня",
   "biome.terrestria.oasis": "Оазис",
   "biome.terrestria.dunes": "Дюны",
-  "biome.terrestria.outback": "Пустошь",
-  "entity.terrestria.cypress_boat": "Лодка из кипариса",
-  "entity.terrestria.hemlock_boat": "Лодка из тсуги",
-  "entity.terrestria.japanese_maple_boat": "Лодка из японского клёна",
-  "entity.terrestria.rainbow_eucalyptus_boat": "Лодка из радужного эвкалипта",
-  "entity.terrestria.redwood_boat": "Лодка из секвойи",
-  "entity.terrestria.rubber_boat": "Лодка из гевеи",
-  "entity.terrestria.sakura_boat": "Лодка из сакуры",
-  "entity.terrestria.willow_boat": "Лодка из ивы"
+  "biome.terrestria.outback": "Пустошь"
 }
