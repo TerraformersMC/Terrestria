@@ -33,8 +33,8 @@ public class CanyonArchGenerator extends StructurePiece {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null);
 		this.setOrientation(null);
 
-		this.centerX = centerX >> 4;
-		this.centerZ = centerZ >> 4;
+		this.centerX = centerX;
+		this.centerZ = centerZ;
 
 		int seed = random.nextInt(10000);
 

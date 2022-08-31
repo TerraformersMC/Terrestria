@@ -26,7 +26,7 @@ public class CanyonArchStructureFeature extends StructureFeature<DefaultFeatureC
 	}
 
 	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<DefaultFeatureConfig> context) {
-		collector.addPiece(new CanyonArchGenerator(context.random(), context.chunkPos().getStartX(), context.chunkPos().getStartZ()));
+		collector.addPiece(new CanyonArchGenerator(context.random(), context.chunkPos().getCenterX(), context.chunkPos().getCenterZ()));
 	}
 
 	@Override

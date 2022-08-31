@@ -37,7 +37,7 @@ public class VolcanoStructureFeature extends StructureFeature<VolcanoFeatureConf
 	}
 
 	private static void addPieces(StructurePiecesCollector collector, StructurePiecesGenerator.Context<VolcanoFeatureConfig> context) {
-		collector.addPiece(new VolcanoGenerator(context.random(), context.chunkPos().getStartX(), context.chunkPos().getStartZ(), context.config()));
+		collector.addPiece(new VolcanoGenerator(context.random(), context.chunkPos().getCenterX(), context.chunkPos().getCenterZ(), context.config()));
 	}
 
 	@Override

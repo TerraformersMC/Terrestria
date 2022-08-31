@@ -37,7 +37,7 @@ public class WoodItems {
 		items.stairs = TerrestriaRegistry.registerBuildingBlockItem(name + "_stairs", blocks.stairs);
 		items.fence = TerrestriaRegistry.registerDecorationBlockItem(name + "_fence", blocks.fence);
 		items.fenceGate = TerrestriaRegistry.registerRedstoneBlockItem(name + "_fence_gate", blocks.fenceGate);
-		items.door = TerrestriaRegistry.registerDecorationBlockItem(name + "_door", blocks.door);
+		items.door = TerrestriaRegistry.registerRedstoneBlockItem(name + "_door", blocks.door);
 		items.button = TerrestriaRegistry.registerRedstoneBlockItem(name + "_button", blocks.button);
 		items.pressurePlate = TerrestriaRegistry.registerRedstoneBlockItem(name + "_pressure_plate", blocks.pressurePlate);
 		items.trapdoor = TerrestriaRegistry.registerRedstoneBlockItem(name + "_trapdoor", blocks.trapdoor);
