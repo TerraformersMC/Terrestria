@@ -11,10 +11,7 @@ import it.unimi.dsi.fastutil.ints.Int2ReferenceMap;
 import it.unimi.dsi.fastutil.ints.Int2ReferenceMaps;
 import it.unimi.dsi.fastutil.ints.Int2ReferenceOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.*;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import org.jetbrains.annotations.NotNull;
@@ -125,7 +122,7 @@ public class BiomePerimeters {
 
 		// If we are on the perimeter, avoid some difficult "edge" cases (har har) by short-circuiting.
 		for (EightWayDirection direction : EightWayDirection.values()) {
-			if (!checkBiome(biomeAccess, pos.add(direction.method_42015(), 0, direction.method_42016()), threadLocalCache)) {
+			if (!checkBiome(biomeAccess, pos.add(direction.getOffsetX(), 0, direction.getOffsetZ()), threadLocalCache)) {
 				return 0;
 			}
 		}
@@ -145,8 +142,8 @@ public class BiomePerimeters {
 		// Try to find our closest perimeter point.
 		for (EightWayDirection direction : EightWayDirection.values()) {
 			horizon = (direction.ordinal() % 2 == 0) ? cardinalHorizon : ordinalHorizon;
-			dx = direction.method_42015();
-			dz = direction.method_42016();
+			dx = direction.getOffsetX();
+			dz = direction.getOffsetZ();
 
 			for (int radius = 0; radius < horizon; radius++) {
 				iterPos = pos.add(dx * radius, 0, dz * radius);
@@ -196,9 +193,9 @@ public class BiomePerimeters {
 				orientation = getEightWayClockwiseRotation(orientation, 5);
 				for (int rotation = 2; rotation < 8; rotation++) {
 					orientation = getEightWayClockwiseRotation(orientation, 1);
-					if (!checkBiome(biomeAccess, current.pos.add(orientation.method_42015(), 0, orientation.method_42016()), threadLocalCache)) {
+					if (!checkBiome(biomeAccess, current.pos.add(orientation.getOffsetX(), 0, orientation.getOffsetZ()), threadLocalCache)) {
 						orientation = getEightWayClockwiseRotation(orientation, -1);
-						BlockPos prospect = current.pos.add(orientation.method_42015(), 0, orientation.method_42016());
+						BlockPos prospect = current.pos.add(orientation.getOffsetX(), 0, orientation.getOffsetZ());
 						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(prospect)).perimeters.get(CacheRecord.getIndex(prospect));
 						if (prospectPoint != null) {
 							prospectPoint.setRight(current);
@@ -242,9 +239,9 @@ public class BiomePerimeters {
 				orientation = getEightWayClockwiseRotation(orientation, 3);
 				for (int rotation = 2; rotation < 8; rotation++) {
 					orientation = getEightWayClockwiseRotation(orientation, -1);
-					if (!checkBiome(biomeAccess, current.pos.add(orientation.method_42015(), 0, orientation.method_42016()), threadLocalCache)) {
+					if (!checkBiome(biomeAccess, current.pos.add(orientation.getOffsetX(), 0, orientation.getOffsetZ()), threadLocalCache)) {
 						orientation = getEightWayClockwiseRotation(orientation, 1);
-						BlockPos prospect = current.pos.add(orientation.method_42015(), 0, orientation.method_42016());
+						BlockPos prospect = current.pos.add(orientation.getOffsetX(), 0, orientation.getOffsetZ());
 						BiomePerimeterPoint prospectPoint = getCache(threadLocalCache, new ChunkPos(prospect)).perimeters.get(CacheRecord.getIndex(prospect));
 						if (prospectPoint != null) {
 							// Detect when we are passing through the same path we passed through on the left.
@@ -320,7 +317,7 @@ public class BiomePerimeters {
 		float upper = MAX_HORIZON;
 
 		for (EightWayDirection direction : EightWayDirection.values()) {
-			final BlockPos neighborPos = pos.add(direction.method_42015(), 0, direction.method_42016());
+			final BlockPos neighborPos = pos.add(direction.getOffsetX(), 0, direction.getOffsetZ());
 			int neighbor = getCache(threadLocalCache, new ChunkPos(neighborPos)).biomeCache.getOrDefault(CacheRecord.getIndex(neighborPos), -1);
 
 			if (neighbor > 0) {
