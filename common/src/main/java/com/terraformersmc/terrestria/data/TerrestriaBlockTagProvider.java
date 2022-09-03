@@ -60,7 +60,10 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 
 		this.getOrCreateTagBuilder(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
-			.add(Blocks.SMOOTH_SANDSTONE);
+			.add(Blocks.SMOOTH_SANDSTONE)
+			.add(TerrestriaBlocks.ANDISOL.getDirt())
+			.add(TerrestriaBlocks.ANDISOL.getGrassBlock())
+			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
 
 		this.getOrCreateTagBuilder(BlockTags.SAPLINGS)
 			.add(TerrestriaBlocks.BRYCE_SAPLING)
