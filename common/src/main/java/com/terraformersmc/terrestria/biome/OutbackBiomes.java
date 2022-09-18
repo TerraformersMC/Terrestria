@@ -37,8 +37,8 @@ public class OutbackBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_DEAD_GRASS);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS);
-		DefaultBiomeFeatures.addSavannaGrass(builder);
 		DefaultBiomeFeatures.addDesertDeadBushes(builder);
+		DefaultBiomeFeatures.addSavannaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
 		DefaultBiomeFeatures.addDesertFeatures(builder);
