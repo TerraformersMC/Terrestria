@@ -162,7 +162,7 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 
 	private void addWoodDrops(WoodBlocks woodBlock, @Nullable SaplingBlock sapling) {
 		addDrop(woodBlock.button);
-		addDrop(woodBlock.door, BlockLootTableGenerator::doorDrops);
+		addDrop(woodBlock.door, BlockLootTableGenerator::addDoorDrop);
 		addDrop(woodBlock.fence);
 		addDrop(woodBlock.fenceGate);
 		addDrop(woodBlock.log);
