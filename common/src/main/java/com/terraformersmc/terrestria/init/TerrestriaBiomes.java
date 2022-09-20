@@ -104,18 +104,18 @@ public class TerrestriaBiomes {
 		CanyonBiomes.register();
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
-		DenseWoodlandsBiomes.register();
 		DunesBiomes.register();
 		HemlockRainforestBiomes.register();
-		LushRedwoodForestBiomes.register();
+		JapaneseMapleForestBiomes.register();
 		LushDesertBiomes.register();
+		LushRedwoodForestBiomes.register();
+		OutbackBiomes.register();
 		RainbowRainforestBiomes.register();
 		RedwoodForestBiomes.register();
 		SakuraForestBiomes.register();
 		SnowyHemlockRainforestBiomes.register();
-		JapaneseMapleForestBiomes.register();
 		VolcanicIslandBiomes.register();
-		OutbackBiomes.register();
+		WoodlandsBiomes.register();
 	}
 
 	public static RegistryKey<Biome> register(String name, Biome biome) {

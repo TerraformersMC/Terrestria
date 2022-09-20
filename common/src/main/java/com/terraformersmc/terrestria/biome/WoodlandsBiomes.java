@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
-public class DenseWoodlandsBiomes {
+public class WoodlandsBiomes {
 	public static void register() {
 		final Biome.Builder template = new Biome.Builder()
 				.precipitation(Biome.Precipitation.RAIN)
