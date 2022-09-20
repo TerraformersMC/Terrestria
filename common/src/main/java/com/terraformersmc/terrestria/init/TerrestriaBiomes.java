@@ -36,11 +36,12 @@ public class TerrestriaBiomes {
 	public static RegistryKey<Biome> OUTBACK;
 	public static RegistryKey<Biome> RAINBOW_RAINFOREST;
 	public static RegistryKey<Biome> REDWOOD_FOREST;
-	public static RegistryKey<Biome> WINDSWEPT_REDWOOD_FOREST;
 	public static RegistryKey<Biome> SAKURA_FOREST;
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_FOREST;
 	public static RegistryKey<Biome> SNOWY_HEMLOCK_TREELINE;
 	public static RegistryKey<Biome> VOLCANIC_ISLAND;
+	public static RegistryKey<Biome> WINDSWEPT_REDWOOD_FOREST;
+	public static RegistryKey<Biome> WINDSWEPT_WOODLANDS;
 
 
 	public static void addBasicFeatures(GenerationSettings.Builder generationSettings) {

@@ -27,6 +27,12 @@ public class DenseWoodlandsBiomes {
 				.spawnSettings(defaultSpawnSettings().build())
 				.build()
 		);
+
+		TerrestriaBiomes.WINDSWEPT_WOODLANDS = TerrestriaBiomes.register("windswept_woodlands", template
+				.generationSettings(windsweptWoodlandsGenerationSettings().build())
+				.spawnSettings(defaultSpawnSettings().build())
+				.build()
+		);
 	}
 
 	private static GenerationSettings.Builder denseWoodlandsGenerationSettings() {
@@ -35,8 +41,28 @@ public class DenseWoodlandsBiomes {
 		DefaultBiomeFeatures.addPlainsTallGrass(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_FANCY_OAK_TREES);
+		// TODO: "oak spruce" is a placeholder until we get cedar trees
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_OAK_SPRUCE_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_OAK_SHRUBS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_DENSE_WOODLANDS_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_OAK_LOGS);
+		DefaultBiomeFeatures.addPlainsFeatures(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		return builder;
+	}
+
+	private static GenerationSettings.Builder windsweptWoodlandsGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		addBasicFeatures(builder);
+		DefaultBiomeFeatures.addPlainsTallGrass(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		// TODO: "oak spruce" is a placeholder until we get cedar trees
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_OAK_SPRUCE_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_OAK_SHRUBS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_DENSE_WOODLANDS_TREES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_FALLEN_OAK_LOGS);
 		DefaultBiomeFeatures.addPlainsFeatures(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);

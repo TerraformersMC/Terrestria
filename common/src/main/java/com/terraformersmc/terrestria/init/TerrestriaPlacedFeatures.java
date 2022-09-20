@@ -122,6 +122,8 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryEntry<PlacedFeature> FALLEN_REDWOOD_LOGS = createPlacedTreeFeature("fallen_redwood_logs", 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 	public static final RegistryEntry<PlacedFeature> DENSE_FALLEN_HEMLOCK_LOGS = createPlacedTreeFeature("dense_fallen_hemlock_logs", 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 	public static final RegistryEntry<PlacedFeature> DENSE_FALLEN_REDWOOD_LOGS = createPlacedTreeFeature("dense_fallen_redwood_logs", 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+	public static final RegistryEntry<PlacedFeature> SPARSE_FALLEN_OAK_LOGS = createPlacedTreeFeature("sparse_fallen_oak_logs", 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_OAK_LOG);
+	public static final RegistryEntry<PlacedFeature> DENSE_FALLEN_OAK_LOGS = createPlacedTreeFeature("dense_fallen_oak_logs", 3, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_OAK_LOG);
 
 	public static final RegistryEntry<PlacedFeature> SPARSE_SMALL_HEMLOCK_TREES = createPlacedTreeFeature("sparse_small_hemlock_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 	public static final RegistryEntry<PlacedFeature> SPARSE_SMALL_REDWOOD_TREES = createPlacedTreeFeature("sparse_small_redwood_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
@@ -172,9 +174,11 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryEntry<PlacedFeature> DENSEST_MEGA_REDWOOD_TREES = createPlacedTreeFeature("densest_mega_redwood_trees", 7, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 	public static final RegistryEntry<PlacedFeature> DENSEST_MEGA_HEMLOCK_TREES = createPlacedTreeFeature("densest_mega_hemlock_trees", 8, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-	public static final RegistryEntry<PlacedFeature> DENSE_FANCY_OAK_TREES = createPlacedTreeFeature("dense_fancy_oak_trees", 3, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
 	public static final RegistryEntry<PlacedFeature> DENSER_FANCY_OAK_TREES = createPlacedTreeFeature("denser_fancy_oak_trees", 5, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
-	public static final RegistryEntry<PlacedFeature> DENSEST_FANCY_OAK_TREES = createPlacedTreeFeature("densest_fancy_oak_trees", 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
+
+	public static final RegistryEntry<PlacedFeature> SPARSE_DENSE_WOODLANDS_TREES = createPlacedTreeFeature("sparse_dense_woodlands_trees", 1, ON_DIRT, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
+	public static final RegistryEntry<PlacedFeature> DENSE_DENSE_WOODLANDS_TREES = createPlacedTreeFeature("dense_dense_woodlands_trees", 3, ON_DIRT, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
+	public static final RegistryEntry<PlacedFeature> DENSEST_DENSE_WOODLANDS_TREES = createPlacedTreeFeature("densest_dense_woodlands_trees", 7, ON_DIRT, TerrestriaConfiguredFeatures.DENSE_WOODLAND_TREE);
 
 	public static final RegistryEntry<PlacedFeature> JUNGLE_PALM_TREES = createPlacedFeature("jungle_palm_trees",
 			TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
@@ -221,6 +225,8 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryEntry<PlacedFeature> RARE_YUCCA_PALM_TREES = createPlacedTreeFeature("yucca_palm_trees", 0, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE);
 	public static final RegistryEntry<PlacedFeature> ACACIA_DOT_SHRUBS = createPlacedTreeFeature("acacia_dot_shrubs", 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB);
 	public static final RegistryEntry<PlacedFeature> OAK_DOT_SHRUBS = createPlacedTreeFeature("oak_dot_shrubs", 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
+
+	public static final RegistryEntry<PlacedFeature> SMALL_OAK_SPRUCE_TREES = createPlacedTreeFeature("small_oak_spruce_trees", 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_OAK_SPRUCE);
 
 	public static final RegistryEntry<PlacedFeature> SAGUARO_CACTUSES = createPlacedTreeFeature("saguaro_cactuses", 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS_FEATURE);
 

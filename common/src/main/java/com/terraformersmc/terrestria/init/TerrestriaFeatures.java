@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.CattailFeature;
 import com.terraformersmc.terrestria.feature.misc.DumDumHeadFeature;
+import com.terraformersmc.terrestria.feature.tree.treeconfigs.DenseWoodlandTreeConfig;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
 
 import net.minecraft.util.Identifier;
@@ -21,6 +22,7 @@ public class TerrestriaFeatures {
 	public static CattailFeature CATTAIL;
 	public static Feature<DefaultFeatureConfig> DUM_DUM_HEAD;
 	public static TreeFeature QUARTERED_MEGA_TREE;
+	public static TreeFeature DENSE_WOODLAND_TREE;
 
 	@SuppressWarnings({"rawtypes, unchecked"})
 	public static void init() {
@@ -29,6 +31,7 @@ public class TerrestriaFeatures {
 
 		// Super hacky casts, but it works
 		QUARTERED_MEGA_TREE = register("quartered_mega_tree", new TreeFeature((Codec) QuarteredMegaTreeConfig.CODEC));
+		DENSE_WOODLAND_TREE = register("dense_woodland_tree", new TreeFeature((Codec) DenseWoodlandTreeConfig.CODEC));
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {

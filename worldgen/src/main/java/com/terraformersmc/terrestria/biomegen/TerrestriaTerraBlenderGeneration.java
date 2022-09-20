@@ -41,6 +41,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_FOREST))     { this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST); }
 		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_TREELINE))   { this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE); }
 		if (BIOME_CONFIG.isBiomeEnabled(WINDSWEPT_REDWOOD_FOREST)) { this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_FOREST, WINDSWEPT_REDWOOD_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(WINDSWEPT_WOODLANDS))      { this.addBiomeSimilar(mapper, BiomeKeys.WINDSWEPT_HILLS, WINDSWEPT_WOODLANDS); }
 
 		// Balancing low-utilization areas with vanilla biomes.
 		this.addBiomeSimilar(mapper, BiomeKeys.RIVER, BiomeKeys.RIVER);
