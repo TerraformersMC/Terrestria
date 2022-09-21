@@ -23,6 +23,7 @@ public class TerrestriaBiomes {
 
 	public static RegistryKey<Biome> CALDERA;
 	public static RegistryKey<Biome> CANYON;
+	public static RegistryKey<Biome> CHALK_ISLAND;
 	public static RegistryKey<Biome> CYPRESS_FOREST;
 	public static RegistryKey<Biome> CYPRESS_SWAMP;
 	public static RegistryKey<Biome> DENSE_WOODLANDS;
@@ -101,6 +102,7 @@ public class TerrestriaBiomes {
 	public static void init() {
 		CalderaBiomes.register();
 		CanyonBiomes.register();
+		ChalkIslandBiomes.register();
 		CypressForestBiomes.register();
 		CypressSwampBiomes.register();
 		DenseWoodlandsBiomes.register();

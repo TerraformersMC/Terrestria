@@ -23,6 +23,15 @@ public class TerrestriaSurfaceBuilders {
 				Blocks.TERRACOTTA.getDefaultState()
 			).setBiomeKey(TerrestriaBiomes.CANYON));
 
+		builders.add(new CliffedSurfaceBuilder(
+				Blocks.GRASS_BLOCK.getDefaultState(),
+				Blocks.DIRT.getDefaultState(),
+				Blocks.CALCITE.getDefaultState(),
+				Blocks.SAND.getDefaultState(),
+				Blocks.GRAVEL.getDefaultState(),
+				48
+		).setBiomeKey(TerrestriaBiomes.CHALK_ISLAND));
+
 		builders.add(new DuneSurfaceBuilder(Blocks.SAND.getDefaultState()).setBiomeKey(TerrestriaBiomes.DUNES));
 
 		builders.add(new OceanIslandSurfaceBuilder(

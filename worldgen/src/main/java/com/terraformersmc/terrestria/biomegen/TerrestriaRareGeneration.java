@@ -25,6 +25,7 @@ public class TerrestriaRareGeneration extends Region implements TerraBlenderApi 
 	@Override
 	public void addBiomes(Registry<Biome> registry, Consumer<Pair<MultiNoiseUtil.NoiseHypercube, RegistryKey<Biome>>> mapper) {
 		this.addModifiedVanillaOverworldBiomes(mapper, builder -> {
+			if (BIOME_CONFIG.isBiomeEnabled(CHALK_ISLAND))       { builder.replaceBiome(BiomeKeys.DEEP_OCEAN, CHALK_ISLAND); }
 			if (BIOME_CONFIG.isBiomeEnabled(DUNES))              { builder.replaceBiome(BiomeKeys.DESERT, DUNES); }
 			if (BIOME_CONFIG.isBiomeEnabled(HEMLOCK_TREELINE))   { builder.replaceBiome(BiomeKeys.MEADOW, HEMLOCK_TREELINE); }
 			if (BIOME_CONFIG.isBiomeEnabled(RAINBOW_RAINFOREST)) { builder.replaceBiome(BiomeKeys.JUNGLE, RAINBOW_RAINFOREST); }

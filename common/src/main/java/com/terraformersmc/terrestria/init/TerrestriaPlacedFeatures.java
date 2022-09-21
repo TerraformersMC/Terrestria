@@ -203,6 +203,7 @@ public class TerrestriaPlacedFeatures {
 	public static final RegistryEntry<PlacedFeature> DENSE_JAPANESE_MAPLE_SHRUBS = createPlacedTreeFeature("dense_japanese_maple_shrubs", 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
 	public static final RegistryEntry<PlacedFeature> DENSER_SAKURA_TREES = createPlacedTreeFeature("denser_sakura_trees", 6, ON_DIRT, TerrestriaConfiguredFeatures.SAKURA_TREE);
 
+	public static final RegistryEntry<PlacedFeature> DENSE_CYPRESS_TREES = createPlacedTreeFeature("dense_cypress_trees", 8, ON_DIRT, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 	public static final RegistryEntry<PlacedFeature> DENSEST_CYPRESS_TREES = createPlacedTreeFeature("densest_cypress_trees", 9, ON_DIRT, TerrestriaConfiguredFeatures.CYPRESS_TREE);
 
 	public static final RegistryEntry<PlacedFeature> DENSER_RAINBOW_EUCALYPTUS_TREES = createPlacedTreeFeature("denser_rainbow_eucalyptus_trees", 5, 3, ON_DIRT, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
