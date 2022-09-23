@@ -34,9 +34,10 @@ public class PyramidFoliagePlacer extends FoliagePlacer {
 
 	@Override
 	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, TreeNode treeNode, int foliageHeight, int radius, int offset) {
+		double leavesRadius = Math.min(trunkHeight * 0.75, radius) - offset + 0.3;
 
 		// Add 0.25 to make it not a square and also not a single block
-		Shapes.ellipticalPyramid(2 * radius + 0.25,2 * radius + 0.25,trunkHeight + 0.25)
+		Shapes.ellipticalPyramid(leavesRadius, leavesRadius, trunkHeight + 0.25)
 				.applyLayer(TranslateLayer.of(Position.of(treeNode.getCenter()).move(0, -trunkHeight, 0)))
 				.stream()
 				.forEach((block) -> {

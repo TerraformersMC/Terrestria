@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
+import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.DenseWoodlandTreeConfig;
@@ -24,7 +25,6 @@ import net.minecraft.world.gen.feature.size.TwoLayersFeatureSize;
 import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.foliage.BushFoliagePlacer;
 import net.minecraft.world.gen.foliage.LargeOakFoliagePlacer;
-import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
@@ -198,10 +198,10 @@ public class TerrestriaConfiguredFeatures {
 				SimpleBlockStateProvider.of(Blocks.OAK_WOOD)));
 
 		SMALL_OAK_SPRUCE = register("small_oak_spruce", Feature.TREE, new TreeFeatureConfig.Builder(
-				SimpleBlockStateProvider.of(Blocks.SPRUCE_LOG.getDefaultState()),
-				new StraightTrunkPlacer(4, 1, 0),
+				SimpleBlockStateProvider.of(TerrestriaBlocks.SMALL_OAK_LOG.getDefaultState().with(SmallLogBlock.HAS_LEAVES, true)),
+				new StraightTrunkPlacer(4, 2, 0),
 				SimpleBlockStateProvider.of(Blocks.OAK_LEAVES.getDefaultState()),
-				new PyramidFoliagePlacer(ConstantIntProvider.create(2), UniformIntProvider.create(2, 4)),
+				new PyramidFoliagePlacer(ConstantIntProvider.create(4), ConstantIntProvider.create(1)),
 				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
 				.build());
