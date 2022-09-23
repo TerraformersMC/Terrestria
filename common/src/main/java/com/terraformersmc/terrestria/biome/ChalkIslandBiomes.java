@@ -39,8 +39,10 @@ public class ChalkIslandBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.BIRCH_TALL);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSE_CYPRESS_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.TREES_BIRCH);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TreePlacedFeatures.SUPER_BIRCH_BEES);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TreePlacedFeatures.SUPER_BIRCH_BEES_0002);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.PATCH_CHALK_ISLAND_GRASS);
 		DefaultBiomeFeatures.addDefaultFlowers(builder);
-		DefaultBiomeFeatures.addDefaultGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_DEEP);

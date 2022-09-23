@@ -47,14 +47,28 @@ public class TerrestriaPlacedFeatures {
 			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 			BlockFilterPlacementModifier.of(ON_DIRT));
 
+	private static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_CHALK_ISLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.register("patch_chalk_island_grass", Feature.RANDOM_PATCH,
+			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
+							new WeightedBlockStateProvider(createStatePoolBuilder()
+									.add(Blocks.GRASS.getDefaultState(), 2)
+									.add(Blocks.FERN.getDefaultState(), 1)
+									.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
+									.build())),
+					BlockPredicate.IS_AIR)));
+	public static final RegistryEntry<PlacedFeature> PATCH_CHALK_ISLAND_GRASS = createPlacedFeature("patch_chalk_island_grass", PATCH_CHALK_ISLAND_GRASS_CONFIGURED,
+			CountPlacementModifier.of(12),
+			SquarePlacementModifier.of(),
+			PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
+			BlockFilterPlacementModifier.of(ON_DIRT));
+
 	private static final RegistryEntry<ConfiguredFeature<RandomPatchFeatureConfig, ?>> PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED = TerrestriaConfiguredFeatures.register("patch_volcanic_island_grass", Feature.RANDOM_PATCH,
 			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
-					new WeightedBlockStateProvider(createStatePoolBuilder()
-							.add(Blocks.GRASS.getDefaultState(), 1)
-							.add(Blocks.FERN.getDefaultState(), 1)
-							.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
-							.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
-							.build())),
+							new WeightedBlockStateProvider(createStatePoolBuilder()
+									.add(Blocks.GRASS.getDefaultState(), 1)
+									.add(Blocks.FERN.getDefaultState(), 1)
+									.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
+									.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
+									.build())),
 					BlockPredicate.IS_AIR)));
 	public static final RegistryEntry<PlacedFeature> PATCH_VOLCANIC_ISLAND_GRASS = createPlacedFeature("patch_volcanic_island_grass", PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED,
 			CountPlacementModifier.of(12),
