@@ -197,12 +197,12 @@ public class TerrestriaConfiguredFeatures {
 				SimpleBlockStateProvider.of(Blocks.OAK_LOG),
 				SimpleBlockStateProvider.of(Blocks.OAK_WOOD)));
 
-		SMALL_OAK_SPRUCE = register("small_spruce", Feature.TREE, new TreeFeatureConfig.Builder(
+		SMALL_OAK_SPRUCE = register("small_oak_spruce", Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(Blocks.SPRUCE_LOG.getDefaultState()),
 				new StraightTrunkPlacer(4, 1, 0),
 				SimpleBlockStateProvider.of(Blocks.OAK_LEAVES.getDefaultState()),
-				new SpruceFoliagePlacer(ConstantIntProvider.create(2), UniformIntProvider.create(0, 1), UniformIntProvider.create(1, 2)),
-				new TwoLayersFeatureSize(2, 0, 2))
+				new PyramidFoliagePlacer(ConstantIntProvider.create(2), UniformIntProvider.create(2, 4)),
+				new TwoLayersFeatureSize(1, 0, 1))
 				.ignoreVines()
 				.build());
 

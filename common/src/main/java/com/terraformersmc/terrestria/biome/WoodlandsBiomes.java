@@ -41,11 +41,11 @@ public class WoodlandsBiomes {
 		DefaultBiomeFeatures.addPlainsTallGrass(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_DENSE_WOODLANDS_TREES);
 		// TODO: "oak spruce" is a placeholder until we get cedar trees
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SMALL_OAK_SPRUCE_TREES);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_OAK_SHRUBS);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.DENSEST_DENSE_WOODLANDS_TREES);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_FALLEN_OAK_LOGS);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, TerrestriaPlacedFeatures.SPARSE_OAK_SHRUBS);
 		DefaultBiomeFeatures.addPlainsFeatures(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
