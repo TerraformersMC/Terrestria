@@ -45,6 +45,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.add(TerrestriaBlocks.POTTED_WILLOW_SAPLING)
 			.add(TerrestriaBlocks.POTTED_YUCCA_PALM_SAPLING);
 
+		this.getOrCreateTagBuilder(BlockTags.GOATS_SPAWNABLE_ON)
+			.add(Blocks.CALCITE);
+
 		this.getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)

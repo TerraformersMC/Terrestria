@@ -29,7 +29,7 @@ public class TerrestriaSurfaceBuilders {
 				Blocks.CALCITE.getDefaultState(),
 				Blocks.SAND.getDefaultState(),
 				Blocks.GRAVEL.getDefaultState(),
-				48
+				80
 		).setBiomeKey(TerrestriaBiomes.CHALK_ISLAND));
 
 		builders.add(new DuneSurfaceBuilder(Blocks.SAND.getDefaultState()).setBiomeKey(TerrestriaBiomes.DUNES));
