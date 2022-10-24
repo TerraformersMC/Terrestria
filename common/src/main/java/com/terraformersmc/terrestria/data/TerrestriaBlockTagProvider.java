@@ -170,13 +170,14 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	private void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
 		FabricTagBuilder<Block> stoneBuilder = getOrCreateTagBuilder(stoneTag);
 		if (stoneBlock.bricks != null) {
-			stoneBuilder
-				.add(stoneBlock.bricks.full)
-
-				.add(stoneBlock.chiseledBricks)
-				.add(stoneBlock.crackedBricks);
-
+			stoneBuilder.add(stoneBlock.bricks.full);
 			addStoneVariant(stoneBlock.bricks);
+
+			stoneBuilder.add(stoneBlock.chiseledBricks);
+			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.chiseledBricks);
+
+			stoneBuilder.add(stoneBlock.crackedBricks);
+			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.crackedBricks);
 		}
 		if (stoneBlock.cobblestone != null) {
 			stoneBuilder.add(stoneBlock.cobblestone.full);
