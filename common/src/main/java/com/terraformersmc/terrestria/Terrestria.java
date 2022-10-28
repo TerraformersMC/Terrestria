@@ -29,7 +29,6 @@ public class Terrestria implements ModInitializer {
 		CONFIG_MANAGER.getGeneralConfig();
 
 		TerrestriaBlocks.init();
-		TerrestriaBoats.init();
 		TerrestriaItems.init();
 		TerrestriaPlacementModifierType.init();
 		TerrestriaFoliagePlacerTypes.init();

@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.boat.api.TerraformBoatType;
 import com.terraformersmc.terraform.boat.impl.item.TerraformBoatItem;
 
 import net.minecraft.item.BlockItem;
@@ -28,7 +29,8 @@ public class WoodItems {
 	private WoodItems() {
 	}
 
-	public static WoodItems register(String name, WoodBlocks blocks, TerraformBoatItem boatItem, TerraformBoatItem chestBoatItem) {
+	public static WoodItems register(String name, WoodBlocks blocks) {
+		TerraformBoatType boatType;
 		WoodItems items = new WoodItems();
 
 		items.log = TerrestriaRegistry.registerBuildingBlockItem(name + "_log", blocks.log);
@@ -44,8 +46,12 @@ public class WoodItems {
 		items.trapdoor = TerrestriaRegistry.registerRedstoneBlockItem(name + "_trapdoor", blocks.trapdoor);
 		items.sign = TerrestriaRegistry.registerSignItem(name + "_sign", blocks.sign, blocks.wallSign);
 		items.strippedLog = TerrestriaRegistry.registerBuildingBlockItem("stripped_" + name + "_log", blocks.strippedLog);
-		items.boat = boatItem;
-		items.chestBoat = chestBoatItem;
+
+		boatType = TerrestriaBoats.register(name, items.planks);
+		if (boatType != null) {
+			items.boat = (TerraformBoatItem) boatType.getItem();
+			items.chestBoat = (TerraformBoatItem) boatType.getChestItem();
+		}
 
 		if (blocks.log != blocks.wood) {
 			items.wood = TerrestriaRegistry.registerBuildingBlockItem(name + "_wood", blocks.wood);
