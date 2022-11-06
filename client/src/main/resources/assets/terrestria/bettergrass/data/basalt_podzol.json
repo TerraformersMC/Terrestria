@@ -1,0 +1,10 @@
+{
+  "layers": [
+    {
+      "textures": {
+        "top": "minecraft:block/podzol_top",
+        "side": "terrestria:block/basalt_podzol"
+      }
+    }
+  ]
+}

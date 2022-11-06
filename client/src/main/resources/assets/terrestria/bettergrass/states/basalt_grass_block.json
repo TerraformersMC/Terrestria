@@ -1,0 +1,11 @@
+{
+  "type": "grass",
+  "variants": {
+    "snowy=false": {
+      "data": "terrestria:bettergrass/data/basalt_grass_block"
+    },
+    "snowy=true": {
+      "data": "terrestria:bettergrass/data/basalt_grass_block_snow"
+    }
+  }
+}

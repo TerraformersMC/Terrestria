@@ -1,0 +1,21 @@
+{
+  "layers": [
+    {
+      "textures": {
+        "top": "lambdabettergrass:block/grass_block_side_shadow",
+        "side": "terrestria:block/basalt_dirt"
+      }
+    },
+    {
+      "color_index": 0,
+      "textures": {
+        "top": "minecraft:block/grass_block_top",
+        "side": "minecraft:block/grass_block_side_overlay"
+      },
+      "masks": {
+        "blend_up": "lambdabettergrass:bettergrass/mask/grass_block_side_blend_up",
+        "arch": "lambdabettergrass:bettergrass/mask/grass_block_side_arch_blend"
+      }
+    }
+  ]
+}
