@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WaterCreatureEntity.class)
-public abstract class MixinWaterCreatureEntity extends PathAwareEntity implements Monster {
+public abstract class MixinWaterCreatureEntity extends PathAwareEntity {
 	public MixinWaterCreatureEntity(EntityType<? extends PathAwareEntity> type, World world) {
 		super(type, world);
 	}
