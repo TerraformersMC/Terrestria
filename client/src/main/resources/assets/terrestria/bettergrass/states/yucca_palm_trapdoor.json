@@ -1,0 +1,8 @@
+{
+  "type": "layer",
+  "variants":{
+    "waterlogged=false": {
+      "data": "terrestria:bettergrass/data/yucca_palm_trapdoor"
+    }
+  }
+}
