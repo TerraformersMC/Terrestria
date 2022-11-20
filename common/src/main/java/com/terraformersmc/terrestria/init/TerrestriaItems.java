@@ -1,24 +1,28 @@
 package com.terraformersmc.terrestria.init;
 
+import com.terraformersmc.terrestria.init.helpers.QuarteredWoodItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 
 import com.terraformersmc.terrestria.item.LogTurnerItem;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
 public class TerrestriaItems {
-	public static WoodItems REDWOOD;
-	public static WoodItems HEMLOCK;
+	public static QuarteredWoodItems REDWOOD;
+	public static QuarteredWoodItems HEMLOCK;
 	public static WoodItems RUBBER;
-	public static WoodItems CYPRESS;
+	public static QuarteredWoodItems CYPRESS;
 	public static WoodItems WILLOW;
 	public static WoodItems JAPANESE_MAPLE;
-	public static WoodItems RAINBOW_EUCALYPTUS;
+	public static QuarteredWoodItems RAINBOW_EUCALYPTUS;
 	public static WoodItems SAKURA;
 	public static WoodItems YUCCA_PALM;
 
@@ -76,13 +80,13 @@ public class TerrestriaItems {
 
 	public static void init() {
 
-		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
-		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
+		REDWOOD = QuarteredWoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
+		HEMLOCK = QuarteredWoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
 		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
-		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
+		CYPRESS = QuarteredWoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
 		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
 		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
-		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+		RAINBOW_EUCALYPTUS = QuarteredWoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
 		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
 		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM);
 
@@ -96,17 +100,6 @@ public class TerrestriaItems {
 		SAKURA_LEAF_PILE = TerrestriaRegistry.registerDecorationBlockItem("sakura_leaf_pile", TerrestriaBlocks.SAKURA_LEAF_PILE);
 
 		CATTAIL = TerrestriaRegistry.registerDecorationBlockItem("cattail", TerrestriaBlocks.CATTAIL);
-
-		// TODO: make this automatic with a new QuarteredWoodItems like QuarteredWoodBlocks
-		REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("redwood_quarter_log", TerrestriaBlocks.REDWOOD.quarterLog);
-		HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("hemlock_quarter_log", TerrestriaBlocks.HEMLOCK.quarterLog);
-		CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("cypress_quarter_log", TerrestriaBlocks.CYPRESS.quarterLog);
-		RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog);
-
-		STRIPPED_REDWOOD_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("stripped_redwood_quarter_log", TerrestriaBlocks.REDWOOD.strippedQuarterLog);
-		STRIPPED_HEMLOCK_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("stripped_hemlock_quarter_log", TerrestriaBlocks.HEMLOCK.strippedQuarterLog);
-		STRIPPED_CYPRESS_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("stripped_cypress_quarter_log", TerrestriaBlocks.CYPRESS.strippedQuarterLog);
-		STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG = TerrestriaRegistry.registerBuildingBlockItem("stripped_rainbow_eucalyptus_quarter_log", TerrestriaBlocks.RAINBOW_EUCALYPTUS.strippedQuarterLog);
 
 		BRYCE_SAPLING = TerrestriaRegistry.registerDecorationBlockItem("bryce_sapling", TerrestriaBlocks.BRYCE_SAPLING);
 		REDWOOD_SAPLING = TerrestriaRegistry.registerDecorationBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
@@ -122,7 +115,6 @@ public class TerrestriaItems {
 		JUNGLE_PALM_SAPLING = TerrestriaRegistry.registerDecorationBlockItem("jungle_palm_sapling", TerrestriaBlocks.JUNGLE_PALM_SAPLING);
 		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.registerDecorationBlockItem("saguaro_cactus_sapling", TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
 		YUCCA_PALM_SAPLING = TerrestriaRegistry.registerDecorationBlockItem("yucca_palm_sapling", TerrestriaBlocks.YUCCA_PALM_SAPLING);
-
 
 		VOLCANIC_ROCK = StoneItems.register("basalt", TerrestriaBlocks.VOLCANIC_ROCK);
 		BLACK_SAND = TerrestriaRegistry.registerBuildingBlockItem("basalt_sand", TerrestriaBlocks.BLACK_SAND);
@@ -140,5 +132,58 @@ public class TerrestriaItems {
 		DEAD_GRASS = TerrestriaRegistry.registerDecorationBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
 
 		LOG_TURNER = TerrestriaRegistry.registerItem("log_turner", new LogTurnerItem(new Item.Settings().group(ItemGroup.TOOLS)));
+
+		addCompostables();
+		addFuels();
+	}
+
+	private static void addCompostables() {
+		CompostingChanceRegistry compostingRegistry = CompostingChanceRegistry.INSTANCE;
+		float CACTUS_CHANCE = compostingRegistry.get(Items.CACTUS);
+		float FERN_CHANCE = compostingRegistry.get(Items.FERN);
+		float FLOWER_CHANCE = compostingRegistry.get(Items.POPPY);
+		float GRASS_CHANCE = compostingRegistry.get(Items.GRASS);
+		float LEAVES_CHANCE = compostingRegistry.get(Items.OAK_LEAVES);
+		float SAPLING_CHANCE = compostingRegistry.get(Items.OAK_SAPLING);
+		float SEAGRASS_CHANCE = compostingRegistry.get(Items.SEAGRASS);
+
+		compostingRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, LEAVES_CHANCE);
+		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, LEAVES_CHANCE);
+		compostingRegistry.add(JUNGLE_PALM_LEAVES, LEAVES_CHANCE);
+		compostingRegistry.add(SAKURA_LEAF_PILE, LEAVES_CHANCE);
+
+		compostingRegistry.add(SAGUARO_CACTUS, CACTUS_CHANCE);
+		compostingRegistry.add(TINY_CACTUS, CACTUS_CHANCE);
+
+		compostingRegistry.add(CATTAIL, SEAGRASS_CHANCE);
+
+		compostingRegistry.add(AGAVE, FLOWER_CHANCE);
+		compostingRegistry.add(ALOE_VERA, FLOWER_CHANCE);
+		compostingRegistry.add(DEAD_GRASS, GRASS_CHANCE);
+		compostingRegistry.add(INDIAN_PAINTBRUSH, FLOWER_CHANCE);
+		compostingRegistry.add(MONSTERAS, FERN_CHANCE);
+
+		// TODO: Consider if there's a reasonable way to make WoodItems do this.
+		compostingRegistry.add(BRYCE_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(CYPRESS_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(DARK_JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(HEMLOCK_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(JUNGLE_PALM_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(RAINBOW_EUCALYPTUS_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(REDWOOD_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(RUBBER_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(SAGUARO_CACTUS_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(SAKURA_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(WILLOW_SAPLING, SAPLING_CHANCE);
+		compostingRegistry.add(YUCCA_PALM_SAPLING, SAPLING_CHANCE);
+	}
+
+	private static void addFuels() {
+		FuelRegistry fuelRegistry = FuelRegistry.INSTANCE;
+
+		fuelRegistry.add(DEAD_GRASS, 100);
+		fuelRegistry.add(LOG_TURNER, 300);
 	}
 }

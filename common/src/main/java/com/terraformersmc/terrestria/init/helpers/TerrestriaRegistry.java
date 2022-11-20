@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.terraformersmc.terraform.leaves.ComposterRecipes;
 import com.terraformersmc.terrestria.Terrestria;
 
 import net.minecraft.block.Block;
@@ -28,8 +27,6 @@ public class TerrestriaRegistry {
 	public static BlockItem registerBlockItem(String name, Block block, ItemGroup itemGroup) {
 		BlockItem item = new BlockItem(block, new Item.Settings().group(itemGroup));
 		item.appendBlocks(Item.BLOCK_ITEMS, item);
-
-		ComposterRecipes.registerCompostableBlock(block);
 
 		return Registry.register(Registry.ITEM, new Identifier(Terrestria.MOD_ID, name), item);
 	}

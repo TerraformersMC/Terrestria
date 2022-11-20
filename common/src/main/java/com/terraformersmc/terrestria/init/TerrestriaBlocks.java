@@ -108,24 +108,19 @@ public class TerrestriaBlocks {
 	public static FlowerPotBlock POTTED_ALOE_VERA;
 
 	public static void init() {
-		FlammableBlockRegistry flammable = FlammableBlockRegistry.getDefaultInstance();
-
-		REDWOOD = QuarteredWoodBlocks.register("redwood", WoodColors.REDWOOD, flammable, true);
-		HEMLOCK = QuarteredWoodBlocks.register("hemlock", WoodColors.HEMLOCK, flammable, true);
-		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER, flammable);
-		CYPRESS = QuarteredWoodBlocks.register("cypress", WoodColors.CYPRESS, flammable);
-		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW, flammable);
-		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE, flammable);
-		RAINBOW_EUCALYPTUS = QuarteredWoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS, flammable);
-		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, flammable, WoodBlocks.LogSize.SMALL);
-		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, flammable, WoodBlocks.LogSize.SMALL);
+		REDWOOD = QuarteredWoodBlocks.register("redwood", WoodColors.REDWOOD, true);
+		HEMLOCK = QuarteredWoodBlocks.register("hemlock", WoodColors.HEMLOCK, true);
+		RUBBER = WoodBlocks.register("rubber", WoodColors.RUBBER);
+		CYPRESS = QuarteredWoodBlocks.register("cypress", WoodColors.CYPRESS);
+		WILLOW = WoodBlocks.register("willow", WoodColors.WILLOW);
+		JAPANESE_MAPLE = WoodBlocks.register("japanese_maple", WoodColors.JAPANESE_MAPLE);
+		RAINBOW_EUCALYPTUS = QuarteredWoodBlocks.register("rainbow_eucalyptus", WoodColors.RAINBOW_EUCALYPTUS);
+		SAKURA = WoodBlocks.register("sakura", WoodColors.SAKURA, WoodBlocks.LogSize.SMALL);
+		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, WoodBlocks.LogSize.SMALL);
 
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, null, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
 		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", new SmallLogBlock(Blocks.OAK_LEAVES, () -> STRIPPED_SMALL_OAK_LOG, FabricBlockSettings.copyOf(Blocks.OAK_PLANKS)));
 		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", new SaguaroCactusBlock(null, FabricBlockSettings.copyOf(Blocks.CACTUS)));
-
-		flammable.add(SMALL_OAK_LOG, 5, 5);
-		flammable.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
@@ -136,11 +131,6 @@ public class TerrestriaBlocks {
 		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 
 		SAKURA_LEAF_PILE = TerrestriaRegistry.register("sakura_leaf_pile", new LeafPileBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).mapColor(MapColor.PINK)));
-
-		flammable.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
-		flammable.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
-		flammable.add(JUNGLE_PALM_LEAVES, 30, 60);
-		flammable.add(SAKURA_LEAF_PILE, 30, 60);
 
 		TALL_CATTAIL = TerrestriaRegistry.register("tall_cattail", new TallCattailBlock(() -> TerrestriaItems.CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
 		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
@@ -205,6 +195,22 @@ public class TerrestriaBlocks {
 		POTTED_TINY_CACTUS = TerrestriaRegistry.register("potted_tiny_cactus", new FlowerPotBlock(TINY_CACTUS, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_AGAVE = TerrestriaRegistry.register("potted_agave", new FlowerPotBlock(AGAVE, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
+
+		addFlammables();
+	}
+
+	private static void addFlammables() {
+		FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
+
+		flammableRegistry.add(SMALL_OAK_LOG, 5, 5);
+		flammableRegistry.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
+
+		flammableRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
+		flammableRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);
+		flammableRegistry.add(JUNGLE_PALM_LEAVES, 30, 60);
+		flammableRegistry.add(SAKURA_LEAF_PILE, 30, 60);
+
+		flammableRegistry.add(DEAD_GRASS, 30, 60);
 	}
 
 	public static boolean never(BlockState state, BlockView world, BlockPos pos) {

@@ -9,7 +9,6 @@ import com.terraformersmc.terrestria.block.TerrestriaOptiLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.block.*;
 import net.minecraft.util.Identifier;
 
@@ -35,8 +34,8 @@ public class WoodBlocks {
 
 	public WoodBlocks() {}
 
-	protected static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry, LogSize size, boolean useExtendedLeaves) {
-		WoodBlocks blocks = registerManufactured(name, colors, registry);
+	protected static WoodBlocks register(String name, WoodColors colors, LogSize size, boolean useExtendedLeaves) {
+		WoodBlocks blocks = registerManufactured(name, colors);
 
 		if (useExtendedLeaves) {
 			if (size.equals(LogSize.SMALL)) {
@@ -63,20 +62,20 @@ public class WoodBlocks {
 			blocks.wood = TerrestriaRegistry.register(name + "_wood", new StrippableLogBlock(() -> blocks.strippedWood, colors.bark, FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.bark)));
 		}
 
-		blocks.addTreeFireInfo(registry);
+		blocks.addFlammables();
 
 		return blocks;
 	}
 
-	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry, LogSize size) {
-		return register(name, colors, registry, size, false);
+	public static WoodBlocks register(String name, WoodColors colors, LogSize size) {
+		return register(name, colors, size, false);
 	}
 
-	public static WoodBlocks register(String name, WoodColors colors, FlammableBlockRegistry registry) {
-		return register(name, colors, registry, LogSize.NORMAL, false);
+	public static WoodBlocks register(String name, WoodColors colors) {
+		return register(name, colors, LogSize.NORMAL, false);
 	}
 
-	public static WoodBlocks registerManufactured(String name, WoodColors colors, FlammableBlockRegistry registry) {
+	public static WoodBlocks registerManufactured(String name, WoodColors colors) {
 		WoodBlocks blocks = new WoodBlocks();
 		blocks.name = name;
 		blocks.colors = colors;
@@ -96,35 +95,30 @@ public class WoodBlocks {
 		blocks.sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, FabricBlockSettings.copyOf(Blocks.OAK_SIGN).mapColor(colors.planks)));
 		blocks.wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).mapColor(colors.planks)));
 
-		blocks.addManufacturedFireInfo(registry);
-
-		FuelRegistry.INSTANCE.add(blocks.fence, 300);
-		FuelRegistry.INSTANCE.add(blocks.fenceGate, 300);
-
 		return blocks;
 	}
 
-	public void addTreeFireInfo(FlammableBlockRegistry registry) {
-		registry.add(log, 5, 5);
-		registry.add(strippedLog, 5, 5);
+	protected void addFlammables() {
+		FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
 
-		if (wood != log) {
-			registry.add(wood, 5, 5);
-		}
+		// manufactured
+		flammableRegistry.add(fence, 5, 20);
+		flammableRegistry.add(fenceGate, 5, 20);
+		flammableRegistry.add(planks, 5, 20);
+		flammableRegistry.add(slab, 5, 20);
+		flammableRegistry.add(stairs, 5, 20);
 
+		// tree
+		flammableRegistry.add(log, 5, 5);
+		flammableRegistry.add(strippedLog, 5, 5);
 		if (strippedWood != strippedLog) {
-			registry.add(strippedWood, 5, 5);
+			flammableRegistry.add(strippedWood, 5, 5);
+		}
+		if (wood != log) {
+			flammableRegistry.add(wood, 5, 5);
 		}
 
-		registry.add(leaves, 30, 60);
-	}
-
-	public void addManufacturedFireInfo(FlammableBlockRegistry registry) {
-		registry.add(planks, 5, 20);
-		registry.add(slab, 5, 20);
-		registry.add(stairs, 5, 20);
-		registry.add(fence, 5, 20);
-		registry.add(fenceGate, 5, 20);
+		flammableRegistry.add(leaves, 30, 60);
 	}
 
 	public enum LogSize {
