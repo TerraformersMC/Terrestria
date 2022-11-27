@@ -32,18 +32,18 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 	protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
 		// misc. recipes
 		new ShapelessRecipeJsonBuilder(TerrestriaItems.BRYCE_SAPLING, 1)
-				.input(Items.OAK_SAPLING)
-				.input(Items.STICK)
-				.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
-				.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
+			.input(Items.OAK_SAPLING)
+			.input(Items.STICK)
+			.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
+			.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
 
 		new ShapedRecipeJsonBuilder(TerrestriaItems.LOG_TURNER, 1)
-				.pattern("ss")
-				.pattern(" s")
-				.pattern("ss")
-				.input('s', Items.STICK)
-				.criterion("has_sticks", InventoryChangedCriterion.Conditions.items(Items.STICK))
-				.offerTo(exporter);
+			.pattern("ss")
+			.pattern(" s")
+			.pattern("ss")
+			.input('s', Items.STICK)
+			.criterion("has_sticks", InventoryChangedCriterion.Conditions.items(Items.STICK))
+			.offerTo(exporter);
 
 		offerSingleOutputShapelessRecipe(exporter, Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
 

@@ -76,20 +76,12 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		// stone building item tags
 		addStone(TerrestriaItemTags.BASALT, TerrestriaItems.VOLCANIC_ROCK);
 
-		// wood building item tags (sadly no QuarteredWoodItems available)
-		addWood(TerrestriaItemTags.CYPRESS_LOGS, TerrestriaItems.CYPRESS)
-			.add(TerrestriaItems.CYPRESS_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_CYPRESS_QUARTER_LOG);
-		addWood(TerrestriaItemTags.HEMLOCK_LOGS, TerrestriaItems.HEMLOCK)
-			.add(TerrestriaItems.HEMLOCK_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_HEMLOCK_QUARTER_LOG);
+		// wood building item tags
+		addWood(TerrestriaItemTags.CYPRESS_LOGS, TerrestriaItems.CYPRESS);
+		addWood(TerrestriaItemTags.HEMLOCK_LOGS, TerrestriaItems.HEMLOCK);
 		addWood(TerrestriaItemTags.JAPANESE_MAPLE_LOGS, TerrestriaItems.JAPANESE_MAPLE);
-		addWood(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItems.RAINBOW_EUCALYPTUS)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG);
-		addWood(TerrestriaItemTags.REDWOOD_LOGS, TerrestriaItems.REDWOOD)
-			.add(TerrestriaItems.REDWOOD_QUARTER_LOG)
-			.add(TerrestriaItems.STRIPPED_REDWOOD_QUARTER_LOG);
+		addWood(TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS, TerrestriaItems.RAINBOW_EUCALYPTUS);
+		addWood(TerrestriaItemTags.REDWOOD_LOGS, TerrestriaItems.REDWOOD);
 		addWood(TerrestriaItemTags.RUBBER_LOGS, TerrestriaItems.RUBBER);
 		addWood(TerrestriaItemTags.SAKURA_LOGS, TerrestriaItems.SAKURA);
 		addWood(TerrestriaItemTags.WILLOW_LOGS, TerrestriaItems.WILLOW);
@@ -172,6 +164,12 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		}
 		if (woodItem.wood != null) {
 			woodBuilder.add(woodItem.wood);
+		}
+
+		if (woodItem instanceof QuarteredWoodItems) {
+			woodBuilder
+				.add(((QuarteredWoodItems) woodItem).quarterLog)
+				.add(((QuarteredWoodItems) woodItem).strippedQuarterLog);
 		}
 
 		// Add boats if they exist via the WoodItem.

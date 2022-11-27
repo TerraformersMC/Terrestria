@@ -37,15 +37,6 @@ public class TerrestriaItems {
 
 	public static BlockItem CATTAIL;
 
-	public static BlockItem REDWOOD_QUARTER_LOG;
-	public static BlockItem HEMLOCK_QUARTER_LOG;
-	public static BlockItem CYPRESS_QUARTER_LOG;
-	public static BlockItem RAINBOW_EUCALYPTUS_QUARTER_LOG;
-	public static BlockItem STRIPPED_REDWOOD_QUARTER_LOG;
-	public static BlockItem STRIPPED_HEMLOCK_QUARTER_LOG;
-	public static BlockItem STRIPPED_CYPRESS_QUARTER_LOG;
-	public static BlockItem STRIPPED_RAINBOW_EUCALYPTUS_QUARTER_LOG;
-
 	public static BlockItem BRYCE_SAPLING;
 	public static BlockItem REDWOOD_SAPLING;
 	public static BlockItem HEMLOCK_SAPLING;
