@@ -157,7 +157,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			new ShapelessRecipeJsonBuilder(stoneItem.mossyBricks.full, 1)
 				.group("mossy_bricks")
 				.input(stoneItem.bricks.full)
-				.input(Items.VINE)
+				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.bricks.full))
 				.offerTo(exporter);
 		}
@@ -167,7 +167,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			new ShapelessRecipeJsonBuilder(stoneItem.mossyCobblestone.full, 1)
 				.group("mossy_cobblestone")
 				.input(stoneItem.cobblestone.full)
-				.input(Items.VINE)
+				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.cobblestone.full))
 				.offerTo(exporter);
 		}

@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.TagKey;
 
@@ -50,6 +51,10 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 
 		this.getOrCreateTagBuilder(TerrestriaItemTags.BLACK_SAND)
 			.add(TerrestriaItems.BLACK_SAND);
+
+		this.getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
+			.add(Items.MOSS_BLOCK)
+			.add(Items.VINE);
 
 		this.getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
 			.add(TerrestriaItems.CYPRESS.planks)
