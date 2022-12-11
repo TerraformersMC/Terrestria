@@ -130,6 +130,10 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		if (stoneItem.cobblestone != null) {
 			stoneBuilder.add(stoneItem.cobblestone.full);
 			addStoneVariant(stoneItem.cobblestone);
+
+			// Add any cobble variant to vanilla crafting tags.
+			getOrCreateTagBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
+			getOrCreateTagBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
 		}
 		if (stoneItem.mossyBricks != null) {
 			stoneBuilder.add(stoneItem.mossyBricks.full);
