@@ -3,13 +3,9 @@ package com.terraformersmc.terrestria;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
+import com.terraformersmc.terrestria.item.TerrestriaItemGroups;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,20 +36,15 @@ public class Terrestria implements ModInitializer {
 		TerrestriaStructures.init();
 		TerrestriaBiomes.init();
 		TerrestriaVillagerTypes.init();
-
-		// This must be after TerrestriaBiomes.init()
-		CONFIG_MANAGER.getBiomeConfig();
-
-		FabricItemGroupBuilder.create(new Identifier(MOD_ID, "items")).icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack()).appendItems(stacks -> Registry.ITEM.forEach(item -> {
-			if (Registry.ITEM.getId(item).getNamespace().equals(MOD_ID)) {
-				item.appendStacks(item.getGroup(), (DefaultedList<ItemStack>) stacks);
-			}
-		})).build();
+		TerrestriaItemGroups.init();
 	}
 
 	@Override
 	public void onInitialize() {
 		register();
+
+		// This must be after TraverseBiomes.register()
+		CONFIG_MANAGER.getBiomeConfig();
 
 		if (!FabricLoader.getInstance().isModLoaded("terrestria-worldgen")) {
 			Terrestria.LOGGER.info("No Terrestria worldgen module present; Terrestria biomes will not generate.");

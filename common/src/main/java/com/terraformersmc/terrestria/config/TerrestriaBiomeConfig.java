@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.config;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.biome.Biome;
 
 import java.util.Map;
@@ -13,7 +13,7 @@ public class TerrestriaBiomeConfig {
 
 	TerrestriaBiomeConfig() {
 		// This is where to set biomes to default disabled if needed (replace "k -> true").
-		biomes = TerrestriaBiomes.biomes.keySet().stream().collect(Collectors.toMap(k -> k, k -> true));
+		biomes = TerrestriaBiomes.BIOMES.stream().collect(Collectors.toMap(k -> k.getValue().getPath(), k -> true));
 	}
 
 	public boolean isBiomeEnabled(String name) {

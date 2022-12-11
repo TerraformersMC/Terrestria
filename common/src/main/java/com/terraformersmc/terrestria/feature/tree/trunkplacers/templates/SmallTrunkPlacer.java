@@ -21,7 +21,7 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 
 	protected void setBlockStateAndUpdate(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction) {
 		//Place the block
-		checkAndPlaceSpecificBlockState(world, origin, replacer, config.trunkProvider.getBlockState(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
+		checkAndPlaceSpecificBlockState(world, origin, replacer, config.trunkProvider.get(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
 
 		// Fix the one behind it to connect if it's a BareSmallLogBlock
 		addSmallLogConnection(config, random, replacer, world, origin.offset(direction.getOpposite()), direction);
@@ -49,7 +49,7 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 			return null;
 		}
 
-		return config.trunkProvider.getBlockState(random, pos)
+		return config.trunkProvider.get(random, pos)
 				.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
 				.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
 				.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))

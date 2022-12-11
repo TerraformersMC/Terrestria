@@ -68,9 +68,9 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 
 	static BlockState getState(Random random, BlockPos pos, TreeFeatureConfig config, QuarterLogBlock.BarkSide side) {
 		if (config instanceof QuarteredMegaTreeConfig && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
-			return ((QuarteredMegaTreeConfig) config).quarteredTrunkProvider.getBlockState(random, pos).with(QuarterLogBlock.BARK_SIDE, side);
+			return ((QuarteredMegaTreeConfig) config).quarteredTrunkProvider.get(random, pos).with(QuarterLogBlock.BARK_SIDE, side);
 		} else {
-			return config.trunkProvider.getBlockState(random, pos);
+			return config.trunkProvider.get(random, pos);
 		}
 	}
 
@@ -109,7 +109,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		// Place the root
 		for (int i = 0; i < height; i++) {
 			if (TreeFeature.canReplace(world, bottom) || TreeFeature.canReplace(world, bottom) || world.testBlockState(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				replacer.accept(bottom.toImmutable(), wood.getBlockState(random, bottom));
+				replacer.accept(bottom.toImmutable(), wood.get(random, bottom));
 			}
 
 			bottom.move(Direction.UP);

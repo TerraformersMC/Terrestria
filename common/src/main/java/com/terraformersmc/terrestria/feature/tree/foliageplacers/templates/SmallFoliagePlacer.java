@@ -24,7 +24,7 @@ public abstract class SmallFoliagePlacer extends FoliagePlacer {
 			return;
 		}
 		if (world.testBlockState(pos, BlockState::isAir)) {
-			replacer.accept(pos, config.foliageProvider.getBlockState(random, pos));
+			replacer.accept(pos, config.foliageProvider.get(random, pos));
 		}
 	}
 
@@ -34,7 +34,7 @@ public abstract class SmallFoliagePlacer extends FoliagePlacer {
 			return null;
 		}
 
-		return config.trunkProvider.getBlockState(random, pos)
+		return config.trunkProvider.get(random, pos)
 				.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
 				.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
 				.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))

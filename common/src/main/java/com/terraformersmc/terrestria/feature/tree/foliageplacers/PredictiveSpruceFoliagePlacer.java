@@ -54,7 +54,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 					mutable.set(blockPos, offsetX, offsetY, offsetZ);
 					if (TreeFeature.canReplace(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
-						BlockState baseState = config.foliageProvider.getBlockState(random, mutable);
+						BlockState baseState = config.foliageProvider.get(random, mutable);
 						// TODO: https://github.com/TerraformersMC/Terrestria/pull/256/files/bf6e019da7969f01ed15f736fbeb0f796d701034#r651410439
 						//       This is about leaf decay behavior, which changed quite a bit in 1.17.
 						//       Look here first if we get reports of strange decay on the biggest trees.

@@ -85,7 +85,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 
 	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos.Mutable currentPosition, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
 		if (TreeFeature.canReplace(world, currentPosition)) {
-			replacer.accept(currentPosition.toImmutable(), config.foliageProvider.getBlockState(random, currentPosition));
+			replacer.accept(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
 		}
 	}
 

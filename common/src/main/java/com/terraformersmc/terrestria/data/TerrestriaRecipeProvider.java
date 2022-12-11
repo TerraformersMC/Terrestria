@@ -6,7 +6,7 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
@@ -16,7 +16,8 @@ import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
-import net.minecraft.tag.TagKey;
+import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 
 import javax.annotation.Nullable;
@@ -24,20 +25,20 @@ import java.util.Collections;
 import java.util.function.Consumer;
 
 public class TerrestriaRecipeProvider extends FabricRecipeProvider {
-	public TerrestriaRecipeProvider(FabricDataGenerator dataGenerator) {
-		super(dataGenerator);
+	protected TerrestriaRecipeProvider(FabricDataOutput dataOutput) {
+		super(dataOutput);
 	}
 
 	@Override
-	protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+	public void generate(Consumer<RecipeJsonProvider> exporter) {
 		// misc. recipes
-		new ShapelessRecipeJsonBuilder(TerrestriaItems.BRYCE_SAPLING, 1)
+		new ShapelessRecipeJsonBuilder(RecipeCategory.DECORATIONS, TerrestriaItems.BRYCE_SAPLING, 1)
 			.input(Items.OAK_SAPLING)
 			.input(Items.STICK)
 			.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
 			.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
 
-		new ShapedRecipeJsonBuilder(TerrestriaItems.LOG_TURNER, 1)
+		new ShapedRecipeJsonBuilder(RecipeCategory.TOOLS, TerrestriaItems.LOG_TURNER, 1)
 			.pattern("ss")
 			.pattern(" s")
 			.pattern("ss")
@@ -47,7 +48,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 		offerSingleOutputShapelessRecipe(exporter, Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
 
-		new ShapedRecipeJsonBuilder(TerrestriaItems.SAKURA_LEAF_PILE, 16)
+		new ShapedRecipeJsonBuilder(RecipeCategory.DECORATIONS, TerrestriaItems.SAKURA_LEAF_PILE, 16)
 			.pattern("LL")
 			.input('L', TerrestriaItems.SAKURA.leaves)
 			.criterion("has_leaves", InventoryChangedCriterion.Conditions.items(TerrestriaItems.SAKURA.leaves))
@@ -73,7 +74,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
 		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
 
-		new ShapelessRecipeJsonBuilder(woodItem.button, 1)
+		new ShapelessRecipeJsonBuilder(RecipeCategory.REDSTONE, woodItem.button, 1)
 			.group("wooden_button")
 			.input(woodItem.planks)
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
@@ -91,7 +92,9 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
-		offerPlanksRecipe(exporter, woodItem.planks, logsTag);
+		offerHangingSignRecipe(exporter, woodItem.hangingSign, woodItem.planks);
+
+		offerPlanksRecipe(exporter, woodItem.planks, logsTag, 4);
 
 		offerPressurePlateRecipe(exporter, woodItem.pressurePlate, woodItem.planks);
 
@@ -99,7 +102,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
-		offerSlabRecipe(exporter, woodItem.slab, woodItem.planks);
+		offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, woodItem.slab, woodItem.planks);
 
 		createStairsRecipe(woodItem.stairs, Ingredient.ofItems(woodItem.planks))
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
@@ -111,7 +114,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 		// some woodItem with no real wood have wood set to log
 		if (!woodItem.wood.equals(woodItem.log)) {
-			new ShapedRecipeJsonBuilder(woodItem.wood, 3)
+			new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, woodItem.wood, 3)
 				.group("bark")
 				.pattern("LL")
 				.pattern("LL")
@@ -119,7 +122,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_logs", InventoryChangedCriterion.Conditions.items(woodItem.log))
 				.offerTo(exporter);
 
-			new ShapedRecipeJsonBuilder(woodItem.strippedWood, 3)
+			new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, woodItem.strippedWood, 3)
 				.group("bark")
 				.pattern("LL")
 				.pattern("LL")
@@ -133,18 +136,18 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 		if (stoneItem.bricks != null) {
 			generateStoneVariant(exporter, stoneItem.bricks, stoneItem.plain.full);
 
-			new ShapedRecipeJsonBuilder(stoneItem.bricks.full, 4)
+			new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, stoneItem.bricks.full, 4)
 				.group("bricks")
 				.pattern("SS")
 				.pattern("SS")
 				.input('S', stoneItem.plain.full)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.plain.full))
 				.offerTo(exporter);
-			offerStonecuttingRecipe(exporter, stoneItem.bricks.full, stoneItem.plain.full);
+			offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneItem.bricks.full, stoneItem.plain.full);
 
-			offerChiseledBlockRecipe(exporter, stoneItem.chiseledBricks, stoneItem.bricks.slab);
-			offerStonecuttingRecipe(exporter, stoneItem.chiseledBricks, stoneItem.bricks.full);
-			offerStonecuttingRecipe(exporter, stoneItem.chiseledBricks, stoneItem.plain.full);
+			offerChiseledBlockRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneItem.chiseledBricks, stoneItem.bricks.slab);
+			offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneItem.chiseledBricks, stoneItem.bricks.full);
+			offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneItem.chiseledBricks, stoneItem.plain.full);
 
 			offerCrackingRecipe(exporter, stoneItem.crackedBricks, stoneItem.bricks.full);
 		}
@@ -154,7 +157,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 		if (stoneItem.mossyBricks != null) {
 			generateStoneVariant(exporter, stoneItem.mossyBricks, null);
 
-			new ShapelessRecipeJsonBuilder(stoneItem.mossyBricks.full, 1)
+			new ShapelessRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, stoneItem.mossyBricks.full, 1)
 				.group("mossy_bricks")
 				.input(stoneItem.bricks.full)
 				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
@@ -164,7 +167,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 		if (stoneItem.mossyCobblestone != null) {
 			generateStoneVariant(exporter, stoneItem.mossyCobblestone, null);
 
-			new ShapelessRecipeJsonBuilder(stoneItem.mossyCobblestone.full, 1)
+			new ShapelessRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, stoneItem.mossyCobblestone.full, 1)
 				.group("mossy_cobblestone")
 				.input(stoneItem.cobblestone.full)
 				.input(TerrestriaItemTags.MOSSY_INGREDIENTS)
@@ -177,17 +180,18 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			if (stoneItem.cobblestone != null) {
 				offerSmelting(exporter,
 					Collections.singletonList(stoneItem.cobblestone.full),
+					RecipeCategory.BUILDING_BLOCKS,
 					stoneItem.plain.full,
 					0.1f, 200, "stone");
 			}
 
-			new ShapelessRecipeJsonBuilder(stoneItem.button, 1)
+			new ShapelessRecipeJsonBuilder(RecipeCategory.REDSTONE, stoneItem.button, 1)
 				.group("stone_button")
 				.input(stoneItem.plain.full)
 				.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneItem.plain.full))
 				.offerTo(exporter);
 
-			new ShapedRecipeJsonBuilder(stoneItem.pressurePlate, 1)
+			new ShapedRecipeJsonBuilder(RecipeCategory.REDSTONE, stoneItem.pressurePlate, 1)
 				.group("stone_pressure_plate")
 				.pattern("SS")
 				.input('S', stoneItem.plain.full)
@@ -200,6 +204,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			if (stoneItem.plain != null) {
 				offerSmelting(exporter,
 					Collections.singletonList(stoneItem.plain.full),
+					RecipeCategory.BUILDING_BLOCKS,
 					stoneItem.smooth.full,
 					0.1f, 200, "stone");
 			}
@@ -207,20 +212,20 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 	}
 
 	private void generateStoneVariant(Consumer<RecipeJsonProvider> exporter, StoneVariantItems stoneVariantItem, @Nullable BlockItem cutPlainItem) {
-		offerSlabRecipe(exporter, stoneVariantItem.slab, stoneVariantItem.full);
+		offerSlabRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.slab, stoneVariantItem.full);
 		createStairsRecipe(stoneVariantItem.stairs, Ingredient.ofItems(stoneVariantItem.full))
 			.criterion("has_stone", InventoryChangedCriterion.Conditions.items(stoneVariantItem.full))
 			.offerTo(exporter);  // ?? so lame there is no offerStairsRecipe() !!
-		offerWallRecipe(exporter, stoneVariantItem.wall, stoneVariantItem.full);
+		offerWallRecipe(exporter, RecipeCategory.DECORATIONS, stoneVariantItem.wall, stoneVariantItem.full);
 
-		offerStonecuttingRecipe(exporter, stoneVariantItem.slab, stoneVariantItem.full, 2);
-		offerStonecuttingRecipe(exporter, stoneVariantItem.stairs, stoneVariantItem.full);
-		offerStonecuttingRecipe(exporter, stoneVariantItem.wall, stoneVariantItem.full);
+		offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.slab, stoneVariantItem.full, 2);
+		offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.stairs, stoneVariantItem.full);
+		offerStonecuttingRecipe(exporter, RecipeCategory.DECORATIONS, stoneVariantItem.wall, stoneVariantItem.full);
 
 		if (cutPlainItem != null) {
-			offerStonecuttingRecipe(exporter, stoneVariantItem.slab, cutPlainItem, 2);
-			offerStonecuttingRecipe(exporter, stoneVariantItem.stairs, cutPlainItem);
-			offerStonecuttingRecipe(exporter, stoneVariantItem.wall, cutPlainItem);
+			offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.slab, cutPlainItem, 2);
+			offerStonecuttingRecipe(exporter, RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.stairs, cutPlainItem);
+			offerStonecuttingRecipe(exporter, RecipeCategory.DECORATIONS, stoneVariantItem.wall, cutPlainItem);
 		}
 	}
 

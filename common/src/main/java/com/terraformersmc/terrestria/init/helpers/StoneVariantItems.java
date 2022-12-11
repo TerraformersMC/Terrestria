@@ -17,10 +17,10 @@ public class StoneVariantItems {
 	public static StoneVariantItems register(String name, String shapedName, StoneVariantBlocks blocks) {
 		StoneVariantItems items = new StoneVariantItems();
 
-		items.full = TerrestriaRegistry.registerBuildingBlockItem(name, blocks.full);
-		items.slab = TerrestriaRegistry.registerBuildingBlockItem(shapedName + "_slab", blocks.slab);
-		items.stairs = TerrestriaRegistry.registerBuildingBlockItem(shapedName + "_stairs", blocks.stairs);
-		items.wall = TerrestriaRegistry.registerDecorationBlockItem(shapedName + "_wall", blocks.wall);
+		items.full = TerrestriaRegistry.registerBlockItem(name, blocks.full);
+		items.slab = TerrestriaRegistry.registerBlockItem(shapedName + "_slab", blocks.slab);
+		items.stairs = TerrestriaRegistry.registerBlockItem(shapedName + "_stairs", blocks.stairs);
+		items.wall = TerrestriaRegistry.registerBlockItem(shapedName + "_wall", blocks.wall);
 
 		return items;
 	}

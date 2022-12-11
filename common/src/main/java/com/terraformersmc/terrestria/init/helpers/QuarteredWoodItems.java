@@ -9,8 +9,8 @@ public class QuarteredWoodItems extends WoodItems {
 	public static QuarteredWoodItems register(String name, QuarteredWoodBlocks blocks) {
 		QuarteredWoodItems items = QuarteredWoodItems.copyOf(WoodItems.register(name, blocks));
 
-		items.quarterLog = TerrestriaRegistry.registerBuildingBlockItem(name + "_quarter_log", blocks.quarterLog);
-		items.strippedQuarterLog = TerrestriaRegistry.registerBuildingBlockItem("stripped_" + name + "_quarter_log", blocks.strippedQuarterLog);
+		items.quarterLog = TerrestriaRegistry.registerBlockItem(name + "_quarter_log", blocks.quarterLog);
+		items.strippedQuarterLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_quarter_log", blocks.strippedQuarterLog);
 
 		items.addCompostables();
 		items.addFuels();
@@ -33,6 +33,7 @@ public class QuarteredWoodItems extends WoodItems {
 		items.button = woodItems.button;
 		items.pressurePlate = woodItems.pressurePlate;
 		items.sign = woodItems.sign;
+		items.hangingSign = woodItems.hangingSign;
 		items.trapdoor = woodItems.trapdoor;
 		items.strippedLog = woodItems.strippedLog;
 		items.strippedWood = woodItems.strippedWood;

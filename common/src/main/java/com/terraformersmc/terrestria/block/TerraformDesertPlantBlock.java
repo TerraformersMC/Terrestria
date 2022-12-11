@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.block;
 
 import net.minecraft.block.*;
-import net.minecraft.tag.BlockTags;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;

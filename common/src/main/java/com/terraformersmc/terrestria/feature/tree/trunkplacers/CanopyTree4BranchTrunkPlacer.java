@@ -56,12 +56,12 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		// Place the branches
 		currentPosition.move(Direction.NORTH, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(PillarBlock.AXIS, Direction.NORTH.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.get(random, currentPosition).with(PillarBlock.AXIS, Direction.NORTH.getAxis()));
 		}
 		currentPosition = origin.mutableCopy();
 		currentPosition.move(Direction.EAST, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(PillarBlock.AXIS, Direction.EAST.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.get(random, currentPosition).with(PillarBlock.AXIS, Direction.EAST.getAxis()));
 		}
 
 		// Go back to the middle of the tree

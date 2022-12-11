@@ -54,7 +54,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 
 			circle(pos.mutableCopy(), treeRadius, position -> {
 				if (TreeFeature.isAirOrLeaves(world, position)) {
-					replacer.accept(position.toImmutable(), config.foliageProvider.getBlockState(random, position));
+					replacer.accept(position.toImmutable(), config.foliageProvider.get(random, position));
 				}
 			});
 		}

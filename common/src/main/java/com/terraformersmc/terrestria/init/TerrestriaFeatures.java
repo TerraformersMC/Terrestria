@@ -5,9 +5,9 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.CattailFeature;
 import com.terraformersmc.terrestria.feature.misc.DumDumHeadFeature;
 import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
-
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.ProbabilityConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
@@ -32,6 +32,6 @@ public class TerrestriaFeatures {
 	}
 
 	public static <T extends Feature<FC>, FC extends FeatureConfig> T register(String name, T feature) {
-		return Registry.register(Registry.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
+		return Registry.register(Registries.FEATURE, new Identifier(Terrestria.MOD_ID, name), feature);
 	}
 }

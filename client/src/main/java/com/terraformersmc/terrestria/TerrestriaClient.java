@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
 import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
+import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
@@ -10,6 +11,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -133,14 +135,23 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		addSigns(
 				TerrestriaBlocks.REDWOOD.sign,
+				TerrestriaBlocks.REDWOOD.hangingSign,
 				TerrestriaBlocks.HEMLOCK.sign,
+				TerrestriaBlocks.HEMLOCK.hangingSign,
 				TerrestriaBlocks.RUBBER.sign,
+				TerrestriaBlocks.RUBBER.hangingSign,
 				TerrestriaBlocks.CYPRESS.sign,
+				TerrestriaBlocks.CYPRESS.hangingSign,
 				TerrestriaBlocks.WILLOW.sign,
+				TerrestriaBlocks.WILLOW.hangingSign,
 				TerrestriaBlocks.JAPANESE_MAPLE.sign,
+				TerrestriaBlocks.JAPANESE_MAPLE.hangingSign,
 				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
+				TerrestriaBlocks.RAINBOW_EUCALYPTUS.hangingSign,
 				TerrestriaBlocks.SAKURA.sign,
-				TerrestriaBlocks.YUCCA_PALM.sign
+				TerrestriaBlocks.SAKURA.hangingSign,
+				TerrestriaBlocks.YUCCA_PALM.sign,
+				TerrestriaBlocks.YUCCA_PALM.hangingSign
 		);
 
 		ColorProviderRegistry.ITEM.register(
@@ -164,26 +175,31 @@ public class TerrestriaClient implements ClientModInitializer {
 	}
 
 	private void registerEntityRenderers() {
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "redwood"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "hemlock"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "rubber"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "cypress"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "willow"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "japanese_maple"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "sakura"));
-		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "yucca_palm"));
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "redwood"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "hemlock"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "rubber"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "cypress"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "willow"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "japanese_maple"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "sakura"), false);
+		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "yucca_palm"), false);
 	}
 
-	private void addSigns(TerraformSignBlock... signs) {
-		for (TerraformSignBlock sign : signs) {
-			addSign(sign);
+	@SafeVarargs
+	private <S extends AbstractSignBlock> void addSigns(S... signs) {
+		for (AbstractSignBlock maybeSign : signs) {
+			if (maybeSign instanceof TerraformSignBlock sign) {
+				addSignTexture(sign.getTexture());
+			} else if(maybeSign instanceof TerraformHangingSignBlock sign) {
+				addSignTexture(sign.getTexture());
+			} else {
+				throw new IllegalArgumentException("Only Terraform API signs may be registered via this method.");
+			}
 		}
 	}
 
-	private void addSign(TerraformSignBlock sign) {
-		Identifier texture = sign.getTexture();
-
+	private void addSignTexture(Identifier texture) {
 		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, texture));
 	}
 

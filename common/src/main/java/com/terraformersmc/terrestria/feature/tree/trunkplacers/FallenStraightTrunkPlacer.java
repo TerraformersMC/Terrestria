@@ -59,7 +59,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 
 		// Place the blocks
 		for (int i = 0; i < trunkHeight; ++i) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(PillarBlock.AXIS, direction.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.get(random, currentPosition).with(PillarBlock.AXIS, direction.getAxis()));
 		}
 
 		// No foliage placer locations needed

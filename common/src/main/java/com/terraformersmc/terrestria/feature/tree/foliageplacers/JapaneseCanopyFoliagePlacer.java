@@ -55,7 +55,7 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 
 	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, BlockState::isAir)) {
-			replacer.accept(pos, config.foliageProvider.getBlockState(random, pos));
+			replacer.accept(pos, config.foliageProvider.get(random, pos));
 		}
 	}
 

@@ -46,7 +46,7 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 		height = random.nextInt(1) + 5;
 
 		// Place the first 2 blocks of the cactus
-		placeSpecificBlockState(world, replacer, currentPosition, treeFeatureConfig.trunkProvider.getBlockState(random, currentPosition).with(BareSmallLogBlock.DOWN, true));
+		placeSpecificBlockState(world, replacer, currentPosition, treeFeatureConfig.trunkProvider.get(random, currentPosition).with(BareSmallLogBlock.DOWN, true));
 		setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
 
 		// Place one branch always

@@ -46,7 +46,7 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 				.stream().filter(AirValidator.of(world))
 				.forEach(position -> {
 					BlockPos pos = position.toBlockPos();
-					replacer.accept(pos, config.foliageProvider.getBlockState(random, pos));
+					replacer.accept(pos, config.foliageProvider.get(random, pos));
 				});
 	}
 

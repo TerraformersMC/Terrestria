@@ -6,10 +6,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 public class TerrestriaDatagen implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
-		dataGenerator.addProvider(TerrestriaBiomeTagProvider::new);
-		dataGenerator.addProvider(TerrestriaBlockLootTableProvider::new);
-		dataGenerator.addProvider(TerrestriaBlockTagProvider::new);
-		dataGenerator.addProvider(TerrestriaItemTagProvider::new);
-		dataGenerator.addProvider(TerrestriaRecipeProvider::new);
+		FabricDataGenerator.Pack pack = dataGenerator.createPack();
+
+		pack.addProvider(TerrestriaDynamicRegistryProvider::new);
+		pack.addProvider(TerrestriaBiomeTagProvider::new);
+		pack.addProvider(TerrestriaBlockLootTableProvider::new);
+		TerrestriaBlockTagProvider blockTagProvider = pack.addProvider(TerrestriaBlockTagProvider::new);
+		pack.addProvider((output, registries) -> new TerrestriaItemTagProvider(output, registries, blockTagProvider));
+		pack.addProvider(TerrestriaRecipeProvider::new);
 	}
 }

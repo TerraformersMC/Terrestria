@@ -6,9 +6,10 @@ import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructure;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructure;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.structure.StructurePieceType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.*;
 import net.minecraft.world.gen.structure.Structure;
 import net.minecraft.world.gen.structure.StructureType;
 
@@ -29,10 +30,10 @@ public class TerrestriaStructures {
 	}
 
 	private static <S extends Structure> StructureType<S> registerStructureType(String id, Codec<S> codec) {
-		return Registry.register(Registry.STRUCTURE_TYPE, new Identifier(Terrestria.MOD_ID, id), () -> codec);
+		return Registry.register(Registries.STRUCTURE_TYPE, new Identifier(Terrestria.MOD_ID, id), () -> codec);
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
-		return Registry.register(Registry.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
+		return Registry.register(Registries.STRUCTURE_PIECE, new Identifier(Terrestria.MOD_ID, id), piece);
 	}
 }

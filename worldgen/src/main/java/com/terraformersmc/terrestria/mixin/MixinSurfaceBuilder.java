@@ -2,12 +2,12 @@ package com.terraformersmc.terrestria.mixin;
 
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilder;
 import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.math.random.RandomSplitter;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.util.registry.RegistryEntry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
@@ -37,7 +37,7 @@ public class MixinSurfaceBuilder {
 
 	@Inject(method = "buildSurface",
 			at = @At(value = "INVOKE",
-					target = "Lnet/minecraft/util/registry/RegistryEntry;matchesKey(Lnet/minecraft/util/registry/RegistryKey;)Z",
+					target = "Lnet/minecraft/registry/entry/RegistryEntry;matchesKey(Lnet/minecraft/registry/RegistryKey;)Z",
 					ordinal = 1,
 					shift = At.Shift.BEFORE),
 			locals = LocalCapture.CAPTURE_FAILHARD
@@ -54,7 +54,7 @@ public class MixinSurfaceBuilder {
 
 	@Inject(method = "buildSurface",
 			at = @At(value = "INVOKE",
-					target = "Lnet/minecraft/util/registry/RegistryEntry;matchesKey(Lnet/minecraft/util/registry/RegistryKey;)Z",
+					target = "Lnet/minecraft/registry/entry/RegistryEntry;matchesKey(Lnet/minecraft/registry/RegistryKey;)Z",
 					ordinal = 2,
 					shift = At.Shift.BEFORE),
 			locals = LocalCapture.CAPTURE_FAILHARD

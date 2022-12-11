@@ -2,9 +2,9 @@ package com.terraformersmc.terrestria.tag;
 
 import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.block.Block;
-import net.minecraft.tag.TagKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public final class TerrestriaBlockTags {
 	public static final TagKey<Block> BASALT = TerrestriaBlockTags.of(new Identifier("c", "basalt"));
@@ -26,6 +26,7 @@ public final class TerrestriaBlockTags {
 	public static final TagKey<Block> WILLOW_LOGS = TerrestriaBlockTags.of("willow_logs");
 	public static final TagKey<Block> YUCCA_PALM_LOGS = TerrestriaBlockTags.of("yucca_palm_logs");
 
+	@SuppressWarnings("UnnecessaryReturnStatement")
 	private TerrestriaBlockTags() {
 		return;
 	}
@@ -35,6 +36,6 @@ public final class TerrestriaBlockTags {
 	}
 
 	private static TagKey<Block> of(Identifier id) {
-		return TagKey.of(Registry.BLOCK_KEY, id);
+		return TagKey.of(RegistryKeys.BLOCK, id);
 	}
 }

@@ -39,6 +39,8 @@ public class QuarteredWoodBlocks extends WoodBlocks {
 		blocks.pressurePlate = woodBlocks.pressurePlate;
 		blocks.sign = woodBlocks.sign;
 		blocks.wallSign = woodBlocks.wallSign;
+		blocks.hangingSign = woodBlocks.hangingSign;
+		blocks.wallHangingSign = woodBlocks.wallHangingSign;
 		blocks.trapdoor = woodBlocks.trapdoor;
 		blocks.strippedLog = woodBlocks.strippedLog;
 		blocks.strippedWood = woodBlocks.strippedWood;
