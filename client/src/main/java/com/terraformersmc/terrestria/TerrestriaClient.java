@@ -59,7 +59,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG
 		);
 
-		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
+		BlockRenderLayerMap.INSTANCE.putBlock(TerrestriaBlocks.SAKURA.leafPile, RenderLayer.getCutoutMipped());
 
 		BlockRenderLayerMap.INSTANCE.putBlocks(
 				DOOR_BLOCK_LAYER,
@@ -165,7 +165,7 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaItems.HEMLOCK.leaves
 		);
 
-		BlockRenderLayerMap.INSTANCE.putItem(TerrestriaItems.SAKURA_LEAF_PILE, RenderLayer.getCutoutMipped());
+		BlockRenderLayerMap.INSTANCE.putItem(TerrestriaItems.SAKURA.leafPile, RenderLayer.getCutoutMipped());
 
 		ColorProviderRegistry.ITEM.register(
 				GRASS_ITEM_COLORS,

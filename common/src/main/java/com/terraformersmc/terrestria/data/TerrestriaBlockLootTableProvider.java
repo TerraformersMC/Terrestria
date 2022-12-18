@@ -1,9 +1,7 @@
 package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terraform.dirt.DirtBlocks;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -89,7 +87,6 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, leavesDrops(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, leavesDrops(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
 		addDrop(TerrestriaBlocks.JUNGLE_PALM_LEAVES, leavesDrops(TerrestriaBlocks.JUNGLE_PALM_LEAVES, TerrestriaBlocks.JUNGLE_PALM_SAPLING, 0.07f, 0.0875f, 0.116666667f, 0.14f));
-		addDrop(TerrestriaBlocks.SAKURA_LEAF_PILE, leavesDrops(TerrestriaBlocks.SAKURA_LEAF_PILE, TerrestriaBlocks.SAKURA_SAPLING, 0.00625f, 0.0078125f, 0.010416667f, 0.0125f));
 		addDrop(TerrestriaBlocks.YUCCA_PALM.leaves, leavesDrops(TerrestriaBlocks.YUCCA_PALM.leaves, TerrestriaBlocks.YUCCA_PALM_SAPLING, 0.15f, 0.1875f, 0.24f, 0.333333333f));
 	}
 
@@ -161,7 +158,6 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 	}
 
 	private void addWoodDrops(WoodBlocks woodBlock, @Nullable SaplingBlock sapling) {
-Terrestria.LOGGER.warn("WoodBlocks of {}, sign as item '{}, hanging as item '{}''", woodBlock.log.getName().toString(), woodBlock.sign.asItem(), woodBlock.hangingSign.asItem());
 		addDrop(woodBlock.button);
 		addDrop(woodBlock.door, this::doorDrops);
 		addDrop(woodBlock.fence);
@@ -174,19 +170,25 @@ Terrestria.LOGGER.warn("WoodBlocks of {}, sign as item '{}, hanging as item '{}'
 		addDrop(woodBlock.slab, this::slabDrops);
 		addDrop(woodBlock.stairs);
 		addDrop(woodBlock.strippedLog);
-		addDrop(woodBlock.strippedWood);
 		addDrop(woodBlock.trapdoor);
 		addDrop(woodBlock.wallHangingSign);
 		addDrop(woodBlock.wallSign);
-		addDrop(woodBlock.wood);
 
-		if (woodBlock instanceof QuarteredWoodBlocks) {
-			addDrop(((QuarteredWoodBlocks) woodBlock).quarterLog);
-			addDrop(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog);
+		if (woodBlock.hasWood()) {
+			addDrop(woodBlock.wood);
+			addDrop(woodBlock.strippedWood);
+		}
+
+		if (woodBlock.hasQuarterLog()) {
+			addDrop(woodBlock.quarterLog);
+			addDrop(woodBlock.strippedQuarterLog);
 		}
 
 		if (sapling != null) {
 			addDrop(woodBlock.leaves, leavesDrops(woodBlock.leaves, sapling, 0.05f, 0.0625f, 0.083333336f, 0.1f));
+			if (woodBlock.hasLeafPile()) {
+				addDrop(woodBlock.leafPile, leavesDrops(woodBlock.leafPile, sapling, 0.00625f, 0.0078125f, 0.010416667f, 0.0125f));
+			}
 		}
 	}
 }

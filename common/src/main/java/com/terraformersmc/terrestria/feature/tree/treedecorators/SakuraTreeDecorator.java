@@ -54,7 +54,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
 			if (valid && TreeFeature.canReplace(world, top)) {
-				generator.replace(top, TerrestriaBlocks.SAKURA_LEAF_PILE.getDefaultState());
+				generator.replace(top, TerrestriaBlocks.SAKURA.leafPile.getDefaultState());
 			}
 		}
 	}

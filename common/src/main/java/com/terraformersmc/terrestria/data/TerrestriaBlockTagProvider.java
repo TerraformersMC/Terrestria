@@ -2,7 +2,6 @@ package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
@@ -26,6 +25,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	@Override
 	public void configure(RegistryWrapper.WrapperLookup registries) {
 		// basic block tags
+		getOrCreateTagBuilder(BlockTags.AZALEA_ROOT_REPLACEABLE)
+			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
+
 		getOrCreateTagBuilder(BlockTags.FLOWER_POTS)
 			.add(TerrestriaBlocks.POTTED_AGAVE)
 			.add(TerrestriaBlocks.POTTED_ALOE_VERA)
@@ -50,13 +52,15 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
-			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES)
-			.add(TerrestriaBlocks.SAKURA_LEAF_PILE);
+			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES);
 
 		getOrCreateTagBuilder(BlockTags.LEAVES)
 			.add(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES)
 			.add(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES)
 			.add(TerrestriaBlocks.JUNGLE_PALM_LEAVES);
+
+		getOrCreateTagBuilder(BlockTags.MOSS_REPLACEABLE)
+			.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
 
 		getOrCreateTagBuilder(BlockTags.OAK_LOGS)
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
@@ -130,6 +134,15 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	}
 
 	private void addDirt(DirtBlocks dirtBlock) {
+		getOrCreateTagBuilder(BlockTags.ANIMALS_SPAWNABLE_ON)
+			.add(dirtBlock.getGrassBlock());
+
+		getOrCreateTagBuilder(BlockTags.BIG_DRIPLEAF_PLACEABLE)
+			.add(dirtBlock.getFarmland());
+
+		getOrCreateTagBuilder(BlockTags.CONVERTABLE_TO_MUD)
+			.add(dirtBlock.getDirt());
+
 		getOrCreateTagBuilder(BlockTags.DIRT)
 			.add(dirtBlock.getDirt())
 			.add(dirtBlock.getGrassBlock())
@@ -181,12 +194,15 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		if (stoneBlock.bricks != null) {
 			stoneBuilder.add(stoneBlock.bricks.full);
 			addStoneVariant(stoneBlock.bricks);
+			getOrCreateTagBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.bricks.full);
 
 			stoneBuilder.add(stoneBlock.chiseledBricks);
 			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.chiseledBricks);
+			getOrCreateTagBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.chiseledBricks);
 
 			stoneBuilder.add(stoneBlock.crackedBricks);
 			getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.crackedBricks);
+			getOrCreateTagBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.crackedBricks);
 		}
 		if (stoneBlock.cobblestone != null) {
 			stoneBuilder.add(stoneBlock.cobblestone.full);
@@ -194,6 +210,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		}
 		if (stoneBlock.mossyBricks != null) {
 			stoneBuilder.add(stoneBlock.mossyBricks.full);
+			getOrCreateTagBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.mossyBricks.full);
 			addStoneVariant(stoneBlock.mossyBricks);
 		}
 		if (stoneBlock.mossyCobblestone != null) {
@@ -230,16 +247,17 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		woodBuilder
 			.add(woodBlock.log)
 			.add(woodBlock.strippedLog);
-		if (woodBlock.strippedWood != null) {
-			woodBuilder.add(woodBlock.strippedWood);
-		}
-		if (woodBlock.wood != null) {
-			woodBuilder.add(woodBlock.wood);
-		}
-		if(woodBlock instanceof QuarteredWoodBlocks) {
+
+		if (woodBlock.hasWood()) {
 			woodBuilder
-				.add(((QuarteredWoodBlocks) woodBlock).quarterLog)
-				.add(((QuarteredWoodBlocks) woodBlock).strippedQuarterLog);
+				.add(woodBlock.wood)
+				.add(woodBlock.strippedWood);
+		}
+
+		if (woodBlock.hasQuarterLog()) {
+			woodBuilder
+				.add(woodBlock.quarterLog)
+				.add(woodBlock.strippedQuarterLog);
 		}
 
 		getOrCreateTagBuilder(BlockTags.FENCE_GATES).add(woodBlock.fenceGate);
@@ -261,5 +279,8 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 
 		// Adding to FENCE_GATES or any WOODEN tag does this for AXE_MINEABLE.
 		getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leaves);
+		if (woodBlock.hasLeafPile()) {
+			getOrCreateTagBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leafPile);
+		}
 	}
 }

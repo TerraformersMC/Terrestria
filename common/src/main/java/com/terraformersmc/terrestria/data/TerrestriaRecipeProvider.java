@@ -48,12 +48,6 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 		offerSingleOutputShapelessRecipe(exporter, Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
 
-		new ShapedRecipeJsonBuilder(RecipeCategory.DECORATIONS, TerrestriaItems.SAKURA_LEAF_PILE, 16)
-			.pattern("LL")
-			.input('L', TerrestriaItems.SAKURA.leaves)
-			.criterion("has_leaves", InventoryChangedCriterion.Conditions.items(TerrestriaItems.SAKURA.leaves))
-			.offerTo(exporter);
-
 
 		// wood building block recipes
 		generateWood(exporter, TerrestriaItems.CYPRESS, TerrestriaItemTags.CYPRESS_LOGS);
@@ -71,8 +65,12 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 	}
 
 	private void generateWood(Consumer<RecipeJsonProvider> exporter, WoodItems woodItem, TagKey<Item> logsTag) {
-		offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
-		offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
+		if (woodItem.hasBoat()) {
+			assert (woodItem.boat != null);  // it's not null; this is just for IDEA
+			offerBoatRecipe(exporter, woodItem.boat, woodItem.planks);
+			assert (woodItem.chestBoat != null);  // it's not null; this is just for IDEA
+			offerChestBoatRecipe(exporter, woodItem.chestBoat, woodItem.boat);
+		}
 
 		new ShapelessRecipeJsonBuilder(RecipeCategory.REDSTONE, woodItem.button, 1)
 			.group("wooden_button")
@@ -112,8 +110,19 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
+		// leaf piles are an optional wood feature
+		if (woodItem.hasLeafPile()) {
+			assert (woodItem.leafPile != null);  // it's not null; this is just for IDEA
+			new ShapedRecipeJsonBuilder(RecipeCategory.DECORATIONS, woodItem.leafPile, 16)
+					.pattern("LL")
+					.input('L', woodItem.leaves)
+					.criterion("has_leaves", InventoryChangedCriterion.Conditions.items(woodItem.leaves))
+					.offerTo(exporter);
+		}
+
 		// some woodItem with no real wood have wood set to log
-		if (!woodItem.wood.equals(woodItem.log)) {
+		if (woodItem.hasWood()) {
+			assert (woodItem.wood != null);  // it's not null; this is just for IDEA
 			new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, woodItem.wood, 3)
 				.group("bark")
 				.pattern("LL")
@@ -122,6 +131,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 				.criterion("has_logs", InventoryChangedCriterion.Conditions.items(woodItem.log))
 				.offerTo(exporter);
 
+			assert (woodItem.strippedWood != null);  // it's not null; this is just for IDEA
 			new ShapedRecipeJsonBuilder(RecipeCategory.BUILDING_BLOCKS, woodItem.strippedWood, 3)
 				.group("bark")
 				.pattern("LL")

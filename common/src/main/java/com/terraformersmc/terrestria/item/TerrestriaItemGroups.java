@@ -4,7 +4,6 @@ import com.terraformersmc.terraform.dirt.DirtBlocks;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
-import com.terraformersmc.terrestria.init.helpers.QuarteredWoodItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -70,7 +69,6 @@ public class TerrestriaItemGroups {
 		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
 		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
 		addGroupEntry(TerrestriaBlocks.JUNGLE_PALM_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
-		addGroupEntry(TerrestriaBlocks.SAKURA_LEAF_PILE, ItemGroups.NATURAL, NATURAL_LEAVES);
 
 		// Saplings
 		addGroupEntry(TerrestriaBlocks.BRYCE_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
@@ -251,16 +249,18 @@ public class TerrestriaItemGroups {
 		// BUILDING BLOCKS
 
 		// Wood Items
-		if (items instanceof QuarteredWoodItems quartered) {
-			addGroupEntry(quartered.quarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-			addGroupEntry(quartered.strippedQuarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		}
 		addGroupEntry(items.log, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		if (!items.log.equals(items.wood)) {
+		if (items.hasQuarterLog()) {
+			addGroupEntry(items.quarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		}
+		if (items.hasWood()) {
 			addGroupEntry(items.wood, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
 		addGroupEntry(items.strippedLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		if (!items.strippedLog.equals(items.strippedWood)) {
+		if (items.hasQuarterLog()) {
+			addGroupEntry(items.strippedQuarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		}
+		if (items.hasWood()) {
 			addGroupEntry(items.strippedWood, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
 		addGroupEntry(items.planks, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
@@ -278,9 +278,19 @@ public class TerrestriaItemGroups {
 
 		// Wood Items
 		addGroupEntry(items.log, ItemGroups.NATURAL, NATURAL_LOG);
+		if (items.hasQuarterLog()) {
+			addGroupEntry(items.quarterLog, ItemGroups.NATURAL, NATURAL_LOG);
+			if (items.hasWood()) {
+				// At the moment, wood generates naturally on all quartered trees...
+				addGroupEntry(items.wood, ItemGroups.NATURAL, NATURAL_LOG);
+			}
+		}
 
 		// Leaves
 		addGroupEntry(items.leaves, ItemGroups.NATURAL, NATURAL_LEAVES);
+		if (items.hasLeafPile()) {
+			addGroupEntry(items.leafPile, ItemGroups.NATURAL, NATURAL_LEAVES);
+		}
 
 
 		// FUNCTIONAL
@@ -293,7 +303,7 @@ public class TerrestriaItemGroups {
 		// TOOLS
 
 		// Boats
-		if (items.boat != null) {
+		if (items.hasBoat()) {
 			addGroupEntry(items.boat, ItemGroups.TOOLS, TOOLS_BOAT);
 			addGroupEntry(items.chestBoat, ItemGroups.TOOLS, TOOLS_BOAT);
 		}
