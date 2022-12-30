@@ -10,21 +10,19 @@ import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 
-import java.util.function.BiConsumer;
-
 public abstract class SmallFoliagePlacer extends FoliagePlacer {
 
 	public SmallFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
-	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
+	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BlockPlacer placer, TreeFeatureConfig config) {
 		if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-			replacer.accept(pos, getOriginalState(config, world, pos, random).with(SmallLogBlock.HAS_LEAVES, true));
+			placer.placeBlock(pos, getOriginalState(config, world, pos, random).with(SmallLogBlock.HAS_LEAVES, true));
 			return;
 		}
 		if (world.testBlockState(pos, BlockState::isAir)) {
-			replacer.accept(pos, config.foliageProvider.get(random, pos));
+			placer.placeBlock(pos, config.foliageProvider.get(random, pos));
 		}
 	}
 

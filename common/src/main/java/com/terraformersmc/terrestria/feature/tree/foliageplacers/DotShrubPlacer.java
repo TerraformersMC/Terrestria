@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.IntProvider;
@@ -14,8 +13,6 @@ import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
-
-import java.util.function.BiConsumer;
 
 public class DotShrubPlacer extends FoliagePlacer {
 
@@ -32,14 +29,14 @@ public class DotShrubPlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
-		checkAndSetBlockState(world, random, treeNode.getCenter(), replacer, config);
-		Direction.Type.HORIZONTAL.forEach((direction) -> checkAndSetBlockState(world, random, treeNode.getCenter().down().offset(direction), replacer, config));
+	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+		checkAndSetBlockState(world, random, treeNode.getCenter(), placer, config);
+		Direction.Type.HORIZONTAL.forEach((direction) -> checkAndSetBlockState(world, random, treeNode.getCenter().down().offset(direction), placer, config));
 	}
 
-	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos currentPosition, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
+	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos currentPosition, BlockPlacer placer, TreeFeatureConfig config) {
 		if (TreeFeature.canReplace(world, currentPosition)) {
-			replacer.accept(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
+			placer.placeBlock(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
 		}
 	}
 

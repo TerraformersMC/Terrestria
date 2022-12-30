@@ -17,7 +17,7 @@ public class LushDesertBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries, oasis))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.RAIN)
+				.precipitation(true)
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

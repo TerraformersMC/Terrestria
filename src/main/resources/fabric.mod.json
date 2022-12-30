@@ -29,8 +29,8 @@
   "environment": "*",
   "depends": {
     "fabricloader": ">=0.13.3",
-    "fabric": ">=0.68.0",
-    "minecraft": ">1.19.2 <1.20",
+    "fabric": ">=0.75.0",
+    "minecraft": ">1.19.3 <1.20",
     "java": ">=17"
   }
 }

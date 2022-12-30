@@ -17,7 +17,7 @@ public class CalderaBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.SNOW)
+				.precipitation(true)
 				.temperature(0.2F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
+import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
+import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
 
-public class CalderaSurfaceBuilder extends TerrestriaSurfaceBuilder {
+public class CalderaSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise CALDERA_NOISE = new OpenSimplexNoise(27438);
 
 	private static final int RIM_HEIGHT = 128;

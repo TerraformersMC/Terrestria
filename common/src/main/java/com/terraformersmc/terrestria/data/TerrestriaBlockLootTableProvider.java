@@ -7,8 +7,8 @@ import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.SaplingBlock;
-import net.minecraft.data.server.loottable.VanillaBlockLootTableGenerator;
-import javax.annotation.Nullable;
+import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
+import org.jetbrains.annotations.Nullable;
 
 public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvider {
 	protected TerrestriaBlockLootTableProvider(FabricDataOutput dataOutput) {

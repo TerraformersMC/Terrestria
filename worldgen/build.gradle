@@ -5,7 +5,8 @@ loom {
 }
 
 dependencies {
-	// TerraBlender is our biome API overlord.
+	// Biolith and TerraBlender for the worldgen API modules
+	modImplementation "com.terraformersmc:biolith:${biolith_version}"
 	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
 	implementation project(path: ':common')

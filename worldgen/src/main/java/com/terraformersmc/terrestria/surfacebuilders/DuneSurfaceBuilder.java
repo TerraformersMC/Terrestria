@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
+import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
+import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -11,7 +12,7 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
 
-public class DuneSurfaceBuilder extends TerrestriaSurfaceBuilder {
+public class DuneSurfaceBuilder extends BiolithSurfaceBuilder {
 
 	private static final OpenSimplexNoise NOISE = new OpenSimplexNoise(3445);
 

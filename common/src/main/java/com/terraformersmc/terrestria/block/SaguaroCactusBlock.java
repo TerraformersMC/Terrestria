@@ -7,7 +7,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.entity.ai.pathing.PathNodeType;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -28,7 +27,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		entity.damage(DamageSource.CACTUS, 1.0F);
+		entity.damage(world.getDamageSources().cactus(), 1.0f);
 	}
 
 	@Override
@@ -38,12 +37,12 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 
 	// For Lithium - https://github.com/jellysquid3/lithium-fabric/blob/1.16.x/dev/src/main/java/me/jellysquid/mods/lithium/api/pathing/BlockPathingBehavior.java
 	public PathNodeType getPathNodeType(BlockState state) {
-		return PathNodeType.DAMAGE_CACTUS;
+		return PathNodeType.DAMAGE_OTHER;
 	}
 
 	// For Lithium - https://github.com/jellysquid3/lithium-fabric/blob/1.16.x/dev/src/main/java/me/jellysquid/mods/lithium/api/pathing/BlockPathingBehavior.java
 	public PathNodeType getNeighborPathNodeType(BlockState state) {
-		return PathNodeType.DAMAGE_CACTUS;
+		return PathNodeType.DANGER_OTHER;
 	}
 
 	@Override

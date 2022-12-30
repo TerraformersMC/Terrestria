@@ -1,7 +1,5 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import java.util.function.BiConsumer;
-
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
@@ -43,7 +41,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void generateSquare(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
+	protected void generateSquare(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		int actualDistance;
@@ -59,7 +57,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 						//       This is about leaf decay behavior, which changed quite a bit in 1.17.
 						//       Look here first if we get reports of strange decay on the biggest trees.
 
-						replacer.accept(mutable.toImmutable(), withDistance(baseState, actualDistance));
+						placer.placeBlock(mutable.toImmutable(), withDistance(baseState, actualDistance));
 					}
 				}
 			}

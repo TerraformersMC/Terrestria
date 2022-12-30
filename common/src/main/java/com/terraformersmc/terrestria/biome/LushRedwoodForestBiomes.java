@@ -18,7 +18,7 @@ public class LushRedwoodForestBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.RAIN)
+				.precipitation(true)
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

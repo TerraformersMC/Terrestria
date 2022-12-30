@@ -165,8 +165,6 @@ public class TerrestriaClient implements ClientModInitializer {
 				TerrestriaItems.HEMLOCK.leaves
 		);
 
-		BlockRenderLayerMap.INSTANCE.putItem(TerrestriaItems.SAKURA.leafPile, RenderLayer.getCutoutMipped());
-
 		ColorProviderRegistry.ITEM.register(
 				GRASS_ITEM_COLORS,
 				TerrestriaItems.ANDISOL_GRASS_BLOCK

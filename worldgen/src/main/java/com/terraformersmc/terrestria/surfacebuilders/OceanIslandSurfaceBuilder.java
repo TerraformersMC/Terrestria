@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
+import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
+import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import com.terraformersmc.terrestria.biomeperimeters.BiomePerimeters;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -12,7 +13,7 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
 
-public class OceanIslandSurfaceBuilder extends TerrestriaSurfaceBuilder {
+public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise ISLAND_NOISE = new OpenSimplexNoise(346987);
 	private static final int DEEP_DEPTH = 32;
 	private static final int SHALLOW_DEPTH = 16;

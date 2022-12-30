@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
+import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -10,7 +11,7 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
 
-public class ThreeLayerOutlineSurfaceBuilder extends TerrestriaSurfaceBuilder {
+public class ThreeLayerOutlineSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise TLO_NOISE = new OpenSimplexNoise(8675309);
 
 	public static final BlockState STONE = Blocks.STONE.getDefaultState();

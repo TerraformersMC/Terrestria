@@ -15,7 +15,7 @@ public class CanyonBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.NONE)
+				.precipitation(false)
 				.temperature(0.9F)
 				.downfall(0.1F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

@@ -3,8 +3,8 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'fabric-loom' version '0.12-SNAPSHOT'
-	id 'io.github.juuxel.loom-quiltflower' version '1.7.4'
+	id 'fabric-loom' version '1.0.+'
+	id 'io.github.juuxel.loom-quiltflower' version '1.8.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.5/ferry.gradle'
@@ -24,9 +24,9 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
-	if (findProject(':worldgen') != null) {
-		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
-	}
+//	if (findProject(':worldgen') != null) {
+//		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
+//	}
 
 	afterEvaluate {
 		subprojects.each {

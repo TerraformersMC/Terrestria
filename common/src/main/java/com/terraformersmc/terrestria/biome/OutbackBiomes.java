@@ -15,7 +15,7 @@ public class OutbackBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.NONE)
+				.precipitation(false)
 				.temperature(1.8F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

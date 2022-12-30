@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
+import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.MathHelper;
@@ -9,7 +10,7 @@ import net.minecraft.world.biome.source.BiomeAccess;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.gen.chunk.BlockColumn;
 
-public class CanyonSurfaceBuilder extends TerrestriaSurfaceBuilder {
+public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
 

@@ -27,7 +27,7 @@ public class MixinLandPathNodeMaker {
 		BlockState state = blockView.getBlockState(blockPos);
 
 		if (state.isOf(TerrestriaBlocks.SAGUARO_CACTUS) || state.isOf(TerrestriaBlocks.TINY_CACTUS)) {
-			callback.setReturnValue(PathNodeType.DAMAGE_CACTUS);
+			callback.setReturnValue(PathNodeType.DAMAGE_OTHER);
 		}
 	}
 
@@ -38,7 +38,7 @@ public class MixinLandPathNodeMaker {
 																	PathNodeType pathNodeType, CallbackInfoReturnable<PathNodeType> callback,
 																	int i, int j, int k, int l, int m, int n, BlockState state) {
 		if (state.isOf(TerrestriaBlocks.SAGUARO_CACTUS) || state.isOf(TerrestriaBlocks.TINY_CACTUS)) {
-			callback.setReturnValue(PathNodeType.DAMAGE_CACTUS);
+			callback.setReturnValue(PathNodeType.DANGER_OTHER);
 		}
 	}
 }

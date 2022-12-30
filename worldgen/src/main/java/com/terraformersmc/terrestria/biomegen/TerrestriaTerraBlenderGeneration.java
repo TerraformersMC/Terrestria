@@ -92,6 +92,6 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		// Add the biomes to Overworld generation via TerraBlender.
 		BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
 		Regions.register(this);
-		Regions.register(new TerrestriaRareGeneration());
+		Regions.register(new TerrestriaTerraBlenderRare());
 	}
 }

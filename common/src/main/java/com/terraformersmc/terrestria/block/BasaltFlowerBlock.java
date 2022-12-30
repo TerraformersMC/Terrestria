@@ -12,7 +12,7 @@ public class BasaltFlowerBlock extends FlowerBlock {
 	public static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public BasaltFlowerBlock(StatusEffect stewEffect, int effectSeconds, Settings settings) {
-		super(stewEffect, effectSeconds, settings.offsetType(AbstractBlock.OffsetType.XZ));
+		super(stewEffect, effectSeconds, settings.offset(AbstractBlock.OffsetType.XZ));
 	}
 
 	@Override

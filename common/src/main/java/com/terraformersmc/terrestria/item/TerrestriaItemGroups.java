@@ -185,7 +185,7 @@ public class TerrestriaItemGroups {
 		ITEM_GROUP = FabricItemGroup.builder(new Identifier(Terrestria.MOD_ID, "items"))
 				.displayName(Text.literal("Terrestria"))
 				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack())
-				.entries((enabledFeatures, entries, operatorEnabled) -> {
+				.entries((context, entries) -> {
 					ITEM_GROUP_ENTRY_MAPS.values().stream()
 							.map(HashMap::values).flatMap(Collection::stream)
 							.map(ItemGroupEntries::getCollection).flatMap(Collection::stream)

@@ -18,7 +18,7 @@ public class HemlockRainforestBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries, sparse))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.RAIN)
+				.precipitation(true)
 				.temperature(0.6F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()

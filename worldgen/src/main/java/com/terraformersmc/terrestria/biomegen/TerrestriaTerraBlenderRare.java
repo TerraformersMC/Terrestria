@@ -15,10 +15,10 @@ import java.util.function.Consumer;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
-public class TerrestriaRareGeneration extends Region implements TerraBlenderApi {
+public class TerrestriaTerraBlenderRare extends Region implements TerraBlenderApi {
 	TerrestriaBiomeConfig BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();
 
-	public TerrestriaRareGeneration() {
+	public TerrestriaTerraBlenderRare() {
 		super(new Identifier(Terrestria.MOD_ID, "overworld_rare"), RegionType.OVERWORLD, 7);
 	}
 

@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.intprovider.IntProvider;
@@ -14,8 +13,6 @@ import net.minecraft.world.gen.feature.TreeFeature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
-
-import java.util.function.BiConsumer;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 
@@ -32,7 +29,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
 
 		// The origin of this leaf piece
 		BlockPos center = treeNode.getCenter().toImmutable();
@@ -44,16 +41,16 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		boolean flipSpiral = random.nextBoolean();
 
 		// Place the top blocks
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 0), replacer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(1, 1, 0), replacer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 1), replacer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(-1, 1, 0), replacer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, -1), replacer, config);
+		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 0), placer, config);
+		checkAndSetBlockState(world, random, pos.set(center).move(1, 1, 0), placer, config);
+		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 1), placer, config);
+		checkAndSetBlockState(world, random, pos.set(center).move(-1, 1, 0), placer, config);
+		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, -1), placer, config);
 
 		// Place supports for dangly bits
 		for (int dZ = -1; dZ < 2; dZ++) {
 			for (int dX = -1; dX < 2; dX++) {
-				checkAndSetBlockState(world, random, pos.set(center).move(dZ, 0, dX), replacer, config);
+				checkAndSetBlockState(world, random, pos.set(center).move(dZ, 0, dX), placer, config);
 			}
 		}
 
@@ -62,30 +59,30 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 			Direction direction = Direction.fromHorizontal(d);
 
 			pos.set(center).move(direction, 2);
-			placeSpiral(world, random, pos, replacer, config, direction, !flipSpiral);
+			placeSpiral(world, random, pos, placer, config, direction, !flipSpiral);
 
 			pos.set(center).move(direction, 3);
-			placeSpiral(world, random, pos, replacer, config, direction, flipSpiral);
+			placeSpiral(world, random, pos, placer, config, direction, flipSpiral);
 		}
 	}
 
-	private void placeSpiral(TestableWorld world, Random rand, BlockPos.Mutable pos, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
+	private void placeSpiral(TestableWorld world, Random rand, BlockPos.Mutable pos, BlockPlacer placer, TreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
 		// Base of dangly bit
-		checkAndSetBlockState(world, rand, pos, replacer, config);
+		checkAndSetBlockState(world, rand, pos, placer, config);
 
 		// Get the direction of the twist from the direction of the branch then place a block there
 		Direction spiral = spiral(direction, invertLeafSpiral);
-		checkAndSetBlockState(world, rand, pos.move(spiral), replacer, config);
+		checkAndSetBlockState(world, rand, pos.move(spiral), placer, config);
 
 		// Continue the branch all the way down
 		for (int i = 0; i < 2; i++) {
-			checkAndSetBlockState(world, rand, pos.move(Direction.DOWN), replacer, config);
+			checkAndSetBlockState(world, rand, pos.move(Direction.DOWN), placer, config);
 		}
 	}
 
-	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos.Mutable currentPosition, BiConsumer<BlockPos, BlockState> replacer, TreeFeatureConfig config) {
+	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos.Mutable currentPosition, BlockPlacer placer, TreeFeatureConfig config) {
 		if (TreeFeature.canReplace(world, currentPosition)) {
-			replacer.accept(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
+			placer.placeBlock(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
 		}
 	}
 

@@ -19,7 +19,7 @@ public class SnowyHemlockRainforestBiomes {
 		return new Biome.Builder()
 				.generationSettings(createGenerationSettings(entries, sparse))
 				.spawnSettings(createSpawnSettings())
-				.precipitation(Biome.Precipitation.SNOW)
+				.precipitation(true)
 				.temperature(-0.5F)
 				.downfall(1.0F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
