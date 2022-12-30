@@ -80,8 +80,8 @@ public class TerrestriaBiomes {
 		entries.add(RAINBOW_RAINFOREST, RainbowRainforestBiomes.create(entries));
 		entries.add(REDWOOD_FOREST, RedwoodForestBiomes.create(entries, false));
 		entries.add(SAKURA_FOREST, SakuraForestBiomes.create(entries));
-		entries.add(SNOWY_HEMLOCK_FOREST, HemlockRainforestBiomes.create(entries, false));
-		entries.add(SNOWY_HEMLOCK_TREELINE, HemlockRainforestBiomes.create(entries, true));
+		entries.add(SNOWY_HEMLOCK_FOREST, SnowyHemlockRainforestBiomes.create(entries, false));
+		entries.add(SNOWY_HEMLOCK_TREELINE, SnowyHemlockRainforestBiomes.create(entries, true));
 		entries.add(VOLCANIC_ISLAND, VolcanicIslandBiomes.create(entries));
 		entries.add(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(entries, true));
 	}

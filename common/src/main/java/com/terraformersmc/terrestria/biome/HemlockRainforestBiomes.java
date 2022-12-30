@@ -53,7 +53,7 @@ public class HemlockRainforestBiomes {
 		DefaultBiomeFeatures.addTaigaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder);
-		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
+		DefaultBiomeFeatures.addSweetBerryBushes(builder);
 		return builder.build();
 	}
 
