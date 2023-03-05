@@ -24,9 +24,9 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
-//	if (findProject(':worldgen') != null) {
-//		includeMod "terrablender", "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
-//	}
+	if (findProject(':worldgen') != null) {
+		includeMod "biolith", "com.terraformersmc:biolith:${biolith_version}"
+	}
 
 	afterEvaluate {
 		subprojects.each {

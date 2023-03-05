@@ -9,6 +9,9 @@
   "entrypoints": {
     "main": [
       "com.terraformersmc.terrestria.TerrestriaWorldgen"
+    ],
+    "terrablender": [
+      "com.terraformersmc.terrestria.biomegen.TerrestriaTerraBlenderGeneration"
     ]
   },
   "accessWidener": "terrestria-worldgen.accesswidener",
