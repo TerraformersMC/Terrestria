@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria.block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.entity.ai.pathing.PathNodeType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -26,15 +25,5 @@ public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock {
 	@Override
 	public boolean canPathfindThrough(BlockState state, BlockView world, BlockPos pos, NavigationType type) {
 		return false;
-	}
-
-	// For Lithium - https://github.com/jellysquid3/lithium-fabric/blob/1.16.x/dev/src/main/java/me/jellysquid/mods/lithium/api/pathing/BlockPathingBehavior.java
-	public PathNodeType getPathNodeType(BlockState state) {
-		return PathNodeType.DAMAGE_OTHER;
-	}
-
-	// For Lithium - https://github.com/jellysquid3/lithium-fabric/blob/1.16.x/dev/src/main/java/me/jellysquid/mods/lithium/api/pathing/BlockPathingBehavior.java
-	public PathNodeType getNeighborPathNodeType(BlockState state) {
-		return PathNodeType.DANGER_OTHER;
 	}
 }
