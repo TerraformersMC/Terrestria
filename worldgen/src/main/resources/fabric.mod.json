@@ -23,10 +23,10 @@
       "parent": "terrestria"
     }
   },
-  "recommends": {
+  "depends": {
     "biolith": "*"
   },
-  "suggests": {
+  "recommends": {
     "terrablender": "*"
   }
 }
