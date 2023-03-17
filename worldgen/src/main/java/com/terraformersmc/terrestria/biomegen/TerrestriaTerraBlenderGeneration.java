@@ -1,8 +1,10 @@
 package com.terraformersmc.terrestria.biomegen;
 
 import com.mojang.datafixers.util.Pair;
+import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.config.TerrestriaBiomeConfig;
+import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
 import com.terraformersmc.terrestria.surfacerules.TerrestriaSurfaceRules;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
@@ -77,6 +79,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 	public void onTerraBlenderInitialized() {
 		// We can't do registration stuff until both Terrestria and TerraBlender are ready.
 		// The run() method below will be called when Terrestria is done initializing.
+		Terrestria.callbackWhenInitialized(TerrestriaSurfaceBuilders::init);
 		Terrestria.callbackWhenInitialized(this);
 	}
 
@@ -88,6 +91,9 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 
 		// Add the Terrestria Overworld surface rules via TerraBlender.
 		SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Terrestria.MOD_ID, TerrestriaSurfaceRules.createRules());
+
+		// Register the Terrestria surface builders.
+		TerrestriaSurfaceBuilders.getBuilders().forEach(SurfaceGeneration::addSurfaceBuilder);
 
 		// Add the biomes to Overworld generation via TerraBlender.
 		BIOME_CONFIG = Terrestria.getConfigManager().getBiomeConfig();

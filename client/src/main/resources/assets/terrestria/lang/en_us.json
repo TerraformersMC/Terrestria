@@ -250,7 +250,7 @@
   "block.terrestria.saguaro_cactus_sapling": "Saguaro Cactus Sapling",
   "block.terrestria.yucca_palm_sapling": "Yucca Palm Sapling",
   "item.terrestria.log_turner": "Log Turner",
-  "item.terrestria.log_turner.tooltip": "Use on a log to instantly set\n its axis to the side you clicked\n When used on a quarter log, it\n will try to set the axis, and if\n it already matches, it will then\n rotate the bark side clockwise\n When used while sneaking, it will\n cycle the axis and bark side",
+  "item.terrestria.log_turner.tooltip": "Use on a log to set axis and rotation",
   "biome.terrestria.caldera": "Caldera",
   "biome.terrestria.canyon": "Canyon",
   "biome.terrestria.cypress_forest": "Cypress Forest",
