@@ -16,12 +16,9 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-import java.util.function.Supplier;
-
 public class SaguaroCactusBlock extends BareSmallLogBlock {
-
-	public SaguaroCactusBlock(Supplier<Block> stripped, Settings settings) {
-		super(stripped, settings);
+	public SaguaroCactusBlock(Settings settings) {
+		super(settings);
 	}
 
 	@Override

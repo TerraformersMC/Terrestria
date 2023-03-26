@@ -12,6 +12,7 @@ import com.terraformersmc.terrestria.block.TerrestriaOptiLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.sound.BlockSoundGroup;
@@ -93,27 +94,27 @@ public class WoodBlocks {
 
 		if (size.equals(LogSize.SMALL)) {
 			// Small logs have neither wood nor quarter logs.
-			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new SmallLogBlock(leaves, null, FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.planks)));
-			log = TerrestriaRegistry.register(name + "_log", new SmallLogBlock(leaves, () -> strippedLog, FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.bark)));
+			log = TerrestriaRegistry.register(name + "_log", SmallLogBlock.of(leaves, colors.planks, colors.bark));
+			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", SmallLogBlock.of(leaves, colors.planks));
 
-			strippedWood = null;
 			wood = null;
+			strippedWood = null;
 
-			strippedQuarterLog = null;
 			quarterLog = null;
+			strippedQuarterLog = null;
 		} else {
-			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.planks)));
-			log = TerrestriaRegistry.register(name + "_log", new StrippableLogBlock(() -> strippedLog, colors.planks, FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.bark)));
+			log = TerrestriaRegistry.register(name + "_log", StrippableLogBlock.of(colors.planks, colors.bark));
+			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", StrippableLogBlock.of(colors.planks));
 
-			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", new PillarBlock(FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.planks)));
-			wood = TerrestriaRegistry.register(name + "_wood", new StrippableLogBlock(() -> strippedWood, colors.bark, FabricBlockSettings.copyOf(Blocks.OAK_LOG).mapColor(colors.bark)));
+			wood = TerrestriaRegistry.register(name + "_wood", StrippableLogBlock.of(colors.bark));
+			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", StrippableLogBlock.of(colors.planks));
 
 			if (hasQuarterLog) {
-				strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", new QuarterLogBlock(null, colors.planks, Block.Settings.copy(strippedLog)));
-				quarterLog = TerrestriaRegistry.register(name + "_quarter_log", new QuarterLogBlock(() -> strippedQuarterLog, colors.planks, Block.Settings.copy(log)));
+				quarterLog = TerrestriaRegistry.register(name + "_quarter_log", QuarterLogBlock.of(colors.planks, colors.bark));
+				strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", QuarterLogBlock.of(colors.planks));
 			} else {
-				strippedQuarterLog = null;
 				quarterLog = null;
+				strippedQuarterLog = null;
 			}
 		}
 	}
@@ -122,6 +123,7 @@ public class WoodBlocks {
 		WoodBlocks blocks = new WoodBlocks(name, colors, size, hasLeafPile, hasQuarteredLog, usesExtendedLeaves);
 
 		blocks.addFlammables();
+		blocks.addStrippables();
 
 		return blocks;
 	}
@@ -159,6 +161,18 @@ public class WoodBlocks {
 		flammableRegistry.add(leaves, 30, 60);
 		if (hasLeafPile()) {
 			flammableRegistry.add(leafPile, 30, 60);
+		}
+	}
+
+	private void addStrippables() {
+		if (log != null && strippedLog != null) {
+			StrippableBlockRegistry.register(log, strippedLog);
+		}
+		if (wood != null && strippedWood != null) {
+			StrippableBlockRegistry.register(wood, strippedWood);
+		}
+		if (quarterLog != null && strippedQuarterLog != null) {
+			StrippableBlockRegistry.register(quarterLog, strippedQuarterLog);
 		}
 	}
 
