@@ -24,14 +24,14 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
-	if (findProject(':worldgen') != null) {
+	if (findProject(':terrestria-worldgen') != null) {
 		includeMod "biolith", "com.terraformersmc:biolith:${biolith_version}"
 	}
 
 	afterEvaluate {
 		subprojects.each {
 			testmodImplementation sourceSets.main.output
-			implementation project(path: "${it.name}", configuration: "namedElements")
+			api project(path: "${it.name}", configuration: "namedElements")
 			include project("${it.name}:")
 		}
 	}
@@ -125,4 +125,39 @@ subprojects {
 	version = rootProject.version
 
 	runClient.enabled = false
+
+	// Ferry functionality but for subprojects
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				artifact(jar) {
+					builtBy remapJar
+				}
+				artifact(sourcesJar) {
+					builtBy remapSourcesJar
+				}
+
+				afterEvaluate {
+					artifact remapJar
+				}
+			}
+		}
+
+		setupRepositories(repositories)
+	}
+}
+
+// Copied from Ferry 2.5 ... apparently Ferry's def does not apply to the subprojects
+static void setupRepositories(RepositoryHandler repositories) {
+	//repositories.mavenLocal() // uncomment for testing
+	def ENV = System.getenv()
+	if (ENV.MAVEN_URL) {
+		repositories.maven {
+			url ENV.MAVEN_URL
+			credentials {
+				username ENV.MAVEN_USERNAME
+				password ENV.MAVEN_PASSWORD
+			}
+		}
+	}
 }

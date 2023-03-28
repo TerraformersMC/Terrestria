@@ -9,5 +9,5 @@ dependencies {
 	modImplementation "com.terraformersmc:biolith:${biolith_version}"
 	modImplementation "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
-	implementation project(path: ':common')
+	implementation project(path: ':terrestria-common')
 }

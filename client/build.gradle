@@ -4,5 +4,5 @@ loom {
 }
 
 dependencies {
-	implementation project(path: ':common')
+	implementation project(path: ':terrestria-common')
 }
