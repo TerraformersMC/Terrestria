@@ -103,11 +103,11 @@ public class WoodBlocks {
 			quarterLog = null;
 			strippedQuarterLog = null;
 		} else {
-			log = TerrestriaRegistry.register(name + "_log", StrippableLogBlock.of(colors.planks, colors.bark));
-			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", StrippableLogBlock.of(colors.planks));
+			log = TerrestriaRegistry.register(name + "_log", PillarLogHelper.of(colors.planks, colors.bark));
+			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", PillarLogHelper.of(colors.planks));
 
-			wood = TerrestriaRegistry.register(name + "_wood", StrippableLogBlock.of(colors.bark));
-			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", StrippableLogBlock.of(colors.planks));
+			wood = TerrestriaRegistry.register(name + "_wood", PillarLogHelper.of(colors.bark));
+			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", PillarLogHelper.of(colors.planks));
 
 			if (hasQuarterLog) {
 				quarterLog = TerrestriaRegistry.register(name + "_quarter_log", QuarterLogBlock.of(colors.planks, colors.bark));
