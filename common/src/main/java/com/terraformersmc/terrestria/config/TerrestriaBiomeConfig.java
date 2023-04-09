@@ -13,7 +13,10 @@ public class TerrestriaBiomeConfig {
 
 	TerrestriaBiomeConfig() {
 		// This is where to set biomes to default disabled if needed (replace "k -> true").
-		biomes = TerrestriaBiomes.BIOMES.stream().collect(Collectors.toMap(k -> k.getValue().getPath(), k -> true));
+		// Presently default disabled biomes: Sakura Forest
+		biomes = TerrestriaBiomes.BIOMES.stream().collect(Collectors.toMap(k -> k.getValue().getPath(),
+				k -> (!TerrestriaBiomes.SAKURA_FOREST.equals(k))
+		));
 	}
 
 	public boolean isBiomeEnabled(String name) {

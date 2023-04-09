@@ -38,7 +38,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		if (BIOME_CONFIG.isBiomeEnabled(LUSH_DESERT))              { this.addBiomeSimilar(mapper, BiomeKeys.DESERT, LUSH_DESERT); }
 		if (BIOME_CONFIG.isBiomeEnabled(OUTBACK))                  { this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, OUTBACK); }
 		if (BIOME_CONFIG.isBiomeEnabled(REDWOOD_FOREST))           { this.addBiomeSimilar(mapper, BiomeKeys.FOREST, REDWOOD_FOREST); }
-		if (BIOME_CONFIG.isBiomeEnabled(SAKURA_FOREST))            { this.addBiomeSimilar(mapper, BiomeKeys.BIRCH_FOREST, SAKURA_FOREST); }
+		if (BIOME_CONFIG.isBiomeEnabled(SAKURA_FOREST))            { this.addBiomeSimilar(mapper, BiomeKeys.CHERRY_GROVE, SAKURA_FOREST); }
 		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_FOREST))     { this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_TAIGA, SNOWY_HEMLOCK_FOREST); }
 		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_FOREST))     { this.addBiomeSimilar(mapper, BiomeKeys.GROVE, SNOWY_HEMLOCK_FOREST); }
 		if (BIOME_CONFIG.isBiomeEnabled(SNOWY_HEMLOCK_TREELINE))   { this.addBiomeSimilar(mapper, BiomeKeys.SNOWY_SLOPES, SNOWY_HEMLOCK_TREELINE); }
@@ -60,6 +60,7 @@ public class TerrestriaTerraBlenderGeneration extends Region implements Runnable
 		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_COLD_OCEAN, BiomeKeys.DEEP_COLD_OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.DEEP_FROZEN_OCEAN, BiomeKeys.DEEP_FROZEN_OCEAN);
 		this.addBiomeSimilar(mapper, BiomeKeys.JUNGLE, BiomeKeys.JUNGLE);
+		this.addBiomeSimilar(mapper, BiomeKeys.MANGROVE_SWAMP, BiomeKeys.MANGROVE_SWAMP);
 		this.addBiomeSimilar(mapper, BiomeKeys.BAMBOO_JUNGLE, BiomeKeys.BAMBOO_JUNGLE);
 		this.addBiomeSimilar(mapper, BiomeKeys.SPARSE_JUNGLE, BiomeKeys.SPARSE_JUNGLE);
 		this.addBiomeSimilar(mapper, BiomeKeys.SAVANNA, BiomeKeys.SAVANNA);

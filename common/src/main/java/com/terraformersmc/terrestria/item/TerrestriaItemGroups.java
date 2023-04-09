@@ -29,18 +29,18 @@ public class TerrestriaItemGroups {
 	 * Each is used to build a collection of items which will be inserted below the Vanilla item.
 	 */
 	private static final Item BUILDING_STONE_ITEMS = Items.MOSSY_STONE_BRICK_WALL;
-	private static final Item BUILDING_WOOD_ITEMS = Items.MANGROVE_BUTTON;
-	private static final Item FUNCTIONAL_SIGN = Items.MANGROVE_HANGING_SIGN;
+	private static final Item BUILDING_WOOD_ITEMS = Items.CHERRY_BUTTON;
+	private static final Item FUNCTIONAL_SIGN = Items.CHERRY_HANGING_SIGN;
 	private static final Item NATURAL_CACTUS = Items.CACTUS;
 	private static final Item NATURAL_DIRT_ITEMS = Items.FARMLAND;
-	private static final Item NATURAL_LEAVES = Items.MANGROVE_LEAVES;
-	private static final Item NATURAL_LOG = Items.MANGROVE_LOG;
-	private static final Item NATURAL_SAPLING = Items.MANGROVE_PROPAGULE;
+	private static final Item NATURAL_LEAVES = Items.CHERRY_LEAVES;
+	private static final Item NATURAL_LOG = Items.CHERRY_LOG;
+	private static final Item NATURAL_SAPLING = Items.CHERRY_SAPLING;
 	private static final Item NATURAL_SAND = Items.RED_SANDSTONE;
 	private static final Item NATURAL_STONE = Items.STONE;
 	private static final Item NATURAL_TALL_VEGETATION = Items.LARGE_FERN;
 	private static final Item NATURAL_VEGETATION = Items.FERN;
-	private static final Item TOOLS_BOAT = Items.MANGROVE_CHEST_BOAT;
+	private static final Item TOOLS_BOAT = Items.CHERRY_CHEST_BOAT;
 
 	static {
 		ITEM_GROUP_ENTRY_MAPS = new HashMap<>(8);
@@ -168,8 +168,6 @@ public class TerrestriaItemGroups {
 					if (relative == null) {
 						// Target the end of the Item Group
 						content.addAll(entries.getCollection());
-					} else if (relative.equals(Items.MANGROVE_HANGING_SIGN) && !Items.MANGROVE_HANGING_SIGN.isEnabled(featureSet)) {
-						content.addAfter(Items.MANGROVE_SIGN, entries.getCollection());
 					} else {
 						//Terrestria.LOGGER.warn("About to add to Vanilla Item Group '{}' after Item '{}': '{}'", group.getId(), relative, entries.getCollection().stream().map(ItemStack::getItem).collect(Collectors.toList()));
 						content.addAfter(relative, entries.getCollection());
