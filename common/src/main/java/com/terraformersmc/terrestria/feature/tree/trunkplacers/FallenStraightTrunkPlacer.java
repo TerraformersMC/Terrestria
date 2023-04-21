@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.util.math.BlockPos;
@@ -47,7 +48,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 			BlockPos localPos = currentPosition.move(direction.getOpposite());
 
 			// If the pos is blocked, then return
-			if (!world.testBlockState(localPos, state -> state.getMaterial().isReplaceable())) {
+			if (!world.testBlockState(localPos, AbstractBlock.AbstractBlockState::isReplaceable)) {
 				return ImmutableList.of();
 			}
 
