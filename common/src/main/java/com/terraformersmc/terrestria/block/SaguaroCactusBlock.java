@@ -4,10 +4,13 @@ import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
@@ -19,6 +22,24 @@ import net.minecraft.world.WorldView;
 public class SaguaroCactusBlock extends BareSmallLogBlock {
 	public SaguaroCactusBlock(Settings settings) {
 		super(settings);
+	}
+
+	public static SaguaroCactusBlock of(MapColor color) {
+		return new SaguaroCactusBlock(Block.Settings.of()
+				.mapColor(color)
+				.strength(0.4F)
+				.sounds(BlockSoundGroup.WOOL)
+				.pistonBehavior(PistonBehavior.DESTROY)
+		);
+	}
+
+	public static SaguaroCactusBlock of(MapColor flesh, MapColor skin) {
+		return new SaguaroCactusBlock(Block.Settings.of()
+				.mapColor((state) -> state.get(UP) ? flesh : skin)
+				.strength(0.4F)
+				.sounds(BlockSoundGroup.WOOL)
+				.pistonBehavior(PistonBehavior.DESTROY)
+		);
 	}
 
 	@Override

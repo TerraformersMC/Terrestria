@@ -11,17 +11,17 @@ public class StoneVariantBlocks {
 
 	private StoneVariantBlocks() {}
 
-	public static StoneVariantBlocks register(String name, MapColor color) {
-		return register(name, name, color);
+	public static StoneVariantBlocks register(String name, MapColor color, Block family) {
+		return register(name, name, color, family);
 	}
 
-	public static StoneVariantBlocks register(String name, String shapedName, MapColor color) {
+	public static StoneVariantBlocks register(String name, String shapedName, MapColor color, Block family) {
 		StoneVariantBlocks blocks = new StoneVariantBlocks();
 
-		blocks.full = TerrestriaRegistry.register(name, new Block(FabricBlockSettings.copyOf(Blocks.COBBLESTONE).mapColor(color)));
-		blocks.slab = TerrestriaRegistry.register(shapedName + "_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.COBBLESTONE_STAIRS).mapColor(color)));
-		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new StairsBlock(blocks.full.getDefaultState(), FabricBlockSettings.copyOf(Blocks.COBBLESTONE_STAIRS).mapColor(color)));
-		blocks.wall = TerrestriaRegistry.register(shapedName + "_wall", new WallBlock(FabricBlockSettings.copyOf(Blocks.COBBLESTONE_WALL).mapColor(color)));
+		blocks.full = TerrestriaRegistry.register(name, new Block(FabricBlockSettings.copyOf(family).mapColor(color)));
+		blocks.slab = TerrestriaRegistry.register(shapedName + "_slab", new SlabBlock(FabricBlockSettings.copyOf(family).mapColor(color)));
+		blocks.stairs = TerrestriaRegistry.register(shapedName + "_stairs", new StairsBlock(blocks.full.getDefaultState(), FabricBlockSettings.copyOf(family).mapColor(color)));
+		blocks.wall = TerrestriaRegistry.register(shapedName + "_wall", new WallBlock(FabricBlockSettings.copyOf(family).mapColor(color)));
 
 		return blocks;
 	}

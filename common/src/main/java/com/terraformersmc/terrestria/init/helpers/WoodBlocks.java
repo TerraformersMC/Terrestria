@@ -14,7 +14,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class WoodBlocks {
@@ -86,7 +85,7 @@ public class WoodBlocks {
 		}
 
 		if (hasLeafPile) {
-			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", new LeafPileBlock(FabricBlockSettings.of(Material.ALLOWS_MOVEMENT_LIGHT_PASSES_THROUGH_NOT_SOLID).strength(0.025f, 0.1f).noCollision().sounds(BlockSoundGroup.GRASS).mapColor(colors.leaves)));
+			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", new LeafPileBlock(FabricBlockSettings.copyOf(Blocks.PINK_PETALS).mapColor(colors.leaves)));
 		} else {
 			leafPile = null;
 		}
