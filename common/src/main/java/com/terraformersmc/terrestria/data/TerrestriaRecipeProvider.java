@@ -90,7 +90,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.criterion("has_planks", InventoryChangedCriterion.Conditions.items(woodItem.planks))
 			.offerTo(exporter);
 
-		offerHangingSignRecipe(exporter, woodItem.hangingSign, woodItem.planks);
+		offerHangingSignRecipe(exporter, woodItem.hangingSign, woodItem.strippedLog);
 
 		offerPlanksRecipe(exporter, woodItem.planks, logsTag, 4);
 

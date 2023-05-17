@@ -7,7 +7,12 @@ import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.SaplingBlock;
+import net.minecraft.data.server.loottable.BlockLootTableGenerator;
 import net.minecraft.data.server.loottable.vanilla.VanillaBlockLootTableGenerator;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.loot.condition.TableBonusLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.loot.entry.LeafEntry;
 import org.jetbrains.annotations.Nullable;
 
 public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvider {
@@ -35,7 +40,6 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		addDrop(TerrestriaBlocks.REDWOOD_SAPLING);
 		addDrop(TerrestriaBlocks.RUBBER_SAPLING);
-		addDrop(TerrestriaBlocks.SAGUARO_CACTUS);
 		addDrop(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
 		addDrop(TerrestriaBlocks.SAKURA_SAPLING);
 		addDrop(TerrestriaBlocks.SMALL_OAK_LOG);
@@ -88,6 +92,13 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, leavesDrops(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING, 0.05f, 0.0625f, 0.083333336f, 0.1f));
 		addDrop(TerrestriaBlocks.JUNGLE_PALM_LEAVES, leavesDrops(TerrestriaBlocks.JUNGLE_PALM_LEAVES, TerrestriaBlocks.JUNGLE_PALM_SAPLING, 0.07f, 0.0875f, 0.116666667f, 0.14f));
 		addDrop(TerrestriaBlocks.YUCCA_PALM.leaves, leavesDrops(TerrestriaBlocks.YUCCA_PALM.leaves, TerrestriaBlocks.YUCCA_PALM_SAPLING, 0.15f, 0.1875f, 0.24f, 0.333333333f));
+
+		// even more specialty leaf-like drop thingy
+		addDrop(TerrestriaBlocks.SAGUARO_CACTUS,
+				BlockLootTableGenerator.dropsWithSilkTouch(TerrestriaBlocks.SAGUARO_CACTUS,
+						((LeafEntry.Builder<?>)this.addSurvivesExplosionCondition(TerrestriaBlocks.SAGUARO_CACTUS,
+								ItemEntry.builder(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING)))
+								.conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, 0.2f, 0.24285715f, 0.5f, 2.0f))));
 	}
 
 	private void addDirtDrops(DirtBlocks dirtBlock) {
