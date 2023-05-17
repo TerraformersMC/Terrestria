@@ -9,6 +9,9 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.block.SaplingBlock;
 import net.minecraft.data.server.BlockLootTableGenerator;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.loot.condition.TableBonusLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
 
 import javax.annotation.Nullable;
 
@@ -37,7 +40,6 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		addDrop(TerrestriaBlocks.REDWOOD_SAPLING);
 		addDrop(TerrestriaBlocks.RUBBER_SAPLING);
-		addDrop(TerrestriaBlocks.SAGUARO_CACTUS);
 		addDrop(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
 		addDrop(TerrestriaBlocks.SAKURA_SAPLING);
 		addDrop(TerrestriaBlocks.SMALL_OAK_LOG);
@@ -91,6 +93,13 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.JUNGLE_PALM_LEAVES, leavesDrop(TerrestriaBlocks.JUNGLE_PALM_LEAVES, TerrestriaBlocks.JUNGLE_PALM_SAPLING, 0.07f, 0.0875f, 0.116666667f, 0.14f));
 		addDrop(TerrestriaBlocks.SAKURA_LEAF_PILE, leavesDrop(TerrestriaBlocks.SAKURA_LEAF_PILE, TerrestriaBlocks.SAKURA_SAPLING, 0.00625f, 0.0078125f, 0.010416667f, 0.0125f));
 		addDrop(TerrestriaBlocks.YUCCA_PALM.leaves, leavesDrop(TerrestriaBlocks.YUCCA_PALM.leaves, TerrestriaBlocks.YUCCA_PALM_SAPLING, 0.15f, 0.1875f, 0.24f, 0.333333333f));
+
+		// even more specialty leaf-like drop thingy
+		addDrop(TerrestriaBlocks.SAGUARO_CACTUS,
+				BlockLootTableGenerator.dropsWithSilkTouch(TerrestriaBlocks.SAGUARO_CACTUS,
+						(addSurvivesExplosionCondition(TerrestriaBlocks.SAGUARO_CACTUS,
+								ItemEntry.builder(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING)))
+								.conditionally(TableBonusLootCondition.builder(Enchantments.FORTUNE, 0.2f, 0.24285715f, 0.5f, 2.0f))));
 	}
 
 	private void addDirtDrops(DirtBlocks dirtBlock) {
