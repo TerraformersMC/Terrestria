@@ -137,7 +137,7 @@ public class TerrestriaBlocks {
 		CATTAIL = TerrestriaRegistry.register("cattail", new TerraformSeagrassBlock(TALL_CATTAIL, FabricBlockSettings.copyOf(Blocks.SEAGRASS)));
 
 		// Saplings
-		AbstractBlock.Settings saplingSettings = AbstractBlock.Settings.of().mapColor(MapColor.DARK_GREEN).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).pistonBehavior(PistonBehavior.DESTROY);
+		AbstractBlock.Settings saplingSettings = AbstractBlock.Settings.create().mapColor(MapColor.DARK_GREEN).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS).pistonBehavior(PistonBehavior.DESTROY);
 
 		BRYCE_SAPLING = TerrestriaRegistry.register("bryce_sapling", new TerraformDesertSaplingBlock(new TerrestriaSaplingGenerator(() -> TerrestriaConfiguredFeatures.BRYCE_TREE), saplingSettings));
 		CYPRESS_SAPLING = TerrestriaRegistry.register("cypress_sapling", new SaplingBlock(new TerrestriaLargeSaplingGenerator(() -> TerrestriaConfiguredFeatures.CYPRESS_TREE, () -> TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE), saplingSettings.mapColor(WoodColors.CYPRESS.leaves)));

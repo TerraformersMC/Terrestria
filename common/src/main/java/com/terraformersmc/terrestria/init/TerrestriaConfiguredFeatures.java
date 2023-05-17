@@ -90,6 +90,7 @@ public class TerrestriaConfiguredFeatures {
 
 		entries.add(MEGA_HEMLOCK_TREE, configureFeature(TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 1, 11)));
 		entries.add(MEGA_REDWOOD_TREE, configureFeature(TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 19)));
+
 		entries.add(RUBBER_TREE, configureFeature(Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RUBBER.log),
 				new RubberTreeTrunkPlacer(6, 2, 2),

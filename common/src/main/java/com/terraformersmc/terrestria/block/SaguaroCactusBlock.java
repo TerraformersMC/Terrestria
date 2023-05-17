@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.MapColor;
@@ -25,7 +26,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	public static SaguaroCactusBlock of(MapColor color) {
-		return new SaguaroCactusBlock(Block.Settings.of()
+		return new SaguaroCactusBlock(AbstractBlock.Settings.create()
 				.mapColor(color)
 				.strength(0.4F)
 				.sounds(BlockSoundGroup.WOOL)
@@ -34,7 +35,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	public static SaguaroCactusBlock of(MapColor flesh, MapColor skin) {
-		return new SaguaroCactusBlock(Block.Settings.of()
+		return new SaguaroCactusBlock(AbstractBlock.Settings.create()
 				.mapColor((state) -> state.get(UP) ? flesh : skin)
 				.strength(0.4F)
 				.sounds(BlockSoundGroup.WOOL)
