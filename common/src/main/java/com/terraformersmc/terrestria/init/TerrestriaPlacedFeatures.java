@@ -192,7 +192,7 @@ public class TerrestriaPlacedFeatures {
 
 		entries.add(DENSE_FALLEN_HEMLOCK_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
 
-		entries.add(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG));
+		entries.add(DENSE_FALLEN_REDWOOD_LOGS, placeTreeFeature(entries, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG));
 
 		entries.add(SPARSE_SMALL_HEMLOCK_TREES, placeTreeFeature(entries, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE));
 
