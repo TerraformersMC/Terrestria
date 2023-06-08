@@ -20,7 +20,7 @@
     "magneticflux-"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/terrestria",
+    "homepage": "https://modrinth.com/mod/terrestria",
     "sources": "https://github.com/TerraformersMC/Terrestria",
     "issues": "https://github.com/TerraformersMC/Terrestria/issues"
   },
@@ -30,7 +30,7 @@
   "depends": {
     "fabricloader": ">=0.14.11",
     "fabric": ">=0.77.0",
-    "minecraft": ">=1.20-beta.2 <1.21",
+    "minecraft": ">=1.20 <1.21",
     "java": ">=17"
   }
 }
