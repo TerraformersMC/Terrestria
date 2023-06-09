@@ -116,6 +116,7 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		getOrCreateTagBuilder(ItemTags.SAND).add(sandItem);
 	}
 
+	@SuppressWarnings("SameParameterValue")
 	private void addStone(TagKey<Item> stoneTag, StoneItems stoneItem) {
 		FabricTagBuilder<Item> stoneBuilder = getOrCreateTagBuilder(stoneTag);
 		if (stoneItem.bricks != null) {
@@ -126,6 +127,9 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 				.add(stoneItem.crackedBricks);
 
 			addStoneVariant(stoneItem.bricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.bricks.full);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.chiseledBricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.crackedBricks);
 		}
 		if (stoneItem.cobblestone != null) {
 			stoneBuilder.add(stoneItem.cobblestone.full);
@@ -134,10 +138,12 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 			// Add any cobble variant to vanilla crafting tags.
 			getOrCreateTagBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
 			getOrCreateTagBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
+			getOrCreateTagBuilder(TerrestriaItemTags.COBBLESTONE).add(stoneItem.cobblestone.full);
 		}
 		if (stoneItem.mossyBricks != null) {
 			stoneBuilder.add(stoneItem.mossyBricks.full);
 			addStoneVariant(stoneItem.mossyBricks);
+			getOrCreateTagBuilder(ItemTags.STONE_BRICKS).add(stoneItem.mossyBricks.full);
 		}
 		if (stoneItem.mossyCobblestone != null) {
 			stoneBuilder.add(stoneItem.mossyCobblestone.full);
@@ -146,10 +152,12 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		if (stoneItem.plain != null) {
 			stoneBuilder.add(stoneItem.plain.full);
 			addStoneVariant(stoneItem.plain);
+			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.plain.full);
 		}
 		if (stoneItem.smooth != null) {
 			stoneBuilder.add(stoneItem.smooth.full);
 			addStoneVariant(stoneItem.smooth);
+			getOrCreateTagBuilder(TerrestriaItemTags.STONE).add(stoneItem.smooth.full);
 		}
 
 		getOrCreateTagBuilder(ItemTags.BUTTONS).add(stoneItem.button);
@@ -162,23 +170,26 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		getOrCreateTagBuilder(ItemTags.WALLS).add(stoneVariantItem.wall);
 	}
 
-	private FabricTagBuilder<Item> addWood(TagKey<Item> logTag, WoodItems woodItem) {
+	private void addWood(TagKey<Item> logTag, WoodItems woodItem) {
 		FabricTagBuilder<Item> woodBuilder = getOrCreateTagBuilder(logTag);
 		woodBuilder
 			.add(woodItem.log)
 			.add(woodItem.strippedLog);
+		getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(woodItem.strippedLog);
 
 		if (woodItem.strippedWood != null) {
 			woodBuilder.add(woodItem.strippedWood);
+			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_WOOD).add(woodItem.strippedWood);
 		}
 		if (woodItem.wood != null) {
 			woodBuilder.add(woodItem.wood);
 		}
 
-		if (woodItem instanceof QuarteredWoodItems) {
+		if (woodItem instanceof QuarteredWoodItems quarteredWoodItems) {
 			woodBuilder
-				.add(((QuarteredWoodItems) woodItem).quarterLog)
-				.add(((QuarteredWoodItems) woodItem).strippedQuarterLog);
+				.add(quarteredWoodItems.quarterLog)
+				.add(quarteredWoodItems.strippedQuarterLog);
+			getOrCreateTagBuilder(TerrestriaItemTags.STRIPPED_LOGS).add(quarteredWoodItems.strippedQuarterLog);
 		}
 
 		// Add boats if they exist via the WoodItem.
@@ -202,7 +213,5 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		getOrCreateTagBuilder(ItemTags.WOODEN_SLABS).add(woodItem.slab);
 		getOrCreateTagBuilder(ItemTags.WOODEN_STAIRS).add(woodItem.stairs);
 		getOrCreateTagBuilder(ItemTags.WOODEN_TRAPDOORS).add(woodItem.trapdoor);
-
-		return(woodBuilder);
 	}
 }
