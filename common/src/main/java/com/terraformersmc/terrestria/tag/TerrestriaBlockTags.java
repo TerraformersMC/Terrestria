@@ -9,6 +9,11 @@ import net.minecraft.util.Identifier;
 public final class TerrestriaBlockTags {
 	public static final TagKey<Block> BASALT = TerrestriaBlockTags.of(new Identifier("c", "basalt"));
 	public static final TagKey<Block> BLACK_SAND = TerrestriaBlockTags.of(new Identifier("c", "black_sand"));
+	public static final TagKey<Block> COBBLESTONE = TerrestriaBlockTags.of(new Identifier("c", "cobblestone"));
+	public static final TagKey<Block> PLANKS_THAT_BURN = TerrestriaBlockTags.of(Identifier.of("c", "planks_that_burn"));
+	public static final TagKey<Block> STONE = TerrestriaBlockTags.of(new Identifier("c", "stone"));
+	public static final TagKey<Block> STRIPPED_LOGS = TerrestriaBlockTags.of(new Identifier("c", "stripped_logs"));
+	public static final TagKey<Block> STRIPPED_WOOD = TerrestriaBlockTags.of(new Identifier("c", "stripped_wood"));
 
 	public static final TagKey<Block> FARMLAND = TerrestriaBlockTags.of(new Identifier("terraform", "farmland"));
 	public static final TagKey<Block> GRASS_BLOCKS = TerrestriaBlockTags.of(new Identifier("terraform", "grass_blocks"));

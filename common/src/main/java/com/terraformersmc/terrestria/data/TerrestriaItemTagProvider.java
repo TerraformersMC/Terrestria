@@ -67,22 +67,21 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 
 		copy(TerrestriaBlockTags.BLACK_SAND, TerrestriaItemTags.BLACK_SAND);
 
+		copy(TerrestriaBlockTags.COBBLESTONE, TerrestriaItemTags.COBBLESTONE);
+
 		getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
 			.add(Items.MOSS_BLOCK)
 			.add(Items.VINE);
 
-		getOrCreateTagBuilder(TerrestriaItemTags.PLANKS_THAT_BURN)
-			.add(TerrestriaItems.CYPRESS.planks)
-			.add(TerrestriaItems.HEMLOCK.planks)
-			.add(TerrestriaItems.JAPANESE_MAPLE.planks)
-			.add(TerrestriaItems.RAINBOW_EUCALYPTUS.planks)
-			.add(TerrestriaItems.REDWOOD.planks)
-			.add(TerrestriaItems.RUBBER.planks)
-			.add(TerrestriaItems.SAKURA.planks)
-			.add(TerrestriaItems.WILLOW.planks)
-			.add(TerrestriaItems.YUCCA_PALM.planks);
+		copy(TerrestriaBlockTags.PLANKS_THAT_BURN, TerrestriaItemTags.PLANKS_THAT_BURN);
 
 		copy(TerrestriaBlockTags.SMALL_OAK_LOGS, TerrestriaItemTags.SMALL_OAK_LOGS);
+
+		copy(TerrestriaBlockTags.STONE, TerrestriaItemTags.STONE);
+
+		copy(TerrestriaBlockTags.STRIPPED_LOGS, TerrestriaItemTags.STRIPPED_LOGS);
+
+		copy(TerrestriaBlockTags.STRIPPED_WOOD, TerrestriaItemTags.STRIPPED_WOOD);
 
 
 		// stone type tags
