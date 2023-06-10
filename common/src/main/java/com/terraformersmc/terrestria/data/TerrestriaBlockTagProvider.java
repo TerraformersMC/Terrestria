@@ -99,6 +99,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.add(TerrestriaBlocks.SMALL_OAK_LOG)
 			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 
+		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
+			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
+
 
 		// custom dirt block tags
 		addDirt(TerrestriaBlocks.ANDISOL);
@@ -119,9 +122,6 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		addWood(TerrestriaBlockTags.SAKURA_LOGS, TerrestriaBlocks.SAKURA);
 		addWood(TerrestriaBlockTags.WILLOW_LOGS, TerrestriaBlocks.WILLOW);
 		addWood(TerrestriaBlockTags.YUCCA_PALM_LOGS, TerrestriaBlocks.YUCCA_PALM);
-
-		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
-			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 	}
 
 	private void addDirt(DirtBlocks dirtBlock) {
