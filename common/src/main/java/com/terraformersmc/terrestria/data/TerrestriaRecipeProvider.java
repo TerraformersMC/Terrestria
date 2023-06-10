@@ -9,9 +9,7 @@ import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.*;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -37,6 +35,14 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 			.input(Items.STICK)
 			.criterion("has_bryce_sapling", InventoryChangedCriterion.Conditions.items(TerrestriaItems.BRYCE_SAPLING))
 			.offerTo(exporter, new Identifier(Terrestria.MOD_ID, "bryce_sapling_from_oak_sapling"));
+
+		CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, Items.GREEN_DYE, 1.0f, 200)
+			.criterion("has_cactus", InventoryChangedCriterion.Conditions.items(TerrestriaItems.SAGUARO_CACTUS))
+			.offerTo(exporter);
+
+		CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, Items.LIME_DYE, 1.0f, 200)
+			.criterion("has_tiny_cactus", InventoryChangedCriterion.Conditions.items(TerrestriaItems.TINY_CACTUS))
+			.offerTo(exporter);
 
 		new ShapedRecipeJsonBuilder(RecipeCategory.TOOLS, TerrestriaItems.LOG_TURNER, 1)
 			.pattern("ss")
