@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "block/oak_hanging_sign" }
+    "": { "model": "terrestria:block/japanese_maple_hanging_sign" }
   }
 }

@@ -9,6 +9,11 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class TerrestriaRegistry {
+	@SuppressWarnings("UnnecessaryReturnStatement")
+	public TerrestriaRegistry() {
+		return;
+	}
+
 	public static BlockItem registerBlockItem(String name, Block block) {
 		BlockItem item = new BlockItem(block, new Item.Settings());
 		return register(name, item);
@@ -21,7 +26,7 @@ public class TerrestriaRegistry {
 		return Registry.register(Registries.ITEM, Identifier.of(Terrestria.MOD_ID, name), item);
 	}
 
-	public static <T extends Block> T register(String name, T block) {
+	public static <B extends Block> B register(String name, B block) {
 		return Registry.register(Registries.BLOCK, Identifier.of(Terrestria.MOD_ID, name), block);
 	}
 }
