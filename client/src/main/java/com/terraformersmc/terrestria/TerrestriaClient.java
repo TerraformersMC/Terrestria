@@ -5,10 +5,12 @@ import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
 import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
+import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
@@ -43,6 +45,10 @@ public class TerrestriaClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		// Load the client config if it hasn't been loaded already
 		Terrestria.getConfigManager().getClientConfig();
+
+		ParticleRenderEvents.ALLOW_BLOCK_DUST_TINT.register((state, world, pos) ->
+				!state.isOf(TerrestriaBlocks.ANDISOL.getGrassBlock()) &&
+				!state.isIn(TerrestriaBlockTags.SMALL_OAK_LOGS));
 
 		ColorProviderRegistry.BLOCK.register(
 				FOLIAGE_BLOCK_COLORS,
