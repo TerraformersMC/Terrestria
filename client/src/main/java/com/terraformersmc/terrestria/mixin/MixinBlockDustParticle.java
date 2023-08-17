@@ -16,7 +16,7 @@ import net.fabricmc.api.Environment;
 @Environment(EnvType.CLIENT)
 public class MixinBlockDustParticle {
 	@Redirect(method = "<init>(Lnet/minecraft/client/world/ClientWorld;DDDDDDLnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)V",
-	        at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"))
+	        at = @At(value = "INVOKE", target = "Lnet/minecraft/block/BlockState;isOf(Lnet/minecraft/block/Block;)Z"), require = 0)
 	private boolean terrestria$fixParticleColors(BlockState blockState, Block requiredBlock) {
 		Block block = blockState.getBlock();
 

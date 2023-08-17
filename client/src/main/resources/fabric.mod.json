@@ -6,6 +6,7 @@
   "license": "LGPL-3.0-only",
   "icon": "assets/terrestria/icon.png",
   "environment": "client",
+  "plugin": "com.terraformersmc.terrestria.mixin.TerrestriaClientMixinPlugin",
   "mixins": [
     "mixins.terrestria-client.json"
   ],
