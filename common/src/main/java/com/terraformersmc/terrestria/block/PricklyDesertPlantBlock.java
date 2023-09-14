@@ -37,7 +37,7 @@ public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implement
 	}
 
 	@Override
-	public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
+	public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
 		return world.getBlockState(pos.down()).isIn(BlockTags.SAND);
 	}
 
