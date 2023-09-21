@@ -1,5 +1,5 @@
 <p style="text-align: center;"><img src="banners/Terrestria-full-2.0.0.png" /></p>
-<p style="text-align: center;"><b>NOTE</b>: Terrestria for 1.20 no longer requires TerraBlender.
+<p style="text-align: center;"><b>NOTE</b>: Terrestria for 1.20+ no longer requires TerraBlender.
 <p style="text-align: center;">Terrestria is a detailed and vibrant biomes mod for Minecraft running on the Fabric mod loader. Terrestria enhances gameplay through the addition of 16 major biomes with several derivative biomes, 9 new wood types, as well as a healthy selection of foliage - providing a refreshing new selection of terrain.</p>
 <p style="text-align: center;"><span style="font-size: 14px;"><strong>Terrestria requires <a href="https://fabricmc.net/use/"><img src="banners/fabric-logo.png" height="14"></img> Fabric Loader and Fabric API</a></strong></span></p>
 <p style="text-align: center;"><strong>Check out the <a href="https://discord.gg/jEGF5fb">Terraformers Discord Server</a> to chat about Terrestria and other Fabric mods!</strong></p>
@@ -48,4 +48,8 @@
 
 <br/>
 
-<p style="text-align: center;"><span style="font-size: 14px;"><strong>Terrestria is a mod for Fabric, and there are no plans to port this mod to Forge.</strong></span></p>
+<h5 style="text-align: center;">
+	Terrestria is a mod for Fabric, and there are no plans to port this mod to Forge.<br />
+	However, another team is maintaining a Forge fork of this mod at <a href="https://legacy.curseforge.com/minecraft/mc-mods/terrestria-reforged">Terrestria Reforged.</a><br />
+	Terrestria Reforged is unaffiliated with Terraformers, so please do not ask us for support regarding their mod.
+</h5>
