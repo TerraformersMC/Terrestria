@@ -50,6 +50,6 @@
 
 <h5 style="text-align: center;">
 	Terrestria is a mod for Fabric, and there are no plans to port this mod to Forge.<br />
-	However, another team is maintaining a Forge fork of this mod at <a href="https://legacy.curseforge.com/minecraft/mc-mods/terrestria-reforged">Terrestria Reforged.</a><br />
+	However, another team is maintaining a Forge fork of this mod at <a href="https://www.curseforge.com/minecraft/mc-mods/terrestria-reforged">Terrestria Reforged.</a><br />
 	Terrestria Reforged is unaffiliated with Terraformers, so please do not ask us for support regarding their mod.
 </h5>
