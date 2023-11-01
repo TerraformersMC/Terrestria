@@ -159,6 +159,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.add(dirtBlock.getPodzol());
 
 
+		getOrCreateTagBuilder(TerrestriaBlockTags.DIRT)
+			.add(dirtBlock.getDirt());
+
 		getOrCreateTagBuilder(TerrestriaBlockTags.FARMLAND)
 			.add(dirtBlock.getFarmland());
 
@@ -178,6 +181,8 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SAND).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(sandBlock);
+
+		getOrCreateTagBuilder(TerrestriaBlockTags.SAND).add(sandBlock);
 	}
 
 	@SuppressWarnings("SameParameterValue")
