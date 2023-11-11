@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.block;
 
+import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,18 +14,14 @@ import net.minecraft.util.math.random.Random;
 /**
  * A custom seagrass block that allows the specification of a custom tall variant.
  */
-public class TerraformSeagrassBlock extends SeagrassBlock {
-	private Block tall;
-
-	public TerraformSeagrassBlock(Block tall, Block.Settings settings) {
+public class CattailBlock extends SeagrassBlock {
+	public CattailBlock(Block.Settings settings) {
 		super(settings);
-
-		this.tall = tall;
 	}
 
 	@Override
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
-		BlockState tallBottom = tall.getDefaultState();
+		BlockState tallBottom = TerrestriaBlocks.TALL_CATTAIL.getDefaultState();
 		BlockState tallTop = tallBottom.with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
 		BlockPos upper = pos.up();
 

@@ -10,7 +10,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.SandBlock;
+import net.minecraft.block.ColoredFallingBlock;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.registry.tag.TagKey;
@@ -177,7 +177,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 			.add(dirtBlock.getPodzol());
 	}
 
-	private void addSand(SandBlock sandBlock) {
+	private void addSand(ColoredFallingBlock sandBlock) {
 		getOrCreateTagBuilder(BlockTags.ENDERMAN_HOLDABLE).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SAND).add(sandBlock);
 		getOrCreateTagBuilder(BlockTags.SHOVEL_MINEABLE).add(sandBlock);

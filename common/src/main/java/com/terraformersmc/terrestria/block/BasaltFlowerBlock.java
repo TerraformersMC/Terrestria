@@ -8,7 +8,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class BasaltFlowerBlock extends FlowerBlock {
-
 	public static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
 	public BasaltFlowerBlock(StatusEffect stewEffect, int effectSeconds, Settings settings) {
