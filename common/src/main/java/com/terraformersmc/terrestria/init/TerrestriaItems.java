@@ -129,7 +129,7 @@ public class TerrestriaItems {
 		float CACTUS_CHANCE = compostingRegistry.get(Items.CACTUS);
 		float FERN_CHANCE = compostingRegistry.get(Items.FERN);
 		float FLOWER_CHANCE = compostingRegistry.get(Items.POPPY);
-		float GRASS_CHANCE = compostingRegistry.get(Items.GRASS);
+		float GRASS_CHANCE = compostingRegistry.get(Items.SHORT_GRASS);
 		float LEAVES_CHANCE = compostingRegistry.get(Items.OAK_LEAVES);
 		float SAPLING_CHANCE = compostingRegistry.get(Items.OAK_SAPLING);
 		float SEAGRASS_CHANCE = compostingRegistry.get(Items.SEAGRASS);

@@ -22,7 +22,6 @@ import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings("UnstableApiUsage")
 public class TerrestriaPlacedFeatures {
 	public static final RegistryKey<PlacedFeature> CATTAILS_WARM = createRegistryKey("cattails_warm");
 	public static final RegistryKey<PlacedFeature> SPARSE_OAK_SHRUBS = createRegistryKey("sparse_oak_shrubs");
@@ -117,7 +116,7 @@ public class TerrestriaPlacedFeatures {
 		entries.add(PATCH_VOLCANIC_ISLAND_GRASS_CONFIGURED, TerrestriaConfiguredFeatures.configureFeature(Feature.RANDOM_PATCH,
 			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 					new WeightedBlockStateProvider(createStatePoolBuilder()
-							.add(Blocks.GRASS.getDefaultState(), 1)
+							.add(Blocks.SHORT_GRASS.getDefaultState(), 1)
 							.add(Blocks.FERN.getDefaultState(), 1)
 							.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.getDefaultState(), 1)
 							.add(TerrestriaBlocks.MONSTERAS.getDefaultState(), 4)
@@ -156,7 +155,7 @@ public class TerrestriaPlacedFeatures {
 			new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 							new WeightedBlockStateProvider(createStatePoolBuilder()
 									.add(Blocks.FERN.getDefaultState(), 1)
-									.add(Blocks.GRASS.getDefaultState(), 2)
+									.add(Blocks.SHORT_GRASS.getDefaultState(), 2)
 									.add(TerrestriaBlocks.TINY_CACTUS.getDefaultState(), 1)
 									.add(TerrestriaBlocks.AGAVE.getDefaultState(), 1)
 									.add(TerrestriaBlocks.ALOE_VERA.getDefaultState(), 1)

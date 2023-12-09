@@ -9,7 +9,6 @@ import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("UnstableApiUsage")
 public class TerrestriaDynamicRegistryProvider extends FabricDynamicRegistryProvider {
 	protected TerrestriaDynamicRegistryProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
 		super(output, registriesFuture);

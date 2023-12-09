@@ -195,7 +195,7 @@ public class TerrestriaBlocks {
 		TINY_CACTUS = TerrestriaRegistry.register("tiny_cactus", new PricklyDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY), true));
 		AGAVE = TerrestriaRegistry.register("agave", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY)));
 		ALOE_VERA = TerrestriaRegistry.register("aloe_vera", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.POPPY)));
-		DEAD_GRASS = TerrestriaRegistry.register("dead_grass", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.GRASS), true));
+		DEAD_GRASS = TerrestriaRegistry.register("dead_grass", new TerraformDesertPlantBlock(FabricBlockSettings.copyOf(Blocks.SHORT_GRASS), true));
 		POTTED_TINY_CACTUS = TerrestriaRegistry.register("potted_tiny_cactus", new FlowerPotBlock(TINY_CACTUS, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_AGAVE = TerrestriaRegistry.register("potted_agave", new FlowerPotBlock(AGAVE, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));
 		POTTED_ALOE_VERA = TerrestriaRegistry.register("potted_aloe_vera", new FlowerPotBlock(ALOE_VERA, FabricBlockSettings.copyOf(Blocks.POTTED_POPPY)));

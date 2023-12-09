@@ -28,7 +28,6 @@ import net.minecraft.world.gen.trunk.StraightTrunkPlacer;
 
 import java.util.List;
 
-@SuppressWarnings("UnstableApiUsage")
 public class TerrestriaConfiguredFeatures {
 	public static RegistryKey<ConfiguredFeature<?, ?>> SMALL_RAINBOW_EUCALYPTUS_TREE = createRegistryKey("small_rainbow_eucalyptus_tree");
 	public static RegistryKey<ConfiguredFeature<?, ?>> BRYCE_TREE = createRegistryKey("bryce_tree");

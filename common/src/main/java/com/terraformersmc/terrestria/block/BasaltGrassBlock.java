@@ -26,7 +26,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 
 		// 33% chance of normal grass
 		if (random.nextInt(3) == 0) {
-			grass = Blocks.GRASS.getDefaultState();
+			grass = Blocks.SHORT_GRASS.getDefaultState();
 		}
 
 		outer:
@@ -52,7 +52,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 			BlockState state = world.getBlockState(pos);
 
 			// NB: this just converts short grass to tall grass, this isn't specific to GRASS_BLOCK
-			if (state.getBlock() == Blocks.GRASS && random.nextInt(10) == 0) {
+			if (state.getBlock() == Blocks.SHORT_GRASS && random.nextInt(10) == 0) {
 				((Fertilizable) state.getBlock()).grow(world, random, pos, state);
 			}
 

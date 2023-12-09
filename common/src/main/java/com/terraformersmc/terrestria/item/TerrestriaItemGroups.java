@@ -94,7 +94,7 @@ public class TerrestriaItemGroups {
 		addGroupEntry(TerrestriaBlocks.TINY_CACTUS, ItemGroups.NATURAL, NATURAL_CACTUS);
 		addGroupEntry(TerrestriaBlocks.AGAVE, ItemGroups.NATURAL, NATURAL_CACTUS);
 		addGroupEntry(TerrestriaBlocks.ALOE_VERA, ItemGroups.NATURAL, NATURAL_CACTUS);
-		addGroupEntry(TerrestriaBlocks.DEAD_GRASS, ItemGroups.NATURAL, Items.GRASS);
+		addGroupEntry(TerrestriaBlocks.DEAD_GRASS, ItemGroups.NATURAL, Items.SHORT_GRASS);
 
 		// Vegetation
 		addGroupEntry(TerrestriaBlocks.INDIAN_PAINTBRUSH, ItemGroups.NATURAL, NATURAL_VEGETATION);

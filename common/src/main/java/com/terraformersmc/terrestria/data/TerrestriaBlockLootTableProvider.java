@@ -36,7 +36,7 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
 		addDrop(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
 		addDrop(TerrestriaBlocks.JUNGLE_PALM_SAPLING);
-		addDrop(TerrestriaBlocks.MONSTERAS, this::grassDrops);
+		addDrop(TerrestriaBlocks.MONSTERAS, this::shortPlantDrops);
 		addDrop(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
 		addDrop(TerrestriaBlocks.REDWOOD_SAPLING);
 		addDrop(TerrestriaBlocks.RUBBER_SAPLING);
