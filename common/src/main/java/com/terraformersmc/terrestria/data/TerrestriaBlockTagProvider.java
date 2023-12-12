@@ -102,6 +102,9 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		getOrCreateTagBuilder(BlockTags.LOGS_THAT_BURN)
 			.addTag(TerrestriaBlockTags.SMALL_OAK_LOGS);
 
+		getOrCreateTagBuilder(TerrestriaBlockTags.STRIPPED_LOGS)
+			.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
+
 
 		// custom dirt block tags
 		addDirt(TerrestriaBlocks.ANDISOL);
