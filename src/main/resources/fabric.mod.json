@@ -28,9 +28,9 @@
   "icon": "assets/terrestria/icon.png",
   "environment": "*",
   "depends": {
-    "fabricloader": ">=0.14.11",
+    "fabricloader": ">=0.14.25",
     "fabric": ">=0.85.0",
-    "minecraft": ">=1.20 <1.21",
+    "minecraft": ">=1.20 <1.20.2",
     "java": ">=17"
   }
 }
