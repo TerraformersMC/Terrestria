@@ -6,8 +6,8 @@ loom {
 
 dependencies {
 	// Biolith and TerraBlender for the worldgen API modules
-	modImplementation "com.terraformersmc:biolith:${biolith_version}"
-	modCompileOnlyApi "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
+	modImplementation "com.terraformersmc:biolith-fabric:${biolith_version}"
+	modCompileOnly "com.github.glitchfiend:TerraBlender-fabric:${terrablender_version}"
 
 	implementation project(path: ':terrestria-common')
 }

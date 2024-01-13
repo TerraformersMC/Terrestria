@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.block;
 
 import net.minecraft.block.*;
 import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
@@ -10,7 +11,7 @@ import net.minecraft.world.BlockView;
 public class BasaltFlowerBlock extends FlowerBlock {
 	public static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
-	public BasaltFlowerBlock(StatusEffect stewEffect, int effectSeconds, Settings settings) {
+	public BasaltFlowerBlock(RegistryEntry<StatusEffect> stewEffect, int effectSeconds, Settings settings) {
 		super(stewEffect, effectSeconds, settings.offset(AbstractBlock.OffsetType.XZ));
 	}
 

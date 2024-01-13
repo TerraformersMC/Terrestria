@@ -24,7 +24,7 @@ dependencies {
 	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 
 	if (findProject(':terrestria-worldgen') != null) {
-		includeMod "biolith", "com.terraformersmc:biolith:${biolith_version}"
+		includeMod "biolith", "com.terraformersmc:biolith-fabric:${biolith_version}"
 	}
 
 	afterEvaluate {
