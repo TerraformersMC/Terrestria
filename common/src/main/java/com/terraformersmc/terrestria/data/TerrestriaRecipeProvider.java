@@ -15,15 +15,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
+import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
 
 public class TerrestriaRecipeProvider extends FabricRecipeProvider {
-	protected TerrestriaRecipeProvider(FabricDataOutput dataOutput) {
-		super(dataOutput);
+	protected TerrestriaRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+		super(output, registriesFuture);
 	}
 
 	@Override

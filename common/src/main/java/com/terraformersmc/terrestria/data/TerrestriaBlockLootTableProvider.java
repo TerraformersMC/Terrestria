@@ -13,11 +13,14 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.loot.condition.TableBonusLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.loot.entry.LeafEntry;
+import net.minecraft.registry.RegistryWrapper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.concurrent.CompletableFuture;
+
 public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvider {
-	protected TerrestriaBlockLootTableProvider(FabricDataOutput dataOutput) {
-		super(dataOutput);
+	protected TerrestriaBlockLootTableProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+		super(output, registriesFuture);
 	}
 
 	@Override

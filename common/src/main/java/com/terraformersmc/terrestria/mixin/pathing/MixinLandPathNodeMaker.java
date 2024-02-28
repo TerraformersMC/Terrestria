@@ -5,7 +5,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.ai.pathing.LandPathNodeMaker;
@@ -20,25 +19,14 @@ import net.minecraft.world.BlockView;
  */
 @Mixin(LandPathNodeMaker.class)
 public class MixinLandPathNodeMaker {
-	@Inject(method = "getCommonNodeType(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/entity/ai/pathing/PathNodeType;",
+	@Inject(method = "getCommonNodeType",
 			at = @At(value = "FIELD", target = "net/minecraft/block/Blocks.CACTUS:Lnet/minecraft/block/Block;"),
 			cancellable = true)
-	private static void terrestria$preventPathingIntoCustomCactuses(BlockView blockView, BlockPos blockPos, CallbackInfoReturnable<PathNodeType> callback) {
+	private static void terrestria$preventPathingIntoCustomCactuses(BlockView blockView, BlockPos blockPos, CallbackInfoReturnable<PathNodeType> cir) {
 		BlockState state = blockView.getBlockState(blockPos);
 
 		if (state.isOf(TerrestriaBlocks.SAGUARO_CACTUS) || state.isOf(TerrestriaBlocks.TINY_CACTUS)) {
-			callback.setReturnValue(PathNodeType.DAMAGE_OTHER);
-		}
-	}
-
-	@Inject(method = "getNodeTypeFromNeighbors(Lnet/minecraft/world/BlockView;Lnet/minecraft/util/math/BlockPos$Mutable;Lnet/minecraft/entity/ai/pathing/PathNodeType;)Lnet/minecraft/entity/ai/pathing/PathNodeType;",
-			at = @At(value = "INVOKE_ASSIGN", target = "net/minecraft/world/BlockView.getBlockState(Lnet/minecraft/util/math/BlockPos;)Lnet/minecraft/block/BlockState;"),
-			cancellable = true, locals = LocalCapture.CAPTURE_FAILSOFT)
-	private static void terrestria$preventPathingNearCustomCactuses(BlockView blockView, BlockPos.Mutable mutable,
-																	PathNodeType pathNodeType, CallbackInfoReturnable<PathNodeType> callback,
-																	int i, int j, int k, int l, int m, int n, BlockState state) {
-		if (state.isOf(TerrestriaBlocks.SAGUARO_CACTUS) || state.isOf(TerrestriaBlocks.TINY_CACTUS)) {
-			callback.setReturnValue(PathNodeType.DANGER_OTHER);
+			cir.setReturnValue(PathNodeType.DAMAGE_OTHER);
 		}
 	}
 }
