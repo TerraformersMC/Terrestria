@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.SurfaceLevelFilterPlacementModifier;
+import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
@@ -81,56 +82,56 @@ public class TerrestriaPlacedFeatures {
 		final BlockPredicate ON_SAND = BlockPredicate.matchingBlockTag(Direction.DOWN.getVector(), BlockTags.SAND);
 		final BlockPredicate ON_DIRT_OR_SAND = BlockPredicate.eitherOf(ON_DIRT, ON_SAND);
 
-		register(registerable, CATTAILS_WARM, TerrestriaConfiguredFeatures.CATTAIL,
+		TerrestriaRegistry.register(registerable, CATTAILS_WARM, TerrestriaConfiguredFeatures.CATTAIL,
 				CountPlacementModifier.of(80),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, SPARSE_OAK_SHRUBS, TerrestriaConfiguredFeatures.OAK_SHRUB,
+		TerrestriaRegistry.register(registerable, SPARSE_OAK_SHRUBS, TerrestriaConfiguredFeatures.OAK_SHRUB,
 				PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_LUSH_FERNS, VegetationConfiguredFeatures.PATCH_TAIGA_GRASS,
+		TerrestriaRegistry.register(registerable, PATCH_LUSH_FERNS, VegetationConfiguredFeatures.PATCH_TAIGA_GRASS,
 				CountPlacementModifier.of(16),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_VOLCANIC_ISLAND_GRASS,
+		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_VOLCANIC_ISLAND_GRASS,
 				CountPlacementModifier.of(12),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_DEAD_GRASS, TerrestriaConfiguredFeatures.PATCH_DEAD_GRASS,
+		TerrestriaRegistry.register(registerable, PATCH_DEAD_GRASS, TerrestriaConfiguredFeatures.PATCH_DEAD_GRASS,
 				CountPlacementModifier.of(12),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_OUTBACK_BUSHLAND_GRASS,
+		TerrestriaRegistry.register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_OUTBACK_BUSHLAND_GRASS,
 				CountPlacementModifier.of(12),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_OASIS_VEGETATION, TerrestriaConfiguredFeatures.PATCH_OASIS_VEGETATION,
+		TerrestriaRegistry.register(registerable, PATCH_OASIS_VEGETATION, TerrestriaConfiguredFeatures.PATCH_OASIS_VEGETATION,
 				CountPlacementModifier.of(6),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, PATCH_LUSH_DESERT_VEGETATION, TerrestriaConfiguredFeatures.PATCH_LUSH_DESERT_VEGETATION,
+		TerrestriaRegistry.register(registerable, PATCH_LUSH_DESERT_VEGETATION, TerrestriaConfiguredFeatures.PATCH_LUSH_DESERT_VEGETATION,
 				CountPlacementModifier.of(4),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -153,7 +154,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, SPARSE_SMALL_REDWOOD_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
 
-		register(registerable, CALDERA_SMALL_HEMLOCK_TREES, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
+		TerrestriaRegistry.register(registerable, CALDERA_SMALL_HEMLOCK_TREES, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
 				PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
@@ -161,7 +162,7 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(ON_DIRT),
 				BiomePlacementModifier.of());
 
-		register(registerable, CALDERA_SMALL_REDWOOD_TREES, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
+		TerrestriaRegistry.register(registerable, CALDERA_SMALL_REDWOOD_TREES, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
 				PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
@@ -177,7 +178,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, SPARSE_REDWOOD_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
 
-		register(registerable, CALDERA_HEMLOCK_TREES, TerrestriaConfiguredFeatures.HEMLOCK_TREE,
+		TerrestriaRegistry.register(registerable, CALDERA_HEMLOCK_TREES, TerrestriaConfiguredFeatures.HEMLOCK_TREE,
 				PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
@@ -185,7 +186,7 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(ON_DIRT),
 				BiomePlacementModifier.of());
 
-		register(registerable, CALDERA_REDWOOD_TREES, TerrestriaConfiguredFeatures.REDWOOD_TREE,
+		TerrestriaRegistry.register(registerable, CALDERA_REDWOOD_TREES, TerrestriaConfiguredFeatures.REDWOOD_TREE,
 				PlacedFeatures.createCountExtraModifier(1, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 64, 100),
@@ -223,7 +224,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, DENSEST_FANCY_OAK_TREES, 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
 
-		register(registerable, JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+		TerrestriaRegistry.register(registerable, JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 				PlacedFeatures.createCountExtraModifier(2, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 71),
@@ -231,7 +232,7 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, DENSER_JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
+		TerrestriaRegistry.register(registerable, DENSER_JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 				PlacedFeatures.createCountExtraModifier(5, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 72, 320),
@@ -239,7 +240,7 @@ public class TerrestriaPlacedFeatures {
 				BlockFilterPlacementModifier.of(ON_DIRT_OR_SAND),
 				BiomePlacementModifier.of());
 
-		register(registerable, RARE_DUM_DUM_HEADS, TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
+		TerrestriaRegistry.register(registerable, RARE_DUM_DUM_HEADS, TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
 				PlacedFeatures.createCountExtraModifier(0, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 62, 64),
@@ -265,7 +266,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, SPARSE_WILLOW_TREES, 1, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.WILLOW_TREE);
 
-		register(registerable, OUTBACK_YUCCA_PALM, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, PlacedFeatures.wouldSurvive(TerrestriaBlocks.YUCCA_PALM_SAPLING));
+		TerrestriaRegistry.register(registerable, OUTBACK_YUCCA_PALM, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, PlacedFeatures.wouldSurvive(TerrestriaBlocks.YUCCA_PALM_SAPLING));
 
 		registerTreeFeature(registerable, OUTBACK_BUSHLAND_TREES, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OUTBACK_BUSHLAND_TREES);
 
@@ -277,7 +278,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, SAGUARO_CACTUSES, 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS);
 
-		register(registerable, RARE_BRYCE_TREES, TerrestriaConfiguredFeatures.BRYCE_TREE,
+		TerrestriaRegistry.register(registerable, RARE_BRYCE_TREES, TerrestriaConfiguredFeatures.BRYCE_TREE,
 				RarityFilterPlacementModifier.of(2),
 				SquarePlacementModifier.of(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Type.WORLD_SURFACE_WG, 80, 320),
@@ -286,12 +287,12 @@ public class TerrestriaPlacedFeatures {
 				BiomePlacementModifier.of());
 	}
 
-	public static RegistryKey<PlacedFeature> createRegistryKey(String name) {
+	private static RegistryKey<PlacedFeature> createRegistryKey(String name) {
 		return RegistryKey.of(RegistryKeys.PLACED_FEATURE, Identifier.of(Terrestria.MOD_ID, name));
 	}
 
-	public static void registerTreeFeature(Registerable<PlacedFeature> registerable, RegistryKey<PlacedFeature> key, int count, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
-		register(registerable, key, feature,
+	private static void registerTreeFeature(Registerable<PlacedFeature> registerable, RegistryKey<PlacedFeature> key, int count, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
+		TerrestriaRegistry.register(registerable, key, feature,
 				PlacedFeatures.createCountExtraModifier(count, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.MOTION_BLOCKING_HEIGHTMAP,
@@ -299,19 +300,13 @@ public class TerrestriaPlacedFeatures {
 				BiomePlacementModifier.of());
 	}
 
-	public static void registerTreeFeature(Registerable<PlacedFeature> registerable, RegistryKey<PlacedFeature> key, int count, int maxWaterDepth, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
-		register(registerable, key, feature,
+	private static void registerTreeFeature(Registerable<PlacedFeature> registerable, RegistryKey<PlacedFeature> key, int count, int maxWaterDepth, BlockPredicate predicate, RegistryKey<ConfiguredFeature<?, ?>> feature) {
+		TerrestriaRegistry.register(registerable, key, feature,
 				PlacedFeatures.createCountExtraModifier(count, 0.1f, 1),
 				SquarePlacementModifier.of(),
 				PlacedFeatures.OCEAN_FLOOR_HEIGHTMAP,
 				SurfaceWaterDepthFilterPlacementModifier.of(maxWaterDepth),
 				BlockFilterPlacementModifier.of(predicate),
 				BiomePlacementModifier.of());
-	}
-
-	private static void register(Registerable<PlacedFeature> registerable, RegistryKey<PlacedFeature> key, RegistryKey<ConfiguredFeature<?, ?>> feature, PlacementModifier... placementModifiers) {
-		PlacedFeatures.register(registerable, key,
-				registerable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE).getOrThrow(feature),
-				placementModifiers);
 	}
 }

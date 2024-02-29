@@ -1,6 +1,5 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 
 public class StoneBlocks {
@@ -28,10 +27,10 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color, Blocks.STONE_BRICKS);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color, Blocks.MOSSY_STONE_BRICKS);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", new ButtonBlock(BlockSetType.STONE, 20, FabricBlockSettings.copyOf(Blocks.STONE_BUTTON).mapColor(color)));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(BlockSetType.STONE, FabricBlockSettings.copyOf(Blocks.STONE_PRESSURE_PLATE).mapColor(color)));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.CRACKED_STONE_BRICKS).mapColor(color)));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(FabricBlockSettings.copyOf(Blocks.CHISELED_STONE_BRICKS).mapColor(color)));
+		blocks.button = TerrestriaRegistry.register(name + "_button", new ButtonBlock(BlockSetType.STONE, 20, AbstractBlock.Settings.copy(Blocks.STONE_BUTTON).mapColor(color)));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(BlockSetType.STONE, AbstractBlock.Settings.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(color)));
+		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", new Block(AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS).mapColor(color)));
+		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", new Block(AbstractBlock.Settings.copy(Blocks.CHISELED_STONE_BRICKS).mapColor(color)));
 
 		return blocks;
 	}

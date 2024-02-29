@@ -10,7 +10,6 @@ import com.terraformersmc.terraform.sign.block.TerraformWallSignBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.block.TerrestriaOptiLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -50,24 +49,24 @@ public class WoodBlocks {
 
 		// register manufactured blocks
 
-		planks = TerrestriaRegistry.register(name + "_planks", new Block(FabricBlockSettings.copyOf(Blocks.OAK_PLANKS).mapColor(colors.planks)));
-		slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(FabricBlockSettings.copyOf(Blocks.OAK_SLAB).mapColor(colors.planks)));
-		stairs = TerrestriaRegistry.register(name + "_stairs", new StairsBlock(planks.getDefaultState(), FabricBlockSettings.copyOf(Blocks.OAK_STAIRS).mapColor(colors.planks)));
-		fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(FabricBlockSettings.copyOf(Blocks.OAK_FENCE).mapColor(colors.planks)));
-		fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(WoodType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_FENCE_GATE).mapColor(colors.planks)));
-		door = TerrestriaRegistry.register(name + "_door", new DoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_DOOR).mapColor(colors.planks)));
-		button = TerrestriaRegistry.register(name + "_button", new ButtonBlock(BlockSetType.OAK, 30, FabricBlockSettings.copyOf(Blocks.OAK_BUTTON).mapColor(colors.planks)));
-		pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks)));
-		trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TrapdoorBlock(BlockSetType.OAK, FabricBlockSettings.copyOf(Blocks.OAK_TRAPDOOR).mapColor(colors.planks)));
+		planks = TerrestriaRegistry.register(name + "_planks", new Block(AbstractBlock.Settings.copy(Blocks.OAK_PLANKS).mapColor(colors.planks)));
+		slab = TerrestriaRegistry.register(name + "_slab", new SlabBlock(AbstractBlock.Settings.copy(Blocks.OAK_SLAB).mapColor(colors.planks)));
+		stairs = TerrestriaRegistry.register(name + "_stairs", new StairsBlock(planks.getDefaultState(), AbstractBlock.Settings.copy(Blocks.OAK_STAIRS).mapColor(colors.planks)));
+		fence = TerrestriaRegistry.register(name + "_fence", new FenceBlock(AbstractBlock.Settings.copy(Blocks.OAK_FENCE).mapColor(colors.planks)));
+		fenceGate = TerrestriaRegistry.register(name + "_fence_gate", new FenceGateBlock(WoodType.OAK, AbstractBlock.Settings.copy(Blocks.OAK_FENCE_GATE).mapColor(colors.planks)));
+		door = TerrestriaRegistry.register(name + "_door", new DoorBlock(BlockSetType.OAK, AbstractBlock.Settings.copy(Blocks.OAK_DOOR).mapColor(colors.planks)));
+		button = TerrestriaRegistry.register(name + "_button", new ButtonBlock(BlockSetType.OAK, 30, AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(colors.planks)));
+		pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", new PressurePlateBlock(BlockSetType.OAK, AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks)));
+		trapdoor = TerrestriaRegistry.register(name + "_trapdoor", new TrapdoorBlock(BlockSetType.OAK, AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(colors.planks)));
 
 		Identifier signTexture = Identifier.of(Terrestria.MOD_ID, "entity/signs/" + name);
-		sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, FabricBlockSettings.copyOf(Blocks.OAK_SIGN).mapColor(colors.planks)));
-		wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, FabricBlockSettings.copyOf(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).dropsLike(sign)));
+		sign = TerrestriaRegistry.register(name + "_sign", new TerraformSignBlock(signTexture, AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks)));
+		wallSign = TerrestriaRegistry.register(name + "_wall_sign", new TerraformWallSignBlock(signTexture, AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).dropsLike(sign)));
 
 		Identifier hangingSignTexture = Identifier.of(Terrestria.MOD_ID, "entity/signs/hanging/" + name);
 		Identifier hangingSignGuiTexture = Identifier.of(Terrestria.MOD_ID, "textures/gui/hanging_signs/" + name);
-		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, FabricBlockSettings.copyOf(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks)));
-		wallHangingSign = TerrestriaRegistry.register(name + "_wall_hanging_sign", new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, FabricBlockSettings.copyOf(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).dropsLike(hangingSign)));
+		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks)));
+		wallHangingSign = TerrestriaRegistry.register(name + "_wall_hanging_sign", new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).dropsLike(hangingSign)));
 
 		// register natural and stripped blocks
 
@@ -75,17 +74,17 @@ public class WoodBlocks {
 			if (size.equals(LogSize.SMALL)) {
 				throw new IllegalArgumentException("Small log trees are not compatible with extended leaves, I'm not sure how you even did this...");
 			}
-			leaves = TerrestriaRegistry.register(name + "_leaves", new TerrestriaOptiLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+			leaves = TerrestriaRegistry.register(name + "_leaves", new TerrestriaOptiLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 		} else {
 			if (size.equals(LogSize.SMALL)) {
-				leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+				leaves = TerrestriaRegistry.register(name + "_leaves", new TransparentLeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 			} else {
-				leaves = TerrestriaRegistry.register(name + "_leaves", new LeavesBlock(FabricBlockSettings.copyOf(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
+				leaves = TerrestriaRegistry.register(name + "_leaves", new LeavesBlock(AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never)));
 			}
 		}
 
 		if (hasLeafPile) {
-			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", new LeafPileBlock(FabricBlockSettings.copyOf(Blocks.PINK_PETALS).mapColor(colors.leaves)));
+			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", new LeafPileBlock(AbstractBlock.Settings.copy(Blocks.PINK_PETALS).mapColor(colors.leaves)));
 		} else {
 			leafPile = null;
 		}

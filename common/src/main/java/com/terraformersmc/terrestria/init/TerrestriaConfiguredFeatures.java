@@ -7,6 +7,7 @@ import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeC
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
+import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -79,7 +80,7 @@ public class TerrestriaConfiguredFeatures {
 		RegistryEntryLookup<ConfiguredFeature<?, ?>> configuredFeatures = registerable.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 		RegistryEntryLookup<PlacedFeature> placedFeatures = registerable.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
 
-		register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, Feature.RANDOM_PATCH,
+		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, Feature.RANDOM_PATCH,
 				new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 								new WeightedBlockStateProvider(createStatePoolBuilder()
 										.add(Blocks.SHORT_GRASS.getDefaultState(), 1)
@@ -89,12 +90,12 @@ public class TerrestriaConfiguredFeatures {
 										.build())),
 						BlockPredicate.IS_AIR)));
 
-		register(registerable, PATCH_DEAD_GRASS, Feature.RANDOM_PATCH,
+		TerrestriaRegistry.register(registerable, PATCH_DEAD_GRASS, Feature.RANDOM_PATCH,
 				new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 								BlockStateProvider.of(TerrestriaBlocks.DEAD_GRASS.getDefaultState())),
 						BlockPredicate.IS_AIR)));
 
-		register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, Feature.RANDOM_PATCH,
+		TerrestriaRegistry.register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, Feature.RANDOM_PATCH,
 				new RandomPatchFeatureConfig(4, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 								new WeightedBlockStateProvider(createStatePoolBuilder()
 										.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 3)
@@ -102,7 +103,7 @@ public class TerrestriaConfiguredFeatures {
 										.build())),
 						BlockPredicate.IS_AIR)));
 
-		register(registerable, PATCH_OASIS_VEGETATION, Feature.RANDOM_PATCH,
+		TerrestriaRegistry.register(registerable, PATCH_OASIS_VEGETATION, Feature.RANDOM_PATCH,
 				new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 								new WeightedBlockStateProvider(createStatePoolBuilder()
 										.add(Blocks.FERN.getDefaultState(), 1)
@@ -113,7 +114,7 @@ public class TerrestriaConfiguredFeatures {
 										.build())),
 						BlockPredicate.IS_AIR)));
 
-		register(registerable, PATCH_LUSH_DESERT_VEGETATION, Feature.RANDOM_PATCH,
+		TerrestriaRegistry.register(registerable, PATCH_LUSH_DESERT_VEGETATION, Feature.RANDOM_PATCH,
 				new RandomPatchFeatureConfig(32, 15, 3, PlacedFeatures.createEntry(Feature.SIMPLE_BLOCK, new SimpleBlockFeatureConfig(
 								new WeightedBlockStateProvider(createStatePoolBuilder()
 										.add(TerrestriaBlocks.DEAD_GRASS.getDefaultState(), 2)
@@ -122,7 +123,7 @@ public class TerrestriaConfiguredFeatures {
 										.build())),
 						BlockPredicate.IS_AIR)));
 
-		register(registerable, BRYCE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, BRYCE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SMALL_OAK_LOG),
 				new SpindlyTrunkPlacer(10, 0, 0),
 				SimpleBlockStateProvider.of(Blocks.OAK_LEAVES),
@@ -130,7 +131,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 0))
 				.build());
 
-		register(registerable, JUNGLE_PALM_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, JUNGLE_PALM_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(Blocks.JUNGLE_WOOD),
 				new BentTrunkPlacer(15, 15, 15),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.JUNGLE_PALM_LEAVES),
@@ -139,16 +140,16 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.build());
 
-		register(registerable, SMALL_HEMLOCK_TREE, Feature.TREE, spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState()));
-		register(registerable, SMALL_REDWOOD_TREE, Feature.TREE, spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, SMALL_HEMLOCK_TREE, Feature.TREE, spruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, SMALL_REDWOOD_TREE, Feature.TREE, spruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState()));
 
-		register(registerable, HEMLOCK_TREE, Feature.TREE, tallSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 1, 11));
-		register(registerable, REDWOOD_TREE, Feature.TREE, tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 5, 7, 12, 19));
+		TerrestriaRegistry.register(registerable, HEMLOCK_TREE, Feature.TREE, tallSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 24, 4, 3, 2, 5, 1, 11));
+		TerrestriaRegistry.register(registerable, REDWOOD_TREE, Feature.TREE, tallSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 24, 4, 3, 5, 7, 12, 19));
 
-		register(registerable, MEGA_HEMLOCK_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 1, 11));
-		register(registerable, MEGA_REDWOOD_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 19));
+		TerrestriaRegistry.register(registerable, MEGA_HEMLOCK_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 1, 11));
+		TerrestriaRegistry.register(registerable, MEGA_REDWOOD_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, giantSpruceOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), 32, 8, 7, 2, 5, 12, 19));
 
-		register(registerable, RUBBER_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, RUBBER_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RUBBER.log),
 				new RubberTreeTrunkPlacer(6, 2, 2),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RUBBER.leaves),
@@ -156,7 +157,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 1)
 				).build());
 
-		register(registerable, CYPRESS_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, CYPRESS_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.log),
 				new StraightTrunkPlacer(7, 3, 0),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.leaves),
@@ -165,13 +166,13 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.build());
 
-		register(registerable, FALLEN_HEMLOCK_LOG, Feature.TREE, fallenLogOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), new FallenStraightTrunkPlacer(5, 3, 1)));
-		register(registerable, FALLEN_REDWOOD_LOG, Feature.TREE, fallenLogOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), new FallenStraightTrunkPlacer(7, 2, 1)));
+		TerrestriaRegistry.register(registerable, FALLEN_HEMLOCK_LOG, Feature.TREE, fallenLogOf(TerrestriaBlocks.HEMLOCK, TerrestriaBlocks.HEMLOCK_SAPLING.getDefaultState(), new FallenStraightTrunkPlacer(5, 3, 1)));
+		TerrestriaRegistry.register(registerable, FALLEN_REDWOOD_LOG, Feature.TREE, fallenLogOf(TerrestriaBlocks.REDWOOD, TerrestriaBlocks.REDWOOD_SAPLING.getDefaultState(), new FallenStraightTrunkPlacer(7, 2, 1)));
 
-		register(registerable, JAPANESE_MAPLE_SHRUB, Feature.TREE, shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING.getDefaultState()));
-		register(registerable, OAK_SHRUB, Feature.TREE, shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), Blocks.OAK_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, JAPANESE_MAPLE_SHRUB, Feature.TREE, shrubOf(TerrestriaBlocks.JAPANESE_MAPLE.log.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES.getDefaultState(), TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, OAK_SHRUB, Feature.TREE, shrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), Blocks.OAK_SAPLING.getDefaultState()));
 
-		register(registerable, RAINBOW_EUCALYPTUS_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, RAINBOW_EUCALYPTUS_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log),
 				new QuarteredMegaCanopyTrunkPlacer(4, 2, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves),
@@ -182,7 +183,7 @@ public class TerrestriaConfiguredFeatures {
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.quarterLog),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.wood)));
 
-		register(registerable, SMALL_RAINBOW_EUCALYPTUS_TREE, Feature.TREE, (new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, SMALL_RAINBOW_EUCALYPTUS_TREE, Feature.TREE, (new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.log),
 				new StraightTrunkPlacer(4, 8, 0),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.RAINBOW_EUCALYPTUS.leaves),
@@ -191,7 +192,7 @@ public class TerrestriaConfiguredFeatures {
 				.ignoreVines()
 				.build());
 
-		register(registerable, SAGUARO_CACTUS, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, SAGUARO_CACTUS, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SAGUARO_CACTUS),
 				new SaguaroCactusTrunkPlacer(0,0,0),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SAGUARO_CACTUS),
@@ -199,7 +200,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.build());
 
-		register(registerable, SAKURA_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, SAKURA_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SAKURA.log),
 				new SmallCanopyTree4BranchTrunkPlacer(4, 1, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.SAKURA.leaves),
@@ -208,7 +209,7 @@ public class TerrestriaConfiguredFeatures {
 				.decorators(ImmutableList.of(new SakuraTreeDecorator()))
 				.build());
 
-		register(registerable, JAPANESE_MAPLE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, JAPANESE_MAPLE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.JAPANESE_MAPLE.log),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.JAPANESE_MAPLE.leaves),
@@ -216,7 +217,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.build());
 
-		register(registerable, DARK_JAPANESE_MAPLE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, DARK_JAPANESE_MAPLE_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.JAPANESE_MAPLE.log),
 				new CanopyTree4BranchTrunkPlacer(4, 1, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES),
@@ -224,7 +225,7 @@ public class TerrestriaConfiguredFeatures {
 				new TwoLayersFeatureSize(1, 0, 1))
 				.build());
 
-		register(registerable, MEGA_CYPRESS_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, MEGA_CYPRESS_TREE, TerrestriaFeatures.QUARTERED_MEGA_TREE, new QuarteredMegaTreeConfig(new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.log),
 				new QuarteredMegaCanopyTrunkPlacer(5, 2, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.leaves),
@@ -235,16 +236,16 @@ public class TerrestriaConfiguredFeatures {
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.quarterLog),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.CYPRESS.wood)));
 
-		register(registerable, WILLOW_TREE, Feature.TREE, canopyOf(TerrestriaBlocks.WILLOW, TerrestriaBlocks.WILLOW_SAPLING.getDefaultState(), new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState()))));
+		TerrestriaRegistry.register(registerable, WILLOW_TREE, Feature.TREE, canopyOf(TerrestriaBlocks.WILLOW, TerrestriaBlocks.WILLOW_SAPLING.getDefaultState(), new CanopyTree4BranchTrunkPlacer(4, 1, 1), ImmutableList.of(new DanglingLeavesTreeDecorator(TerrestriaBlocks.WILLOW.leaves.getDefaultState()))));
 
-		register(registerable, YUCCA_PALM_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
+		TerrestriaRegistry.register(registerable, YUCCA_PALM_TREE, Feature.TREE, new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(TerrestriaBlocks.YUCCA_PALM.log),
 				new SmallBranchingTrunkPlacer(6, 2, 1),
 				SimpleBlockStateProvider.of(TerrestriaBlocks.YUCCA_PALM.leaves),
 				new SmallLogSphereFoliagePlacer(ConstantIntProvider.create(1), ConstantIntProvider.create(0)),
 				new TwoLayersFeatureSize(1, 0, 1)).build());
 
-		register(registerable, OUTBACK_BUSHLAND_TREES, Feature.RANDOM_SELECTOR,
+		TerrestriaRegistry.register(registerable, OUTBACK_BUSHLAND_TREES, Feature.RANDOM_SELECTOR,
 				new RandomFeatureConfig(
 						ImmutableList.of(
 								new RandomFeatureEntry(placedFeatures.getOrThrow(TreePlacedFeatures.ACACIA_CHECKED), 0.95F),
@@ -252,22 +253,22 @@ public class TerrestriaConfiguredFeatures {
 						),
 						placedFeatures.getOrThrow(TreePlacedFeatures.FANCY_OAK_CHECKED)));
 
-		register(registerable, OAK_DOT_SHRUB, Feature.TREE, dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), Blocks.OAK_SAPLING.getDefaultState()));
-		register(registerable, ACACIA_DOT_SHRUB, Feature.TREE, dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), Blocks.ACACIA_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, OAK_DOT_SHRUB, Feature.TREE, dotShrubOf(Blocks.OAK_LOG.getDefaultState(), Blocks.OAK_LEAVES.getDefaultState(), Blocks.OAK_SAPLING.getDefaultState()));
+		TerrestriaRegistry.register(registerable, ACACIA_DOT_SHRUB, Feature.TREE, dotShrubOf(Blocks.ACACIA_LOG.getDefaultState(), Blocks.ACACIA_LEAVES.getDefaultState(), Blocks.ACACIA_SAPLING.getDefaultState()));
 
-		register(registerable, CATTAIL, TerrestriaFeatures.CATTAIL, new ProbabilityConfig(0.3F));
-		register(registerable, DUM_DUM_HEAD, TerrestriaFeatures.DUM_DUM_HEAD, DefaultFeatureConfig.INSTANCE);
+		TerrestriaRegistry.register(registerable, CATTAIL, TerrestriaFeatures.CATTAIL, new ProbabilityConfig(0.3F));
+		TerrestriaRegistry.register(registerable, DUM_DUM_HEAD, TerrestriaFeatures.DUM_DUM_HEAD, DefaultFeatureConfig.INSTANCE);
 	}
 
 	private static DataPool.Builder<BlockState> createStatePoolBuilder() {
 		return DataPool.builder();
 	}
 
-	static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
+	private static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
 		return canopyOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling, trunkPlacer, decorators);
 	}
 
-	static TreeFeatureConfig canopyOf(BlockState log, BlockState leaves, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
+	private static TreeFeatureConfig canopyOf(BlockState log, BlockState leaves, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				trunkPlacer,
@@ -278,11 +279,11 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig fallenLogOf(WoodBlocks woodBlocks, BlockState sapling, FallenStraightTrunkPlacer trunk) {
+	private static TreeFeatureConfig fallenLogOf(WoodBlocks woodBlocks, BlockState sapling, FallenStraightTrunkPlacer trunk) {
 		return fallenLogOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling, trunk);
 	}
 
-	static TreeFeatureConfig fallenLogOf(BlockState log, BlockState leaves, BlockState sapling, FallenStraightTrunkPlacer trunk) {
+	private static TreeFeatureConfig fallenLogOf(BlockState log, BlockState leaves, BlockState sapling, FallenStraightTrunkPlacer trunk) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				trunk,
@@ -293,11 +294,11 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig shrubOf(WoodBlocks woodBlocks, BlockState sapling) {
+	private static TreeFeatureConfig shrubOf(WoodBlocks woodBlocks, BlockState sapling) {
 		return shrubOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling);
 	}
 
-	static TreeFeatureConfig shrubOf(BlockState log, BlockState leaves, BlockState sapling) {
+	private static TreeFeatureConfig shrubOf(BlockState log, BlockState leaves, BlockState sapling) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				new StraightTrunkPlacer(1, 0, 0),
@@ -307,7 +308,7 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig dotShrubOf(BlockState log, BlockState leaves, BlockState sapling) {
+	private static TreeFeatureConfig dotShrubOf(BlockState log, BlockState leaves, BlockState sapling) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				new StraightTrunkPlacer(1, 1, 0),
@@ -317,11 +318,11 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig spruceOf(WoodBlocks woodBlocks, BlockState sapling) {
+	private static TreeFeatureConfig spruceOf(WoodBlocks woodBlocks, BlockState sapling) {
 		return spruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling);
 	}
 
-	static TreeFeatureConfig spruceOf(BlockState log, BlockState leaves, BlockState sapling) {
+	private static TreeFeatureConfig spruceOf(BlockState log, BlockState leaves, BlockState sapling) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				new StraightTrunkPlacer(5, 2, 1),
@@ -333,11 +334,11 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
+	private static TreeFeatureConfig tallSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
 		return tallSpruceOf(woodBlocks.log.getDefaultState(), woodBlocks.leaves.getDefaultState(), sapling, minHeight, extraRandomHeight1, extraRandomHeight2, minLeavesRadius, maxLeavesRadius, minBareHeight, maxBareHeight);
 	}
 
-	static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
+	private static TreeFeatureConfig tallSpruceOf(BlockState log, BlockState leaves, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
 		return new TreeFeatureConfig.Builder(
 				SimpleBlockStateProvider.of(log),
 				new StraightTrunkPlacer(minHeight, extraRandomHeight1, extraRandomHeight2),
@@ -349,7 +350,7 @@ public class TerrestriaConfiguredFeatures {
 				.build();
 	}
 
-	static QuarteredMegaTreeConfig giantSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
+	private static QuarteredMegaTreeConfig giantSpruceOf(WoodBlocks woodBlocks, BlockState sapling, int minHeight, int extraRandomHeight1, int extraRandomHeight2, int minLeavesRadius, int maxLeavesRadius, int minBareHeight, int maxBareHeight) {
 		if (!woodBlocks.hasQuarterLog()) {
 			throw new IllegalArgumentException("giantSpruceOf() requires WoodBlocks with defined Quarter Logs: " + woodBlocks.getName());
 		}
@@ -365,11 +366,7 @@ public class TerrestriaConfiguredFeatures {
 				SimpleBlockStateProvider.of(woodBlocks.wood));
 	}
 
-	public static RegistryKey<ConfiguredFeature<?, ?>> createRegistryKey(String name) {
+	private static RegistryKey<ConfiguredFeature<?, ?>> createRegistryKey(String name) {
 		return RegistryKey.of(RegistryKeys.CONFIGURED_FEATURE, Identifier.of(Terrestria.MOD_ID, name));
-	}
-
-	public static <FC extends FeatureConfig, F extends Feature<FC>> void register(Registerable<ConfiguredFeature<?, ?>> registerable, RegistryKey<ConfiguredFeature<?, ?>> key, F feature, FC config) {
-		ConfiguredFeatures.register(registerable, key, feature, config);
 	}
 }
