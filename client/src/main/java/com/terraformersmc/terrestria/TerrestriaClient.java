@@ -1,9 +1,6 @@
 package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terraform.boat.api.client.TerraformBoatClientHelper;
-import com.terraformersmc.terraform.sign.SpriteIdentifierRegistry;
-import com.terraformersmc.terraform.sign.block.TerraformHangingSignBlock;
-import com.terraformersmc.terraform.sign.block.TerraformSignBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
@@ -13,7 +10,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.block.AbstractSignBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.color.block.BlockColorProvider;
 import net.minecraft.client.color.item.ItemColorProvider;
@@ -22,7 +18,6 @@ import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.TexturedRenderLayers;
-import net.minecraft.client.util.SpriteIdentifier;
 import net.minecraft.util.Identifier;
 
 // This class is an entrypoint
@@ -139,27 +134,6 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		addColoredGrass(TerrestriaBlocks.ANDISOL.getGrassBlock());
 
-		addSigns(
-				TerrestriaBlocks.REDWOOD.sign,
-				TerrestriaBlocks.REDWOOD.hangingSign,
-				TerrestriaBlocks.HEMLOCK.sign,
-				TerrestriaBlocks.HEMLOCK.hangingSign,
-				TerrestriaBlocks.RUBBER.sign,
-				TerrestriaBlocks.RUBBER.hangingSign,
-				TerrestriaBlocks.CYPRESS.sign,
-				TerrestriaBlocks.CYPRESS.hangingSign,
-				TerrestriaBlocks.WILLOW.sign,
-				TerrestriaBlocks.WILLOW.hangingSign,
-				TerrestriaBlocks.JAPANESE_MAPLE.sign,
-				TerrestriaBlocks.JAPANESE_MAPLE.hangingSign,
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.sign,
-				TerrestriaBlocks.RAINBOW_EUCALYPTUS.hangingSign,
-				TerrestriaBlocks.SAKURA.sign,
-				TerrestriaBlocks.SAKURA.hangingSign,
-				TerrestriaBlocks.YUCCA_PALM.sign,
-				TerrestriaBlocks.YUCCA_PALM.hangingSign
-		);
-
 		ColorProviderRegistry.ITEM.register(
 				FOLIAGE_ITEM_COLORS,
 				TerrestriaItems.RUBBER.leaves,
@@ -188,23 +162,6 @@ public class TerrestriaClient implements ClientModInitializer {
 		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "rainbow_eucalyptus"), false);
 		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "sakura"), false);
 		TerraformBoatClientHelper.registerModelLayers(new Identifier(Terrestria.MOD_ID, "yucca_palm"), false);
-	}
-
-	@SafeVarargs
-	private <S extends AbstractSignBlock> void addSigns(S... signs) {
-		for (AbstractSignBlock maybeSign : signs) {
-			if (maybeSign instanceof TerraformSignBlock sign) {
-				addSignTexture(sign.getTexture());
-			} else if(maybeSign instanceof TerraformHangingSignBlock sign) {
-				addSignTexture(sign.getTexture());
-			} else {
-				throw new IllegalArgumentException("Only Terraform API signs may be registered via this method.");
-			}
-		}
-	}
-
-	private void addSignTexture(Identifier texture) {
-		SpriteIdentifierRegistry.INSTANCE.addIdentifier(new SpriteIdentifier(TexturedRenderLayers.SIGNS_ATLAS_TEXTURE, texture));
 	}
 
 	private void addColoredGrass(Block grass) {
