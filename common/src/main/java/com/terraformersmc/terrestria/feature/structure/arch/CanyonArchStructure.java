@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terrestria.feature.helpers.placement.StructureCanGenerate;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.structure.*;
@@ -11,7 +11,7 @@ import net.minecraft.world.gen.structure.StructureType;
 import java.util.Optional;
 
 public class CanyonArchStructure extends Structure {
-	public static final Codec<CanyonArchStructure> CODEC = CanyonArchStructure.createCodec(CanyonArchStructure::new);
+	public static final MapCodec<CanyonArchStructure> CODEC = CanyonArchStructure.createCodec(CanyonArchStructure::new);
 
 	public CanyonArchStructure(Structure.Config config) {
 		super(config);

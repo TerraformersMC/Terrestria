@@ -7,10 +7,8 @@
   "config": {},
   "height": {
     "type": "uniform",
-    "value": {
-      "min_inclusive": 19,
-      "max_inclusive": 20
-    }
+    "min_inclusive": 19,
+    "max_inclusive": 20
   },
   "base_y": 30,
   "thin_if_tall": false

@@ -1,13 +1,8 @@
 package com.terraformersmc.terrestria.surfacerules;
 
-import com.mojang.serialization.Codec;
-import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.noise.NoiseParametersKeys;
 import net.minecraft.world.gen.surfacebuilder.MaterialRules;
@@ -17,7 +12,6 @@ import static net.minecraft.world.gen.surfacebuilder.MaterialRules.*;
 
 public class TerrestriaSurfaceRules {
 	public static MaterialRule createRules() {
-
 		// Sandy surface rules
 		MaterialRule sandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH,
 			block(Blocks.SAND)), block(Blocks.SANDSTONE));
@@ -58,9 +52,5 @@ public class TerrestriaSurfaceRules {
 	}
 
 	public static void init() {
-	}
-
-	public static <T extends MaterialRule> Codec<T> register(String id, Codec<T> ruleCodec) {
-		return Registry.register(Registries.MATERIAL_RULE, new Identifier(Terrestria.MOD_ID, id), ruleCodec);
 	}
 }

@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
 import java.util.function.Consumer;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
@@ -16,7 +16,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class CypressFoliagePlacer extends FoliagePlacer {
-	public static final Codec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			fillFoliagePlacerFields(instance).apply(instance, CypressFoliagePlacer::new));
 
 	public CypressFoliagePlacer(IntProvider radius, IntProvider offset) {

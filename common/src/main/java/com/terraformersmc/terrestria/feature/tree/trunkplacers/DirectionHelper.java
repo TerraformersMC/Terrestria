@@ -4,7 +4,6 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 
 public class DirectionHelper {
-
 	/**
 	 * A utility method for getting a direction not the same as the one specified in the horizontal direction
 	 * Often used in tree generation for creating unique branches

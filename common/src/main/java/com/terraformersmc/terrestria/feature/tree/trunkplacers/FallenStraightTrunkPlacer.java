@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
-	public static final Codec<FallenStraightTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+	public static final MapCodec<FallenStraightTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
 		fillTrunkPlacerFields(instance).apply(instance, FallenStraightTrunkPlacer::new));
 
 	public FallenStraightTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

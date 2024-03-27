@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
-
-	public static final Codec<SpindlyTrunkPlacer> CODEC = RecordCodecBuilder.create(spindlyTrunkPlacerInstance ->
+	public static final MapCodec<SpindlyTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(spindlyTrunkPlacerInstance ->
 			fillTrunkPlacerFields(spindlyTrunkPlacerInstance).apply(spindlyTrunkPlacerInstance, SpindlyTrunkPlacer::new));
 
 	public SpindlyTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.Position;
 import com.terraformersmc.terraform.shapes.impl.Shapes;
@@ -16,8 +16,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class SmallLogSphereFoliagePlacer extends SmallFoliagePlacer {
-
-	public static final Codec<SmallLogSphereFoliagePlacer> CODEC = RecordCodecBuilder.create(smallLogSphereFoliagePlacerInstance ->
+	public static final MapCodec<SmallLogSphereFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(smallLogSphereFoliagePlacerInstance ->
 			fillFoliagePlacerFields(smallLogSphereFoliagePlacerInstance).apply(smallLogSphereFoliagePlacerInstance, SmallLogSphereFoliagePlacer::new));
 
 	public SmallLogSphereFoliagePlacer(IntProvider radius, IntProvider offset) {

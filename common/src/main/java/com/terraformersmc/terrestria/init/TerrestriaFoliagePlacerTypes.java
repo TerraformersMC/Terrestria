@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.tree.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
@@ -9,7 +9,6 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class TerrestriaFoliagePlacerTypes {
-
 	public static FoliagePlacerType<CanopyFoliagePlacer> CANOPY;
 	public static FoliagePlacerType<DotShrubPlacer> DOT_SHRUB;
 	public static FoliagePlacerType<PredictiveSpruceFoliagePlacer> PREDICTIVE_SPRUCE;
@@ -34,8 +33,7 @@ public class TerrestriaFoliagePlacerTypes {
 		CYPRESS = register("cypress_foliage_placer", CypressFoliagePlacer.CODEC);
 	}
 
-	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, Codec<P> codec) {
+	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, MapCodec<P> codec) {
 		return PlacerTypes.registerFoliagePlacer(new Identifier(Terrestria.MOD_ID, name), codec);
 	}
-
 }

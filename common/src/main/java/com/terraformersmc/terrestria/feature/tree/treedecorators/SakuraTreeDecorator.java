@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.treedecorators;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.wood.block.SmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
@@ -16,7 +16,7 @@ import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class SakuraTreeDecorator extends TreeDecorator {
-	public static Codec<SakuraTreeDecorator> CODEC = Codec.unit(new SakuraTreeDecorator());
+	public static MapCodec<SakuraTreeDecorator> CODEC = MapCodec.unit(new SakuraTreeDecorator());
 
 	@Override
 	protected TreeDecoratorType<?> getType() {

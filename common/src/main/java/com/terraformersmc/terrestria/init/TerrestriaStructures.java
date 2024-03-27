@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructure;
@@ -29,7 +29,7 @@ public class TerrestriaStructures {
 	public static void init() {
 	}
 
-	private static <S extends Structure> StructureType<S> registerStructureType(String id, Codec<S> codec) {
+	private static <S extends Structure> StructureType<S> registerStructureType(String id, MapCodec<S> codec) {
 		return Registry.register(Registries.STRUCTURE_TYPE, new Identifier(Terrestria.MOD_ID, id), () -> codec);
 	}
 

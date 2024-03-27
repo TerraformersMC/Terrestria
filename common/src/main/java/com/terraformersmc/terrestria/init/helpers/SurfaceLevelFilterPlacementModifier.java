@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
@@ -10,8 +11,8 @@ import net.minecraft.world.gen.placementmodifier.AbstractConditionalPlacementMod
 import net.minecraft.world.gen.placementmodifier.PlacementModifierType;
 
 public class SurfaceLevelFilterPlacementModifier extends AbstractConditionalPlacementModifier {
-	public static final Codec<SurfaceLevelFilterPlacementModifier> MODIFIER_CODEC =
-			RecordCodecBuilder.create(instance -> instance.group(
+	public static final MapCodec<SurfaceLevelFilterPlacementModifier> MODIFIER_CODEC =
+			RecordCodecBuilder.mapCodec(instance -> instance.group(
 					Heightmap.Type.CODEC.fieldOf("heightmap").forGetter(arg -> arg.heightmap),
 					Codec.INT.optionalFieldOf("min_inclusive", Integer.MIN_VALUE).forGetter(arg -> arg.min),
 					Codec.INT.optionalFieldOf("max_inclusive", Integer.MAX_VALUE).forGetter(arg -> arg.max))

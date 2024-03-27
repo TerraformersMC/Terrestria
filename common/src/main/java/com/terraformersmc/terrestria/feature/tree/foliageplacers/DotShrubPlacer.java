@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
@@ -15,8 +15,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class DotShrubPlacer extends FoliagePlacer {
-
-	public static final Codec<DotShrubPlacer> CODEC = RecordCodecBuilder.create(dotShrubPlacerInstance ->
+	public static final MapCodec<DotShrubPlacer> CODEC = RecordCodecBuilder.mapCodec(dotShrubPlacerInstance ->
 			fillFoliagePlacerFields(dotShrubPlacerInstance).apply(dotShrubPlacerInstance, DotShrubPlacer::new));
 
 	public DotShrubPlacer(IntProvider radius, IntProvider offset) {

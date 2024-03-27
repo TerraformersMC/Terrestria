@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.tree.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
@@ -9,7 +9,6 @@ import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 public class TerrestriaTrunkPlacerTypes {
-
 	public static TrunkPlacerType<BentTrunkPlacer> BENT;
 	public static TrunkPlacerType<CanopyTree4BranchTrunkPlacer> CANOPY_4_BRANCHES;
 	public static TrunkPlacerType<QuarteredMegaCanopyTrunkPlacer> QUARTERED_MEGA_CANOPY;
@@ -36,8 +35,7 @@ public class TerrestriaTrunkPlacerTypes {
 		FALLEN_STRAIGHT = register("fallen_straight_trunk_placer", FallenStraightTrunkPlacer.CODEC);
 	}
 
-	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, Codec<P> codec) {
+	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, MapCodec<P> codec) {
 		return PlacerTypes.registerTrunkPlacer(new Identifier(Terrestria.MOD_ID, name), codec);
 	}
-
 }

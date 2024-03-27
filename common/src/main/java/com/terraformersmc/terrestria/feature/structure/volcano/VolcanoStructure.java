@@ -1,6 +1,7 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
@@ -17,7 +18,7 @@ import net.minecraft.world.gen.structure.StructureType;
 import java.util.Optional;
 
 public class VolcanoStructure extends Structure {
-    public static final Codec<VolcanoStructure> CODEC = RecordCodecBuilder.create(instance -> instance.group(VolcanoStructure.configCodecBuilder(instance),
+    public static final MapCodec<VolcanoStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(VolcanoStructure.configCodecBuilder(instance),
 			IntProvider.NON_NEGATIVE_CODEC.fieldOf("height").forGetter(arg -> arg.height),
 			Codec.INT.fieldOf("base_y").forGetter(arg -> arg.baseY),
 			Codec.BOOL.fieldOf("thin_if_tall").forGetter(arg -> arg.thinIfTall)

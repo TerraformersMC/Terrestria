@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
-
-	public static final Codec<SmallCanopyTree4BranchTrunkPlacer> CODEC = RecordCodecBuilder.create(smallCanopyTree4BranchTrunkPlacerInstance ->
+	public static final MapCodec<SmallCanopyTree4BranchTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(smallCanopyTree4BranchTrunkPlacerInstance ->
 			fillTrunkPlacerFields(smallCanopyTree4BranchTrunkPlacerInstance).apply(smallCanopyTree4BranchTrunkPlacerInstance, SmallCanopyTree4BranchTrunkPlacer::new));
 
 	public SmallCanopyTree4BranchTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

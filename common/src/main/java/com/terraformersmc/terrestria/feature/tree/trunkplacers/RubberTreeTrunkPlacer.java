@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class RubberTreeTrunkPlacer extends TrunkPlacer {
-
-	public static final Codec<RubberTreeTrunkPlacer> CODEC = RecordCodecBuilder.create(rubberTreeTrunkPlacerInstance ->
+	public static final MapCodec<RubberTreeTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(rubberTreeTrunkPlacerInstance ->
 			fillTrunkPlacerFields(rubberTreeTrunkPlacerInstance).apply(rubberTreeTrunkPlacerInstance, RubberTreeTrunkPlacer::new));
 
 	public RubberTreeTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

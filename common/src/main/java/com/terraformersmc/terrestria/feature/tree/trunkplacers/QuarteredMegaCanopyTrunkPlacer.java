@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
-
-	public static final Codec<QuarteredMegaCanopyTrunkPlacer> CODEC = RecordCodecBuilder.create(quarteredMegaCanopyTrunkPlacerInstance ->
+	public static final MapCodec<QuarteredMegaCanopyTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(quarteredMegaCanopyTrunkPlacerInstance ->
 			fillTrunkPlacerFields(quarteredMegaCanopyTrunkPlacerInstance).apply(quarteredMegaCanopyTrunkPlacerInstance, QuarteredMegaCanopyTrunkPlacer::new));
 
 	public QuarteredMegaCanopyTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

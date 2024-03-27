@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
@@ -15,8 +15,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
-
-	public static final Codec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.create((instance) ->
+	public static final MapCodec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
 			fillFoliagePlacerFields(instance).apply(instance, PalmFanFoliagePlacer::new));
 
 	public PalmFanFoliagePlacer(IntProvider radius, IntProvider offset) {

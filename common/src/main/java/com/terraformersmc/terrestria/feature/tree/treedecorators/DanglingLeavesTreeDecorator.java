@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.treedecorators;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
 import net.minecraft.block.AbstractBlock;
@@ -13,7 +13,7 @@ import net.minecraft.world.gen.treedecorator.TreeDecorator;
 import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
 
 public class DanglingLeavesTreeDecorator extends TreeDecorator {
-	public static final Codec<DanglingLeavesTreeDecorator> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final MapCodec<DanglingLeavesTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			BlockState.CODEC.fieldOf("state").forGetter(decorator -> decorator.state))
 			.apply(instance, DanglingLeavesTreeDecorator::new));
 	private final BlockState state;

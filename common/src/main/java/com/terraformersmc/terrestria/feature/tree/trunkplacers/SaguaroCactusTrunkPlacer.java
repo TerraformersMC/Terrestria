@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
@@ -20,8 +20,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
-
-	public static final Codec<SaguaroCactusTrunkPlacer> CODEC = RecordCodecBuilder.create(saguaroCactusTrunkPlacerInstance ->
+	public static final MapCodec<SaguaroCactusTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(saguaroCactusTrunkPlacerInstance ->
 			fillTrunkPlacerFields(saguaroCactusTrunkPlacerInstance).apply(saguaroCactusTrunkPlacerInstance, SaguaroCactusTrunkPlacer::new));
 
 	public SaguaroCactusTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
@@ -14,7 +14,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 public class NoneFoliagePlacer extends FoliagePlacer {
 	private static final IntProvider ZERO = ConstantIntProvider.create(0);
 	// This has to come last, because static initialization order is important!
-	public static final Codec<NoneFoliagePlacer> CODEC = Codec.unit(new NoneFoliagePlacer());
+	public static final MapCodec<NoneFoliagePlacer> CODEC = MapCodec.unit(new NoneFoliagePlacer());
 
 	public NoneFoliagePlacer() {
 		super(ZERO, ZERO);

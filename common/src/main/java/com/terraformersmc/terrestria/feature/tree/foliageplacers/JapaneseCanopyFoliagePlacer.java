@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.shapes.api.Position;
 import com.terraformersmc.terraform.shapes.impl.Shapes;
@@ -18,8 +18,7 @@ import net.minecraft.world.gen.foliage.FoliagePlacer;
 import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
-
-	public static final Codec<JapaneseCanopyFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<JapaneseCanopyFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			fillFoliagePlacerFields(instance).apply(instance, JapaneseCanopyFoliagePlacer::new));
 
 	public JapaneseCanopyFoliagePlacer(IntProvider radius, IntProvider offset) {

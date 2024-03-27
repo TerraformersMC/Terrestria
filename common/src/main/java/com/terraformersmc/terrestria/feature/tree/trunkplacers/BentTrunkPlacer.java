@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 public class BentTrunkPlacer extends TrunkPlacer {
-
-	public static final Codec<BentTrunkPlacer> CODEC = RecordCodecBuilder.create((bentTrunkPlacerInstance) ->
+	public static final MapCodec<BentTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((bentTrunkPlacerInstance) ->
 			fillTrunkPlacerFields(bentTrunkPlacerInstance).apply(bentTrunkPlacerInstance, BentTrunkPlacer::new));
 
 	public BentTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {

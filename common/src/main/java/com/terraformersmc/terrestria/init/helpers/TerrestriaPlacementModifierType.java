@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
@@ -13,11 +13,11 @@ public class TerrestriaPlacementModifierType implements PlacementModifierType<Su
 	}
 
 	@Override
-	public Codec<SurfaceLevelFilterPlacementModifier> codec() {
+	public MapCodec<SurfaceLevelFilterPlacementModifier> codec() {
 		return null;
 	}
 
-	private static <P extends PlacementModifier> PlacementModifierType<P> register(String id, Codec<P> codec) {
+	private static <P extends PlacementModifier> PlacementModifierType<P> register(String id, MapCodec<P> codec) {
 		return Registry.register(Registries.PLACEMENT_MODIFIER_TYPE, id, () -> codec);
 	}
 }

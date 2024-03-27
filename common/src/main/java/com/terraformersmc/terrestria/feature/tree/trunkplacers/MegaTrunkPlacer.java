@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.BiConsumer;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
@@ -25,7 +25,7 @@ import net.minecraft.world.gen.trunk.TrunkPlacer;
 import net.minecraft.world.gen.trunk.TrunkPlacerType;
 
 public class MegaTrunkPlacer extends TrunkPlacer {
-	public static final Codec<MegaTrunkPlacer> CODEC = RecordCodecBuilder.create((instance) ->
+	public static final MapCodec<MegaTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
 		fillTrunkPlacerFields(instance).apply(instance, MegaTrunkPlacer::new)
 	);
 

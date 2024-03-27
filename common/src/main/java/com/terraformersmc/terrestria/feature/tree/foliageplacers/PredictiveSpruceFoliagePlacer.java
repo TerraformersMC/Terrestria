@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.leaves.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
@@ -19,7 +19,7 @@ import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
 public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	// Copied from SpruceFoliagePlacer. There doesn't appear to be a convenient way to turn a SpruceFoliagePlacer into a
 	// PredictiveSpruceFoliagePlacer.
-	public static final Codec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.create(instance ->
+	public static final MapCodec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
 		fillFoliagePlacerFields(instance).and(
 				IntProvider.createValidatingCodec(0, 28)
 						.fieldOf("trunk_height")
