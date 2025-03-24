@@ -2,6 +2,7 @@ package com.terraformersmc.terrestria.data;
 
 import com.mojang.datafixers.util.Pair;
 import com.terraformersmc.terraform.dirt.api.DirtBlocks;
+import com.terraformersmc.terraform.leaves.api.data.LeavesModels;
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terraform.wood.api.block.SmallLogBlock;
@@ -349,7 +350,17 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		}
 		if ("willow".equals(woodBlocks.getName())) {
 			// TODO: generalize this special case?
-			generator.registerTintedBlockAndItem(woodBlocks.leaves, TexturedModel.END_FOR_TOP_CUBE_COLUMN, FoliageColors.DEFAULT);
+			TextureMap textureMap = new TextureMap()
+					.put(TextureKey.SIDE, TextureMap.getId(woodBlocks.leaves))
+					.put(TextureKey.END, TextureMap.getSubId(woodBlocks.leaves, "_top"))
+					.copy(TextureKey.SIDE, TextureKey.PARTICLE);
+			Model model = new Model(
+					Optional.of(LeavesModels.BLOCK_PILLAR_LEAVES),
+					Optional.empty(),
+					TextureKey.PARTICLE, TextureKey.SIDE, TextureKey.END);
+			TexturedModel.Factory texturedModel = TexturedModel.makeFactory(block -> textureMap, model);
+
+			generator.registerTintedBlockAndItem(woodBlocks.leaves, texturedModel, FoliageColors.DEFAULT);
 		} else if (woodBlocks.isTintable()) {
 			generator.registerTintedBlockAndItem(woodBlocks.leaves, TexturedModel.LEAVES, FoliageColors.DEFAULT);
 		} else {
