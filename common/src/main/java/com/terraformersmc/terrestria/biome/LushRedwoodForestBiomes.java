@@ -7,6 +7,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -26,6 +28,7 @@ public class LushRedwoodForestBiomes {
 				.temperature(0.9F)
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_FOREST))
 						.waterColor(0x3f76e4)
 						.waterFogColor(0x50533)
 						.build()
@@ -52,16 +55,16 @@ public class LushRedwoodForestBiomes {
 		DefaultBiomeFeatures.addDefaultFlowers(builder);
 		DefaultBiomeFeatures.addTaigaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 8, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FOX, 8, 2, 4));
+		builder.spawn(SpawnGroup.CREATURE, 8, new SpawnSettings.SpawnEntry(EntityType.WOLF, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 4, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 2, 3));
+		builder.spawn(SpawnGroup.CREATURE, 8, new SpawnSettings.SpawnEntry(EntityType.FOX, 2, 4));
 		return builder.build();
 	}
 }

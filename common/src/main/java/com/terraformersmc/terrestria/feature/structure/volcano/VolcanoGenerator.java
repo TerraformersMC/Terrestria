@@ -77,22 +77,22 @@ public class VolcanoGenerator extends StructurePiece {
 	public VolcanoGenerator(StructureContext context, NbtCompound tag) {
 		super(TerrestriaStructures.VOLCANO_PIECE, tag);
 
-		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN"), 0.75, 0.5);
-		vegetationNoise = new SimpleRadialNoise(16, tag.getLong("VVN"), 0.25, 0.5);
-		chamberNoise = new SimpleRadialNoise(16, tag.getLong("VCN"), 0.75, 0.5);
-		chamberOreSeed = tag.getLong("VCON");
+		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN", 0), 0.75, 0.5);
+		vegetationNoise = new SimpleRadialNoise(16, tag.getLong("VVN", 0), 0.25, 0.5);
+		chamberNoise = new SimpleRadialNoise(16, tag.getLong("VCN", 0), 0.75, 0.5);
+		chamberOreSeed = tag.getLong("VCON", 0);
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		height = tag.getInt("VH");
-		radius = tag.getInt("VR");
-		lavaHeight = tag.getInt("VL");
-		lavaTubeLength = tag.getInt("VLT");
-		baseY = tag.getInt("Y");
-		chamberHeight = tag.getInt("VCH");
-		underwater = tag.getBoolean("VU");
+		height = tag.getInt("VH", 0);
+		radius = tag.getInt("VR", 0);
+		lavaHeight = tag.getInt("VL", 0);
+		lavaTubeLength = tag.getInt("VLT", 0);
+		baseY = tag.getInt("Y", 0);
+		chamberHeight = tag.getInt("VCH", 0);
+		underwater = tag.getBoolean("VU", false);
 
-		centerX = tag.getInt("CX");
-		centerZ = tag.getInt("CZ");
+		centerX = tag.getInt("CX", 0);
+		centerZ = tag.getInt("CZ", 0);
 	}
 
 	private static double positionToAngle(double dist, double dX, double dZ) {

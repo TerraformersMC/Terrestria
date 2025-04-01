@@ -3,6 +3,7 @@ package com.terraformersmc.terrestria.block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCollisionHandler;
 import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
@@ -78,7 +79,7 @@ public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implement
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
 		if (world instanceof ServerWorld serverWorld) {
 			entity.damage(serverWorld, world.getDamageSources().cactus(), 1.0f);
 		}

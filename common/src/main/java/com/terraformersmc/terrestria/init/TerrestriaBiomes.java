@@ -97,31 +97,32 @@ public class TerrestriaBiomes {
 	public static SpawnSettings.Builder createDefaultSpawnSettings() {
 		SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
 		addDefaultCreatureSpawnEntries(spawnSettings);
-		addDefaultAmbientSpawnEntries(spawnSettings);
+		addDefaultCaveSpawnEntries(spawnSettings);
 		addDefaultMonsterSpawnEntries(spawnSettings);
 		return spawnSettings;
 	}
 
 	public static void addDefaultCreatureSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.PIG, 10, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.CHICKEN, 10, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.COW, 8, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 12, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.PIG, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.CHICKEN, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE,  8, new SpawnSettings.SpawnEntry(EntityType.COW, 4, 4));
 	}
 
-	public static void addDefaultAmbientSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.AMBIENT, new SpawnSettings.SpawnEntry(EntityType.BAT, 10, 8, 8));
+	public static void addDefaultCaveSpawnEntries(SpawnSettings.Builder builder) {
+		builder.spawn(SpawnGroup.AMBIENT, 10, new SpawnSettings.SpawnEntry(EntityType.BAT, 8, 8));
+		builder.spawn(SpawnGroup.UNDERGROUND_WATER_CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.GLOW_SQUID, 4, 6));
 	}
 
 	public static void addDefaultMonsterSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 95, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER,  95, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER,   5, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SLIME, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER,  10, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4));
+		builder.spawn(SpawnGroup.MONSTER,   5, new SpawnSettings.SpawnEntry(EntityType.WITCH, 1, 1));
 	}
 
 	// Copied from Traverse

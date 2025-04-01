@@ -4,6 +4,8 @@ import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -22,6 +24,7 @@ public class DunesBiomes {
 				.temperature(0.9F)
 				.downfall(0.1F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_DESERT))
 						.waterColor(0x4da5e3)
 						.waterFogColor(0x24a0b0)
 						.build()
@@ -38,7 +41,7 @@ public class DunesBiomes {
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		return builder.build();
 	}
 

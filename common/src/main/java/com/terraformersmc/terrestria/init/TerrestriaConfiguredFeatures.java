@@ -16,7 +16,7 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.DataPool;
+import net.minecraft.util.collection.Pool;
 import net.minecraft.util.math.intprovider.ConstantIntProvider;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 import net.minecraft.world.gen.ProbabilityConfig;
@@ -260,8 +260,8 @@ public class TerrestriaConfiguredFeatures {
 		TerrestriaRegistry.register(registerable, DUM_DUM_HEAD, TerrestriaFeatures.DUM_DUM_HEAD, DefaultFeatureConfig.INSTANCE);
 	}
 
-	private static DataPool.Builder<BlockState> createStatePoolBuilder() {
-		return DataPool.builder();
+	private static Pool.Builder<BlockState> createStatePoolBuilder() {
+		return Pool.builder();
 	}
 
 	private static TreeFeatureConfig canopyOf(WoodBlocks woodBlocks, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {

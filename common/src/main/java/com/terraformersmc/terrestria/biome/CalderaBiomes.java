@@ -6,6 +6,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -25,6 +27,7 @@ public class CalderaBiomes {
 				.temperature(0.2F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_SNOWY_SLOPES))
 						.waterColor(0x54d3c0)
 						.waterFogColor(0x24a0b0)
 						.build()
@@ -47,17 +50,17 @@ public class CalderaBiomes {
 		DefaultBiomeFeatures.addDefaultFlowers(builder);
 		DefaultBiomeFeatures.addDefaultGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.GOAT, 1, 1, 4));
-		builder.spawn(SpawnGroup.WATER_CREATURE, new SpawnSettings.SpawnEntry(EntityType.SQUID, 3, 1, 4));
-		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.SALMON, 15, 3, 6));
-		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.COD, 15, 1, 5));
+		builder.spawn(SpawnGroup.CREATURE, 5, new SpawnSettings.SpawnEntry(EntityType.WOLF, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 1, new SpawnSettings.SpawnEntry(EntityType.GOAT, 1, 4));
+		builder.spawn(SpawnGroup.WATER_CREATURE, 3, new SpawnSettings.SpawnEntry(EntityType.SQUID, 1, 4));
+		builder.spawn(SpawnGroup.WATER_AMBIENT, 15, new SpawnSettings.SpawnEntry(EntityType.SALMON, 3, 6));
+		builder.spawn(SpawnGroup.WATER_AMBIENT, 15, new SpawnSettings.SpawnEntry(EntityType.COD, 1, 5));
 		return builder.build();
 	}
 }

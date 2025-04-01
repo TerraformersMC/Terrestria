@@ -7,6 +7,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -26,6 +28,7 @@ public class SakuraForestBiomes {
 				.temperature(0.8F)
 				.downfall(1.0F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_CHERRY_GROVE))
 						.waterColor(0x3f76e4)
 						.waterFogColor(0x50533)
 						.build()
@@ -45,13 +48,13 @@ public class SakuraForestBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.DENSE_JAPANESE_MAPLE_SHRUBS));
 		DefaultBiomeFeatures.addForestGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 5, new SpawnSettings.SpawnEntry(EntityType.WOLF, 4, 4));
 		return builder.build();
 	}
 }

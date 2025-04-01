@@ -7,6 +7,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -25,6 +27,7 @@ public class CypressSwampBiomes {
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_SWAMP))
 						.waterColor(0x2c7f32)
 						.waterFogColor(0x053305)
 						.grassColor(0x699e3c)
@@ -60,10 +63,10 @@ public class CypressSwampBiomes {
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.WATER_AMBIENT, new SpawnSettings.SpawnEntry(EntityType.COD, 8, 2, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1, 1));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.BOGGED, 50, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.FROG, 10, 2, 5));
+		builder.spawn(SpawnGroup.WATER_AMBIENT, 8, new SpawnSettings.SpawnEntry(EntityType.COD, 2, 4));
+		builder.spawn(SpawnGroup.MONSTER,  1, new SpawnSettings.SpawnEntry(EntityType.SLIME, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER, 50, new SpawnSettings.SpawnEntry(EntityType.BOGGED, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.FROG, 2, 5));
 		return builder.build();
 	}
 }

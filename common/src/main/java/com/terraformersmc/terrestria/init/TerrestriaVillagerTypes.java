@@ -4,8 +4,6 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.village.VillagerType;
 import net.minecraft.world.biome.Biome;
 
-import net.fabricmc.fabric.api.object.builder.v1.villager.VillagerTypeHelper;
-
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
 public class TerrestriaVillagerTypes {
@@ -30,9 +28,9 @@ public class TerrestriaVillagerTypes {
 	}
 
 	@SafeVarargs
-	private static void register(VillagerType type, RegistryKey<Biome>... biomes) {
+	private static void register(RegistryKey<VillagerType> type, RegistryKey<Biome>... biomes) {
 		for (RegistryKey<Biome> biome : biomes) {
-			VillagerTypeHelper.addVillagerTypeToBiome(biome, type);
+			VillagerType.BIOME_TO_TYPE.put(biome, type);
 		}
 	}
 }

@@ -54,16 +54,16 @@ public class CanyonArchGenerator extends StructurePiece {
 	public CanyonArchGenerator(StructureContext context, NbtCompound tag) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, tag);
 
-		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed"));
+		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed", 0));
 
-		a = tag.getFloat("a");
-		b = tag.getFloat("b");
-		maxHeight = tag.getInt("MaxHeight");
-		radius = tag.getInt("Radius");
-		yStart = tag.getInt("YStart");
+		a = tag.getFloat("a", 0);
+		b = tag.getFloat("b", 0);
+		maxHeight = tag.getInt("MaxHeight", 0);
+		radius = tag.getInt("Radius", 0);
+		yStart = tag.getInt("YStart", 0);
 
-		centerX = tag.getInt("CenterX");
-		centerZ = tag.getInt("CenterZ");
+		centerX = tag.getInt("CenterX", 0);
+		centerZ = tag.getInt("CenterZ", 0);
 	}
 
 	@Override

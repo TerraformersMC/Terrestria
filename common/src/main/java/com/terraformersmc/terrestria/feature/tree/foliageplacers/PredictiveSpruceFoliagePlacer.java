@@ -4,7 +4,6 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.leaves.api.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.LeavesBlock;
 import net.minecraft.util.math.BlockPos;
@@ -82,12 +81,10 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	private static BlockState withDistance(BlockState state, int distance) {
-		if (state.getBlock() instanceof ExtendedLeavesBlock) {
-			return state.with(LeavesBlock.DISTANCE, Math.min(distance, ExtendedLeavesBlock.MAX_DISTANCE));
-		} else if (state.contains(LeavesBlock.DISTANCE)) {
-			return state.with(LeavesBlock.DISTANCE, Math.min(distance, LeavesBlock.MAX_DISTANCE));
+		if (!state.contains(ExtendedLeavesBlock.EXTENDED_DISTANCE)) {
+			distance = Math.min(distance, LeavesBlock.MAX_DISTANCE);
 		}
 
-		return state;
+		return ExtendedLeavesBlock.setExtendedDistance(state, distance);
 	}
 }

@@ -6,6 +6,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -25,6 +27,7 @@ public class LushDesertBiomes {
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_DESERT))
 						.waterColor(0x3f76e4)
 						.waterFogColor(0x50533)
 						.build()
@@ -54,23 +57,23 @@ public class LushDesertBiomes {
 		} else {
 			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_LUSH_DESERT_VEGETATION));
 		}
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = new SpawnSettings.Builder();
-		TerrestriaBiomes.addDefaultAmbientSpawnEntries(builder);
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 4, 2, 3));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.SLIME, 100, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 10, 1, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.WITCH, 5, 1, 1));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 19, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1, 1));
-		builder.spawn(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.HUSK, 80, 4, 4));
+		TerrestriaBiomes.addDefaultCaveSpawnEntries(builder);
+		builder.spawn(SpawnGroup.CREATURE, 4, new SpawnSettings.SpawnEntry(EntityType.RABBIT, 2, 3));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SLIME, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER,  10, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4));
+		builder.spawn(SpawnGroup.MONSTER,   5, new SpawnSettings.SpawnEntry(EntityType.WITCH, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER,  19, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 4, 4));
+		builder.spawn(SpawnGroup.MONSTER,   1, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1));
+		builder.spawn(SpawnGroup.MONSTER,  80, new SpawnSettings.SpawnEntry(EntityType.HUSK, 4, 4));
 		return builder.build();
 	}
 }

@@ -7,6 +7,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -26,6 +28,7 @@ public class CypressForestBiomes {
 				.temperature(0.7F)
 				.downfall(0.8F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_FOREST))
 						.waterColor(0x3f76e4)
 						.waterFogColor(0x50533)
 						.grassColor(0x7ecc41)
@@ -48,13 +51,13 @@ public class CypressForestBiomes {
 		DefaultBiomeFeatures.addDefaultFlowers(builder);
 		DefaultBiomeFeatures.addForestGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
+		builder.spawn(SpawnGroup.CREATURE, 5, new SpawnSettings.SpawnEntry(EntityType.WOLF, 4, 4));
 		return builder.build();
 	}
 }

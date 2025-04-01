@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.treedecorators;
 
 import com.mojang.serialization.MapCodec;
-import com.terraformersmc.terraform.wood.api.block.SmallLogBlock;
+import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
 import net.minecraft.registry.tag.FluidTags;
@@ -30,7 +30,8 @@ public class SakuraTreeDecorator extends TreeDecorator {
 
 		for (BlockPos pos : generator.getLeavesPositions()) {
 			// 1/6 positions have leaf piles
-			// As this executes for every single leaf block and there is usually 3-4 leaf blocks in a column, it ends up working out to 50%, usually.
+			// As this executes for every single leaf block and there is usually 3-4 leaf blocks in a column,
+			// it ends up working out to 50%, usually.
 			if (random.nextInt(6) > 0) {
 				continue;
 			}
@@ -43,13 +44,11 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			BlockPos top = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
 
 			boolean valid = world.testBlockState(top.down(),
-					state -> state.getFluidState().getFluid().isIn(FluidTags.WATER) ||
-							state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP)
+					state -> !(state.getBlock() instanceof BareSmallLogBlock) &&
+							state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP) ||
+							state.getFluidState().isStill() &&
+							state.getFluidState().isIn(FluidTags.WATER)
 			);
-
-			if (world.testBlockState(top, state -> state.getBlock() instanceof SmallLogBlock)) {
-				continue;
-			}
 
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.

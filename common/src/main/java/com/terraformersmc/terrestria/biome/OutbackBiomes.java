@@ -6,6 +6,8 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.MusicType;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -13,6 +15,7 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.carver.ConfiguredCarver;
 import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
@@ -25,6 +28,7 @@ public class OutbackBiomes {
 				.temperature(1.8F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_BADLANDS))
 						.waterColor(0x3f76e4)
 						.waterFogColor(0x50533)
 						.build()
@@ -45,19 +49,19 @@ public class OutbackBiomes {
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES));
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_DEAD_GRASS));
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS));
-		DefaultBiomeFeatures.addDesertDeadBushes(builder);
+		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_DEAD_BUSH_2);
 		DefaultBiomeFeatures.addSavannaGrass(builder);
 		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		DefaultBiomeFeatures.addDesertFeatures(builder);
 		return builder.build();
 	}
 
 	private static SpawnSettings createSpawnSettings() {
 		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.HORSE, 1, 2, 6));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.DONKEY, 1, 1, 1));
-		builder.spawn(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 10, 2, 3));
+		builder.spawn(SpawnGroup.CREATURE,  1, new SpawnSettings.SpawnEntry(EntityType.HORSE, 2, 6));
+		builder.spawn(SpawnGroup.CREATURE,  1, new SpawnSettings.SpawnEntry(EntityType.DONKEY, 1, 1));
+		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 2, 3));
 		builder.creatureSpawnProbability(0.03F);
 		return builder.build();
 	}

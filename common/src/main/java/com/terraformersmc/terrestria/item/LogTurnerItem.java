@@ -6,6 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
+import net.minecraft.component.type.TooltipDisplayComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -18,7 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-import java.util.List;
+import java.util.function.Consumer;
 
 public class LogTurnerItem extends Item {
 	public LogTurnerItem(Settings settings) {
@@ -74,13 +75,13 @@ public class LogTurnerItem extends Item {
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-		super.appendTooltip(stack, context, tooltip, type);
+	public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
+		super.appendTooltip(stack, context, displayComponent, textConsumer, type);
 
 		String translation = Language.getInstance().get("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 
 		for (String line: translation.split("\n")) {
-			tooltip.add(Text.literal(line.trim()).formatted(Formatting.GRAY));
+			textConsumer.accept(Text.literal(line.trim()).formatted(Formatting.GRAY));
 		}
 	}
 }

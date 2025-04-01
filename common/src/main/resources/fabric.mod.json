@@ -20,6 +20,9 @@
     "terraform-boat-dfu": [
       "com.terraformersmc.terrestria.init.helpers.TerrestriaBoatDfu"
     ],
+    "terraform-leaves-dfu": [
+      "com.terraformersmc.terrestria.init.helpers.TerrestriaLeavesDfu"
+    ],
     "fabric-datagen": [
       "com.terraformersmc.terrestria.data.TerrestriaDatagen"
     ]

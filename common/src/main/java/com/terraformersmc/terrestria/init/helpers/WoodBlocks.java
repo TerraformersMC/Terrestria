@@ -1,7 +1,8 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terraform.leaves.api.block.ColoredParticleLeavesBlock;
+import com.terraformersmc.terraform.leaves.api.block.ExtendedLeavesBlock;
 import com.terraformersmc.terraform.leaves.api.block.LeafPileBlock;
-import com.terraformersmc.terraform.leaves.api.block.TransparentLeavesBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
 import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
@@ -15,7 +16,11 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
+import net.minecraft.particle.EntityEffectParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
+
+import java.util.Optional;
 
 public class WoodBlocks {
 	private final String NAME;
@@ -77,20 +82,21 @@ public class WoodBlocks {
 		// register natural and stripped blocks
 
 		if (usesExtendedLeaves) {
-			if (size.equals(LogSize.SMALL)) {
-				throw new IllegalArgumentException("Small log trees are not compatible with extended leaves, I'm not sure how you even did this...");
-			}
 			leaves = TerrestriaRegistry.register(name + "_leaves", TerrestriaOptiLeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
 		} else {
 			if (size.equals(LogSize.SMALL)) {
-				leaves = TerrestriaRegistry.register(name + "_leaves", TransparentLeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+				leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new ExtendedLeavesBlock(0.01f, tintable ? Optional.empty() : Optional.of(EntityEffectParticleEffect.create(ParticleTypes.TINTED_LEAVES, colors.leaves.color)), false, true, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
 			} else {
-				leaves = TerrestriaRegistry.register(name + "_leaves", LeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+				if (tintable) {
+					leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new TintedParticleLeavesBlock(0.01f, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+				} else {
+					leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new ColoredParticleLeavesBlock(0.01f, colors.leaves.color, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+				}
 			}
 		}
 
 		if (hasLeafPile) {
-			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", LeafPileBlock::new, AbstractBlock.Settings.copy(Blocks.PINK_PETALS).mapColor(colors.leaves));
+			leafPile = TerrestriaRegistry.register(name + "_leaf_pile", LeafPileBlock::new, AbstractBlock.Settings.copy(Blocks.LEAF_LITTER).mapColor(colors.leaves));
 		} else {
 			leafPile = null;
 		}

@@ -6,6 +6,7 @@ import com.terraformersmc.terraform.dirt.api.block.TerraformFarmlandBlock;
 import com.terraformersmc.terraform.dirt.api.block.TerraformGrassBlock;
 import com.terraformersmc.terraform.dirt.api.block.TerraformSnowyBlock;
 import com.terraformersmc.terraform.dirt.api.registry.TerraformDirtRegistry;
+import com.terraformersmc.terraform.leaves.api.block.ColoredParticleLeavesBlock;
 import com.terraformersmc.terraform.tree.api.block.TerraformDesertSaplingBlock;
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.wood.api.block.PillarLogHelper;
@@ -122,9 +123,9 @@ public class TerrestriaBlocks {
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogSettings(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.getDefaultMapColor()));
 
 		// strange leaves
-		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves", LeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
-		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", LeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
-		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", LeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves", settings -> new ColoredParticleLeavesBlock(0.01f, 0x351829, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.register("japanese_maple_shrub_leaves", settings -> new ColoredParticleLeavesBlock(0.01f, 0x4e001f, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+		JUNGLE_PALM_LEAVES = TerrestriaRegistry.register("jungle_palm_leaves", settings -> new ColoredParticleLeavesBlock(0.02f, 0x225723, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
 
 		// swamp blocks
 		CATTAIL = TerrestriaRegistry.register("cattail", CattailBlock::new, AbstractBlock.Settings.copy(Blocks.SEAGRASS));
