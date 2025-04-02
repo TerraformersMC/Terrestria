@@ -51,7 +51,11 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 
 		copy(BlockTags.SMALL_FLOWERS, ItemTags.SMALL_FLOWERS);
 
+		copy(BlockTags.SMELTS_TO_GLASS, ItemTags.SMELTS_TO_GLASS);
+
 		copy(BlockTags.STAIRS, ItemTags.STAIRS);
+
+		copy(BlockTags.STONE_BUTTONS, ItemTags.STONE_BUTTONS);
 
 		copy(BlockTags.WALLS, ItemTags.WALLS);
 

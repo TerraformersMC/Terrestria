@@ -26,6 +26,18 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 		getOrCreateTagBuilder(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
 				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
 
+		getOrCreateTagBuilder(BiomeTags.HAS_CLOSER_WATER_FOG)
+				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
+
+		getOrCreateTagBuilder(BiomeTags.INCREASED_FIRE_BURNOUT)
+				.addOptional(TerrestriaBiomes.CALDERA)
+				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
+				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
+				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
+				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
+
 		getOrCreateTagBuilder(BiomeTags.IS_BEACH)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
@@ -43,6 +55,28 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 		getOrCreateTagBuilder(BiomeTags.IS_MOUNTAIN)
 				.addOptional(TerrestriaBiomes.CALDERA);
 
+		getOrCreateTagBuilder(BiomeTags.IS_OVERWORLD)
+				.addOptional(TerrestriaBiomes.CALDERA)
+				.addOptional(TerrestriaBiomes.CANYON)
+				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
+				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
+				.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
+				.addOptional(TerrestriaBiomes.DUNES)
+				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
+				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
+				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
+				.addOptional(TerrestriaBiomes.LUSH_DESERT)
+				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.OASIS)
+				.addOptional(TerrestriaBiomes.OUTBACK)
+				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
+				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.SAKURA_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
+				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
+				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
+
 		getOrCreateTagBuilder(BiomeTags.IS_SAVANNA)
 				.addOptional(TerrestriaBiomes.OUTBACK);
 
@@ -56,10 +90,34 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
+		getOrCreateTagBuilder(BiomeTags.SNOW_GOLEM_MELTS)
+				.addOptional(TerrestriaBiomes.CANYON)
+				.addOptional(TerrestriaBiomes.DUNES)
+				.addOptional(TerrestriaBiomes.LUSH_DESERT)
+				.addOptional(TerrestriaBiomes.OASIS)
+				.addOptional(TerrestriaBiomes.OUTBACK);
+
 		getOrCreateTagBuilder(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
 				.addOptional(TerrestriaBiomes.CALDERA)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+
+		getOrCreateTagBuilder(BiomeTags.SPAWNS_GOLD_RABBITS)
+				.addOptional(TerrestriaBiomes.CANYON)
+				.addOptional(TerrestriaBiomes.DUNES)
+				.addOptional(TerrestriaBiomes.LUSH_DESERT);
+
+		getOrCreateTagBuilder(BiomeTags.SPAWNS_SNOW_FOXES)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
+
+		getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FARM_ANIMALS)
+				.addOptional(TerrestriaBiomes.CANYON)
+				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
+				.addOptional(TerrestriaBiomes.DUNES)
+				.addOptional(TerrestriaBiomes.LUSH_DESERT)
+				.addOptional(TerrestriaBiomes.OASIS)
+				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
 		getOrCreateTagBuilder(BiomeTags.SPAWNS_WARM_VARIANT_FROGS)
 				.addOptional(TerrestriaBiomes.CANYON)
@@ -67,6 +125,23 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.LUSH_DESERT)
 				.addOptional(TerrestriaBiomes.OASIS)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
+
+		getOrCreateTagBuilder(BiomeTags.STRONGHOLD_BIASED_TO)
+				.addOptional(TerrestriaBiomes.CANYON)
+				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
+				.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
+				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
+				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
+				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
+				.addOptional(TerrestriaBiomes.LUSH_DESERT)
+				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.OUTBACK)
+				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
+				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
+				.addOptional(TerrestriaBiomes.SAKURA_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
+				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
+				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
 		getOrCreateTagBuilder(BiomeTags.WATER_ON_MAP_OUTLINES)
 				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
@@ -110,28 +185,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
-		getOrCreateTagBuilder(ConventionalBiomeTags.IS_OVERWORLD)
-				.addOptional(TerrestriaBiomes.CALDERA)
-				.addOptional(TerrestriaBiomes.CANYON)
-				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
-				.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
-				.addOptional(TerrestriaBiomes.DUNES)
-				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-				.addOptional(TerrestriaBiomes.LUSH_DESERT)
-				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.OASIS)
-				.addOptional(TerrestriaBiomes.OUTBACK)
-				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.SAKURA_FOREST)
-				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
-				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
-
 		getOrCreateTagBuilder(ConventionalBiomeTags.IS_SAVANNA)
 				.addOptional(TerrestriaBiomes.OUTBACK);
 
@@ -165,8 +218,7 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 		 * Biome structure generation tags
 		 */
 		getOrCreateTagBuilder(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE)
-				.addOptional(TerrestriaBiomes.LUSH_DESERT)
-				.addOptional(TerrestriaBiomes.OASIS);
+				.addOptional(TerrestriaBiomes.LUSH_DESERT);
 
 		getOrCreateTagBuilder(BiomeTags.IGLOO_HAS_STRUCTURE)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
@@ -224,28 +276,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 
 		getOrCreateTagBuilder(BiomeTags.SHIPWRECK_BEACHED_HAS_STRUCTURE)
 				.addTag(BiomeTags.IS_BEACH);
-
-		getOrCreateTagBuilder(BiomeTags.STRONGHOLD_HAS_STRUCTURE)
-				.addOptional(TerrestriaBiomes.CALDERA)
-				.addOptional(TerrestriaBiomes.CANYON)
-				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
-				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
-				.addOptional(TerrestriaBiomes.DENSE_WOODLANDS)
-				.addOptional(TerrestriaBiomes.DUNES)
-				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
-				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
-				.addOptional(TerrestriaBiomes.LUSH_DESERT)
-				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.OASIS)
-				.addOptional(TerrestriaBiomes.OUTBACK)
-				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.SAKURA_FOREST)
-				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
-				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
-				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
-				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
 		getOrCreateTagBuilder(BiomeTags.TRAIL_RUINS_HAS_STRUCTURE)
 				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)

@@ -222,7 +222,7 @@ public class TerrestriaPlacedFeatures {
 
 		registerTreeFeature(registerable, DENSER_FANCY_OAK_TREES, 5, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
 
-		registerTreeFeature(registerable, DENSEST_FANCY_OAK_TREES, 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK);
+		registerTreeFeature(registerable, DENSEST_FANCY_OAK_TREES, 7, ON_DIRT, TreeConfiguredFeatures.FANCY_OAK_LEAF_LITTER);
 
 		TerrestriaRegistry.register(registerable, JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 				PlacedFeatures.createCountExtraModifier(2, 0.1f, 1),

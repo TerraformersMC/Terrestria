@@ -14,6 +14,7 @@ public class TerrestriaDatagen implements DataGeneratorEntrypoint {
 		pack.addProvider(TerrestriaBlockLootTableProvider::new);
 		TerrestriaBlockTagProvider blockTagProvider = pack.addProvider(TerrestriaBlockTagProvider::new);
 		pack.addProvider((output, registries) -> new TerrestriaItemTagProvider(output, registries, blockTagProvider));
+		pack.addProvider(TerrestriaEntityTypeTagProvider::new);
 		pack.addProvider(TerrestriaModelProvider::new);
 		pack.addProvider(TerrestriaRecipeProvider::new);
 	}
