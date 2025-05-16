@@ -110,17 +110,22 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		if (dirtBlock.getDirt() != null) {
 			addDrop(dirtBlock.getDirt());
 			if (dirtBlock.getDirtPath() != null) {
-				addDrop(TerrestriaBlocks.ANDISOL.getDirtPath(), TerrestriaBlocks.ANDISOL.getDirt());
+				addDrop(dirtBlock.getDirtPath(), dirtBlock.getDirt());
 			}
 			if (dirtBlock.getFarmland() != null) {
-				addDrop(TerrestriaBlocks.ANDISOL.getFarmland(), TerrestriaBlocks.ANDISOL.getDirt());
+				addDrop(dirtBlock.getFarmland(), dirtBlock.getDirt());
 			}
 			if (dirtBlock.getGrassBlock() != null) {
-				addDrop(TerrestriaBlocks.ANDISOL.getGrassBlock(), TerrestriaBlocks.ANDISOL.getDirt());
+				addDrop(dirtBlock.getGrassBlock(), block -> drops(block, dirtBlock.getDirt()));
 			}
-		}
-		if (dirtBlock.getPodzol() != null) {
-			addDrop(TerrestriaBlocks.ANDISOL.getPodzol());
+			/* TODO: When mycelium support is added to DirtBlocks...
+			if (dirtBlock.getMycelium() != null) {
+				addDrop(dirtBlock.getMycelium(), block -> drops(block, dirtBlock.getDirt()));
+			}
+			*/
+			if (dirtBlock.getPodzol() != null) {
+				addDrop(dirtBlock.getPodzol(), block -> drops(block, dirtBlock.getDirt()));
+			}
 		}
 	}
 
