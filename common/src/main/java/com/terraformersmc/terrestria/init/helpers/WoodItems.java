@@ -8,7 +8,8 @@ import net.minecraft.item.*;
 import net.minecraft.util.Identifier;
 
 public class WoodItems {
-	private final String NAME;
+	private final String name;
+	private final Identifier id;
 
 	public final BlockItem log;
 	public final BlockItem quarterLog;
@@ -32,8 +33,9 @@ public class WoodItems {
 	public final Item boat;
 	public final Item chestBoat;
 
-	private WoodItems(String name, WoodBlocks blocks) {
-		this.NAME = name;
+	private WoodItems(WoodBlocks blocks) {
+		this.name = blocks.getName();
+		this.id = blocks.getId();
 
 		log = TerrestriaRegistry.registerBlockItem(name + "_log", blocks.log);
 		leaves = TerrestriaRegistry.registerBlockItem(name + "_leaves", blocks.leaves);
@@ -77,8 +79,8 @@ public class WoodItems {
 	}
 
 
-	public static WoodItems register(String name, WoodBlocks blocks) {
-		WoodItems items = new WoodItems(name, blocks);
+	public static WoodItems register(WoodBlocks blocks) {
+		WoodItems items = new WoodItems(blocks);
 
 		items.addCompostables();
 		items.addFuels();
@@ -104,7 +106,11 @@ public class WoodItems {
 	}
 
 	public String getName() {
-		return NAME;
+		return name;
+	}
+
+	public Identifier getId() {
+		return id;
 	}
 
 	public boolean hasQuarterLog() {

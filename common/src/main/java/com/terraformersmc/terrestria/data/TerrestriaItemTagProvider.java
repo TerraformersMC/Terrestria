@@ -91,7 +91,7 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		/*
 		 * Local item tags
 		 */
-		getOrCreateTagBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
+		valueLookupBuilder(TerrestriaItemTags.MOSSY_INGREDIENTS)
 				.add(Items.MOSS_BLOCK)
 				.add(Items.VINE);
 
@@ -162,18 +162,18 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 	private void addStone(StoneItems stoneItem) {
 		if (stoneItem.cobblestone != null) {
 			// Add any cobble variant to vanilla crafting tags.
-			getOrCreateTagBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
-			getOrCreateTagBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
+			valueLookupBuilder(ItemTags.STONE_CRAFTING_MATERIALS).add(stoneItem.cobblestone.full);
+			valueLookupBuilder(ItemTags.STONE_TOOL_MATERIALS).add(stoneItem.cobblestone.full);
 		}
 	}
 
 	private void addWood(WoodItems woodItem) {
 		// Add boats if they exist via the WoodItem.
 		if (woodItem.boat != null) {
-			getOrCreateTagBuilder(ItemTags.BOATS).add(woodItem.boat);
+			valueLookupBuilder(ItemTags.BOATS).add(woodItem.boat);
 		}
 		if (woodItem.chestBoat != null) {
-			getOrCreateTagBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
+			valueLookupBuilder(ItemTags.CHEST_BOATS).add(woodItem.chestBoat);
 		}
 	}
 

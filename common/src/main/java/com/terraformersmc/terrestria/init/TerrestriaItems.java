@@ -67,15 +67,15 @@ public class TerrestriaItems {
 	public static LogTurnerItem LOG_TURNER;
 
 	public static void init() {
-		REDWOOD = WoodItems.register("redwood", TerrestriaBlocks.REDWOOD);
-		HEMLOCK = WoodItems.register("hemlock", TerrestriaBlocks.HEMLOCK);
-		RUBBER = WoodItems.register("rubber", TerrestriaBlocks.RUBBER);
-		CYPRESS = WoodItems.register("cypress", TerrestriaBlocks.CYPRESS);
-		WILLOW = WoodItems.register("willow", TerrestriaBlocks.WILLOW);
-		JAPANESE_MAPLE = WoodItems.register("japanese_maple", TerrestriaBlocks.JAPANESE_MAPLE);
-		RAINBOW_EUCALYPTUS = WoodItems.register("rainbow_eucalyptus", TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.register("sakura", TerrestriaBlocks.SAKURA);
-		YUCCA_PALM = WoodItems.register("yucca_palm", TerrestriaBlocks.YUCCA_PALM);
+		REDWOOD = WoodItems.register(TerrestriaBlocks.REDWOOD);
+		HEMLOCK = WoodItems.register(TerrestriaBlocks.HEMLOCK);
+		RUBBER = WoodItems.register(TerrestriaBlocks.RUBBER);
+		CYPRESS = WoodItems.register(TerrestriaBlocks.CYPRESS);
+		WILLOW = WoodItems.register(TerrestriaBlocks.WILLOW);
+		JAPANESE_MAPLE = WoodItems.register(TerrestriaBlocks.JAPANESE_MAPLE);
+		RAINBOW_EUCALYPTUS = WoodItems.register(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+		SAKURA = WoodItems.register(TerrestriaBlocks.SAKURA);
+		YUCCA_PALM = WoodItems.register(TerrestriaBlocks.YUCCA_PALM);
 
 		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);

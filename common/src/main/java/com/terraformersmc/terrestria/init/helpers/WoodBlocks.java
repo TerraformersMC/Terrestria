@@ -3,16 +3,14 @@ package com.terraformersmc.terrestria.init.helpers;
 import com.terraformersmc.terraform.leaves.api.block.ColoredParticleLeavesBlock;
 import com.terraformersmc.terraform.leaves.api.block.ExtendedLeavesBlock;
 import com.terraformersmc.terraform.leaves.api.block.LeafPileBlock;
-import com.terraformersmc.terraform.sign.api.block.TerraformHangingSignBlock;
-import com.terraformersmc.terraform.sign.api.block.TerraformSignBlock;
-import com.terraformersmc.terraform.sign.api.block.TerraformWallHangingSignBlock;
-import com.terraformersmc.terraform.sign.api.block.TerraformWallSignBlock;
 import com.terraformersmc.terraform.wood.api.block.PillarLogHelper;
 import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terraform.wood.api.block.SmallLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.block.TerrestriaOptiLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
@@ -22,10 +20,16 @@ import net.minecraft.util.Identifier;
 
 import java.util.Optional;
 
+// TODO: Consider reverting to a record with builder object to enable config of things like
+//       BlockSetType, WoodType, flammability, and simplify the 'has', 'is, 'uses' args.
 public class WoodBlocks {
-	private final String NAME;
-	private final WoodColors COLORS;
-	private final LogSize SIZE;
+	private final String name;
+	private final Identifier id;
+	private final WoodColors colors;
+	private final LogSize size;
+
+	public final BlockSetType blockSetType;
+	public final WoodType woodType;
 
 	private final boolean tintable;
 
@@ -42,10 +46,10 @@ public class WoodBlocks {
 	public final DoorBlock door;
 	public final ButtonBlock button;
 	public final PressurePlateBlock pressurePlate;
-	public final TerraformSignBlock sign;
-	public final TerraformWallSignBlock wallSign;
-	public final TerraformHangingSignBlock hangingSign;
-	public final TerraformWallHangingSignBlock wallHangingSign;
+	public final SignBlock sign;
+	public final WallSignBlock wallSign;
+	public final HangingSignBlock hangingSign;
+	public final WallHangingSignBlock wallHangingSign;
 	public final TrapdoorBlock trapdoor;
 	public final Block strippedLog;
 	public final Block strippedQuarterLog;
@@ -54,9 +58,13 @@ public class WoodBlocks {
 	private WoodBlocks(String name, WoodColors colors, LogSize size, boolean hasLeafPile, boolean hasQuarterLog, boolean usesExtendedLeaves, boolean isTintable) {
 		this.tintable = isTintable;
 
-		this.NAME = name;
-		this.COLORS = colors;
-		this.SIZE = size;
+		this.name = name;
+		this.id = Identifier.of(Terrestria.MOD_ID, name);
+		this.colors = colors;
+		this.size = size;
+
+		this.blockSetType = BlockSetTypeBuilder.copyOf(BlockSetType.OAK).register(id);
+		this.woodType = WoodTypeBuilder.copyOf(WoodType.OAK).register(id, this.blockSetType);
 
 		// register manufactured blocks
 
@@ -69,15 +77,10 @@ public class WoodBlocks {
 		button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.OAK, 30, settings), AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(colors.planks));
 		pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks));
 		trapdoor = TerrestriaRegistry.register(name + "_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(colors.planks));
-
-		Identifier signTexture = Identifier.of(Terrestria.MOD_ID, "entity/signs/" + name);
-		sign = TerrestriaRegistry.register(name + "_sign", settings -> new TerraformSignBlock(signTexture, settings), AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks));
-		wallSign = TerrestriaRegistry.register(name + "_wall_sign", settings -> new TerraformWallSignBlock(signTexture, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).lootTable(sign.getLootTableKey()));
-
-		Identifier hangingSignTexture = Identifier.of(Terrestria.MOD_ID, "entity/signs/hanging/" + name);
-		Identifier hangingSignGuiTexture = Identifier.of(Terrestria.MOD_ID, "textures/gui/hanging_signs/" + name);
-		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new TerraformHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, settings), AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks));
-		wallHangingSign = TerrestriaRegistry.register(name + "_wall_hanging_sign", settings -> new TerraformWallHangingSignBlock(hangingSignTexture, hangingSignGuiTexture, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).lootTable(hangingSign.getLootTableKey()));
+		sign = TerrestriaRegistry.register(name + "_sign", settings -> new SignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks));
+		wallSign = TerrestriaRegistry.register(name + "_wall_sign", settings -> new WallSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).lootTable(sign.getLootTableKey()));
+		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new HangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks));
+		wallHangingSign = TerrestriaRegistry.register(name + "_wall_hanging_sign", settings -> new WallHangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).lootTable(hangingSign.getLootTableKey()));
 
 		// register natural and stripped blocks
 
@@ -186,15 +189,19 @@ public class WoodBlocks {
 	}
 
 	public String getName() {
-		return NAME;
+		return name;
+	}
+
+	public Identifier getId() {
+		return id;
 	}
 
 	public WoodColors getColors() {
-		return COLORS;
+		return colors;
 	}
 
 	public LogSize getSize() {
-		return SIZE;
+		return size;
 	}
 
 	public boolean hasQuarterLog() {

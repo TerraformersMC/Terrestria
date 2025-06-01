@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init.helpers;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.*;
@@ -22,6 +22,45 @@ public class TerrestriaRegistry {
 	/*
 	 * Blocks and Items
 	 */
+
+	/**
+	 * Registers a sign block.
+	 *
+	 * In addition to registering the block, this method also registers the block as a support for its block entity.
+	 *
+	 * @param name Name ({@link Identifier} path string) of the block
+	 * @param factory Factory function to create {@link Block} from settings
+	 * @param settings {@link AbstractBlock.Settings} of the block
+	 * @return Newly registered {@link Block}
+	 */
+	public static <S extends AbstractSignBlock> S registerSignBlock(String name, Function<AbstractBlock.Settings, S> factory, AbstractBlock.Settings settings) {
+		S block = register(name, factory, settings);
+
+		if (block instanceof SignBlock || block instanceof WallSignBlock) {
+			BlockEntityType.SIGN.addSupportedBlock(block);
+		} else if (block instanceof HangingSignBlock || block instanceof WallHangingSignBlock) {
+			BlockEntityType.HANGING_SIGN.addSupportedBlock(block);
+		} else {
+			throw new IllegalArgumentException("This method only accepts vanilla sign blocks and descendants!");
+		}
+
+		return block;
+	}
+
+	/**
+	 * Registers a block.
+	 *
+	 * @param name Name ({@link Identifier} path string) of the block
+	 * @param factory Factory function to create {@link Block} from settings
+	 * @param settings {@link AbstractBlock.Settings} of the block
+	 * @return Newly registered {@link Block}
+	 */
+	public static <B extends Block> B register(String name, Function<AbstractBlock.Settings, B> factory, AbstractBlock.Settings settings) {
+		RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Terrestria.MOD_ID, name));
+		B block = factory.apply(settings.registryKey(key));
+
+		return Registry.register(Registries.BLOCK, key, block);
+	}
 
 	/**
 	 * Registers a block item and associates it with its block.
@@ -56,21 +95,6 @@ public class TerrestriaRegistry {
 		}
 
 		return Registry.register(Registries.ITEM, key, item);
-	}
-
-	/**
-	 * Registers a block.
-	 *
-	 * @param name Name ({@link Identifier} path string) of the block
-	 * @param factory Factory function to create {@link Block} from settings
-	 * @param settings {@link AbstractBlock.Settings} of the block
-	 * @return Newly registered {@link Block}
-	 */
-	public static <B extends Block> B register(String name, Function<AbstractBlock.Settings, B> factory, AbstractBlock.Settings settings) {
-		RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Terrestria.MOD_ID, name));
-		B block = factory.apply(settings.registryKey(key));
-
-		return Registry.register(Registries.BLOCK, key, block);
 	}
 
 	/*

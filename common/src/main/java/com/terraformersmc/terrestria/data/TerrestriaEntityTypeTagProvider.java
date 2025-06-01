@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.data;
 
+import com.terraformersmc.terraform.boat.api.data.TerraformBoatData;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -33,17 +34,13 @@ public class TerrestriaEntityTypeTagProvider extends FabricTagProvider.EntityTyp
 
 	private void addWood(WoodItems woodItem) {
 		// Add boats if they exist via the WoodItem.
-		// TODO: Hard-coded hack until Terraform API provides access to boat entity types.
-		//       This relies on the fact the API uses the same resource name for item and entity type.
+		TerraformBoatData boatData = TerraformBoatData.get(woodItem.getId());
+
 		if (woodItem.boat != null) {
-			getOrCreateTagBuilder(EntityTypeTags.BOAT)
-					.add(TerrestriaItems.CYPRESS.boat.getDefaultStack()
-							.getRegistryEntry().getKey().orElseThrow().getValue());
+			getTagBuilder(EntityTypeTags.BOAT).add(boatData.boatEntityTypeId());
 		}
 		if (woodItem.chestBoat != null) {
-			getOrCreateTagBuilder(ConventionalEntityTypeTags.BOATS)
-					.add(TerrestriaItems.CYPRESS.chestBoat.getDefaultStack()
-							.getRegistryEntry().getKey().orElseThrow().getValue());
+			getTagBuilder(ConventionalEntityTypeTags.BOATS).add(boatData.chestBoatEntityTypeId());
 		}
 	}
 
