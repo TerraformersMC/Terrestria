@@ -63,7 +63,6 @@ public class RedwoodForestBiomes {
 			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.SPARSE_SMALL_REDWOOD_TREES));
 		}
 		DefaultBiomeFeatures.addTaigaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
 		return builder.build();

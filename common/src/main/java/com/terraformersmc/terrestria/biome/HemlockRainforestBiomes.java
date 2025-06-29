@@ -61,7 +61,6 @@ public class HemlockRainforestBiomes {
 			builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_LUSH_FERNS));
 		}
 		DefaultBiomeFeatures.addTaigaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		DefaultBiomeFeatures.addSweetBerryBushes(builder);
 		return builder.build();

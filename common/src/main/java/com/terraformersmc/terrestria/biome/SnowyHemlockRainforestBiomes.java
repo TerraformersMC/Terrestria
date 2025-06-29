@@ -59,7 +59,6 @@ public class SnowyHemlockRainforestBiomes {
 		}
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_GRASS_NORMAL);
 		DefaultBiomeFeatures.addTaigaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
 		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
 		DefaultBiomeFeatures.addSweetBerryBushesSnowy(builder);
 		return builder.build();
