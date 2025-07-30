@@ -77,10 +77,10 @@ public class WoodBlocks {
 		button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.OAK, 30, settings), AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(colors.planks));
 		pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks));
 		trapdoor = TerrestriaRegistry.register(name + "_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(colors.planks));
-		sign = TerrestriaRegistry.register(name + "_sign", settings -> new SignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks));
-		wallSign = TerrestriaRegistry.register(name + "_wall_sign", settings -> new WallSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).lootTable(sign.getLootTableKey()));
-		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new HangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks));
-		wallHangingSign = TerrestriaRegistry.register(name + "_wall_hanging_sign", settings -> new WallHangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).lootTable(hangingSign.getLootTableKey()));
+		sign = TerrestriaRegistry.registerSignBlock(name + "_sign", settings -> new SignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks));
+		wallSign = TerrestriaRegistry.registerSignBlock(name + "_wall_sign", settings -> new WallSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).lootTable(sign.getLootTableKey()));
+		hangingSign = TerrestriaRegistry.registerSignBlock(name + "_hanging_sign", settings -> new HangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks));
+		wallHangingSign = TerrestriaRegistry.registerSignBlock(name + "_wall_hanging_sign", settings -> new WallHangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_HANGING_SIGN).mapColor(colors.planks).lootTable(hangingSign.getLootTableKey()));
 
 		// register natural and stripped blocks
 
