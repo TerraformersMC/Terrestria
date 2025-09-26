@@ -47,7 +47,7 @@ public class TallCattailBlock extends TallSeagrassBlock {
 
 	@Override
 	public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!world.isClient) {
+		if (!world.isClient()) {
 			if (player.isCreative()) {
 				TallPlantBlock.onBreakInCreative(world, pos, state, player);
 			} else {

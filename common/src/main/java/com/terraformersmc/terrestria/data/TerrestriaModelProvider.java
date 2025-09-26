@@ -303,6 +303,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 	private void registerWoodBlocks(BlockStateModelGenerator generator, WoodBlocks woodBlocks, BlockFamily blockFamily, Block sapling, Block pottedSapling) {
 		// Vanilla part of WoodBlocks
 		generator.registerCubeAllModelTexturePool(blockFamily.getBaseBlock()).family(blockFamily);
+		generator.registerShelf(woodBlocks.shelf, woodBlocks.strippedLog);
 		this.registerBlockItemModel(generator, woodBlocks.fenceGate);
 		this.registerBlockItemModel(generator, woodBlocks.planks);
 		this.registerBlockItemModel(generator, woodBlocks.pressurePlate);

@@ -14,8 +14,9 @@ import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
 import net.minecraft.block.*;
-import net.minecraft.particle.EntityEffectParticleEffect;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.particle.TintedParticleEffect;
 import net.minecraft.util.Identifier;
 
 import java.util.Optional;
@@ -51,6 +52,7 @@ public class WoodBlocks {
 	public final HangingSignBlock hangingSign;
 	public final WallHangingSignBlock wallHangingSign;
 	public final TrapdoorBlock trapdoor;
+	public final ShelfBlock shelf;
 	public final Block strippedLog;
 	public final Block strippedQuarterLog;
 	public final Block strippedWood;
@@ -77,6 +79,7 @@ public class WoodBlocks {
 		button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.OAK, 30, settings), AbstractBlock.Settings.copy(Blocks.OAK_BUTTON).mapColor(colors.planks));
 		pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_PRESSURE_PLATE).mapColor(colors.planks));
 		trapdoor = TerrestriaRegistry.register(name + "_trapdoor", settings -> new TrapdoorBlock(BlockSetType.OAK, settings), AbstractBlock.Settings.copy(Blocks.OAK_TRAPDOOR).mapColor(colors.planks));
+		shelf = TerrestriaRegistry.register(name + "_shelf", ShelfBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_SHELF).mapColor(colors.planks));
 		sign = TerrestriaRegistry.registerSignBlock(name + "_sign", settings -> new SignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_SIGN).mapColor(colors.planks));
 		wallSign = TerrestriaRegistry.registerSignBlock(name + "_wall_sign", settings -> new WallSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_WALL_SIGN).mapColor(colors.planks).lootTable(sign.getLootTableKey()));
 		hangingSign = TerrestriaRegistry.registerSignBlock(name + "_hanging_sign", settings -> new HangingSignBlock(woodType, settings), AbstractBlock.Settings.copy(Blocks.OAK_HANGING_SIGN).mapColor(colors.planks));
@@ -88,7 +91,7 @@ public class WoodBlocks {
 			leaves = TerrestriaRegistry.register(name + "_leaves", TerrestriaOptiLeavesBlock::new, AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
 		} else {
 			if (size.equals(LogSize.SMALL)) {
-				leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new ExtendedLeavesBlock(0.01f, tintable ? Optional.empty() : Optional.of(EntityEffectParticleEffect.create(ParticleTypes.TINTED_LEAVES, colors.leaves.color)), false, true, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
+				leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new ExtendedLeavesBlock(0.01f, tintable ? Optional.empty() : Optional.of(TintedParticleEffect.create(ParticleTypes.TINTED_LEAVES, colors.leaves.color)), false, true, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
 			} else {
 				if (tintable) {
 					leaves = TerrestriaRegistry.register(name + "_leaves", settings -> new TintedParticleLeavesBlock(0.01f, settings), AbstractBlock.Settings.copy(Blocks.OAK_LEAVES).mapColor(colors.leaves).allowsSpawning(TerrestriaBlocks::canSpawnOnLeaves).suffocates(TerrestriaBlocks::never).blockVision(TerrestriaBlocks::never));
@@ -134,6 +137,7 @@ public class WoodBlocks {
 	public static WoodBlocks register(String name, WoodColors colors, LogSize size, boolean hasLeafPile, boolean hasQuarteredLog, boolean usesExtendedLeaves, boolean isTintable) {
 		WoodBlocks blocks = new WoodBlocks(name, colors, size, hasLeafPile, hasQuarteredLog, usesExtendedLeaves, isTintable);
 
+		blocks.addBlockEntityTypes();
 		blocks.addFlammables();
 		blocks.addStrippables();
 
@@ -148,6 +152,10 @@ public class WoodBlocks {
 		return register(name, colors, LogSize.NORMAL);
 	}
 
+	private void addBlockEntityTypes() {
+		BlockEntityType.SHELF.addSupportedBlock(shelf);
+	}
+
 	private void addFlammables() {
 		FlammableBlockRegistry flammableRegistry = FlammableBlockRegistry.getDefaultInstance();
 
@@ -155,6 +163,7 @@ public class WoodBlocks {
 		flammableRegistry.add(fence, 5, 20);
 		flammableRegistry.add(fenceGate, 5, 20);
 		flammableRegistry.add(planks, 5, 20);
+		flammableRegistry.add(shelf, 30, 20);
 		flammableRegistry.add(slab, 5, 20);
 		flammableRegistry.add(stairs, 5, 20);
 

@@ -186,6 +186,7 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 		addDrop(woodBlock.log);
 		addDrop(woodBlock.planks);
 		addDrop(woodBlock.pressurePlate);
+		addDrop(woodBlock.shelf);
 		addDrop(woodBlock.sign);
 		addDrop(woodBlock.slab, this::slabDrops);
 		addDrop(woodBlock.stairs);

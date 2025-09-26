@@ -46,9 +46,9 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
       - name: Data Gen
-        run: ./gradlew runDatagen --stacktrace -PcurrentTag="v${{ github.event.inputs.version }}"
+        run: ./gradlew runDatagen -PcurrentTag="v${{ github.event.inputs.version }}" --stacktrace
       - name: Build
-        run: ./gradlew generateChangelog build publish curseforge github modrinth --stacktrace -x runDatagen -PlastTag="v${{ github.event.inputs.previousVersion }}" -PcurrentTag="v${{ github.event.inputs.version }}"
+        run: ./gradlew generateChangelog build publish publishMods -Pgithub -Pmodrinth -Pcurseforge -Pdiscord -PlastTag="v${{ github.event.inputs.previousVersion }}" -PcurrentTag="v${{ github.event.inputs.version }}" -x runDatagen --stacktrace
         env:
           MAVEN_URL: ${{ secrets.MAVEN_URL }}
           MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}

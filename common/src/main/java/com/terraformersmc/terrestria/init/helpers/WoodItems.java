@@ -27,6 +27,7 @@ public class WoodItems {
 	public final SignItem sign;
 	public final HangingSignItem hangingSign;
 	public final BlockItem trapdoor;
+	public final BlockItem shelf;
 	public final BlockItem strippedLog;
 	public final BlockItem strippedQuarterLog;
 	public final BlockItem strippedWood;
@@ -53,6 +54,7 @@ public class WoodItems {
 		button = TerrestriaRegistry.registerBlockItem(name + "_button", blocks.button);
 		pressurePlate = TerrestriaRegistry.registerBlockItem(name + "_pressure_plate", blocks.pressurePlate);
 		trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
+		shelf = TerrestriaRegistry.registerBlockItem(name + "_shelf", blocks.shelf);
 		sign = TerrestriaRegistry.register(name + "_sign", settings -> new SignItem(blocks.sign, blocks.wallSign, settings), new Item.Settings().maxCount(16).useBlockPrefixedTranslationKey());
 		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new HangingSignItem(blocks.hangingSign, blocks.wallHangingSign, settings), new Item.Settings().maxCount(16).useBlockPrefixedTranslationKey());
 		strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);

@@ -100,6 +100,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 				}
 
 				offerHangingSignRecipe(woodItem.hangingSign, woodItem.strippedLog);
+				offerShelfRecipe(woodItem.shelf, woodItem.strippedLog);
 
 				// Leaf piles are an optional wood feature
 				if (woodItem.hasLeafPile()) {

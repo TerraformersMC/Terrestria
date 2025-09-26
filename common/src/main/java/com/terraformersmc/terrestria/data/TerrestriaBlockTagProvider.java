@@ -338,6 +338,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		valueLookupBuilder(BlockTags.WOODEN_DOORS).add(woodBlock.door);
 		valueLookupBuilder(BlockTags.WOODEN_FENCES).add(woodBlock.fence);
 		valueLookupBuilder(BlockTags.WOODEN_PRESSURE_PLATES).add(woodBlock.pressurePlate);
+		valueLookupBuilder(BlockTags.WOODEN_SHELVES).add(woodBlock.shelf);
 		valueLookupBuilder(BlockTags.WOODEN_SLABS).add(woodBlock.slab);
 		valueLookupBuilder(BlockTags.WOODEN_STAIRS).add(woodBlock.stairs);
 		valueLookupBuilder(BlockTags.WOODEN_TRAPDOORS).add(woodBlock.trapdoor);

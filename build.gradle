@@ -3,10 +3,10 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'fabric-loom' version '1.10.+'
+	id 'fabric-loom' version '1.11.+'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/2.7/ferry.gradle'
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/3.0/ferry-mpp.gradle'
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -15,16 +15,16 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-	includeMod "terraform-api", "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+	include(modApi("com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"))
+	include(modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"))
 
 	if (findProject(':terrestria-worldgen') != null) {
-		includeMod "biolith", "com.terraformersmc:biolith-fabric:${biolith_version}"
+		include(modApi("com.terraformersmc:biolith-fabric:${biolith_version}"))
 	}
 
 	afterEvaluate {
@@ -81,9 +81,16 @@ allprojects {
 	//	from sourceSets.main.allSource
 	//}
 
-	tasks.withType(JavaCompile) {
+	tasks.withType(JavaCompile).configureEach {
 		it.options.encoding = "UTF-8"
 		it.options.release = 21
+	}
+
+	java {
+		withSourcesJar()
+
+		sourceCompatibility = JavaVersion.VERSION_21
+		targetCompatibility = JavaVersion.VERSION_21
 	}
 
 	repositories {

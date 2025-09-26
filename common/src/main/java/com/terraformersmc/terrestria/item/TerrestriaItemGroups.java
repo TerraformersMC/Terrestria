@@ -32,18 +32,19 @@ public class TerrestriaItemGroups {
 	 * Each is used to build a collection of items which will be inserted below the Vanilla item.
 	 */
 	private static final Item BUILDING_STONE_ITEMS = Items.MOSSY_STONE_BRICK_WALL;
-	private static final Item BUILDING_WOOD_ITEMS = Items.CHERRY_BUTTON;
-	private static final Item FUNCTIONAL_SIGN = Items.CHERRY_HANGING_SIGN;
+	private static final Item BUILDING_WOOD_ITEMS = Items.PALE_OAK_BUTTON;
+	private static final Item FUNCTIONAL_SHELF = Items.PALE_OAK_SHELF;
+	private static final Item FUNCTIONAL_SIGN = Items.PALE_OAK_HANGING_SIGN;
 	private static final Item NATURAL_CACTUS = Items.CACTUS;
 	private static final Item NATURAL_DIRT_ITEMS = Items.FARMLAND;
-	private static final Item NATURAL_LEAVES = Items.CHERRY_LEAVES;
-	private static final Item NATURAL_LOG = Items.CHERRY_LOG;
-	private static final Item NATURAL_SAPLING = Items.CHERRY_SAPLING;
+	private static final Item NATURAL_LEAVES = Items.FLOWERING_AZALEA_LEAVES;
+	private static final Item NATURAL_LOG = Items.PALE_OAK_LOG;
+	private static final Item NATURAL_SAPLING = Items.PALE_OAK_SAPLING;
 	private static final Item NATURAL_SAND = Items.RED_SANDSTONE;
 	private static final Item NATURAL_STONE = Items.STONE;
 	private static final Item NATURAL_TALL_VEGETATION = Items.LARGE_FERN;
 	private static final Item NATURAL_VEGETATION = Items.FERN;
-	private static final Item TOOLS_BOAT = Items.CHERRY_CHEST_BOAT;
+	private static final Item TOOLS_BOAT = Items.PALE_OAK_CHEST_BOAT;
 
 	static {
 		ITEM_GROUP_ENTRY_MAPS = new HashMap<>(8);
@@ -298,6 +299,7 @@ public class TerrestriaItemGroups {
 		// FUNCTIONAL
 
 		// Wood Items
+		addGroupEntry(items.shelf, ItemGroups.FUNCTIONAL, FUNCTIONAL_SHELF);
 		addGroupEntry(items.sign, ItemGroups.FUNCTIONAL, FUNCTIONAL_SIGN);
 		addGroupEntry(items.hangingSign, ItemGroups.FUNCTIONAL, FUNCTIONAL_SIGN);
 
