@@ -50,6 +50,12 @@ public class TerrestriaBlockLootSubProvider extends FabricBlockLootSubProvider {
 		dropSelf(TerrestriaBlocks.SAKURA_SAPLING);
 		dropSelf(TerrestriaBlocks.SMALL_OAK_LOG);
 		dropSelf(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
+		dropSelf(TerrestriaBlocks.STACKED_OAK_LOGS);
+		dropSelf(TerrestriaBlocks.STACKED_SAKURA_LOGS);
+		dropSelf(TerrestriaBlocks.STACKED_YUCCA_PALM_LOGS);
+		dropSelf(TerrestriaBlocks.STACKED_STRIPPED_OAK_LOGS);
+		dropSelf(TerrestriaBlocks.STACKED_STRIPPED_SAKURA_LOGS);
+		dropSelf(TerrestriaBlocks.STACKED_STRIPPED_YUCCA_PALM_LOGS);
 		add(TerrestriaBlocks.TALL_CATTAIL, createShearsOnlyDrop(TerrestriaBlocks.CATTAIL));
 		dropSelf(TerrestriaBlocks.TINY_CACTUS);
 		dropSelf(TerrestriaBlocks.WILLOW_SAPLING);

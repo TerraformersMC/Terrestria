@@ -4,6 +4,7 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
+import com.terraformersmc.terrestria.tag.TerrestriaBlockItemTags;
 import net.fabricmc.fabric.api.registry.CompostableRegistry;
 import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.world.item.BlockItem;
@@ -28,6 +29,13 @@ public class TerrestriaItems {
 	public static BlockItem SMALL_OAK_LOG;
 	public static BlockItem STRIPPED_SMALL_OAK_LOG;
 	public static BlockItem SAGUARO_CACTUS;
+
+	public static BlockItem STACKED_OAK_LOGS;
+	public static BlockItem STACKED_SAKURA_LOGS;
+	public static BlockItem STACKED_YUCCA_PALM_LOGS;
+	public static BlockItem STACKED_STRIPPED_OAK_LOGS;
+	public static BlockItem STACKED_STRIPPED_SAKURA_LOGS;
+	public static BlockItem STACKED_STRIPPED_YUCCA_PALM_LOGS;
 
 	public static BlockItem JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static BlockItem DARK_JAPANESE_MAPLE_LEAVES;
@@ -88,6 +96,13 @@ public class TerrestriaItems {
 		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 		SAGUARO_CACTUS = TerrestriaRegistry.registerBlockItem("saguaro_cactus", TerrestriaBlocks.SAGUARO_CACTUS);
+
+		STACKED_OAK_LOGS = TerrestriaRegistry.registerBlockItem("stacked_oak_logs", TerrestriaBlocks.STACKED_OAK_LOGS);
+		STACKED_SAKURA_LOGS = TerrestriaRegistry.registerBlockItem("stacked_sakura_logs", TerrestriaBlocks.STACKED_SAKURA_LOGS);
+		STACKED_YUCCA_PALM_LOGS = TerrestriaRegistry.registerBlockItem("stacked_yucca_palm_logs", TerrestriaBlocks.STACKED_YUCCA_PALM_LOGS);
+		STACKED_STRIPPED_OAK_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_oak_logs", TerrestriaBlocks.STACKED_STRIPPED_OAK_LOGS);
+		STACKED_STRIPPED_SAKURA_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_sakura_logs", TerrestriaBlocks.STACKED_STRIPPED_SAKURA_LOGS);
+		STACKED_STRIPPED_YUCCA_PALM_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_yucca_palm_logs", TerrestriaBlocks.STACKED_STRIPPED_YUCCA_PALM_LOGS);
 
 		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
@@ -178,6 +193,8 @@ public class TerrestriaItems {
 		FuelValueEvents.BUILD.register((builder, context) -> {
 			builder.add(DEAD_GRASS, 100);
 			builder.add(LOG_TURNER, 300);
+
+			builder.add(TerrestriaBlockItemTags.STACKED_LOGS.item(), 300);
 		});
 	}
 }

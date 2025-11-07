@@ -52,6 +52,13 @@ public class TerrestriaBlocks {
 	public static SmallLogBlock STRIPPED_SMALL_OAK_LOG;
 	public static BareSmallLogBlock SAGUARO_CACTUS;
 
+	public static Block STACKED_OAK_LOGS;
+	public static Block STACKED_SAKURA_LOGS;
+	public static Block STACKED_YUCCA_PALM_LOGS;
+	public static Block STACKED_STRIPPED_OAK_LOGS;
+	public static Block STACKED_STRIPPED_SAKURA_LOGS;
+	public static Block STACKED_STRIPPED_YUCCA_PALM_LOGS;
+
 	public static LeavesBlock JAPANESE_MAPLE_SHRUB_LEAVES;
 	public static LeavesBlock DARK_JAPANESE_MAPLE_LEAVES;
 	public static LeavesBlock JUNGLE_PALM_LEAVES;
@@ -126,6 +133,14 @@ public class TerrestriaBlocks {
 		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", SaguaroCactusBlock::new, SaguaroCactusBlock.createSettings(Blocks.CACTUS.defaultMapColor()));
 		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogProperties(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor(), Blocks.OAK_WOOD.defaultMapColor()));
 		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogProperties(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor()));
+
+		// stacked small logs
+		STACKED_OAK_LOGS = TerrestriaRegistry.register("stacked_oak_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(MapColor.WOOD, MapColor.PODZOL));
+		STACKED_SAKURA_LOGS = TerrestriaRegistry.register("stacked_sakura_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(WoodColors.SAKURA.planks, WoodColors.SAKURA.bark));
+		STACKED_YUCCA_PALM_LOGS = TerrestriaRegistry.register("stacked_yucca_palm_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(WoodColors.YUCCA_PALM.planks, WoodColors.YUCCA_PALM.bark));
+		STACKED_STRIPPED_OAK_LOGS = TerrestriaRegistry.register("stacked_stripped_oak_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(MapColor.WOOD));
+		STACKED_STRIPPED_SAKURA_LOGS = TerrestriaRegistry.register("stacked_stripped_sakura_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(WoodColors.SAKURA.planks));
+		STACKED_STRIPPED_YUCCA_PALM_LOGS = TerrestriaRegistry.register("stacked_stripped_yucca_palm_logs", RotatedPillarBlock::new, PillarLogHelper.createProperties(WoodColors.YUCCA_PALM.planks));
 
 		// strange leaves
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves", settings -> new ColoredParticleLeavesBlock(0.01f, 0x351829, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).isValidSpawn(TerrestriaBlocks::canSpawnOnLeaves).isSuffocating(TerrestriaBlocks::never).isViewBlocking(TerrestriaBlocks::never));
@@ -208,6 +223,13 @@ public class TerrestriaBlocks {
 
 		flammableRegistry.add(SMALL_OAK_LOG, 5, 5);
 		flammableRegistry.add(STRIPPED_SMALL_OAK_LOG, 5, 5);
+
+		flammableRegistry.add(STACKED_OAK_LOGS, 5, 5);
+		flammableRegistry.add(STACKED_SAKURA_LOGS, 5, 5);
+		flammableRegistry.add(STACKED_YUCCA_PALM_LOGS, 5, 5);
+		flammableRegistry.add(STACKED_STRIPPED_OAK_LOGS, 5, 5);
+		flammableRegistry.add(STACKED_STRIPPED_SAKURA_LOGS, 5, 5);
+		flammableRegistry.add(STACKED_STRIPPED_YUCCA_PALM_LOGS, 5, 5);
 
 		flammableRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, 30, 60);
 		flammableRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, 30, 60);

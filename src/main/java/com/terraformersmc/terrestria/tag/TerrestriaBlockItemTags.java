@@ -32,6 +32,7 @@ public final class TerrestriaBlockItemTags {
 	public static final BlockItemTagId SMALL_OAK_LOGS = create("small_oak_logs");
 	public static final BlockItemTagId WILLOW_LOGS = create("willow_logs");
 	public static final BlockItemTagId YUCCA_PALM_LOGS = create("yucca_palm_logs");
+	public static final BlockItemTagId STACKED_LOGS = create("stacked_logs");
 
 	@SuppressWarnings("UnnecessaryReturnStatement")
 	private TerrestriaBlockItemTags() {

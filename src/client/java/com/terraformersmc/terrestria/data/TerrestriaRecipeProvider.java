@@ -25,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -66,6 +67,16 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 						.save(output);
 
 				oneToOneConversionRecipe(Items.DYE.red(), TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
+
+
+				// stacked log recipes
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_OAK_LOGS, TerrestriaItems.SMALL_OAK_LOG);
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_SAKURA_LOGS, TerrestriaItems.SAKURA.log);
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.log);
+
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_OAK_LOGS, TerrestriaItems.STRIPPED_SMALL_OAK_LOG);
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_SAKURA_LOGS, TerrestriaItems.SAKURA.strippedLog);
+				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.strippedLog);
 
 
 				// wood building block recipes
@@ -210,6 +221,20 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 					stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, stoneVariantItem.stairs, cutPlainItem);
 					stonecutterResultFromBase(RecipeCategory.DECORATIONS, stoneVariantItem.wall, cutPlainItem);
 				}
+			}
+
+			private void bidiStackedLogsRecipe(RecipeOutput exporter, ItemLike stacked, ItemLike smallLog) {
+				// there
+				shaped(RecipeCategory.BUILDING_BLOCKS, stacked, 6)
+						.pattern("###")
+						.pattern("###")
+						.define('#', smallLog)
+						.unlockedBy("has_logs", this.has(smallLog))
+						.group("stacked")
+						.save(exporter);
+
+				// back again
+				oneToOneConversionRecipe(smallLog, stacked, "stacked");
 			}
 		};
 	}

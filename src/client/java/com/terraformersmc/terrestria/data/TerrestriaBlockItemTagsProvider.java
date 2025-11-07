@@ -30,7 +30,8 @@ public class TerrestriaBlockItemTagsProvider extends BlockItemTagsProvider {
 			.add(TerrestriaBlockItemIds.JUNGLE_PALM_LEAVES);
 
 		tag(BlockItemTags.LOGS_THAT_BURN)
-			.addTag(TerrestriaBlockItemTags.SMALL_OAK_LOGS);
+			.addTag(TerrestriaBlockItemTags.SMALL_OAK_LOGS)
+			.addTag(TerrestriaBlockItemTags.STACKED_LOGS);
 
 		tag(BlockItemTags.OAK_LOGS)
 			.addTag(TerrestriaBlockItemTags.SMALL_OAK_LOGS);
@@ -71,6 +72,14 @@ public class TerrestriaBlockItemTagsProvider extends BlockItemTagsProvider {
 		tag(TerrestriaBlockItemTags.SMALL_OAK_LOGS)
 			.add(TerrestriaBlockItemIds.SMALL_OAK_LOG)
 			.add(TerrestriaBlockItemIds.STRIPPED_SMALL_OAK_LOG);
+
+		tag(TerrestriaBlockItemTags.STACKED_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_OAK_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_SAKURA_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_YUCCA_PALM_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_STRIPPED_OAK_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_STRIPPED_SAKURA_LOGS)
+			.add(TerrestriaBlockItemIds.STACKED_STRIPPED_YUCCA_PALM_LOGS);
 
 
 		/*

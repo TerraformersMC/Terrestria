@@ -100,6 +100,14 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		this.registerSmallLog(generator, TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG, Blocks.STRIPPED_OAK_LOG, Blocks.OAK_LEAVES);
 		// Log item registration for small logs is in the item registration
 
+		// Stacked Log pillar variants
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_OAK_LOGS);
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_SAKURA_LOGS);
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_YUCCA_PALM_LOGS);
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_STRIPPED_OAK_LOGS);
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_STRIPPED_SAKURA_LOGS);
+		this.registerPillar(generator, TerrestriaBlocks.STACKED_STRIPPED_YUCCA_PALM_LOGS);
+
 		// Wood odds and ends
 		generator.createPlantWithDefaultItem(TerrestriaBlocks.BRYCE_SAPLING, TerrestriaBlocks.POTTED_BRYCE_SAPLING, BlockModelGenerators.PlantType.NOT_TINTED);
 		generator.createTrivialBlock(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, TexturedModel.LEAVES);
@@ -242,6 +250,18 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		});
 
 		generator.blockStateOutput.accept(multipartBlockModelDefinitionCreator);
+	}
+
+	private void registerPillar(BlockModelGenerators generator, Block variant) {
+		MultiVariant verticalModel = BlockModelGenerators.plainVariant(
+				TexturedModel.COLUMN_ALT.create(variant, generator.modelOutput)
+		);
+		MultiVariant horizontalModel = BlockModelGenerators.plainVariant(
+				TexturedModel.COLUMN_HORIZONTAL_ALT.create(variant, generator.modelOutput)
+		);
+		generator.blockStateOutput.accept(
+				BlockModelGenerators.createRotatedPillarWithHorizontalVariant(variant, verticalModel, horizontalModel)
+		);
 	}
 
 	private void registerQuarterLog(BlockModelGenerators generator, Block quarterLog, Block log) {

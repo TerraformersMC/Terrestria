@@ -3,7 +3,9 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.Terrestria;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 @SuppressWarnings("unused")
 public class TerrestriaBlockItemIds {
 	public static WoodBlockItemIds REDWOOD = WoodBlockItemIds.of(id("redwood"));
@@ -19,6 +21,13 @@ public class TerrestriaBlockItemIds {
 	public static BlockItemId SMALL_OAK_LOG = create("small_oak_log");
 	public static BlockItemId STRIPPED_SMALL_OAK_LOG = create("stripped_small_oak_log");
 	public static BlockItemId SAGUARO_CACTUS = create("saguaro_cactus");
+
+	public static BlockItemId STACKED_OAK_LOGS = create("stacked_oak_logs");
+	public static BlockItemId STACKED_SAKURA_LOGS = create("stacked_sakura_logs");
+	public static BlockItemId STACKED_YUCCA_PALM_LOGS = create("stacked_yucca_palm_logs");
+	public static BlockItemId STACKED_STRIPPED_OAK_LOGS = create("stacked_stripped_oak_logs");
+	public static BlockItemId STACKED_STRIPPED_SAKURA_LOGS = create("stacked_stripped_sakura_logs");
+	public static BlockItemId STACKED_STRIPPED_YUCCA_PALM_LOGS = create("stacked_stripped_yucca_palm_logs");
 
 	public static BlockItemId JAPANESE_MAPLE_SHRUB_LEAVES = create("japanese_maple_shrub_leaves");
 	public static BlockItemId DARK_JAPANESE_MAPLE_LEAVES = create("dark_japanese_maple_leaves");
