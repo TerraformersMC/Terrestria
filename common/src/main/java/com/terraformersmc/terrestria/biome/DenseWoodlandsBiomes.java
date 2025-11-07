@@ -5,8 +5,9 @@ import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.MusicType;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -26,9 +27,12 @@ public class DenseWoodlandsBiomes {
 				.temperature(0.9F)
 				.downfall(0.3F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_FOREST))
 						.waterColor(0x3f76e4)
-						.waterFogColor(0x50533)
+						.build()
+				)
+				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_FOREST))
+						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x50533)
 						.build()
 				)
 				.build();
@@ -39,7 +43,7 @@ public class DenseWoodlandsBiomes {
 		RegistryEntryLookup<PlacedFeature> placedFeatures = registerable.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
 
 		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(placedFeatures, configuredCarvers);
-		addBasicFeatures(builder);
+		addBasicFeatures(builder, true);
 		DefaultBiomeFeatures.addPlainsTallGrass(builder);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);

@@ -6,8 +6,9 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.MusicType;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -27,9 +28,13 @@ public class CalderaBiomes {
 				.temperature(0.2F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_SNOWY_SLOPES))
 						.waterColor(0x54d3c0)
-						.waterFogColor(0x24a0b0)
+						.build()
+				)
+				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_SNOWY_SLOPES))
+						.with(EnvironmentAttributes.INCREASED_FIRE_BURNOUT_GAMEPLAY, true)
+						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x232317)
 						.build()
 				)
 				.build();
@@ -40,7 +45,7 @@ public class CalderaBiomes {
 		RegistryEntryLookup<PlacedFeature> placedFeatures = registerable.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
 
 		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(placedFeatures, configuredCarvers);
-		addBasicFeatures(builder);
+		addBasicFeatures(builder, true);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addDefaultDisks(builder);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.CALDERA_HEMLOCK_TREES));

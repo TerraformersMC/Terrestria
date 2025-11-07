@@ -41,7 +41,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler) {
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean initial) {
 		if (world instanceof ServerWorld serverWorld) {
 			entity.damage(serverWorld, world.getDamageSources().cactus(), 1.0f);
 		}

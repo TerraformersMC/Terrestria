@@ -26,18 +26,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 		builder(BiomeTags.ALLOWS_SURFACE_SLIME_SPAWNS)
 				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
 
-		builder(BiomeTags.HAS_CLOSER_WATER_FOG)
-				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
-
-		builder(BiomeTags.INCREASED_FIRE_BURNOUT)
-				.addOptional(TerrestriaBiomes.CALDERA)
-				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
-				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
-				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
-				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
-				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
-
 		builder(BiomeTags.IS_BEACH)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
@@ -89,13 +77,6 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
-
-		builder(BiomeTags.SNOW_GOLEM_MELTS)
-				.addOptional(TerrestriaBiomes.CANYON)
-				.addOptional(TerrestriaBiomes.DUNES)
-				.addOptional(TerrestriaBiomes.LUSH_DESERT)
-				.addOptional(TerrestriaBiomes.OASIS)
-				.addOptional(TerrestriaBiomes.OUTBACK);
 
 		builder(BiomeTags.SPAWNS_COLD_VARIANT_FROGS)
 				.addOptional(TerrestriaBiomes.CALDERA)

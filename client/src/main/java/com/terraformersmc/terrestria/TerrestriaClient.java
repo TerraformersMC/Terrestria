@@ -20,7 +20,7 @@ import net.minecraft.world.biome.GrassColors;
 // This class is an entrypoint
 @Environment(EnvType.CLIENT)
 public class TerrestriaClient implements ClientModInitializer {
-	private static final BlockRenderLayer GRASS_BLOCK_LAYER = BlockRenderLayer.CUTOUT_MIPPED;
+	private static final BlockRenderLayer GRASS_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
 	private static final BlockRenderLayer PLANT_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
 	private static final BlockRenderLayer DOOR_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
 
@@ -52,7 +52,7 @@ public class TerrestriaClient implements ClientModInitializer {
 		);
 
 		//noinspection ConstantConditions
-		BlockRenderLayerMap.putBlock(TerrestriaBlocks.SAKURA.leafPile, BlockRenderLayer.CUTOUT_MIPPED);
+		BlockRenderLayerMap.putBlock(TerrestriaBlocks.SAKURA.leafPile, BlockRenderLayer.CUTOUT);
 
 		BlockRenderLayerMap.putBlocks(
 				DOOR_BLOCK_LAYER,

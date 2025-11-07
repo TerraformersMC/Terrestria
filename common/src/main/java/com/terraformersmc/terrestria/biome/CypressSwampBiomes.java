@@ -7,8 +7,10 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.MusicType;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
+import net.minecraft.world.attribute.FloatModifier;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -27,11 +29,16 @@ public class CypressSwampBiomes {
 				.temperature(0.7F)
 				.downfall(0.7F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
-						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_OVERWORLD_SWAMP))
 						.waterColor(0x2c7f32)
-						.waterFogColor(0x053305)
 						.grassColor(0x699e3c)
 						.foliageColor(0x619137)
+						.build()
+				)
+				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_SWAMP))
+						.with(EnvironmentAttributes.INCREASED_FIRE_BURNOUT_GAMEPLAY, true)
+						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x053305)
+						.with(EnvironmentAttributes.WATER_FOG_END_DISTANCE_VISUAL, FloatModifier.MULTIPLY, 0.85F)
 						.build()
 				)
 				.build();
@@ -43,7 +50,7 @@ public class CypressSwampBiomes {
 
 		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(placedFeatures, configuredCarvers);
 		DefaultBiomeFeatures.addFossils(builder);
-		addBasicFeatures(builder);
+		addBasicFeatures(builder, true);
 		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_TALL_GRASS);
 		DefaultBiomeFeatures.addDefaultOres(builder);
 		DefaultBiomeFeatures.addClayOre(builder);

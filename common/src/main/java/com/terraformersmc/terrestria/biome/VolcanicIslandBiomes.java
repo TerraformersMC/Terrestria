@@ -6,6 +6,9 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.attribute.BackgroundMusic;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.GenerationSettings;
 import net.minecraft.world.biome.SpawnSettings;
@@ -23,7 +26,11 @@ public class VolcanicIslandBiomes {
 				.downfall(0.9F)
 				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
 						.waterColor(0x54d3c0)
-						.waterFogColor(0x24a0b0)
+						.build()
+				)
+				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_JUNGLE))
+						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x24a0b0)
 						.build()
 				)
 				.build();
