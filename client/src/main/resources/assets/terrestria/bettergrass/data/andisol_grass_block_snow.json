@@ -3,7 +3,7 @@
     {
       "textures": {
         "top": "minecraft:block/snow",
-        "side": "terrestria:block/basalt_grass_side_snow"
+        "side": "terrestria:block/andisol_grass_block_side_snow"
       }
     },
     {
