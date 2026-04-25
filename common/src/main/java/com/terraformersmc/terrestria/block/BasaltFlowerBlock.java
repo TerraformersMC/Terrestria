@@ -1,23 +1,27 @@
 package com.terraformersmc.terrestria.block;
 
-import net.minecraft.block.*;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.core.Holder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FlowerBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
 
 public class BasaltFlowerBlock extends FlowerBlock {
-	public static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+	public static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
 
-	public BasaltFlowerBlock(RegistryEntry<StatusEffect> stewEffect, int effectSeconds, Settings settings) {
-		super(stewEffect, effectSeconds, settings.offset(AbstractBlock.OffsetType.XZ));
+	public BasaltFlowerBlock(Holder<MobEffect> stewEffect, int effectSeconds, Properties settings) {
+		super(stewEffect, effectSeconds, settings.offsetType(BlockBehaviour.OffsetType.XZ));
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		Vec3d vec3d = state.getModelOffset(pos);
-		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		Vec3 vec3d = state.getOffset(pos);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 }

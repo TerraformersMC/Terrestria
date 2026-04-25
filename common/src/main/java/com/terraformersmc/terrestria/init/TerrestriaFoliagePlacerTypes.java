@@ -4,9 +4,9 @@ import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.tree.api.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.*;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class TerrestriaFoliagePlacerTypes {
 	public static FoliagePlacerType<CanopyFoliagePlacer> CANOPY;
@@ -34,6 +34,6 @@ public class TerrestriaFoliagePlacerTypes {
 	}
 
 	private static <P extends FoliagePlacer> FoliagePlacerType<P> register(String name, MapCodec<P> codec) {
-		return PlacerTypes.registerFoliagePlacer(Identifier.of(Terrestria.MOD_ID, name), codec);
+		return PlacerTypes.registerFoliagePlacer(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name), codec);
 	}
 }

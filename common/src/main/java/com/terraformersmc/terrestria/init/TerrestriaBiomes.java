@@ -2,48 +2,48 @@ package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.biome.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.MiscPlacedFeatures;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSpecialEffects;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 
 import java.util.List;
 
 public class TerrestriaBiomes {
-	public static final RegistryKey<Biome> CALDERA = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "caldera"));
-	public static final RegistryKey<Biome> CANYON = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "canyon"));
-	public static final RegistryKey<Biome> CYPRESS_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "cypress_forest"));
-	public static final RegistryKey<Biome> CYPRESS_SWAMP = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "cypress_swamp"));
-	public static final RegistryKey<Biome> DENSE_WOODLANDS = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "dense_woodlands"));
-	public static final RegistryKey<Biome> DUNES = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "dunes"));
-	public static final RegistryKey<Biome> HEMLOCK_RAINFOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "hemlock_rainforest"));
-	public static final RegistryKey<Biome> HEMLOCK_TREELINE = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "hemlock_treeline"));
-	public static final RegistryKey<Biome> JAPANESE_MAPLE_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "japanese_maple_forest"));
-	public static final RegistryKey<Biome> LUSH_DESERT = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "lush_desert"));
-	public static final RegistryKey<Biome> LUSH_REDWOOD_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "lush_redwood_forest"));
-	public static final RegistryKey<Biome> OASIS = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "oasis"));
-	public static final RegistryKey<Biome> OUTBACK = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "outback"));
-	public static final RegistryKey<Biome> RAINBOW_RAINFOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "rainbow_rainforest"));
-	public static final RegistryKey<Biome> REDWOOD_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "redwood_forest"));
-	public static final RegistryKey<Biome> SAKURA_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "sakura_forest"));
-	public static final RegistryKey<Biome> SNOWY_HEMLOCK_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "snowy_hemlock_forest"));
-	public static final RegistryKey<Biome> SNOWY_HEMLOCK_TREELINE = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "snowy_hemlock_treeline"));
-	public static final RegistryKey<Biome> VOLCANIC_ISLAND = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "volcanic_island"));
-	public static final RegistryKey<Biome> WINDSWEPT_REDWOOD_FOREST = RegistryKey.of(RegistryKeys.BIOME, Identifier.of(Terrestria.MOD_ID, "windswept_redwood_forest"));
+	public static final ResourceKey<Biome> CALDERA = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "caldera"));
+	public static final ResourceKey<Biome> CANYON = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "canyon"));
+	public static final ResourceKey<Biome> CYPRESS_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "cypress_forest"));
+	public static final ResourceKey<Biome> CYPRESS_SWAMP = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "cypress_swamp"));
+	public static final ResourceKey<Biome> DENSE_WOODLANDS = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "dense_woodlands"));
+	public static final ResourceKey<Biome> DUNES = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "dunes"));
+	public static final ResourceKey<Biome> HEMLOCK_RAINFOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "hemlock_rainforest"));
+	public static final ResourceKey<Biome> HEMLOCK_TREELINE = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "hemlock_treeline"));
+	public static final ResourceKey<Biome> JAPANESE_MAPLE_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "japanese_maple_forest"));
+	public static final ResourceKey<Biome> LUSH_DESERT = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "lush_desert"));
+	public static final ResourceKey<Biome> LUSH_REDWOOD_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "lush_redwood_forest"));
+	public static final ResourceKey<Biome> OASIS = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "oasis"));
+	public static final ResourceKey<Biome> OUTBACK = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "outback"));
+	public static final ResourceKey<Biome> RAINBOW_RAINFOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "rainbow_rainforest"));
+	public static final ResourceKey<Biome> REDWOOD_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "redwood_forest"));
+	public static final ResourceKey<Biome> SAKURA_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "sakura_forest"));
+	public static final ResourceKey<Biome> SNOWY_HEMLOCK_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "snowy_hemlock_forest"));
+	public static final ResourceKey<Biome> SNOWY_HEMLOCK_TREELINE = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "snowy_hemlock_treeline"));
+	public static final ResourceKey<Biome> VOLCANIC_ISLAND = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "volcanic_island"));
+	public static final ResourceKey<Biome> WINDSWEPT_REDWOOD_FOREST = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "windswept_redwood_forest"));
 
-	public static final List<RegistryKey<Biome>> BIOMES = List.of(
+	public static final List<ResourceKey<Biome>> BIOMES = List.of(
 			CALDERA,
 			CANYON,
 			CYPRESS_FOREST,
@@ -66,7 +66,7 @@ public class TerrestriaBiomes {
 			WINDSWEPT_REDWOOD_FOREST
 	);
 
-	public static void bootstrap(Registerable<Biome> registerable) {
+	public static void bootstrap(BootstrapContext<Biome> registerable) {
 		registerable.register(CALDERA, CalderaBiomes.create(registerable));
 		registerable.register(CANYON, CanyonBiomes.create(registerable));
 		registerable.register(CYPRESS_FOREST, CypressForestBiomes.create(registerable));
@@ -89,67 +89,67 @@ public class TerrestriaBiomes {
 		registerable.register(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(registerable, true));
 	}
 
-	public static void addBasicFeatures(GenerationSettings.LookupBackedBuilder generationSettings, boolean lavaSprings) {
-		DefaultBiomeFeatures.addLandCarvers(generationSettings);
-		DefaultBiomeFeatures.addAmethystGeodes(generationSettings);
-		DefaultBiomeFeatures.addDungeons(generationSettings);
-		DefaultBiomeFeatures.addMineables(generationSettings);
+	public static void addBasicFeatures(BiomeGenerationSettings.Builder generationSettings, boolean lavaSprings) {
+		BiomeDefaultFeatures.addDefaultCarversAndLakes(generationSettings);
+		BiomeDefaultFeatures.addDefaultCrystalFormations(generationSettings);
+		BiomeDefaultFeatures.addDefaultMonsterRoom(generationSettings);
+		BiomeDefaultFeatures.addDefaultUndergroundVariety(generationSettings);
 		if (lavaSprings) {
-			DefaultBiomeFeatures.addSprings(generationSettings);
+			BiomeDefaultFeatures.addDefaultSprings(generationSettings);
 		} else {
-			generationSettings.feature(GenerationStep.Feature.FLUID_SPRINGS, MiscPlacedFeatures.SPRING_WATER);
+			generationSettings.addFeature(GenerationStep.Decoration.FLUID_SPRINGS, MiscOverworldPlacements.SPRING_WATER);
 		}
-		DefaultBiomeFeatures.addFrozenTopLayer(generationSettings);
+		BiomeDefaultFeatures.addSurfaceFreezing(generationSettings);
 	}
 
-	public static SpawnSettings.Builder createDefaultSpawnSettings() {
-		SpawnSettings.Builder spawnSettings = new SpawnSettings.Builder();
+	public static net.minecraft.world.level.biome.MobSpawnSettings.Builder createDefaultSpawnSettings() {
+		net.minecraft.world.level.biome.MobSpawnSettings.Builder spawnSettings = new net.minecraft.world.level.biome.MobSpawnSettings.Builder();
 		addDefaultCreatureSpawnEntries(spawnSettings);
 		addDefaultCaveSpawnEntries(spawnSettings);
 		addDefaultMonsterSpawnEntries(spawnSettings);
 		return spawnSettings;
 	}
 
-	public static void addDefaultCreatureSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.CREATURE, 12, new SpawnSettings.SpawnEntry(EntityType.SHEEP, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.PIG, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.CHICKEN, 4, 4));
-		builder.spawn(SpawnGroup.CREATURE,  8, new SpawnSettings.SpawnEntry(EntityType.COW, 4, 4));
+	public static void addDefaultCreatureSpawnEntries(net.minecraft.world.level.biome.MobSpawnSettings.Builder builder) {
+		builder.addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(EntityType.SHEEP, 4, 4));
+		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.PIG, 4, 4));
+		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.CHICKEN, 4, 4));
+		builder.addSpawn(MobCategory.CREATURE,  8, new MobSpawnSettings.SpawnerData(EntityType.COW, 4, 4));
 	}
 
-	public static void addDefaultCaveSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.AMBIENT, 10, new SpawnSettings.SpawnEntry(EntityType.BAT, 8, 8));
-		builder.spawn(SpawnGroup.UNDERGROUND_WATER_CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.GLOW_SQUID, 4, 6));
+	public static void addDefaultCaveSpawnEntries(net.minecraft.world.level.biome.MobSpawnSettings.Builder builder) {
+		builder.addSpawn(MobCategory.AMBIENT, 10, new MobSpawnSettings.SpawnerData(EntityType.BAT, 8, 8));
+		builder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.GLOW_SQUID, 4, 6));
 	}
 
-	public static void addDefaultMonsterSpawnEntries(SpawnSettings.Builder builder) {
-		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SPIDER, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER,  95, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER,   5, new SpawnSettings.SpawnEntry(EntityType.ZOMBIE_VILLAGER, 1, 1));
-		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SKELETON, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.CREEPER, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER, 100, new SpawnSettings.SpawnEntry(EntityType.SLIME, 4, 4));
-		builder.spawn(SpawnGroup.MONSTER,  10, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4));
-		builder.spawn(SpawnGroup.MONSTER,   5, new SpawnSettings.SpawnEntry(EntityType.WITCH, 1, 1));
+	public static void addDefaultMonsterSpawnEntries(net.minecraft.world.level.biome.MobSpawnSettings.Builder builder) {
+		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityType.SPIDER, 4, 4));
+		builder.addSpawn(MobCategory.MONSTER,  95, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIE, 4, 4));
+		builder.addSpawn(MobCategory.MONSTER,   5, new MobSpawnSettings.SpawnerData(EntityType.ZOMBIE_VILLAGER, 1, 1));
+		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityType.SKELETON, 4, 4));
+		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityType.CREEPER, 4, 4));
+		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 4, 4));
+		builder.addSpawn(MobCategory.MONSTER,  10, new MobSpawnSettings.SpawnerData(EntityType.ENDERMAN, 1, 4));
+		builder.addSpawn(MobCategory.MONSTER,   5, new MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1));
 	}
 
 	// Copied from Traverse
-	public static BiomeEffects.Builder createDefaultBiomeEffects() {
-		return new BiomeEffects.Builder()
+	public static net.minecraft.world.level.biome.BiomeSpecialEffects.Builder createDefaultBiomeEffects() {
+		return new net.minecraft.world.level.biome.BiomeSpecialEffects.Builder()
 			.waterColor(0x3F76E4);
 	}
 
 	public static EnvironmentAttributeMap.Builder createDefaultEnvironmentAttributes() {
 		return EnvironmentAttributeMap.builder()
-			.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x50533)
-			.with(EnvironmentAttributes.SKY_COLOR_VISUAL, getSkyColor(0.2F))
-			.with(EnvironmentAttributes.FOG_COLOR_VISUAL, 0xC0D8FF);
+			.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x50533)
+			.set(EnvironmentAttributes.SKY_COLOR, getSkyColor(0.2F))
+			.set(EnvironmentAttributes.FOG_COLOR, 0xC0D8FF);
 	}
 
 	// Copied from Minecraft
 	private static int getSkyColor(float temperature) {
 		float f = temperature / 3.0F;
-		f = MathHelper.clamp(f, -1.0F, 1.0F);
-		return MathHelper.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
+		f = Mth.clamp(f, -1.0F, 1.0F);
+		return Mth.hsvToRgb(0.62222224F - f * 0.05F, 0.5F + f * 0.1F, 1.0F);
 	}
 }

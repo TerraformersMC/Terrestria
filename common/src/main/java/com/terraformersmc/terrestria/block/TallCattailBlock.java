@@ -1,40 +1,41 @@
 package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.TallPlantBlock;
-import net.minecraft.block.TallSeagrassBlock;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * A custom tall seagrass block where the lower half is underwater, and the upper half is above water.
  */
 public class TallCattailBlock extends TallSeagrassBlock {
-	public TallCattailBlock(Settings settings) {
+	public TallCattailBlock(Properties settings) {
 		super(settings);
 	}
 
 	@Override
-	public ItemStack getPickStack(WorldView world, BlockPos pos, BlockState state, boolean includeData) {
+	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TerrestriaBlocks.CATTAIL);
 	}
 
 	@Override
-	public @Nullable BlockState getPlacementState(ItemPlacementContext context) {
-		BlockPos pos = context.getBlockPos();
-		World world = context.getWorld();
+	public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
+		BlockPos pos = context.getClickedPos();
+		Level world = context.getLevel();
 
-		if (pos.getY() < world.getTopYInclusive() && world.getBlockState(pos.up()).canReplace(context)) {
-			return this.getDefaultState();
+		if (pos.getY() < world.getMaxY() && world.getBlockState(pos.above()).canBeReplaced(context)) {
+			return this.defaultBlockState();
 		}
 
 		return null;
@@ -42,18 +43,18 @@ public class TallCattailBlock extends TallSeagrassBlock {
 
 	@Override
 	public FluidState getFluidState(BlockState state) {
-		return state.get(HALF) == DoubleBlockHalf.UPPER ? Fluids.EMPTY.getDefaultState() : super.getFluidState(state);
+		return state.getValue(HALF) == DoubleBlockHalf.UPPER ? Fluids.EMPTY.defaultFluidState() : super.getFluidState(state);
 	}
 
 	@Override
-	public BlockState onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-		if (!world.isClient()) {
+	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
+		if (!world.isClientSide()) {
 			if (player.isCreative()) {
-				TallPlantBlock.onBreakInCreative(world, pos, state, player);
+				DoublePlantBlock.preventDropFromBottomPart(world, pos, state, player);
 			} else {
-				TallPlantBlock.dropStacks(state, world, pos, null, player, player.getMainHandStack());
+				DoublePlantBlock.dropResources(state, world, pos, null, player, player.getMainHandItem());
 			}
 		}
-		return super.onBreak(world, pos, state, player);
+		return super.playerWillDestroy(world, pos, state, player);
 	}
 }

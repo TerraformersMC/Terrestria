@@ -4,37 +4,38 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 	public static final MapCodec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
-			fillFoliagePlacerFields(instance).apply(instance, PalmFanFoliagePlacer::new));
+			foliagePlacerParts(instance).apply(instance, PalmFanFoliagePlacer::new));
 
 	public PalmFanFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
-	protected FoliagePlacerType<?> getType() {
+	protected FoliagePlacerType<?> type() {
 		return TerrestriaFoliagePlacerTypes.PALM_TOP;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 
 		// The origin of this leaf piece
-		BlockPos center = treeNode.getCenter().toImmutable();
+		BlockPos center = treeNode.pos().immutable();
 
 		// The working mutable position
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
 		// Determine weather this tree should have it's spiral flipped to make it have more variation among trees
 		boolean flipSpiral = random.nextBoolean();
@@ -55,7 +56,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 
 		// Place 2 dangly bits in each direction
 		for (int d = 0; d < 4; d++) {
-			Direction direction = Direction.fromHorizontalQuarterTurns(d);
+			Direction direction = Direction.from2DDataValue(d);
 
 			pos.set(center).move(direction, 2);
 			placeSpiral(world, random, pos, placer, config, direction, !flipSpiral);
@@ -65,7 +66,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		}
 	}
 
-	private void placeSpiral(TestableWorld world, Random rand, BlockPos.Mutable pos, BlockPlacer placer, TreeFeatureConfig config, Direction direction, boolean invertLeafSpiral) {
+	private void placeSpiral(LevelSimulatedReader world, RandomSource rand, BlockPos.MutableBlockPos pos, FoliageSetter placer, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
 		// Base of dangly bit
 		checkAndSetBlockState(world, rand, pos, placer, config);
 
@@ -79,9 +80,9 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		}
 	}
 
-	private void checkAndSetBlockState(TestableWorld world, Random random, BlockPos.Mutable currentPosition, BlockPlacer placer, TreeFeatureConfig config) {
-		if (TreeFeature.canReplace(world, currentPosition)) {
-			placer.placeBlock(currentPosition.toImmutable(), config.foliageProvider.get(random, currentPosition));
+	private void checkAndSetBlockState(LevelSimulatedReader world, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter placer, TreeConfiguration config) {
+		if (TreeFeature.validTreePos(world, currentPosition)) {
+			placer.set(currentPosition.immutable(), config.foliageProvider.getState(random, currentPosition));
 		}
 	}
 
@@ -105,12 +106,12 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
 		return 0;
 	}
 
 	@Override
-	protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
+	protected boolean shouldSkipLocation(RandomSource random, int baseHeight, int dx, int dy, int dz, boolean bl) {
 		return baseHeight == dz && dy == dz;
 	}
 }

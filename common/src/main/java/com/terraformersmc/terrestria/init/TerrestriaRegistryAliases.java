@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
 
 import java.util.Map;
 
@@ -54,11 +54,11 @@ public final class TerrestriaRegistryAliases {
 				entry("basalt_wall",                     "volcanic_rock_wall"),
 				entry("basalt_sand",                     "volcanic_sand")
 		);
-		BLOCKS_ITEMS.forEach(Registries.BLOCK::addAlias);
-		BLOCKS_ITEMS.forEach(Registries.ITEM::addAlias);
+		BLOCKS_ITEMS.forEach(BuiltInRegistries.BLOCK::addAlias);
+		BLOCKS_ITEMS.forEach(BuiltInRegistries.ITEM::addAlias);
 	}
 
 	private static Map.Entry<Identifier, Identifier> entry(String oldName, String newName) {
-		return Map.entry(Identifier.of(Terrestria.MOD_ID, oldName), Identifier.of(Terrestria.MOD_ID, newName));
+		return Map.entry(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, oldName), Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, newName));
 	}
 }

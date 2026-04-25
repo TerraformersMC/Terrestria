@@ -1,18 +1,18 @@
 package com.terraformersmc.terrestria.tag;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.resources.Identifier;
 
 public final class TerrestriaBlockTags {
-	public static final TagKey<Block> BASALTS = TerrestriaBlockTags.of(Identifier.of("c", "basalts"));
-	public static final TagKey<Block> BLACK_SANDS = TerrestriaBlockTags.of(Identifier.of("c", "black_sands"));
-	public static final TagKey<Block> DIRTS = TerrestriaBlockTags.of(Identifier.of("c", "dirts"));
-	public static final TagKey<Block> PLANKS_THAT_BURN = TerrestriaBlockTags.of(Identifier.of("c", "planks_that_burn"));
-	public static final TagKey<Block> PODZOLS = TerrestriaBlockTags.of(Identifier.of("c", "podzols"));
-	public static final TagKey<Block> SANDS = TerrestriaBlockTags.of(Identifier.of("c", "sands"));
+	public static final TagKey<Block> BASALTS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "basalts"));
+	public static final TagKey<Block> BLACK_SANDS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "black_sands"));
+	public static final TagKey<Block> DIRTS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "dirts"));
+	public static final TagKey<Block> PLANKS_THAT_BURN = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "planks_that_burn"));
+	public static final TagKey<Block> PODZOLS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "podzols"));
+	public static final TagKey<Block> SANDS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "sands"));
 
 	public static final TagKey<Block> CYPRESS_LOGS = TerrestriaBlockTags.of("cypress_logs");
 	public static final TagKey<Block> HEMLOCK_LOGS = TerrestriaBlockTags.of("hemlock_logs");
@@ -31,10 +31,10 @@ public final class TerrestriaBlockTags {
 	}
 
 	private static TagKey<Block> of(String path) {
-		return TerrestriaBlockTags.of(Identifier.of(Terrestria.MOD_ID, path));
+		return TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, path));
 	}
 
 	private static TagKey<Block> of(Identifier id) {
-		return TagKey.of(RegistryKeys.BLOCK, id);
+		return TagKey.create(Registries.BLOCK, id);
 	}
 }

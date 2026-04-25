@@ -3,44 +3,48 @@ package com.terraformersmc.terrestria.block;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.*;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.VegetationBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraft.world.level.BlockGetter;
 
-public class TerraformDesertPlantBlock extends PlantBlock {
-	public static final MapCodec<TerraformDesertPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.BOOL.fieldOf("onlySand").forGetter(args -> args.onlySand), TerraformDesertPlantBlock.createSettingsCodec()).apply(instance, TerraformDesertPlantBlock::new));
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
+public class TerraformDesertPlantBlock extends VegetationBlock {
+	public static final MapCodec<TerraformDesertPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.BOOL.fieldOf("onlySand").forGetter(args -> args.onlySand), TerraformDesertPlantBlock.propertiesCodec()).apply(instance, TerraformDesertPlantBlock::new));
+	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	private final boolean onlySand;
 
-	public TerraformDesertPlantBlock(Settings settings) {
+	public TerraformDesertPlantBlock(Properties settings) {
 		this(false, settings);
 	}
 
-	public TerraformDesertPlantBlock(boolean onlySand, Settings settings) {
-		super(settings.offset(AbstractBlock.OffsetType.XYZ));
+	public TerraformDesertPlantBlock(boolean onlySand, Properties settings) {
+		super(settings.offsetType(BlockBehaviour.OffsetType.XYZ));
 		this.onlySand = onlySand;
 	}
 
 	@Override
-	protected MapCodec<? extends PlantBlock> getCodec() {
+	protected MapCodec<? extends VegetationBlock> codec() {
 		return CODEC;
 	}
 
 	@Override
-	public boolean canPlantOnTop(BlockState blockState, BlockView blockView, BlockPos pos) {
+	public boolean mayPlaceOn(BlockState blockState, BlockGetter blockView, BlockPos pos) {
 		if (onlySand) {
-			return blockState.isIn(BlockTags.SAND);
+			return blockState.is(BlockTags.SAND);
 		} else {
-			return blockState.isIn(BlockTags.SAND) || super.canPlantOnTop(blockState, blockView, pos);
+			return blockState.is(BlockTags.SAND) || super.mayPlaceOn(blockState, blockView, pos);
 		}
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		Vec3d vec3d = state.getModelOffset(pos);
-		return SHAPE.offset(vec3d.x, vec3d.y, vec3d.z);
+	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+		Vec3 vec3d = state.getOffset(pos);
+		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}
 }

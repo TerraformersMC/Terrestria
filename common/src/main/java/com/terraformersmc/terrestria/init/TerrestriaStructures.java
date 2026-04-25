@@ -6,12 +6,12 @@ import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchGenerator;
 import com.terraformersmc.terrestria.feature.structure.arch.CanyonArchStructure;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoGenerator;
 import com.terraformersmc.terrestria.feature.structure.volcano.VolcanoStructure;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.structure.StructurePieceType;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
 
 /**
  * Terrestria structures are procedurally generated, but configured and placed via JSON.
@@ -30,10 +30,10 @@ public class TerrestriaStructures {
 	}
 
 	private static <S extends Structure> StructureType<S> registerStructureType(String id, MapCodec<S> codec) {
-		return Registry.register(Registries.STRUCTURE_TYPE, Identifier.of(Terrestria.MOD_ID, id), () -> codec);
+		return Registry.register(BuiltInRegistries.STRUCTURE_TYPE, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, id), () -> codec);
 	}
 
 	private static StructurePieceType registerStructurePiece(String id, StructurePieceType piece) {
-		return Registry.register(Registries.STRUCTURE_PIECE, Identifier.of(Terrestria.MOD_ID, id), piece);
+		return Registry.register(BuiltInRegistries.STRUCTURE_PIECE, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, id), piece);
 	}
 }

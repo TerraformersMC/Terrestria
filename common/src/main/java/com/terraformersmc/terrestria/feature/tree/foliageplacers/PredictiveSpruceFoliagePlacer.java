@@ -4,23 +4,24 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.leaves.api.block.ExtendedLeavesBlock;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.LeavesBlock;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
-import net.minecraft.world.gen.foliage.SpruceFoliagePlacer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 
 public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	// Copied from SpruceFoliagePlacer. There doesn't appear to be a convenient way to turn a SpruceFoliagePlacer into a
 	// PredictiveSpruceFoliagePlacer.
 	public static final MapCodec<PredictiveSpruceFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
-		fillFoliagePlacerFields(instance).and(
-				IntProvider.createValidatingCodec(0, 28)
+		foliagePlacerParts(instance).and(
+				IntProvider.codec(0, 28)
 						.fieldOf("trunk_height")
 						.forGetter(placer -> placer.trunkHeight)
 		).apply(instance, PredictiveSpruceFoliagePlacer::new)
@@ -35,24 +36,24 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected FoliagePlacerType<PredictiveSpruceFoliagePlacer> getType() {
+	protected FoliagePlacerType<PredictiveSpruceFoliagePlacer> type() {
 		return TerrestriaFoliagePlacerTypes.PREDICTIVE_SPRUCE;
 	}
 
 	@Override
-	protected void generateSquare(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
+	protected void placeLeavesRow(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
-		BlockPos.Mutable mutable = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		int actualDistance;
 
 		for (int offsetX = -radius; offsetX <= radius + giantTrunkOffset; ++offsetX) {
 			for (int offsetZ = -radius; offsetZ <= radius + giantTrunkOffset; ++offsetZ) {
-				if (!this.isPositionInvalid(random, offsetX, offsetY, offsetZ, radius, giantTrunk)) {
-					mutable.set(blockPos, offsetX, offsetY, offsetZ);
-					if (TreeFeature.canReplace(world, mutable)) {
+				if (!this.shouldSkipLocationSigned(random, offsetX, offsetY, offsetZ, radius, giantTrunk)) {
+					mutable.setWithOffset(blockPos, offsetX, offsetY, offsetZ);
+					if (TreeFeature.validTreePos(world, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
-						BlockState baseState = config.foliageProvider.get(random, mutable);
-						placer.placeBlock(mutable.toImmutable(), withDistance(baseState, actualDistance));
+						BlockState baseState = config.foliageProvider.getState(random, mutable);
+						placer.set(mutable.immutable(), withDistance(baseState, actualDistance));
 					}
 				}
 			}
@@ -81,8 +82,8 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	private static BlockState withDistance(BlockState state, int distance) {
-		if (!state.contains(ExtendedLeavesBlock.EXTENDED_DISTANCE)) {
-			distance = Math.min(distance, LeavesBlock.MAX_DISTANCE);
+		if (!state.hasProperty(ExtendedLeavesBlock.EXTENDED_DISTANCE)) {
+			distance = Math.min(distance, LeavesBlock.DECAY_DISTANCE);
 		}
 
 		return ExtendedLeavesBlock.setExtendedDistance(state, distance);

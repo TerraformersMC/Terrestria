@@ -5,21 +5,21 @@ import com.terraformersmc.terrestria.tag.TerrestriaBiomeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BiomeTags;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BiomeTags;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
-	protected TerrestriaBiomeTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-		super(output, RegistryKeys.BIOME, registriesFuture);
+	protected TerrestriaBiomeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+		super(output, Registries.BIOME, registriesFuture);
 	}
 
 	@Override
-	public void configure(RegistryWrapper.WrapperLookup registries) {
+	public void addTags(HolderLookup.Provider registries) {
 		/*
 		 * Vanilla biome tags
 		 */
@@ -198,16 +198,16 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 		/*
 		 * Biome structure generation tags
 		 */
-		builder(BiomeTags.DESERT_PYRAMID_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_DESERT_PYRAMID)
 				.addOptional(TerrestriaBiomes.LUSH_DESERT);
 
-		builder(BiomeTags.IGLOO_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_IGLOO)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
 
-		builder(BiomeTags.JUNGLE_TEMPLE_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_JUNGLE_TEMPLE)
 				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST);
 
-		builder(BiomeTags.MINESHAFT_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_MINESHAFT)
 				.addOptional(TerrestriaBiomes.CALDERA)
 				.addOptional(TerrestriaBiomes.CANYON)
 				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
@@ -229,21 +229,21 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
-		builder(BiomeTags.RUINED_PORTAL_DESERT_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_RUINED_PORTAL_DESERT)
 				.addOptional(TerrestriaBiomes.LUSH_DESERT)
 				.addOptional(TerrestriaBiomes.OASIS)
 				.addOptional(TerrestriaBiomes.OUTBACK);
 
-		builder(BiomeTags.RUINED_PORTAL_JUNGLE_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_RUINED_PORTAL_JUNGLE)
 				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
-		builder(BiomeTags.RUINED_PORTAL_MOUNTAIN_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_RUINED_PORTAL_MOUNTAIN)
 				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
-		builder(BiomeTags.RUINED_PORTAL_STANDARD_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_RUINED_PORTAL_STANDARD)
 				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
 				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
 				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
@@ -252,20 +252,20 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.SAKURA_FOREST)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST);
 
-		builder(BiomeTags.SWAMP_HUT_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_SWAMP_HUT)
 				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP);
 
-		builder(BiomeTags.SHIPWRECK_BEACHED_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_SHIPWRECK_BEACHED)
 				.addTag(BiomeTags.IS_BEACH);
 
-		builder(BiomeTags.TRAIL_RUINS_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_TRAIL_RUINS)
 				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
 				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
 				.addOptional(TerrestriaBiomes.RAINBOW_RAINFOREST)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
-		builder(BiomeTags.TRIAL_CHAMBERS_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_TRIAL_CHAMBERS)
 				.addOptional(TerrestriaBiomes.CANYON)
 				.addOptional(TerrestriaBiomes.CYPRESS_FOREST)
 				.addOptional(TerrestriaBiomes.CYPRESS_SWAMP)
@@ -282,26 +282,26 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
-		builder(BiomeTags.VILLAGE_DESERT_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_VILLAGE_DESERT)
 				.addOptional(TerrestriaBiomes.LUSH_DESERT)
 				.addOptional(TerrestriaBiomes.OASIS)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);
 
-		builder(BiomeTags.VILLAGE_PLAINS_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_VILLAGE_PLAINS)
 				.addOptional(TerrestriaBiomes.HEMLOCK_RAINFOREST)
 				.addOptional(TerrestriaBiomes.JAPANESE_MAPLE_FOREST)
 				.addOptional(TerrestriaBiomes.LUSH_REDWOOD_FOREST)
 				.addOptional(TerrestriaBiomes.REDWOOD_FOREST)
 				.addOptional(TerrestriaBiomes.SAKURA_FOREST);
 
-		builder(BiomeTags.VILLAGE_SAVANNA_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_VILLAGE_SAVANNA)
 				.addOptional(TerrestriaBiomes.OUTBACK);
 
-		builder(BiomeTags.VILLAGE_SNOWY_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_VILLAGE_SNOWY)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_FOREST)
 				.addOptional(TerrestriaBiomes.SNOWY_HEMLOCK_TREELINE);
 
-		builder(BiomeTags.VILLAGE_TAIGA_HAS_STRUCTURE)
+		builder(BiomeTags.HAS_VILLAGE_TAIGA)
 				.addOptional(TerrestriaBiomes.HEMLOCK_TREELINE)
 				.addOptional(TerrestriaBiomes.WINDSWEPT_REDWOOD_FOREST);
 
@@ -310,10 +310,10 @@ public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
 				.addOptional(TerrestriaBiomes.CANYON);
 
 		builder(TerrestriaBiomeTags.OCEAN_VOLCANO_HAS_STRUCTURE)
-				.add(BiomeKeys.DEEP_FROZEN_OCEAN)
-				.add(BiomeKeys.DEEP_COLD_OCEAN)
-				.add(BiomeKeys.DEEP_OCEAN)
-				.add(BiomeKeys.DEEP_LUKEWARM_OCEAN);
+				.add(Biomes.DEEP_FROZEN_OCEAN)
+				.add(Biomes.DEEP_COLD_OCEAN)
+				.add(Biomes.DEEP_OCEAN)
+				.add(Biomes.DEEP_LUKEWARM_OCEAN);
 
 		builder(TerrestriaBiomeTags.VOLCANO_HAS_STRUCTURE)
 				.addOptional(TerrestriaBiomes.VOLCANIC_ISLAND);

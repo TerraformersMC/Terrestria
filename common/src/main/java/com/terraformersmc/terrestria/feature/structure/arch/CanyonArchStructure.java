@@ -3,35 +3,35 @@ package com.terraformersmc.terrestria.feature.structure.arch;
 import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terrestria.feature.helpers.placement.StructureCanGenerate;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.structure.*;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureType;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 
 import java.util.Optional;
 
 public class CanyonArchStructure extends Structure {
-	public static final MapCodec<CanyonArchStructure> CODEC = CanyonArchStructure.createCodec(CanyonArchStructure::new);
+	public static final MapCodec<CanyonArchStructure> CODEC = CanyonArchStructure.simpleCodec(CanyonArchStructure::new);
 
-	public CanyonArchStructure(Structure.Config config) {
+	public CanyonArchStructure(Structure.StructureSettings config) {
 		super(config);
 	}
 
 	@Override
-	public Optional<StructurePosition> getStructurePosition(Structure.Context context) {
+	public Optional<GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
 		if (StructureCanGenerate.getMinCenteredCornerHeight(context, 96, 96) >= context.chunkGenerator().getSeaLevel()) {
-			return getStructurePosition(context, Heightmap.Type.WORLD_SURFACE_WG, collector -> this.addPieces(collector, context));
+			return onTopOfChunkCenter(context, Heightmap.Types.WORLD_SURFACE_WG, collector -> this.addPieces(collector, context));
 		} else {
 			return Optional.empty();
 		}
 	}
 
-	private void addPieces(StructurePiecesCollector collector, Structure.Context context) {
-		collector.addPiece(new CanyonArchGenerator(context.random(), context.chunkPos().getCenterX(), context.chunkPos().getStartZ()));
+	private void addPieces(StructurePiecesBuilder collector, Structure.GenerationContext context) {
+		collector.addPiece(new CanyonArchGenerator(context.random(), context.chunkPos().getMiddleBlockX(), context.chunkPos().getMinBlockZ()));
 	}
 
 	@Override
-	public StructureType<?> getType() {
+	public StructureType<?> type() {
 		return TerrestriaStructures.CANYON_ARCH_STRUCTURE_TYPE;
 	}
 }

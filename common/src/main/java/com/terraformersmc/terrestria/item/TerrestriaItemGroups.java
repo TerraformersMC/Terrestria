@@ -8,14 +8,19 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.*;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.resource.featuretoggle.FeatureSet;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
@@ -24,8 +29,8 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class TerrestriaItemGroups {
-	private static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Identifier.of(Terrestria.MOD_ID, "items"));
-	private static final HashMap<RegistryKey<ItemGroup>, HashMap<ItemConvertible, ItemGroupEntries>> ITEM_GROUP_ENTRY_MAPS;
+	private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "items"));
+	private static final HashMap<ResourceKey<CreativeModeTab>, HashMap<ItemLike, ItemGroupEntries>> ITEM_GROUP_ENTRY_MAPS;
 
 	/*
 	 * These items are the last Vanilla item of a "similar" type to items we add to Vanilla groups.
@@ -57,52 +62,52 @@ public class TerrestriaItemGroups {
 		// BUILDING BLOCKS
 
 		// Wood Items
-		addGroupEntry(TerrestriaBlocks.SMALL_OAK_LOG, ItemGroups.BUILDING_BLOCKS, Items.OAK_WOOD);
-		addGroupEntry(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG, ItemGroups.BUILDING_BLOCKS, Items.STRIPPED_OAK_WOOD);
+		addGroupEntry(TerrestriaBlocks.SMALL_OAK_LOG, CreativeModeTabs.BUILDING_BLOCKS, Items.OAK_WOOD);
+		addGroupEntry(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG, CreativeModeTabs.BUILDING_BLOCKS, Items.STRIPPED_OAK_WOOD);
 
 
 		// NATURAL
 
 		// Wood Items
-		addGroupEntry(TerrestriaBlocks.SMALL_OAK_LOG, ItemGroups.NATURAL, Items.OAK_LOG);
+		addGroupEntry(TerrestriaBlocks.SMALL_OAK_LOG, CreativeModeTabs.NATURAL_BLOCKS, Items.OAK_LOG);
 
 		// Sand and Sandstone
-		addGroupEntry(TerrestriaBlocks.VOLCANIC_SAND, ItemGroups.NATURAL, NATURAL_SAND);
+		addGroupEntry(TerrestriaBlocks.VOLCANIC_SAND, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAND);
 
 		// Leaves
-		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
-		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
-		addGroupEntry(TerrestriaBlocks.JUNGLE_PALM_LEAVES, ItemGroups.NATURAL, NATURAL_LEAVES);
+		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LEAVES);
+		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LEAVES);
+		addGroupEntry(TerrestriaBlocks.JUNGLE_PALM_LEAVES, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LEAVES);
 
 		// Saplings
-		addGroupEntry(TerrestriaBlocks.BRYCE_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.CYPRESS_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.HEMLOCK_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.JUNGLE_PALM_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.REDWOOD_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.RUBBER_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.SAKURA_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.WILLOW_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
-		addGroupEntry(TerrestriaBlocks.YUCCA_PALM_SAPLING, ItemGroups.NATURAL, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.BRYCE_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.CYPRESS_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.HEMLOCK_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.JUNGLE_PALM_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.REDWOOD_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.RUBBER_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.SAKURA_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.WILLOW_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
+		addGroupEntry(TerrestriaBlocks.YUCCA_PALM_SAPLING, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_SAPLING);
 
 		// Cactuses
-		addGroupEntry(TerrestriaBlocks.SAGUARO_CACTUS, ItemGroups.NATURAL, NATURAL_CACTUS);
-		addGroupEntry(TerrestriaBlocks.TINY_CACTUS, ItemGroups.NATURAL, NATURAL_CACTUS);
-		addGroupEntry(TerrestriaBlocks.AGAVE, ItemGroups.NATURAL, NATURAL_CACTUS);
-		addGroupEntry(TerrestriaBlocks.ALOE_VERA, ItemGroups.NATURAL, NATURAL_CACTUS);
-		addGroupEntry(TerrestriaBlocks.DEAD_GRASS, ItemGroups.NATURAL, Items.SHORT_GRASS);
+		addGroupEntry(TerrestriaBlocks.SAGUARO_CACTUS, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_CACTUS);
+		addGroupEntry(TerrestriaBlocks.TINY_CACTUS, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_CACTUS);
+		addGroupEntry(TerrestriaBlocks.AGAVE, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_CACTUS);
+		addGroupEntry(TerrestriaBlocks.ALOE_VERA, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_CACTUS);
+		addGroupEntry(TerrestriaBlocks.DEAD_GRASS, CreativeModeTabs.NATURAL_BLOCKS, Items.SHORT_GRASS);
 
 		// Vegetation
-		addGroupEntry(TerrestriaBlocks.INDIAN_PAINTBRUSH, ItemGroups.NATURAL, NATURAL_VEGETATION);
-		addGroupEntry(TerrestriaBlocks.MONSTERAS, ItemGroups.NATURAL, NATURAL_VEGETATION);
+		addGroupEntry(TerrestriaBlocks.INDIAN_PAINTBRUSH, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_VEGETATION);
+		addGroupEntry(TerrestriaBlocks.MONSTERAS, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_VEGETATION);
 
 		// Tall Plants
-		addGroupEntry(TerrestriaBlocks.CATTAIL, ItemGroups.NATURAL, NATURAL_TALL_VEGETATION);
+		addGroupEntry(TerrestriaBlocks.CATTAIL, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_TALL_VEGETATION);
 
 
 		// FUNCTIONAL
@@ -120,7 +125,7 @@ public class TerrestriaItemGroups {
 		// TOOLS
 
 		// Misc. Hand Tools
-		addGroupEntry(TerrestriaItems.LOG_TURNER, ItemGroups.TOOLS, Items.FISHING_ROD);
+		addGroupEntry(TerrestriaItems.LOG_TURNER, CreativeModeTabs.TOOLS_AND_UTILITIES, Items.FISHING_ROD);
 
 
 		// COMBAT
@@ -159,19 +164,19 @@ public class TerrestriaItemGroups {
 		/*
 		 * Add the items configured above to the Vanilla item groups.
 		 */
-		for (RegistryKey<ItemGroup> group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
+		for (ResourceKey<CreativeModeTab> group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
 			ItemGroupEvents.modifyEntriesEvent(group).register((content) -> {
-				FeatureSet featureSet = content.getEnabledFeatures();
-				HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(group);
+				FeatureFlagSet featureSet = content.getEnabledFeatures();
+				HashMap<ItemLike, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(group);
 
-				for (ItemConvertible relative : entryMap.keySet()) {
+				for (ItemLike relative : entryMap.keySet()) {
 					ItemGroupEntries entries = entryMap.get(relative);
 
 					// FAPI does not give us a way to add at a feature-flag-disabled location.
 					// So, below we have to adjust for any items which may be disabled.
 					if (relative == null) {
 						// Target the end of the Item Group
-						content.addAll(entries.getCollection());
+						content.acceptAll(entries.getCollection());
 					} else {
 						//Terrestria.LOGGER.warn("About to add to Vanilla Item Group '{}' after Item '{}': '{}'", group.getId(), relative, entries.getCollection().stream().map(ItemStack::getItem).collect(Collectors.toList()));
 						content.addAfter(relative, entries.getCollection());
@@ -184,15 +189,15 @@ public class TerrestriaItemGroups {
 		/*
 		 * Also add all the items to Terrestria's own item group.
 		 */
-		Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
-				.displayName(Text.literal("Terrestria"))
-				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultStack())
-				.entries((context, entries) -> {
+		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
+				.title(Component.literal("Terrestria"))
+				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultInstance())
+				.displayItems((context, entries) -> {
 					ITEM_GROUP_ENTRY_MAPS.values().stream()
 							.map(HashMap::values).flatMap(Collection::stream)
 							.map(ItemGroupEntries::getCollection).flatMap(Collection::stream)
 							.collect(Collectors.groupingByConcurrent(ItemStack::getItem)).keySet().stream()
-							.sorted(Comparator.comparing((item) -> item.getName().getString())).forEach(entries::add);
+							.sorted(Comparator.comparing((item) -> item.getName().getString())).forEach(entries::accept);
 				}).build()
 		);
 	}
@@ -201,125 +206,125 @@ public class TerrestriaItemGroups {
 		// NATURAL
 
 		// Dirt Items
-		addGroupEntry(blocks.getGrassBlock(), ItemGroups.NATURAL, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getPodzol(), ItemGroups.NATURAL, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getDirtPath(), ItemGroups.NATURAL, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getDirt(), ItemGroups.NATURAL, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getFarmland(), ItemGroups.NATURAL, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.getGrassBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.getPodzol(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.getDirtPath(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.getDirt(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.getFarmland(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 	}
 
 	private static void addStoneEntries(StoneItems items) {
 		// BUILDING BLOCKS
 
 		// Stone Items
-		addGroupEntry(items.plain.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.plain.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.plain.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.plain.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.pressurePlate, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.button, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.cobblestone.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.cobblestone.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.cobblestone.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.cobblestone.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyCobblestone.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyCobblestone.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyCobblestone.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyCobblestone.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.smooth.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.smooth.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.smooth.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.smooth.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.bricks.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.crackedBricks, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.bricks.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.bricks.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.bricks.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.chiseledBricks, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyBricks.full, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyBricks.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyBricks.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
-		addGroupEntry(items.mossyBricks.wall, ItemGroups.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.plain.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.plain.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.plain.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.plain.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.pressurePlate, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.button, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.cobblestone.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.cobblestone.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.cobblestone.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.cobblestone.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyCobblestone.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyCobblestone.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyCobblestone.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyCobblestone.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.smooth.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.smooth.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.smooth.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.smooth.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.bricks.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.crackedBricks, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.bricks.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.bricks.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.bricks.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.chiseledBricks, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyBricks.full, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyBricks.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyBricks.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
+		addGroupEntry(items.mossyBricks.wall, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_STONE_ITEMS);
 
 
 		// NATURAL
 
 		// Stone Items
-		addGroupEntry(items.plain.full, ItemGroups.NATURAL, NATURAL_STONE);
+		addGroupEntry(items.plain.full, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_STONE);
 	}
 
 	private static void addWoodEntries(WoodItems items) {
 		// BUILDING BLOCKS
 
 		// Wood Items
-		addGroupEntry(items.log, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.log, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		if (items.hasQuarterLog()) {
-			addGroupEntry(items.quarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+			addGroupEntry(items.quarterLog, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
 		if (items.hasWood()) {
-			addGroupEntry(items.wood, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+			addGroupEntry(items.wood, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
-		addGroupEntry(items.strippedLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.strippedLog, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		if (items.hasQuarterLog()) {
-			addGroupEntry(items.strippedQuarterLog, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+			addGroupEntry(items.strippedQuarterLog, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
 		if (items.hasWood()) {
-			addGroupEntry(items.strippedWood, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+			addGroupEntry(items.strippedWood, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 		}
-		addGroupEntry(items.planks, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.stairs, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.slab, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.fence, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.fenceGate, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.door, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.trapdoor, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.pressurePlate, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
-		addGroupEntry(items.button, ItemGroups.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.planks, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.stairs, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.slab, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.fence, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.fenceGate, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.door, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.trapdoor, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.pressurePlate, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
+		addGroupEntry(items.button, CreativeModeTabs.BUILDING_BLOCKS, BUILDING_WOOD_ITEMS);
 
 
 		// NATURAL
 
 		// Wood Items
-		addGroupEntry(items.log, ItemGroups.NATURAL, NATURAL_LOG);
+		addGroupEntry(items.log, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LOG);
 		if (items.hasQuarterLog()) {
-			addGroupEntry(items.quarterLog, ItemGroups.NATURAL, NATURAL_LOG);
+			addGroupEntry(items.quarterLog, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LOG);
 			if (items.hasWood()) {
 				// At the moment, wood generates naturally on all quartered trees...
-				addGroupEntry(items.wood, ItemGroups.NATURAL, NATURAL_LOG);
+				addGroupEntry(items.wood, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LOG);
 			}
 		}
 
 		// Leaves
-		addGroupEntry(items.leaves, ItemGroups.NATURAL, NATURAL_LEAVES);
+		addGroupEntry(items.leaves, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LEAVES);
 		if (items.hasLeafPile()) {
-			addGroupEntry(items.leafPile, ItemGroups.NATURAL, NATURAL_LEAVES);
+			addGroupEntry(items.leafPile, CreativeModeTabs.NATURAL_BLOCKS, NATURAL_LEAVES);
 		}
 
 
 		// FUNCTIONAL
 
 		// Wood Items
-		addGroupEntry(items.shelf, ItemGroups.FUNCTIONAL, FUNCTIONAL_SHELF);
-		addGroupEntry(items.sign, ItemGroups.FUNCTIONAL, FUNCTIONAL_SIGN);
-		addGroupEntry(items.hangingSign, ItemGroups.FUNCTIONAL, FUNCTIONAL_SIGN);
+		addGroupEntry(items.shelf, CreativeModeTabs.FUNCTIONAL_BLOCKS, FUNCTIONAL_SHELF);
+		addGroupEntry(items.sign, CreativeModeTabs.FUNCTIONAL_BLOCKS, FUNCTIONAL_SIGN);
+		addGroupEntry(items.hangingSign, CreativeModeTabs.FUNCTIONAL_BLOCKS, FUNCTIONAL_SIGN);
 
 
 		// TOOLS
 
 		// Boats
 		if (items.hasBoat()) {
-			addGroupEntry(items.boat, ItemGroups.TOOLS, TOOLS_BOAT);
-			addGroupEntry(items.chestBoat, ItemGroups.TOOLS, TOOLS_BOAT);
+			addGroupEntry(items.boat, CreativeModeTabs.TOOLS_AND_UTILITIES, TOOLS_BOAT);
+			addGroupEntry(items.chestBoat, CreativeModeTabs.TOOLS_AND_UTILITIES, TOOLS_BOAT);
 		}
 	}
 
-	public static void addGroupEntry(ItemConvertible item, RegistryKey<ItemGroup> group) {
+	public static void addGroupEntry(ItemLike item, ResourceKey<CreativeModeTab> group) {
 		// Appends the item to the bottom of the group.
 		addGroupEntry(item, group, null);
 	}
 
-	public static void addGroupEntry(ItemConvertible item, RegistryKey<ItemGroup> group, @Nullable ItemConvertible relative) {
-		HashMap<ItemConvertible, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.computeIfAbsent(group, (key) -> new HashMap<>(32));
+	public static void addGroupEntry(ItemLike item, ResourceKey<CreativeModeTab> group, @Nullable ItemLike relative) {
+		HashMap<ItemLike, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.computeIfAbsent(group, (key) -> new HashMap<>(32));
 		ItemGroupEntries entries = entryMap.computeIfAbsent(relative, ItemGroupEntries::empty);
 		entries.addItem(item);
 	}

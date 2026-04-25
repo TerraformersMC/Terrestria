@@ -4,8 +4,8 @@ import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.resources.Identifier;
 
 import java.util.HashMap;
 
@@ -13,31 +13,31 @@ public class TerrestriaSurfaceBuilders {
 	private static final HashMap<Identifier, BiolithSurfaceBuilder> builders = new HashMap<>(8);
 
 	public static void init() {
-		builders.put(Identifier.of(Terrestria.MOD_ID, "surface/caldera"),
+		builders.put(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface/caldera"),
 				new CalderaSurfaceBuilder(
-						Blocks.GRASS_BLOCK.getDefaultState(),
-						Blocks.DIRT.getDefaultState(),
-						Blocks.STONE.getDefaultState(),
-						Blocks.SAND.getDefaultState()
+						Blocks.GRASS_BLOCK.defaultBlockState(),
+						Blocks.DIRT.defaultBlockState(),
+						Blocks.STONE.defaultBlockState(),
+						Blocks.SAND.defaultBlockState()
 				).setBiomeKey(TerrestriaBiomes.CALDERA));
 
-		builders.put(Identifier.of(Terrestria.MOD_ID, "surface/canyon"),
+		builders.put(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface/canyon"),
 				new CanyonSurfaceBuilder(
-						Blocks.SMOOTH_SANDSTONE.getDefaultState(),
-						Blocks.SAND.getDefaultState(),
-						Blocks.TERRACOTTA.getDefaultState()
+						Blocks.SMOOTH_SANDSTONE.defaultBlockState(),
+						Blocks.SAND.defaultBlockState(),
+						Blocks.TERRACOTTA.defaultBlockState()
 				).setBiomeKey(TerrestriaBiomes.CANYON));
 
-		builders.put(Identifier.of(Terrestria.MOD_ID, "surface/dunes"),
-				new DuneSurfaceBuilder(Blocks.SAND.getDefaultState()).setBiomeKey(TerrestriaBiomes.DUNES));
+		builders.put(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface/dunes"),
+				new DuneSurfaceBuilder(Blocks.SAND.defaultBlockState()).setBiomeKey(TerrestriaBiomes.DUNES));
 
-		builders.put(Identifier.of(Terrestria.MOD_ID, "surface/volcanic_island"),
+		builders.put(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface/volcanic_island"),
 				new OceanIslandSurfaceBuilder(
-						TerrestriaBlocks.ANDISOL.getGrassBlock().getDefaultState(),
-						TerrestriaBlocks.ANDISOL.getDirt().getDefaultState(),
-						TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(),
-						TerrestriaBlocks.VOLCANIC_SAND.getDefaultState(),
-						Blocks.SAND.getDefaultState()
+						TerrestriaBlocks.ANDISOL.getGrassBlock().defaultBlockState(),
+						TerrestriaBlocks.ANDISOL.getDirt().defaultBlockState(),
+						TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState(),
+						TerrestriaBlocks.VOLCANIC_SAND.defaultBlockState(),
+						Blocks.SAND.defaultBlockState()
 				).setBiomeKey(TerrestriaBiomes.VOLCANIC_ISLAND));
 	}
 

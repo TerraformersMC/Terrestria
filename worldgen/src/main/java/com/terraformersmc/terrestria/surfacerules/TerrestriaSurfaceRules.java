@@ -1,54 +1,54 @@
 package com.terraformersmc.terrestria.surfacerules;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.YOffset;
-import net.minecraft.world.gen.noise.NoiseParametersKeys;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules;
-import net.minecraft.world.gen.surfacebuilder.MaterialRules.MaterialRule;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.Noises;
+import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.SurfaceRules.RuleSource;
 
-import static net.minecraft.world.gen.surfacebuilder.MaterialRules.*;
+import static net.minecraft.world.level.levelgen.SurfaceRules.*;
 
 public class TerrestriaSurfaceRules {
-	public static MaterialRule createRules() {
+	public static RuleSource createRules() {
 		// Sandy surface rules
-		MaterialRule sandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH,
+		RuleSource sandAndSandstone = sequence(ifTrue(UNDER_FLOOR,
 			block(Blocks.SAND)), block(Blocks.SANDSTONE));
-		MaterialRule redSandAndSandstone = sequence(condition(STONE_DEPTH_FLOOR_WITH_SURFACE_DEPTH,
+		RuleSource redSandAndSandstone = sequence(ifTrue(UNDER_FLOOR,
 			block(Blocks.RED_SAND)), block(Blocks.RED_SANDSTONE));
 
 		// Special dirt surfaces
-		MaterialRule oldGrowthSurface = condition(STONE_DEPTH_FLOOR, sequence(
-			condition(surfaceNoiseThreshold(1.75), block(Blocks.COARSE_DIRT)),
-				condition(surfaceNoiseThreshold(-0.95), block(Blocks.PODZOL))));
+		RuleSource oldGrowthSurface = ifTrue(ON_FLOOR, sequence(
+			ifTrue(surfaceNoiseThreshold(1.75), block(Blocks.COARSE_DIRT)),
+				ifTrue(surfaceNoiseThreshold(-0.95), block(Blocks.PODZOL))));
 
 		// Biome-level rules
-		MaterialRule canyon = condition(biome(TerrestriaBiomes.CANYON), sandAndSandstone);
-		MaterialRule cypressSwamp = condition(biome(TerrestriaBiomes.CYPRESS_SWAMP),
-			condition(STONE_DEPTH_FLOOR,
-				condition(aboveY(YOffset.fixed(62), 0),
-					condition(not(aboveY(YOffset.fixed(63), 0)),
-						condition(noiseThreshold(NoiseParametersKeys.SURFACE_SWAMP, 0.0D),
+		RuleSource canyon = ifTrue(isBiome(TerrestriaBiomes.CANYON), sandAndSandstone);
+		RuleSource cypressSwamp = ifTrue(isBiome(TerrestriaBiomes.CYPRESS_SWAMP),
+			ifTrue(ON_FLOOR,
+				ifTrue(yBlockCheck(VerticalAnchor.absolute(62), 0),
+					ifTrue(not(yBlockCheck(VerticalAnchor.absolute(63), 0)),
+						ifTrue(noiseCondition(Noises.SWAMP, 0.0D),
 							block(Blocks.WATER))))));
-		MaterialRule dunes = condition(biome(TerrestriaBiomes.DUNES), sandAndSandstone);
-		MaterialRule lushDesert = condition(biome(TerrestriaBiomes.LUSH_DESERT),
-			condition(noiseThreshold(NoiseParametersKeys.SURFACE, -0.75D), sandAndSandstone));
-		MaterialRule outback = condition(biome(TerrestriaBiomes.OUTBACK),
-			condition(noiseThreshold(NoiseParametersKeys.BADLANDS_SURFACE, -0.12D), redSandAndSandstone));
-		MaterialRule redwoodForest = condition(biome(TerrestriaBiomes.REDWOOD_FOREST), oldGrowthSurface);
+		RuleSource dunes = ifTrue(isBiome(TerrestriaBiomes.DUNES), sandAndSandstone);
+		RuleSource lushDesert = ifTrue(isBiome(TerrestriaBiomes.LUSH_DESERT),
+			ifTrue(noiseCondition(Noises.SURFACE, -0.75D), sandAndSandstone));
+		RuleSource outback = ifTrue(isBiome(TerrestriaBiomes.OUTBACK),
+			ifTrue(noiseCondition(Noises.BADLANDS_SURFACE, -0.12D), redSandAndSandstone));
+		RuleSource redwoodForest = ifTrue(isBiome(TerrestriaBiomes.REDWOOD_FOREST), oldGrowthSurface);
 
 		// Return a surface-only sequence of our surface rules
-		return condition(surface(),
+		return ifTrue(abovePreliminarySurface(),
 				sequence(canyon, cypressSwamp, dunes, lushDesert, outback, redwoodForest));
 	}
 
-	private static MaterialRule block(Block block) {
-		return MaterialRules.block(block.getDefaultState());
+	private static RuleSource block(Block block) {
+		return SurfaceRules.state(block.defaultBlockState());
 	}
 
-	private static MaterialRules.MaterialCondition surfaceNoiseThreshold(double min) {
-		return MaterialRules.noiseThreshold(NoiseParametersKeys.SURFACE, min / 8.25, Double.MAX_VALUE);
+	private static SurfaceRules.ConditionSource surfaceNoiseThreshold(double min) {
+		return SurfaceRules.noiseCondition(Noises.SURFACE, min / 8.25, Double.MAX_VALUE);
 	}
 
 	public static void init() {

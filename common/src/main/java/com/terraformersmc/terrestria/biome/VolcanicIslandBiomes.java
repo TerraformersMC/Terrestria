@@ -1,70 +1,72 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.placement.AquaticPlacements;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.carver.ConfiguredCarver;
-import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 public class VolcanicIslandBiomes {
-	public static Biome create(Registerable<Biome> registerable) {
-		return new Biome.Builder()
+	public static Biome create(BootstrapContext<Biome> registerable) {
+		return new Biome.BiomeBuilder()
 				.generationSettings(createGenerationSettings(registerable))
-				.spawnSettings(createSpawnSettings())
-				.precipitation(true)
+				.mobSpawnSettings(createSpawnSettings())
+				.hasPrecipitation(true)
 				.temperature(0.9F)
 				.downfall(0.9F)
-				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+				.specialEffects(TerrestriaBiomes.createDefaultBiomeEffects()
 						.waterColor(0x54d3c0)
 						.build()
 				)
-				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
-						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_JUNGLE))
-						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x24a0b0)
+				.putAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_JUNGLE))
+						.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x24a0b0)
 						.build()
 				)
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(Registerable<Biome> registerable) {
-		RegistryEntryLookup<ConfiguredCarver<?>> configuredCarvers = registerable.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER);
-		RegistryEntryLookup<PlacedFeature> placedFeatures = registerable.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
+	private static BiomeGenerationSettings createGenerationSettings(BootstrapContext<Biome> registerable) {
+		HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = registerable.lookup(Registries.CONFIGURED_CARVER);
+		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(placedFeatures, configuredCarvers);
-		DefaultBiomeFeatures.addLandCarvers(builder);
-		DefaultBiomeFeatures.addAmethystGeodes(builder);
-		DefaultBiomeFeatures.addDungeons(builder);
-		DefaultBiomeFeatures.addMineables(builder);
+		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
+		BiomeDefaultFeatures.addDefaultCarversAndLakes(builder);
+		BiomeDefaultFeatures.addDefaultCrystalFormations(builder);
+		BiomeDefaultFeatures.addDefaultMonsterRoom(builder);
+		BiomeDefaultFeatures.addDefaultUndergroundVariety(builder);
 		// ^^ addBasicFeatures(builder); EXCEPT addSprings and addFrozenTopLayer
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.JUNGLE_PALM_TREES));
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.RARE_DUM_DUM_HEADS));
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.DENSER_JUNGLE_PALM_TREES));
-		DefaultBiomeFeatures.addDefaultFlowers(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_VOLCANIC_ISLAND_GRASS));
-		DefaultBiomeFeatures.addDefaultGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, OceanPlacedFeatures.SEAGRASS_WARM);
+		BiomeDefaultFeatures.addDefaultOres(builder);
+		BiomeDefaultFeatures.addDefaultSoftDisks(builder);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.JUNGLE_PALM_TREES));
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.RARE_DUM_DUM_HEADS));
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.DENSER_JUNGLE_PALM_TREES));
+		BiomeDefaultFeatures.addDefaultFlowers(builder);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_VOLCANIC_ISLAND_GRASS));
+		BiomeDefaultFeatures.addDefaultGrass(builder);
+		BiomeDefaultFeatures.addDefaultMushrooms(builder);
+		BiomeDefaultFeatures.addDefaultExtraVegetation(builder, true);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, AquaticPlacements.SEAGRASS_WARM);
 		return builder.build();
 	}
 
-	private static SpawnSettings createSpawnSettings() {
-		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.WATER_CREATURE, 3, new SpawnSettings.SpawnEntry(EntityType.SQUID, 1, 4));
-		builder.spawn(SpawnGroup.WATER_AMBIENT, 15, new SpawnSettings.SpawnEntry(EntityType.SALMON, 3, 6));
-		builder.spawn(SpawnGroup.WATER_AMBIENT, 15, new SpawnSettings.SpawnEntry(EntityType.COD, 1, 5));
+	private static MobSpawnSettings createSpawnSettings() {
+		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.addSpawn(MobCategory.WATER_CREATURE, 3, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 1, 4));
+		builder.addSpawn(MobCategory.WATER_AMBIENT, 15, new MobSpawnSettings.SpawnerData(EntityType.SALMON, 3, 6));
+		builder.addSpawn(MobCategory.WATER_AMBIENT, 15, new MobSpawnSettings.SpawnerData(EntityType.COD, 1, 5));
 		return builder.build();
 	}
 }

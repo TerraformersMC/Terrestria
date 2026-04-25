@@ -3,8 +3,8 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
-import net.minecraft.data.family.BlockFamilies;
-import net.minecraft.data.family.BlockFamily;
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
 
 public class TerrestriaBlockFamilies {
 	// Wood
@@ -27,7 +27,7 @@ public class TerrestriaBlockFamilies {
 
 
 	private static BlockFamily fromWoodBlocks(WoodBlocks woodBlocks) {
-		return BlockFamilies.register(woodBlocks.planks)
+		return BlockFamilies.familyBuilder(woodBlocks.planks)
 				.button(woodBlocks.button)
 				.fence(woodBlocks.fence)
 				.fenceGate(woodBlocks.fenceGate)
@@ -37,36 +37,36 @@ public class TerrestriaBlockFamilies {
 				.stairs(woodBlocks.stairs)
 				.door(woodBlocks.door)
 				.trapdoor(woodBlocks.trapdoor)
-				.group("wooden")
-				.unlockCriterionName("has_planks")
-				.build();
+				.recipeGroupPrefix("wooden")
+				.recipeUnlockedBy("has_planks")
+				.getFamily();
 	}
 
 	private static BlockFamily plainFromStoneBlocks(StoneBlocks stoneBlocks) {
-		return BlockFamilies.register(stoneBlocks.plain.full)
+		return BlockFamilies.familyBuilder(stoneBlocks.plain.full)
 				.button(stoneBlocks.button)
 				.slab(stoneBlocks.plain.slab)
 				.stairs(stoneBlocks.plain.stairs)
 				.wall(stoneBlocks.plain.wall)
 				.pressurePlate(stoneBlocks.pressurePlate)
-				.build();
+				.getFamily();
 	}
 
 	private static BlockFamily brickFromStoneBlocks(StoneBlocks stoneBlocks) {
-		return BlockFamilies.register(stoneBlocks.bricks.full)
+		return BlockFamilies.familyBuilder(stoneBlocks.bricks.full)
 				.chiseled(stoneBlocks.chiseledBricks)
 				.cracked(stoneBlocks.crackedBricks)
 				.slab(stoneBlocks.bricks.slab)
 				.stairs(stoneBlocks.bricks.stairs)
 				.wall(stoneBlocks.bricks.wall)
-				.build();
+				.getFamily();
 	}
 
 	private static BlockFamily fromStoneVariantBlocks(StoneVariantBlocks stoneVarientBlocks) {
-		return BlockFamilies.register(stoneVarientBlocks.full)
+		return BlockFamilies.familyBuilder(stoneVarientBlocks.full)
 				.slab(stoneVarientBlocks.slab)
 				.stairs(stoneVarientBlocks.stairs)
 				.wall(stoneVarientBlocks.wall)
-				.build();
+				.getFamily();
 	}
 }

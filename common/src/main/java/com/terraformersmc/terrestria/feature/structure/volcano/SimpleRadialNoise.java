@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.feature.structure.volcano;
 
 import java.util.Random;
 
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.Mth;
 
 /**
  * Simple noise function that proceeds in a circular fashion.
@@ -44,14 +44,14 @@ public class SimpleRadialNoise {
 	public double sample(double angle) {
 		angle = angle * noise.length;
 
-		int lower = MathHelper.floor(angle);
-		int upper = MathHelper.ceil(angle);
-		double frac = MathHelper.fractionalPart(angle);
+		int lower = Mth.floor(angle);
+		int upper = Mth.ceil(angle);
+		double frac = Mth.frac(angle);
 
 		double from = noise[lower < noise.length ? lower : noise.length - 1];
 		double to = noise[upper < noise.length ? upper : 0];
 
-		return MathHelper.lerp(fade(frac), from, to);
+		return Mth.lerp(fade(frac), from, to);
 	}
 
 	private static double fade(double f) {

@@ -5,9 +5,9 @@ import com.terraformersmc.terraform.tree.api.decorator.DecoratorTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.DanglingLeavesTreeDecorator;
 import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecorator;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.treedecorator.TreeDecorator;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class TerrestriaTreeDecorators {
 
@@ -20,6 +20,6 @@ public class TerrestriaTreeDecorators {
 	}
 
 	private static <P extends TreeDecorator> TreeDecoratorType<P> register(String name, MapCodec<P> codec) {
-		return DecoratorTypes.registerTreeDecorator(Identifier.of(Terrestria.MOD_ID, name), codec);
+		return DecoratorTypes.registerTreeDecorator(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name), codec);
 	}
 }

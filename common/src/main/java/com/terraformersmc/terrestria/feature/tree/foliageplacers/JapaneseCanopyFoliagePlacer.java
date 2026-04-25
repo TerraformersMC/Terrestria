@@ -8,40 +8,41 @@ import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.AddLayer;
 import com.terraformersmc.terraform.shapes.impl.layer.pathfinder.SubtractLayer;
 import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 	public static final MapCodec<JapaneseCanopyFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
-			fillFoliagePlacerFields(instance).apply(instance, JapaneseCanopyFoliagePlacer::new));
+			foliagePlacerParts(instance).apply(instance, JapaneseCanopyFoliagePlacer::new));
 
 	public JapaneseCanopyFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
-	protected FoliagePlacerType<?> getType() {
+	protected FoliagePlacerType<?> type() {
 		return TerrestriaFoliagePlacerTypes.JAPANESE_CANOPY;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 
-		double width = treeNode.getFoliageRadius() * 2.25 + (random.nextFloat() - 0.5);
+		double width = treeNode.radiusOffset() * 2.25 + (random.nextFloat() - 0.5);
 		double height = width * 1.75 + (random.nextFloat() - 0.5);
-		BlockPos center = treeNode.getCenter();
+		BlockPos center = treeNode.pos();
 
 		Shapes.hemiEllipsoid(width, width, height)
 				.applyLayer(new AddLayer(Shapes.ellipticalPyramid(width * 0.707, width * 0.707, height / 4) // 0.707 is approximately sqrt(2)/2
 						.applyLayer(new TranslateLayer(Position.of(0, height * 2/3, 0)))))
 				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(width - 2, width - 2, 5)))
-				.applyLayer(TranslateLayer.of(Position.of(center.down(2))))
+				.applyLayer(TranslateLayer.of(Position.of(center.below(2))))
 				.fill((position) -> {
 					// On the bottom layer only place 50% of the blocks
 					if (position.getY() - center.getY() >= 0 || random.nextBoolean()) {
@@ -50,19 +51,19 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 				});
 	}
 
-	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BlockPlacer placer, TreeFeatureConfig config) {
-		if (world.testBlockState(pos, BlockState::isAir)) {
-			placer.placeBlock(pos, config.foliageProvider.get(random, pos));
+	protected void tryPlaceLeaves(LevelSimulatedReader world, BlockPos pos, RandomSource random, FoliageSetter placer, TreeConfiguration config) {
+		if (world.isStateAtPosition(pos, BlockState::isAir)) {
+			placer.set(pos, config.foliageProvider.getState(random, pos));
 		}
 	}
 
 	@Override
-	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
 		return 0;
 	}
 
 	@Override
-	protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
+	protected boolean shouldSkipLocation(RandomSource random, int baseHeight, int dx, int dy, int dz, boolean bl) {
 		return baseHeight == dz && dy == dz;
 	}
 }

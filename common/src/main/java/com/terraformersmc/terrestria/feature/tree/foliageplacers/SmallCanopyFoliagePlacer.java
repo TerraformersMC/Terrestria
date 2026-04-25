@@ -9,36 +9,37 @@ import com.terraformersmc.terraform.shapes.impl.layer.transform.TranslateLayer;
 import com.terraformersmc.terrestria.feature.tree.foliageplacers.templates.SmallFoliagePlacer;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 	public static final MapCodec<SmallCanopyFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(smallCanopyFoliagePlacerInstance ->
-			fillFoliagePlacerFields(smallCanopyFoliagePlacerInstance).apply(smallCanopyFoliagePlacerInstance, SmallCanopyFoliagePlacer::new));
+			foliagePlacerParts(smallCanopyFoliagePlacerInstance).apply(smallCanopyFoliagePlacerInstance, SmallCanopyFoliagePlacer::new));
 
 	public SmallCanopyFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
-	protected FoliagePlacerType<?> getType() {
+	protected FoliagePlacerType<?> type() {
 		return TerrestriaFoliagePlacerTypes.SMALL_CANOPY;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 
-		int diameter = treeNode.getFoliageRadius() * 2;
-		BlockPos pos = treeNode.getCenter();
+		int diameter = treeNode.radiusOffset() * 2;
+		BlockPos pos = treeNode.pos();
 
 		Shapes.hemiEllipsoid(diameter * 1.1, diameter * 1.1, diameter * 1.8)
 				.applyLayer(new SubtractLayer(Shapes.hemiEllipsoid(diameter - 2, diameter - 2, diameter - 1)))
-				.applyLayer(TranslateLayer.of(Position.of(pos.down(2))))
+				.applyLayer(TranslateLayer.of(Position.of(pos.below(2))))
 				.stream()
 				.forEach((position) -> {
 					//On the bottom layer only place 50% of the blocks
@@ -50,12 +51,12 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
 		return 0;
 	}
 
 	@Override
-	protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
+	protected boolean shouldSkipLocation(RandomSource random, int baseHeight, int dx, int dy, int dz, boolean bl) {
 		return false;
 	}
 }

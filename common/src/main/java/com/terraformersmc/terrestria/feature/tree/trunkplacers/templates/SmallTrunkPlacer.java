@@ -1,15 +1,15 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers.templates;
 
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.trunk.TrunkPlacer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 
 import java.util.function.BiConsumer;
 
@@ -19,43 +19,43 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
 	}
 
-	protected void setBlockStateAndUpdate(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction) {
+	protected void setBlockStateAndUpdate(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos origin, Direction direction) {
 		//Place the block
-		checkAndPlaceSpecificBlockState(world, origin, replacer, config.trunkProvider.get(random, origin).with(getPropertyFromDirection(direction.getOpposite()), true));
+		checkAndPlaceSpecificBlockState(world, origin, replacer, config.trunkProvider.getState(random, origin).setValue(getPropertyFromDirection(direction.getOpposite()), true));
 
 		// Fix the one behind it to connect if it's a BareSmallLogBlock
-		addSmallLogConnection(config, random, replacer, world, origin.offset(direction.getOpposite()), direction);
+		addSmallLogConnection(config, random, replacer, world, origin.relative(direction.getOpposite()), direction);
 	}
 
-	protected void addSmallLogConnection(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction) {
-		if (world.testBlockState(origin, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
-			placeSpecificBlockState(world, replacer, origin, getOriginalState(config, world, origin, random).with(getPropertyFromDirection(direction), true));
+	protected void addSmallLogConnection(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos origin, Direction direction) {
+		if (world.isStateAtPosition(origin, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
+			placeSpecificBlockState(world, replacer, origin, getOriginalState(config, world, origin, random).setValue(getPropertyFromDirection(direction), true));
 		}
 	}
 
-	protected static void checkAndPlaceSpecificBlockState(TestableWorld testableWorld, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
-		if (TreeFeature.canReplace(testableWorld, blockPos)) {
+	protected static void checkAndPlaceSpecificBlockState(LevelSimulatedReader testableWorld, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
+		if (TreeFeature.validTreePos(testableWorld, blockPos)) {
 			placeSpecificBlockState(testableWorld, replacer, blockPos, blockState);
 		}
 	}
 
-	protected static void placeSpecificBlockState(TestableWorld testableWorld, BiConsumer<BlockPos, BlockState> replacer, BlockPos blockPos, BlockState blockState) {
-		replacer.accept(blockPos.toImmutable(), blockState);
+	protected static void placeSpecificBlockState(LevelSimulatedReader testableWorld, BiConsumer<BlockPos, BlockState> replacer, BlockPos blockPos, BlockState blockState) {
+		replacer.accept(blockPos.immutable(), blockState);
 	}
 
-	protected BlockState getOriginalState(TreeFeatureConfig config, TestableWorld world, BlockPos pos, Random random) {
+	protected BlockState getOriginalState(TreeConfiguration config, LevelSimulatedReader world, BlockPos pos, RandomSource random) {
 
-		if (!world.testBlockState(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
+		if (!world.isStateAtPosition(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
 			return null;
 		}
 
-		return config.trunkProvider.get(random, pos)
-				.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
-				.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
-				.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
-				.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
-				.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
-				.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)));
+		return config.trunkProvider.getState(random, pos)
+				.setValue(BareSmallLogBlock.NORTH, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.NORTH)))
+				.setValue(BareSmallLogBlock.SOUTH, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.SOUTH)))
+				.setValue(BareSmallLogBlock.EAST, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.EAST)))
+				.setValue(BareSmallLogBlock.WEST, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.WEST)))
+				.setValue(BareSmallLogBlock.UP, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.UP)))
+				.setValue(BareSmallLogBlock.DOWN, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.DOWN)));
 	}
 
 	protected BooleanProperty getPropertyFromDirection(Direction direction) {

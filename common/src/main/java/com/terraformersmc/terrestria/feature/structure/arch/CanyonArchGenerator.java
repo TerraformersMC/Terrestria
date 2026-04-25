@@ -2,18 +2,18 @@ package com.terraformersmc.terrestria.feature.structure.arch;
 
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructurePiece;
-import net.minecraft.util.math.BlockBox;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 
 public class CanyonArchGenerator extends StructurePiece {
 	private final OpenSimplexNoise noise;
@@ -27,7 +27,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private final int centerX;
 	private final int centerZ;
 
-	CanyonArchGenerator(Random random, int centerX, int centerZ) {
+	CanyonArchGenerator(RandomSource random, int centerX, int centerZ) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null);
 		this.setOrientation(null);
 
@@ -48,26 +48,26 @@ public class CanyonArchGenerator extends StructurePiece {
 		// Just to be sure.
 		int radiusBound = radius + 5;
 
-		this.boundingBox = new BlockBox(this.centerX - radiusBound, yStart, this.centerZ - radiusBound, this.centerX + radiusBound, yStart + maxHeight, this.centerZ + radiusBound);
+		this.boundingBox = new BoundingBox(this.centerX - radiusBound, yStart, this.centerZ - radiusBound, this.centerX + radiusBound, yStart + maxHeight, this.centerZ + radiusBound);
 	}
 
-	public CanyonArchGenerator(StructureContext context, NbtCompound tag) {
+	public CanyonArchGenerator(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, tag);
 
-		noise = new OpenSimplexNoise(tag.getLong("NoiseSeed", 0));
+		noise = new OpenSimplexNoise(tag.getLongOr("NoiseSeed", 0));
 
-		a = tag.getFloat("a", 0);
-		b = tag.getFloat("b", 0);
-		maxHeight = tag.getInt("MaxHeight", 0);
-		radius = tag.getInt("Radius", 0);
-		yStart = tag.getInt("YStart", 0);
+		a = tag.getFloatOr("a", 0);
+		b = tag.getFloatOr("b", 0);
+		maxHeight = tag.getIntOr("MaxHeight", 0);
+		radius = tag.getIntOr("Radius", 0);
+		yStart = tag.getIntOr("YStart", 0);
 
-		centerX = tag.getInt("CenterX", 0);
-		centerZ = tag.getInt("CenterZ", 0);
+		centerX = tag.getIntOr("CenterX", 0);
+		centerZ = tag.getIntOr("CenterZ", 0);
 	}
 
 	@Override
-	protected void writeNbt(StructureContext context, NbtCompound tag) {
+	protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
 		tag.putLong("NoiseSeed", noise.getSeed());
 
 		tag.putFloat("a", a);
@@ -81,15 +81,15 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.getMinY() > this.boundingBox.getMinY() || box.getMaxY() < this.boundingBox.getMaxY()) {
+	public void postProcess(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos blockPos) {
+		if (box.minY() > this.boundingBox.minY() || box.maxY() < this.boundingBox.maxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
-		for (int z = box.getMinZ(); z <= box.getMaxZ(); z++) {
-			for (int x = box.getMinX(); x <= box.getMaxX(); x++) {
+		for (int z = box.minZ(); z <= box.maxZ(); z++) {
+			for (int x = box.minX(); x <= box.maxX(); x++) {
 
 				double noiseValue = noise.sample(x * 0.05, z * 0.05);
 				double height = maxHeight - Math.abs(noiseValue) * 8;
@@ -97,7 +97,7 @@ public class CanyonArchGenerator extends StructurePiece {
 				for (int h = 0; h < height; h++) {
 					if (shapeArch(h, x, z)) {
 						pos.set(x, yStart + h, z);
-						world.setBlockState(pos, getStateAtY(h, x, z), 2);
+						world.setBlock(pos, getStateAtY(h, x, z), 2);
 					}
 				}
 			}
@@ -155,11 +155,11 @@ public class CanyonArchGenerator extends StructurePiece {
 		double noiseValue = Math.abs(noise.sample(x * 0.05, z * 0.05));
 
 		if (noiseValue * 3 > height % 6) {
-			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
+			return Blocks.SMOOTH_SANDSTONE.defaultBlockState();
 		} else if (noiseValue * 4 > height % 3) {
-			return Blocks.TERRACOTTA.getDefaultState();
+			return Blocks.TERRACOTTA.defaultBlockState();
 		} else {
-			return Blocks.SMOOTH_SANDSTONE.getDefaultState();
+			return Blocks.SMOOTH_SANDSTONE.defaultBlockState();
 		}
 	}
 }

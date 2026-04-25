@@ -3,20 +3,24 @@ package com.terraformersmc.terrestria.feature.structure.volcano;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.structure.StructureContext;
-import net.minecraft.structure.StructurePiece;
-import net.minecraft.util.math.*;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.StructureAccessor;
-import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.tick.OrderedTick;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.ticks.ScheduledTick;
 
 public class VolcanoGenerator extends StructurePiece {
 	private final SimpleRadialNoise radiusNoise;
@@ -36,7 +40,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private final int centerX;
 	private final int centerZ;
 
-	VolcanoGenerator(Random random, int centerX, int centerZ, IntProvider heightProvider, int baseY, boolean thinIfTall) {
+	VolcanoGenerator(RandomSource random, int centerX, int centerZ, IntProvider heightProvider, int baseY, boolean thinIfTall) {
 		super(TerrestriaStructures.VOLCANO_PIECE, 0, null);
 		this.setOrientation(null);
 
@@ -49,7 +53,7 @@ public class VolcanoGenerator extends StructurePiece {
 		chamberOreSeed = random.nextLong();
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		this.height = heightProvider.get(random);
+		this.height = heightProvider.sample(random);
 		this.baseY = baseY;
 
 		if (height < 48) {
@@ -69,30 +73,30 @@ public class VolcanoGenerator extends StructurePiece {
 
 		underwater = baseY + lavaHeight < 64;
 
-		int radiusBound = MathHelper.ceil(radius * 1.5);
+		int radiusBound = Mth.ceil(radius * 1.5);
 
-		this.boundingBox = new BlockBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
+		this.boundingBox = new BoundingBox(centerX - radiusBound, 1, centerZ - radiusBound, centerX + radiusBound, 62 + height, centerZ + radiusBound);
 	}
 
-	public VolcanoGenerator(StructureContext context, NbtCompound tag) {
+	public VolcanoGenerator(StructurePieceSerializationContext context, CompoundTag tag) {
 		super(TerrestriaStructures.VOLCANO_PIECE, tag);
 
-		radiusNoise = new SimpleRadialNoise(16, tag.getLong("VRN", 0), 0.75, 0.5);
-		vegetationNoise = new SimpleRadialNoise(16, tag.getLong("VVN", 0), 0.25, 0.5);
-		chamberNoise = new SimpleRadialNoise(16, tag.getLong("VCN", 0), 0.75, 0.5);
-		chamberOreSeed = tag.getLong("VCON", 0);
+		radiusNoise = new SimpleRadialNoise(16, tag.getLongOr("VRN", 0), 0.75, 0.5);
+		vegetationNoise = new SimpleRadialNoise(16, tag.getLongOr("VVN", 0), 0.25, 0.5);
+		chamberNoise = new SimpleRadialNoise(16, tag.getLongOr("VCN", 0), 0.75, 0.5);
+		chamberOreSeed = tag.getLongOr("VCON", 0);
 		chamberOreNoise = new OpenSimplexNoise(chamberOreSeed);
 
-		height = tag.getInt("VH", 0);
-		radius = tag.getInt("VR", 0);
-		lavaHeight = tag.getInt("VL", 0);
-		lavaTubeLength = tag.getInt("VLT", 0);
-		baseY = tag.getInt("Y", 0);
-		chamberHeight = tag.getInt("VCH", 0);
-		underwater = tag.getBoolean("VU", false);
+		height = tag.getIntOr("VH", 0);
+		radius = tag.getIntOr("VR", 0);
+		lavaHeight = tag.getIntOr("VL", 0);
+		lavaTubeLength = tag.getIntOr("VLT", 0);
+		baseY = tag.getIntOr("Y", 0);
+		chamberHeight = tag.getIntOr("VCH", 0);
+		underwater = tag.getBooleanOr("VU", false);
 
-		centerX = tag.getInt("CX", 0);
-		centerZ = tag.getInt("CZ", 0);
+		centerX = tag.getIntOr("CX", 0);
+		centerZ = tag.getIntOr("CZ", 0);
 	}
 
 	private static double positionToAngle(double dist, double dX, double dZ) {
@@ -137,7 +141,7 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	protected void writeNbt(StructureContext context, NbtCompound tag) {
+	protected void addAdditionalSaveData(StructurePieceSerializationContext context, CompoundTag tag) {
 		tag.putLong("VRN", radiusNoise.getSeed());
 		tag.putLong("VVN", vegetationNoise.getSeed());
 		tag.putLong("VCN", chamberNoise.getSeed());
@@ -155,17 +159,17 @@ public class VolcanoGenerator extends StructurePiece {
 	}
 
 	@Override
-	public void generate(StructureWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockBox box, ChunkPos chunkPos, BlockPos blockPos) {
-		if (box.getMinY() > this.boundingBox.getMinY() || box.getMaxY() < this.boundingBox.getMaxY()) {
+	public void postProcess(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos blockPos) {
+		if (box.minY() > this.boundingBox.minY() || box.maxY() < this.boundingBox.maxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
 
 		int chamberMiddle = baseY - lavaTubeLength - chamberHeight / 2;
 
-		BlockPos.Mutable pos = new BlockPos.Mutable();
+		BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
-		for (int z = box.getMinZ(); z <= box.getMaxZ(); z++) {
-			for (int x = box.getMinX(); x <= box.getMaxX(); x++) {
+		for (int z = box.minZ(); z <= box.maxZ(); z++) {
+			for (int x = box.minX(); x <= box.maxX(); x++) {
 				int dX = x - centerX;
 				int dZ = z - centerZ;
 
@@ -186,12 +190,12 @@ public class VolcanoGenerator extends StructurePiece {
 				if (chamberShape > 0.0) {
 					for (int dY = -chamberDY; dY <= chamberDY; dY++) {
 						pos.set(x, chamberMiddle + dY, z);
-						world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
-						world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));
+						world.setBlock(pos, Blocks.LAVA.defaultBlockState(), 2);
+						world.getFluidTicks().schedule(ScheduledTick.probe(world.getFluidState(pos).getType(), pos));
 					}
 				} else if (chamberShape > -0.1) {
 					pos.set(x, chamberMiddle, z);
-					world.setBlockState(pos, pickRandomChamberBlock(true, dX, dZ), 2);
+					world.setBlock(pos, pickRandomChamberBlock(true, dX, dZ), 2);
 				}
 
 				// The center of the volcano is a lava tube, arranged in a plus sign shape.
@@ -201,19 +205,19 @@ public class VolcanoGenerator extends StructurePiece {
 						pos.set(x, baseY + dY, z);
 
 						if (underwater && dY == lavaHeight - 1) {
-							BlockState state = random.nextInt(4) == 0 ? Blocks.MAGMA_BLOCK.getDefaultState() : Blocks.OBSIDIAN.getDefaultState();
+							BlockState state = random.nextInt(4) == 0 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.OBSIDIAN.defaultBlockState();
 
-							world.setBlockState(pos, state, 2);
+							world.setBlock(pos, state, 2);
 						} else {
-							world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
-							world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));;
+							world.setBlock(pos, Blocks.LAVA.defaultBlockState(), 2);
+							world.getFluidTicks().schedule(ScheduledTick.probe(world.getFluidState(pos).getType(), pos));;
 						}
 					}
 
 					continue;
 				} else if (chamberShape > 0.0) {
-					world.setBlockState(pos.set(x, chamberMiddle + chamberDY + 1, z), pickRandomChamberBlock(true, dX, dZ), 2);
-					world.setBlockState(pos.set(x, chamberMiddle - chamberDY - 1, z), pickRandomChamberBlock(false, dX, dZ), 2);
+					world.setBlock(pos.set(x, chamberMiddle + chamberDY + 1, z), pickRandomChamberBlock(true, dX, dZ), 2);
+					world.setBlock(pos.set(x, chamberMiddle - chamberDY - 1, z), pickRandomChamberBlock(false, dX, dZ), 2);
 				}
 
 				// Otherwise, proceed with normal generation. Sample the necessary values.
@@ -223,7 +227,7 @@ public class VolcanoGenerator extends StructurePiece {
 
 				double scaled = (dist / radius) * noise;
 				int columnHeight = (int) (shape(scaled) * height);
-				BlockState top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
+				BlockState top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState();
 
 				// Below bedrock, skip.
 
@@ -245,22 +249,22 @@ public class VolcanoGenerator extends StructurePiece {
 					double scaledHeight = (double) (columnHeight) / (double) (lavaHeight);
 					if (scaledHeight < vegetation) {
 						if (columnHeight < 4) {
-							top = TerrestriaBlocks.VOLCANIC_SAND.getDefaultState();
+							top = TerrestriaBlocks.VOLCANIC_SAND.defaultBlockState();
 						} else {
-							top = TerrestriaBlocks.ANDISOL.getGrassBlock().getDefaultState();
+							top = TerrestriaBlocks.ANDISOL.getGrassBlock().defaultBlockState();
 						}
 					}
 				}
 
 				// Place the basalt column to the specified height.
 
-				int startY = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR_WG, new BlockPos(x, 0, z)).getY() - baseY;
+				int startY = world.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR_WG, new BlockPos(x, 0, z)).getY() - baseY;
 
 				for (int dY = startY; dY < columnHeight - 1; dY++) {
 					pos.set(x, baseY + dY, z);
 
-					if (world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) {
-						world.setBlockState(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(), 2);
+					if (world.getBlockState(pos).isAir() || world.getFluidState(pos).getType() == Fluids.WATER) {
+						world.setBlock(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState(), 2);
 					}
 				}
 
@@ -273,12 +277,12 @@ public class VolcanoGenerator extends StructurePiece {
 					for (int y = startY; y < endY; y++) {
 						pos.set(x, y, z);
 
-						world.setBlockState(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState(), 2);
+						world.setBlock(pos, TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState(), 2);
 					}
 
 					// The bowl fill logic can miss placing lava directly above the center columns.
 					pos.move(Direction.UP);
-					world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
+					world.setBlock(pos, Blocks.LAVA.defaultBlockState(), 2);
 				}
 
 				// Some complex top block logic:
@@ -291,13 +295,13 @@ public class VolcanoGenerator extends StructurePiece {
 
 				if (baseY < 60 || !world.getBlockState(pos).isAir()) {
 					if (underwater && random.nextInt(80) == 0) {
-						top = Blocks.MAGMA_BLOCK.getDefaultState();
+						top = Blocks.MAGMA_BLOCK.defaultBlockState();
 					} else {
-						top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
+						top = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState();
 					}
 				} else if (scaled > 0.25 && scaled < 0.35) {
 					if (!underwater && random.nextInt(320) == 0) {
-						top = Blocks.LAVA.getDefaultState();
+						top = Blocks.LAVA.defaultBlockState();
 						lava = true;
 					}
 				}
@@ -306,11 +310,11 @@ public class VolcanoGenerator extends StructurePiece {
 
 				pos.move(Direction.DOWN);
 
-				if ((world.getBlockState(pos).isAir() || world.getFluidState(pos).getFluid() == Fluids.WATER) && startY < columnHeight) {
-					world.setBlockState(pos, top, 2);
+				if ((world.getBlockState(pos).isAir() || world.getFluidState(pos).getType() == Fluids.WATER) && startY < columnHeight) {
+					world.setBlock(pos, top, 2);
 
 					if (lava) {
-						world.getFluidTickScheduler().scheduleTick(OrderedTick.create(world.getFluidState(pos).getFluid(), pos));
+						world.getFluidTicks().schedule(ScheduledTick.probe(world.getFluidState(pos).getType(), pos));
 					}
 				}
 
@@ -322,11 +326,11 @@ public class VolcanoGenerator extends StructurePiece {
 						pos.set(x, baseY + dY, z);
 
 						if (underwater && dY == lavaHeight - 1) {
-							BlockState state = random.nextInt(6) == 0 ? Blocks.MAGMA_BLOCK.getDefaultState() : Blocks.OBSIDIAN.getDefaultState();
+							BlockState state = random.nextInt(6) == 0 ? Blocks.MAGMA_BLOCK.defaultBlockState() : Blocks.OBSIDIAN.defaultBlockState();
 
-							world.setBlockState(pos, state, 2);
+							world.setBlock(pos, state, 2);
 						} else {
-							world.setBlockState(pos, Blocks.LAVA.getDefaultState(), 2);
+							world.setBlock(pos, Blocks.LAVA.defaultBlockState(), 2);
 						}
 					}
 				}
@@ -344,11 +348,11 @@ public class VolcanoGenerator extends StructurePiece {
 		double obsidianNoise = chamberOreNoise.sample(dX * 0.05, -dZ * 0.05);
 
 		if (diamondNoise > 0.70) {
-			return Blocks.DIAMOND_ORE.getDefaultState();
+			return Blocks.DIAMOND_ORE.defaultBlockState();
 		} else if (goldNoise < -0.75) {
-			return Blocks.GOLD_ORE.getDefaultState();
+			return Blocks.GOLD_ORE.defaultBlockState();
 		} else {
-			return obsidianNoise > 0.25 ? Blocks.OBSIDIAN.getDefaultState() : TerrestriaBlocks.VOLCANIC_ROCK.plain.full.getDefaultState();
+			return obsidianNoise > 0.25 ? Blocks.OBSIDIAN.defaultBlockState() : TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState();
 		}
 	}
 }

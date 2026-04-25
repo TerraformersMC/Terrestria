@@ -1,76 +1,77 @@
 package com.terraformersmc.terrestria.block;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Fertilizable;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCollisionHandler;
-import net.minecraft.entity.ai.pathing.NavigationType;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 
 import org.joml.Vector3d;
 
-public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implements Fertilizable {
-	public PricklyDesertPlantBlock(Settings settings) {
+public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implements BonemealableBlock {
+	public PricklyDesertPlantBlock(Properties settings) {
 		super(false, settings);
 	}
 
-	public PricklyDesertPlantBlock(boolean onlySand, Settings settings) {
+	public PricklyDesertPlantBlock(boolean onlySand, Properties settings) {
 		super(onlySand, settings);
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
-		for (Direction direction : DIRECTIONS) {
-			if (world.getBlockState(pos.offset(direction)).isOf(this)) {
+	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
+		for (Direction direction : UPDATE_SHAPE_ORDER) {
+			if (world.getBlockState(pos.relative(direction)).is(this)) {
 				return false;
 			}
 		}
 
-		return world.getBlockState(pos).isAir() && super.canPlaceAt(state, world, pos);
+		return world.getBlockState(pos).isAir() && super.canSurvive(state, world, pos);
 	}
 
 	@Override
-	public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
-		return world.getBlockState(pos.down()).isIn(BlockTags.SAND);
+	public boolean isValidBonemealTarget(LevelReader world, BlockPos pos, BlockState state) {
+		return world.getBlockState(pos.below()).is(BlockTags.SAND);
 	}
 
 	@Override
-	public boolean canGrow(World world, Random random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level world, RandomSource random, BlockPos pos, BlockState state) {
 		return true;
 	}
 
 	@Override
-	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
 		for (int tries = 30; tries > 0; --tries) {
 			double rotation = random.nextDouble() * 2d * Math.PI;
 			double distance = random.nextDouble() * 8 + 0.5d;
 
 			Vector3d newCoord = new Vector3d(distance, 0d, 0d).rotateY(rotation).add(pos.getX(), pos.getY(), pos.getZ());
-			BlockPos testPos = BlockPos.ofFloored(newCoord.x, newCoord.y, newCoord.z);
+			BlockPos testPos = BlockPos.containing(newCoord.x, newCoord.y, newCoord.z);
 
 			// Lucky guess
-			if (this.canPlaceAt(this.getDefaultState(), world, testPos)) {
-				world.setBlockState(testPos, this.getDefaultState());
+			if (this.canSurvive(this.defaultBlockState(), world, testPos)) {
+				world.setBlockAndUpdate(testPos, this.defaultBlockState());
 
 				continue;
 			}
 
 			// Try a ways up and a ways down
 			for (int yDelta = 0; yDelta < 5; ++yDelta) {
-				if (this.canPlaceAt(this.getDefaultState(), world, testPos.up(yDelta))) {
-					world.setBlockState(testPos.up(yDelta), this.getDefaultState());
+				if (this.canSurvive(this.defaultBlockState(), world, testPos.above(yDelta))) {
+					world.setBlockAndUpdate(testPos.above(yDelta), this.defaultBlockState());
 
 					break;
 				}
 
-				if (this.canPlaceAt(this.getDefaultState(), world, testPos.down(yDelta))) {
-					world.setBlockState(testPos.down(yDelta), this.getDefaultState());
+				if (this.canSurvive(this.defaultBlockState(), world, testPos.below(yDelta))) {
+					world.setBlockAndUpdate(testPos.below(yDelta), this.defaultBlockState());
 
 					break;
 				}
@@ -79,14 +80,14 @@ public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implement
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, EntityCollisionHandler handler, boolean initial) {
-		if (world instanceof ServerWorld serverWorld) {
-			entity.damage(serverWorld, world.getDamageSources().cactus(), 1.0f);
+	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean initial) {
+		if (world instanceof ServerLevel serverWorld) {
+			entity.hurtServer(serverWorld, world.damageSources().cactus(), 1.0f);
 		}
 	}
 
 	@Override
-	public boolean canPathfindThrough(BlockState state, NavigationType type) {
+	public boolean isPathfindable(BlockState state, PathComputationType type) {
 		return false;
 	}
 }

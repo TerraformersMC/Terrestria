@@ -4,19 +4,19 @@ import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
 import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.TerrestriaWorldgen;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.noise.DoublePerlinNoiseSampler;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.chunk.BlockColumn;
-import net.minecraft.world.gen.noise.NoiseParametersKeys;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.BlockColumn;
+import net.minecraft.world.level.levelgen.Noises;
 
 public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise ISLAND_NOISE = new OpenSimplexNoise(346987);
@@ -38,19 +38,19 @@ public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
-		ServerWorld overworld = TerrestriaWorldgen.getOverworld();
+	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+		ServerLevel overworld = TerrestriaWorldgen.getOverworld();
 		if (overworld == null) {
 			throw new IllegalStateException("Overworld does not exist during Overworld surface generation...");
 		}
-		DoublePerlinNoiseSampler surface = overworld.getChunkManager().chunkLoadingManager.noiseConfig
-				.getOrCreateSampler(NoiseParametersKeys.SURFACE);
+		NormalNoise surface = overworld.getChunkSource().chunkMap.randomState
+				.getOrCreateNoise(Noises.SURFACE);
 
 		// Find the original top Y value, the desired top Y value, and the delta between them.
 		// We can't trust the provided vHeight because we need the ocean floor instead of surface.
-		vHeight = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
-		int top = seaLevel + ISLAND_HEIGHT + (int) (NOISE_SCALE * surface.sample(x, seaLevel, z));
-		int delta = MathHelper.clamp(top - vHeight, 0, 128);
+		vHeight = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
+		int top = seaLevel + ISLAND_HEIGHT + (int) (NOISE_SCALE * surface.getValue(x, seaLevel, z));
+		int delta = Mth.clamp(top - vHeight, 0, 128);
 
 		// Work around noise-adapting structures (like villages)...
 		if (vHeight >= seaLevel - 2) {
@@ -66,16 +66,16 @@ public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 
 		top = vHeight + delta;
 		for (int y = 0; y <= top; y++) {
-			BlockState originalState = column.getState(y);
-			if (originalState.isOf(Blocks.STONE) || originalState.isOf(Blocks.WATER) || originalState.isAir()) {
+			BlockState originalState = column.getBlock(y);
+			if (originalState.is(Blocks.STONE) || originalState.is(Blocks.WATER) || originalState.isAir()) {
 				if (top > seaLevel + 9) {
 					// In this case we are generating island "inland".
 					if (y < top - 3) {
-						column.setState(y, lowMaterial);
+						column.setBlock(y, lowMaterial);
 					} else if (y < top) {
-						column.setState(y, midMaterial);
+						column.setBlock(y, midMaterial);
 					} else {
-						column.setState(y, topMaterial);
+						column.setBlock(y, topMaterial);
 					}
 				} else {
 					// The noise below distributes the beach sand colors.
@@ -84,25 +84,25 @@ public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 					if (top >= seaLevel) {
 						// In this case we are generating island beach.
 						if (y < seaLevel - 3) {
-							column.setState(y, lowMaterial);
+							column.setBlock(y, lowMaterial);
 						} else if (ISLAND_NOISE.sample(x * 0.04D, z * 0.04D) > 0.3D) {
 							// The noise above creates "breakthrough" areas where there is no cliff.
-							column.setState(y, y == top ? topMaterial : midMaterial);
+							column.setBlock(y, y == top ? topMaterial : midMaterial);
 						} else if (y < seaLevel) {
 							// Place the main beach surface.
-							column.setState(y, surfaceBias ? beachMaterial : underwaterMaterial);
+							column.setBlock(y, surfaceBias ? beachMaterial : underwaterMaterial);
 						} else if (y < seaLevel - 1 + (top - seaLevel) / 4.5D && top > seaLevel + 4) {
 							// Raise the beach level in some interior locations.
-							column.setState(y, surfaceBias ? rand.nextFloat() > 0.78D ? lowMaterial : beachMaterial : underwaterMaterial);
+							column.setBlock(y, surfaceBias ? rand.nextFloat() > 0.78D ? lowMaterial : beachMaterial : underwaterMaterial);
 						} else {
-							column.setState(y, Blocks.AIR.getDefaultState());
+							column.setBlock(y, Blocks.AIR.defaultBlockState());
 						}
 					} else {
 						// In this case we are generating island off-shore (ocean).
 						if (y < top - 3) {
-							column.setState(y, lowMaterial);
+							column.setBlock(y, lowMaterial);
 						} else {
-							column.setState(y, surfaceBias ? beachMaterial : underwaterMaterial);
+							column.setBlock(y, surfaceBias ? beachMaterial : underwaterMaterial);
 						}
 					}
 				}

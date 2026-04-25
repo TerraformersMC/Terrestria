@@ -4,9 +4,9 @@ import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.tree.api.placer.PlacerTypes;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.trunk.TrunkPlacer;
-import net.minecraft.world.gen.trunk.TrunkPlacerType;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 public class TerrestriaTrunkPlacerTypes {
 	public static TrunkPlacerType<BentTrunkPlacer> BENT;
@@ -36,6 +36,6 @@ public class TerrestriaTrunkPlacerTypes {
 	}
 
 	private static <P extends TrunkPlacer> TrunkPlacerType<P> register(String name, MapCodec<P> codec) {
-		return PlacerTypes.registerTrunkPlacer(Identifier.of(Terrestria.MOD_ID, name), codec);
+		return PlacerTypes.registerTrunkPlacer(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name), codec);
 	}
 }

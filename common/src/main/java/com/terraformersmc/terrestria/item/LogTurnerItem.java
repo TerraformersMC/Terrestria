@@ -4,84 +4,85 @@ import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.PillarBlock;
-import net.minecraft.component.type.TooltipDisplayComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
-import net.minecraft.util.Language;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.ChatFormatting;
+import net.minecraft.locale.Language;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
 
 import java.util.function.Consumer;
 
 public class LogTurnerItem extends Item {
-	public LogTurnerItem(Settings settings) {
+	public LogTurnerItem(Properties settings) {
 		super(settings);
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context) {
-		BlockPos pos = context.getBlockPos();
-		World world = context.getWorld();
+	public InteractionResult useOn(UseOnContext context) {
+		BlockPos pos = context.getClickedPos();
+		Level world = context.getLevel();
 
 		BlockState state = world.getBlockState(pos);
 
-		if (!(state.getBlock() instanceof PillarBlock)) {
-			return ActionResult.PASS;
+		if (!(state.getBlock() instanceof RotatedPillarBlock)) {
+			return InteractionResult.PASS;
 		}
 
-		Direction.Axis currentAxis = state.get(PillarBlock.AXIS);
+		Direction.Axis currentAxis = state.getValue(RotatedPillarBlock.AXIS);
 
-		if (context.getPlayer() != null && context.getPlayer().isSneaking()) {
+		if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown()) {
 			if (state.getBlock() instanceof QuarterLogBlock) {
 				state = state.cycle(QuarterLogBlock.BARK_SIDE);
 
 				// First cycle the bark side. If we return to the start, then cycle the axis too.
-				if (state.get(QuarterLogBlock.BARK_SIDE) == QuarterLogBlock.BarkSide.SOUTHWEST) {
-					state = state.cycle(PillarBlock.AXIS);
+				if (state.getValue(QuarterLogBlock.BARK_SIDE) == QuarterLogBlock.BarkSide.SOUTHWEST) {
+					state = state.cycle(RotatedPillarBlock.AXIS);
 				}
 
-				world.setBlockState(pos, state);
+				world.setBlockAndUpdate(pos, state);
 			} else {
-				world.setBlockState(pos, state.cycle(PillarBlock.AXIS));
+				world.setBlockAndUpdate(pos, state.cycle(RotatedPillarBlock.AXIS));
 			}
 
-			return ActionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else {
-			Direction.Axis newAxis = context.getSide().getAxis();
+			Direction.Axis newAxis = context.getClickedFace().getAxis();
 
 			if (currentAxis != newAxis) {
-				world.setBlockState(pos, state.with(PillarBlock.AXIS, newAxis));
+				world.setBlockAndUpdate(pos, state.setValue(RotatedPillarBlock.AXIS, newAxis));
 
-				return ActionResult.SUCCESS;
+				return InteractionResult.SUCCESS;
 			}
 		}
 
 		if (state.getBlock() instanceof QuarterLogBlock) {
-			world.setBlockState(pos, state.cycle(QuarterLogBlock.BARK_SIDE));
+			world.setBlockAndUpdate(pos, state.cycle(QuarterLogBlock.BARK_SIDE));
 
-			return ActionResult.SUCCESS;
+			return InteractionResult.SUCCESS;
 		} else {
-			return ActionResult.PASS;
+			return InteractionResult.PASS;
 		}
 	}
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent displayComponent, Consumer<Text> textConsumer, TooltipType type) {
-		super.appendTooltip(stack, context, displayComponent, textConsumer, type);
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
+		super.appendHoverText(stack, context, displayComponent, textConsumer, type);
 
-		String translation = Language.getInstance().get("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
+		String translation = Language.getInstance().getOrDefault("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 
 		for (String line: translation.split("\n")) {
-			textConsumer.accept(Text.literal(line.trim()).formatted(Formatting.GRAY));
+			textConsumer.accept(Component.literal(line.trim()).withStyle(ChatFormatting.GRAY));
 		}
 	}
 }

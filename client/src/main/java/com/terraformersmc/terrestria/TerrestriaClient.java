@@ -9,25 +9,25 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.client.color.block.BlockColorProvider;
-import net.minecraft.client.color.world.BiomeColors;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.FoliageColors;
-import net.minecraft.world.biome.GrassColors;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.client.color.block.BlockColor;
+import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.FoliageColor;
+import net.minecraft.world.level.GrassColor;
 
 // This class is an entrypoint
 @Environment(EnvType.CLIENT)
 public class TerrestriaClient implements ClientModInitializer {
-	private static final BlockRenderLayer GRASS_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
-	private static final BlockRenderLayer PLANT_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
-	private static final BlockRenderLayer DOOR_BLOCK_LAYER = BlockRenderLayer.CUTOUT;
+	private static final ChunkSectionLayer GRASS_BLOCK_LAYER = ChunkSectionLayer.CUTOUT;
+	private static final ChunkSectionLayer PLANT_BLOCK_LAYER = ChunkSectionLayer.CUTOUT;
+	private static final ChunkSectionLayer DOOR_BLOCK_LAYER = ChunkSectionLayer.CUTOUT;
 
-	private static final BlockColorProvider FOLIAGE_BLOCK_COLORS =
-			(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getFoliageColor(world, pos) : FoliageColors.DEFAULT;
-	private static final BlockColorProvider GRASS_BLOCK_COLORS =
-			(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getGrassColor(world, pos) : GrassColors.getColor(0.5, 1.0);
+	private static final BlockColor FOLIAGE_BLOCK_COLORS =
+			(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getAverageFoliageColor(world, pos) : FoliageColor.FOLIAGE_DEFAULT;
+	private static final BlockColor GRASS_BLOCK_COLORS =
+			(block, world, pos, layer) -> world != null && pos != null ? BiomeColors.getAverageGrassColor(world, pos) : GrassColor.get(0.5, 1.0);
 
 	@Override
 	public void onInitializeClient() {
@@ -35,8 +35,8 @@ public class TerrestriaClient implements ClientModInitializer {
 		Terrestria.getConfigManager().getClientConfig();
 
 		ParticleRenderEvents.ALLOW_BLOCK_DUST_TINT.register((state, world, pos) ->
-				!state.isOf(TerrestriaBlocks.ANDISOL.getGrassBlock()) &&
-				!state.isIn(TerrestriaBlockTags.SMALL_OAK_LOGS));
+				!state.is(TerrestriaBlocks.ANDISOL.getGrassBlock()) &&
+				!state.is(TerrestriaBlockTags.SMALL_OAK_LOGS));
 
 		ColorProviderRegistry.BLOCK.register(
 				FOLIAGE_BLOCK_COLORS,
@@ -52,7 +52,7 @@ public class TerrestriaClient implements ClientModInitializer {
 		);
 
 		//noinspection ConstantConditions
-		BlockRenderLayerMap.putBlock(TerrestriaBlocks.SAKURA.leafPile, BlockRenderLayer.CUTOUT);
+		BlockRenderLayerMap.putBlock(TerrestriaBlocks.SAKURA.leafPile, ChunkSectionLayer.CUTOUT);
 
 		BlockRenderLayerMap.putBlocks(
 				DOOR_BLOCK_LAYER,
@@ -130,15 +130,15 @@ public class TerrestriaClient implements ClientModInitializer {
 	}
 
 	private void registerEntityRenderers() {
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "redwood"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "hemlock"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "rubber"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "cypress"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "willow"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "japanese_maple"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "rainbow_eucalyptus"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "sakura"));
-		TerraformBoatClientHelper.registerModelLayers(Identifier.of(Terrestria.MOD_ID, "yucca_palm"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "redwood"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "hemlock"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "rubber"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "cypress"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "willow"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "japanese_maple"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "rainbow_eucalyptus"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "sakura"));
+		TerraformBoatClientHelper.registerModelLayers(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "yucca_palm"));
 	}
 
 	private void addColoredGrass(Block grass) {

@@ -1,73 +1,73 @@
 package com.terraformersmc.terrestria.biome;
 
 import com.terraformersmc.terrestria.init.*;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.registry.Registerable;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.GenerationSettings;
-import net.minecraft.world.biome.SpawnSettings;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.carver.ConfiguredCarver;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.PlacedFeature;
-import net.minecraft.world.gen.feature.VegetationPlacedFeatures;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeGenerationSettings;
+import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
 
 public class OutbackBiomes {
-	public static Biome create(Registerable<Biome> registerable) {
-		return new Biome.Builder()
+	public static Biome create(BootstrapContext<Biome> registerable) {
+		return new Biome.BiomeBuilder()
 				.generationSettings(createGenerationSettings(registerable))
-				.spawnSettings(createSpawnSettings())
-				.precipitation(false)
+				.mobSpawnSettings(createSpawnSettings())
+				.hasPrecipitation(false)
 				.temperature(1.8F)
 				.downfall(0.3F)
-				.effects(TerrestriaBiomes.createDefaultBiomeEffects()
+				.specialEffects(TerrestriaBiomes.createDefaultBiomeEffects()
 						.waterColor(0x3f76e4)
 						.build()
 				)
-				.addEnvironmentAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
-						.with(EnvironmentAttributes.BACKGROUND_MUSIC_AUDIO, new BackgroundMusic(SoundEvents.MUSIC_OVERWORLD_BADLANDS))
-						.with(EnvironmentAttributes.SNOW_GOLEM_MELTS_GAMEPLAY, true)
-						.with(EnvironmentAttributes.WATER_FOG_COLOR_VISUAL, 0x50533)
+				.putAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
+						.set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_BADLANDS))
+						.set(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
+						.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x50533)
 						.build()
 				)
 				.build();
 	}
 
-	private static GenerationSettings createGenerationSettings(Registerable<Biome> registerable) {
-		RegistryEntryLookup<ConfiguredCarver<?>> configuredCarvers = registerable.getRegistryLookup(RegistryKeys.CONFIGURED_CARVER);
-		RegistryEntryLookup<PlacedFeature> placedFeatures = registerable.getRegistryLookup(RegistryKeys.PLACED_FEATURE);
+	private static BiomeGenerationSettings createGenerationSettings(BootstrapContext<Biome> registerable) {
+		HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = registerable.lookup(Registries.CONFIGURED_CARVER);
+		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
-		GenerationSettings.LookupBackedBuilder builder = new GenerationSettings.LookupBackedBuilder(placedFeatures, configuredCarvers);
-		DefaultBiomeFeatures.addFossils(builder);
+		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
+		BiomeDefaultFeatures.addFossilDecoration(builder);
 		addBasicFeatures(builder, true);
-		DefaultBiomeFeatures.addDefaultOres(builder);
-		DefaultBiomeFeatures.addClayOre(builder);
-		DefaultBiomeFeatures.addDefaultDisks(builder);
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES));
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_DEAD_GRASS));
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS));
-		builder.feature(GenerationStep.Feature.VEGETAL_DECORATION, VegetationPlacedFeatures.PATCH_DEAD_BUSH_2);
-		DefaultBiomeFeatures.addSavannaGrass(builder);
-		DefaultBiomeFeatures.addDefaultMushrooms(builder);
-		DefaultBiomeFeatures.addDefaultVegetation(builder, true);
-		DefaultBiomeFeatures.addDesertFeatures(builder);
+		BiomeDefaultFeatures.addDefaultOres(builder);
+		BiomeDefaultFeatures.addLushCavesSpecialOres(builder);
+		BiomeDefaultFeatures.addDefaultSoftDisks(builder);
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.RARE_YUCCA_PALM_TREES));
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.PATCH_DEAD_GRASS));
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, placedFeatures.getOrThrow(TerrestriaPlacedFeatures.ACACIA_DOT_SHRUBS));
+		builder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PATCH_DEAD_BUSH_2);
+		BiomeDefaultFeatures.addSavannaExtraGrass(builder);
+		BiomeDefaultFeatures.addDefaultMushrooms(builder);
+		BiomeDefaultFeatures.addDefaultExtraVegetation(builder, true);
+		BiomeDefaultFeatures.addDesertExtraDecoration(builder);
 		return builder.build();
 	}
 
-	private static SpawnSettings createSpawnSettings() {
-		SpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.spawn(SpawnGroup.CREATURE,  1, new SpawnSettings.SpawnEntry(EntityType.HORSE, 2, 6));
-		builder.spawn(SpawnGroup.CREATURE,  1, new SpawnSettings.SpawnEntry(EntityType.DONKEY, 1, 1));
-		builder.spawn(SpawnGroup.CREATURE, 10, new SpawnSettings.SpawnEntry(EntityType.ARMADILLO, 2, 3));
-		builder.creatureSpawnProbability(0.03F);
+	private static MobSpawnSettings createSpawnSettings() {
+		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.HORSE, 2, 6));
+		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.DONKEY, 1, 1));
+		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.ARMADILLO, 2, 3));
+		builder.creatureGenerationProbability(0.03F);
 		return builder.build();
 	}
 }

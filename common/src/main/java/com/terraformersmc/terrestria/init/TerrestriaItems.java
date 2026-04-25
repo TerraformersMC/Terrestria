@@ -7,9 +7,9 @@ import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -119,7 +119,7 @@ public class TerrestriaItems {
 		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
 		DEAD_GRASS = TerrestriaRegistry.registerBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
 
-		LOG_TURNER = TerrestriaRegistry.register("log_turner", LogTurnerItem::new, new Item.Settings());
+		LOG_TURNER = TerrestriaRegistry.register("log_turner", LogTurnerItem::new, new Item.Properties());
 
 		addCompostables();
 		addFuels();

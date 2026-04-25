@@ -6,36 +6,36 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.trunk.TrunkPlacerType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
 public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 	public static final MapCodec<SmallCanopyTree4BranchTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(smallCanopyTree4BranchTrunkPlacerInstance ->
-			fillTrunkPlacerFields(smallCanopyTree4BranchTrunkPlacerInstance).apply(smallCanopyTree4BranchTrunkPlacerInstance, SmallCanopyTree4BranchTrunkPlacer::new));
+			trunkPlacerParts(smallCanopyTree4BranchTrunkPlacerInstance).apply(smallCanopyTree4BranchTrunkPlacerInstance, SmallCanopyTree4BranchTrunkPlacer::new));
 
 	public SmallCanopyTree4BranchTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
 	}
 
 	@Override
-	protected TrunkPlacerType<?> getType() {
+	protected TrunkPlacerType<?> type() {
 		return TerrestriaTrunkPlacerTypes.SMALL_CANOPY_4_BRANCHES;
 	}
 
 	@Override
-	public List<FoliagePlacer.TreeNode> generate(TestableWorld world, BiConsumer<BlockPos, BlockState> replacer, Random random, int trunkHeight, BlockPos pos, TreeFeatureConfig treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
-		BlockPos.Mutable currentPosition = pos.mutableCopy().move(Direction.DOWN);
+		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
 		// Determine the radius
 		int radius = (int)((trunkHeight / 2) + 0.5);
@@ -46,10 +46,10 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 		}
 
 		// Save the current position as the leaf origin
-		BlockPos origin = currentPosition.toImmutable();
+		BlockPos origin = currentPosition.immutable();
 
 		// Place the branches
-		Direction.Type.HORIZONTAL.forEach((direction) -> placeBranch(treeFeatureConfig, random, replacer, world, origin, direction, radius + 1));
+		Direction.Plane.HORIZONTAL.forEach((direction) -> placeBranch(treeFeatureConfig, random, replacer, world, origin, direction, radius + 1));
 
 		// Place the rest of the trunk
 		for (int height = 0; height < trunkHeight; height++) {
@@ -57,12 +57,12 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 		}
 
 		// Return the leaf origin
-		return ImmutableList.of(new FoliagePlacer.TreeNode(origin, radius, false));
+		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(origin, radius, false));
 	}
 
-	private void placeBranch(TreeFeatureConfig config, Random random, BiConsumer<BlockPos, BlockState> replacer, TestableWorld world, BlockPos origin, Direction direction, int length) {
+	private void placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos origin, Direction direction, int length) {
 		for (int position = 0; position < length; position++) {
-			setBlockStateAndUpdate(config, random, replacer, world, origin.offset(direction, position + 1), direction);
+			setBlockStateAndUpdate(config, random, replacer, world, origin.relative(direction, position + 1), direction);
 		}
 	}
 }

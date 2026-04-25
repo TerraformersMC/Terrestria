@@ -1,18 +1,18 @@
 package com.terraformersmc.terrestria.item;
 
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public record ItemGroupEntries(@Nullable ItemConvertible relativeItem, ArrayList<ItemStack> items) {
+public record ItemGroupEntries(@Nullable ItemLike relativeItem, ArrayList<ItemStack> items) {
 	ItemGroupEntries(ArrayList<ItemStack> items) {
 		this(null, items);
 	}
 
-	static ItemGroupEntries empty(@Nullable ItemConvertible relativeItem) {
+	static ItemGroupEntries empty(@Nullable ItemLike relativeItem) {
 		return new ItemGroupEntries(relativeItem, new ArrayList<>(64));
 	}
 
@@ -24,7 +24,7 @@ public record ItemGroupEntries(@Nullable ItemConvertible relativeItem, ArrayList
 		items.add(item);
 	}
 
-	void addItem(ItemConvertible item) {
+	void addItem(ItemLike item) {
 		addItem(new ItemStack(item));
 	}
 

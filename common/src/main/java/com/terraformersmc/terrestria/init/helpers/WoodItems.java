@@ -4,8 +4,12 @@ import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
-import net.minecraft.item.*;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.HangingSignItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.SignItem;
 
 public class WoodItems {
 	private final String name;
@@ -55,11 +59,11 @@ public class WoodItems {
 		pressurePlate = TerrestriaRegistry.registerBlockItem(name + "_pressure_plate", blocks.pressurePlate);
 		trapdoor = TerrestriaRegistry.registerBlockItem(name + "_trapdoor", blocks.trapdoor);
 		shelf = TerrestriaRegistry.registerBlockItem(name + "_shelf", blocks.shelf);
-		sign = TerrestriaRegistry.register(name + "_sign", settings -> new SignItem(blocks.sign, blocks.wallSign, settings), new Item.Settings().maxCount(16).useBlockPrefixedTranslationKey());
-		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new HangingSignItem(blocks.hangingSign, blocks.wallHangingSign, settings), new Item.Settings().maxCount(16).useBlockPrefixedTranslationKey());
+		sign = TerrestriaRegistry.register(name + "_sign", settings -> new SignItem(blocks.sign, blocks.wallSign, settings), new Item.Properties().stacksTo(16).useBlockDescriptionPrefix());
+		hangingSign = TerrestriaRegistry.register(name + "_hanging_sign", settings -> new HangingSignItem(blocks.hangingSign, blocks.wallHangingSign, settings), new Item.Properties().stacksTo(16).useBlockDescriptionPrefix());
 		strippedLog = TerrestriaRegistry.registerBlockItem("stripped_" + name + "_log", blocks.strippedLog);
 
-		Identifier family = Identifier.of(Terrestria.MOD_ID, name);
+		Identifier family = Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name);
 		boat = TerraformBoatItemHelper.registerBoatItem(family, false);
 		chestBoat = TerraformBoatItemHelper.registerBoatItem(family, true);
 

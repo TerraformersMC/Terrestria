@@ -2,19 +2,19 @@ package com.terraformersmc.terrestria.surfacebuilders;
 
 import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.chunk.BlockColumn;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.BlockColumn;
 
 public class ThreeLayerOutlineSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise TLO_NOISE = new OpenSimplexNoise(8675309);
 
-	public static final BlockState STONE = Blocks.STONE.getDefaultState();
+	public static final BlockState STONE = Blocks.STONE.defaultBlockState();
 
 	private final BlockState topMaterial;
 	private final BlockState topMiddle;
@@ -35,20 +35,20 @@ public class ThreeLayerOutlineSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		double noise = TLO_NOISE.sample(x, z);
 		int run = -1;
 
 		for (int y = vHeight; y >= 0; --y) {
-			Block currentBlock = column.getState(y).getBlock();
+			Block currentBlock = column.getBlock(y).getBlock();
 			++run;
 
 			if (currentBlock == Blocks.WATER) {
 				run = -2;
-				column.setState(y, Blocks.WATER.getDefaultState());
+				column.setBlock(y, Blocks.WATER.defaultBlockState());
 			} else if (currentBlock == Blocks.AIR) {
 				run = -1;
-				column.setState(y, Blocks.AIR.getDefaultState());
+				column.setBlock(y, Blocks.AIR.defaultBlockState());
 			} else if (currentBlock == Blocks.STONE) {
 				BlockState stateToSet;
 				if (run == 0) {
@@ -67,7 +67,7 @@ public class ThreeLayerOutlineSurfaceBuilder extends BiolithSurfaceBuilder {
 				} else {
 					stateToSet = STONE;
 				}
-				column.setState(y, stateToSet);
+				column.setBlock(y, stateToSet);
 			}
 		}
 	}

@@ -1,0 +1,47 @@
+package com.terraformersmc.terrestria.mixin;
+
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.Level;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+
+@Mixin(LiquidBlock.class)
+public class MixinLiquidBlock {
+	@WrapOperation(method = "shouldSpreadLiquid",
+			at = @At(
+					value = "INVOKE",
+					target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z",
+					ordinal = 0
+			)
+	)
+	@SuppressWarnings("unused")
+	private boolean terrestria$generateVolcanicCobblestone(Level world, BlockPos pos, BlockState newState, Operation<Boolean> original) {
+		// This is the cobble generation pathway; see also: MixinLavaFluid.
+
+		// In this method, newState can alternatively be Obsidian.
+		if (newState.is(Blocks.COBBLESTONE)) {
+			// Search immediately adjacent blocks for Volcanic Rock variants.
+			for (Direction towards : Direction.values()) {
+				BlockState neighbor = world.getBlockState(pos.relative(towards));
+
+				if (neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.plain.full) ||
+						neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.cobblestone.full) ||
+						neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.bricks.full)) {
+
+					// If Volcanic neighbor found, convert to Volcanic Cobblestone.
+					newState = TerrestriaBlocks.VOLCANIC_ROCK.cobblestone.full.defaultBlockState();
+					break;
+				}
+			}
+		}
+
+		return original.call(world, pos, newState);
+	}
+}

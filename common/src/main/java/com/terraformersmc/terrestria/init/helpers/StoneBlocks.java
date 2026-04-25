@@ -1,6 +1,12 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import net.minecraft.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.PressurePlateBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.MapColor;
 
 public class StoneBlocks {
 	public StoneVariantBlocks plain;
@@ -27,10 +33,10 @@ public class StoneBlocks {
 		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color, Blocks.STONE_BRICKS);
 		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color, Blocks.MOSSY_STONE_BRICKS);
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.STONE, 20, settings), AbstractBlock.Settings.copy(Blocks.STONE_BUTTON).mapColor(color));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.STONE, settings), AbstractBlock.Settings.copy(Blocks.STONE_PRESSURE_PLATE).mapColor(color));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", Block::new, AbstractBlock.Settings.copy(Blocks.CRACKED_STONE_BRICKS).mapColor(color));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", Block::new, AbstractBlock.Settings.copy(Blocks.CHISELED_STONE_BRICKS).mapColor(color));
+		blocks.button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.STONE, 20, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BUTTON).mapColor(color));
+		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.STONE, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_PRESSURE_PLATE).mapColor(color));
+		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_STONE_BRICKS).mapColor(color));
+		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).mapColor(color));
 
 		return blocks;
 	}

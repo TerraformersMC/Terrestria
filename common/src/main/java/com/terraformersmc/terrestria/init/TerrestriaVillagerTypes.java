@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.init;
 
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.village.VillagerType;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.npc.villager.VillagerType;
+import net.minecraft.world.level.biome.Biome;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.*;
 
@@ -28,9 +28,9 @@ public class TerrestriaVillagerTypes {
 	}
 
 	@SafeVarargs
-	private static void register(RegistryKey<VillagerType> type, RegistryKey<Biome>... biomes) {
-		for (RegistryKey<Biome> biome : biomes) {
-			VillagerType.BIOME_TO_TYPE.put(biome, type);
+	private static void register(ResourceKey<VillagerType> type, ResourceKey<Biome>... biomes) {
+		for (ResourceKey<Biome> biome : biomes) {
+			VillagerType.BY_BIOME.put(biome, type);
 		}
 	}
 }

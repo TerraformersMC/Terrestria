@@ -1,25 +1,25 @@
 package com.terraformersmc.terrestria.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.TallSeagrassBlock;
-import net.minecraft.block.enums.DoubleBlockHalf;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.StructureWorldAccess;
-import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.util.FeatureContext;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
-public class CattailFeature extends Feature<ProbabilityConfig> {
+public class CattailFeature extends Feature<ProbabilityFeatureConfiguration> {
 	private Block normal;
 	private Block tall;
 
 	// TODO: Migrate to feature config
-	public CattailFeature(Codec<ProbabilityConfig> codec, Block normal, Block tall) {
+	public CattailFeature(Codec<ProbabilityFeatureConfiguration> codec, Block normal, Block tall) {
 		super(codec);
 
 		this.normal = normal;
@@ -27,32 +27,32 @@ public class CattailFeature extends Feature<ProbabilityConfig> {
 	}
 
 	@Override
-	public boolean generate(FeatureContext<ProbabilityConfig> context) {
-		StructureWorldAccess world = context.getWorld();
-		Random random = context.getRandom();
-		BlockPos origin = context.getOrigin();
+	public boolean place(FeaturePlaceContext<ProbabilityFeatureConfiguration> context) {
+		WorldGenLevel world = context.level();
+		RandomSource random = context.random();
+		BlockPos origin = context.origin();
 
 		int x = random.nextInt(8) - random.nextInt(8);
 		int z = random.nextInt(8) - random.nextInt(8);
-		int y = world.getTopPosition(Heightmap.Type.OCEAN_FLOOR, new BlockPos(origin.getX() + x, 0, origin.getZ() + z)).getY();
+		int y = world.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR, new BlockPos(origin.getX() + x, 0, origin.getZ() + z)).getY();
 
 		BlockPos candidate = new BlockPos(origin.getX() + x, y, origin.getZ() + z);
 
 		if (world.getBlockState(candidate).getBlock() == Blocks.WATER) {
-			boolean tall = random.nextDouble() < context.getConfig().probability;
-			BlockState grass = tall ? this.tall.getDefaultState() : this.normal.getDefaultState();
+			boolean tall = random.nextDouble() < context.config().probability;
+			BlockState grass = tall ? this.tall.defaultBlockState() : this.normal.defaultBlockState();
 
-			if (grass.canPlaceAt(world, candidate)) {
+			if (grass.canSurvive(world, candidate)) {
 				if (tall) {
-					BlockState grassTop = grass.with(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
-					BlockPos upper = candidate.up();
+					BlockState grassTop = grass.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
+					BlockPos upper = candidate.above();
 
 					if (world.getBlockState(upper).getBlock() == Blocks.AIR) {
-						world.setBlockState(candidate, grass, 2);
-						world.setBlockState(upper, grassTop, 2);
+						world.setBlock(candidate, grass, 2);
+						world.setBlock(upper, grassTop, 2);
 					}
 				} else {
-					world.setBlockState(candidate, grass, 2);
+					world.setBlock(candidate, grass, 2);
 				}
 				return true;
 			}

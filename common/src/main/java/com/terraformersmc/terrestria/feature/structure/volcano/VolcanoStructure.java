@@ -7,24 +7,24 @@ import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.structure.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.biome.source.BiomeCoords;
-import net.minecraft.world.biome.source.BiomeSource;
-import net.minecraft.world.biome.source.util.MultiNoiseUtil;
-import net.minecraft.world.gen.structure.Structure;
-import net.minecraft.world.gen.structure.StructureType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Holder;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.core.QuartPos;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
 
 import java.util.Optional;
 
 public class VolcanoStructure extends Structure {
-    public static final MapCodec<VolcanoStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(VolcanoStructure.configCodecBuilder(instance),
+    public static final MapCodec<VolcanoStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(VolcanoStructure.settingsCodec(instance),
 			IntProvider.NON_NEGATIVE_CODEC.fieldOf("height").forGetter(arg -> arg.height),
 			Codec.INT.fieldOf("base_y").forGetter(arg -> arg.baseY),
 			Codec.BOOL.fieldOf("thin_if_tall").forGetter(arg -> arg.thinIfTall)
@@ -34,7 +34,7 @@ public class VolcanoStructure extends Structure {
 	public final int baseY;
 	public final boolean thinIfTall;
 
-	public VolcanoStructure(VolcanoStructure.Config config, IntProvider height, int baseY, boolean thinIfTall) {
+	public VolcanoStructure(VolcanoStructure.StructureSettings config, IntProvider height, int baseY, boolean thinIfTall) {
 		super(config);
 
 		this.height = height;
@@ -43,20 +43,20 @@ public class VolcanoStructure extends Structure {
 	}
 
 	@Override
-	public Optional<StructurePosition> getStructurePosition(Structure.Context context) {
-		int x = context.chunkPos().getCenterX();
-		int z = context.chunkPos().getCenterZ();
-		int y = context.chunkGenerator().getHeightInGround(x, z, Heightmap.Type.OCEAN_FLOOR_WG, context.world(), context.noiseConfig());
+	public Optional<GenerationStub> findGenerationPoint(Structure.GenerationContext context) {
+		int x = context.chunkPos().getMiddleBlockX();
+		int z = context.chunkPos().getMiddleBlockZ();
+		int y = context.chunkGenerator().getFirstOccupiedHeight(x, z, Heightmap.Types.OCEAN_FLOOR_WG, context.heightAccessor(), context.randomState());
 		int seaLevel = context.chunkGenerator().getSeaLevel();
-		RegistryEntry<Biome> biome = context.chunkGenerator().getBiomeSource().getBiome(BiomeCoords.fromBlock(x),
-				BiomeCoords.fromBlock(y), BiomeCoords.fromBlock(z), context.noiseConfig().getMultiNoiseSampler());
+		Holder<Biome> biome = context.chunkGenerator().getBiomeSource().getNoiseBiome(QuartPos.fromBlock(x),
+				QuartPos.fromBlock(y), QuartPos.fromBlock(z), context.randomState().sampler());
 
-		if (biome.matchesKey(TerrestriaBiomes.VOLCANIC_ISLAND)) {
+		if (biome.is(TerrestriaBiomes.VOLCANIC_ISLAND)) {
 			// Shore volcanoes at the edges and regular volcanoes in the center.
 			int distance = BiomePerimeters.getOrCreateInstance(
-					context.dynamicRegistryManager().getOrThrow(RegistryKeys.BIOME).getValueOrThrow(TerrestriaBiomes.VOLCANIC_ISLAND), 40)
-					.getPerimeterDistance(new BiomeAccess(
-							new BiomeAccessStorage(context.biomeSource(), context.noiseConfig().getMultiNoiseSampler()),
+					context.registryAccess().lookupOrThrow(Registries.BIOME).getValueOrThrow(TerrestriaBiomes.VOLCANIC_ISLAND), 40)
+					.getPerimeterDistance(new BiomeManager(
+							new BiomeAccessStorage(context.biomeSource(), context.randomState().sampler()),
 							context.seed()), new BlockPos(x, seaLevel, z));
 
 			if (this.baseY < seaLevel - 10 && distance >= 20) {
@@ -70,23 +70,23 @@ public class VolcanoStructure extends Structure {
 			return Optional.empty();
 		}
 
-		return getStructurePosition(context, Heightmap.Type.WORLD_SURFACE_WG, collector -> this.addPieces(collector, context));
+		return onTopOfChunkCenter(context, Heightmap.Types.WORLD_SURFACE_WG, collector -> this.addPieces(collector, context));
 	}
 
-	private void addPieces(StructurePiecesCollector collector, Structure.Context context) {
-		collector.addPiece(new VolcanoGenerator(context.random(), context.chunkPos().getCenterX(), context.chunkPos().getCenterZ(), height, baseY, thinIfTall));
+	private void addPieces(StructurePiecesBuilder collector, Structure.GenerationContext context) {
+		collector.addPiece(new VolcanoGenerator(context.random(), context.chunkPos().getMiddleBlockX(), context.chunkPos().getMiddleBlockZ(), height, baseY, thinIfTall));
 	}
 
 	@Override
-	public StructureType<?> getType() {
+	public StructureType<?> type() {
 		return TerrestriaStructures.VOLCANO_STRUCTURE_TYPE;
 	}
 
 	// Shim class to instantiate a BiomeAccess.Storage from available information.
-	private record BiomeAccessStorage(BiomeSource biomeSource, MultiNoiseUtil.MultiNoiseSampler noiseSampler) implements BiomeAccess.Storage {
+	private record BiomeAccessStorage(BiomeSource biomeSource, Climate.Sampler noiseSampler) implements BiomeManager.NoiseBiomeSource {
 		@Override
-		public RegistryEntry<Biome> getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
-			return biomeSource.getBiome(biomeX, biomeY, biomeZ, noiseSampler);
+		public Holder<Biome> getNoiseBiome(int biomeX, int biomeY, int biomeZ) {
+			return biomeSource.getNoiseBiome(biomeX, biomeY, biomeZ, noiseSampler);
 		}
 	}
 }

@@ -3,15 +3,15 @@ package com.terraformersmc.terrestria.surfacebuilders;
 import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
 import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.chunk.BlockColumn;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.BlockColumn;
 
 public class CalderaSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise CALDERA_NOISE = new OpenSimplexNoise(27438);
@@ -32,13 +32,13 @@ public class CalderaSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		int surfaceNoise = (int) (4.6D * CALDERA_NOISE.sample(x * 0.05D, z * 0.05D));
-		int inBiomeDistance = BiomePerimeters.getOrCreateInstance(biome, 80).getPerimeterDistance(biomeAccess, new BlockPos.Mutable(x, RIM_HEIGHT, z));
+		int inBiomeDistance = BiomePerimeters.getOrCreateInstance(biome, 80).getPerimeterDistance(biomeAccess, new BlockPos.MutableBlockPos(x, RIM_HEIGHT, z));
 		int top;
 
 		// Re-sample vHeight so we match the surface even when we're in or abutting watery biomes.
-		vHeight = chunk.sampleHeightmap(Heightmap.Type.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
+		vHeight = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
 
 		if (inBiomeDistance <= 16) {
 			// Slope (up?) to rim
@@ -72,37 +72,37 @@ public class CalderaSurfaceBuilder extends BiolithSurfaceBuilder {
 		// Update the column with our overrides.
 		for (int y = 0; y <= Math.max(Math.max(top, vHeight), LAKE_LEVEL); y++) {
 			// Don't mess with the deepslate transition.
-			if (column.getState(y).isOf(Blocks.DEEPSLATE)) {
+			if (column.getBlock(y).is(Blocks.DEEPSLATE)) {
 				continue;
 			}
 
 			if (y < top - Math.abs(surfaceNoise)) {
-				column.setState(y, lowMaterial);
+				column.setBlock(y, lowMaterial);
 			} else if (inBiomeDistance < 56) {
 				// terrain
 				if (y < top) {
-					column.setState(y, midMaterial);
+					column.setBlock(y, midMaterial);
 				} else if (y == top) {
 					if (y < seaLevel - 1) {
-						column.setState(y, midMaterial);
+						column.setBlock(y, midMaterial);
 					} else {
-						column.setState(y, topMaterial);
+						column.setBlock(y, topMaterial);
 					}
 				} else {
 					if (y < seaLevel) {
-						column.setState(y, Blocks.WATER.getDefaultState());
+						column.setBlock(y, Blocks.WATER.defaultBlockState());
 					} else {
-						column.setState(y, Blocks.AIR.getDefaultState());
+						column.setBlock(y, Blocks.AIR.defaultBlockState());
 					}
 				}
 			} else {
 				// lake sand
 				if (y <= top) {
-					column.setState(y, beachMaterial);
+					column.setBlock(y, beachMaterial);
 				} else if (y < LAKE_LEVEL) {
-					column.setState(y, Blocks.WATER.getDefaultState());
+					column.setBlock(y, Blocks.WATER.defaultBlockState());
 				} else {
-					column.setState(y, Blocks.AIR.getDefaultState());
+					column.setBlock(y, Blocks.AIR.defaultBlockState());
 				}
 			}
 		}

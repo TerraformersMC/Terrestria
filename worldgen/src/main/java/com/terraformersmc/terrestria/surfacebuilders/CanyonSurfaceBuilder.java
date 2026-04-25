@@ -2,13 +2,13 @@ package com.terraformersmc.terrestria.surfacebuilders;
 
 import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.source.BiomeAccess;
-import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.chunk.BlockColumn;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeManager;
+import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.chunk.BlockColumn;
 
 public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);
@@ -51,7 +51,7 @@ public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 		// Domain transformation:
 		// [0.0, 1.0] -> [0, 60]
 
-		noise = MathHelper.clamp(noise, 0, 1);
+		noise = Mth.clamp(noise, 0, 1);
 		noise *= 60;
 
 		int height = 1;
@@ -92,7 +92,7 @@ public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeAccess biomeAccess, BlockColumn column, Random rand, Chunk chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first
@@ -125,21 +125,21 @@ public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 		// Place cliff material
 
 		for (int i = 0; i < cliffLayers; i++) {
-			column.setState(y, cliffMaterial);
+			column.setBlock(y, cliffMaterial);
 			++y;
 		}
 
 		// Place under material
 
 		for (int i = 0; i < underLayers; i++) {
-			column.setState(y, underMaterial);
+			column.setBlock(y, underMaterial);
 			++y;
 		}
 
 		// Place top material
 
 		for (int i = 0; i < topLayers; i++) {
-			column.setState(y, topMaterial);
+			column.setBlock(y, topMaterial);
 			++y;
 		}
 	}

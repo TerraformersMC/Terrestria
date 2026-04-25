@@ -1,7 +1,7 @@
 package com.terraformersmc.terrestria.feature.tree.trunkplacers;
 
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 
 public class DirectionHelper {
 	/**
@@ -12,8 +12,8 @@ public class DirectionHelper {
 	 * @param direction the direction you want a general direction away from
 	 * @return a random direction away from the specified direction. weighted so the opposite direction is more likely.
 	 */
-	public static Direction randomHorizontalDirectionAwayFrom(Random rand, Direction direction) {
-		Direction out = Direction.Type.HORIZONTAL.random(rand);
+	public static Direction randomHorizontalDirectionAwayFrom(RandomSource rand, Direction direction) {
+		Direction out = Direction.Plane.HORIZONTAL.getRandomDirection(rand);
 		return out == direction ? direction.getOpposite() : out;
 	}
 }

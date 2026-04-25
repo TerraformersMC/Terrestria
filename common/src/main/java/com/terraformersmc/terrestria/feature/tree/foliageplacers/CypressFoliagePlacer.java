@@ -6,33 +6,34 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
-import net.minecraft.world.gen.foliage.FoliagePlacerType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 
 public class CypressFoliagePlacer extends FoliagePlacer {
 	public static final MapCodec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
-			fillFoliagePlacerFields(instance).apply(instance, CypressFoliagePlacer::new));
+			foliagePlacerParts(instance).apply(instance, CypressFoliagePlacer::new));
 
 	public CypressFoliagePlacer(IntProvider radius, IntProvider offset) {
 		super(radius, offset);
 	}
 
 	@Override
-	protected FoliagePlacerType<?> getType() {
+	protected FoliagePlacerType<?> type() {
 		return TerrestriaFoliagePlacerTypes.CYPRESS;
 	}
 
 	@Override
-	protected void generate(TestableWorld world, BlockPlacer placer, Random random, TreeFeatureConfig config, int trunkHeight, FoliagePlacer.TreeNode treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		double maxRadius = 1.5 + 1.5 * random.nextDouble();
 
-		BlockPos.Mutable pos = treeNode.getCenter().mutableCopy();
+		BlockPos.MutableBlockPos pos = treeNode.pos().mutable();
 
 		int x = pos.getX();
 		int y = pos.getY();
@@ -50,21 +51,21 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 				continue;
 			}
 
-			circle(pos.mutableCopy(), treeRadius, position -> {
+			circle(pos.mutable(), treeRadius, position -> {
 				if (TreeFeature.isAirOrLeaves(world, position)) {
-					placer.placeBlock(position.toImmutable(), config.foliageProvider.get(random, position));
+					placer.set(position.immutable(), config.foliageProvider.getState(random, position));
 				}
 			});
 		}
 	}
 
 	@Override
-	public int getRandomHeight(Random random, int trunkHeight, TreeFeatureConfig config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
 		return 0;
 	}
 
 	@Override
-	protected boolean isInvalidForLeaves(Random random, int baseHeight, int dx, int dy, int dz, boolean bl) {
+	protected boolean shouldSkipLocation(RandomSource random, int baseHeight, int dx, int dy, int dz, boolean bl) {
 		return false;
 	}
 
@@ -84,7 +85,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	 * @param radius The radius of the circle
 	 * @param consumer The target of the positions; it passes the same BlockPos.Mutable object each time
 	 */
-	private static void circle(BlockPos.Mutable origin, double radius, Consumer<BlockPos.Mutable> consumer) {
+	private static void circle(BlockPos.MutableBlockPos origin, double radius, Consumer<BlockPos.MutableBlockPos> consumer) {
 		int x = origin.getX();
 		int z = origin.getZ();
 

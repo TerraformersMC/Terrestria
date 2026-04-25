@@ -4,7 +4,7 @@
   "compatibilityLevel": "JAVA_16",
   "plugin": "com.terraformersmc.terrestria.mixin.pathing.TerrestriaMixinPlugin",
   "mixins": [
-	"MixinLandPathNodeMaker"
+    "MixinWalkNodeEvaluator"
   ],
   "injectors": {
 	"defaultRequire": 1

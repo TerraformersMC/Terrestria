@@ -5,11 +5,11 @@ import com.terraformersmc.terrestria.surfacebuilders.TerrestriaSurfaceBuilders;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.server.level.ServerLevel;
 import org.jetbrains.annotations.Nullable;
 
 public class TerrestriaWorldgen implements ModInitializer {
-	private static ServerWorld OVERWORLD = null;
+	private static ServerLevel OVERWORLD = null;
 
 	@Override
 	public void onInitialize() {
@@ -24,14 +24,14 @@ public class TerrestriaWorldgen implements ModInitializer {
 
 		// We need access to the Overworld for some surface builders.
 		ServerLifecycleEvents.SERVER_STARTED.register(server -> {
-			OVERWORLD = server.getOverworld();
+			OVERWORLD = server.overworld();
 		});
 		ServerLifecycleEvents.SERVER_STOPPED.register(server -> {
 			OVERWORLD = null;
 		});
 	}
 
-	public static @Nullable ServerWorld getOverworld() {
+	public static @Nullable ServerLevel getOverworld() {
 		return OVERWORLD;
 	}
 }

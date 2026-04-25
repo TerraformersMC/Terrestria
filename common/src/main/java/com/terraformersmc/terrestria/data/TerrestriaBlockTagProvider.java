@@ -10,23 +10,23 @@ import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ColoredFallingBlock;
-import net.minecraft.data.tag.ProvidedTagBuilder;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColoredFallingBlock;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-	protected TerrestriaBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+	protected TerrestriaBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
 	@Override
-	public void configure(RegistryWrapper.WrapperLookup registries) {
+	public void addTags(HolderLookup.Provider registries) {
 		/*
 		 * Basic block tags
 		 */
@@ -194,7 +194,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		valueLookupBuilder(BlockTags.RABBITS_SPAWNABLE_ON)
 				.add(dirtBlock.getGrassBlock());
 
-		valueLookupBuilder(BlockTags.SHOVEL_MINEABLE)
+		valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
 				.add(dirtBlock.getDirt())
 				.add(dirtBlock.getDirtPath())
 				.add(dirtBlock.getFarmland())
@@ -241,7 +241,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		valueLookupBuilder(BlockTags.RABBITS_SPAWNABLE_ON).add(sandBlock);
 		valueLookupBuilder(BlockTags.SAND).add(sandBlock);
 		valueLookupBuilder(BlockTags.SCULK_REPLACEABLE).add(sandBlock);
-		valueLookupBuilder(BlockTags.SHOVEL_MINEABLE).add(sandBlock);
+		valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).add(sandBlock);
 		valueLookupBuilder(BlockTags.SMELTS_TO_GLASS).add(sandBlock);
 
 		valueLookupBuilder(TerrestriaBlockTags.SANDS).add(sandBlock);
@@ -249,18 +249,18 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 
 	@SuppressWarnings("SameParameterValue")
 	private void addStone(TagKey<Block> stoneTag, StoneBlocks stoneBlock) {
-		ProvidedTagBuilder<Block, Block> stoneBuilder = valueLookupBuilder(stoneTag);
+		TagAppender<Block, Block> stoneBuilder = valueLookupBuilder(stoneTag);
 		if (stoneBlock.bricks != null) {
 			stoneBuilder.add(stoneBlock.bricks.full);
 			addStoneVariant(stoneBlock.bricks);
 			valueLookupBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.bricks.full);
 
 			stoneBuilder.add(stoneBlock.chiseledBricks);
-			valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.chiseledBricks);
+			valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(stoneBlock.chiseledBricks);
 			valueLookupBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.chiseledBricks);
 
 			stoneBuilder.add(stoneBlock.crackedBricks);
-			valueLookupBuilder(BlockTags.PICKAXE_MINEABLE).add(stoneBlock.crackedBricks);
+			valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(stoneBlock.crackedBricks);
 			valueLookupBuilder(BlockTags.STONE_BRICKS).add(stoneBlock.crackedBricks);
 		}
 		if (stoneBlock.cobblestone != null) {
@@ -297,7 +297,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		valueLookupBuilder(BlockTags.STAIRS).add(stoneVariantBlock.stairs);
 		valueLookupBuilder(BlockTags.WALLS).add(stoneVariantBlock.wall);
 
-		valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
+		valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
 				.add(stoneVariantBlock.full)
 				.add(stoneVariantBlock.slab)
 				.add(stoneVariantBlock.stairs);
@@ -305,7 +305,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	}
 
 	private void addWood(TagKey<Block> logTag, WoodBlocks woodBlock) {
-		ProvidedTagBuilder<Block, Block> woodBuilder = valueLookupBuilder(logTag);
+		TagAppender<Block, Block> woodBuilder = valueLookupBuilder(logTag);
 		woodBuilder
 				.add(woodBlock.log)
 				.add(woodBlock.strippedLog);
@@ -346,11 +346,11 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 		// Adding to FENCE_GATES, PLANKS, or any SIGNS or WOODEN tag does this for AXE_MINEABLE.
 		// Adding to LEAVES does this for HOE_MINEABLE.
 		if (woodBlock.hasLeafPile()) {
-			valueLookupBuilder(BlockTags.HOE_MINEABLE).add(woodBlock.leafPile);
+			valueLookupBuilder(BlockTags.MINEABLE_WITH_HOE).add(woodBlock.leafPile);
 		}
 
 		// If the log burns, we assume all the logs, planks, and wood burn.
-		if (woodBlock.log.getDefaultState().isBurnable()) {
+		if (woodBlock.log.defaultBlockState().ignitedByLava()) {
 			valueLookupBuilder(BlockTags.LOGS_THAT_BURN).addTag(logTag);
 			valueLookupBuilder(TerrestriaBlockTags.PLANKS_THAT_BURN).add(woodBlock.planks);
 		}

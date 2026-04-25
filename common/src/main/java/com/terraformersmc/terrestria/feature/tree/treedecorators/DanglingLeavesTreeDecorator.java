@@ -3,14 +3,15 @@ package com.terraformersmc.terrestria.feature.tree.treedecorators;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.treedecorator.TreeDecorator;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator.Context;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	public static final MapCodec<DanglingLeavesTreeDecorator> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -23,26 +24,26 @@ public class DanglingLeavesTreeDecorator extends TreeDecorator {
 	}
 
 	@Override
-	protected TreeDecoratorType<?> getType() {
+	protected TreeDecoratorType<?> type() {
 		return TerrestriaTreeDecorators.DANGLING_LEAVES;
 	}
 
 	@Override
-	public void generate(Generator generator) {
-		Random random = generator.getRandom();
-		TestableWorld world = generator.getWorld();
+	public void place(Context generator) {
+		RandomSource random = generator.random();
+		LevelSimulatedReader world = generator.level();
 
-		for (BlockPos pos : generator.getLeavesPositions()) {
-			if (world.testBlockState(pos.down(), AbstractBlock.AbstractBlockState::isAir)) {
+		for (BlockPos pos : generator.leaves()) {
+			if (world.isStateAtPosition(pos.below(), BlockBehaviour.BlockStateBase::isAir)) {
 				// If there is air below, then make dangling leaves 33% of the time
 				if (random.nextInt(3) == 0) {
 
 					// Iterate downwards and place leaves if air is present
-					BlockPos.Mutable mutable = pos.mutableCopy();
+					BlockPos.MutableBlockPos mutable = pos.mutable();
 					for (int i = 0; i < random.nextInt(3) + 1; i++) {
 						mutable.move(Direction.DOWN);
-						if (world.testBlockState(mutable, AbstractBlock.AbstractBlockState::isAir)) {
-							generator.replace(mutable, state);
+						if (world.isStateAtPosition(mutable, BlockBehaviour.BlockStateBase::isAir)) {
+							generator.setBlock(mutable, state);
 						} else {
 							break;
 						}

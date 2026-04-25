@@ -4,31 +4,32 @@ import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.EmptyBlockView;
-import net.minecraft.world.Heightmap;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeature;
-import net.minecraft.world.gen.treedecorator.TreeDecorator;
-import net.minecraft.world.gen.treedecorator.TreeDecoratorType;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.EmptyBlockGetter;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator.Context;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 
 public class SakuraTreeDecorator extends TreeDecorator {
 	public static MapCodec<SakuraTreeDecorator> CODEC = MapCodec.unit(new SakuraTreeDecorator());
 
 	@Override
-	protected TreeDecoratorType<?> getType() {
+	protected TreeDecoratorType<?> type() {
 		return TerrestriaTreeDecorators.SAKURA;
 	}
 
 	@Override
-	public void generate(Generator generator) {
-		Random random = generator.getRandom();
-		TestableWorld world = generator.getWorld();
+	public void place(Context generator) {
+		RandomSource random = generator.random();
+		LevelSimulatedReader world = generator.level();
 
-		for (BlockPos pos : generator.getLeavesPositions()) {
+		for (BlockPos pos : generator.leaves()) {
 			// 1/6 positions have leaf piles
 			// As this executes for every single leaf block and there is usually 3-4 leaf blocks in a column,
 			// it ends up working out to 50%, usually.
@@ -41,19 +42,19 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// of the water.
 			//
 			// This seems to work in both worldgen and when growing saplings.
-			BlockPos top = world.getTopPosition(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, pos);
+			BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos);
 
-			boolean valid = world.testBlockState(top.down(),
+			boolean valid = world.isStateAtPosition(top.below(),
 					state -> !(state.getBlock() instanceof BareSmallLogBlock) &&
-							state.isSideSolidFullSquare(EmptyBlockView.INSTANCE, top.down(), Direction.UP) ||
-							state.getFluidState().isStill() &&
-							state.getFluidState().isIn(FluidTags.WATER)
+							state.isFaceSturdy(EmptyBlockGetter.INSTANCE, top.below(), Direction.UP) ||
+							state.getFluidState().isSource() &&
+							state.getFluidState().is(FluidTags.WATER)
 			);
 
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
-			if (valid && TreeFeature.canReplace(world, top)) {
-				generator.replace(top, TerrestriaBlocks.SAKURA.leafPile.getDefaultState());
+			if (valid && TreeFeature.validTreePos(world, top)) {
+				generator.setBlock(top, TerrestriaBlocks.SAKURA.leafPile.defaultBlockState());
 			}
 		}
 	}

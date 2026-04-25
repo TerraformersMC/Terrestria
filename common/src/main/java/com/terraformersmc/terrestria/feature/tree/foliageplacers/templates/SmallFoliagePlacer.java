@@ -2,13 +2,14 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers.templates;
 
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terraform.wood.api.block.SmallLogBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.intprovider.IntProvider;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.TestableWorld;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
-import net.minecraft.world.gen.foliage.FoliagePlacer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
 
 public abstract class SmallFoliagePlacer extends FoliagePlacer {
 
@@ -16,28 +17,28 @@ public abstract class SmallFoliagePlacer extends FoliagePlacer {
 		super(radius, offset);
 	}
 
-	protected void tryPlaceLeaves(TestableWorld world, BlockPos pos, Random random, BlockPlacer placer, TreeFeatureConfig config) {
-		if (world.testBlockState(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
-			placer.placeBlock(pos, getOriginalState(config, world, pos, random).with(SmallLogBlock.HAS_LEAVES, true));
+	protected void tryPlaceLeaves(LevelSimulatedReader world, BlockPos pos, RandomSource random, FoliageSetter placer, TreeConfiguration config) {
+		if (world.isStateAtPosition(pos, isLog -> isLog.getBlock() instanceof SmallLogBlock)) {
+			placer.set(pos, getOriginalState(config, world, pos, random).setValue(SmallLogBlock.HAS_LEAVES, true));
 			return;
 		}
-		if (world.testBlockState(pos, BlockState::isAir)) {
-			placer.placeBlock(pos, config.foliageProvider.get(random, pos));
+		if (world.isStateAtPosition(pos, BlockState::isAir)) {
+			placer.set(pos, config.foliageProvider.getState(random, pos));
 		}
 	}
 
-	protected BlockState getOriginalState(TreeFeatureConfig config, TestableWorld world, BlockPos pos, Random random) {
+	protected BlockState getOriginalState(TreeConfiguration config, LevelSimulatedReader world, BlockPos pos, RandomSource random) {
 
-		if (!world.testBlockState(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
+		if (!world.isStateAtPosition(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
 			return null;
 		}
 
-		return config.trunkProvider.get(random, pos)
-				.with(BareSmallLogBlock.NORTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.NORTH)))
-				.with(BareSmallLogBlock.SOUTH, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.SOUTH)))
-				.with(BareSmallLogBlock.EAST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.EAST)))
-				.with(BareSmallLogBlock.WEST, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.WEST)))
-				.with(BareSmallLogBlock.UP, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.UP)))
-				.with(BareSmallLogBlock.DOWN, world.testBlockState(pos, test -> test.get(BareSmallLogBlock.DOWN)));
+		return config.trunkProvider.getState(random, pos)
+				.setValue(BareSmallLogBlock.NORTH, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.NORTH)))
+				.setValue(BareSmallLogBlock.SOUTH, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.SOUTH)))
+				.setValue(BareSmallLogBlock.EAST, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.EAST)))
+				.setValue(BareSmallLogBlock.WEST, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.WEST)))
+				.setValue(BareSmallLogBlock.UP, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.UP)))
+				.setValue(BareSmallLogBlock.DOWN, world.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.DOWN)));
 	}
 }

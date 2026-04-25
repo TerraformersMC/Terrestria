@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
-import net.minecraft.item.BlockItem;
+import net.minecraft.world.item.BlockItem;
 
 public class StoneVariantItems {
 	public BlockItem full;

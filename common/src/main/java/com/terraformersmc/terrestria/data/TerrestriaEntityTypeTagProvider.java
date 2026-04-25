@@ -6,18 +6,18 @@ import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.EntityTypeTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.EntityTypeTags;
 
 import java.util.concurrent.CompletableFuture;
 
 public class TerrestriaEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagProvider {
-	protected TerrestriaEntityTypeTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+	protected TerrestriaEntityTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
 	@Override
-	public void configure(RegistryWrapper.WrapperLookup registries) {
+	public void addTags(HolderLookup.Provider registries) {
 		/*
 		 * Wood items
 		 */
@@ -37,10 +37,10 @@ public class TerrestriaEntityTypeTagProvider extends FabricTagProvider.EntityTyp
 		TerraformBoatData boatData = TerraformBoatData.get(woodItem.getId());
 
 		if (woodItem.boat != null) {
-			getTagBuilder(EntityTypeTags.BOAT).add(boatData.boatEntityTypeId());
+			getOrCreateRawBuilder(EntityTypeTags.BOAT).addElement(boatData.boatEntityTypeId());
 		}
 		if (woodItem.chestBoat != null) {
-			getTagBuilder(ConventionalEntityTypeTags.BOATS).add(boatData.chestBoatEntityTypeId());
+			getOrCreateRawBuilder(ConventionalEntityTypeTags.BOATS).addElement(boatData.chestBoatEntityTypeId());
 		}
 	}
 
