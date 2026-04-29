@@ -2,24 +2,24 @@ package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.InsideBlockEffectApplier;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class SaguaroCactusBlock extends BareSmallLogBlock {
 	public SaguaroCactusBlock(Properties settings) {
 		super(settings);
@@ -46,11 +46,6 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 		if (world instanceof ServerLevel serverWorld) {
 			entity.hurtServer(serverWorld, world.damageSources().cactus(), 1.0f);
 		}
-	}
-
-	@Override
-	public boolean isPathfindable(BlockState state, PathComputationType type) {
-		return false;
 	}
 
 	@Override

@@ -5,20 +5,21 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 	public static final MapCodec<SmallBranchingTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(smallBranchingTrunkPlacerInstance ->
 			trunkPlacerParts(smallBranchingTrunkPlacerInstance).apply(smallBranchingTrunkPlacerInstance, SmallBranchingTrunkPlacer::new));
@@ -33,7 +34,7 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
@@ -42,7 +43,7 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 		ArrayList<FoliagePlacer.FoliageAttachment> foliageNodes = new ArrayList<>();
 
 		// The trunk height before branches
-		int baseHeight = (int)((trunkHeight / 2) + 0.5);
+		int baseHeight = (int)((trunkHeight / 2f) + 0.5f);
 		// The trunk height after branches
 		int restHeight = trunkHeight - baseHeight - 2;
 
@@ -91,7 +92,7 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos.MutableBlockPos origin, Direction direction, int length) {
+	private BlockPos placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel world, BlockPos.MutableBlockPos origin, Direction direction, int length) {
 		// Place the supporting branch in the correct direction
 		setBlockStateAndUpdate(config, random, replacer, world, origin.move(direction), direction);
 		// Place the rest of the branch upwards

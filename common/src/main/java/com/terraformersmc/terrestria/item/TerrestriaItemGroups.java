@@ -6,27 +6,25 @@ import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.stream.Collectors;
 
 public class TerrestriaItemGroups {
 	private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "items"));
@@ -165,8 +163,8 @@ public class TerrestriaItemGroups {
 		 * Add the items configured above to the Vanilla item groups.
 		 */
 		for (ResourceKey<CreativeModeTab> group : ITEM_GROUP_ENTRY_MAPS.keySet()) {
-			ItemGroupEvents.modifyEntriesEvent(group).register((content) -> {
-				FeatureFlagSet featureSet = content.getEnabledFeatures();
+			CreativeModeTabEvents.modifyOutputEvent(group).register((output) -> {
+				FeatureFlagSet featureSet = output.getEnabledFeatures();
 				HashMap<ItemLike, ItemGroupEntries> entryMap = ITEM_GROUP_ENTRY_MAPS.get(group);
 
 				for (ItemLike relative : entryMap.keySet()) {
@@ -176,10 +174,10 @@ public class TerrestriaItemGroups {
 					// So, below we have to adjust for any items which may be disabled.
 					if (relative == null) {
 						// Target the end of the Item Group
-						content.acceptAll(entries.getCollection());
+						output.acceptAll(entries.getStackCollection());
 					} else {
 						//Terrestria.LOGGER.warn("About to add to Vanilla Item Group '{}' after Item '{}': '{}'", group.getId(), relative, entries.getCollection().stream().map(ItemStack::getItem).collect(Collectors.toList()));
-						content.addAfter(relative, entries.getCollection());
+						output.insertAfter(relative, entries.getStackCollection());
 					}
 				}
 			});
@@ -189,16 +187,16 @@ public class TerrestriaItemGroups {
 		/*
 		 * Also add all the items to Terrestria's own item group.
 		 */
-		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
+		Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricCreativeModeTab.builder()
 				.title(Component.literal("Terrestria"))
 				.icon(() -> TerrestriaBlocks.RUBBER_SAPLING.asItem().getDefaultInstance())
-				.displayItems((context, entries) -> {
+				.displayItems((context, output) ->
 					ITEM_GROUP_ENTRY_MAPS.values().stream()
 							.map(HashMap::values).flatMap(Collection::stream)
-							.map(ItemGroupEntries::getCollection).flatMap(Collection::stream)
-							.collect(Collectors.groupingByConcurrent(ItemStack::getItem)).keySet().stream()
-							.sorted(Comparator.comparing((item) -> item.getName().getString())).forEach(entries::accept);
-				}).build()
+							.flatMap(ItemGroupEntries::getItemStream).distinct()
+							.sorted(Comparator.comparing(ItemLike::toString))
+							.forEach(output::accept)
+				).build()
 		);
 	}
 
@@ -206,11 +204,11 @@ public class TerrestriaItemGroups {
 		// NATURAL
 
 		// Dirt Items
-		addGroupEntry(blocks.getGrassBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getPodzol(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getDirtPath(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getDirt(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
-		addGroupEntry(blocks.getFarmland(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.grassBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.podzolBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.dirtPathBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.dirtBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addGroupEntry(blocks.farmBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 	}
 
 	private static void addStoneEntries(StoneItems items) {

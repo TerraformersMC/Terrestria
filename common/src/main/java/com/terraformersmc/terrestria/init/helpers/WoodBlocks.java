@@ -13,27 +13,11 @@ import net.fabricmc.fabric.api.object.builder.v1.block.type.BlockSetTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.type.WoodTypeBuilder;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.CeilingHangingSignBlock;
-import net.minecraft.world.level.block.DoorBlock;
-import net.minecraft.world.level.block.FenceBlock;
-import net.minecraft.world.level.block.FenceGateBlock;
-import net.minecraft.world.level.block.PressurePlateBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.ShelfBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.StandingSignBlock;
-import net.minecraft.world.level.block.TintedParticleLeavesBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
-import net.minecraft.world.level.block.WallHangingSignBlock;
-import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.ColorParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -128,8 +112,8 @@ public class WoodBlocks {
 
 		if (size.equals(LogSize.SMALL)) {
 			// Small logs have neither wood nor quarter logs.
-			log = TerrestriaRegistry.register(name + "_log", settings -> new SmallLogBlock(leaves, settings), PillarLogHelper.createSmallLogSettings(leaves, colors.planks, colors.bark));
-			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", settings -> new SmallLogBlock(leaves, settings), PillarLogHelper.createSmallLogSettings(leaves, colors.planks));
+			log = TerrestriaRegistry.register(name + "_log", settings -> new SmallLogBlock(leaves, settings), PillarLogHelper.createSmallLogProperties(leaves, colors.planks, colors.bark));
+			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", settings -> new SmallLogBlock(leaves, settings), PillarLogHelper.createSmallLogProperties(leaves, colors.planks));
 
 			wood = null;
 			strippedWood = null;
@@ -137,15 +121,15 @@ public class WoodBlocks {
 			quarterLog = null;
 			strippedQuarterLog = null;
 		} else {
-			log = TerrestriaRegistry.register(name + "_log", RotatedPillarBlock::new, PillarLogHelper.createSettings(colors.planks, colors.bark));
-			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", RotatedPillarBlock::new, PillarLogHelper.createSettings(colors.planks));
+			log = TerrestriaRegistry.register(name + "_log", RotatedPillarBlock::new, PillarLogHelper.createProperties(colors.planks, colors.bark));
+			strippedLog = TerrestriaRegistry.register("stripped_" + name + "_log", RotatedPillarBlock::new, PillarLogHelper.createProperties(colors.planks));
 
-			wood = TerrestriaRegistry.register(name + "_wood", RotatedPillarBlock::new, PillarLogHelper.createSettings(colors.bark));
-			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", RotatedPillarBlock::new, PillarLogHelper.createSettings(colors.planks));
+			wood = TerrestriaRegistry.register(name + "_wood", RotatedPillarBlock::new, PillarLogHelper.createProperties(colors.bark));
+			strippedWood = TerrestriaRegistry.register("stripped_" + name + "_wood", RotatedPillarBlock::new, PillarLogHelper.createProperties(colors.planks));
 
 			if (hasQuarterLog) {
-				quarterLog = TerrestriaRegistry.register(name + "_quarter_log", QuarterLogBlock::new, PillarLogHelper.createQuarterLogSettings(colors.planks, colors.bark));
-				strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", QuarterLogBlock::new, PillarLogHelper.createSettings(colors.planks));
+				quarterLog = TerrestriaRegistry.register(name + "_quarter_log", QuarterLogBlock::new, PillarLogHelper.createQuarterLogProperties(colors.planks, colors.bark));
+				strippedQuarterLog = TerrestriaRegistry.register("stripped_" + name + "_quarter_log", QuarterLogBlock::new, PillarLogHelper.createProperties(colors.planks));
 			} else {
 				quarterLog = null;
 				strippedQuarterLog = null;
@@ -172,7 +156,7 @@ public class WoodBlocks {
 	}
 
 	private void addBlockEntityTypes() {
-		BlockEntityType.SHELF.addSupportedBlock(shelf);
+		BlockEntityType.SHELF.addValidBlock(shelf);
 	}
 
 	private void addFlammables() {

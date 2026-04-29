@@ -5,19 +5,20 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 	public static final MapCodec<SmallCanopyTree4BranchTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(smallCanopyTree4BranchTrunkPlacerInstance ->
 			trunkPlacerParts(smallCanopyTree4BranchTrunkPlacerInstance).apply(smallCanopyTree4BranchTrunkPlacerInstance, SmallCanopyTree4BranchTrunkPlacer::new));
@@ -32,13 +33,13 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
 		// Determine the radius
-		int radius = (int)((trunkHeight / 2) + 0.5);
+		int radius = (int)((trunkHeight / 2f) + 0.5f);
 
 		// Place the trunk
 		for (int height = 0; height < trunkHeight; height++) {
@@ -60,7 +61,7 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(origin, radius, false));
 	}
 
-	private void placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos origin, Direction direction, int length) {
+	private void placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel world, BlockPos origin, Direction direction, int length) {
 		for (int position = 0; position < length; position++) {
 			setBlockStateAndUpdate(config, random, replacer, world, origin.relative(direction, position + 1), direction);
 		}

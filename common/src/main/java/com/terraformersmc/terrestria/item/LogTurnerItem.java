@@ -4,24 +4,25 @@ import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.world.item.Item.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.ChatFormatting;
-import net.minecraft.locale.Language;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.locale.Language;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.function.Consumer;
 
+@NullMarked
 public class LogTurnerItem extends Item {
 	public LogTurnerItem(Properties settings) {
 		super(settings);

@@ -1,24 +1,18 @@
 package com.terraformersmc.terrestria.tag;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.world.item.Item;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 
 public final class TerrestriaItemTags {
-	public static final TagKey<Item> BASALT = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "basalt"));
 	public static final TagKey<Item> BASALTS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "basalts"));
-	public static final TagKey<Item> BLACK_SAND = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "black_sand"));
 	public static final TagKey<Item> BLACK_SANDS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "black_sands"));
-	public static final TagKey<Item> COBBLESTONE = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "cobblestone"));
-	public static final TagKey<Item> DIRT = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "dirt"));
 	public static final TagKey<Item> DIRTS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "dirts"));
 	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "planks_that_burn"));
 	public static final TagKey<Item> PODZOLS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "podzols"));
-	public static final TagKey<Item> SAND = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "sand"));
 	public static final TagKey<Item> SANDS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "sands"));
-	public static final TagKey<Item> STONE = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "stone"));
 
 	public static final TagKey<Item> CYPRESS_LOGS = TerrestriaItemTags.of("cypress_logs");
 	public static final TagKey<Item> HEMLOCK_LOGS = TerrestriaItemTags.of("hemlock_logs");

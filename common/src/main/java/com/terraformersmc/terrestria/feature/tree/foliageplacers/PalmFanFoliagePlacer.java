@@ -3,18 +3,18 @@ package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class PalmFanFoliagePlacer extends FoliagePlacer {
 	public static final MapCodec<PalmFanFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
 			foliagePlacerParts(instance).apply(instance, PalmFanFoliagePlacer::new));
@@ -29,8 +29,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
-
+	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		// The origin of this leaf piece
 		BlockPos center = treeNode.pos().immutable();
 
@@ -66,7 +65,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		}
 	}
 
-	private void placeSpiral(LevelSimulatedReader world, RandomSource rand, BlockPos.MutableBlockPos pos, FoliageSetter placer, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
+	private void placeSpiral(WorldGenLevel world, RandomSource rand, BlockPos.MutableBlockPos pos, FoliageSetter placer, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
 		// Base of dangly bit
 		checkAndSetBlockState(world, rand, pos, placer, config);
 
@@ -80,9 +79,9 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		}
 	}
 
-	private void checkAndSetBlockState(LevelSimulatedReader world, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter placer, TreeConfiguration config) {
+	private void checkAndSetBlockState(WorldGenLevel world, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter placer, TreeConfiguration config) {
 		if (TreeFeature.validTreePos(world, currentPosition)) {
-			placer.set(currentPosition.immutable(), config.foliageProvider.getState(random, currentPosition));
+			placer.set(currentPosition.immutable(), config.foliageProvider.getState(world, random, currentPosition));
 		}
 	}
 

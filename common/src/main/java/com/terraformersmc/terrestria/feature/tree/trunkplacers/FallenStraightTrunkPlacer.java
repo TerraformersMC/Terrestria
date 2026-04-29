@@ -4,23 +4,25 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 	public static final MapCodec<FallenStraightTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((instance) ->
 		trunkPlacerParts(instance).apply(instance, FallenStraightTrunkPlacer::new));
@@ -35,7 +37,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Select a Direction for the log to be placed in
 		Direction direction = random.nextBoolean() ? Direction.NORTH : Direction.EAST;
@@ -60,7 +62,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 
 		// Place the blocks
 		for (int i = 0; i < trunkHeight; ++i) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getState(random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
 		}
 
 		// No foliage placer locations needed

@@ -7,32 +7,30 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.CeilingHangingSignBlock;
-import net.minecraft.world.level.block.SignBlock;
-import net.minecraft.world.level.block.StandingSignBlock;
-import net.minecraft.world.level.block.WallHangingSignBlock;
-import net.minecraft.world.level.block.WallSignBlock;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.Function;
 
+@NullMarked
 public class TerrestriaRegistry {
 	@SuppressWarnings("UnnecessaryReturnStatement")
 	private TerrestriaRegistry() {
 		return;
 	}
+
 
 	/*
 	 * Blocks and Items
@@ -40,21 +38,21 @@ public class TerrestriaRegistry {
 
 	/**
 	 * Registers a sign block.
-	 *
+	 * <br/>
 	 * In addition to registering the block, this method also registers the block as a support for its block entity.
 	 *
 	 * @param name Name ({@link Identifier} path string) of the block
-	 * @param factory Factory function to create {@link Block} from settings
-	 * @param settings {@link BlockBehaviour.Properties} of the block
+	 * @param factory Factory function to create {@link Block} from properties
+	 * @param properties {@link BlockBehaviour.Properties} of the block
 	 * @return Newly registered {@link Block}
 	 */
-	public static <S extends SignBlock> S registerSignBlock(String name, Function<BlockBehaviour.Properties, S> factory, BlockBehaviour.Properties settings) {
-		S block = register(name, factory, settings);
+	public static <S extends SignBlock> S registerSignBlock(String name, Function<BlockBehaviour.Properties, S> factory, BlockBehaviour.Properties properties) {
+		S block = register(name, factory, properties);
 
 		if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
-			BlockEntityType.SIGN.addSupportedBlock(block);
+			BlockEntityType.SIGN.addValidBlock(block);
 		} else if (block instanceof CeilingHangingSignBlock || block instanceof WallHangingSignBlock) {
-			BlockEntityType.HANGING_SIGN.addSupportedBlock(block);
+			BlockEntityType.HANGING_SIGN.addValidBlock(block);
 		} else {
 			throw new IllegalArgumentException("This method only accepts vanilla sign blocks and descendants!");
 		}
@@ -66,44 +64,44 @@ public class TerrestriaRegistry {
 	 * Registers a block.
 	 *
 	 * @param name Name ({@link Identifier} path string) of the block
-	 * @param factory Factory function to create {@link Block} from settings
-	 * @param settings {@link BlockBehaviour.Properties} of the block
+	 * @param factory Factory function to create {@link Block} from properties
+	 * @param properties {@link BlockBehaviour.Properties} of the block
 	 * @return Newly registered {@link Block}
 	 */
-	public static <B extends Block> B register(String name, Function<BlockBehaviour.Properties, B> factory, BlockBehaviour.Properties settings) {
+	public static <B extends Block> B register(String name, Function<BlockBehaviour.Properties, B> factory, BlockBehaviour.Properties properties) {
 		ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name));
-		B block = factory.apply(settings.setId(key));
+		B block = factory.apply(properties.setId(key));
 
 		return Registry.register(BuiltInRegistries.BLOCK, key, block);
 	}
 
 	/**
 	 * Registers a block item and associates it with its block.
-	 *
-	 * This method applies {@code settings.useBlockPrefixedTranslationKey()}.
+	 * <br/>
+	 * This method applies {@code properties.useBlockDescriptionPrefix()}.
 	 *
 	 * @param name Name ({@link Identifier} path string) of the block item
 	 * @param block {@link Block} to associate to the block item
 	 * @return Newly created {@link BlockItem}
 	 */
 	public static BlockItem registerBlockItem(String name, Block block) {
-		return register(name, settings -> new BlockItem(block, settings), new net.minecraft.world.item.Item.Properties().useBlockDescriptionPrefix());
+		return register(name, properties -> new BlockItem(block, properties), new Item.Properties().useBlockDescriptionPrefix());
 	}
 
 	/**
 	 * Registers an item.
-	 *
+	 * <br/>
 	 * When using this method directly, the caller should apply
-	 * {@code settings.useBlockPrefixedTranslationKey()} if desired.
+	 * {@code properties.useBlockDescriptionPrefix()} if desired.
 	 *
 	 * @param name Name ({@link Identifier} path string) of the item
-	 * @param factory Factory function to create {@link Item} from settings
-	 * @param settings {@link net.minecraft.world.item.Item.Properties} of the item
+	 * @param factory Factory function to create {@link Item} from properties
+	 * @param properties {@link Item.Properties} of the item
 	 * @return Newly registered {@link Item}
 	 */
-	public static <I extends Item> I register(String name, Function<net.minecraft.world.item.Item.Properties, I> factory, net.minecraft.world.item.Item.Properties settings) {
+	public static <I extends Item> I register(String name, Function<Item.Properties, I> factory, Item.Properties properties) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name));
-		I item = factory.apply(settings.setId(key));
+		I item = factory.apply(properties.setId(key));
 
 		if (item instanceof BlockItem blockItem) {
 			blockItem.registerBlocks(Item.BY_BLOCK, blockItem);
@@ -164,7 +162,7 @@ public class TerrestriaRegistry {
 	 */
 	public static void register(BootstrapContext<PlacedFeature> registerable, ResourceKey<PlacedFeature> key, ResourceKey<ConfiguredFeature<?, ?>> feature, List<PlacementModifier> placementModifiers) {
 		PlacementUtils.register(registerable, key,
-				registerable.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(feature),
-				placementModifiers);
+			registerable.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(feature),
+			placementModifiers);
 	}
 }

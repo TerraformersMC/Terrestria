@@ -1,14 +1,14 @@
 package com.terraformersmc.terrestria.surfacebuilders;
 
 import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
-import com.terraformersmc.terraform.noise.OpenSimplexNoise;
-import net.minecraft.world.level.block.state.BlockState;
+import com.terraformersmc.terraform.noise.api.OpenSimplexNoise;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.chunk.ChunkAccess;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.BlockColumn;
+import net.minecraft.world.level.chunk.ChunkAccess;
 
 public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise CLIFF_NOISE = new OpenSimplexNoise(346987);

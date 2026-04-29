@@ -6,19 +6,20 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 	public static final MapCodec<SaguaroCactusTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(saguaroCactusTrunkPlacerInstance ->
 			trunkPlacerParts(saguaroCactusTrunkPlacerInstance).apply(saguaroCactusTrunkPlacerInstance, SaguaroCactusTrunkPlacer::new));
@@ -33,7 +34,7 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, BlockPos position, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, BlockPos position, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = position.mutable();
@@ -45,7 +46,7 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 		height = random.nextInt(1) + 5;
 
 		// Place the first 2 blocks of the cactus
-		placeSpecificBlockState(world, replacer, currentPosition, treeFeatureConfig.trunkProvider.getState(random, currentPosition).setValue(BareSmallLogBlock.DOWN, true));
+		placeSpecificBlockState(world, replacer, currentPosition, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(BareSmallLogBlock.DOWN, true));
 		setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
 
 		// Place one branch always
@@ -64,7 +65,7 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.of();
 	}
 
-	public void placeBranch(LevelSimulatedReader world, RandomSource rand, BlockPos.MutableBlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
+	public void placeBranch(WorldGenLevel world, RandomSource rand, BlockPos.MutableBlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
 		setBlockStateAndUpdate(config, rand, replacer, world, pos.move(direction), direction);
 		for (int i = 0; i < length; i++) {
 			setBlockStateAndUpdate(config, rand, replacer, world, pos.move(Direction.UP), Direction.UP);

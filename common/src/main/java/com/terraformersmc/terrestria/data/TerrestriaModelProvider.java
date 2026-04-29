@@ -14,36 +14,34 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.minecraft.client.color.item.GrassColorSource;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.blockstates.ConditionBuilder;
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.model.ModelLocationUtils;
-import net.minecraft.client.data.models.model.ModelTemplate;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.client.data.*;
-import net.minecraft.client.color.item.GrassColorSource;
-import net.minecraft.client.renderer.block.model.Variant;
-import net.minecraft.client.data.models.blockstates.ConditionBuilder;
-import net.minecraft.client.data.models.MultiVariant;
+import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.block.dispatch.Variant;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.FoliageColor;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+@NullMarked
 public class TerrestriaModelProvider extends FabricModelProvider {
 	public static final List<Pair<BooleanProperty, Function<MultiVariant, MultiVariant>>> SMALL_LOG_VARIANT_FUNCTIONS = List.of(
 			Pair.of(BlockStateProperties.NORTH, (model) -> model
@@ -68,7 +66,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 			)
 	);
 
-	public TerrestriaModelProvider(FabricDataOutput output) {
+	public TerrestriaModelProvider(FabricPackOutput output) {
 		super(output);
 	}
 
@@ -311,7 +309,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		this.registerBlockItemModel(generator, quarterLog);
 	}
 
-	private void registerWoodBlocks(BlockModelGenerators generator, WoodBlocks woodBlocks, BlockFamily blockFamily, Block sapling, Block pottedSapling) {
+	private void registerWoodBlocks(BlockModelGenerators generator, WoodBlocks woodBlocks, BlockFamily blockFamily, @Nullable Block sapling, Block pottedSapling) {
 		// Vanilla part of WoodBlocks
 		generator.family(blockFamily.getBaseBlock()).generateFor(blockFamily);
 		generator.createShelf(woodBlocks.shelf, woodBlocks.strippedLog);
@@ -414,23 +412,23 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 
 	private void registerDirtBlocks(BlockModelGenerators generator, DirtBlocks dirtBlocks) {
 		// Dirt basic block
-		generator.createRotatedVariantBlock(dirtBlocks.getDirt());
-		Identifier dirtTextureId = TextureMapping.getBlockTexture(dirtBlocks.getDirt());
+		generator.createRotatedVariantBlock(dirtBlocks.dirtBlock());
+		Material dirtTextureId = TextureMapping.getBlockTexture(dirtBlocks.dirtBlock());
 
 		// Dirt Path based on vanilla model and the partial code in BlockStateModelGenerator.registerDirtPath()
-		TextureMapping pathTexture = TextureMapping.logColumn(dirtBlocks.getDirtPath())
+		TextureMapping pathTexture = TextureMapping.logColumn(Objects.requireNonNull(dirtBlocks.dirtPathBlock()))
 				.put(TextureSlot.BOTTOM, dirtTextureId)
 				.copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
 				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.DIRT_PATH,"_top"))
-				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.getDirtPath(), "_side"));
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.dirtPathBlock(), "_side"));
 		Identifier pathModelId = new ModelTemplate(
 				Optional.of(ModelLocationUtils.getModelLocation(Blocks.DIRT_PATH)),
 				Optional.empty(),
 				TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.TOP
-		).create(dirtBlocks.getDirtPath(), pathTexture, generator.modelOutput);
+		).create(dirtBlocks.dirtPathBlock(), pathTexture, generator.modelOutput);
 		Variant pathModel = BlockModelGenerators.plainModel(pathModelId);
 
-		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.getDirtPath(),
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.dirtPathBlock(),
 				BlockModelGenerators.createRotatedVariants(pathModel)));
 
 		// Grass, Mycelium, and Podzol based roughly on BlockStateModelGenerator.registerTopSoils()
@@ -439,63 +437,63 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 				.put(TextureSlot.BOTTOM, dirtTextureId)
 				.copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
 				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.GRASS_BLOCK, "_top"))
-				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.getGrassBlock(), "_side"))
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(Objects.requireNonNull(dirtBlocks.grassBlock()), "_side"))
 				.put(TextureSlot.create("overlay"), TextureMapping.getBlockTexture(Blocks.GRASS_BLOCK, "_side_overlay"));
 		Identifier grassTextureId = new ModelTemplate(
 				Optional.of(ModelLocationUtils.getModelLocation(Blocks.GRASS_BLOCK)),
 				Optional.empty(),
 				TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.TOP
-		).create(dirtBlocks.getGrassBlock(), grassTextureMap, generator.modelOutput);
+		).create(dirtBlocks.grassBlock(), grassTextureMap, generator.modelOutput);
 		MultiVariant grassTexture = BlockModelGenerators.plainVariant(grassTextureId);
 		TextureMapping snowTexture = new TextureMapping()
 				.put(TextureSlot.BOTTOM, dirtTextureId)
 				.copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
 				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.GRASS_BLOCK, "_top"))
-				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.getGrassBlock(), "_snow"));
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.grassBlock(), "_snow"));
 		MultiVariant snowStateVariant = BlockModelGenerators
 				.plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(
-						dirtBlocks.getGrassBlock(), "_snow", snowTexture, generator.modelOutput));
-		generator.createGrassLikeBlock(dirtBlocks.getGrassBlock(), grassTexture, snowStateVariant);
-		generator.registerSimpleTintedItemModel(dirtBlocks.getGrassBlock(), grassTextureId, new GrassColorSource());
+						dirtBlocks.grassBlock(), "_snow", snowTexture, generator.modelOutput));
+		generator.createGrassLikeBlock(dirtBlocks.grassBlock(), grassTexture, snowStateVariant);
+		generator.registerSimpleTintedItemModel(dirtBlocks.grassBlock(), grassTextureId, new GrassColorSource());
 		/* TODO: future mycelium feature?
 		// mycelium
 		Identifier myceliumTexture = TexturedModel.CUBE_BOTTOM_TOP
-				.get(dirtBlocks.getMycelium())
+				.get(dirtBlocks.myceliumBlock())
 				.textures(textures -> textures
 						.put(TextureKey.BOTTOM, dirtTextureId)
 						.put(TextureKey.TOP, TextureMap.getSubId(Blocks.MYCELIUM, "_top")))
-				.upload(dirtBlocks.getMycelium(), generator.modelCollector);
-		generator.registerTopSoil(dirtBlocks.getMycelium(), myceliumTexture, blockStateVariant);
+				.upload(dirtBlocks.myceliumBlock(), generator.modelCollector);
+		generator.registerTopSoil(dirtBlocks.myceliumBlock(), myceliumTexture, blockStateVariant);
 		*/
 		// podzol
 		Identifier podzolTextureId = TexturedModel.CUBE_TOP_BOTTOM
-				.get(dirtBlocks.getPodzol())
+				.get(Objects.requireNonNull(dirtBlocks.podzolBlock()))
 				.updateTextures(textures -> textures
 						.put(TextureSlot.BOTTOM, dirtTextureId)
 						.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.PODZOL, "_top")))
-				.create(dirtBlocks.getPodzol(), generator.modelOutput);
+				.create(dirtBlocks.podzolBlock(), generator.modelOutput);
 		MultiVariant podzolTexture = BlockModelGenerators.plainVariant(podzolTextureId);
-		generator.createGrassLikeBlock(dirtBlocks.getPodzol(), podzolTexture, snowStateVariant);
+		generator.createGrassLikeBlock(dirtBlocks.podzolBlock(), podzolTexture, snowStateVariant);
 
 		// Farmland from BlockStateModelGenerator.registerFarmland()
 		TextureMapping farmlandTexture = new TextureMapping()
-				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.getDirt()))
-				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(dirtBlocks.getFarmland()));
+				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.dirtBlock()))
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Objects.requireNonNull(dirtBlocks.farmBlock())));
 		TextureMapping moistFarmlandTexture = new TextureMapping()
-				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.getDirt()))
-				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(dirtBlocks.getFarmland(), "_moist"));
-		Identifier farmlandModelId = ModelTemplates.FARMLAND.create(dirtBlocks.getFarmland(), farmlandTexture, generator.modelOutput);
-		Identifier moistFarmlandModelId = ModelTemplates.FARMLAND.create(TextureMapping.getBlockTexture(dirtBlocks.getFarmland(), "_moist"), moistFarmlandTexture, generator.modelOutput);
+				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.dirtBlock()))
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(dirtBlocks.farmBlock(), "_moist"));
+		Identifier farmlandModelId = ModelTemplates.FARMLAND.create(dirtBlocks.farmBlock(), farmlandTexture, generator.modelOutput);
+		Identifier moistFarmlandModelId = ModelTemplates.FARMLAND.create(TextureMapping.getBlockTexture(dirtBlocks.farmBlock(), "_moist").sprite(), moistFarmlandTexture, generator.modelOutput);
 		MultiVariant farmlandModel = BlockModelGenerators.plainVariant(farmlandModelId);
 		MultiVariant moistFarmlandModel = BlockModelGenerators.plainVariant(moistFarmlandModelId);
-		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.getFarmland())
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.farmBlock())
 				.with(BlockModelGenerators
 						.createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, moistFarmlandModel, farmlandModel)));
 
-		this.registerBlockItemModel(generator, dirtBlocks.getDirt());
-		this.registerBlockItemModel(generator, dirtBlocks.getDirtPath());
-		this.registerBlockItemModel(generator, dirtBlocks.getFarmland());
-		this.registerBlockItemModel(generator, dirtBlocks.getPodzol());
+		this.registerBlockItemModel(generator, dirtBlocks.dirtBlock());
+		this.registerBlockItemModel(generator, dirtBlocks.dirtPathBlock());
+		this.registerBlockItemModel(generator, dirtBlocks.farmBlock());
+		this.registerBlockItemModel(generator, dirtBlocks.podzolBlock());
 	}
 
 	private void registerSmallLogItemModel(ItemModelGenerators generator, Block block, @Nullable Block texture) {

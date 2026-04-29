@@ -9,28 +9,21 @@ import com.terraformersmc.terrestria.feature.tree.treedecorators.SakuraTreeDecor
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.*;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.data.worldgen.placement.TreePlacements;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.TreePlacements;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.WeightedPlacedFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomFeatureConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BushFoliagePlacer;
@@ -90,48 +83,42 @@ public class TerrestriaConfiguredFeatures {
 		HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = registerable.lookup(Registries.CONFIGURED_FEATURE);
 		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
-		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(32, 15, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-								new WeightedStateProvider(createStatePoolBuilder()
-										.add(Blocks.SHORT_GRASS.defaultBlockState(), 1)
-										.add(Blocks.FERN.defaultBlockState(), 1)
-										.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.defaultBlockState(), 1)
-										.add(TerrestriaBlocks.MONSTERAS.defaultBlockState(), 4)
-										.build())),
-						BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+				new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+					.add(Blocks.SHORT_GRASS.defaultBlockState(), 1)
+					.add(Blocks.FERN.defaultBlockState(), 1)
+					.add(TerrestriaBlocks.INDIAN_PAINTBRUSH.defaultBlockState(), 1)
+					.add(TerrestriaBlocks.MONSTERAS.defaultBlockState(), 4)
+				)
+		));
 
-		TerrestriaRegistry.register(registerable, PATCH_DEAD_GRASS, Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(4, 15, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-								BlockStateProvider.simple(TerrestriaBlocks.DEAD_GRASS.defaultBlockState())),
-						BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+		TerrestriaRegistry.register(registerable, PATCH_DEAD_GRASS, Feature.SIMPLE_BLOCK,
+				new SimpleBlockConfiguration(BlockStateProvider.simple(TerrestriaBlocks.DEAD_GRASS)));
 
-		TerrestriaRegistry.register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(4, 15, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-								new WeightedStateProvider(createStatePoolBuilder()
-										.add(TerrestriaBlocks.DEAD_GRASS.defaultBlockState(), 3)
-										.add(TerrestriaBlocks.AGAVE.defaultBlockState(), 1)
-										.build())),
-						BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+		TerrestriaRegistry.register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+				new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+					.add(TerrestriaBlocks.DEAD_GRASS.defaultBlockState(), 3)
+					.add(TerrestriaBlocks.AGAVE.defaultBlockState(), 1)
+				)
+		));
 
-		TerrestriaRegistry.register(registerable, PATCH_OASIS_VEGETATION, Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(32, 15, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-								new WeightedStateProvider(createStatePoolBuilder()
-										.add(Blocks.FERN.defaultBlockState(), 1)
-										.add(Blocks.SHORT_GRASS.defaultBlockState(), 2)
-										.add(TerrestriaBlocks.TINY_CACTUS.defaultBlockState(), 1)
-										.add(TerrestriaBlocks.AGAVE.defaultBlockState(), 1)
-										.add(TerrestriaBlocks.ALOE_VERA.defaultBlockState(), 1)
-										.build())),
-						BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+		TerrestriaRegistry.register(registerable, PATCH_OASIS_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+				new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+					.add(Blocks.FERN.defaultBlockState(), 1)
+					.add(Blocks.SHORT_GRASS.defaultBlockState(), 2)
+					.add(TerrestriaBlocks.TINY_CACTUS.defaultBlockState(), 1)
+					.add(TerrestriaBlocks.AGAVE.defaultBlockState(), 1)
+					.add(TerrestriaBlocks.ALOE_VERA.defaultBlockState(), 1)
+				)
+		));
 
-		TerrestriaRegistry.register(registerable, PATCH_LUSH_DESERT_VEGETATION, Feature.RANDOM_PATCH,
-				new RandomPatchConfiguration(32, 15, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
-								new WeightedStateProvider(createStatePoolBuilder()
-										.add(TerrestriaBlocks.DEAD_GRASS.defaultBlockState(), 2)
-										.add(Blocks.DEAD_BUSH.defaultBlockState(), 1)
-										.add(TerrestriaBlocks.TINY_CACTUS.defaultBlockState(), 1)
-										.build())),
-						BlockPredicate.ONLY_IN_AIR_PREDICATE)));
+		TerrestriaRegistry.register(registerable, PATCH_LUSH_DESERT_VEGETATION, Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(
+				new WeightedStateProvider(new WeightedList.Builder<BlockState>()
+					.add(TerrestriaBlocks.DEAD_GRASS.defaultBlockState(), 2)
+					.add(Blocks.DEAD_BUSH.defaultBlockState(), 1)
+					.add(TerrestriaBlocks.TINY_CACTUS.defaultBlockState(), 1)
+				)
+		));
 
 		TerrestriaRegistry.register(registerable, BRYCE_TREE, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
 				SimpleStateProvider.simple(TerrestriaBlocks.SMALL_OAK_LOG),
@@ -268,10 +255,6 @@ public class TerrestriaConfiguredFeatures {
 
 		TerrestriaRegistry.register(registerable, CATTAIL, TerrestriaFeatures.CATTAIL, new ProbabilityFeatureConfiguration(0.3F));
 		TerrestriaRegistry.register(registerable, DUM_DUM_HEAD, TerrestriaFeatures.DUM_DUM_HEAD, NoneFeatureConfiguration.INSTANCE);
-	}
-
-	private static WeightedList.Builder<BlockState> createStatePoolBuilder() {
-		return WeightedList.builder();
 	}
 
 	private static TreeConfiguration canopyOf(WoodBlocks woodBlocks, BlockState sapling, CanopyTree4BranchTrunkPlacer trunkPlacer, List<TreeDecorator> decorators) {

@@ -1,3 +1,3 @@
-accessWidener	v1	named
+accessWidener	v1	official
 
 accessible field net/minecraft/server/level/ChunkMap randomState Lnet/minecraft/world/level/levelgen/RandomState;

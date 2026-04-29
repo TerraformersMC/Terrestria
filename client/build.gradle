@@ -1,7 +1,4 @@
-archivesBaseName = "terrestria-client"
-
-loom {
-}
+base.archivesName = "terrestria-client"
 
 dependencies {
 	implementation project(path: ':terrestria-common')

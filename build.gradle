@@ -3,36 +3,35 @@ plugins {
 	id 'maven-publish'
 	id 'idea'
 	id 'eclipse'
-	id 'fabric-loom' version '1.13.+'
+	id 'net.fabricmc.fabric-loom' version '1.15.+'
 }
 
-apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/3.0/ferry-mpp.gradle'
+base.archivesName = project.archives_base_name
+
+apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/3.2/ferry-mpp.gradle'
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
-	mappings loom.officialMojangMappings()
 
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	include(modApi("com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"))
-	include(modApi("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"))
+	include(api("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"))
 
 	if (findProject(':terrestria-worldgen') != null) {
-		include(modApi("com.terraformersmc:biolith-fabric:${biolith_version}"))
+		include(api("com.terraformersmc:biolith-fabric:${biolith_version}"))
 	}
 
-	afterEvaluate {
-		subprojects.each {
-			testmodImplementation sourceSets.main.output
-			api project(path: "${it.name}", configuration: "namedElements")
-			include project("${it.name}:")
-		}
+	subprojects.each {
+		// TODO: what if anything is actually needed here?
+		//testmodImplementation sourceSets.main.output
+		include(api(project("${it.name}:")))
 	}
 }
 
@@ -41,10 +40,7 @@ allprojects {
 	apply plugin: 'idea'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven-publish'
-	apply plugin: 'fabric-loom'
-
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	apply plugin: 'net.fabricmc.fabric-loom'
 
 	group = project.maven_group
 
@@ -53,17 +49,6 @@ allprojects {
 			compileClasspath += main.compileClasspath
 			runtimeClasspath += main.runtimeClasspath
 		}
-	}
-
-	configurations {
-		dev {
-			canBeResolved = false
-			canBeConsumed = true
-		}
-	}
-
-	jar {
-		archiveClassifier.set("dev")
 	}
 
 	afterEvaluate {
@@ -76,21 +61,16 @@ allprojects {
 		}
 	}
 
-	//task sourcesJar(type: Jar, dependsOn: classes) {
-	//  archiveClassifier.set("sources")
-	//	from sourceSets.main.allSource
-	//}
-
 	tasks.withType(JavaCompile).configureEach {
 		it.options.encoding = "UTF-8"
-		it.options.release = 21
+		it.options.release = 25
 	}
 
 	java {
 		withSourcesJar()
 
-		sourceCompatibility = JavaVersion.VERSION_21
-		targetCompatibility = JavaVersion.VERSION_21
+		sourceCompatibility = JavaVersion.VERSION_25
+		targetCompatibility = JavaVersion.VERSION_25
 	}
 
 	repositories {
@@ -98,24 +78,25 @@ allprojects {
 			name = 'TerraformersMC'
 			url = 'https://maven.terraformersmc.com/'
 		}
+		// TODO
+		mavenLocal()
 	}
 }
 
 subprojects {
 	dependencies {
 		minecraft "com.mojang:minecraft:${project.minecraft_version}"
-		mappings loom.officialMojangMappings()
 
-		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+		implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+		implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-		modImplementation "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-		modImplementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
+		implementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
 	}
 
 	version = rootProject.version
@@ -125,17 +106,9 @@ subprojects {
 	// Ferry functionality but for subprojects
 	publishing {
 		publications {
-			mavenJava(MavenPublication) {
-				artifact(jar) {
-					builtBy remapJar
-				}
-				artifact(sourcesJar) {
-					builtBy remapSourcesJar
-				}
-
-				afterEvaluate {
-					artifact remapJar
-				}
+			create("mavenJava", MavenPublication) {
+				artifactId = project.archives_base_name
+				from components.java
 			}
 		}
 

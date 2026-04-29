@@ -3,16 +3,18 @@ package com.terraformersmc.terrestria.data;
 import com.terraformersmc.terraform.boat.api.data.TerraformBoatData;
 import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalEntityTypeTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.EntityTypeTags;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.CompletableFuture;
 
-public class TerrestriaEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagProvider {
-	protected TerrestriaEntityTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+@NullMarked
+public class TerrestriaEntityTypeTagProvider extends FabricTagsProvider.EntityTypeTagsProvider {
+	protected TerrestriaEntityTypeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 

@@ -4,21 +4,24 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 	public static final MapCodec<CanopyTree4BranchTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec((straightTrunkWith4BranchesPlacerInstance ->
 			trunkPlacerParts(straightTrunkWith4BranchesPlacerInstance).apply(straightTrunkWith4BranchesPlacerInstance, CanopyTree4BranchTrunkPlacer::new)));
@@ -33,10 +36,10 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Check and set the block below to dirt
-		setDirtAt(world, replacer, random, pos.below(), treeFeatureConfig);
+		placeBelowTrunkBlock(world, replacer, random, pos.below(), treeFeatureConfig);
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
@@ -55,12 +58,12 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		// Place the branches
 		currentPosition.move(Direction.NORTH, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getState(random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
 		}
 		currentPosition = origin.mutable();
 		currentPosition.move(Direction.EAST, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getState(random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
+			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
 		}
 
 		// Go back to the middle of the tree

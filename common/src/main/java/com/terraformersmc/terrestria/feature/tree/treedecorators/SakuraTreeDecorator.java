@@ -4,18 +4,21 @@ import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terraform.wood.api.block.BareSmallLogBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaTreeDecorators;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.EmptyBlockGetter;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
-import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator.Context;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
+
+@NullMarked
 public class SakuraTreeDecorator extends TreeDecorator {
 	public static MapCodec<SakuraTreeDecorator> CODEC = MapCodec.unit(new SakuraTreeDecorator());
 
@@ -54,7 +57,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
 			if (valid && TreeFeature.validTreePos(world, top)) {
-				generator.setBlock(top, TerrestriaBlocks.SAKURA.leafPile.defaultBlockState());
+				generator.setBlock(top, Objects.requireNonNull(TerrestriaBlocks.SAKURA.leafPile).defaultBlockState());
 			}
 		}
 	}

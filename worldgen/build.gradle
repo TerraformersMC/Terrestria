@@ -1,4 +1,4 @@
-archivesBaseName = "terrestria-worldgen"
+base.archivesName = "terrestria-worldgen"
 
 loom {
 	accessWidenerPath = file("src/main/resources/terrestria-worldgen.accesswidener")
@@ -6,7 +6,7 @@ loom {
 
 dependencies {
 	// Biolith for the worldgen API module
-	modImplementation "com.terraformersmc:biolith-fabric:${biolith_version}"
+	implementation "com.terraformersmc:biolith-fabric:${biolith_version}"
 
 	implementation project(path: ':terrestria-common')
 }

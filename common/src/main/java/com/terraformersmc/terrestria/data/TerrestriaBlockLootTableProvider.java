@@ -4,21 +4,23 @@ import com.terraformersmc.terraform.dirt.api.DirtBlocks;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.world.level.block.SaplingBlock;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.HolderLookup;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.storage.loot.predicates.BonusLevelTableCondition;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvider {
-	protected TerrestriaBlockLootTableProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+@NullMarked
+public class TerrestriaBlockLootTableProvider extends FabricBlockLootSubProvider {
+	protected TerrestriaBlockLootTableProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
@@ -106,25 +108,23 @@ public class TerrestriaBlockLootTableProvider extends FabricBlockLootTableProvid
 	}
 
 	private void addDirtDrops(DirtBlocks dirtBlock) {
-		if (dirtBlock.getDirt() != null) {
-			dropSelf(dirtBlock.getDirt());
-			if (dirtBlock.getDirtPath() != null) {
-				dropOther(dirtBlock.getDirtPath(), dirtBlock.getDirt());
-			}
-			if (dirtBlock.getFarmland() != null) {
-				dropOther(dirtBlock.getFarmland(), dirtBlock.getDirt());
-			}
-			if (dirtBlock.getGrassBlock() != null) {
-				add(dirtBlock.getGrassBlock(), block -> createSingleItemTableWithSilkTouch(block, dirtBlock.getDirt()));
-			}
-			/* TODO: When mycelium support is added to DirtBlocks...
-			if (dirtBlock.getMycelium() != null) {
-				addDrop(dirtBlock.getMycelium(), block -> drops(block, dirtBlock.getDirt()));
-			}
-			*/
-			if (dirtBlock.getPodzol() != null) {
-				add(dirtBlock.getPodzol(), block -> createSingleItemTableWithSilkTouch(block, dirtBlock.getDirt()));
-			}
+		dropSelf(dirtBlock.dirtBlock());
+		if (dirtBlock.dirtPathBlock() != null) {
+			dropOther(dirtBlock.dirtPathBlock(), dirtBlock.dirtBlock());
+		}
+		if (dirtBlock.farmBlock() != null) {
+			dropOther(dirtBlock.farmBlock(), dirtBlock.dirtBlock());
+		}
+		if (dirtBlock.grassBlock() != null) {
+			add(dirtBlock.grassBlock(), block -> createSingleItemTableWithSilkTouch(block, dirtBlock.dirtBlock()));
+		}
+		/* TODO: When mycelium support is added to DirtBlocks...
+		if (dirtBlock.myceliumBlock() != null) {
+			add(dirtBlock.myceliumBlock(), block -> createSingleItemTableWithSilkTouch(block, dirtBlock.dirtBlock()));
+		}
+		*/
+		if (dirtBlock.podzolBlock() != null) {
+			add(dirtBlock.podzolBlock(), block -> createSingleItemTableWithSilkTouch(block, dirtBlock.dirtBlock()));
 		}
 	}
 

@@ -3,11 +3,11 @@ package com.terraformersmc.terrestria.mixin;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.LavaFluid;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.LavaFluid;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 

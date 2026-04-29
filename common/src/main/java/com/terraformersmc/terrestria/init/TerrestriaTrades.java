@@ -1,9 +1,9 @@
 package com.terraformersmc.terrestria.init;
 
-import com.terraformersmc.terraform.tree.api.merchant.TerraformSaplingTradeHelper;
-
 public class TerrestriaTrades {
 	public static void register() {
+// TODO: This needs to be replaced with datagen before release.
+/*
 		TerraformSaplingTradeHelper.registerWanderingTraderSaplingTrades(
 				TerrestriaBlocks.BRYCE_SAPLING,
 				TerrestriaBlocks.CYPRESS_SAPLING,
@@ -20,5 +20,6 @@ public class TerrestriaTrades {
 				TerrestriaBlocks.WILLOW_SAPLING,
 				TerrestriaBlocks.YUCCA_PALM_SAPLING
 		);
+*/
 	}
 }

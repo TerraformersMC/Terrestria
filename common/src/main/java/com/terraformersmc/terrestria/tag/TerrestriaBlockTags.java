@@ -1,10 +1,10 @@
 package com.terraformersmc.terrestria.tag;
 
 import com.terraformersmc.terrestria.Terrestria;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.TagKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 public final class TerrestriaBlockTags {
 	public static final TagKey<Block> BASALTS = TerrestriaBlockTags.of(Identifier.fromNamespaceAndPath("c", "basalts"));

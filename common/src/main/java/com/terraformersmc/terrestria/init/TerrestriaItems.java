@@ -3,13 +3,14 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
-
 import com.terraformersmc.terrestria.item.LogTurnerItem;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+
+import java.util.Objects;
 
 // This class exports public item constants, these fields have to be public
 @SuppressWarnings("WeakerAccess")
@@ -67,6 +68,13 @@ public class TerrestriaItems {
 	public static LogTurnerItem LOG_TURNER;
 
 	public static void init() {
+		// Because DirtBlocks are nullable.
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.dirtBlock());
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.dirtPathBlock());
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.grassBlock());
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.podzolBlock());
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.farmBlock());
+
 		REDWOOD = WoodItems.register(TerrestriaBlocks.REDWOOD);
 		HEMLOCK = WoodItems.register(TerrestriaBlocks.HEMLOCK);
 		RUBBER = WoodItems.register(TerrestriaBlocks.RUBBER);
@@ -102,11 +110,11 @@ public class TerrestriaItems {
 		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.registerBlockItem("saguaro_cactus_sapling", TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
 		YUCCA_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("yucca_palm_sapling", TerrestriaBlocks.YUCCA_PALM_SAPLING);
 
-		ANDISOL = TerrestriaRegistry.registerBlockItem("andisol", TerrestriaBlocks.ANDISOL.getDirt());
-		ANDISOL_DIRT_PATH = TerrestriaRegistry.registerBlockItem("andisol_dirt_path", TerrestriaBlocks.ANDISOL.getDirtPath());
-		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL.getFarmland());
-		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("andisol_grass_block", TerrestriaBlocks.ANDISOL.getGrassBlock());
-		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("andisol_podzol", TerrestriaBlocks.ANDISOL.getPodzol());
+		ANDISOL = TerrestriaRegistry.registerBlockItem("andisol", TerrestriaBlocks.ANDISOL.dirtBlock());
+		ANDISOL_DIRT_PATH = TerrestriaRegistry.registerBlockItem("andisol_dirt_path", TerrestriaBlocks.ANDISOL.dirtPathBlock());
+		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL.farmBlock());
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("andisol_grass_block", TerrestriaBlocks.ANDISOL.grassBlock());
+		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("andisol_podzol", TerrestriaBlocks.ANDISOL.podzolBlock());
 
 		VOLCANIC_ROCK = StoneItems.register("volcanic_rock", TerrestriaBlocks.VOLCANIC_ROCK);
 		VOLCANIC_SAND = TerrestriaRegistry.registerBlockItem("volcanic_sand", TerrestriaBlocks.VOLCANIC_SAND);
@@ -126,7 +134,7 @@ public class TerrestriaItems {
 	}
 
 	private static void addCompostables() {
-		CompostingChanceRegistry compostingRegistry = CompostingChanceRegistry.INSTANCE;
+		CompostableRegistry compostingRegistry = CompostableRegistry.INSTANCE;
 		float CACTUS_CHANCE = compostingRegistry.get(Items.CACTUS);
 		float FERN_CHANCE = compostingRegistry.get(Items.FERN);
 		float FLOWER_CHANCE = compostingRegistry.get(Items.POPPY);
@@ -167,7 +175,7 @@ public class TerrestriaItems {
 	}
 
 	private static void addFuels() {
-		FuelRegistryEvents.BUILD.register((builder, context) -> {
+		FuelValueEvents.BUILD.register((builder, context) -> {
 			builder.add(DEAD_GRASS, 100);
 			builder.add(LOG_TURNER, 300);
 		});

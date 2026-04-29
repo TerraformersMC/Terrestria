@@ -4,20 +4,21 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 	public static final MapCodec<QuarteredMegaCanopyTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(quarteredMegaCanopyTrunkPlacerInstance ->
 			trunkPlacerParts(quarteredMegaCanopyTrunkPlacerInstance).apply(quarteredMegaCanopyTrunkPlacerInstance, QuarteredMegaCanopyTrunkPlacer::new));
@@ -32,7 +33,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 		// Determine the number of branched branchLayers to have
 		int branchLayers = 5 + random.nextInt(3);
 
@@ -70,7 +71,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(LevelSimulatedReader world, RandomSource random, BlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig, Direction direction) {
+	private BlockPos placeBranch(WorldGenLevel world, RandomSource random, BlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig, Direction direction) {
 		// Create the Mutable version of our block position so that we can procedurally create the branch
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 

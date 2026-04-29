@@ -30,9 +30,9 @@
   "icon": "assets/terrestria/icon.png",
   "environment": "*",
   "depends": {
-    "fabricloader": ">=0.16.0",
-    "fabric-api": ">=0.97.0",
-    "minecraft": ">=1.21.11 <26",
-    "java": ">=21"
+    "fabricloader": ">=0.18.0",
+    "fabric-api": ">=0.144.0",
+    "minecraft": ">=26.1 <26.2",
+    "java": ">=25"
   }
 }

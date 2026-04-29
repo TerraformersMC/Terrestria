@@ -2,14 +2,10 @@ package com.terraformersmc.terrestria.init.helpers;
 
 import com.terraformersmc.terraform.boat.api.item.TerraformBoatItemHelper;
 import com.terraformersmc.terrestria.Terrestria;
-import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.fabricmc.fabric.api.registry.CompostableRegistry;
+import net.fabricmc.fabric.api.registry.FuelValueEvents;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.HangingSignItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SignItem;
+import net.minecraft.world.item.*;
 
 public class WoodItems {
 	private final String name;
@@ -95,7 +91,7 @@ public class WoodItems {
 	}
 
 	protected void addCompostables() {
-		CompostingChanceRegistry compostingRegistry = CompostingChanceRegistry.INSTANCE;
+		CompostableRegistry compostingRegistry = CompostableRegistry.INSTANCE;
 		float LEAVES_CHANCE = compostingRegistry.get(Items.OAK_LEAVES);
 
 		compostingRegistry.add(leaves, LEAVES_CHANCE);
@@ -105,7 +101,7 @@ public class WoodItems {
 	}
 
 	protected void addFuels() {
-		FuelRegistryEvents.BUILD.register((builder, context) -> {
+		FuelValueEvents.BUILD.register((builder, context) -> {
 			builder.add(fence, 300);
 			builder.add(fenceGate, 300);
 		});

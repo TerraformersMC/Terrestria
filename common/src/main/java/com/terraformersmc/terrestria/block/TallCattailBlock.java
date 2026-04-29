@@ -1,24 +1,25 @@
 package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.DoublePlantBlock;
-import net.minecraft.world.level.block.TallSeagrassBlock;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.block.DoublePlantBlock;
+import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /**
  * A custom tall seagrass block where the lower half is underwater, and the upper half is above water.
  */
+@NullMarked
 public class TallCattailBlock extends TallSeagrassBlock {
 	public TallCattailBlock(Properties settings) {
 		super(settings);

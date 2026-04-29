@@ -5,21 +5,22 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.feature.tree.trunkplacers.templates.SmallTrunkPlacer;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
-
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
 
+@NullMarked
 public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 	public static final MapCodec<SpindlyTrunkPlacer> CODEC = RecordCodecBuilder.mapCodec(spindlyTrunkPlacerInstance ->
 			trunkPlacerParts(spindlyTrunkPlacerInstance).apply(spindlyTrunkPlacerInstance, SpindlyTrunkPlacer::new));
@@ -34,7 +35,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(LevelSimulatedReader world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height_1, BlockPos origin, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height_1, BlockPos origin, TreeConfiguration treeFeatureConfig) {
 
 		//Pick a direction for the tree to lean
 		Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
@@ -85,7 +86,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	public BlockPos placeBranch(LevelSimulatedReader world, RandomSource random, BlockPos origin, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
+	public BlockPos placeBranch(WorldGenLevel world, RandomSource random, BlockPos origin, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
 		Direction offset;
 		BlockPos.MutableBlockPos pos = origin.mutable();
 		for (int i = 0; i < length; i++) {
@@ -108,7 +109,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		return pos.immutable();
 	}
 
-	public void placeRoot(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, LevelSimulatedReader world, BlockPos origin, int rootLength, Direction originalDirection) {
+	public void placeRoot(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel world, BlockPos origin, int rootLength, Direction originalDirection) {
 		BlockPos.MutableBlockPos pos = origin.mutable();
 		Direction direction;
 		for (int i = 0; i < rootLength; i++) {

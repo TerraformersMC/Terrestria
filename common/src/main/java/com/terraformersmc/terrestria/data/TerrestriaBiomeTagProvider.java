@@ -2,19 +2,21 @@ package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.tag.TerrestriaBiomeTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBiomeTags;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.CompletableFuture;
 
-public class TerrestriaBiomeTagProvider extends FabricTagProvider<Biome> {
-	protected TerrestriaBiomeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+@NullMarked
+public class TerrestriaBiomeTagProvider extends FabricTagsProvider<Biome> {
+	protected TerrestriaBiomeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, Registries.BIOME, registriesFuture);
 	}
 

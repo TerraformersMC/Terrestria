@@ -1,22 +1,25 @@
 package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.init.TerrestriaItems;
-import com.terraformersmc.terrestria.init.helpers.*;
+import com.terraformersmc.terrestria.init.helpers.StoneItems;
+import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.CompletableFuture;
 
-public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider {
-	protected TerrestriaItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, BlockTagProvider blockTagProvider) {
+@NullMarked
+public class TerrestriaItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
+	protected TerrestriaItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, BlockTagsProvider blockTagProvider) {
 		super(output, registriesFuture, blockTagProvider);
 	}
 
@@ -27,11 +30,11 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		 */
 		copy(BlockTags.BUTTONS, ItemTags.BUTTONS);
 
-		copy(BlockTags.DIRT, ItemTags.DIRT);
-
 		copy(BlockTags.CEILING_HANGING_SIGNS, ItemTags.HANGING_SIGNS);
 
 		copy(BlockTags.FENCE_GATES, ItemTags.FENCE_GATES);
+
+		copy(BlockTags.GRASS_BLOCKS, ItemTags.GRASS_BLOCKS);
 
 		copy(BlockTags.LEAVES, ItemTags.LEAVES);
 
@@ -40,8 +43,6 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		copy(BlockTags.OAK_LOGS, ItemTags.OAK_LOGS);
 
 		copy(BlockTags.PLANKS, ItemTags.PLANKS);
-
-		copy(BlockTags.SAND, ItemTags.SAND);
 
 		copy(BlockTags.SAPLINGS, ItemTags.SAPLINGS);
 
@@ -150,15 +151,6 @@ public class TerrestriaItemTagProvider extends FabricTagProvider.ItemTagProvider
 		addWood(TerrestriaItems.SAKURA);
 		addWood(TerrestriaItems.WILLOW);
 		addWood(TerrestriaItems.YUCCA_PALM);
-
-
-		// TODO: DEPRECATED as of 1.21
-		copy(TerrestriaBlockTags.BASALTS, TerrestriaItemTags.BASALT);
-		copy(TerrestriaBlockTags.BLACK_SANDS, TerrestriaItemTags.BLACK_SAND);
-		copy(ConventionalBlockTags.COBBLESTONES, TerrestriaItemTags.COBBLESTONE);
-		copy(TerrestriaBlockTags.DIRTS, TerrestriaItemTags.DIRT);
-		copy(TerrestriaBlockTags.SANDS, TerrestriaItemTags.SAND);
-		copy(ConventionalBlockTags.STONES, TerrestriaItemTags.STONE);
 	}
 
 	private void addStone(StoneItems stoneItem) {

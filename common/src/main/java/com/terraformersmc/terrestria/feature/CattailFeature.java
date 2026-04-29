@@ -1,22 +1,24 @@
 package com.terraformersmc.terrestria.feature;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.TallSeagrassBlock;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TallSeagrassBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class CattailFeature extends Feature<ProbabilityFeatureConfiguration> {
-	private Block normal;
-	private Block tall;
+	private final Block normal;
+	private final Block tall;
 
 	// TODO: Migrate to feature config
 	public CattailFeature(Codec<ProbabilityFeatureConfiguration> codec, Block normal, Block tall) {

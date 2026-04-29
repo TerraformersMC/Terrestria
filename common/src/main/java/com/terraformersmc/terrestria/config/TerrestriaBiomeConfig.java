@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.config;
 
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 
 import java.util.Map;

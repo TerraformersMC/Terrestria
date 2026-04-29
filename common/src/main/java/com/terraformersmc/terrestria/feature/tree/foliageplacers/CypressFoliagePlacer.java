@@ -1,21 +1,21 @@
 package com.terraformersmc.terrestria.feature.tree.foliageplacers;
 
-import java.util.function.Consumer;
-
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
-
 import net.minecraft.core.BlockPos;
-import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelSimulatedReader;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer.FoliageSetter;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import org.jspecify.annotations.NullMarked;
 
+import java.util.function.Consumer;
+
+@NullMarked
 public class CypressFoliagePlacer extends FoliagePlacer {
 	public static final MapCodec<CypressFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(instance ->
 			foliagePlacerParts(instance).apply(instance, CypressFoliagePlacer::new));
@@ -30,7 +30,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(LevelSimulatedReader world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		double maxRadius = 1.5 + 1.5 * random.nextDouble();
 
 		BlockPos.MutableBlockPos pos = treeNode.pos().mutable();
@@ -53,7 +53,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 
 			circle(pos.mutable(), treeRadius, position -> {
 				if (TreeFeature.isAirOrLeaves(world, position)) {
-					placer.set(position.immutable(), config.foliageProvider.getState(random, position));
+					placer.set(position.immutable(), config.foliageProvider.getState(world, random, position));
 				}
 			});
 		}

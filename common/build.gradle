@@ -1,4 +1,4 @@
-archivesBaseName = "terrestria-common"
+base.archivesName = "terrestria-common"
 
 fabricApi {
 	configureDataGeneration {
@@ -8,5 +8,5 @@ fabricApi {
 
 dependencies {
 	// Biolith for BiomePerimeters in the VolcanoStructure
-	modImplementation "com.terraformersmc:biolith-fabric:${biolith_version}"
+	implementation "com.terraformersmc:biolith-fabric:${biolith_version}"
 }

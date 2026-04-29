@@ -4,10 +4,11 @@ import com.terraformersmc.biolith.api.surface.BiolithSurfaceBuilder;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class TerrestriaSurfaceBuilders {
 	private static final HashMap<Identifier, BiolithSurfaceBuilder> builders = new HashMap<>(8);
@@ -33,8 +34,8 @@ public class TerrestriaSurfaceBuilders {
 
 		builders.put(Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface/volcanic_island"),
 				new OceanIslandSurfaceBuilder(
-						TerrestriaBlocks.ANDISOL.getGrassBlock().defaultBlockState(),
-						TerrestriaBlocks.ANDISOL.getDirt().defaultBlockState(),
+						Objects.requireNonNull(TerrestriaBlocks.ANDISOL.grassBlock()).defaultBlockState(),
+						TerrestriaBlocks.ANDISOL.dirtBlock().defaultBlockState(),
 						TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState(),
 						TerrestriaBlocks.VOLCANIC_SAND.defaultBlockState(),
 						Blocks.SAND.defaultBlockState()

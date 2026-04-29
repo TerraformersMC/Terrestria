@@ -1,20 +1,22 @@
 package com.terraformersmc.terrestria.feature.structure.arch;
 
-import com.terraformersmc.terraform.noise.OpenSimplexNoise;
+import com.terraformersmc.terraform.noise.api.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.ChunkPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class CanyonArchGenerator extends StructurePiece {
 	private final OpenSimplexNoise noise;
 
@@ -28,6 +30,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	private final int centerZ;
 
 	CanyonArchGenerator(RandomSource random, int centerX, int centerZ) {
+		//noinspection ConstantConditions
 		super(TerrestriaStructures.CANYON_ARCH_PIECE, 0, null);
 		this.setOrientation(null);
 

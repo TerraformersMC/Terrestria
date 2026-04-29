@@ -7,25 +7,28 @@ import com.terraformersmc.biolith.api.biomeperimeters.BiomePerimeters;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.core.Holder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.QuartPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.core.QuartPos;
 import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.biome.Climate;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
 
+@NullMarked
 public class VolcanoStructure extends Structure {
     public static final MapCodec<VolcanoStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(VolcanoStructure.settingsCodec(instance),
-			IntProvider.NON_NEGATIVE_CODEC.fieldOf("height").forGetter(arg -> arg.height),
+			IntProviders.NON_NEGATIVE_CODEC.fieldOf("height").forGetter(arg -> arg.height),
 			Codec.INT.fieldOf("base_y").forGetter(arg -> arg.baseY),
 			Codec.BOOL.fieldOf("thin_if_tall").forGetter(arg -> arg.thinIfTall)
 		).apply(instance, VolcanoStructure::new));

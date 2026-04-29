@@ -3,26 +3,22 @@ package com.terraformersmc.terrestria.init;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.helpers.SurfaceLevelFilterPlacementModifier;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.features.TreeFeatures;
 import net.minecraft.data.worldgen.features.VegetationFeatures;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
-import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Util;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.BlockPredicateFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.RarityFilter;
-import net.minecraft.world.level.levelgen.placement.SurfaceWaterDepthFilter;
+import net.minecraft.world.level.levelgen.placement.*;
 
 public class TerrestriaPlacedFeatures {
 	public static final ResourceKey<PlacedFeature> CATTAILS_WARM = createRegistryKey("cattails_warm");
@@ -105,7 +101,7 @@ public class TerrestriaPlacedFeatures {
 				BlockPredicateFilter.forPredicate(ON_DIRT),
 				BiomeFilter.biome());
 
-		TerrestriaRegistry.register(registerable, PATCH_LUSH_FERNS, VegetationFeatures.PATCH_TAIGA_GRASS,
+		TerrestriaRegistry.register(registerable, PATCH_LUSH_FERNS, VegetationFeatures.TAIGA_GRASS,
 				CountPlacement.of(16),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP,
@@ -113,39 +109,44 @@ public class TerrestriaPlacedFeatures {
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_VOLCANIC_ISLAND_GRASS,
-				CountPlacement.of(12),
-				InSquarePlacement.spread(),
-				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
-				BiomeFilter.biome());
+				Util.copyAndAdd(
+					VegetationPlacements.worldSurfaceSquaredWithCount(12),
+					CountPlacement.of(32),
+					RandomOffsetPlacement.ofTriangle(15, 3),
+					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+				));
 
 		TerrestriaRegistry.register(registerable, PATCH_DEAD_GRASS, TerrestriaConfiguredFeatures.PATCH_DEAD_GRASS,
-				CountPlacement.of(12),
-				InSquarePlacement.spread(),
-				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
-				BiomeFilter.biome());
+				Util.copyAndAdd(
+					VegetationPlacements.worldSurfaceSquaredWithCount(12),
+					CountPlacement.of(4),
+					RandomOffsetPlacement.ofTriangle(15, 3),
+					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+				));
 
 		TerrestriaRegistry.register(registerable, PATCH_OUTBACK_BUSHLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_OUTBACK_BUSHLAND_GRASS,
-				CountPlacement.of(12),
-				InSquarePlacement.spread(),
-				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
-				BiomeFilter.biome());
+				Util.copyAndAdd(
+					VegetationPlacements.worldSurfaceSquaredWithCount(12),
+					CountPlacement.of(4),
+					RandomOffsetPlacement.ofTriangle(15, 3),
+					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+				));
 
 		TerrestriaRegistry.register(registerable, PATCH_OASIS_VEGETATION, TerrestriaConfiguredFeatures.PATCH_OASIS_VEGETATION,
-				CountPlacement.of(6),
-				InSquarePlacement.spread(),
-				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
-				BiomeFilter.biome());
+				Util.copyAndAdd(
+					VegetationPlacements.worldSurfaceSquaredWithCount(6),
+					CountPlacement.of(32),
+					RandomOffsetPlacement.ofTriangle(15, 3),
+					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+				));
 
 		TerrestriaRegistry.register(registerable, PATCH_LUSH_DESERT_VEGETATION, TerrestriaConfiguredFeatures.PATCH_LUSH_DESERT_VEGETATION,
-				CountPlacement.of(4),
-				InSquarePlacement.spread(),
-				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
-				BiomeFilter.biome());
+				Util.copyAndAdd(
+					VegetationPlacements.worldSurfaceSquaredWithCount(4),
+					CountPlacement.of(32),
+					RandomOffsetPlacement.ofTriangle(15, 3),
+					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+				));
 
 		registerTreeFeature(registerable, SPARSE_FALLEN_HEMLOCK_LOGS, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 

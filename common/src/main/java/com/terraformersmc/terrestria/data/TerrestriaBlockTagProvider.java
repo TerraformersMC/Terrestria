@@ -7,21 +7,24 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColoredFallingBlock;
-import net.minecraft.data.tags.TagAppender;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
+import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-	protected TerrestriaBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+@NullMarked
+public class TerrestriaBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
+	protected TerrestriaBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
@@ -34,7 +37,7 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 				.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
 
 		valueLookupBuilder(BlockTags.CONVERTABLE_TO_MUD)
-				.add(TerrestriaBlocks.ANDISOL.getDirt());
+				.add(TerrestriaBlocks.ANDISOL.dirtBlock());
 
 		valueLookupBuilder(BlockTags.EDIBLE_FOR_SHEEP)
 				.add(TerrestriaBlocks.AGAVE)
@@ -78,8 +81,8 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 
 		valueLookupBuilder(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
 				.add(Blocks.SMOOTH_SANDSTONE)
-				.add(TerrestriaBlocks.ANDISOL.getDirt())
-				.add(TerrestriaBlocks.ANDISOL.getGrassBlock())
+				.add(TerrestriaBlocks.ANDISOL.dirtBlock())
+				.add(Objects.requireNonNull(TerrestriaBlocks.ANDISOL.grassBlock()))
 				.add(TerrestriaBlocks.VOLCANIC_ROCK.plain.full);
 
 		valueLookupBuilder(BlockTags.SAPLINGS)
@@ -153,96 +156,125 @@ public class TerrestriaBlockTagProvider extends FabricTagProvider.BlockTagProvid
 	}
 
 	private void addDirt(DirtBlocks dirtBlock) {
-		valueLookupBuilder(BlockTags.ANIMALS_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock());
+		Block dirt = Objects.requireNonNull(dirtBlock.dirtBlock());
+		Block dirtPath = Objects.requireNonNull(dirtBlock.dirtPathBlock());
+		Block grass = Objects.requireNonNull(dirtBlock.grassBlock());
+		Block podzol = Objects.requireNonNull(dirtBlock.podzolBlock());
+		Block farm = Objects.requireNonNull(dirtBlock.farmBlock());
 
-		valueLookupBuilder(BlockTags.BIG_DRIPLEAF_PLACEABLE)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getFarmland())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+		valueLookupBuilder(BlockTags.ANIMALS_SPAWNABLE_ON)
+				.add(grass);
+
+		valueLookupBuilder(BlockTags.CANNOT_REPLACE_BELOW_TREE_TRUNK)
+				.add(podzol);
 
 		valueLookupBuilder(BlockTags.CONVERTABLE_TO_MUD)
-				.add(dirtBlock.getDirt());
+				.add(dirt);
 
 		valueLookupBuilder(BlockTags.DIRT)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
-
-		valueLookupBuilder(BlockTags.DRY_VEGETATION_MAY_PLACE_ON)
-				.add(dirtBlock.getFarmland());
+				.add(dirt);
 
 		valueLookupBuilder(BlockTags.ENDERMAN_HOLDABLE)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(dirt)
+				.add(grass)
+				.add(podzol);
 
 		valueLookupBuilder(BlockTags.FOXES_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(grass)
+				.add(podzol);
 
 		valueLookupBuilder(BlockTags.FROGS_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock());
+				.add(grass);
 
-		valueLookupBuilder(BlockTags.MUSHROOM_GROW_BLOCK)
-				.add(dirtBlock.getPodzol());
+		valueLookupBuilder(BlockTags.GRASS_BLOCKS)
+				.add(grass)
+				.add(podzol);
 
-		valueLookupBuilder(BlockTags.PARROTS_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock());
+		valueLookupBuilder(BlockTags.GROWS_CROPS)
+				.add(farm);
 
-		valueLookupBuilder(BlockTags.RABBITS_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock());
+		valueLookupBuilder(BlockTags.HUGE_BROWN_MUSHROOM_CAN_PLACE_ON)
+				.add(podzol);
+
+		valueLookupBuilder(BlockTags.HUGE_RED_MUSHROOM_CAN_PLACE_ON)
+				.add(podzol);
 
 		valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getDirtPath())
-				.add(dirtBlock.getFarmland())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(dirt)
+				.add(dirtPath)
+				.add(farm)
+				.add(grass)
+				.add(podzol);
+
+		valueLookupBuilder(BlockTags.OVERRIDES_MUSHROOM_LIGHT_REQUIREMENT)
+				.add(podzol);
+
+		valueLookupBuilder(BlockTags.PARROTS_SPAWNABLE_ON)
+				.add(grass);
+
+		valueLookupBuilder(BlockTags.RABBITS_SPAWNABLE_ON)
+				.add(grass);
 
 		valueLookupBuilder(BlockTags.SNIFFER_DIGGABLE_BLOCK)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(dirt)
+				.add(grass)
+				.add(podzol);
+
+		valueLookupBuilder(BlockTags.SUPPORT_OVERRIDE_CACTUS_FLOWER)
+				.add(farm);
+
+		valueLookupBuilder(BlockTags.SUPPORTS_BIG_DRIPLEAF)
+				.add(dirt)
+				.add(farm)
+				.add(grass)
+				.add(podzol);
+
+		valueLookupBuilder(BlockTags.SUPPORTS_CROPS)
+				.add(farm);
+
+		valueLookupBuilder(BlockTags.SUPPORTS_DRY_VEGETATION)
+				.add(farm);
+
+		valueLookupBuilder(BlockTags.SUPPORTS_VEGETATION)
+				.add(farm);
 
 		valueLookupBuilder(BlockTags.VALID_SPAWN)
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(grass)
+				.add(podzol);
 
 		valueLookupBuilder(BlockTags.WOLVES_SPAWNABLE_ON)
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(grass)
+				.add(podzol);
 
 
 		valueLookupBuilder(TerrestriaBlockTags.DIRTS)
-				.add(dirtBlock.getDirt());
+				.add(dirt);
 
 		valueLookupBuilder(TerraformDirtBlockTags.FARMLAND)
-				.add(dirtBlock.getFarmland());
+				.add(farm);
 
 		valueLookupBuilder(TerraformDirtBlockTags.GRASS_BLOCKS)
-				.add(dirtBlock.getGrassBlock());
+				.add(grass);
 
 		valueLookupBuilder(TerrestriaBlockTags.PODZOLS)
-				.add(dirtBlock.getPodzol());
+				.add(podzol);
 
 		valueLookupBuilder(TerraformDirtBlockTags.SOIL)
-				.add(dirtBlock.getDirt())
-				.add(dirtBlock.getGrassBlock())
-				.add(dirtBlock.getPodzol());
+				.add(dirt)
+				.add(grass)
+				.add(podzol);
 	}
 
 	private void addSand(ColoredFallingBlock sandBlock) {
 		valueLookupBuilder(BlockTags.AZALEA_ROOT_REPLACEABLE).add(sandBlock);
 		valueLookupBuilder(BlockTags.ENDERMAN_HOLDABLE).add(sandBlock);
 		valueLookupBuilder(BlockTags.LUSH_GROUND_REPLACEABLE).add(sandBlock);
-		valueLookupBuilder(BlockTags.TRIGGERS_AMBIENT_DESERT_SAND_BLOCK_SOUNDS).add(sandBlock);
+		valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).add(sandBlock);
 		valueLookupBuilder(BlockTags.RABBITS_SPAWNABLE_ON).add(sandBlock);
 		valueLookupBuilder(BlockTags.SAND).add(sandBlock);
 		valueLookupBuilder(BlockTags.SCULK_REPLACEABLE).add(sandBlock);
-		valueLookupBuilder(BlockTags.MINEABLE_WITH_SHOVEL).add(sandBlock);
 		valueLookupBuilder(BlockTags.SMELTS_TO_GLASS).add(sandBlock);
+		valueLookupBuilder(BlockTags.TRIGGERS_AMBIENT_DESERT_SAND_BLOCK_SOUNDS).add(sandBlock);
 
 		valueLookupBuilder(TerrestriaBlockTags.SANDS).add(sandBlock);
 	}

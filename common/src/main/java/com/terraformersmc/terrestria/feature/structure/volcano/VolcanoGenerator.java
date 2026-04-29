@@ -1,27 +1,31 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
 
+import com.terraformersmc.terraform.noise.api.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terraform.noise.OpenSimplexNoise;
 import com.terraformersmc.terrestria.init.TerrestriaStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.util.Mth;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.structure.BoundingBox;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.util.valueproviders.IntProvider;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.StructureManager;
+import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructurePiece;
+import net.minecraft.world.level.levelgen.structure.pieces.StructurePieceSerializationContext;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.ticks.ScheduledTick;
+import org.jspecify.annotations.NullMarked;
 
+import java.util.Objects;
+
+@NullMarked
 public class VolcanoGenerator extends StructurePiece {
 	private final SimpleRadialNoise radiusNoise;
 	private final SimpleRadialNoise vegetationNoise;
@@ -41,6 +45,7 @@ public class VolcanoGenerator extends StructurePiece {
 	private final int centerZ;
 
 	VolcanoGenerator(RandomSource random, int centerX, int centerZ, IntProvider heightProvider, int baseY, boolean thinIfTall) {
+		//noinspection ConstantConditions
 		super(TerrestriaStructures.VOLCANO_PIECE, 0, null);
 		this.setOrientation(null);
 
@@ -163,6 +168,7 @@ public class VolcanoGenerator extends StructurePiece {
 		if (box.minY() > this.boundingBox.minY() || box.maxY() < this.boundingBox.maxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.grassBlock());
 
 		int chamberMiddle = baseY - lavaTubeLength - chamberHeight / 2;
 
@@ -210,7 +216,7 @@ public class VolcanoGenerator extends StructurePiece {
 							world.setBlock(pos, state, 2);
 						} else {
 							world.setBlock(pos, Blocks.LAVA.defaultBlockState(), 2);
-							world.getFluidTicks().schedule(ScheduledTick.probe(world.getFluidState(pos).getType(), pos));;
+							world.getFluidTicks().schedule(ScheduledTick.probe(world.getFluidState(pos).getType(), pos));
 						}
 					}
 
@@ -251,7 +257,7 @@ public class VolcanoGenerator extends StructurePiece {
 						if (columnHeight < 4) {
 							top = TerrestriaBlocks.VOLCANIC_SAND.defaultBlockState();
 						} else {
-							top = TerrestriaBlocks.ANDISOL.getGrassBlock().defaultBlockState();
+							top = TerrestriaBlocks.ANDISOL.grassBlock().defaultBlockState();
 						}
 					}
 				}

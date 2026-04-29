@@ -7,29 +7,32 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.Identifier;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.flag.FeatureFlags;
-import net.minecraft.world.flag.FeatureFlagSet;
-import net.minecraft.resources.Identifier;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
+@NullMarked
 public class TerrestriaRecipeProvider extends FabricRecipeProvider {
-	protected TerrestriaRecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+	protected TerrestriaRecipeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
@@ -45,11 +48,11 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 						.unlockedBy("has_bryce_sapling", this.has(TerrestriaItems.BRYCE_SAPLING))
 						.save(output, "bryce_sapling_from_oak_sapling");
 
-				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, Items.GREEN_DYE, 1.0f, 200)
+				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GREEN_DYE, 1.0f, 200)
 						.unlockedBy("has_cactus", this.has(TerrestriaItems.SAGUARO_CACTUS))
 						.save(output);
 
-				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, Items.LIME_DYE, 1.0f, 200)
+				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.LIME_DYE, 1.0f, 200)
 						.unlockedBy("has_tiny_cactus", this.has(TerrestriaItems.TINY_CACTUS))
 						.save(output);
 
@@ -160,6 +163,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 					if (stoneItem.cobblestone != null) {
 						oreSmelting(Collections.singletonList(stoneItem.cobblestone.full),
 								RecipeCategory.BUILDING_BLOCKS,
+								CookingBookCategory.BLOCKS,
 								stoneItem.plain.full,
 								0.1f, 200, "stone");
 					}
@@ -183,6 +187,7 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 					if (stoneItem.plain != null) {
 						oreSmelting(Collections.singletonList(stoneItem.plain.full),
 								RecipeCategory.BUILDING_BLOCKS,
+							CookingBookCategory.BLOCKS,
 								stoneItem.smooth.full,
 								0.1f, 200, "stone");
 					}

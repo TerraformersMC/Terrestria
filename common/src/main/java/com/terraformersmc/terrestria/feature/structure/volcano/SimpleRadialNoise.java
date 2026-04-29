@@ -1,8 +1,8 @@
 package com.terraformersmc.terrestria.feature.structure.volcano;
 
-import java.util.Random;
-
 import net.minecraft.util.Mth;
+
+import java.util.Random;
 
 /**
  * Simple noise function that proceeds in a circular fashion.

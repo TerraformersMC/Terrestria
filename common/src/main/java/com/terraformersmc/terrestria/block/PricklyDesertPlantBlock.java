@@ -1,21 +1,21 @@
 package com.terraformersmc.terrestria.block;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.InsideBlockEffectApplier;
-import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import org.joml.Vector3d;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implements BonemealableBlock {
 	public PricklyDesertPlantBlock(Properties settings) {
 		super(false, settings);

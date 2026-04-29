@@ -19,27 +19,19 @@ import com.terraformersmc.terrestria.init.helpers.WoodColors;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FlattenableBlockRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ColoredFallingBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.SeagrassBlock;
-import net.minecraft.world.level.block.TallSeagrassBlock;
-import net.minecraft.world.level.block.VegetationBlock;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.ColorRGBA;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.util.ColorRGBA;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.BlockGetter;
 
+import java.util.Objects;
 import java.util.Optional;
 
 // This class exports public block constants, these fields have to be public
@@ -131,8 +123,8 @@ public class TerrestriaBlocks {
 		YUCCA_PALM = WoodBlocks.register("yucca_palm", WoodColors.YUCCA_PALM, WoodBlocks.LogSize.SMALL, false, false, false, false);
 
 		SAGUARO_CACTUS = TerrestriaRegistry.register("saguaro_cactus", SaguaroCactusBlock::new, SaguaroCactusBlock.createSettings(Blocks.CACTUS.defaultMapColor()));
-		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogSettings(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor(), Blocks.OAK_WOOD.defaultMapColor()));
-		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogSettings(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor()));
+		SMALL_OAK_LOG = TerrestriaRegistry.register("small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogProperties(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor(), Blocks.OAK_WOOD.defaultMapColor()));
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.register("stripped_small_oak_log", settings -> new SmallLogBlock(Blocks.OAK_LEAVES, settings), PillarLogHelper.createSmallLogProperties(Blocks.OAK_LEAVES, Blocks.STRIPPED_OAK_WOOD.defaultMapColor()));
 
 		// strange leaves
 		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.register("dark_japanese_maple_leaves", settings -> new ColoredParticleLeavesBlock(0.01f, 0x351829, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES).mapColor(MapColor.TERRACOTTA_RED).isValidSpawn(TerrestriaBlocks::canSpawnOnLeaves).isSuffocating(TerrestriaBlocks::never).isViewBlocking(TerrestriaBlocks::never));
@@ -166,7 +158,7 @@ public class TerrestriaBlocks {
 		Block andisol = TerrestriaRegistry.register("andisol", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT).mapColor(MapColor.COLOR_BLACK));
 		TerraformDirtPathBlock andisolDirtPath = TerrestriaRegistry.register("andisol_dirt_path", TerraformDirtPathBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT_PATH));
 		TerraformFarmlandBlock andisolFarmland = TerrestriaRegistry.register("andisol_farmland", TerraformFarmlandBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.FARMLAND).mapColor(MapColor.COLOR_BLACK));
-		TerraformGrassBlock andisolGrassBlock = TerrestriaRegistry.register("andisol_grass_block", settings -> new BasaltGrassBlock(andisol, () -> ANDISOL.getDirtPath(), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK));
+		TerraformGrassBlock andisolGrassBlock = TerrestriaRegistry.register("andisol_grass_block", settings -> new BasaltGrassBlock(andisol, () -> Objects.requireNonNull(ANDISOL.dirtPathBlock()), settings), BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK));
 		TerraformSnowyBlock andisolPodzol = TerrestriaRegistry.register("andisol_podzol", TerraformSnowyBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.PODZOL));
 		ANDISOL = TerraformDirtRegistry.register(new DirtBlocks(andisol, andisolGrassBlock, andisolDirtPath, andisolPodzol, andisolFarmland));
 
@@ -224,9 +216,11 @@ public class TerrestriaBlocks {
 	}
 
 	private static void addFlattenables() {
-		FlattenableBlockRegistry.register(ANDISOL.getDirt(), ANDISOL.getDirtPath().defaultBlockState());
-		FlattenableBlockRegistry.register(ANDISOL.getGrassBlock(), ANDISOL.getDirtPath().defaultBlockState());
-		FlattenableBlockRegistry.register(ANDISOL.getPodzol(), ANDISOL.getDirtPath().defaultBlockState());
+		Objects.requireNonNull(ANDISOL.dirtPathBlock());
+
+		FlattenableBlockRegistry.register(ANDISOL.dirtBlock(), ANDISOL.dirtPathBlock().defaultBlockState());
+		FlattenableBlockRegistry.register(ANDISOL.grassBlock(), ANDISOL.dirtPathBlock().defaultBlockState());
+		FlattenableBlockRegistry.register(ANDISOL.podzolBlock(), ANDISOL.dirtPathBlock().defaultBlockState());
 	}
 
 	private static void addStrippables() {
@@ -236,6 +230,7 @@ public class TerrestriaBlocks {
 	public static boolean never(BlockState state, BlockGetter world, BlockPos pos) {
 		return false;
 	}
+
 	public static Boolean canSpawnOnLeaves(BlockState state, BlockGetter world, BlockPos pos, EntityType<?> type) {
 		return type == EntityType.OCELOT || type == EntityType.PARROT;
 	}

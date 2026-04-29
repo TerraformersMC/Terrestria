@@ -2,17 +2,18 @@ package com.terraformersmc.terrestria.block;
 
 import com.terraformersmc.terraform.dirt.api.block.TerraformGrassBlock;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.function.Supplier;
 
+@NullMarked
 public class BasaltGrassBlock extends TerraformGrassBlock {
 	public BasaltGrassBlock(Block dirt, Supplier<Block> path, Properties settings) {
 		super(dirt, path, settings);
