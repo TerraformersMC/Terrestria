@@ -4,6 +4,7 @@ import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
 import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
+import com.terraformersmc.terrestria.villager.TerrestriaVillagerTrades;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Holder;
@@ -25,6 +26,7 @@ public class TerrestriaDynamicRegistryProvider extends FabricDynamicRegistryProv
 		registryBuilder.add(Registries.CONFIGURED_FEATURE, TerrestriaConfiguredFeatures::bootstrap);
 		registryBuilder.add(Registries.PLACED_FEATURE, TerrestriaPlacedFeatures::bootstrap);
 		registryBuilder.add(Registries.BIOME, TerrestriaBiomes::bootstrap);
+		registryBuilder.add(Registries.VILLAGER_TRADE, TerrestriaVillagerTrades::bootstrap);
 	}
 
 	@Override
@@ -32,6 +34,7 @@ public class TerrestriaDynamicRegistryProvider extends FabricDynamicRegistryProv
 		addAll(entries, registries.lookupOrThrow(Registries.CONFIGURED_FEATURE), Terrestria.MOD_ID);
 		addAll(entries, registries.lookupOrThrow(Registries.PLACED_FEATURE), Terrestria.MOD_ID);
 		addAll(entries, registries.lookupOrThrow(Registries.BIOME), Terrestria.MOD_ID);
+		addAll(entries, registries.lookupOrThrow(Registries.VILLAGER_TRADE), Terrestria.MOD_ID);
 	}
 
 	@Override
