@@ -36,17 +36,17 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Check and set the block below to dirt
-		placeBelowTrunkBlock(world, replacer, random, pos.below(), treeFeatureConfig);
+		placeBelowTrunkBlock(level, replacer, random, pos.below(), treeFeatureConfig);
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
 		//We vary the base trunk height, but not the top of the tree for simplicity sake so this height does not reflect the actual height of this type of tree
 		for (int i = 0; i < getTreeHeight(random); i++) {
-			placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
 		// Remember the current location for branch placement
@@ -58,27 +58,27 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		// Place the branches
 		currentPosition.move(Direction.NORTH, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
 		}
 		currentPosition = origin.mutable();
 		currentPosition.move(Direction.EAST, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
 		}
 
 		// Go back to the middle of the tree
 		currentPosition = origin.mutable();
 
 		// Place 2 more blocks to cap off the tree
-		placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
-		placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+		placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+		placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 
 		// Return the crossing of the branches as the foliage placer's center
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(origin, radius, false));
 	}
 
-	private static void checkAndPlaceSpecificBlockState(LevelSimulatedReader testableWorld, RandomSource random, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
-		if (TreeFeature.validTreePos(testableWorld, blockPos)) {
+	private static void checkAndPlaceSpecificBlockState(LevelSimulatedReader level, RandomSource random, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
+		if (TreeFeature.validTreePos(level, blockPos)) {
 			replacer.accept(blockPos.immutable(), blockState);
 		}
 	}

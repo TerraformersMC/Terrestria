@@ -29,7 +29,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		// The origin of this leaf piece
 		BlockPos center = treeNode.pos().immutable();
 
@@ -40,16 +40,16 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		boolean flipSpiral = random.nextBoolean();
 
 		// Place the top blocks
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 0), placer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(1, 1, 0), placer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, 1), placer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(-1, 1, 0), placer, config);
-		checkAndSetBlockState(world, random, pos.set(center).move(0, 1, -1), placer, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 0), setter, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(1, 1, 0), setter, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 1), setter, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(-1, 1, 0), setter, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, -1), setter, config);
 
 		// Place supports for dangly bits
 		for (int dZ = -1; dZ < 2; dZ++) {
 			for (int dX = -1; dX < 2; dX++) {
-				checkAndSetBlockState(world, random, pos.set(center).move(dZ, 0, dX), placer, config);
+				checkAndSetBlockState(level, random, pos.set(center).move(dZ, 0, dX), setter, config);
 			}
 		}
 
@@ -58,30 +58,30 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 			Direction direction = Direction.from2DDataValue(d);
 
 			pos.set(center).move(direction, 2);
-			placeSpiral(world, random, pos, placer, config, direction, !flipSpiral);
+			placeSpiral(level, random, pos, setter, config, direction, !flipSpiral);
 
 			pos.set(center).move(direction, 3);
-			placeSpiral(world, random, pos, placer, config, direction, flipSpiral);
+			placeSpiral(level, random, pos, setter, config, direction, flipSpiral);
 		}
 	}
 
-	private void placeSpiral(WorldGenLevel world, RandomSource rand, BlockPos.MutableBlockPos pos, FoliageSetter placer, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
+	private void placeSpiral(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, FoliageSetter setter, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
 		// Base of dangly bit
-		checkAndSetBlockState(world, rand, pos, placer, config);
+		checkAndSetBlockState(level, random, pos, setter, config);
 
 		// Get the direction of the twist from the direction of the branch then place a block there
 		Direction spiral = spiral(direction, invertLeafSpiral);
-		checkAndSetBlockState(world, rand, pos.move(spiral), placer, config);
+		checkAndSetBlockState(level, random, pos.move(spiral), setter, config);
 
 		// Continue the branch all the way down
 		for (int i = 0; i < 2; i++) {
-			checkAndSetBlockState(world, rand, pos.move(Direction.DOWN), placer, config);
+			checkAndSetBlockState(level, random, pos.move(Direction.DOWN), setter, config);
 		}
 	}
 
-	private void checkAndSetBlockState(WorldGenLevel world, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter placer, TreeConfiguration config) {
-		if (TreeFeature.validTreePos(world, currentPosition)) {
-			placer.set(currentPosition.immutable(), config.foliageProvider.getState(world, random, currentPosition));
+	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter setter, TreeConfiguration config) {
+		if (TreeFeature.validTreePos(level, currentPosition)) {
+			setter.set(currentPosition.immutable(), config.foliageProvider.getState(level, random, currentPosition));
 		}
 	}
 

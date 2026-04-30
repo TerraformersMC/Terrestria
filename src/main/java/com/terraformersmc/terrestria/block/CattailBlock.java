@@ -21,14 +21,14 @@ public class CattailBlock extends SeagrassBlock {
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
 		BlockState tallBottom = TerrestriaBlocks.TALL_CATTAIL.defaultBlockState();
 		BlockState tallTop = tallBottom.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
 		BlockPos upper = pos.above();
 
-		if (world.getBlockState(upper).isAir()) {
-			world.setBlock(pos, tallBottom, 2);
-			world.setBlock(upper, tallTop, 2);
+		if (level.getBlockState(upper).isAir()) {
+			level.setBlock(pos, tallBottom, 2);
+			level.setBlock(upper, tallTop, 2);
 		}
 	}
 }

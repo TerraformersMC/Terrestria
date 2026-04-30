@@ -16,7 +16,6 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
-
 	private static final BlockState PRIMARY_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState();
 	private static final BlockState MOSS_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.mossyCobblestone.full.defaultBlockState();
 	private static final BlockState FEATURE_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.smooth.full.defaultBlockState();
@@ -27,17 +26,17 @@ public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-		WorldGenLevel world = context.level();
+		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
 		BlockPos blockPos = context.origin();
 
-		// Check that we wont pass build height
-		if (blockPos.getY() + 8 > 256 || blockPos.getY() < 1) {
+		// Check that we won't pass build height
+		if (blockPos.getY() + 8 > level.getMaxY() || blockPos.getY() < level.getMinY()) {
 			return false;
 		}
 
 		// Check to see if the block underneath is good for placement
-		if (!world.isStateAtPosition(blockPos.below(), blockState -> blockState.is(BlockTags.SAND))) {
+		if (!level.isStateAtPosition(blockPos.below(), blockState -> blockState.is(BlockTags.SAND))) {
 			return false;
 		}
 
@@ -48,9 +47,9 @@ public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
 			for (int x = 0; x < 3; x++) {
 				for (int z = 0; z < 3; z++) {
 					if ((float) random.nextInt(y + 1) / 3 < .15) {
-						world.setBlock(pos, MOSS_BLOCK, 1);
+						level.setBlock(pos, MOSS_BLOCK, 1);
 					} else {
-						world.setBlock(pos, PRIMARY_BLOCK, 1);
+						level.setBlock(pos, PRIMARY_BLOCK, 1);
 					}
 					pos.move(0, 0, 1);
 				}
@@ -85,22 +84,22 @@ public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
 		pos.move(invAxisDirection.getOpposite(), 2);
 		for (int i = 0; i < 3; i++) {
 			pos.move(invAxisDirection, 1);
-			world.setBlock(pos, FEATURE_BLOCK, 1);
+			level.setBlock(pos, FEATURE_BLOCK, 1);
 		}
 
 		// Generate Eyes
 		pos.move(Direction.DOWN);
-		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
+		level.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 		pos.move(invAxisDirection.getOpposite(), 2);
-		world.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
+		level.setBlock(pos, Blocks.AIR.defaultBlockState(), 0);
 
 		// Generate Nose
 		pos.move(direction);
 		pos.move(invAxisDirection);
 		pos.move(Direction.DOWN);
-		world.setBlock(pos, FEATURE_BLOCK, 0);
+		level.setBlock(pos, FEATURE_BLOCK, 0);
 		pos.move(Direction.DOWN);
-		world.setBlock(pos, FEATURE_BLOCK, 0);
+		level.setBlock(pos, FEATURE_BLOCK, 0);
 
 		return true;
 	}

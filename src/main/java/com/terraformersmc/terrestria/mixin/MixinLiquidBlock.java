@@ -22,14 +22,14 @@ public class MixinLiquidBlock {
 			)
 	)
 	@SuppressWarnings("unused")
-	private boolean terrestria$generateVolcanicCobblestone(Level world, BlockPos pos, BlockState newState, Operation<Boolean> original) {
+	private boolean terrestria$generateVolcanicCobblestone(Level level, BlockPos pos, BlockState newState, Operation<Boolean> original) {
 		// This is the cobble generation pathway; see also: MixinLavaFluid.
 
 		// In this method, newState can alternatively be Obsidian.
 		if (newState.is(Blocks.COBBLESTONE)) {
 			// Search immediately adjacent blocks for Volcanic Rock variants.
 			for (Direction towards : Direction.values()) {
-				BlockState neighbor = world.getBlockState(pos.relative(towards));
+				BlockState neighbor = level.getBlockState(pos.relative(towards));
 
 				if (neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.plain.full) ||
 						neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.cobblestone.full) ||
@@ -42,6 +42,6 @@ public class MixinLiquidBlock {
 			}
 		}
 
-		return original.call(world, pos, newState);
+		return original.call(level, pos, newState);
 	}
 }

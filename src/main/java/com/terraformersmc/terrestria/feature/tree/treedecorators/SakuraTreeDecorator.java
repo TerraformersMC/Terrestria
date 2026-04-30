@@ -30,7 +30,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 	@Override
 	public void place(Context generator) {
 		RandomSource random = generator.random();
-		LevelSimulatedReader world = generator.level();
+		LevelSimulatedReader level = generator.level();
 
 		for (BlockPos pos : generator.leaves()) {
 			// 1/6 positions have leaf piles
@@ -45,9 +45,9 @@ public class SakuraTreeDecorator extends TreeDecorator {
 			// of the water.
 			//
 			// This seems to work in both worldgen and when growing saplings.
-			BlockPos top = world.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos);
+			BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, pos);
 
-			boolean valid = world.isStateAtPosition(top.below(),
+			boolean valid = level.isStateAtPosition(top.below(),
 					state -> !(state.getBlock() instanceof BareSmallLogBlock) &&
 							state.isFaceSturdy(EmptyBlockGetter.INSTANCE, top.below(), Direction.UP) ||
 							state.getFluidState().isSource() &&
@@ -56,7 +56,7 @@ public class SakuraTreeDecorator extends TreeDecorator {
 
 			// It's quite important that we don't replace other blocks that aren't supposed to be touched by trees.
 			// Otherwise, you get very destructive sakura trees.
-			if (valid && TreeFeature.validTreePos(world, top)) {
+			if (valid && TreeFeature.validTreePos(level, top)) {
 				generator.setBlock(top, Objects.requireNonNull(TerrestriaBlocks.SAKURA.leafPile).defaultBlockState());
 			}
 		}

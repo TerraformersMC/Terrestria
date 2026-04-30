@@ -65,27 +65,27 @@ public class TerrestriaBiomes {
 			WINDSWEPT_REDWOOD_FOREST
 	);
 
-	public static void bootstrap(BootstrapContext<Biome> registerable) {
-		registerable.register(CALDERA, CalderaBiomes.create(registerable));
-		registerable.register(CANYON, CanyonBiomes.create(registerable));
-		registerable.register(CYPRESS_FOREST, CypressForestBiomes.create(registerable));
-		registerable.register(CYPRESS_SWAMP, CypressSwampBiomes.create(registerable));
-		registerable.register(DENSE_WOODLANDS, DenseWoodlandsBiomes.create(registerable));
-		registerable.register(DUNES, DunesBiomes.create(registerable));
-		registerable.register(HEMLOCK_RAINFOREST, HemlockRainforestBiomes.create(registerable, false));
-		registerable.register(HEMLOCK_TREELINE, HemlockRainforestBiomes.create(registerable, true));
-		registerable.register(JAPANESE_MAPLE_FOREST, JapaneseMapleForestBiomes.create(registerable));
-		registerable.register(LUSH_DESERT, LushDesertBiomes.create(registerable, false));
-		registerable.register(LUSH_REDWOOD_FOREST, LushRedwoodForestBiomes.create(registerable));
-		registerable.register(OASIS, LushDesertBiomes.create(registerable, true));
-		registerable.register(OUTBACK, OutbackBiomes.create(registerable));
-		registerable.register(RAINBOW_RAINFOREST, RainbowRainforestBiomes.create(registerable));
-		registerable.register(REDWOOD_FOREST, RedwoodForestBiomes.create(registerable, false));
-		registerable.register(SAKURA_FOREST, SakuraForestBiomes.create(registerable));
-		registerable.register(SNOWY_HEMLOCK_FOREST, SnowyHemlockRainforestBiomes.create(registerable, false));
-		registerable.register(SNOWY_HEMLOCK_TREELINE, SnowyHemlockRainforestBiomes.create(registerable, true));
-		registerable.register(VOLCANIC_ISLAND, VolcanicIslandBiomes.create(registerable));
-		registerable.register(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(registerable, true));
+	public static void bootstrap(BootstrapContext<Biome> context) {
+		context.register(CALDERA, CalderaBiomes.create(context));
+		context.register(CANYON, CanyonBiomes.create(context));
+		context.register(CYPRESS_FOREST, CypressForestBiomes.create(context));
+		context.register(CYPRESS_SWAMP, CypressSwampBiomes.create(context));
+		context.register(DENSE_WOODLANDS, DenseWoodlandsBiomes.create(context));
+		context.register(DUNES, DunesBiomes.create(context));
+		context.register(HEMLOCK_RAINFOREST, HemlockRainforestBiomes.create(context, false));
+		context.register(HEMLOCK_TREELINE, HemlockRainforestBiomes.create(context, true));
+		context.register(JAPANESE_MAPLE_FOREST, JapaneseMapleForestBiomes.create(context));
+		context.register(LUSH_DESERT, LushDesertBiomes.create(context, false));
+		context.register(LUSH_REDWOOD_FOREST, LushRedwoodForestBiomes.create(context));
+		context.register(OASIS, LushDesertBiomes.create(context, true));
+		context.register(OUTBACK, OutbackBiomes.create(context));
+		context.register(RAINBOW_RAINFOREST, RainbowRainforestBiomes.create(context));
+		context.register(REDWOOD_FOREST, RedwoodForestBiomes.create(context, false));
+		context.register(SAKURA_FOREST, SakuraForestBiomes.create(context));
+		context.register(SNOWY_HEMLOCK_FOREST, SnowyHemlockRainforestBiomes.create(context, false));
+		context.register(SNOWY_HEMLOCK_TREELINE, SnowyHemlockRainforestBiomes.create(context, true));
+		context.register(VOLCANIC_ISLAND, VolcanicIslandBiomes.create(context));
+		context.register(WINDSWEPT_REDWOOD_FOREST, RedwoodForestBiomes.create(context, true));
 	}
 
 	public static void addBasicFeatures(BiomeGenerationSettings.Builder generationSettings, boolean lavaSprings) {

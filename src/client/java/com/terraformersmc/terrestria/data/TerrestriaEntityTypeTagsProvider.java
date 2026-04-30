@@ -13,8 +13,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
-public class TerrestriaEntityTypeTagProvider extends FabricTagsProvider.EntityTypeTagsProvider {
-	protected TerrestriaEntityTypeTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class TerrestriaEntityTypeTagsProvider extends FabricTagsProvider.EntityTypeTagsProvider {
+	protected TerrestriaEntityTypeTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 

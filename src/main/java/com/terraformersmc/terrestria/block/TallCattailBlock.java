@@ -26,7 +26,7 @@ public class TallCattailBlock extends TallSeagrassBlock {
 	}
 
 	@Override
-	public ItemStack getCloneItemStack(LevelReader world, BlockPos pos, BlockState state, boolean includeData) {
+	public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state, boolean includeData) {
 		return new ItemStack(TerrestriaBlocks.CATTAIL);
 	}
 
@@ -48,14 +48,14 @@ public class TallCattailBlock extends TallSeagrassBlock {
 	}
 
 	@Override
-	public BlockState playerWillDestroy(Level world, BlockPos pos, BlockState state, Player player) {
-		if (!world.isClientSide()) {
+	public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+		if (!level.isClientSide()) {
 			if (player.isCreative()) {
-				DoublePlantBlock.preventDropFromBottomPart(world, pos, state, player);
+				DoublePlantBlock.preventDropFromBottomPart(level, pos, state, player);
 			} else {
-				DoublePlantBlock.dropResources(state, world, pos, null, player, player.getMainHandItem());
+				DoublePlantBlock.dropResources(state, level, pos, null, player, player.getMainHandItem());
 			}
 		}
-		return super.playerWillDestroy(world, pos, state, player);
+		return super.playerWillDestroy(level, pos, state, player);
 	}
 }

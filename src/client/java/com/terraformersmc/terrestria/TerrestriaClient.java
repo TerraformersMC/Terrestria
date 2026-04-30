@@ -4,8 +4,6 @@ import com.terraformersmc.terraform.boat.api.TerraformBoatClientHelper;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
 import net.minecraft.client.color.block.BlockTintSource;
@@ -23,7 +21,6 @@ import java.util.Objects;
 
 // This class is an entrypoint
 @NullMarked
-@Environment(EnvType.CLIENT)
 public class TerrestriaClient implements ClientModInitializer {
 	private static final List<BlockTintSource> FOLIAGE_BLOCK_COLORS = List.of(new BlockTintSource() {
 		@Override

@@ -84,7 +84,7 @@ public class CanyonArchGenerator extends StructurePiece {
 	}
 
 	@Override
-	public void postProcess(WorldGenLevel world, StructureManager structureAccessor, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos blockPos) {
+	public void postProcess(WorldGenLevel level, StructureManager structureManager, ChunkGenerator chunkGenerator, RandomSource random, BoundingBox box, ChunkPos chunkPos, BlockPos blockPos) {
 		if (box.minY() > this.boundingBox.minY() || box.maxY() < this.boundingBox.maxY()) {
 			throw new IllegalArgumentException("Unexpected bounding box Y range in " + box + ", the Y range is smaller than the one we expected");
 		}
@@ -100,7 +100,7 @@ public class CanyonArchGenerator extends StructurePiece {
 				for (int h = 0; h < height; h++) {
 					if (shapeArch(h, x, z)) {
 						pos.set(x, yStart + h, z);
-						world.setBlock(pos, getStateAtY(h, x, z), 2);
+						level.setBlock(pos, getStateAtY(h, x, z), 2);
 					}
 				}
 			}

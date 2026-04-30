@@ -4,7 +4,7 @@ import com.terraformersmc.terrestria.biomegen.TerrestriaBiolithGeneration;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
-import com.terraformersmc.terrestria.item.TerrestriaItemGroups;
+import com.terraformersmc.terrestria.item.TerrestriaCreativeModeTabs;
 import com.terraformersmc.terrestria.surface.builders.TerrestriaSurfaceBuilders;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.loader.api.FabricLoader;
@@ -28,7 +28,7 @@ public class Terrestria implements ModInitializer {
 		TerrestriaFeatures.init();
 		TerrestriaStructures.init();
 		TerrestriaVillagerTypes.init();
-		TerrestriaItemGroups.init();
+		TerrestriaCreativeModeTabs.init();
 		TerrestriaRegistryAliases.init();
 
 		if (FabricLoader.getInstance().isModLoaded("biolith")) {

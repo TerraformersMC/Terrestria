@@ -33,19 +33,19 @@ public class BentTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 		// Decide the direction at which the tree will bend
 		Direction bendDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
 
 		// Check and set the block below to dirt
-		placeBelowTrunkBlock(world, replacer, random, pos.below(), treeFeatureConfig);
+		placeBelowTrunkBlock(level, replacer, random, pos.below(), treeFeatureConfig);
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
 		// Place the first few blocks
 		for (int i = 0; i < 4 + random.nextInt(3); i++) {
-			placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
 		//Offset in the lean direction and also move it down to keep the trunk solid
@@ -53,7 +53,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 
 		// Place a few more blocks
 		for (int i = 0; i < 4 + random.nextInt(1); i++) {
-			placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
 		// 50% of the time make a 3rd set of blocks the same as the step before
@@ -61,7 +61,7 @@ public class BentTrunkPlacer extends TrunkPlacer {
 			currentPosition.move(bendDirection).move(Direction.DOWN);
 
 			for (int i = 0; i < 3; i++) {
-				placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+				placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 			}
 		}
 

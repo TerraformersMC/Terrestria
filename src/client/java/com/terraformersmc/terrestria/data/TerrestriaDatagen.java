@@ -12,12 +12,12 @@ public class TerrestriaDatagen implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = dataGenerator.createPack();
 
 		pack.addProvider(TerrestriaDynamicRegistryProvider::new);
-		pack.addProvider(TerrestriaBiomeTagProvider::new);
-		pack.addProvider(TerrestriaBlockLootTableProvider::new);
-		TerrestriaBlockTagProvider blockTagProvider = pack.addProvider(TerrestriaBlockTagProvider::new);
-		pack.addProvider((output, registries) -> new TerrestriaItemTagProvider(output, registries, blockTagProvider));
+		pack.addProvider(TerrestriaBiomeTagsProvider::new);
+		pack.addProvider(TerrestriaBlockLootSubProvider::new);
+		TerrestriaBlockTagsProvider blockTagProvider = pack.addProvider(TerrestriaBlockTagsProvider::new);
+		pack.addProvider((output, registries) -> new TerrestriaItemTagsProvider(output, registries, blockTagProvider));
 		pack.addProvider(TerrestriaVillagerTradeKeyTagProvider::new);
-		pack.addProvider(TerrestriaEntityTypeTagProvider::new);
+		pack.addProvider(TerrestriaEntityTypeTagsProvider::new);
 		pack.addProvider(TerrestriaModelProvider::new);
 		pack.addProvider(TerrestriaRecipeProvider::new);
 	}

@@ -19,8 +19,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
-public class TerrestriaBlockLootTableProvider extends FabricBlockLootSubProvider {
-	protected TerrestriaBlockLootTableProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class TerrestriaBlockLootSubProvider extends FabricBlockLootSubProvider {
+	protected TerrestriaBlockLootSubProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 

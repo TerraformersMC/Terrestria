@@ -34,7 +34,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
@@ -43,7 +43,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		// Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 		}
 
 		// Instance a direction before the loop so it no be slow mkay
@@ -51,10 +51,10 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		// Place the rest of the trunk and branches
 		for (int j = 0; j < trunkHeight + 3; j++) {
-			placeLog(world, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
 			branchDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(world, random, currentPosition.immutable(), branchDirection, replacer, treeFeatureConfig), 1, false));
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(world, random, currentPosition.immutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), replacer, treeFeatureConfig), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), branchDirection, replacer, treeFeatureConfig), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), replacer, treeFeatureConfig), 1, false));
 		}
 
 		// Make sure the top gets some love
@@ -64,17 +64,17 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(WorldGenLevel world, RandomSource random, BlockPos pos, Direction direction, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig) {
+	private BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos pos, Direction direction, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig) {
 		BlockPos.MutableBlockPos currentPosition = pos.mutable();
 		// Place a block in the branch direction
-		placeLog(world, replacer, random, currentPosition.move(direction), treeFeatureConfig);
+		placeLog(level, replacer, random, currentPosition.move(direction), treeFeatureConfig);
 		// 50% of the time place another block in the same general direction
 		if (random.nextBoolean()) {
 			// 50% of the time make the branch move upwards
 			if (random.nextBoolean()) {
 				currentPosition.move(Direction.UP);
 			}
-			placeLog(world, replacer, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), treeFeatureConfig);
 		}
 		return currentPosition;
 	}

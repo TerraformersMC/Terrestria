@@ -20,7 +20,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel world, RandomSource random, BlockPos centerPos, BlockState grassState) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos centerPos, BlockState grassState) {
 		BlockPos above = centerPos.above();
 
 		BlockState grass = TerrestriaBlocks.MONSTERAS.defaultBlockState();
@@ -46,24 +46,24 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 				);
 
 				// Check if the block is a valid block
-				if (!block.canSurvive(world, pos) || world.getBlockState(pos).isCollisionShapeFullBlock(world, pos)) {
+				if (!block.canSurvive(level, pos) || level.getBlockState(pos).isCollisionShapeFullBlock(level, pos)) {
 					continue outer;
 				}
 			}
 
-			BlockState state = world.getBlockState(pos);
+			BlockState state = level.getBlockState(pos);
 
 			// NB: this just converts short grass to tall grass, this isn't specific to GRASS_BLOCK
 			if (state.is(Blocks.SHORT_GRASS) && random.nextInt(10) == 0) {
-				((BonemealableBlock) state.getBlock()).performBonemeal(world, random, pos, state);
+				((BonemealableBlock) state.getBlock()).performBonemeal(level, random, pos, state);
 			}
 
 			if (!state.isAir()) {
 				continue;
 			}
 
-			if (block.canSurvive(world, pos)) {
-				world.setBlock(pos, block, 3);
+			if (block.canSurvive(level, pos)) {
+				level.setBlock(pos, block, 3);
 			}
 		}
 	}

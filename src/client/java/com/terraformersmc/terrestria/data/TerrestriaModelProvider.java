@@ -326,6 +326,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		} else {
 			// This is what vanilla's BlockFamily-based code does
 			if (woodBlocks.hasWood()) {
+				assert woodBlocks.wood != null && woodBlocks.strippedWood != null;
 				generator.woodProvider(woodBlocks.log).logWithHorizontal(woodBlocks.log).wood(woodBlocks.wood);
 				generator.woodProvider(woodBlocks.strippedLog).logWithHorizontal(woodBlocks.strippedLog).wood(woodBlocks.strippedWood);
 			} else {
@@ -359,10 +360,12 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 
 		// Extra parts of WoodBlocks
 		if (woodBlocks.hasQuarterLog()) {
+			assert woodBlocks.quarterLog != null && woodBlocks.strippedQuarterLog != null;
 			this.registerQuarterLog(generator, woodBlocks.quarterLog, woodBlocks.log);
 			this.registerQuarterLog(generator, woodBlocks.strippedQuarterLog, woodBlocks.strippedLog);
 		}
 		if (woodBlocks.hasLeafPile()) {
+			assert woodBlocks.leafPile != null;
 			this.registerLeafPile(generator, woodBlocks.leafPile, woodBlocks.leaves);
 		}
 	}

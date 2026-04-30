@@ -30,31 +30,31 @@ public class CattailFeature extends Feature<ProbabilityFeatureConfiguration> {
 
 	@Override
 	public boolean place(FeaturePlaceContext<ProbabilityFeatureConfiguration> context) {
-		WorldGenLevel world = context.level();
+		WorldGenLevel level = context.level();
 		RandomSource random = context.random();
 		BlockPos origin = context.origin();
 
 		int x = random.nextInt(8) - random.nextInt(8);
 		int z = random.nextInt(8) - random.nextInt(8);
-		int y = world.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR, new BlockPos(origin.getX() + x, 0, origin.getZ() + z)).getY();
+		int y = level.getHeightmapPos(Heightmap.Types.OCEAN_FLOOR, new BlockPos(origin.getX() + x, 0, origin.getZ() + z)).getY();
 
 		BlockPos candidate = new BlockPos(origin.getX() + x, y, origin.getZ() + z);
 
-		if (world.getBlockState(candidate).getBlock() == Blocks.WATER) {
+		if (level.getBlockState(candidate).getBlock() == Blocks.WATER) {
 			boolean tall = random.nextDouble() < context.config().probability;
 			BlockState grass = tall ? this.tall.defaultBlockState() : this.normal.defaultBlockState();
 
-			if (grass.canSurvive(world, candidate)) {
+			if (grass.canSurvive(level, candidate)) {
 				if (tall) {
 					BlockState grassTop = grass.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
 					BlockPos upper = candidate.above();
 
-					if (world.getBlockState(upper).getBlock() == Blocks.AIR) {
-						world.setBlock(candidate, grass, 2);
-						world.setBlock(upper, grassTop, 2);
+					if (level.getBlockState(upper).getBlock() == Blocks.AIR) {
+						level.setBlock(candidate, grass, 2);
+						level.setBlock(upper, grassTop, 2);
 					}
 				} else {
-					world.setBlock(candidate, grass, 2);
+					level.setBlock(candidate, grass, 2);
 				}
 				return true;
 			}

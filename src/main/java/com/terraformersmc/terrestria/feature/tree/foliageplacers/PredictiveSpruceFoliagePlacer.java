@@ -43,7 +43,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void placeLeavesRow(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
+	protected void placeLeavesRow(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		int actualDistance;
@@ -52,10 +52,10 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 			for (int offsetZ = -radius; offsetZ <= radius + giantTrunkOffset; ++offsetZ) {
 				if (!this.shouldSkipLocationSigned(random, offsetX, offsetY, offsetZ, radius, giantTrunk)) {
 					mutable.setWithOffset(blockPos, offsetX, offsetY, offsetZ);
-					if (TreeFeature.validTreePos(world, mutable)) {
+					if (TreeFeature.validTreePos(level, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
-						BlockState baseState = config.foliageProvider.getState(world, random, mutable);
-						placer.set(mutable.immutable(), withDistance(baseState, actualDistance));
+						BlockState baseState = config.foliageProvider.getState(level, random, mutable);
+						setter.set(mutable.immutable(), withDistance(baseState, actualDistance));
 					}
 				}
 			}

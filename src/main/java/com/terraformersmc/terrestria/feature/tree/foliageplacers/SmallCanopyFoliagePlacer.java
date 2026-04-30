@@ -31,7 +31,7 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		int diameter = treeNode.radiusOffset() * 2;
 		BlockPos pos = treeNode.pos();
 
@@ -42,7 +42,7 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 				.forEach((position) -> {
 					//On the bottom layer only place 50% of the blocks
 					if (position.getY() != (pos.getY() - 1) || random.nextBoolean()) {
-						tryPlaceLeaves(world, position.toBlockPos(), random, placer, config);
+						tryPlaceLeaves(level, position.toBlockPos(), random, setter, config);
 					}
 				});
 

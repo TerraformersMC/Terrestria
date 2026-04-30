@@ -30,7 +30,7 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		double maxRadius = 1.5 + 1.5 * random.nextDouble();
 
 		BlockPos.MutableBlockPos pos = treeNode.pos().mutable();
@@ -52,8 +52,8 @@ public class CypressFoliagePlacer extends FoliagePlacer {
 			}
 
 			circle(pos.mutable(), treeRadius, position -> {
-				if (TreeFeature.isAirOrLeaves(world, position)) {
-					placer.set(position.immutable(), config.foliageProvider.getState(world, random, position));
+				if (TreeFeature.isAirOrLeaves(level, position)) {
+					setter.set(position.immutable(), config.foliageProvider.getState(level, random, position));
 				}
 			});
 		}

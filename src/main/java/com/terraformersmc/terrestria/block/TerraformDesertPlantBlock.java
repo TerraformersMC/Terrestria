@@ -17,17 +17,17 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class TerraformDesertPlantBlock extends VegetationBlock {
-	public static final MapCodec<TerraformDesertPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.BOOL.fieldOf("onlySand").forGetter(args -> args.onlySand), TerraformDesertPlantBlock.propertiesCodec()).apply(instance, TerraformDesertPlantBlock::new));
+	public static final MapCodec<TerraformDesertPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.BOOL.fieldOf("onlyDry").forGetter(args -> args.onlyDry), TerraformDesertPlantBlock.propertiesCodec()).apply(instance, TerraformDesertPlantBlock::new));
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
-	private final boolean onlySand;
+	private final boolean onlyDry;
 
 	public TerraformDesertPlantBlock(Properties settings) {
 		this(false, settings);
 	}
 
-	public TerraformDesertPlantBlock(boolean onlySand, Properties settings) {
+	public TerraformDesertPlantBlock(boolean onlyDry, Properties settings) {
 		super(settings.offsetType(BlockBehaviour.OffsetType.XYZ));
-		this.onlySand = onlySand;
+		this.onlyDry = onlyDry;
 	}
 
 	@Override
@@ -36,16 +36,16 @@ public class TerraformDesertPlantBlock extends VegetationBlock {
 	}
 
 	@Override
-	public boolean mayPlaceOn(BlockState blockState, BlockGetter blockView, BlockPos pos) {
-		if (onlySand) {
-			return blockState.is(BlockTags.SAND);
+	public boolean mayPlaceOn(BlockState blockState, BlockGetter blockGetter, BlockPos pos) {
+		if (onlyDry) {
+			return blockState.is(BlockTags.SUPPORTS_DRY_VEGETATION);
 		} else {
-			return blockState.is(BlockTags.SAND) || super.mayPlaceOn(blockState, blockView, pos);
+			return blockState.is(BlockTags.SAND) || super.mayPlaceOn(blockState, blockGetter, pos);
 		}
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, BlockGetter world, BlockPos pos, CollisionContext context) {
+	public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
 		Vec3 vec3d = state.getOffset(pos);
 		return SHAPE.move(vec3d.x, vec3d.y, vec3d.z);
 	}

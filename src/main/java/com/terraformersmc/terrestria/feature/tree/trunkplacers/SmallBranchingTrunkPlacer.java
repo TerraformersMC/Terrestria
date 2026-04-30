@@ -34,7 +34,7 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
@@ -49,7 +49,7 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 
 		// Place the base trunk
 		for (int base = 0; base < baseHeight; base++) {
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 		}
 
 		// The First branch direction
@@ -58,12 +58,12 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 		// Sometimes I want to have small branches on the end of the branch
 		if (random.nextBoolean()) {
 			// Place a long branch and save it's end location
-			BlockPos end = placeBranch(treeFeatureConfig, random, replacer, world, currentPosition.mutable(), mainBranchDirection, 3 + random.nextInt(1));
+			BlockPos end = placeBranch(treeFeatureConfig, random, replacer, level, currentPosition.mutable(), mainBranchDirection, 3 + random.nextInt(1));
 			// Place 2 small branches going in the same general direction as the main branch
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, mainBranchDirection.getOpposite()), 1 + random.nextInt(1)), 1, false));
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, mainBranchDirection.getOpposite()), 2 + random.nextInt(1)), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, mainBranchDirection.getOpposite()), 1 + random.nextInt(1)), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, mainBranchDirection.getOpposite()), 2 + random.nextInt(1)), 1, false));
 		} else {
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, currentPosition.mutable(), mainBranchDirection, 3 + random.nextInt(1)), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, currentPosition.mutable(), mainBranchDirection, 3 + random.nextInt(1)), 1, false));
 		}
 
 		// 50% of the time, do it again, but on one of the other 3 sides of the tree
@@ -72,18 +72,18 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 			// Sometimes I want to have small branches on the end of the branch
 			if (random.nextBoolean()) {
 				// Place a long branch and save it's end location
-				BlockPos end = placeBranch(treeFeatureConfig, random, replacer, world, currentPosition.mutable(), secondaryBranchDirection, 3 + random.nextInt(1));
+				BlockPos end = placeBranch(treeFeatureConfig, random, replacer, level, currentPosition.mutable(), secondaryBranchDirection, 3 + random.nextInt(1));
 				// Place 2 small branches going in the same general direction as the main branch
-				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, secondaryBranchDirection.getOpposite()), 1 + random.nextInt(1)), 1, false));
-				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, secondaryBranchDirection.getOpposite()), 2 + random.nextInt(1)), 1, false));
+				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, secondaryBranchDirection.getOpposite()), 1 + random.nextInt(1)), 1, false));
+				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, end.mutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, secondaryBranchDirection.getOpposite()), 2 + random.nextInt(1)), 1, false));
 			} else {
-				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, world, currentPosition.mutable(), secondaryBranchDirection, 3 + random.nextInt(1)), 1, false));
+				foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(treeFeatureConfig, random, replacer, level, currentPosition.mutable(), secondaryBranchDirection, 3 + random.nextInt(1)), 1, false));
 			}
 		}
 
 		// Place the remainder of the tree
 		for (int rest = 0; rest < restHeight; rest++) {
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 		}
 
 		foliageNodes.add(new FoliagePlacer.FoliageAttachment(currentPosition, 1, false));
@@ -92,12 +92,12 @@ public class SmallBranchingTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel world, BlockPos.MutableBlockPos origin, Direction direction, int length) {
+	private BlockPos placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos.MutableBlockPos origin, Direction direction, int length) {
 		// Place the supporting branch in the correct direction
-		setBlockStateAndUpdate(config, random, replacer, world, origin.move(direction), direction);
+		setBlockStateAndUpdate(config, random, replacer, level, origin.move(direction), direction);
 		// Place the rest of the branch upwards
 		for (int position = 0; position < length; position++) {
-			setBlockStateAndUpdate(config, random, replacer, world, origin.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(config, random, replacer, level, origin.move(Direction.UP), Direction.UP);
 		}
 		return origin;
 	}

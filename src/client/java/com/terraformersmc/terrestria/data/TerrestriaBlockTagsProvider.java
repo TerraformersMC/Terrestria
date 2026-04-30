@@ -23,8 +23,8 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
-public class TerrestriaBlockTagProvider extends FabricTagsProvider.BlockTagsProvider {
-	protected TerrestriaBlockTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
+	protected TerrestriaBlockTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 

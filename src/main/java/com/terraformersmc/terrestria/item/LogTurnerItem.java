@@ -31,9 +31,9 @@ public class LogTurnerItem extends Item {
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
 		BlockPos pos = context.getClickedPos();
-		Level world = context.getLevel();
+		Level level = context.getLevel();
 
-		BlockState state = world.getBlockState(pos);
+		BlockState state = level.getBlockState(pos);
 
 		if (!(state.getBlock() instanceof RotatedPillarBlock)) {
 			return InteractionResult.PASS;
@@ -50,9 +50,9 @@ public class LogTurnerItem extends Item {
 					state = state.cycle(RotatedPillarBlock.AXIS);
 				}
 
-				world.setBlockAndUpdate(pos, state);
+				level.setBlockAndUpdate(pos, state);
 			} else {
-				world.setBlockAndUpdate(pos, state.cycle(RotatedPillarBlock.AXIS));
+				level.setBlockAndUpdate(pos, state.cycle(RotatedPillarBlock.AXIS));
 			}
 
 			return InteractionResult.SUCCESS;
@@ -60,14 +60,14 @@ public class LogTurnerItem extends Item {
 			Direction.Axis newAxis = context.getClickedFace().getAxis();
 
 			if (currentAxis != newAxis) {
-				world.setBlockAndUpdate(pos, state.setValue(RotatedPillarBlock.AXIS, newAxis));
+				level.setBlockAndUpdate(pos, state.setValue(RotatedPillarBlock.AXIS, newAxis));
 
 				return InteractionResult.SUCCESS;
 			}
 		}
 
 		if (state.getBlock() instanceof QuarterLogBlock) {
-			world.setBlockAndUpdate(pos, state.cycle(QuarterLogBlock.BARK_SIDE));
+			level.setBlockAndUpdate(pos, state.cycle(QuarterLogBlock.BARK_SIDE));
 
 			return InteractionResult.SUCCESS;
 		} else {
@@ -77,8 +77,8 @@ public class LogTurnerItem extends Item {
 
 	@Override
 	@Environment(EnvType.CLIENT)
-	public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag type) {
-		super.appendHoverText(stack, context, displayComponent, textConsumer, type);
+	public void appendHoverText(ItemStack stack, Item.TooltipContext context, TooltipDisplay displayComponent, Consumer<Component> textConsumer, TooltipFlag flag) {
+		super.appendHoverText(stack, context, displayComponent, textConsumer, flag);
 
 		String translation = Language.getInstance().getOrDefault("item." + Terrestria.MOD_ID + ".log_turner.tooltip");
 

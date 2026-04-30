@@ -21,12 +21,12 @@ public class MixinLavaFluid {
 			)
 	)
 	@SuppressWarnings("unused")
-	private boolean terrestria$generateVolcanicRock(LevelAccessor world, BlockPos pos, BlockState newState, int flags, Operation<Boolean> original) {
+	private boolean terrestria$generateVolcanicRock(LevelAccessor level, BlockPos pos, BlockState newState, int flags, Operation<Boolean> original) {
 		// This is the stone generation pathway; see also: MixinFluidBlock.
 
 		// Search immediately adjacent blocks for Volcanic Rock variants.
 		for (Direction towards : Direction.values()) {
-			BlockState neighbor = world.getBlockState(pos.relative(towards));
+			BlockState neighbor = level.getBlockState(pos.relative(towards));
 
 			if (neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.plain.full) ||
 					neighbor.is(TerrestriaBlocks.VOLCANIC_ROCK.cobblestone.full) ||
@@ -38,6 +38,6 @@ public class MixinLavaFluid {
 			}
 		}
 
-		return original.call(world, pos, newState, flags);
+		return original.call(level, pos, newState, flags);
 	}
 }

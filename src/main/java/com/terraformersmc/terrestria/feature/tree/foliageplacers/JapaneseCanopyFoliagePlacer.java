@@ -31,7 +31,7 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel world, FoliageSetter placer, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		double width = treeNode.radiusOffset() * 2.25 + (random.nextFloat() - 0.5);
 		double height = width * 1.75 + (random.nextFloat() - 0.5);
 		BlockPos center = treeNode.pos();
@@ -44,14 +44,14 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 				.fill((position) -> {
 					// On the bottom layer only place 50% of the blocks
 					if (position.getY() - center.getY() >= 0 || random.nextBoolean()) {
-						tryPlaceLeaves(world, position.toBlockPos(), random, placer, config);
+						tryPlaceLeaves(level, position.toBlockPos(), random, setter, config);
 					}
 				});
 	}
 
-	protected void tryPlaceLeaves(WorldGenLevel world, BlockPos pos, RandomSource random, FoliageSetter placer, TreeConfiguration config) {
-		if (world.isStateAtPosition(pos, BlockState::isAir)) {
-			placer.set(pos, config.foliageProvider.getState(world, random, pos));
+	protected void tryPlaceLeaves(WorldGenLevel level, BlockPos pos, RandomSource random, FoliageSetter setter, TreeConfiguration config) {
+		if (level.isStateAtPosition(pos, BlockState::isAir)) {
+			setter.set(pos, config.foliageProvider.getState(level, random, pos));
 		}
 	}
 

@@ -18,8 +18,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
-public class TerrestriaItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
-	protected TerrestriaItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, BlockTagsProvider blockTagProvider) {
+public class TerrestriaItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
+	protected TerrestriaItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, BlockTagsProvider blockTagProvider) {
 		super(output, registriesFuture, blockTagProvider);
 	}
 

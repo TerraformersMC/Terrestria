@@ -42,72 +42,72 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 	}
 
 	@Override
-	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity, InsideBlockEffectApplier handler, boolean initial) {
-		if (world instanceof ServerLevel serverWorld) {
-			entity.hurtServer(serverWorld, world.damageSources().cactus(), 1.0f);
+	public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, InsideBlockEffectApplier applier, boolean initial) {
+		if (level instanceof ServerLevel serverLevel) {
+			entity.hurtServer(serverLevel, level.damageSources().cactus(), 1.0f);
 		}
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-		if (!isSupported(state, world, pos)) {
-			world.destroyBlock(pos, true);
+	public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if (!isSupported(state, level, pos)) {
+			level.destroyBlock(pos, true);
 		}
 	}
 
 	@Override
-	public BlockState updateShape(BlockState state, LevelReader world, ScheduledTickAccess tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
-		if (world instanceof ServerLevel serverWorld && !isSupported(state, world, pos)) {
-			serverWorld.scheduleTick(pos, this, 1);
+	public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+		if (level instanceof ServerLevel serverLevel && !isSupported(state, level, pos)) {
+			serverLevel.scheduleTick(pos, this, 1);
 		}
 
-		return super.updateShape(state, world, tickView, pos, direction, neighborPos, neighborState, random);
+		return super.updateShape(state, level, tickAccess, pos, direction, neighborPos, neighborState, random);
 	}
 
 	private boolean isSupportedBlock(BlockState state) {
 		return state.is(TerrestriaBlocks.SAGUARO_CACTUS) || state.is(BlockTags.SAND);
 	}
 
-	private boolean isSupported(BlockState state, LevelReader world, BlockPos pos) {
+	private boolean isSupported(BlockState state, LevelReader level, BlockPos pos) {
 		BlockState blockState;
 
-		if (isSupportedBlock(world.getBlockState(pos.below()))) {
+		if (isSupportedBlock(level.getBlockState(pos.below()))) {
 			return true;
 		}
 
 		if (state.getValue(BareSmallLogBlock.DOWN)) {
-			blockState = world.getBlockState(pos.below());
+			blockState = level.getBlockState(pos.below());
 			return (blockState.is(TerrestriaBlocks.SAGUARO_CACTUS) && blockState.getValue(BareSmallLogBlock.UP));
 		}
 		if (state.getValue(BareSmallLogBlock.SOUTH)) {
-			blockState = world.getBlockState(pos.south());
+			blockState = level.getBlockState(pos.south());
 			return (blockState.is(TerrestriaBlocks.SAGUARO_CACTUS) && blockState.getValue(BareSmallLogBlock.NORTH));
 		}
 		if (state.getValue(BareSmallLogBlock.NORTH)) {
-			blockState = world.getBlockState(pos.north());
+			blockState = level.getBlockState(pos.north());
 			return (blockState.is(TerrestriaBlocks.SAGUARO_CACTUS) && blockState.getValue(BareSmallLogBlock.SOUTH));
 		}
 		if (state.getValue(BareSmallLogBlock.WEST)) {
-			blockState = world.getBlockState(pos.west());
+			blockState = level.getBlockState(pos.west());
 			return (blockState.is(TerrestriaBlocks.SAGUARO_CACTUS) && blockState.getValue(BareSmallLogBlock.EAST));
 		}
 		if (state.getValue(BareSmallLogBlock.EAST)) {
-			blockState = world.getBlockState(pos.east());
+			blockState = level.getBlockState(pos.east());
 			return (blockState.is(TerrestriaBlocks.SAGUARO_CACTUS) && blockState.getValue(BareSmallLogBlock.WEST));
 		}
 
 		return false;
 	}
 
-	private boolean canBeSupported(LevelReader world, BlockPos pos) {
-		return world.getBlockState(pos.north()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
-				world.getBlockState(pos.south()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
-				world.getBlockState(pos.east()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
-				world.getBlockState(pos.west()).is(TerrestriaBlocks.SAGUARO_CACTUS);
+	private boolean canBeSupported(LevelReader level, BlockPos pos) {
+		return level.getBlockState(pos.north()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
+				level.getBlockState(pos.south()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
+				level.getBlockState(pos.east()).is(TerrestriaBlocks.SAGUARO_CACTUS) ||
+				level.getBlockState(pos.west()).is(TerrestriaBlocks.SAGUARO_CACTUS);
 	}
 
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader world, BlockPos pos) {
-		return isSupportedBlock(world.getBlockState(pos.below())) || canBeSupported(world, pos);
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+		return isSupportedBlock(level.getBlockState(pos.below())) || canBeSupported(level, pos);
 	}
 }

@@ -20,9 +20,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(WaterAnimal.class)
 public class MixinWaterAnimal {
 	@Inject(method = "checkSurfaceWaterAnimalSpawnRules(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/entity/EntitySpawnReason;Lnet/minecraft/core/BlockPos;Lnet/minecraft/util/RandomSource;)Z", at = @At(value = "HEAD"), cancellable = true)
-	private static void terrestria$canSpawnFish(EntityType<Slime> type, LevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random, CallbackInfoReturnable<Boolean> info) {
-		if (world.getBiome(pos).is(TerrestriaBiomes.CALDERA)) {
-			info.setReturnValue(pos.getY() >= 80 && pos.getY() <= 100 && world.getFluidState(pos.below()).is(FluidTags.WATER) && world.getBlockState(pos.above()).is(Blocks.WATER));
+	private static void terrestria$canSpawnFish(EntityType<Slime> type, LevelAccessor level, EntitySpawnReason reason, BlockPos pos, RandomSource random, CallbackInfoReturnable<Boolean> info) {
+		if (level.getBiome(pos).is(TerrestriaBiomes.CALDERA)) {
+			info.setReturnValue(
+				pos.getY() >= 80 &&
+				pos.getY() <= 100 &&
+				level.getFluidState(pos.below()).is(FluidTags.WATER) &&
+				level.getBlockState(pos.above()).is(Blocks.WATER)
+			);
 		}
 	}
 }

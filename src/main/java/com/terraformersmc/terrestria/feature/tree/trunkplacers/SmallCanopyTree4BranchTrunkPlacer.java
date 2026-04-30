@@ -33,7 +33,7 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
@@ -43,27 +43,27 @@ public class SmallCanopyTree4BranchTrunkPlacer extends SmallTrunkPlacer {
 
 		// Place the trunk
 		for (int height = 0; height < trunkHeight; height++) {
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 		}
 
 		// Save the current position as the leaf origin
 		BlockPos origin = currentPosition.immutable();
 
 		// Place the branches
-		Direction.Plane.HORIZONTAL.forEach((direction) -> placeBranch(treeFeatureConfig, random, replacer, world, origin, direction, radius + 1));
+		Direction.Plane.HORIZONTAL.forEach((direction) -> placeBranch(treeFeatureConfig, random, replacer, level, origin, direction, radius + 1));
 
 		// Place the rest of the trunk
 		for (int height = 0; height < trunkHeight; height++) {
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, world, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 		}
 
 		// Return the leaf origin
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(origin, radius, false));
 	}
 
-	private void placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel world, BlockPos origin, Direction direction, int length) {
+	private void placeBranch(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, Direction direction, int length) {
 		for (int position = 0; position < length; position++) {
-			setBlockStateAndUpdate(config, random, replacer, world, origin.relative(direction, position + 1), direction);
+			setBlockStateAndUpdate(config, random, replacer, level, origin.relative(direction, position + 1), direction);
 		}
 	}
 }

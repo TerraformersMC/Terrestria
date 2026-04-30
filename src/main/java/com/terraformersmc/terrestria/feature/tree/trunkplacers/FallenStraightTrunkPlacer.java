@@ -37,7 +37,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel world, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
 
 		// Select a Direction for the log to be placed in
 		Direction direction = random.nextBoolean() ? Direction.NORTH : Direction.EAST;
@@ -50,27 +50,27 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 			BlockPos localPos = currentPosition.move(direction.getOpposite());
 
 			// If the pos is blocked, then return
-			if (!world.isStateAtPosition(localPos, BlockBehaviour.BlockStateBase::canBeReplaced)) {
+			if (!level.isStateAtPosition(localPos, BlockBehaviour.BlockStateBase::canBeReplaced)) {
 				return ImmutableList.of();
 			}
 
 			// If there is air underneath, then return
-			if (world.isStateAtPosition(localPos.below(), BlockState::isAir)) {
+			if (level.isStateAtPosition(localPos.below(), BlockState::isAir)) {
 				return ImmutableList.of();
 			}
 		}
 
 		// Place the blocks
 		for (int i = 0; i < trunkHeight; ++i) {
-			checkAndPlaceSpecificBlockState(world, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getState(world, random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
 		}
 
 		// No foliage placer locations needed
 		return ImmutableList.of();
 	}
 
-	private static void checkAndPlaceSpecificBlockState(LevelSimulatedReader testableWorld, RandomSource random, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
-		if (TreeFeature.validTreePos(testableWorld, blockPos)) {
+	private static void checkAndPlaceSpecificBlockState(LevelSimulatedReader level, RandomSource random, BlockPos blockPos, BiConsumer<BlockPos, BlockState> replacer, BlockState blockState) {
+		if (TreeFeature.validTreePos(level, blockPos)) {
 			replacer.accept(blockPos.immutable(), blockState);
 		}
 	}
