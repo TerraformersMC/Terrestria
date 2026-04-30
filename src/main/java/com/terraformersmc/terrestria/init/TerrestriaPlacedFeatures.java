@@ -15,6 +15,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Util;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -83,29 +84,30 @@ public class TerrestriaPlacedFeatures {
 	public static void bootstrap(BootstrapContext<PlacedFeature> registerable) {
 		HolderGetter<ConfiguredFeature<?, ?>> configuredFeatures = registerable.lookup(Registries.CONFIGURED_FEATURE);
 
-		final BlockPredicate ON_DIRT = BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), BlockTags.DIRT);
-		final BlockPredicate ON_SAND = BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), BlockTags.SAND);
-		final BlockPredicate ON_DIRT_OR_SAND = BlockPredicate.anyOf(ON_DIRT, ON_SAND);
+		// For things without saplings:
+		final BlockPredicate ON_FERTILE_SOIL = BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), BlockTags.SUPPORTS_VEGETATION);
+		final BlockPredicate ON_INFERTILE_SOIL = BlockPredicate.matchesTag(Direction.DOWN.getUnitVec3i(), BlockTags.SUPPORTS_DRY_VEGETATION);
+		final BlockPredicate ON_ANY_SOIL = BlockPredicate.anyOf(ON_FERTILE_SOIL, ON_INFERTILE_SOIL);
 
 		TerrestriaRegistry.register(registerable, CATTAILS_WARM, TerrestriaConfiguredFeatures.CATTAIL,
 				CountPlacement.of(80),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
+				BlockPredicateFilter.forPredicate(ON_ANY_SOIL),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, SPARSE_OAK_SHRUBS, TerrestriaConfiguredFeatures.OAK_SHRUB,
 				PlacementUtils.countExtra(1, 0.1f, 1),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, PATCH_LUSH_FERNS, VegetationFeatures.TAIGA_GRASS,
 				CountPlacement.of(16),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				BlockPredicateFilter.forPredicate(ON_FERTILE_SOIL),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, PATCH_VOLCANIC_ISLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_VOLCANIC_ISLAND_GRASS,
@@ -148,28 +150,28 @@ public class TerrestriaPlacedFeatures {
 					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
 				));
 
-		registerTreeFeature(registerable, SPARSE_FALLEN_HEMLOCK_LOGS, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
+		registerTreeFeature(registerable, SPARSE_FALLEN_HEMLOCK_LOGS, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 
-		registerTreeFeature(registerable, SPARSE_FALLEN_REDWOOD_LOGS, 1, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		registerTreeFeature(registerable, SPARSE_FALLEN_REDWOOD_LOGS, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 
-		registerTreeFeature(registerable, FALLEN_HEMLOCK_LOGS, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
+		registerTreeFeature(registerable, FALLEN_HEMLOCK_LOGS, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 
-		registerTreeFeature(registerable, FALLEN_REDWOOD_LOGS, 2, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		registerTreeFeature(registerable, FALLEN_REDWOOD_LOGS, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 
-		registerTreeFeature(registerable, DENSE_FALLEN_HEMLOCK_LOGS, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
+		registerTreeFeature(registerable, DENSE_FALLEN_HEMLOCK_LOGS, 4, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
 
-		registerTreeFeature(registerable, DENSE_FALLEN_REDWOOD_LOGS, 4, ON_DIRT, TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
+		registerTreeFeature(registerable, DENSE_FALLEN_REDWOOD_LOGS, 4, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.FALLEN_REDWOOD_LOG);
 
-		registerTreeFeature(registerable, SPARSE_SMALL_HEMLOCK_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
+		registerTreeFeature(registerable, SPARSE_SMALL_HEMLOCK_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, SPARSE_SMALL_REDWOOD_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
+		registerTreeFeature(registerable, SPARSE_SMALL_REDWOOD_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
 
 		TerrestriaRegistry.register(registerable, CALDERA_SMALL_HEMLOCK_TREES, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE,
 				PlacementUtils.countExtra(1, 0.1f, 1),
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 80, 320),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, CALDERA_SMALL_REDWOOD_TREES, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE,
@@ -177,23 +179,23 @@ public class TerrestriaPlacedFeatures {
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 80, 320),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING),
 				BiomeFilter.biome());
 
-		registerTreeFeature(registerable, SMALL_HEMLOCK_TREES, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
+		registerTreeFeature(registerable, SMALL_HEMLOCK_TREES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.SMALL_HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, SMALL_REDWOOD_TREES, 2, ON_DIRT, TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
+		registerTreeFeature(registerable, SMALL_REDWOOD_TREES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.SMALL_REDWOOD_TREE);
 
-		registerTreeFeature(registerable, SPARSE_HEMLOCK_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		registerTreeFeature(registerable, SPARSE_HEMLOCK_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, SPARSE_REDWOOD_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		registerTreeFeature(registerable, SPARSE_REDWOOD_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.REDWOOD_TREE);
 
 		TerrestriaRegistry.register(registerable, CALDERA_HEMLOCK_TREES, TerrestriaConfiguredFeatures.HEMLOCK_TREE,
 				PlacementUtils.countExtra(1, 0.1f, 1),
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 64, 100),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, CALDERA_REDWOOD_TREES, TerrestriaConfiguredFeatures.REDWOOD_TREE,
@@ -201,45 +203,45 @@ public class TerrestriaPlacedFeatures {
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 64, 100),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING),
 				BiomeFilter.biome());
 
-		registerTreeFeature(registerable, HEMLOCK_TREES, 2, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		registerTreeFeature(registerable, HEMLOCK_TREES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, REDWOOD_TREES, 2, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		registerTreeFeature(registerable, REDWOOD_TREES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.REDWOOD_TREE);
 
-		registerTreeFeature(registerable, DENSE_HEMLOCK_TREES, 4, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		registerTreeFeature(registerable, DENSE_HEMLOCK_TREES, 4, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, DENSE_REDWOOD_TREES, 3, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		registerTreeFeature(registerable, DENSE_REDWOOD_TREES, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.REDWOOD_TREE);
 
-		registerTreeFeature(registerable, DENSEST_HEMLOCK_TREES, 8, ON_DIRT, TerrestriaConfiguredFeatures.HEMLOCK_TREE);
+		registerTreeFeature(registerable, DENSEST_HEMLOCK_TREES, 8, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, DENSEST_REDWOOD_TREES, 6, ON_DIRT, TerrestriaConfiguredFeatures.REDWOOD_TREE);
+		registerTreeFeature(registerable, DENSEST_REDWOOD_TREES, 6, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.REDWOOD_TREE);
 
-		registerTreeFeature(registerable, SPARSE_MEGA_HEMLOCK_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+		registerTreeFeature(registerable, SPARSE_MEGA_HEMLOCK_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, SPARSE_MEGA_REDWOOD_TREES, 1, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
+		registerTreeFeature(registerable, SPARSE_MEGA_REDWOOD_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 
-		registerTreeFeature(registerable, MEGA_HEMLOCK_TREES, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+		registerTreeFeature(registerable, MEGA_HEMLOCK_TREES, 4, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, MEGA_REDWOOD_TREES, 4, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
+		registerTreeFeature(registerable, MEGA_REDWOOD_TREES, 4, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 
-		registerTreeFeature(registerable, DENSEST_MEGA_HEMLOCK_TREES, 8, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
+		registerTreeFeature(registerable, DENSEST_MEGA_HEMLOCK_TREES, 8, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.MEGA_HEMLOCK_TREE);
 
-		registerTreeFeature(registerable, DENSEST_MEGA_REDWOOD_TREES, 7, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
+		registerTreeFeature(registerable, DENSEST_MEGA_REDWOOD_TREES, 7, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.REDWOOD_SAPLING), TerrestriaConfiguredFeatures.MEGA_REDWOOD_TREE);
 
-		registerTreeFeature(registerable, DENSE_FANCY_OAK_TREES, 3, ON_DIRT, TreeFeatures.FANCY_OAK);
+		registerTreeFeature(registerable, DENSE_FANCY_OAK_TREES, 3, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING), TreeFeatures.FANCY_OAK);
 
-		registerTreeFeature(registerable, DENSER_FANCY_OAK_TREES, 5, ON_DIRT, TreeFeatures.FANCY_OAK);
+		registerTreeFeature(registerable, DENSER_FANCY_OAK_TREES, 5, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING), TreeFeatures.FANCY_OAK);
 
-		registerTreeFeature(registerable, DENSEST_FANCY_OAK_TREES, 7, ON_DIRT, TreeFeatures.FANCY_OAK_LEAF_LITTER);
+		registerTreeFeature(registerable, DENSEST_FANCY_OAK_TREES, 7, PlacementUtils.filteredByBlockSurvival(Blocks.OAK_SAPLING), TreeFeatures.FANCY_OAK_LEAF_LITTER);
 
 		TerrestriaRegistry.register(registerable, JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
 				PlacementUtils.countExtra(2, 0.1f, 1),
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 62, 71),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.JUNGLE_PALM_SAPLING),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, DENSER_JUNGLE_PALM_TREES, TerrestriaConfiguredFeatures.JUNGLE_PALM_TREE,
@@ -247,7 +249,7 @@ public class TerrestriaPlacedFeatures {
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 72, 320),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.JUNGLE_PALM_SAPLING),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(registerable, RARE_DUM_DUM_HEADS, TerrestriaConfiguredFeatures.DUM_DUM_HEAD,
@@ -255,45 +257,45 @@ public class TerrestriaPlacedFeatures {
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 62, 64),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
+				BlockPredicateFilter.forPredicate(ON_ANY_SOIL),
 				BiomeFilter.biome());
 
-		registerTreeFeature(registerable, DENSE_JAPANESE_MAPLE_TREES, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
+		registerTreeFeature(registerable, DENSE_JAPANESE_MAPLE_TREES, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.JAPANESE_MAPLE_SAPLING), TerrestriaConfiguredFeatures.JAPANESE_MAPLE_TREE);
 
-		registerTreeFeature(registerable, DENSE_DARK_JAPANESE_MAPLE_TREES, 3, ON_DIRT, TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
+		registerTreeFeature(registerable, DENSE_DARK_JAPANESE_MAPLE_TREES, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING), TerrestriaConfiguredFeatures.DARK_JAPANESE_MAPLE_TREE);
 
-		registerTreeFeature(registerable, DENSE_JAPANESE_MAPLE_SHRUBS, 3, ON_DIRT, TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
+		registerTreeFeature(registerable, DENSE_JAPANESE_MAPLE_SHRUBS, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING), TerrestriaConfiguredFeatures.JAPANESE_MAPLE_SHRUB);
 
-		registerTreeFeature(registerable, DENSER_SAKURA_TREES, 6, ON_DIRT, TerrestriaConfiguredFeatures.SAKURA_TREE);
+		registerTreeFeature(registerable, DENSER_SAKURA_TREES, 6, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.SAKURA_SAPLING), TerrestriaConfiguredFeatures.SAKURA_TREE);
 
-		registerTreeFeature(registerable, DENSEST_CYPRESS_TREES, 9, ON_DIRT, TerrestriaConfiguredFeatures.CYPRESS_TREE);
+		registerTreeFeature(registerable, DENSEST_CYPRESS_TREES, 9, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.CYPRESS_SAPLING), TerrestriaConfiguredFeatures.CYPRESS_TREE);
 
-		registerTreeFeature(registerable, DENSER_RAINBOW_EUCALYPTUS_TREES, 5, 3, ON_DIRT, TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
+		registerTreeFeature(registerable, DENSER_RAINBOW_EUCALYPTUS_TREES, 5, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING), TerrestriaConfiguredFeatures.RAINBOW_EUCALYPTUS_TREE);
 
-		registerTreeFeature(registerable, DENSE_RUBBER_TREES, 3, ON_DIRT, TerrestriaConfiguredFeatures.RUBBER_TREE);
+		registerTreeFeature(registerable, DENSE_RUBBER_TREES, 3, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.RUBBER_SAPLING), TerrestriaConfiguredFeatures.RUBBER_TREE);
 
-		registerTreeFeature(registerable, MEGA_CYPRESS_TREES, 2, 6, ON_DIRT, TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
+		registerTreeFeature(registerable, MEGA_CYPRESS_TREES, 2, 6, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.CYPRESS_SAPLING), TerrestriaConfiguredFeatures.MEGA_CYPRESS_TREE);
 
-		registerTreeFeature(registerable, SPARSE_WILLOW_TREES, 1, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.WILLOW_TREE);
+		registerTreeFeature(registerable, SPARSE_WILLOW_TREES, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.WILLOW_SAPLING), TerrestriaConfiguredFeatures.WILLOW_TREE);
 
 		TerrestriaRegistry.register(registerable, OUTBACK_YUCCA_PALM, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.YUCCA_PALM_SAPLING));
 
-		registerTreeFeature(registerable, OUTBACK_BUSHLAND_TREES, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OUTBACK_BUSHLAND_TREES);
+		registerTreeFeature(registerable, OUTBACK_BUSHLAND_TREES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.YUCCA_PALM_SAPLING), TerrestriaConfiguredFeatures.OUTBACK_BUSHLAND_TREES);
 
-		registerTreeFeature(registerable, RARE_YUCCA_PALM_TREES, 0, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.YUCCA_PALM_TREE);
+		registerTreeFeature(registerable, RARE_YUCCA_PALM_TREES, 0, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.YUCCA_PALM_SAPLING), TerrestriaConfiguredFeatures.YUCCA_PALM_TREE);
 
-		registerTreeFeature(registerable, ACACIA_DOT_SHRUBS, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB);
+		registerTreeFeature(registerable, ACACIA_DOT_SHRUBS, 2, BlockPredicateFilter.forPredicate(ON_ANY_SOIL), TerrestriaConfiguredFeatures.ACACIA_DOT_SHRUB);
 
-		registerTreeFeature(registerable, OAK_DOT_SHRUBS, 2, ON_DIRT_OR_SAND, TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
+		registerTreeFeature(registerable, OAK_DOT_SHRUBS, 2, BlockPredicateFilter.forPredicate(ON_ANY_SOIL), TerrestriaConfiguredFeatures.OAK_DOT_SHRUB);
 
-		registerTreeFeature(registerable, SAGUARO_CACTUSES, 2, ON_SAND, TerrestriaConfiguredFeatures.SAGUARO_CACTUS);
+		registerTreeFeature(registerable, SAGUARO_CACTUSES, 2, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.SAGUARO_CACTUS_SAPLING), TerrestriaConfiguredFeatures.SAGUARO_CACTUS);
 
 		TerrestriaRegistry.register(registerable, RARE_BRYCE_TREES, TerrestriaConfiguredFeatures.BRYCE_TREE,
 				RarityFilter.onAverageOnceEvery(2),
 				InSquarePlacement.spread(),
 				SurfaceLevelFilterPlacementModifier.of(Heightmap.Types.WORLD_SURFACE_WG, 80, 320),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_DIRT_OR_SAND),
+				PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.BRYCE_SAPLING),
 				BiomeFilter.biome());
 	}
 
@@ -301,22 +303,22 @@ public class TerrestriaPlacedFeatures {
 		return ResourceKey.create(Registries.PLACED_FEATURE, Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, name));
 	}
 
-	private static void registerTreeFeature(BootstrapContext<PlacedFeature> registerable, ResourceKey<PlacedFeature> key, int count, BlockPredicate predicate, ResourceKey<ConfiguredFeature<?, ?>> feature) {
+	private static void registerTreeFeature(BootstrapContext<PlacedFeature> registerable, ResourceKey<PlacedFeature> key, int count, BlockPredicateFilter blockPredicateFilter, ResourceKey<ConfiguredFeature<?, ?>> feature) {
 		TerrestriaRegistry.register(registerable, key, feature,
 				PlacementUtils.countExtra(count, 0.1f, 1),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(predicate),
+				blockPredicateFilter,
 				BiomeFilter.biome());
 	}
 
-	private static void registerTreeFeature(BootstrapContext<PlacedFeature> registerable, ResourceKey<PlacedFeature> key, int count, int maxWaterDepth, BlockPredicate predicate, ResourceKey<ConfiguredFeature<?, ?>> feature) {
+	private static void registerTreeFeature(BootstrapContext<PlacedFeature> registerable, ResourceKey<PlacedFeature> key, int count, int maxWaterDepth, BlockPredicateFilter blockPredicateFilter, ResourceKey<ConfiguredFeature<?, ?>> feature) {
 		TerrestriaRegistry.register(registerable, key, feature,
 				PlacementUtils.countExtra(count, 0.1f, 1),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP_OCEAN_FLOOR,
 				SurfaceWaterDepthFilter.forMaxDepth(maxWaterDepth),
-				BlockPredicateFilter.forPredicate(predicate),
+				blockPredicateFilter,
 				BiomeFilter.biome());
 	}
 }
