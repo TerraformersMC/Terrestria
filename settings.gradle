@@ -8,11 +8,4 @@ pluginManagement {
     }
 }
 
-include "client"
-include "common"
-include "worldgen"
-
 rootProject.name = "terrestria"
-project(':client').name = "terrestria-client"
-project(':common').name = "terrestria-common"
-project(':worldgen').name = "terrestria-worldgen"

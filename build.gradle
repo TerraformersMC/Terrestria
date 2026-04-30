@@ -7,8 +7,35 @@ plugins {
 }
 
 base.archivesName = project.archives_base_name
+group = project.maven_group
 
 apply from: 'https://raw.githubusercontent.com/TerraformersMC/GradleScripts/3.2/ferry-mpp.gradle'
+
+repositories {
+	maven {
+		name = 'TerraformersMC'
+		url = 'https://maven.terraformersmc.com/'
+	}
+}
+
+loom {
+	splitEnvironmentSourceSets()
+
+	mods {
+		"${project.name}" {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
+
+	accessWidenerPath = file("src/main/resources/terrestria.accesswidener")
+}
+
+fabricApi {
+	configureDataGeneration {
+		client = true
+	}
+}
 
 dependencies {
 	minecraft "com.mojang:minecraft:$project.minecraft_version"
@@ -24,109 +51,49 @@ dependencies {
 	include(api("com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"))
 	include(api("com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"))
 
-	if (findProject(':terrestria-worldgen') != null) {
-		include(api("com.terraformersmc:biolith-fabric:${biolith_version}"))
-	}
+	include(api("com.terraformersmc:biolith-fabric:${biolith_version}"))
+}
+processResources {
+	inputs.property "version", project.version
 
-	subprojects.each {
-		// TODO: what if anything is actually needed here?
-		//testmodImplementation sourceSets.main.output
-		include(api(project("${it.name}:")))
+	filesMatching("fabric.mod.json") {
+		expand "version": inputs.properties.version
 	}
 }
 
-allprojects {
-	apply plugin: 'java'
-	apply plugin: 'idea'
-	apply plugin: 'eclipse'
-	apply plugin: 'maven-publish'
-	apply plugin: 'net.fabricmc.fabric-loom'
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 25
+}
 
-	group = project.maven_group
+java {
+	withSourcesJar()
 
-	sourceSets {
-		testmod {
-			compileClasspath += main.compileClasspath
-			runtimeClasspath += main.runtimeClasspath
+	sourceCompatibility = JavaVersion.VERSION_25
+	targetCompatibility = JavaVersion.VERSION_25
+}
+
+jar {
+	inputs.property "projectName", project.name
+
+	from("LICENSE") {
+		rename { "${it}_${project.name}" }
+	}
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		create("mavenJava", MavenPublication) {
+			from components.java
 		}
 	}
 
-	afterEvaluate {
-		processResources {
-			inputs.property "version", project.version
-
-			filesMatching("fabric.mod.json") {
-				expand "version": project.version
-			}
-		}
-	}
-
-	tasks.withType(JavaCompile).configureEach {
-		it.options.encoding = "UTF-8"
-		it.options.release = 25
-	}
-
-	java {
-		withSourcesJar()
-
-		sourceCompatibility = JavaVersion.VERSION_25
-		targetCompatibility = JavaVersion.VERSION_25
-	}
-
+	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
 	repositories {
-		maven {
-			name = 'TerraformersMC'
-			url = 'https://maven.terraformersmc.com/'
-		}
-		// TODO
-		mavenLocal()
-	}
-}
-
-subprojects {
-	dependencies {
-		minecraft "com.mojang:minecraft:${project.minecraft_version}"
-
-		implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-		implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-		implementation "com.terraformersmc.terraform-api:terraform-biome-remapper-api-v1:${project.terraform_biome_remapper_api_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-config-api-v1:${project.terraform_config_api_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-dirt-api-v1:${project.terraform_dirt_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-shapes-api-v1:${project.terraform_shapes_api_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-surfaces-api-v1:${project.terraform_surfaces_api_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-tree-api-v1:${project.terraform_tree_api_version}"
-		implementation "com.terraformersmc.terraform-api:terraform-wood-api-v1:${project.terraform_wood_api_version}"
-	}
-
-	version = rootProject.version
-
-	runClient.enabled = false
-
-	// Ferry functionality but for subprojects
-	publishing {
-		publications {
-			create("mavenJava", MavenPublication) {
-				artifactId = project.archives_base_name
-				from components.java
-			}
-		}
-
-		setupRepositories(repositories)
-	}
-}
-
-// Copied from Ferry 2.5 ... apparently Ferry's def does not apply to the subprojects
-static void setupRepositories(RepositoryHandler repositories) {
-	//repositories.mavenLocal() // uncomment for testing
-	def ENV = System.getenv()
-	if (ENV.MAVEN_URL) {
-		repositories.maven {
-			url ENV.MAVEN_URL
-			credentials {
-				username ENV.MAVEN_USERNAME
-				password ENV.MAVEN_PASSWORD
-			}
-		}
+		// Add repositories to publish to here.
+		// Notice: This block does NOT have the same function as the block in the top level.
+		// The repositories here will be used for publishing your artifact, not for
+		// retrieving dependencies.
 	}
 }

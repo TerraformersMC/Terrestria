@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.terraformersmc.terrestria.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "MixinLavaFluid",
+    "MixinLiquidBlock",
+    "MixinWaterAnimal"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

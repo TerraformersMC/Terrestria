@@ -1,0 +1,12 @@
+{
+  "required": false,
+  "package": "com.terraformersmc.terrestria.mixin.pathing",
+  "compatibilityLevel": "JAVA_25",
+  "plugin": "com.terraformersmc.terrestria.mixin.pathing.TerrestriaMixinPlugin",
+  "mixins": [
+    "MixinWalkNodeEvaluator"
+  ],
+  "injectors": {
+	"defaultRequire": 1
+  }
+}
