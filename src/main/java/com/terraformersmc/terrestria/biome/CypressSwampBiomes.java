@@ -72,7 +72,7 @@ public class CypressSwampBiomes {
 	}
 
 	private static MobSpawnSettings createSpawnSettings() {
-		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.addSpawn(MobCategory.WATER_AMBIENT, 8, new MobSpawnSettings.SpawnerData(EntityType.COD, 2, 4));
 		builder.addSpawn(MobCategory.MONSTER,  1, new MobSpawnSettings.SpawnerData(EntityType.SLIME, 1, 1));
 		builder.addSpawn(MobCategory.MONSTER, 50, new MobSpawnSettings.SpawnerData(EntityType.BOGGED, 4, 4));

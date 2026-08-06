@@ -56,7 +56,7 @@ public class DenseWoodlandsBiomes {
 	}
 
 	private static MobSpawnSettings createSpawnSettings() {
-		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		return builder.build();
 	}
 }

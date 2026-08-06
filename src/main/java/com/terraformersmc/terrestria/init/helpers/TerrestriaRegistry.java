@@ -31,7 +31,6 @@ public class TerrestriaRegistry {
 		return;
 	}
 
-
 	/*
 	 * Blocks and Items
 	 */

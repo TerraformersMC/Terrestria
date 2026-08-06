@@ -11,6 +11,7 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.concurrent.CompletableFuture;
 
+// TODO: Add: cartographer biome maps
 @NullMarked
 public class TerrestriaVillagerTradeKeyTagProvider extends KeyTagProvider<VillagerTrade> {
 	protected TerrestriaVillagerTradeKeyTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {

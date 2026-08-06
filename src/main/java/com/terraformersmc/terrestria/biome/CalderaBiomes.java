@@ -61,7 +61,7 @@ public class CalderaBiomes {
 	}
 
 	private static MobSpawnSettings createSpawnSettings() {
-		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.addSpawn(MobCategory.CREATURE, 5, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 4, 4));
 		builder.addSpawn(MobCategory.CREATURE, 1, new MobSpawnSettings.SpawnerData(EntityType.GOAT, 1, 4));
 		builder.addSpawn(MobCategory.WATER_CREATURE, 3, new MobSpawnSettings.SpawnerData(EntityType.SQUID, 1, 4));

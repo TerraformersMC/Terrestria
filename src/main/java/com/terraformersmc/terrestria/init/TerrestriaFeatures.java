@@ -13,11 +13,11 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class TerrestriaFeatures {
-	public static CattailFeature CATTAIL = TerrestriaRegistry.register("cattail", new CattailFeature(ProbabilityFeatureConfiguration.CODEC, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL));
-	public static Feature<NoneFeatureConfiguration> DUM_DUM_HEAD = TerrestriaRegistry.register("dum_dum_head", new DumDumHeadFeature(NoneFeatureConfiguration.CODEC));
+	public static final CattailFeature CATTAIL = TerrestriaRegistry.register("cattail", new CattailFeature(ProbabilityFeatureConfiguration.CODEC, TerrestriaBlocks.CATTAIL, TerrestriaBlocks.TALL_CATTAIL));
+	public static final Feature<NoneFeatureConfiguration> DUM_DUM_HEAD = TerrestriaRegistry.register("dum_dum_head", new DumDumHeadFeature(NoneFeatureConfiguration.CODEC));
 	// Super hacky casts, but it works
 	@SuppressWarnings({"rawtypes, unchecked"})
-	public static TreeFeature QUARTERED_MEGA_TREE = TerrestriaRegistry.register("quartered_mega_tree", new TreeFeature((Codec) QuarteredMegaTreeConfig.CODEC));
+	public static final TreeFeature QUARTERED_MEGA_TREE = TerrestriaRegistry.register("quartered_mega_tree", new TreeFeature((Codec) QuarteredMegaTreeConfig.CODEC));
 
-	public static void init() { }
+	public static void init() {}
 }

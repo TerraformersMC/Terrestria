@@ -60,7 +60,7 @@ public class CypressForestBiomes {
 	}
 
 	private static MobSpawnSettings createSpawnSettings() {
-		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.addSpawn(MobCategory.CREATURE, 5, new MobSpawnSettings.SpawnerData(EntityType.WOLF, 4, 4));
 		return builder.build();
 	}

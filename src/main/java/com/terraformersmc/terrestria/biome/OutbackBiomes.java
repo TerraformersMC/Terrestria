@@ -64,7 +64,7 @@ public class OutbackBiomes {
 	}
 
 	private static MobSpawnSettings createSpawnSettings() {
-		net.minecraft.world.level.biome.MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
+		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
 		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.HORSE, 2, 6));
 		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.DONKEY, 1, 1));
 		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.ARMADILLO, 2, 3));
