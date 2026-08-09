@@ -18,7 +18,7 @@ public class TerrestriaBiolithGeneration {
 		// Register the Terrestria surface rules.
 		SurfaceGeneration.addOverworldSurfaceRules(
 			Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface_rules"),
-			TerrestriaSurfaceRules.createRules());
+			TerrestriaSurfaceRules::bootstrap);
 
 		// Register the Terrestria surface builders.
 		TerrestriaSurfaceBuilders.getBuilders().forEach(SurfaceGeneration::addSurfaceBuilder);

@@ -6,6 +6,7 @@ import com.terraformersmc.terrestria.init.TerrestriaItems;
 import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.StoneVariantItems;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
+import com.terraformersmc.terrestria.tag.TerrestriaBlockItemTags;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -48,11 +49,11 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 						.unlockedBy("has_bryce_sapling", this.has(TerrestriaItems.BRYCE_SAPLING))
 						.save(output, "bryce_sapling_from_oak_sapling");
 
-				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.GREEN_DYE, 1.0f, 200)
+				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.SAGUARO_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.DYE.green(), 1.0f, 200)
 						.unlockedBy("has_cactus", this.has(TerrestriaItems.SAGUARO_CACTUS))
 						.save(output);
 
-				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.LIME_DYE, 1.0f, 200)
+				SimpleCookingRecipeBuilder.smelting(Ingredient.of(TerrestriaItems.TINY_CACTUS), RecipeCategory.MISC, CookingBookCategory.MISC, Items.DYE.lime(), 1.0f, 200)
 						.unlockedBy("has_tiny_cactus", this.has(TerrestriaItems.TINY_CACTUS))
 						.save(output);
 
@@ -64,19 +65,19 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 						.unlockedBy("has_sticks", this.has(Items.STICK))
 						.save(output);
 
-				oneToOneConversionRecipe(Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
+				oneToOneConversionRecipe(Items.DYE.red(), TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
 
 
 				// wood building block recipes
-				generateWood(output, TerrestriaBlockFamilies.CYPRESS, TerrestriaItems.CYPRESS, TerrestriaItemTags.CYPRESS_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.HEMLOCK, TerrestriaItems.HEMLOCK, TerrestriaItemTags.HEMLOCK_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.JAPANESE_MAPLE, TerrestriaItems.JAPANESE_MAPLE, TerrestriaItemTags.JAPANESE_MAPLE_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.RAINBOW_EUCALYPTUS, TerrestriaItems.RAINBOW_EUCALYPTUS, TerrestriaItemTags.RAINBOW_EUCALYPTUS_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.REDWOOD, TerrestriaItems.REDWOOD, TerrestriaItemTags.REDWOOD_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.RUBBER, TerrestriaItems.RUBBER, TerrestriaItemTags.RUBBER_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.SAKURA, TerrestriaItems.SAKURA, TerrestriaItemTags.SAKURA_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.WILLOW, TerrestriaItems.WILLOW, TerrestriaItemTags.WILLOW_LOGS);
-				generateWood(output, TerrestriaBlockFamilies.YUCCA_PALM, TerrestriaItems.YUCCA_PALM, TerrestriaItemTags.YUCCA_PALM_LOGS);
+				generateWood(output, TerrestriaBlockFamilies.CYPRESS, TerrestriaItems.CYPRESS, TerrestriaBlockItemTags.CYPRESS_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.HEMLOCK, TerrestriaItems.HEMLOCK, TerrestriaBlockItemTags.HEMLOCK_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.JAPANESE_MAPLE, TerrestriaItems.JAPANESE_MAPLE, TerrestriaBlockItemTags.JAPANESE_MAPLE_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.RAINBOW_EUCALYPTUS, TerrestriaItems.RAINBOW_EUCALYPTUS, TerrestriaBlockItemTags.RAINBOW_EUCALYPTUS_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.REDWOOD, TerrestriaItems.REDWOOD, TerrestriaBlockItemTags.REDWOOD_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.RUBBER, TerrestriaItems.RUBBER, TerrestriaBlockItemTags.RUBBER_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.SAKURA, TerrestriaItems.SAKURA, TerrestriaBlockItemTags.SAKURA_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.WILLOW, TerrestriaItems.WILLOW, TerrestriaBlockItemTags.WILLOW_LOGS.item());
+				generateWood(output, TerrestriaBlockFamilies.YUCCA_PALM, TerrestriaItems.YUCCA_PALM, TerrestriaBlockItemTags.YUCCA_PALM_LOGS.item());
 
 				// stone building block recipes
 				generateStone(output, TerrestriaItems.VOLCANIC_ROCK);
@@ -102,7 +103,6 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 					chestBoat(woodItem.chestBoat, woodItem.boat);
 				}
 
-				hangingSign(woodItem.hangingSign, woodItem.strippedLog);
 				shelf(woodItem.shelf, woodItem.strippedLog);
 
 				// Leaf piles are an optional wood feature

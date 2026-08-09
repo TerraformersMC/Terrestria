@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -49,9 +49,9 @@ public class TerrestriaRegistry {
 		S block = register(name, factory, properties);
 
 		if (block instanceof StandingSignBlock || block instanceof WallSignBlock) {
-			BlockEntityType.SIGN.addValidBlock(block);
+			BlockEntityTypes.SIGN.addValidBlock(block);
 		} else if (block instanceof CeilingHangingSignBlock || block instanceof WallHangingSignBlock) {
-			BlockEntityType.HANGING_SIGN.addValidBlock(block);
+			BlockEntityTypes.HANGING_SIGN.addValidBlock(block);
 		} else {
 			throw new IllegalArgumentException("This method only accepts vanilla sign blocks and descendants!");
 		}

@@ -1,10 +1,10 @@
 package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.villager.TerrestriaVillagerTrades;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.KeyTagProvider;
 import net.minecraft.tags.VillagerTradeTags;
 import net.minecraft.world.item.trading.VillagerTrade;
 import org.jspecify.annotations.NullMarked;
@@ -13,14 +13,14 @@ import java.util.concurrent.CompletableFuture;
 
 // TODO: Add: cartographer biome maps
 @NullMarked
-public class TerrestriaVillagerTradeKeyTagProvider extends KeyTagProvider<VillagerTrade> {
-	protected TerrestriaVillagerTradeKeyTagProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+public class TerrestriaVillagerTradeKeyTagProvider extends FabricTagsProvider<VillagerTrade> {
+	protected TerrestriaVillagerTradeKeyTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 		super(output, Registries.VILLAGER_TRADE, lookupProvider);
 	}
 
 	@Override
 	public void addTags(HolderLookup.Provider registries) {
-		this.tag(VillagerTradeTags.WANDERING_TRADER_COMMON)
+		this.tag(VillagerTradeTags.WANDERING_TRADER_UNCOMMON)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_CYPRESS_LOG)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_CYPRESS_QUARTER_LOG)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_HEMLOCK_LOG)
@@ -34,8 +34,9 @@ public class TerrestriaVillagerTradeKeyTagProvider extends KeyTagProvider<Villag
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_SAKURA_LOG)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_SMALL_OAK_LOG)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_WILLOW_LOG)
-			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_YUCCA_PALM_LOG)
+			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_YUCCA_PALM_LOG);
 
+		this.tag(VillagerTradeTags.WANDERING_TRADER_COMMON)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_BRYCE_SAPLING)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_CYPRESS_SAPLING)
 			.add(TerrestriaVillagerTrades.WANDERING_TRADER_EMERALD_DARK_JAPANESE_MAPLE_SAPLING)

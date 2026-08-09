@@ -334,7 +334,6 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 				generator.woodProvider(woodBlocks.strippedLog).logWithHorizontal(woodBlocks.strippedLog);
 			}
 		}
-		generator.createHangingSign(blockFamily.getBaseBlock(), woodBlocks.hangingSign, woodBlocks.wallHangingSign);
 		if (sapling != null) {
 			generator.createPlantWithDefaultItem(sapling, pottedSapling, BlockModelGenerators.PlantType.NOT_TINTED);
 		}

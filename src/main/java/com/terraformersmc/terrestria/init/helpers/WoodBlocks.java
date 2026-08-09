@@ -17,7 +17,7 @@ import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -156,7 +156,7 @@ public class WoodBlocks {
 	}
 
 	private void addBlockEntityTypes() {
-		BlockEntityType.SHELF.addValidBlock(shelf);
+		BlockEntityTypes.SHELF.addValidBlock(shelf);
 	}
 
 	private void addFlammables() {

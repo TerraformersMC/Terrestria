@@ -10,7 +10,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -65,9 +65,9 @@ public class OutbackBiomes {
 
 	private static MobSpawnSettings createSpawnSettings() {
 		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.HORSE, 2, 6));
-		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityType.DONKEY, 1, 1));
-		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.ARMADILLO, 2, 3));
+		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityTypes.HORSE, 2, 6));
+		builder.addSpawn(MobCategory.CREATURE,  1, new MobSpawnSettings.SpawnerData(EntityTypes.DONKEY, 1, 1));
+		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.ARMADILLO, 2, 3));
 		builder.creatureGenerationProbability(0.03F);
 		return builder.build();
 	}

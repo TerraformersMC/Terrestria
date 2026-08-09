@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria;
 
 import com.terraformersmc.terraform.boat.api.TerraformBoatClientHelper;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
-import com.terraformersmc.terrestria.tag.TerrestriaBlockTags;
+import com.terraformersmc.terrestria.tag.TerrestriaBlockItemTags;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleRenderEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockColorRegistry;
@@ -54,7 +54,7 @@ public class TerrestriaClient implements ClientModInitializer {
 
 		ParticleRenderEvents.ALLOW_TERRAIN_PARTICLE_TINT.register((state, level, pos) ->
 				!state.is(TerrestriaBlocks.ANDISOL.grassBlock()) &&
-				!state.is(TerrestriaBlockTags.SMALL_OAK_LOGS));
+				!state.is(TerrestriaBlockItemTags.SMALL_OAK_LOGS.block()));
 
 		BlockColorRegistry.register(
 				FOLIAGE_BLOCK_COLORS,

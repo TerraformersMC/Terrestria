@@ -28,9 +28,12 @@ public class TerrestriaBlockFamilies {
 
 	private static BlockFamily fromWoodBlocks(WoodBlocks woodBlocks) {
 		return BlockFamilies.familyBuilder(woodBlocks.planks)
+				.log(woodBlocks.log)
+				.strippedLog(woodBlocks.strippedLog)
 				.button(woodBlocks.button)
 				.fence(woodBlocks.fence)
 				.fenceGate(woodBlocks.fenceGate)
+				.hangingSign(woodBlocks.hangingSign, woodBlocks.wallHangingSign)
 				.pressurePlate(woodBlocks.pressurePlate)
 				.sign(woodBlocks.sign, woodBlocks.wallSign)
 				.slab(woodBlocks.slab)

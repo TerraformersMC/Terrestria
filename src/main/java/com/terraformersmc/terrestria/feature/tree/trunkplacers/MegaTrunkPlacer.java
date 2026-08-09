@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfig;
+import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfiguration;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -59,8 +59,8 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 
 		BlockStateProvider rootsProvider = treeFeatureConfig.trunkProvider;
 
-		if (treeFeatureConfig instanceof QuarteredMegaTreeConfig) {
-			rootsProvider = ((QuarteredMegaTreeConfig) treeFeatureConfig).rootsProvider;
+		if (treeFeatureConfig instanceof QuarteredMegaTreeConfiguration) {
+			rootsProvider = ((QuarteredMegaTreeConfiguration) treeFeatureConfig).rootsProvider;
 		}
 
 		growRoots(replacer, level, pos.mutable(), random, rootsProvider);
@@ -69,8 +69,8 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 	}
 
 	private static BlockState getState(WorldGenLevel level, RandomSource random, BlockPos pos, TreeConfiguration config, QuarterLogBlock.BarkSide side) {
-		if (config instanceof QuarteredMegaTreeConfig && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
-			return ((QuarteredMegaTreeConfig) config).quarteredTrunkProvider.getState(level, random, pos).setValue(QuarterLogBlock.BARK_SIDE, side);
+		if (config instanceof QuarteredMegaTreeConfiguration && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
+			return ((QuarteredMegaTreeConfiguration) config).quarteredTrunkProvider.getState(level, random, pos).setValue(QuarterLogBlock.BARK_SIDE, side);
 		} else {
 			return config.trunkProvider.getState(level, random, pos);
 		}

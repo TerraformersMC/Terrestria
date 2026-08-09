@@ -107,7 +107,7 @@ public class TerrestriaPlacedFeatures {
 				CountPlacement.of(16),
 				InSquarePlacement.spread(),
 				PlacementUtils.HEIGHTMAP,
-				BlockPredicateFilter.forPredicate(ON_FERTILE_SOIL),
+				BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, ON_FERTILE_SOIL)),
 				BiomeFilter.biome());
 
 		TerrestriaRegistry.register(context, PATCH_VOLCANIC_ISLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_VOLCANIC_ISLAND_GRASS,
@@ -123,7 +123,7 @@ public class TerrestriaPlacedFeatures {
 					VegetationPlacements.worldSurfaceSquaredWithCount(12),
 					CountPlacement.of(4),
 					RandomOffsetPlacement.ofTriangle(15, 3),
-					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+					BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, ON_INFERTILE_SOIL))
 				));
 
 		TerrestriaRegistry.register(context, PATCH_OUTBACK_BUSHLAND_GRASS, TerrestriaConfiguredFeatures.PATCH_OUTBACK_BUSHLAND_GRASS,
@@ -131,7 +131,7 @@ public class TerrestriaPlacedFeatures {
 					VegetationPlacements.worldSurfaceSquaredWithCount(12),
 					CountPlacement.of(4),
 					RandomOffsetPlacement.ofTriangle(15, 3),
-					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+					BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, ON_ANY_SOIL))
 				));
 
 		TerrestriaRegistry.register(context, PATCH_OASIS_VEGETATION, TerrestriaConfiguredFeatures.PATCH_OASIS_VEGETATION,
@@ -139,7 +139,7 @@ public class TerrestriaPlacedFeatures {
 					VegetationPlacements.worldSurfaceSquaredWithCount(6),
 					CountPlacement.of(32),
 					RandomOffsetPlacement.ofTriangle(15, 3),
-					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+					BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, ON_FERTILE_SOIL))
 				));
 
 		TerrestriaRegistry.register(context, PATCH_LUSH_DESERT_VEGETATION, TerrestriaConfiguredFeatures.PATCH_LUSH_DESERT_VEGETATION,
@@ -147,7 +147,7 @@ public class TerrestriaPlacedFeatures {
 					VegetationPlacements.worldSurfaceSquaredWithCount(4),
 					CountPlacement.of(32),
 					RandomOffsetPlacement.ofTriangle(15, 3),
-					BlockPredicateFilter.forPredicate(BlockPredicate.ONLY_IN_AIR_PREDICATE)
+					BlockPredicateFilter.forPredicate(BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE, ON_ANY_SOIL))
 				));
 
 		registerTreeFeature(context, SPARSE_FALLEN_HEMLOCK_LOGS, 1, PlacementUtils.filteredByBlockSurvival(TerrestriaBlocks.HEMLOCK_SAPLING), TerrestriaConfiguredFeatures.FALLEN_HEMLOCK_LOG);
