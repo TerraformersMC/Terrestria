@@ -11,7 +11,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -34,7 +34,7 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, BlockPos position, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height, BlockPos position, TreeFeature tree) {
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = position.mutable();
@@ -46,29 +46,29 @@ public class SaguaroCactusTrunkPlacer extends SmallTrunkPlacer {
 		height = random.nextInt(1) + 5;
 
 		// Place the first 2 blocks of the cactus
-		placeSpecificBlockState(level, replacer, currentPosition, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(BareSmallLogBlock.DOWN, true));
-		setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
+		placeSpecificBlockState(level, replacer, currentPosition, tree.trunkProvider().value().getState(level, random, currentPosition).setValue(BareSmallLogBlock.DOWN, true));
+		setBlockStateAndUpdate(tree, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 
 		// Place one branch always
-		placeBranch(level, random, currentPosition.mutable(), replacer, treeFeatureConfig, armDir, random.nextInt(1) + 1);
+		placeBranch(level, random, currentPosition.mutable(), replacer, tree, armDir, random.nextInt(1) + 1);
 		// 50% of the time place another one one block higher
 		if (random.nextBoolean()) {
-			placeBranch(level, random, currentPosition.mutable(), replacer, treeFeatureConfig, DirectionHelper.randomHorizontalDirectionAwayFrom(random, armDir), random.nextInt(1) + 2);
+			placeBranch(level, random, currentPosition.mutable(), replacer, tree, DirectionHelper.randomHorizontalDirectionAwayFrom(random, armDir), random.nextInt(1) + 2);
 			height--;
 		}
 
 		// Place the rest of the cactus
 		for (int i = 0; i < height - 3; i++) {
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(tree, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 		}
 
 		return ImmutableList.of();
 	}
 
-	public void placeBranch(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
-		setBlockStateAndUpdate(config, random, replacer, level, pos.move(direction), direction);
+	public void placeBranch(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeFeature tree, Direction direction, int length) {
+		setBlockStateAndUpdate(tree, random, replacer, level, pos.move(direction), direction);
 		for (int i = 0; i < length; i++) {
-			setBlockStateAndUpdate(config, random, replacer, level, pos.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(tree, random, replacer, level, pos.move(Direction.UP), Direction.UP);
 		}
 	}
 }

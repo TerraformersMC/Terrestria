@@ -26,9 +26,10 @@ public class TerrestriaItemIds {
 	public static final WoodItemIds YUCCA_PALM = WoodItemIds.ofBoat(id("yucca_palm"));
 
 
-	public record WoodItemIds(@Nullable ResourceKey<Item> boat, @Nullable ResourceKey<Item> chestBoat, @Nullable ResourceKey<Item> raft, @Nullable ResourceKey<Item> chestRaft) {
+	public record WoodItemIds(Identifier id, @Nullable ResourceKey<Item> boat, @Nullable ResourceKey<Item> chestBoat, @Nullable ResourceKey<Item> raft, @Nullable ResourceKey<Item> chestRaft) {
 		public static WoodItemIds ofBoat(Identifier id) {
 			return new WoodItemIds(
+				id,
 				create(id.withSuffix("_boat")),
 				create(id.withSuffix("_chest_boat")),
 				null,
@@ -38,11 +39,20 @@ public class TerrestriaItemIds {
 
 		public static WoodItemIds ofRaft(Identifier id) {
 			return new WoodItemIds(
+				id,
 				null,
 				null,
 				create(id.withSuffix("_raft")),
 				create(id.withSuffix("_chest_raft"))
 			);
+		}
+
+		boolean hasBoat() {
+			return boat != null && chestBoat != null;
+		}
+
+		boolean hasRaft() {
+			return raft != null && chestRaft != null;
 		}
 	}
 

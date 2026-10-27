@@ -30,7 +30,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 				.mapColor(color)
 				.strength(0.4F)
 				.sound(SoundType.WOOL)
-				.pushReaction(PushReaction.DESTROY);
+				.pushReaction(PushReaction.POPPED);
 	}
 
 	public static BlockBehaviour.Properties createSettings(MapColor flesh, MapColor skin) {
@@ -38,7 +38,7 @@ public class SaguaroCactusBlock extends BareSmallLogBlock {
 				.mapColor((state) -> state.getValue(UP) ? flesh : skin)
 				.strength(0.4F)
 				.sound(SoundType.WOOL)
-				.pushReaction(PushReaction.DESTROY);
+				.pushReaction(PushReaction.POPPED);
 	}
 
 	@Override

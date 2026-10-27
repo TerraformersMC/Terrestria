@@ -1,5 +1,7 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terrestria.init.TerrestriaBlockIds;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -9,6 +11,8 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 
 public class StoneBlocks {
+	private final TerrestriaBlockIds.StoneBlockIds blockIds;
+
 	public StoneVariantBlocks plain;
 	public StoneVariantBlocks smooth;
 	public StoneVariantBlocks cobblestone;
@@ -21,23 +25,31 @@ public class StoneBlocks {
 	public Block chiseledBricks;
 	public Block crackedBricks;
 
-	private StoneBlocks() {}
+	private StoneBlocks(TerrestriaBlockIds.StoneBlockIds blockIds, MapColor color) {
+		this.blockIds = blockIds;
 
-	public static StoneBlocks register(String name, MapColor color) {
-		StoneBlocks blocks = new StoneBlocks();
+		plain = StoneVariantBlocks.register(blockIds.plain(), color, Blocks.STONE);
+		smooth = StoneVariantBlocks.register(blockIds.smooth(), color, Blocks.SMOOTH_STONE);
+		cobblestone = StoneVariantBlocks.register(blockIds.cobblestone(), color, Blocks.COBBLESTONE);
+		mossyCobblestone = StoneVariantBlocks.register(blockIds.mossyCobblestone(), color, Blocks.MOSSY_COBBLESTONE);
+		bricks = StoneVariantBlocks.register(blockIds.bricks(), color, Blocks.STONE_BRICKS);
+		mossyBricks = StoneVariantBlocks.register(blockIds.mossyBricks(), color, Blocks.MOSSY_STONE_BRICKS);
 
-		blocks.plain = StoneVariantBlocks.register(name, color, Blocks.STONE);
-		blocks.smooth = StoneVariantBlocks.register("smooth_" + name, color, Blocks.SMOOTH_STONE);
-		blocks.cobblestone = StoneVariantBlocks.register(name + "_cobblestone", color, Blocks.COBBLESTONE);
-		blocks.mossyCobblestone = StoneVariantBlocks.register("mossy_" + name + "_cobblestone", color, Blocks.MOSSY_COBBLESTONE);
-		blocks.bricks = StoneVariantBlocks.register(name + "_bricks", name + "_brick", color, Blocks.STONE_BRICKS);
-		blocks.mossyBricks = StoneVariantBlocks.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", color, Blocks.MOSSY_STONE_BRICKS);
+		button = TerrestriaRegistry.register(blockIds.button(), settings -> new ButtonBlock(BlockSetType.STONE, 20, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BUTTON).mapColor(color));
+		pressurePlate = TerrestriaRegistry.register(blockIds.pressurePlate(), settings -> new PressurePlateBlock(BlockSetType.STONE, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_PRESSURE_PLATE).mapColor(color));
+		chiseledBricks = TerrestriaRegistry.register(blockIds.chiseledBricks(), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_STONE_BRICKS).mapColor(color));
+		crackedBricks = TerrestriaRegistry.register(blockIds.crackedBricks(), Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).mapColor(color));
+	}
 
-		blocks.button = TerrestriaRegistry.register(name + "_button", settings -> new ButtonBlock(BlockSetType.STONE, 20, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_BUTTON).mapColor(color));
-		blocks.pressurePlate = TerrestriaRegistry.register(name + "_pressure_plate", settings -> new PressurePlateBlock(BlockSetType.STONE, settings), BlockBehaviour.Properties.ofFullCopy(Blocks.STONE_PRESSURE_PLATE).mapColor(color));
-		blocks.chiseledBricks = TerrestriaRegistry.register("chiseled_" + name + "_bricks", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CRACKED_STONE_BRICKS).mapColor(color));
-		blocks.crackedBricks = TerrestriaRegistry.register("cracked_" + name + "_bricks", Block::new, BlockBehaviour.Properties.ofFullCopy(Blocks.CHISELED_STONE_BRICKS).mapColor(color));
+	public static StoneBlocks register(TerrestriaBlockIds.StoneBlockIds blockIds, MapColor color) {
+		return new StoneBlocks(blockIds, color);
+	}
 
-		return blocks;
+	public String getName() {
+		return blockIds.id().getPath();
+	}
+
+	public Identifier getId() {
+		return blockIds.id();
 	}
 }

@@ -1,8 +1,5 @@
 package com.terraformersmc.terrestria.block;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
@@ -17,7 +14,6 @@ import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 public class TerraformDesertPlantBlock extends VegetationBlock {
-	public static final MapCodec<TerraformDesertPlantBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(Codec.BOOL.fieldOf("onlyDry").forGetter(args -> args.onlyDry), TerraformDesertPlantBlock.propertiesCodec()).apply(instance, TerraformDesertPlantBlock::new));
 	protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 13.0D, 14.0D);
 	private final boolean onlyDry;
 
@@ -28,11 +24,6 @@ public class TerraformDesertPlantBlock extends VegetationBlock {
 	public TerraformDesertPlantBlock(boolean onlyDry, Properties settings) {
 		super(settings.offsetType(BlockBehaviour.OffsetType.XYZ));
 		this.onlyDry = onlyDry;
-	}
-
-	@Override
-	protected MapCodec<? extends VegetationBlock> codec() {
-		return CODEC;
 	}
 
 	@Override

@@ -5,7 +5,7 @@ import com.terraformersmc.biolith.api.surface.SurfaceGeneration;
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.config.TerrestriaBiomeConfig;
 import com.terraformersmc.terrestria.surface.builders.TerrestriaSurfaceBuilders;
-import com.terraformersmc.terrestria.surface.rules.TerrestriaSurfaceRules;
+import com.terraformersmc.terrestria.surface.rules.TerrestriaMaterialRules;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.biome.Biomes;
 
@@ -18,7 +18,7 @@ public class TerrestriaBiolithGeneration {
 		// Register the Terrestria surface rules.
 		SurfaceGeneration.addOverworldSurfaceRules(
 			Identifier.fromNamespaceAndPath(Terrestria.MOD_ID, "surface_rules"),
-			TerrestriaSurfaceRules::bootstrap);
+			TerrestriaMaterialRules::bootstrap);
 
 		// Register the Terrestria surface builders.
 		TerrestriaSurfaceBuilders.getBuilders().forEach(SurfaceGeneration::addSurfaceBuilder);

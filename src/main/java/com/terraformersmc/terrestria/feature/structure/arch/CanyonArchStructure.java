@@ -7,9 +7,11 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilder;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
 
+@NullMarked
 public class CanyonArchStructure extends Structure {
 	public static final MapCodec<CanyonArchStructure> CODEC = CanyonArchStructure.simpleCodec(CanyonArchStructure::new);
 

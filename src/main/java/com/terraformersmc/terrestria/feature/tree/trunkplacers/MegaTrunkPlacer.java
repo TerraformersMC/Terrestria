@@ -5,8 +5,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.terraformersmc.terraform.wood.api.block.QuarterLogBlock;
 import com.terraformersmc.terrestria.Terrestria;
-import com.terraformersmc.terrestria.feature.tree.treeconfigs.QuarteredMegaTreeConfiguration;
 import com.terraformersmc.terrestria.init.TerrestriaTrunkPlacerTypes;
+import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -15,9 +15,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.TallSeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -39,45 +37,46 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		return TerrestriaTrunkPlacerTypes.MEGA;
 	}
 
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
-		// Set the blocks below the trunk to dirt
-		BlockPos down = pos.below();
-		placeBelowTrunkBlock(level, replacer, random, down, treeFeatureConfig);
-		placeBelowTrunkBlock(level, replacer, random, down.east(), treeFeatureConfig);
-		placeBelowTrunkBlock(level, replacer, random, down.south(), treeFeatureConfig);
-		placeBelowTrunkBlock(level, replacer, random, down.south().east(), treeFeatureConfig);
-
-		// Place the trunk
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeFeature tree) {
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-		for(int i = 0; i < trunkHeight; ++i) {
-			setLog(level, mutable, replacer, getState(level, random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.NORTHWEST), pos, 0, i, 0);
-			setLog(level, mutable, replacer, getState(level, random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.NORTHEAST), pos, 1, i, 0);
-			setLog(level, mutable, replacer, getState(level, random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.SOUTHEAST), pos, 1, i, 1);
-			setLog(level, mutable, replacer, getState(level, random, mutable, treeFeatureConfig, QuarterLogBlock.BarkSide.SOUTHWEST), pos, 0, i, 1);
+		// For now, we use only one trunk and one root block variant, so for performance we cache them here:
+		BlockState trunkState = tree.trunkProvider().value().getState(level, random, pos);
+		BlockState rootsState = trunkState;
+		WoodBlocks woodBlocks = WoodBlocks.getFromLog(trunkState.getBlock()).orElse(null);
+		if (Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled() && woodBlocks != null && woodBlocks.hasQuarterLog()) {
+			assert woodBlocks.quarterLog != null;
+			trunkState = woodBlocks.quarterLog.defaultBlockState();
+		}
+		if (woodBlocks != null && woodBlocks.hasWood()) {
+			assert woodBlocks.wood != null;
+			rootsState = woodBlocks.wood.defaultBlockState();
 		}
 
-		BlockStateProvider rootsProvider = treeFeatureConfig.trunkProvider;
+		// Set the blocks below the trunk to dirt
+		mutable.setWithOffset(pos, Direction.DOWN);
+		placeBelowTrunkBlock(level, replacer, random, mutable, tree);
+		placeBelowTrunkBlock(level, replacer, random, mutable.move(Direction.EAST), tree);
+		placeBelowTrunkBlock(level, replacer, random, mutable.move(Direction.SOUTH), tree);
+		placeBelowTrunkBlock(level, replacer, random, mutable.move(Direction.WEST), tree);
 
-		if (treeFeatureConfig instanceof QuarteredMegaTreeConfiguration) {
-			rootsProvider = ((QuarteredMegaTreeConfiguration) treeFeatureConfig).rootsProvider;
+		// Place the trunk
+		for (int yOffset = 0; yOffset < trunkHeight; ++yOffset) {
+			setLog(level, mutable, replacer, trunkState.trySetValue(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHWEST), pos, 0, yOffset, 0);
+			setLog(level, mutable, replacer, trunkState.trySetValue(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.NORTHEAST), pos, 1, yOffset, 0);
+			setLog(level, mutable, replacer, trunkState.trySetValue(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHEAST), pos, 1, yOffset, 1);
+			setLog(level, mutable, replacer, trunkState.trySetValue(QuarterLogBlock.BARK_SIDE, QuarterLogBlock.BarkSide.SOUTHWEST), pos, 0, yOffset, 1);
 		}
 
-		growRoots(replacer, level, pos.mutable(), random, rootsProvider);
+		// Place the roots (trunk buttresses)
+		growRoots(replacer, level, mutable.set(pos), random, rootsState);
 
+		// Return the selected foliage attachments
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(pos.above(trunkHeight), 0, true));
 	}
 
-	private static BlockState getState(WorldGenLevel level, RandomSource random, BlockPos pos, TreeConfiguration config, QuarterLogBlock.BarkSide side) {
-		if (config instanceof QuarteredMegaTreeConfiguration && Terrestria.getConfigManager().getGeneralConfig().areQuarterLogsEnabled()) {
-			return ((QuarteredMegaTreeConfiguration) config).quarteredTrunkProvider.getState(level, random, pos).setValue(QuarterLogBlock.BARK_SIDE, side);
-		} else {
-			return config.trunkProvider.getState(level, random, pos);
-		}
-	}
-
-	private static void setLog(LevelSimulatedReader level, BlockPos.MutableBlockPos mutable, BiConsumer<BlockPos, BlockState> replacer, BlockState state, BlockPos blockPos, int i, int j, int k) {
-		mutable.setWithOffset(blockPos, i, j, k);
+	private static void setLog(LevelSimulatedReader level, BlockPos.MutableBlockPos mutable, BiConsumer<BlockPos, BlockState> replacer, BlockState state, BlockPos blockPos, int xOffset, int yOffset, int zOffset) {
+		mutable.setWithOffset(blockPos, xOffset, yOffset, zOffset);
 
 		setLog(level, mutable, replacer, state);
 	}
@@ -88,7 +87,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		}
 	}
 
-	public void growRoots(BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos.MutableBlockPos pos, RandomSource random, BlockStateProvider wood) {
+	public void growRoots(BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos.MutableBlockPos pos, RandomSource random, BlockState wood) {
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -99,7 +98,7 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 		tryGrowRoot(replacer, level, pos.set(x + random.nextInt(2), y, z + 2), random, wood);
 	}
 
-	public void tryGrowRoot(BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos.MutableBlockPos bottom, RandomSource random, BlockStateProvider wood) {
+	public void tryGrowRoot(BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos.MutableBlockPos bottom, RandomSource random, BlockState wood) {
 		// Determine the root length
 		if (random.nextInt(5) == 0) {
 			return;
@@ -110,8 +109,8 @@ public class MegaTrunkPlacer extends TrunkPlacer {
 
 		// Place the root
 		for (int i = 0; i < height; i++) {
-			if (TreeFeature.validTreePos(level, bottom) || TreeFeature.validTreePos(level, bottom) || level.isStateAtPosition(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
-				replacer.accept(bottom.immutable(), wood.getState(level, random, bottom));
+			if (TreeFeature.validTreePos(level, bottom) || level.isStateAtPosition(bottom, state -> state.getBlock() instanceof TallSeagrassBlock)) {
+				replacer.accept(bottom.immutable(), wood);
 			}
 
 			bottom.move(Direction.UP);

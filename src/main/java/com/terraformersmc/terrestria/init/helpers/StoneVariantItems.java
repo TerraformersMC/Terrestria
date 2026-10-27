@@ -1,5 +1,6 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terrestria.init.TerrestriaBlockItemIds;
 import net.minecraft.world.item.BlockItem;
 
 public class StoneVariantItems {
@@ -10,17 +11,13 @@ public class StoneVariantItems {
 
 	private StoneVariantItems() {}
 
-	public static StoneVariantItems register(String name, StoneVariantBlocks blocks) {
-		return register(name, name, blocks);
-	}
-
-	public static StoneVariantItems register(String name, String shapedName, StoneVariantBlocks blocks) {
+	public static StoneVariantItems register(TerrestriaBlockItemIds.StoneVariantBlockItemIds itemIds, StoneVariantBlocks blocks) {
 		StoneVariantItems items = new StoneVariantItems();
 
-		items.full = TerrestriaRegistry.registerBlockItem(name, blocks.full);
-		items.slab = TerrestriaRegistry.registerBlockItem(shapedName + "_slab", blocks.slab);
-		items.stairs = TerrestriaRegistry.registerBlockItem(shapedName + "_stairs", blocks.stairs);
-		items.wall = TerrestriaRegistry.registerBlockItem(shapedName + "_wall", blocks.wall);
+		items.full = TerrestriaRegistry.registerBlockItem(itemIds.full(), blocks.full);
+		items.slab = TerrestriaRegistry.registerBlockItem(itemIds.slab(), blocks.slab);
+		items.stairs = TerrestriaRegistry.registerBlockItem(itemIds.stairs(), blocks.stairs);
+		items.wall = TerrestriaRegistry.registerBlockItem(itemIds.wall(), blocks.wall);
 
 		return items;
 	}

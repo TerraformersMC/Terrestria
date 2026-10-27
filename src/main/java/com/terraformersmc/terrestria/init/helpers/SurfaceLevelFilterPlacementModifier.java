@@ -8,10 +8,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.placement.PlacementContext;
 import net.minecraft.world.level.levelgen.placement.PlacementFilter;
-import net.minecraft.world.level.levelgen.placement.PlacementModifierType;
+import org.jspecify.annotations.NullMarked;
 
-public class SurfaceLevelFilterPlacementModifier extends PlacementFilter {
-	public static final MapCodec<SurfaceLevelFilterPlacementModifier> MODIFIER_CODEC =
+import java.util.function.Consumer;
+
+@NullMarked
+public class SurfaceLevelFilterPlacementModifier implements PlacementFilter {
+	public static final MapCodec<SurfaceLevelFilterPlacementModifier> CODEC =
 			RecordCodecBuilder.mapCodec(instance -> instance.group(
 					Heightmap.Types.CODEC.fieldOf("heightmap").forGetter(arg -> arg.heightmap),
 					Codec.INT.optionalFieldOf("min_inclusive", Integer.MIN_VALUE).forGetter(arg -> arg.min),
@@ -32,13 +35,19 @@ public class SurfaceLevelFilterPlacementModifier extends PlacementFilter {
 	}
 
 	@Override
-	protected boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
-		long l = context.getHeight(this.heightmap, pos.getX(), pos.getZ());
-		return this.min <= l && this.max >= l;
+	public MapCodec<? extends PlacementFilter> codec() {
+		return CODEC;
 	}
 
 	@Override
-	public PlacementModifierType<?> type() {
-		return TerrestriaPlacementModifierType.SURFACE_LEVEL_FILTER;
+	public void modify(PlacementContext context, RandomSource random, BlockPos origin, Consumer<BlockPos> output) {
+		PlacementFilter.super.modify(context, random, origin, output);
+	}
+
+	@Override
+	public boolean shouldPlace(PlacementContext context, RandomSource random, BlockPos pos) {
+		long height = context.getHeight(this.heightmap, pos.getX(), pos.getZ());
+
+		return this.min <= height && this.max >= height;
 	}
 }

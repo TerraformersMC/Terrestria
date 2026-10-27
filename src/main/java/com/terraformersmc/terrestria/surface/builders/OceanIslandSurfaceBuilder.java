@@ -15,7 +15,7 @@ import net.minecraft.world.level.chunk.BlockColumn;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.Noises;
-import net.minecraft.world.level.levelgen.synth.NormalNoise;
+import net.minecraft.world.level.levelgen.synth.Noise;
 
 public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 	private static final OpenSimplexNoise ISLAND_NOISE = new OpenSimplexNoise(346987);
@@ -37,18 +37,18 @@ public class OceanIslandSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generateLate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel, int surfaceMinY) {
 		ServerLevel overworld = TerrestriaSurfaceBuilders.getOverworld();
 		if (overworld == null) {
 			throw new IllegalStateException("Overworld does not exist during Overworld surface generation...");
 		}
-		NormalNoise surface = overworld.getChunkSource().chunkMap.randomState
+		Noise surface = overworld.getChunkSource().chunkMap.randomState
 				.getOrCreateNoise(Noises.SURFACE);
 
 		// Find the original top Y value, the desired top Y value, and the delta between them.
 		// We can't trust the provided vHeight because we need the ocean floor instead of surface.
 		vHeight = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
-		int top = seaLevel + ISLAND_HEIGHT + (int) (NOISE_SCALE * surface.getValue(x, seaLevel, z));
+		int top = seaLevel + ISLAND_HEIGHT + (int) (NOISE_SCALE * surface.get(x, seaLevel, z));
 		int delta = Mth.clamp(top - vHeight, 0, 128);
 
 		// Work around noise-adapting structures (like villages)...

@@ -14,9 +14,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.util.valueproviders.IntProviders;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeManager;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.biome.Climate;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
@@ -24,6 +21,7 @@ import net.minecraft.world.level.levelgen.structure.pieces.StructurePiecesBuilde
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 @NullMarked
 public class VolcanoStructure extends Structure {
@@ -51,16 +49,17 @@ public class VolcanoStructure extends Structure {
 		int z = context.chunkPos().getMiddleBlockZ();
 		int y = context.chunkGenerator().getFirstOccupiedHeight(x, z, Heightmap.Types.OCEAN_FLOOR_WG, context.heightAccessor(), context.randomState());
 		int seaLevel = context.chunkGenerator().getSeaLevel();
-		Holder<Biome> biome = context.chunkGenerator().getBiomeSource().getNoiseBiome(QuartPos.fromBlock(x),
-				QuartPos.fromBlock(y), QuartPos.fromBlock(z), context.randomState().sampler());
+		Holder<Biome> biome = context.biomeResolver()
+				.getNoiseBiome(QuartPos.fromBlock(x), QuartPos.fromBlock(y), QuartPos.fromBlock(z));
 
 		if (biome.is(TerrestriaBiomes.VOLCANIC_ISLAND)) {
+			Function<BlockPos, Holder<Biome>> getBiomeFunction = (BlockPos pos) ->
+				context.biomeResolver().getNoiseBiome(QuartPos.fromBlock(pos.getX()), QuartPos.fromBlock(pos.getY()), QuartPos.fromBlock(pos.getZ()));
+
 			// Shore volcanoes at the edges and regular volcanoes in the center.
 			int distance = BiomePerimeters.getOrCreateInstance(
 					context.registryAccess().lookupOrThrow(Registries.BIOME).getValueOrThrow(TerrestriaBiomes.VOLCANIC_ISLAND), 40)
-					.getPerimeterDistance(new BiomeManager(
-							new BiomeAccessStorage(context.biomeSource(), context.randomState().sampler()),
-							context.seed()), new BlockPos(x, seaLevel, z));
+					.getPerimeterDistance(getBiomeFunction, new BlockPos(x, seaLevel, z));
 
 			if (this.baseY < seaLevel - 10 && distance >= 20) {
 				return Optional.empty();
@@ -83,13 +82,5 @@ public class VolcanoStructure extends Structure {
 	@Override
 	public StructureType<?> type() {
 		return TerrestriaStructures.VOLCANO_STRUCTURE_TYPE;
-	}
-
-	// Shim class to instantiate a BiomeAccess.Storage from available information.
-	private record BiomeAccessStorage(BiomeSource biomeSource, Climate.Sampler noiseSampler) implements BiomeManager.NoiseBiomeSource {
-		@Override
-		public Holder<Biome> getNoiseBiome(int biomeX, int biomeY, int biomeZ) {
-			return biomeSource.getNoiseBiome(biomeX, biomeY, biomeZ, noiseSampler);
-		}
 	}
 }

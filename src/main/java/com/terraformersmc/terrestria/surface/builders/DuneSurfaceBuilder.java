@@ -22,7 +22,7 @@ public class DuneSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generateLate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel, int surfaceMinY) {
 		vHeight = chunk.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x & 0xf, z & 0xf);
 		int y = vHeight - 8;
 

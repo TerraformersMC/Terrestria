@@ -10,7 +10,7 @@ import com.terraformersmc.terrestria.init.TerrestriaFoliagePlacerTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -30,20 +30,20 @@ public class SmallLogSphereFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 
 		// Add 0.25 to make it not a square and also not a single block
 		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)
 				.applyLayer(Layer.translate(Position.of(treeNode.pos())))
 				.stream()
 				.forEach((block) -> {
-					tryPlaceLeaves(level, block.toBlockPos(), random, setter, config);
+					tryPlaceLeaves(level, block.toBlockPos(), random, setter, tree);
 				});
 
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

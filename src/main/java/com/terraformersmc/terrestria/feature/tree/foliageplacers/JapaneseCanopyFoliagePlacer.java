@@ -11,7 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -31,8 +31,8 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
-		double width = treeNode.radiusOffset() * 2.25 + (random.nextFloat() - 0.5);
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+		double width = treeNode.radiusOffsetXZ() * 2.25 + (random.nextFloat() - 0.5);
 		double height = width * 1.75 + (random.nextFloat() - 0.5);
 		BlockPos center = treeNode.pos();
 
@@ -49,14 +49,14 @@ public class JapaneseCanopyFoliagePlacer extends FoliagePlacer {
 				});
 	}
 
-	protected void tryPlaceLeaves(WorldGenLevel level, BlockPos pos, RandomSource random, FoliageSetter setter, TreeConfiguration config) {
+	protected void tryPlaceLeaves(WorldGenLevel level, BlockPos pos, RandomSource random, FoliageSetter setter, TreeFeature tree) {
 		if (level.isStateAtPosition(pos, BlockState::isAir)) {
-			setter.set(pos, config.foliageProvider.getState(level, random, pos));
+			setter.set(pos, tree.foliageProvider().value().getState(level, random, pos));
 		}
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

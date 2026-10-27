@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NullMarked;
@@ -20,7 +21,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos centerPos, BlockState grassState) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos centerPos, BlockState grassState, BonemealSource source) {
 		BlockPos above = centerPos.above();
 
 		BlockState grass = TerrestriaBlocks.MONSTERAS.defaultBlockState();
@@ -55,7 +56,7 @@ public class BasaltGrassBlock extends TerraformGrassBlock {
 
 			// NB: this just converts short grass to tall grass, this isn't specific to GRASS_BLOCK
 			if (state.is(Blocks.SHORT_GRASS) && random.nextInt(10) == 0) {
-				((BonemealableBlock) state.getBlock()).performBonemeal(level, random, pos, state);
+				((BonemealableBlock) state.getBlock()).performBonemeal(level, random, pos, state, source);
 			}
 
 			if (!state.isAir()) {

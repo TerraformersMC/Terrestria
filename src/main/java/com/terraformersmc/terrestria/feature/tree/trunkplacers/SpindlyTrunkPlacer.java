@@ -11,7 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -35,7 +35,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height_1, BlockPos origin, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int height_1, BlockPos origin, TreeFeature tree) {
 
 		//Pick a direction for the tree to lean
 		Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
@@ -55,17 +55,17 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		for (int i = 1; i <= height; i++) {
 
 			//Place a block one block up
-			setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
+			setBlockStateAndUpdate(tree, random, replacer, level, currentPosition.move(Direction.UP), Direction.UP);
 
 			// Randomly change direction and place a block (sometimes)
 			if (random.nextInt(4) == 0) {
 				randDir = DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite());
-				setBlockStateAndUpdate(treeFeatureConfig, random, replacer, level, currentPosition.move(randDir), randDir);
+				setBlockStateAndUpdate(tree, random, replacer, level, currentPosition.move(randDir), randDir);
 			}
 
 			// Randomly generate a branch if the height is greater than half and 66% of the time assign a leaf location to the end
 			if (i > (height / 2) && random.nextBoolean()) {
-				BlockPos branchEnd = placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, direction, 2 + random.nextInt(3));
+				BlockPos branchEnd = placeBranch(level, random, currentPosition.immutable(), replacer, tree, direction, 2 + random.nextInt(3));
 
 				if (random.nextInt(3) != 0) {
 					foliageNodes.add(new FoliagePlacer.FoliageAttachment(branchEnd, 1, false));
@@ -75,10 +75,10 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 			Direction originalDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
 			// Randomly generate up to two roots if the height is less than 4 blocks above the origin
 			if (i < 2 && random.nextInt(3) < 3) {
-				placeRoot(treeFeatureConfig, random, replacer, level, currentPosition.immutable(), random.nextInt(5), originalDirection);
+				placeRoot(tree, random, replacer, level, currentPosition.immutable(), random.nextInt(5), originalDirection);
 			}
 			if (i < 5 && i > 2 && random.nextInt(3) < 3) {
-				placeRoot(treeFeatureConfig, random, replacer, level, currentPosition.immutable(), random.nextInt(5), originalDirection.getOpposite());
+				placeRoot(tree, random, replacer, level, currentPosition.immutable(), random.nextInt(5), originalDirection.getOpposite());
 			}
 		}
 
@@ -86,18 +86,18 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	public BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos origin, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration config, Direction direction, int length) {
+	public BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos origin, BiConsumer<BlockPos, BlockState> replacer, TreeFeature tree, Direction direction, int length) {
 		Direction offset;
 		BlockPos.MutableBlockPos pos = origin.mutable();
 		for (int i = 0; i < length; i++) {
 			offset = DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite());
 			pos.move(offset);
 			if (level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) {
-				setBlockStateAndUpdate(config, random, replacer, level, pos, offset);
+				setBlockStateAndUpdate(tree, random, replacer, level, pos, offset);
 				if (random.nextBoolean()) {
 					pos.move(Direction.UP);
 					if (level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) {
-						setBlockStateAndUpdate(config, random, replacer, level, pos, Direction.UP);
+						setBlockStateAndUpdate(tree, random, replacer, level, pos, Direction.UP);
 					} else {
 						pos.move(Direction.DOWN);
 					}
@@ -109,7 +109,7 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 		return pos.immutable();
 	}
 
-	public void placeRoot(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, int rootLength, Direction originalDirection) {
+	public void placeRoot(TreeFeature tree, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, int rootLength, Direction originalDirection) {
 		BlockPos.MutableBlockPos pos = origin.mutable();
 		Direction direction;
 		for (int i = 0; i < rootLength; i++) {
@@ -117,10 +117,10 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 			direction = DirectionHelper.randomHorizontalDirectionAwayFrom(random, originalDirection.getOpposite());
 			pos.move(direction);
 			if (level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) {
-				setBlockStateAndUpdate(config, random, replacer, level, pos, direction);
+				setBlockStateAndUpdate(tree, random, replacer, level, pos, direction);
 				if (random.nextBoolean()) {
 					pos.move(Direction.DOWN);
-					setBlockStateAndUpdate(config, random, replacer, level, pos, Direction.DOWN);
+					setBlockStateAndUpdate(tree, random, replacer, level, pos, Direction.DOWN);
 				}
 			} else {
 				break;
@@ -131,11 +131,11 @@ public class SpindlyTrunkPlacer extends SmallTrunkPlacer {
 			pos.move(Direction.DOWN);
 			if (level.isStateAtPosition(pos, BlockBehaviour.BlockStateBase::isAir)) {
 				// Place a single block of the root
-				setBlockStateAndUpdate(config, random, replacer, level, pos, Direction.DOWN);
+				setBlockStateAndUpdate(tree, random, replacer, level, pos, Direction.DOWN);
 			} else {
 				// Connect the root to the ground
 				pos.move(Direction.UP);
-				addSmallLogConnection(config, random, replacer, level, pos, Direction.DOWN);
+				addSmallLogConnection(tree, random, replacer, level, pos, Direction.DOWN);
 				break;
 			}
 		}

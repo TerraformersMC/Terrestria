@@ -92,7 +92,7 @@ public class CanyonSurfaceBuilder extends BiolithSurfaceBuilder {
 	}
 
 	@Override
-	public void generate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel) {
+	public void generateLate(BiomeManager biomeAccess, BlockColumn column, RandomSource rand, ChunkAccess chunk, Biome biome, int x, int z, int vHeight, int seaLevel, int surfaceMinY) {
 		if (vHeight < seaLevel + 5) {
 			// In the future make this dig down instead
 			// This will break some stuff like water flowing down so it may need an edge biome first

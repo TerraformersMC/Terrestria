@@ -9,13 +9,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.BlockItemTagsProvider;
-import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NullMarked;
 
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 @NullMarked
@@ -32,7 +30,7 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		tag(BlockTags.AZALEA_ROOT_REPLACEABLE)
 				.add(TerrestriaBlockIds.VOLCANIC_ROCK.plain().full());
 
-		tag(BlockTags.CONVERTABLE_TO_MUD)
+		tag(BlockTags.CONVERTIBLE_TO_MUD)
 				.add(TerrestriaBlockIds.ANDISOL.dirtBlock());
 
 		tag(BlockTags.EDIBLE_FOR_SHEEP)
@@ -62,12 +60,6 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 				.add(TerrestriaBlockIds.POTTED_YUCCA_PALM_SAPLING);
 
 		tag(BlockTags.MOSS_REPLACEABLE)
-				.add(TerrestriaBlockIds.VOLCANIC_ROCK.plain().full());
-
-		tag(BlockTags.OVERWORLD_CARVER_REPLACEABLES)
-				.add(BlockItemIds.SMOOTH_SANDSTONE.block())
-				.add(TerrestriaBlockIds.ANDISOL.dirtBlock())
-				.add(Objects.requireNonNull(TerrestriaBlockIds.ANDISOL.grassBlock()))
 				.add(TerrestriaBlockIds.VOLCANIC_ROCK.plain().full());
 
 		tag(BlockTags.OVERWORLD_NATURAL_LOGS)
@@ -119,7 +111,7 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		tag(BlockTags.CANNOT_REPLACE_BELOW_TREE_TRUNK)
 				.add(dirtBlock.podzolBlock());
 
-		tag(BlockTags.CONVERTABLE_TO_MUD)
+		tag(BlockTags.CONVERTIBLE_TO_MUD)
 				.add(dirtBlock.dirtBlock());
 
 		tag(BlockTags.ENDERMAN_HOLDABLE)

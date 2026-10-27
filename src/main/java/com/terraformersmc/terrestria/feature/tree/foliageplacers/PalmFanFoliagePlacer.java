@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -29,7 +28,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 		// The origin of this leaf piece
 		BlockPos center = treeNode.pos().immutable();
 
@@ -40,16 +39,16 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 		boolean flipSpiral = random.nextBoolean();
 
 		// Place the top blocks
-		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 0), setter, config);
-		checkAndSetBlockState(level, random, pos.set(center).move(1, 1, 0), setter, config);
-		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 1), setter, config);
-		checkAndSetBlockState(level, random, pos.set(center).move(-1, 1, 0), setter, config);
-		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, -1), setter, config);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 0), setter, tree);
+		checkAndSetBlockState(level, random, pos.set(center).move(1, 1, 0), setter, tree);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, 1), setter, tree);
+		checkAndSetBlockState(level, random, pos.set(center).move(-1, 1, 0), setter, tree);
+		checkAndSetBlockState(level, random, pos.set(center).move(0, 1, -1), setter, tree);
 
 		// Place supports for dangly bits
 		for (int dZ = -1; dZ < 2; dZ++) {
 			for (int dX = -1; dX < 2; dX++) {
-				checkAndSetBlockState(level, random, pos.set(center).move(dZ, 0, dX), setter, config);
+				checkAndSetBlockState(level, random, pos.set(center).move(dZ, 0, dX), setter, tree);
 			}
 		}
 
@@ -58,30 +57,30 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 			Direction direction = Direction.from2DDataValue(d);
 
 			pos.set(center).move(direction, 2);
-			placeSpiral(level, random, pos, setter, config, direction, !flipSpiral);
+			placeSpiral(level, random, pos, setter, tree, direction, !flipSpiral);
 
 			pos.set(center).move(direction, 3);
-			placeSpiral(level, random, pos, setter, config, direction, flipSpiral);
+			placeSpiral(level, random, pos, setter, tree, direction, flipSpiral);
 		}
 	}
 
-	private void placeSpiral(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, FoliageSetter setter, TreeConfiguration config, Direction direction, boolean invertLeafSpiral) {
+	private void placeSpiral(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos pos, FoliageSetter setter, TreeFeature tree, Direction direction, boolean invertLeafSpiral) {
 		// Base of dangly bit
-		checkAndSetBlockState(level, random, pos, setter, config);
+		checkAndSetBlockState(level, random, pos, setter, tree);
 
 		// Get the direction of the twist from the direction of the branch then place a block there
 		Direction spiral = spiral(direction, invertLeafSpiral);
-		checkAndSetBlockState(level, random, pos.move(spiral), setter, config);
+		checkAndSetBlockState(level, random, pos.move(spiral), setter, tree);
 
 		// Continue the branch all the way down
 		for (int i = 0; i < 2; i++) {
-			checkAndSetBlockState(level, random, pos.move(Direction.DOWN), setter, config);
+			checkAndSetBlockState(level, random, pos.move(Direction.DOWN), setter, tree);
 		}
 	}
 
-	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter setter, TreeConfiguration config) {
+	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos.MutableBlockPos currentPosition, FoliageSetter setter, TreeFeature tree) {
 		if (TreeFeature.validTreePos(level, currentPosition)) {
-			setter.set(currentPosition.immutable(), config.foliageProvider.getState(level, random, currentPosition));
+			setter.set(currentPosition.immutable(), tree.foliageProvider().value().getState(level, random, currentPosition));
 		}
 	}
 
@@ -105,7 +104,7 @@ public class PalmFanFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

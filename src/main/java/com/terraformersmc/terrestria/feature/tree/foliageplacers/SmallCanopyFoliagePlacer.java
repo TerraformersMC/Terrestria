@@ -11,7 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -31,8 +31,8 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
-		int diameter = treeNode.radiusOffset() * 2;
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+		int diameter = treeNode.radiusOffsetXZ() * 2;
 		BlockPos pos = treeNode.pos();
 
 		Shapes.hemiEllipsoid(diameter * 1.1, diameter * 1.1, diameter * 1.8)
@@ -42,14 +42,14 @@ public class SmallCanopyFoliagePlacer extends SmallFoliagePlacer {
 				.forEach((position) -> {
 					//On the bottom layer only place 50% of the blocks
 					if (position.getY() != (pos.getY() - 1) || random.nextBoolean()) {
-						tryPlaceLeaves(level, position.toBlockPos(), random, setter, config);
+						tryPlaceLeaves(level, position.toBlockPos(), random, setter, tree);
 					}
 				});
 
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

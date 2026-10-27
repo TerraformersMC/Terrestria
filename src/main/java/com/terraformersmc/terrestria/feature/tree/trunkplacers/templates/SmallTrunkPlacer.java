@@ -9,28 +9,26 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 
 import java.util.function.BiConsumer;
 
 public abstract class SmallTrunkPlacer extends TrunkPlacer {
-
 	public SmallTrunkPlacer(int baseHeight, int firstRandomHeight, int secondRandomHeight) {
 		super(baseHeight, firstRandomHeight, secondRandomHeight);
 	}
 
-	protected void setBlockStateAndUpdate(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, Direction direction) {
+	protected void setBlockStateAndUpdate(TreeFeature tree, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, Direction direction) {
 		//Place the block
-		checkAndPlaceSpecificBlockState(level, origin, replacer, config.trunkProvider.getState(level, random, origin).setValue(getPropertyFromDirection(direction.getOpposite()), true));
+		checkAndPlaceSpecificBlockState(level, origin, replacer, tree.trunkProvider().value().getState(level, random, origin).setValue(getPropertyFromDirection(direction.getOpposite()), true));
 
 		// Fix the one behind it to connect if it's a BareSmallLogBlock
-		addSmallLogConnection(config, random, replacer, level, origin.relative(direction.getOpposite()), direction);
+		addSmallLogConnection(tree, random, replacer, level, origin.relative(direction.getOpposite()), direction);
 	}
 
-	protected void addSmallLogConnection(TreeConfiguration config, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, Direction direction) {
+	protected void addSmallLogConnection(TreeFeature tree, RandomSource random, BiConsumer<BlockPos, BlockState> replacer, WorldGenLevel level, BlockPos origin, Direction direction) {
 		if (level.isStateAtPosition(origin, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
-			placeSpecificBlockState(level, replacer, origin, getOriginalState(config, level, origin, random).setValue(getPropertyFromDirection(direction), true));
+			placeSpecificBlockState(level, replacer, origin, getOriginalState(tree, level, origin, random).setValue(getPropertyFromDirection(direction), true));
 		}
 	}
 
@@ -44,13 +42,13 @@ public abstract class SmallTrunkPlacer extends TrunkPlacer {
 		replacer.accept(blockPos.immutable(), blockState);
 	}
 
-	protected BlockState getOriginalState(TreeConfiguration config, WorldGenLevel level, BlockPos pos, RandomSource random) {
+	protected BlockState getOriginalState(TreeFeature tree, WorldGenLevel level, BlockPos pos, RandomSource random) {
 
 		if (!level.isStateAtPosition(pos, tester -> tester.getBlock() instanceof BareSmallLogBlock)) {
 			return null;
 		}
 
-		return config.trunkProvider.getState(level, random, pos)
+		return tree.trunkProvider().value().getState(level, random, pos)
 				.setValue(BareSmallLogBlock.NORTH, level.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.NORTH)))
 				.setValue(BareSmallLogBlock.SOUTH, level.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.SOUTH)))
 				.setValue(BareSmallLogBlock.EAST, level.isStateAtPosition(pos, test -> test.getValue(BareSmallLogBlock.EAST)))

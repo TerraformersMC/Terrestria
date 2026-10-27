@@ -12,7 +12,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
@@ -36,17 +35,17 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeFeature tree) {
 
 		// Check and set the block below to dirt
-		placeBelowTrunkBlock(level, replacer, random, pos.below(), treeFeatureConfig);
+		placeBelowTrunkBlock(level, replacer, random, pos.below(), tree);
 
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
 		//We vary the base trunk height, but not the top of the tree for simplicity sake so this height does not reflect the actual height of this type of tree
 		for (int i = 0; i < getTreeHeight(random); i++) {
-			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
 		}
 
 		// Remember the current location for branch placement
@@ -58,20 +57,20 @@ public class CanopyTree4BranchTrunkPlacer extends TrunkPlacer {
 		// Place the branches
 		currentPosition.move(Direction.NORTH, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.SOUTH), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.SOUTH), replacer, tree.trunkProvider().value().getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.NORTH.getAxis()));
 		}
 		currentPosition = origin.mutable();
 		currentPosition.move(Direction.EAST, radius + 1);
 		for (int i = 0; i < (radius * 2) + 1; i++) {
-			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.WEST), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(Direction.WEST), replacer, tree.trunkProvider().value().getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, Direction.EAST.getAxis()));
 		}
 
 		// Go back to the middle of the tree
 		currentPosition = origin.mutable();
 
 		// Place 2 more blocks to cap off the tree
-		placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
-		placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+		placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
+		placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
 
 		// Return the crossing of the branches as the foliage placer's center
 		return ImmutableList.of(new FoliagePlacer.FoliageAttachment(origin, radius, false));

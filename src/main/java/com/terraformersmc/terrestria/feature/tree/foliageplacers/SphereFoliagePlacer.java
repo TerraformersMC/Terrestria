@@ -11,7 +11,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -31,25 +30,25 @@ public class SphereFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
 
 		// Add 0.25 to make it not a square and also not a single block
 		Shapes.ellipsoid(radius + 0.25,radius + 0.25,radius + 0.25)
 				.applyLayer(Layer.translate(Position.of(treeNode.pos())))
 				.stream()
 				.forEach((block) -> {
-					checkAndSetBlockState(level, random, block.toBlockPos(), setter, config);
+					checkAndSetBlockState(level, random, block.toBlockPos(), setter, tree);
 				});
 	}
 
-	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos currentPosition, FoliageSetter setter, TreeConfiguration config) {
+	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos currentPosition, FoliageSetter setter, TreeFeature tree) {
 		if (TreeFeature.validTreePos(level, currentPosition)) {
-			setter.set(currentPosition.immutable(), config.foliageProvider.getState(level, random, currentPosition));
+			setter.set(currentPosition.immutable(), tree.foliageProvider().value().getState(level, random, currentPosition));
 		}
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

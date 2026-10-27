@@ -8,15 +8,15 @@ import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
@@ -37,14 +37,14 @@ public class SnowyHemlockRainforestBiomes {
 				.putAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
 						.set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_FOREST))
 						.set(EnvironmentAttributes.INCREASED_FIRE_BURNOUT, true)
-						.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x50533)
+						.set(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x50533))
 						.build()
 				)
 				.build();
 	}
 
 	private static BiomeGenerationSettings createGenerationSettings(BootstrapContext<Biome> registerable, boolean sparse) {
-		HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = registerable.lookup(Registries.CONFIGURED_CARVER);
+		HolderGetter<WorldCarver> configuredCarvers = registerable.lookup(Registries.CARVER);
 		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
 		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
@@ -71,9 +71,9 @@ public class SnowyHemlockRainforestBiomes {
 
 	private static MobSpawnSettings createSpawnSettings() {
 		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(EntityTypes.WOLF, 4, 4));
-		builder.addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(EntityTypes.RABBIT, 2, 3));
-		builder.addSpawn(MobCategory.CREATURE, 8, new MobSpawnSettings.SpawnerData(EntityTypes.FOX, 2, 4));
+		builder.addSpawn(EntityTypes.WOLF, 8, 4, 4);
+		builder.addSpawn(EntityTypes.RABBIT, 4, 2, 3);
+		builder.addSpawn(EntityTypes.FOX, 8, 2, 4);
 		return builder.build();
 	}
 }

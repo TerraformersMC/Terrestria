@@ -12,7 +12,6 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.SpruceFoliagePlacer;
 import org.jspecify.annotations.NullMarked;
@@ -43,7 +42,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 	}
 
 	@Override
-	protected void placeLeavesRow(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
+	protected void placeLeavesRow(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, BlockPos blockPos, int radius, int offsetY, boolean giantTrunk) {
 		int giantTrunkOffset = giantTrunk ? 1 : 0;
 		BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 		int actualDistance;
@@ -54,7 +53,7 @@ public class PredictiveSpruceFoliagePlacer extends SpruceFoliagePlacer {
 					mutable.setWithOffset(blockPos, offsetX, offsetY, offsetZ);
 					if (TreeFeature.validTreePos(level, mutable)) {
 						actualDistance = calculateActualDistance(offsetX, offsetY, offsetZ, giantTrunk);
-						BlockState baseState = config.foliageProvider.getState(level, random, mutable);
+						BlockState baseState = tree.foliageProvider().value().getState(level, random, mutable);
 						setter.set(mutable.immutable(), withDistance(baseState, actualDistance));
 					}
 				}

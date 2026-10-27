@@ -9,16 +9,16 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.AquaticPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.attribute.modifier.FloatModifier;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
@@ -40,7 +40,7 @@ public class CypressSwampBiomes {
 				.putAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
 						.set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_SWAMP))
 						.set(EnvironmentAttributes.INCREASED_FIRE_BURNOUT, true)
-						.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x053305)
+						.set(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x053305))
 						.modify(EnvironmentAttributes.WATER_FOG_END_DISTANCE, FloatModifier.MULTIPLY, 0.85F)
 						.build()
 				)
@@ -48,7 +48,7 @@ public class CypressSwampBiomes {
 	}
 
 	private static BiomeGenerationSettings createGenerationSettings(BootstrapContext<Biome> registerable) {
-		HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = registerable.lookup(Registries.CONFIGURED_CARVER);
+		HolderGetter<WorldCarver> configuredCarvers = registerable.lookup(Registries.CARVER);
 		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
 		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
@@ -73,10 +73,10 @@ public class CypressSwampBiomes {
 
 	private static MobSpawnSettings createSpawnSettings() {
 		MobSpawnSettings.Builder builder = TerrestriaBiomes.createDefaultSpawnSettings();
-		builder.addSpawn(MobCategory.WATER_AMBIENT, 8, new MobSpawnSettings.SpawnerData(EntityTypes.COD, 2, 4));
-		builder.addSpawn(MobCategory.MONSTER,  1, new MobSpawnSettings.SpawnerData(EntityTypes.SLIME, 1, 1));
-		builder.addSpawn(MobCategory.MONSTER, 50, new MobSpawnSettings.SpawnerData(EntityTypes.BOGGED, 4, 4));
-		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.FROG, 2, 5));
+		builder.addSpawn(EntityTypes.COD, 8, 2, 4);
+		builder.addSpawn(EntityTypes.SLIME, 1, 1, 1);
+		builder.addSpawn(EntityTypes.BOGGED, 50, 4, 4);
+		builder.addSpawn(EntityTypes.FROG, 10, 2, 5);
 		return builder.build();
 	}
 }

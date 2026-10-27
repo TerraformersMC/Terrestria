@@ -7,15 +7,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.BackgroundMusic;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 
 import static com.terraformersmc.terrestria.init.TerrestriaBiomes.addBasicFeatures;
@@ -35,14 +35,14 @@ public class LushDesertBiomes {
 				.putAttributes(TerrestriaBiomes.createDefaultEnvironmentAttributes()
 						.set(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DESERT))
 						.set(EnvironmentAttributes.SNOW_GOLEM_MELTS, true)
-						.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x50533)
+						.set(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x50533))
 						.build()
 				)
 				.build();
 	}
 
 	private static BiomeGenerationSettings createGenerationSettings(BootstrapContext<Biome> registerable, boolean oasis) {
-		HolderGetter<ConfiguredWorldCarver<?>> configuredCarvers = registerable.lookup(Registries.CONFIGURED_CARVER);
+		HolderGetter<WorldCarver> configuredCarvers = registerable.lookup(Registries.CARVER);
 		HolderGetter<PlacedFeature> placedFeatures = registerable.lookup(Registries.PLACED_FEATURE);
 
 		BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, configuredCarvers);
@@ -70,16 +70,16 @@ public class LushDesertBiomes {
 	private static MobSpawnSettings createSpawnSettings() {
 		MobSpawnSettings.Builder builder = new net.minecraft.world.level.biome.MobSpawnSettings.Builder();
 		TerrestriaBiomes.addDefaultCaveSpawnEntries(builder);
-		builder.addSpawn(MobCategory.CREATURE, 4, new MobSpawnSettings.SpawnerData(EntityTypes.RABBIT, 2, 3));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SPIDER, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SKELETON, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.CREEPER, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SLIME, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER,  10, new MobSpawnSettings.SpawnerData(EntityTypes.ENDERMAN, 1, 4));
-		builder.addSpawn(MobCategory.MONSTER,   5, new MobSpawnSettings.SpawnerData(EntityTypes.WITCH, 1, 1));
-		builder.addSpawn(MobCategory.MONSTER,  19, new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER,   1, new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE_VILLAGER, 1, 1));
-		builder.addSpawn(MobCategory.MONSTER,  80, new MobSpawnSettings.SpawnerData(EntityTypes.HUSK, 4, 4));
+		builder.addSpawn(EntityTypes.RABBIT, 4, 2, 3);
+		builder.addSpawn(EntityTypes.SPIDER, 100, 4, 4);
+		builder.addSpawn(EntityTypes.SKELETON, 100, 4, 4);
+		builder.addSpawn(EntityTypes.CREEPER, 100, 4, 4);
+		builder.addSpawn(EntityTypes.SLIME, 100, 4, 4);
+		builder.addSpawn(EntityTypes.ENDERMAN, 10, 1, 4);
+		builder.addSpawn(EntityTypes.WITCH, 5, 1, 1);
+		builder.addSpawn(EntityTypes.ZOMBIE, 19, 4, 4);
+		builder.addSpawn(EntityTypes.ZOMBIE_VILLAGER, 1, 1, 1);
+		builder.addSpawn(EntityTypes.HUSK, 80, 4, 4);
 		return builder.build();
 	}
 }

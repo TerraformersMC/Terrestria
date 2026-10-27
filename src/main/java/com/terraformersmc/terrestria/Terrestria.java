@@ -3,7 +3,6 @@ package com.terraformersmc.terrestria;
 import com.terraformersmc.terrestria.biomegen.TerrestriaBiolithGeneration;
 import com.terraformersmc.terrestria.config.TerrestriaConfigManager;
 import com.terraformersmc.terrestria.init.*;
-import com.terraformersmc.terrestria.init.helpers.TerrestriaPlacementModifierType;
 import com.terraformersmc.terrestria.item.TerrestriaCreativeModeTabs;
 import com.terraformersmc.terrestria.surface.builders.TerrestriaSurfaceBuilders;
 import net.fabricmc.api.ModInitializer;
@@ -21,11 +20,13 @@ public class Terrestria implements ModInitializer {
 	public void onInitialize() {
 		TerrestriaBlocks.init();
 		TerrestriaItems.init();
-		TerrestriaPlacementModifierType.init();
+
+		TerrestriaPlacementModifierTypes.init();
 		TerrestriaFoliagePlacerTypes.init();
 		TerrestriaTrunkPlacerTypes.init();
 		TerrestriaTreeDecorators.init();
-		TerrestriaFeatures.init();
+		TerrestriaFeatureTypes.init();
+
 		TerrestriaStructures.init();
 		TerrestriaVillagerTypes.init();
 		TerrestriaCreativeModeTabs.init();

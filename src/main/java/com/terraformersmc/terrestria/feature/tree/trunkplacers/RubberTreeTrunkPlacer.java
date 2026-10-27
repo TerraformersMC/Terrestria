@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
@@ -34,7 +34,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeFeature tree) {
 		// Create the Mutable version of our block position so that we can procedurally create the trunk
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
@@ -43,7 +43,7 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		// Place the trunk
 		for (int i = 0; i < trunkHeight; i++) {
-			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
 		}
 
 		// Instance a direction before the loop so it no be slow mkay
@@ -51,10 +51,10 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 
 		// Place the rest of the trunk and branches
 		for (int j = 0; j < trunkHeight + 3; j++) {
-			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
 			branchDirection = Direction.Plane.HORIZONTAL.getRandomDirection(random);
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), branchDirection, replacer, treeFeatureConfig), 1, false));
-			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), replacer, treeFeatureConfig), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), branchDirection, replacer, tree), 1, false));
+			foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), DirectionHelper.randomHorizontalDirectionAwayFrom(random, branchDirection), replacer, tree), 1, false));
 		}
 
 		// Make sure the top gets some love
@@ -64,17 +64,17 @@ public class RubberTreeTrunkPlacer extends TrunkPlacer {
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos pos, Direction direction, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig) {
+	private BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos pos, Direction direction, BiConsumer<BlockPos, BlockState> replacer, TreeFeature tree) {
 		BlockPos.MutableBlockPos currentPosition = pos.mutable();
 		// Place a block in the branch direction
-		placeLog(level, replacer, random, currentPosition.move(direction), treeFeatureConfig);
+		placeLog(level, replacer, random, currentPosition.move(direction), tree);
 		// 50% of the time place another block in the same general direction
 		if (random.nextBoolean()) {
 			// 50% of the time make the branch move upwards
 			if (random.nextBoolean()) {
 				currentPosition.move(Direction.UP);
 			}
-			placeLog(level, replacer, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(DirectionHelper.randomHorizontalDirectionAwayFrom(random, direction.getOpposite())), tree);
 		}
 		return currentPosition;
 	}

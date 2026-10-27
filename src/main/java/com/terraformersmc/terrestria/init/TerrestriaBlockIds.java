@@ -20,12 +20,19 @@ public class TerrestriaBlockIds {
 	public static final WoodBlockIds SAKURA = WoodBlockIds.of(id("sakura"));
 	public static final WoodBlockIds YUCCA_PALM = WoodBlockIds.of(id("yucca_palm"));
 
+	public static final ResourceKey<Block> SAGUARO_CACTUS = create("saguaro_cactus");
 	public static final ResourceKey<Block> SMALL_OAK_LOG = create("small_oak_log");
 	public static final ResourceKey<Block> STRIPPED_SMALL_OAK_LOG = create("stripped_small_oak_log");
-	public static final ResourceKey<Block> SAGUARO_CACTUS = create("saguaro_cactus");
+
+	public static final ResourceKey<Block> STACKED_OAK_LOGS = create("stacked_oak_logs");
+	public static final ResourceKey<Block> STACKED_SAKURA_LOGS = create("stacked_sakura_logs");
+	public static final ResourceKey<Block> STACKED_YUCCA_PALM_LOGS = create("stacked_yucca_palm_logs");
+	public static final ResourceKey<Block> STACKED_STRIPPED_OAK_LOGS = create("stacked_stripped_oak_logs");
+	public static final ResourceKey<Block> STACKED_STRIPPED_SAKURA_LOGS = create("stacked_stripped_sakura_logs");
+	public static final ResourceKey<Block> STACKED_STRIPPED_YUCCA_PALM_LOGS = create("stacked_stripped_yucca_palm_logs");
 
 	public static final ResourceKey<Block> JAPANESE_MAPLE_SHRUB_LEAVES = create("japanese_maple_shrub_leaves");
-	public static final ResourceKey<Block> DARK_JAPANESE_MAPLE_LEAVES = create("dark_japanese_maple_shrub_leaves");
+	public static final ResourceKey<Block> DARK_JAPANESE_MAPLE_LEAVES = create("dark_japanese_maple_leaves");
 	public static final ResourceKey<Block> JUNGLE_PALM_LEAVES = create("jungle_palm_leaves");
 
 	public static final ResourceKey<Block> CATTAIL = create("cattail");
@@ -80,9 +87,10 @@ public class TerrestriaBlockIds {
 	public static final ResourceKey<Block> POTTED_ALOE_VERA = create("potted_aloe_vera");
 
 
-	public record DirtBlockIds(ResourceKey<Block> dirtBlock, ResourceKey<Block> dirtPathBlock, ResourceKey<Block> farmBlock, ResourceKey<Block> grassBlock, ResourceKey<Block> podzolBlock) {
+	public record DirtBlockIds(Identifier id, ResourceKey<Block> dirtBlock, ResourceKey<Block> dirtPathBlock, ResourceKey<Block> farmBlock, ResourceKey<Block> grassBlock, ResourceKey<Block> podzolBlock) {
 		public static DirtBlockIds of(Identifier id) {
 			return new DirtBlockIds(
+				id,
 				create(id),
 				create(id.withSuffix("_dirt_path")),
 				create(id.withSuffix("_farmland")),
@@ -92,12 +100,13 @@ public class TerrestriaBlockIds {
 		}
 	}
 
-	public record StoneBlockIds(StoneVariantBlockIds plain, StoneVariantBlockIds smooth, StoneVariantBlockIds cobblestone, StoneVariantBlockIds mossyCobblestone, StoneVariantBlockIds bricks, StoneVariantBlockIds mossyBricks, ResourceKey<Block> button, ResourceKey<Block> pressurePlate, ResourceKey<Block> chiseledBricks, ResourceKey<Block> crackedBricks) {
+	public record StoneBlockIds(Identifier id, StoneVariantBlockIds plain, StoneVariantBlockIds smooth, StoneVariantBlockIds cobblestone, StoneVariantBlockIds mossyCobblestone, StoneVariantBlockIds bricks, StoneVariantBlockIds mossyBricks, ResourceKey<Block> button, ResourceKey<Block> pressurePlate, ResourceKey<Block> chiseledBricks, ResourceKey<Block> crackedBricks) {
 		public static StoneBlockIds of(Identifier id) {
 			Identifier brickId = id.withSuffix("_brick");
 			Identifier bricksId = id.withSuffix("_bricks");
 
 			return new StoneBlockIds(
+				id,
 				StoneVariantBlockIds.of(id),
 				StoneVariantBlockIds.of(id.withPrefix("smooth_")),
 				StoneVariantBlockIds.of(id.withSuffix("_cobblestone")),
@@ -112,9 +121,10 @@ public class TerrestriaBlockIds {
 		}
 	}
 
-	public record StoneVariantBlockIds(ResourceKey<Block> full, ResourceKey<Block> slab, ResourceKey<Block> stairs, ResourceKey<Block> wall) {
+	public record StoneVariantBlockIds(Identifier id, ResourceKey<Block> full, ResourceKey<Block> slab, ResourceKey<Block> stairs, ResourceKey<Block> wall) {
 		public static StoneVariantBlockIds of(Identifier id, Identifier shapedId) {
 			return new StoneVariantBlockIds(
+				id,
 				create(id),
 				create(shapedId.withSuffix("_slab")),
 				create(shapedId.withSuffix("_stairs")),
@@ -127,9 +137,10 @@ public class TerrestriaBlockIds {
 		}
 	}
 
-	public record WoodBlockIds(ResourceKey<Block> log, ResourceKey<Block> quarterLog, ResourceKey<Block> wood, ResourceKey<Block> leaves, ResourceKey<Block> leafPile, ResourceKey<Block> planks, ResourceKey<Block> slab, ResourceKey<Block> stairs, ResourceKey<Block> fence, ResourceKey<Block> fenceGate, ResourceKey<Block> door, ResourceKey<Block> button, ResourceKey<Block> pressurePlate, ResourceKey<Block> sign, ResourceKey<Block> wallSign, ResourceKey<Block> hangingSign, ResourceKey<Block> wallHangingSign, ResourceKey<Block> trapdoor, ResourceKey<Block> shelf, ResourceKey<Block> strippedLog, ResourceKey<Block> strippedQuarterLog, ResourceKey<Block> strippedWood) {
+	public record WoodBlockIds(Identifier id, ResourceKey<Block> log, ResourceKey<Block> quarterLog, ResourceKey<Block> wood, ResourceKey<Block> leaves, ResourceKey<Block> leafPile, ResourceKey<Block> planks, ResourceKey<Block> slab, ResourceKey<Block> stairs, ResourceKey<Block> fence, ResourceKey<Block> fenceGate, ResourceKey<Block> door, ResourceKey<Block> button, ResourceKey<Block> pressurePlate, ResourceKey<Block> sign, ResourceKey<Block> wallSign, ResourceKey<Block> hangingSign, ResourceKey<Block> wallHangingSign, ResourceKey<Block> trapdoor, ResourceKey<Block> shelf, ResourceKey<Block> strippedLog, ResourceKey<Block> strippedQuarterLog, ResourceKey<Block> strippedWood) {
 		public static WoodBlockIds of(Identifier id) {
 			return new WoodBlockIds(
+				id,
 				create(id.withSuffix("_log")),
 				create(id.withSuffix("_quarter_log")),
 				create(id.withSuffix("_wood")),
@@ -149,9 +160,9 @@ public class TerrestriaBlockIds {
 				create(id.withSuffix("_wall_hanging_sign")),
 				create(id.withSuffix("_trapdoor")),
 				create(id.withSuffix("_shelf")),
-				create(id.withSuffix("_stripped_log")),
-				create(id.withSuffix("_stripped_quarter_log")),
-				create(id.withSuffix("_stripped_wood"))
+				create(id.withPath(name -> "stripped_" + name + "_log")),
+				create(id.withPath(name -> "stripped_" + name + "_quarter_log")),
+				create(id.withPath(name -> "stripped_" + name + "_wood"))
 			);
 		}
 	}

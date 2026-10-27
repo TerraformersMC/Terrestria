@@ -9,7 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -33,13 +33,13 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeFeature tree) {
 		// Determine the number of branched branchLayers to have
 		int branchLayers = 5 + random.nextInt(3);
 
 		// Generate the trunk from the MegaTrunkPlacer, but ignore its chosen foliage location
 		// This also grows the roots
-		super.placeTrunk(level, replacer, random, trunkHeight + branchLayers, pos, treeFeatureConfig);
+		super.placeTrunk(level, replacer, random, trunkHeight + branchLayers, pos, tree);
 
 		// Create our list of foliage nodes
 		ArrayList<FoliagePlacer.FoliageAttachment> foliageNodes = new ArrayList<>();
@@ -52,7 +52,7 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 			Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
 
 			// Place the branch logs
-			BlockPos branch = placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, direction);
+			BlockPos branch = placeBranch(level, random, currentPosition.immutable(), replacer, tree, direction);
 
 			// Add the end of the branch to the foliage locations
 			foliageNodes.add(new FoliagePlacer.FoliageAttachment(branch, random.nextInt(2) + 4, false));
@@ -62,16 +62,16 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 		}
 
 		// Make sure the top of the tree has leaf locations
-		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, Direction.NORTH), random.nextInt(2) + 4, false));
-		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, Direction.SOUTH), random.nextInt(2) + 4, false));
-		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, Direction.EAST), random.nextInt(2) + 4, false));
-		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, treeFeatureConfig, Direction.WEST), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, tree, Direction.NORTH), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, tree, Direction.SOUTH), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, tree, Direction.EAST), random.nextInt(2) + 4, false));
+		foliageNodes.add(new FoliagePlacer.FoliageAttachment(placeBranch(level, random, currentPosition.immutable(), replacer, tree, Direction.WEST), random.nextInt(2) + 4, false));
 
 		// Return an immutable version of the foliage node list
 		return ImmutableList.copyOf(foliageNodes);
 	}
 
-	private BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeConfiguration treeFeatureConfig, Direction direction) {
+	private BlockPos placeBranch(WorldGenLevel level, RandomSource random, BlockPos pos, BiConsumer<BlockPos, BlockState> replacer, TreeFeature tree, Direction direction) {
 		// Create the Mutable version of our block position so that we can procedurally create the branch
 		BlockPos.MutableBlockPos currentPosition = pos.mutable().move(Direction.DOWN);
 
@@ -89,10 +89,10 @@ public class QuarteredMegaCanopyTrunkPlacer extends MegaTrunkPlacer {
 		// Place a branch with length in the diagonalDirection, with an upwards angle
 		for (int i = 0; i < length; i++) {
 			if (random.nextBoolean()) {
-				placeLog(level, replacer, random, currentPosition.move(direction), treeFeatureConfig);
-				placeLog(level, replacer, random, currentPosition.move(diagonalDirection), treeFeatureConfig);
+				placeLog(level, replacer, random, currentPosition.move(direction), tree);
+				placeLog(level, replacer, random, currentPosition.move(diagonalDirection), tree);
 			}
-			placeLog(level, replacer, random, currentPosition.move(Direction.UP), treeFeatureConfig);
+			placeLog(level, replacer, random, currentPosition.move(Direction.UP), tree);
 		}
 
 		// Return the end of the branch as a valid foliage placement location

@@ -408,7 +408,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 
 	private void registerSmoothStone(BlockModelGenerators generator, StoneBlocks stoneBlocks) {
 		// Vanilla part
-		// Non-hard-coded version of BlockStateModelGenerator.registerSmoothStone()
+		// Non-hard-coded version of BlockModelGenerators.registerSmoothStone()
 		TextureMapping fullTexture = TextureMapping.cube(stoneBlocks.smooth.full);
 		TextureMapping slabTexture = TextureMapping.column(TextureMapping.getBlockTexture(stoneBlocks.smooth.slab, "_side"), fullTexture.get(TextureSlot.TOP));
 		Identifier slabId = ModelTemplates.SLAB_BOTTOM.create(stoneBlocks.smooth.slab, slabTexture, generator.modelOutput);
@@ -437,23 +437,23 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		generator.createRotatedVariantBlock(dirtBlocks.dirtBlock());
 		Material dirtTextureId = TextureMapping.getBlockTexture(dirtBlocks.dirtBlock());
 
-		// Dirt Path based on vanilla model and the partial code in BlockStateModelGenerator.registerDirtPath()
-		TextureMapping pathTexture = TextureMapping.logColumn(Objects.requireNonNull(dirtBlocks.dirtPathBlock()))
+		// Dirt Path based on vanilla model and the partial code in BlockModelGenerators.registerDirtPath()
+		TextureMapping pathTexture = TextureMapping.logColumn(Objects.requireNonNull(dirtBlocks.pathBlock()))
 				.put(TextureSlot.BOTTOM, dirtTextureId)
 				.copyForced(TextureSlot.BOTTOM, TextureSlot.PARTICLE)
 				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.DIRT_PATH,"_top"))
-				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.dirtPathBlock(), "_side"));
+				.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(dirtBlocks.pathBlock(), "_side"));
 		Identifier pathModelId = new ModelTemplate(
 				Optional.of(ModelLocationUtils.getModelLocation(Blocks.DIRT_PATH)),
 				Optional.empty(),
 				TextureSlot.BOTTOM, TextureSlot.SIDE, TextureSlot.TOP
-		).create(dirtBlocks.dirtPathBlock(), pathTexture, generator.modelOutput);
+		).create(dirtBlocks.pathBlock(), pathTexture, generator.modelOutput);
 		Variant pathModel = BlockModelGenerators.plainModel(pathModelId);
 
-		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.dirtPathBlock(),
+		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.pathBlock(),
 				BlockModelGenerators.createRotatedVariants(pathModel)));
 
-		// Grass, Mycelium, and Podzol based roughly on BlockStateModelGenerator.registerTopSoils()
+		// Grass, Mycelium, and Podzol based roughly on BlockModelGenerators.registerTopSoils()
 		// grass
 		TextureMapping grassTextureMap = new TextureMapping()
 				.put(TextureSlot.BOTTOM, dirtTextureId)
@@ -488,7 +488,7 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		generator.registerTopSoil(dirtBlocks.myceliumBlock(), myceliumTexture, blockStateVariant);
 		*/
 		// podzol
-		Identifier podzolTextureId = TexturedModel.CUBE_TOP_BOTTOM
+		Identifier podzolTextureId = TexturedModel.CUBE_BOTTOM_TOP
 				.get(Objects.requireNonNull(dirtBlocks.podzolBlock()))
 				.updateTextures(textures -> textures
 						.put(TextureSlot.BOTTOM, dirtTextureId)
@@ -497,23 +497,28 @@ public class TerrestriaModelProvider extends FabricModelProvider {
 		MultiVariant podzolTexture = BlockModelGenerators.plainVariant(podzolTextureId);
 		generator.createGrassLikeBlock(dirtBlocks.podzolBlock(), podzolTexture, snowStateVariant);
 
-		// Farmland from BlockStateModelGenerator.registerFarmland()
-		TextureMapping farmlandTexture = new TextureMapping()
-				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.dirtBlock()))
-				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(Objects.requireNonNull(dirtBlocks.farmBlock())));
-		TextureMapping moistFarmlandTexture = new TextureMapping()
-				.put(TextureSlot.DIRT, TextureMapping.getBlockTexture(dirtBlocks.dirtBlock()))
+		// Farmland from BlockModelGenerators.registerFarmland()
+		assert dirtBlocks.farmBlock() != null;
+		Material baseTexture = TextureMapping.getBlockTexture(dirtBlocks.dirtBlock());
+		Material bottomTexture = TextureMapping.getBlockTexture(dirtBlocks.dirtBlock());
+		ModelTemplate template = ModelTemplates.CUBE_BOTTOM_TOP_INDENTED;
+		TextureMapping dryTextures = new TextureMapping()
+				.put(TextureSlot.SIDE, baseTexture)
+				.put(TextureSlot.BOTTOM, bottomTexture)
+				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(dirtBlocks.farmBlock()));
+		TextureMapping moistTextures = new TextureMapping()
+				.put(TextureSlot.SIDE, baseTexture)
+				.put(TextureSlot.BOTTOM, bottomTexture)
 				.put(TextureSlot.TOP, TextureMapping.getBlockTexture(dirtBlocks.farmBlock(), "_moist"));
-		Identifier farmlandModelId = ModelTemplates.FARMLAND.create(dirtBlocks.farmBlock(), farmlandTexture, generator.modelOutput);
-		Identifier moistFarmlandModelId = ModelTemplates.FARMLAND.create(TextureMapping.getBlockTexture(dirtBlocks.farmBlock(), "_moist").sprite(), moistFarmlandTexture, generator.modelOutput);
-		MultiVariant farmlandModel = BlockModelGenerators.plainVariant(farmlandModelId);
-		MultiVariant moistFarmlandModel = BlockModelGenerators.plainVariant(moistFarmlandModelId);
+		MultiVariant dryModel = BlockModelGenerators.plainVariant(template.create(dirtBlocks.farmBlock(), dryTextures, generator.modelOutput));
+		MultiVariant moistModel = BlockModelGenerators.plainVariant(template.create(
+				ModelLocationUtils.getModelLocation(dirtBlocks.farmBlock(), "_moist"), moistTextures, generator.modelOutput));
 		generator.blockStateOutput.accept(MultiVariantGenerator.dispatch(dirtBlocks.farmBlock())
 				.with(BlockModelGenerators
-						.createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, moistFarmlandModel, farmlandModel)));
+						.createEmptyOrFullDispatch(BlockStateProperties.MOISTURE, 7, moistModel, dryModel)));
 
 		this.registerBlockItemModel(generator, dirtBlocks.dirtBlock());
-		this.registerBlockItemModel(generator, dirtBlocks.dirtPathBlock());
+		this.registerBlockItemModel(generator, dirtBlocks.pathBlock());
 		this.registerBlockItemModel(generator, dirtBlocks.farmBlock());
 		this.registerBlockItemModel(generator, dirtBlocks.podzolBlock());
 	}

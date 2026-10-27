@@ -2,7 +2,7 @@ package com.terraformersmc.terrestria.data;
 
 import com.terraformersmc.terrestria.Terrestria;
 import com.terraformersmc.terrestria.init.TerrestriaBiomes;
-import com.terraformersmc.terrestria.init.TerrestriaConfiguredFeatures;
+import com.terraformersmc.terrestria.init.TerrestriaFeatures;
 import com.terraformersmc.terrestria.init.TerrestriaPlacedFeatures;
 import com.terraformersmc.terrestria.villager.TerrestriaVillagerTrades;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -23,7 +23,7 @@ public class TerrestriaDynamicRegistryProvider extends FabricDynamicRegistryProv
 	}
 
 	public static void buildRegistry(RegistrySetBuilder registryBuilder) {
-		registryBuilder.add(Registries.CONFIGURED_FEATURE, TerrestriaConfiguredFeatures::bootstrap);
+		registryBuilder.add(Registries.FEATURE, TerrestriaFeatures::bootstrap);
 		registryBuilder.add(Registries.PLACED_FEATURE, TerrestriaPlacedFeatures::bootstrap);
 		registryBuilder.add(Registries.BIOME, TerrestriaBiomes::bootstrap);
 		registryBuilder.add(Registries.VILLAGER_TRADE, TerrestriaVillagerTrades::bootstrap);
@@ -31,7 +31,7 @@ public class TerrestriaDynamicRegistryProvider extends FabricDynamicRegistryProv
 
 	@Override
 	public void configure(HolderLookup.Provider registries, Entries entries) {
-		addAll(entries, registries.lookupOrThrow(Registries.CONFIGURED_FEATURE), Terrestria.MOD_ID);
+		addAll(entries, registries.lookupOrThrow(Registries.FEATURE), Terrestria.MOD_ID);
 		addAll(entries, registries.lookupOrThrow(Registries.PLACED_FEATURE), Terrestria.MOD_ID);
 		addAll(entries, registries.lookupOrThrow(Registries.BIOME), Terrestria.MOD_ID);
 		addAll(entries, registries.lookupOrThrow(Registries.VILLAGER_TRADE), Terrestria.MOD_ID);

@@ -206,7 +206,7 @@ public class TerrestriaCreativeModeTabs {
 		// Dirt Items
 		addTabEntry(blocks.grassBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 		addTabEntry(blocks.podzolBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
-		addTabEntry(blocks.dirtPathBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
+		addTabEntry(blocks.pathBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 		addTabEntry(blocks.dirtBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 		addTabEntry(blocks.farmBlock(), CreativeModeTabs.NATURAL_BLOCKS, NATURAL_DIRT_ITEMS);
 	}

@@ -4,13 +4,15 @@ import com.terraformersmc.terrestria.init.helpers.StoneItems;
 import com.terraformersmc.terrestria.init.helpers.TerrestriaRegistry;
 import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.item.LogTurnerItem;
-import com.terraformersmc.terrestria.tag.TerrestriaBlockItemTags;
-import net.fabricmc.fabric.api.registry.CompostableRegistry;
-import net.fabricmc.fabric.api.registry.FuelValueEvents;
+import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.Compostable;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 // This class exports public item constants, these fields have to be public
@@ -78,123 +80,157 @@ public class TerrestriaItems {
 	public static void init() {
 		// Because DirtBlocks are nullable.
 		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.dirtBlock());
-		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.dirtPathBlock());
+		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.pathBlock());
 		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.grassBlock());
 		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.podzolBlock());
 		Objects.requireNonNull(TerrestriaBlocks.ANDISOL.farmBlock());
 
-		REDWOOD = WoodItems.register(TerrestriaBlocks.REDWOOD);
-		HEMLOCK = WoodItems.register(TerrestriaBlocks.HEMLOCK);
-		RUBBER = WoodItems.register(TerrestriaBlocks.RUBBER);
-		CYPRESS = WoodItems.register(TerrestriaBlocks.CYPRESS);
-		WILLOW = WoodItems.register(TerrestriaBlocks.WILLOW);
-		JAPANESE_MAPLE = WoodItems.register(TerrestriaBlocks.JAPANESE_MAPLE);
-		RAINBOW_EUCALYPTUS = WoodItems.register(TerrestriaBlocks.RAINBOW_EUCALYPTUS);
-		SAKURA = WoodItems.register(TerrestriaBlocks.SAKURA);
-		YUCCA_PALM = WoodItems.register(TerrestriaBlocks.YUCCA_PALM);
+		REDWOOD = WoodItems.register(TerrestriaBlockItemIds.REDWOOD, TerrestriaBlocks.REDWOOD);
+		HEMLOCK = WoodItems.register(TerrestriaBlockItemIds.HEMLOCK, TerrestriaBlocks.HEMLOCK);
+		RUBBER = WoodItems.register(TerrestriaBlockItemIds.RUBBER, TerrestriaBlocks.RUBBER);
+		CYPRESS = WoodItems.register(TerrestriaBlockItemIds.CYPRESS, TerrestriaBlocks.CYPRESS);
+		WILLOW = WoodItems.register(TerrestriaBlockItemIds.WILLOW, TerrestriaBlocks.WILLOW);
+		JAPANESE_MAPLE = WoodItems.register(TerrestriaBlockItemIds.JAPANESE_MAPLE, TerrestriaBlocks.JAPANESE_MAPLE);
+		RAINBOW_EUCALYPTUS = WoodItems.register(TerrestriaBlockItemIds.RAINBOW_EUCALYPTUS, TerrestriaBlocks.RAINBOW_EUCALYPTUS);
+		SAKURA = WoodItems.register(TerrestriaBlockItemIds.SAKURA, TerrestriaBlocks.SAKURA);
+		YUCCA_PALM = WoodItems.register(TerrestriaBlockItemIds.YUCCA_PALM, TerrestriaBlocks.YUCCA_PALM);
 
-		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("small_oak_log", TerrestriaBlocks.SMALL_OAK_LOG);
-		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem("stripped_small_oak_log", TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
-		SAGUARO_CACTUS = TerrestriaRegistry.registerBlockItem("saguaro_cactus", TerrestriaBlocks.SAGUARO_CACTUS);
+		SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.SMALL_OAK_LOG, TerrestriaBlocks.SMALL_OAK_LOG);
+		STRIPPED_SMALL_OAK_LOG = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.STRIPPED_SMALL_OAK_LOG, TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
+		SAGUARO_CACTUS = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.SAGUARO_CACTUS, TerrestriaBlocks.SAGUARO_CACTUS);
 
-		STACKED_OAK_LOGS = TerrestriaRegistry.registerBlockItem("stacked_oak_logs", TerrestriaBlocks.STACKED_OAK_LOGS);
-		STACKED_SAKURA_LOGS = TerrestriaRegistry.registerBlockItem("stacked_sakura_logs", TerrestriaBlocks.STACKED_SAKURA_LOGS);
-		STACKED_YUCCA_PALM_LOGS = TerrestriaRegistry.registerBlockItem("stacked_yucca_palm_logs", TerrestriaBlocks.STACKED_YUCCA_PALM_LOGS);
-		STACKED_STRIPPED_OAK_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_oak_logs", TerrestriaBlocks.STACKED_STRIPPED_OAK_LOGS);
-		STACKED_STRIPPED_SAKURA_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_sakura_logs", TerrestriaBlocks.STACKED_STRIPPED_SAKURA_LOGS);
-		STACKED_STRIPPED_YUCCA_PALM_LOGS = TerrestriaRegistry.registerBlockItem("stacked_stripped_yucca_palm_logs", TerrestriaBlocks.STACKED_STRIPPED_YUCCA_PALM_LOGS);
+		STACKED_OAK_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_OAK_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_OAK_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+		STACKED_SAKURA_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_SAKURA_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_SAKURA_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+		STACKED_YUCCA_PALM_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_YUCCA_PALM_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_YUCCA_PALM_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+		STACKED_STRIPPED_OAK_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_STRIPPED_OAK_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_STRIPPED_OAK_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+		STACKED_STRIPPED_SAKURA_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_STRIPPED_SAKURA_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_STRIPPED_SAKURA_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
+		STACKED_STRIPPED_YUCCA_PALM_LOGS = TerrestriaRegistry.register(TerrestriaBlockItemIds.STACKED_STRIPPED_YUCCA_PALM_LOGS, settings -> new BlockItem(TerrestriaBlocks.STACKED_STRIPPED_YUCCA_PALM_LOGS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_BLOCKS));
 
-		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_leaves", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
-		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_leaves", TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
-		JUNGLE_PALM_LEAVES = TerrestriaRegistry.registerBlockItem("jungle_palm_leaves", TerrestriaBlocks.JUNGLE_PALM_LEAVES);
+		JAPANESE_MAPLE_SHRUB_LEAVES = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.JAPANESE_MAPLE_SHRUB_LEAVES, TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_LEAVES);
+		DARK_JAPANESE_MAPLE_LEAVES = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.DARK_JAPANESE_MAPLE_LEAVES, TerrestriaBlocks.DARK_JAPANESE_MAPLE_LEAVES);
+		JUNGLE_PALM_LEAVES = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.JUNGLE_PALM_LEAVES, TerrestriaBlocks.JUNGLE_PALM_LEAVES);
 
-		CATTAIL = TerrestriaRegistry.registerBlockItem("cattail", TerrestriaBlocks.CATTAIL);
+		CATTAIL = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.CATTAIL, TerrestriaBlocks.CATTAIL);
 
-		BRYCE_SAPLING = TerrestriaRegistry.registerBlockItem("bryce_sapling", TerrestriaBlocks.BRYCE_SAPLING);
-		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem("redwood_sapling", TerrestriaBlocks.REDWOOD_SAPLING);
-		HEMLOCK_SAPLING = TerrestriaRegistry.registerBlockItem("hemlock_sapling", TerrestriaBlocks.HEMLOCK_SAPLING);
-		RUBBER_SAPLING = TerrestriaRegistry.registerBlockItem("rubber_sapling", TerrestriaBlocks.RUBBER_SAPLING);
-		CYPRESS_SAPLING = TerrestriaRegistry.registerBlockItem("cypress_sapling", TerrestriaBlocks.CYPRESS_SAPLING);
-		WILLOW_SAPLING = TerrestriaRegistry.registerBlockItem("willow_sapling", TerrestriaBlocks.WILLOW_SAPLING);
-		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem("japanese_maple_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
-		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.registerBlockItem("japanese_maple_shrub_sapling", TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
-		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem("dark_japanese_maple_sapling", TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
-		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.registerBlockItem("rainbow_eucalyptus_sapling", TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
-		SAKURA_SAPLING = TerrestriaRegistry.registerBlockItem("sakura_sapling", TerrestriaBlocks.SAKURA_SAPLING);
-		JUNGLE_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("jungle_palm_sapling", TerrestriaBlocks.JUNGLE_PALM_SAPLING);
-		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.registerBlockItem("saguaro_cactus_sapling", TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
-		YUCCA_PALM_SAPLING = TerrestriaRegistry.registerBlockItem("yucca_palm_sapling", TerrestriaBlocks.YUCCA_PALM_SAPLING);
+		BRYCE_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.BRYCE_SAPLING, TerrestriaBlocks.BRYCE_SAPLING);
+		REDWOOD_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.REDWOOD_SAPLING, TerrestriaBlocks.REDWOOD_SAPLING);
+		HEMLOCK_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.HEMLOCK_SAPLING, TerrestriaBlocks.HEMLOCK_SAPLING);
+		RUBBER_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.RUBBER_SAPLING, TerrestriaBlocks.RUBBER_SAPLING);
+		CYPRESS_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.CYPRESS_SAPLING, TerrestriaBlocks.CYPRESS_SAPLING);
+		WILLOW_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.WILLOW_SAPLING, TerrestriaBlocks.WILLOW_SAPLING);
+		JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.JAPANESE_MAPLE_SAPLING, TerrestriaBlocks.JAPANESE_MAPLE_SAPLING);
+		JAPANESE_MAPLE_SHRUB_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.JAPANESE_MAPLE_SHRUB_SAPLING, TerrestriaBlocks.JAPANESE_MAPLE_SHRUB_SAPLING);
+		DARK_JAPANESE_MAPLE_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.DARK_JAPANESE_MAPLE_SAPLING, TerrestriaBlocks.DARK_JAPANESE_MAPLE_SAPLING);
+		RAINBOW_EUCALYPTUS_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.RAINBOW_EUCALYPTUS_SAPLING, TerrestriaBlocks.RAINBOW_EUCALYPTUS_SAPLING);
+		SAKURA_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.SAKURA_SAPLING, TerrestriaBlocks.SAKURA_SAPLING);
+		JUNGLE_PALM_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.JUNGLE_PALM_SAPLING, TerrestriaBlocks.JUNGLE_PALM_SAPLING);
+		SAGUARO_CACTUS_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.SAGUARO_CACTUS_SAPLING, TerrestriaBlocks.SAGUARO_CACTUS_SAPLING);
+		YUCCA_PALM_SAPLING = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.YUCCA_PALM_SAPLING, TerrestriaBlocks.YUCCA_PALM_SAPLING);
 
-		ANDISOL = TerrestriaRegistry.registerBlockItem("andisol", TerrestriaBlocks.ANDISOL.dirtBlock());
-		ANDISOL_DIRT_PATH = TerrestriaRegistry.registerBlockItem("andisol_dirt_path", TerrestriaBlocks.ANDISOL.dirtPathBlock());
-		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem("andisol_farmland", TerrestriaBlocks.ANDISOL.farmBlock());
-		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem("andisol_grass_block", TerrestriaBlocks.ANDISOL.grassBlock());
-		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem("andisol_podzol", TerrestriaBlocks.ANDISOL.podzolBlock());
+		ANDISOL = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ANDISOL.dirtBlock(), TerrestriaBlocks.ANDISOL.dirtBlock());
+		ANDISOL_DIRT_PATH = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ANDISOL.dirtPathBlock(), TerrestriaBlocks.ANDISOL.pathBlock());
+		ANDISOL_FARMLAND = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ANDISOL.farmBlock(), TerrestriaBlocks.ANDISOL.farmBlock());
+		ANDISOL_GRASS_BLOCK = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ANDISOL.grassBlock(), TerrestriaBlocks.ANDISOL.grassBlock());
+		ANDISOL_PODZOL = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ANDISOL.podzolBlock(), TerrestriaBlocks.ANDISOL.podzolBlock());
 
-		VOLCANIC_ROCK = StoneItems.register("volcanic_rock", TerrestriaBlocks.VOLCANIC_ROCK);
-		VOLCANIC_SAND = TerrestriaRegistry.registerBlockItem("volcanic_sand", TerrestriaBlocks.VOLCANIC_SAND);
+		VOLCANIC_ROCK = StoneItems.register(TerrestriaBlockItemIds.VOLCANIC_ROCK, TerrestriaBlocks.VOLCANIC_ROCK);
+		VOLCANIC_SAND = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.VOLCANIC_SAND, TerrestriaBlocks.VOLCANIC_SAND);
 
-		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem("indian_paintbrush", TerrestriaBlocks.INDIAN_PAINTBRUSH);
-		MONSTERAS = TerrestriaRegistry.registerBlockItem("monsteras", TerrestriaBlocks.MONSTERAS);
+		INDIAN_PAINTBRUSH = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.INDIAN_PAINTBRUSH, TerrestriaBlocks.INDIAN_PAINTBRUSH);
+		MONSTERAS = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.MONSTERAS, TerrestriaBlocks.MONSTERAS);
 
-		TINY_CACTUS = TerrestriaRegistry.registerBlockItem("tiny_cactus", TerrestriaBlocks.TINY_CACTUS);
-		AGAVE = TerrestriaRegistry.registerBlockItem("agave", TerrestriaBlocks.AGAVE);
-		ALOE_VERA = TerrestriaRegistry.registerBlockItem("aloe_vera", TerrestriaBlocks.ALOE_VERA);
-		DEAD_GRASS = TerrestriaRegistry.registerBlockItem("dead_grass", TerrestriaBlocks.DEAD_GRASS);
+		TINY_CACTUS = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.TINY_CACTUS, TerrestriaBlocks.TINY_CACTUS);
+		AGAVE = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.AGAVE, TerrestriaBlocks.AGAVE);
+		ALOE_VERA = TerrestriaRegistry.registerBlockItem(TerrestriaBlockItemIds.ALOE_VERA, TerrestriaBlocks.ALOE_VERA);
+		DEAD_GRASS = TerrestriaRegistry.register(TerrestriaBlockItemIds.DEAD_GRASS, settings -> new BlockItem(TerrestriaBlocks.DEAD_GRASS, settings), new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_DRY_PLANTS));
 
-		LOG_TURNER = TerrestriaRegistry.register("log_turner", LogTurnerItem::new, new Item.Properties());
+		LOG_TURNER = TerrestriaRegistry.register(TerrestriaItemIds.LOG_TURNER, LogTurnerItem::new, new Item.Properties().cookingFuel(ContextIntProviders.COOKING_TIME_WOOD_ITEMS_SMALL));
 
 		addCompostables();
-		addFuels();
 	}
 
 	private static void addCompostables() {
-		CompostableRegistry compostingRegistry = CompostableRegistry.INSTANCE;
-		float CACTUS_CHANCE = compostingRegistry.get(Items.CACTUS);
-		float FERN_CHANCE = compostingRegistry.get(Items.FERN);
-		float FLOWER_CHANCE = compostingRegistry.get(Items.POPPY);
-		float GRASS_CHANCE = compostingRegistry.get(Items.SHORT_GRASS);
-		float LEAVES_CHANCE = compostingRegistry.get(Items.OAK_LEAVES);
-		float SAPLING_CHANCE = compostingRegistry.get(Items.OAK_SAPLING);
-		float SEAGRASS_CHANCE = compostingRegistry.get(Items.SEAGRASS);
+		Collection<Item> leaves = List.of(
+			DARK_JAPANESE_MAPLE_LEAVES,
+			JAPANESE_MAPLE_SHRUB_LEAVES,
+			JUNGLE_PALM_LEAVES
+		);
 
-		compostingRegistry.add(DARK_JAPANESE_MAPLE_LEAVES, LEAVES_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_LEAVES, LEAVES_CHANCE);
-		compostingRegistry.add(JUNGLE_PALM_LEAVES, LEAVES_CHANCE);
+		Collection<Item> cacti = List.of(
+			SAGUARO_CACTUS,
+			TINY_CACTUS
+		);
 
-		compostingRegistry.add(SAGUARO_CACTUS, CACTUS_CHANCE);
-		compostingRegistry.add(TINY_CACTUS, CACTUS_CHANCE);
+		Collection<Item> seagrasses = List.of(
+			CATTAIL
+		);
 
-		compostingRegistry.add(CATTAIL, SEAGRASS_CHANCE);
+		Collection<Item> flowers = List.of(
+			AGAVE,
+			ALOE_VERA,
+			INDIAN_PAINTBRUSH
+		);
 
-		compostingRegistry.add(AGAVE, FLOWER_CHANCE);
-		compostingRegistry.add(ALOE_VERA, FLOWER_CHANCE);
-		compostingRegistry.add(DEAD_GRASS, GRASS_CHANCE);
-		compostingRegistry.add(INDIAN_PAINTBRUSH, FLOWER_CHANCE);
-		compostingRegistry.add(MONSTERAS, FERN_CHANCE);
+		Collection<Item> dryGrasses = List.of(
+			DEAD_GRASS
+		);
 
-		compostingRegistry.add(BRYCE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(CYPRESS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(DARK_JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(HEMLOCK_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JAPANESE_MAPLE_SHRUB_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(JUNGLE_PALM_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(RAINBOW_EUCALYPTUS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(REDWOOD_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(RUBBER_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(SAGUARO_CACTUS_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(SAKURA_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(WILLOW_SAPLING, SAPLING_CHANCE);
-		compostingRegistry.add(YUCCA_PALM_SAPLING, SAPLING_CHANCE);
-	}
+		Collection<Item> largeFerns = List.of(
+			MONSTERAS
+		);
 
-	private static void addFuels() {
-		FuelValueEvents.BUILD.register((builder, context) -> {
-			builder.add(DEAD_GRASS, 100);
-			builder.add(LOG_TURNER, 300);
+		Collection<Item> saplings = List.of(
+			BRYCE_SAPLING,
+			CYPRESS_SAPLING,
+			DARK_JAPANESE_MAPLE_SAPLING,
+			HEMLOCK_SAPLING,
+			JAPANESE_MAPLE_SAPLING,
+			JAPANESE_MAPLE_SHRUB_SAPLING,
+			JUNGLE_PALM_SAPLING,
+			RAINBOW_EUCALYPTUS_SAPLING,
+			REDWOOD_SAPLING,
+			RUBBER_SAPLING,
+			SAGUARO_CACTUS_SAPLING,
+			SAKURA_SAPLING,
+			WILLOW_SAPLING,
+			YUCCA_PALM_SAPLING
+		);
 
-			builder.add(TerrestriaBlockItemTags.STACKED_LOGS.item(), 300);
+		DefaultItemComponentEvents.MODIFY.register(modifyContext -> {
+			modifyContext.modify(leaves, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_LOW))
+			);
+
+			modifyContext.modify(cacti, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_LOW_MEDIUM))
+			);
+
+			modifyContext.modify(seagrasses, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_LOW))
+			);
+
+			modifyContext.modify(flowers, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_MEDIUM))
+			);
+
+			modifyContext.modify(dryGrasses, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_LOW))
+			);
+
+			modifyContext.modify(largeFerns, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_MEDIUM))
+			);
+
+			modifyContext.modify(saplings, (builder, _, _) ->
+				builder.set(DataComponents.COMPOSTABLE,
+					new Compostable(ContextIntProviders.COMPOSTABLE_LOW))
+			);
 		});
 	}
 }

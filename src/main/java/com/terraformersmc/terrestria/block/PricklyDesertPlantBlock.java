@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -37,17 +38,17 @@ public class PricklyDesertPlantBlock extends TerraformDesertPlantBlock implement
 	}
 
 	@Override
-	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+	public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, BonemealSource source) {
 		return level.getBlockState(pos.below()).is(BlockTags.SAND);
 	}
 
 	@Override
-	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+	public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		return true;
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		for (int tries = 30; tries > 0; --tries) {
 			double rotation = random.nextDouble() * 2d * Math.PI;
 			double distance = random.nextDouble() * 8 + 0.5d;

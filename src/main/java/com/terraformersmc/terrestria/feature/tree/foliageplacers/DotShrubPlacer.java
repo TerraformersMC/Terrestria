@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -29,19 +28,19 @@ public class DotShrubPlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
-		checkAndSetBlockState(level, random, treeNode.pos(), setter, config);
-		Direction.Plane.HORIZONTAL.forEach((direction) -> checkAndSetBlockState(level, random, treeNode.pos().below().relative(direction), setter, config));
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+		checkAndSetBlockState(level, random, treeNode.pos(), setter, tree);
+		Direction.Plane.HORIZONTAL.forEach((direction) -> checkAndSetBlockState(level, random, treeNode.pos().below().relative(direction), setter, tree));
 	}
 
-	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos currentPosition, FoliageSetter setter, TreeConfiguration config) {
+	private void checkAndSetBlockState(WorldGenLevel level, RandomSource random, BlockPos currentPosition, FoliageSetter setter, TreeFeature tree) {
 		if (TreeFeature.validTreePos(level, currentPosition)) {
-			setter.set(currentPosition.immutable(), config.foliageProvider.getState(level, random, currentPosition));
+			setter.set(currentPosition.immutable(), tree.foliageProvider().value().getState(level, random, currentPosition));
 		}
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

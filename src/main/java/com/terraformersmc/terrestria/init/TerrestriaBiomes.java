@@ -8,11 +8,11 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.MiscOverworldPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -111,26 +111,26 @@ public class TerrestriaBiomes {
 	}
 
 	public static void addDefaultCreatureSpawnEntries(MobSpawnSettings.Builder builder) {
-		builder.addSpawn(MobCategory.CREATURE, 12, new MobSpawnSettings.SpawnerData(EntityTypes.SHEEP, 4, 4));
-		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.PIG, 4, 4));
-		builder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.CHICKEN, 4, 4));
-		builder.addSpawn(MobCategory.CREATURE,  8, new MobSpawnSettings.SpawnerData(EntityTypes.COW, 4, 4));
+		builder.addSpawn(EntityTypes.SHEEP, 12, 4, 4);
+		builder.addSpawn(EntityTypes.PIG, 10, 4, 4);
+		builder.addSpawn(EntityTypes.CHICKEN, 10, 4, 4);
+		builder.addSpawn(EntityTypes.COW, 8, 4, 4);
 	}
 
 	public static void addDefaultCaveSpawnEntries(MobSpawnSettings.Builder builder) {
-		builder.addSpawn(MobCategory.AMBIENT, 10, new MobSpawnSettings.SpawnerData(EntityTypes.BAT, 8, 8));
-		builder.addSpawn(MobCategory.UNDERGROUND_WATER_CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.GLOW_SQUID, 4, 6));
+		builder.addSpawn(EntityTypes.BAT, 10, 8, 8);
+		builder.addSpawn(EntityTypes.GLOW_SQUID, 10, 4, 6);
 	}
 
 	public static void addDefaultMonsterSpawnEntries(MobSpawnSettings.Builder builder) {
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SPIDER, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER,  95, new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER,   5, new MobSpawnSettings.SpawnerData(EntityTypes.ZOMBIE_VILLAGER, 1, 1));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SKELETON, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.CREEPER, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER, 100, new MobSpawnSettings.SpawnerData(EntityTypes.SLIME, 4, 4));
-		builder.addSpawn(MobCategory.MONSTER,  10, new MobSpawnSettings.SpawnerData(EntityTypes.ENDERMAN, 1, 4));
-		builder.addSpawn(MobCategory.MONSTER,   5, new MobSpawnSettings.SpawnerData(EntityTypes.WITCH, 1, 1));
+		builder.addSpawn(EntityTypes.SPIDER, 100, 4, 4);
+		builder.addSpawn(EntityTypes.ZOMBIE, 95, 4, 4);
+		builder.addSpawn(EntityTypes.ZOMBIE_VILLAGER, 5, 1, 1);
+		builder.addSpawn(EntityTypes.SKELETON, 100, 4, 4);
+		builder.addSpawn(EntityTypes.CREEPER, 100, 4, 4);
+		builder.addSpawn(EntityTypes.SLIME, 100, 4, 4);
+		builder.addSpawn(EntityTypes.ENDERMAN, 10, 1, 4);
+		builder.addSpawn(EntityTypes.WITCH, 5, 1, 1);
 	}
 
 	// Copied from Traverse
@@ -141,9 +141,9 @@ public class TerrestriaBiomes {
 
 	public static EnvironmentAttributeMap.Builder createDefaultEnvironmentAttributes() {
 		return EnvironmentAttributeMap.builder()
-			.set(EnvironmentAttributes.WATER_FOG_COLOR, 0x50533)
-			.set(EnvironmentAttributes.SKY_COLOR, getSkyColor(0.2F))
-			.set(EnvironmentAttributes.FOG_COLOR, 0xC0D8FF);
+			.set(EnvironmentAttributes.WATER_FOG_COLOR, ARGB.vector3fFromRGB24(0x50533))
+			.set(EnvironmentAttributes.SKY_COLOR, ARGB.vector3fFromRGB24(getSkyColor(0.2F)))
+			.set(EnvironmentAttributes.FOG_COLOR, ARGB.vector3fFromRGB24(0xC0D8FF));
 	}
 
 	// Copied from Minecraft

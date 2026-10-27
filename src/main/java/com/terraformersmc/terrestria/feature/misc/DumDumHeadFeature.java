@@ -1,6 +1,6 @@
 package com.terraformersmc.terrestria.feature.misc;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.terraformersmc.terrestria.init.TerrestriaBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,39 +9,37 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
+public class DumDumHeadFeature implements Feature {
 	private static final BlockState PRIMARY_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.plain.full.defaultBlockState();
 	private static final BlockState MOSS_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.mossyCobblestone.full.defaultBlockState();
 	private static final BlockState FEATURE_BLOCK = TerrestriaBlocks.VOLCANIC_ROCK.smooth.full.defaultBlockState();
 
-	public DumDumHeadFeature(Codec<NoneFeatureConfiguration> configCodec) {
-		super(configCodec);
+	public static final MapCodec<DumDumHeadFeature> CODEC = MapCodec.unit(DumDumHeadFeature::new);
+
+	@Override
+	public MapCodec<DumDumHeadFeature> codec() {
+		return CODEC;
 	}
 
 	@Override
-	public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
-		WorldGenLevel level = context.level();
-		RandomSource random = context.random();
-		BlockPos blockPos = context.origin();
-
+	public boolean place(WorldGenLevel level, ChunkGenerator chunkGenerator, RandomSource random, BlockPos origin) {
 		// Check that we won't pass build height
-		if (blockPos.getY() + 8 > level.getMaxY() || blockPos.getY() < level.getMinY()) {
+		if (origin.getY() + 8 > level.getMaxY() || origin.getY() < level.getMinY()) {
 			return false;
 		}
 
 		// Check to see if the block underneath is good for placement
-		if (!level.isStateAtPosition(blockPos.below(), blockState -> blockState.is(BlockTags.SAND))) {
+		if (!level.isStateAtPosition(origin.below(), blockState -> blockState.is(BlockTags.SAND))) {
 			return false;
 		}
 
 		// Generate the head base rectangle prism
-		BlockPos.MutableBlockPos pos = blockPos.mutable();
+		BlockPos.MutableBlockPos pos = origin.mutable();
 		pos.move(-1, 0, -1);
 		for (int y = 0; y < 6; y++) {
 			for (int x = 0; x < 3; x++) {
@@ -62,7 +60,7 @@ public class DumDumHeadFeature extends Feature<NoneFeatureConfiguration> {
 
 
 		// Put a face on it
-		pos = blockPos.mutable();
+		pos = origin.mutable();
 		pos.move(Direction.UP, 4);
 
 		// Get a random Direction for the face to be placed on

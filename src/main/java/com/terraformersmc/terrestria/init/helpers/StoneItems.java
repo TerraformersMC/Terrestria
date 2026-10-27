@@ -1,8 +1,12 @@
 package com.terraformersmc.terrestria.init.helpers;
 
+import com.terraformersmc.terrestria.init.TerrestriaBlockItemIds;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.BlockItem;
 
 public class StoneItems {
+	private final TerrestriaBlockItemIds.StoneBlockItemIds itemIds;
+
 	public StoneVariantItems plain;
 	public StoneVariantItems smooth;
 	public StoneVariantItems cobblestone;
@@ -15,23 +19,31 @@ public class StoneItems {
 	public BlockItem chiseledBricks;
 	public BlockItem crackedBricks;
 
-	private StoneItems() {}
+	private StoneItems(TerrestriaBlockItemIds.StoneBlockItemIds itemIds, StoneBlocks blocks) {
+		this.itemIds = itemIds;
 
-	public static StoneItems register(String name, StoneBlocks blocks) {
-		StoneItems items = new StoneItems();
+		plain = StoneVariantItems.register(itemIds.plain(), blocks.plain);
+		smooth = StoneVariantItems.register(itemIds.smooth(), blocks.smooth);
+		cobblestone = StoneVariantItems.register(itemIds.cobblestone(), blocks.cobblestone);
+		mossyCobblestone = StoneVariantItems.register(itemIds.mossyCobblestone(), blocks.mossyCobblestone);
+		bricks = StoneVariantItems.register(itemIds.bricks(), blocks.bricks);
+		mossyBricks = StoneVariantItems.register(itemIds.mossyBricks(), blocks.mossyBricks);
 
-		items.plain = StoneVariantItems.register(name, blocks.plain);
-		items.smooth = StoneVariantItems.register("smooth_" + name, blocks.smooth);
-		items.cobblestone = StoneVariantItems.register(name + "_cobblestone", blocks.cobblestone);
-		items.mossyCobblestone = StoneVariantItems.register("mossy_" + name + "_cobblestone", blocks.mossyCobblestone);
-		items.bricks = StoneVariantItems.register(name + "_bricks", name + "_brick", blocks.bricks);
-		items.mossyBricks = StoneVariantItems.register("mossy_" + name + "_bricks", "mossy_" + name + "_brick", blocks.mossyBricks);
+		button = TerrestriaRegistry.registerBlockItem(itemIds.button(), blocks.button);
+		pressurePlate = TerrestriaRegistry.registerBlockItem(itemIds.pressurePlate(), blocks.pressurePlate);
+		chiseledBricks = TerrestriaRegistry.registerBlockItem(itemIds.chiseledBricks(), blocks.chiseledBricks);
+		crackedBricks = TerrestriaRegistry.registerBlockItem(itemIds.crackedBricks(), blocks.crackedBricks);
+	}
 
-		items.button = TerrestriaRegistry.registerBlockItem(name + "_button", blocks.button);
-		items.pressurePlate = TerrestriaRegistry.registerBlockItem(name + "_pressure_plate", blocks.pressurePlate);
-		items.chiseledBricks = TerrestriaRegistry.registerBlockItem("chiseled_" + name + "_bricks", blocks.chiseledBricks);
-		items.crackedBricks = TerrestriaRegistry.registerBlockItem("cracked_" + name + "_bricks", blocks.crackedBricks);
+	public static StoneItems register(TerrestriaBlockItemIds.StoneBlockItemIds itemIds, StoneBlocks blocks) {
+		return new StoneItems(itemIds, blocks);
+	}
 
-		return items;
+	public String getName() {
+		return itemIds.id().getPath();
+	}
+
+	public Identifier getId() {
+		return itemIds.id();
 	}
 }

@@ -62,9 +62,10 @@ public class TerrestriaBlockItemIds {
 	public static BlockItemId DEAD_GRASS = create("dead_grass");
 
 
-	public record DirtBlockItemIds(BlockItemId dirtBlock, BlockItemId dirtPathBlock, BlockItemId farmBlock, BlockItemId grassBlock, BlockItemId podzolBlock) {
+	public record DirtBlockItemIds(Identifier id, BlockItemId dirtBlock, BlockItemId dirtPathBlock, BlockItemId farmBlock, BlockItemId grassBlock, BlockItemId podzolBlock) {
 		public static DirtBlockItemIds of(Identifier id) {
 			return new DirtBlockItemIds(
+				id,
 				create(id),
 				create(id.withSuffix("_dirt_path")),
 				create(id.withSuffix("_farmland")),
@@ -74,12 +75,13 @@ public class TerrestriaBlockItemIds {
 		}
 	}
 
-	public record StoneBlockItemIds(StoneVariantBlockItemIds plain, StoneVariantBlockItemIds smooth, StoneVariantBlockItemIds cobblestone, StoneVariantBlockItemIds mossyCobblestone, StoneVariantBlockItemIds bricks, StoneVariantBlockItemIds mossyBricks, BlockItemId button, BlockItemId pressurePlate, BlockItemId chiseledBricks, BlockItemId crackedBricks) {
+	public record StoneBlockItemIds(Identifier id, StoneVariantBlockItemIds plain, StoneVariantBlockItemIds smooth, StoneVariantBlockItemIds cobblestone, StoneVariantBlockItemIds mossyCobblestone, StoneVariantBlockItemIds bricks, StoneVariantBlockItemIds mossyBricks, BlockItemId button, BlockItemId pressurePlate, BlockItemId chiseledBricks, BlockItemId crackedBricks) {
 		public static StoneBlockItemIds of(Identifier id) {
 			Identifier brickId = id.withSuffix("_brick");
 			Identifier bricksId = id.withSuffix("_bricks");
 
 			return new StoneBlockItemIds(
+				id,
 				StoneVariantBlockItemIds.of(id),
 				StoneVariantBlockItemIds.of(id.withPrefix("smooth_")),
 				StoneVariantBlockItemIds.of(id.withSuffix("_cobblestone")),
@@ -94,9 +96,10 @@ public class TerrestriaBlockItemIds {
 		}
 	}
 
-	public record StoneVariantBlockItemIds(BlockItemId full, BlockItemId slab, BlockItemId stairs, BlockItemId wall) {
+	public record StoneVariantBlockItemIds(Identifier id, BlockItemId full, BlockItemId slab, BlockItemId stairs, BlockItemId wall) {
 		public static StoneVariantBlockItemIds of(Identifier id, Identifier shapedId) {
 			return new StoneVariantBlockItemIds(
+				id,
 				create(id),
 				create(shapedId.withSuffix("_slab")),
 				create(shapedId.withSuffix("_stairs")),
@@ -109,9 +112,10 @@ public class TerrestriaBlockItemIds {
 		}
 	}
 
-	public record WoodBlockItemIds(BlockItemId log, BlockItemId quarterLog, BlockItemId wood, BlockItemId leaves, BlockItemId leafPile, BlockItemId planks, BlockItemId slab, BlockItemId stairs, BlockItemId fence, BlockItemId fenceGate, BlockItemId door, BlockItemId button, BlockItemId pressurePlate, BlockItemId sign, BlockItemId wallSign, BlockItemId hangingSign, BlockItemId wallHangingSign, BlockItemId trapdoor, BlockItemId shelf, BlockItemId strippedLog, BlockItemId strippedQuarterLog, BlockItemId strippedWood) {
+	public record WoodBlockItemIds(Identifier id, BlockItemId log, BlockItemId quarterLog, BlockItemId wood, BlockItemId leaves, BlockItemId leafPile, BlockItemId planks, BlockItemId slab, BlockItemId stairs, BlockItemId fence, BlockItemId fenceGate, BlockItemId door, BlockItemId button, BlockItemId pressurePlate, BlockItemId sign, BlockItemId wallSign, BlockItemId hangingSign, BlockItemId wallHangingSign, BlockItemId trapdoor, BlockItemId shelf, BlockItemId strippedLog, BlockItemId strippedQuarterLog, BlockItemId strippedWood) {
 		public static WoodBlockItemIds of(Identifier id) {
 			return new WoodBlockItemIds(
+				id,
 				create(id.withSuffix("_log")),
 				create(id.withSuffix("_quarter_log")),
 				create(id.withSuffix("_wood")),

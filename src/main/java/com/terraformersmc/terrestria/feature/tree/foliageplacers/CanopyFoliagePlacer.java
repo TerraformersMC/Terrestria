@@ -12,7 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import org.jspecify.annotations.NullMarked;
@@ -32,8 +32,8 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 	}
 
 	@Override
-	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeConfiguration config, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
-		radius = treeNode.radiusOffset();
+	protected void createFoliage(WorldGenLevel level, FoliageSetter setter, RandomSource random, TreeFeature tree, int trunkHeight, FoliagePlacer.FoliageAttachment treeNode, int foliageHeight, int radius, int offset) {
+		radius = treeNode.radiusOffsetXZ();
 		BlockPos centerPos = treeNode.pos();
 
 		Shapes.hemiEllipsoid(radius * 2, radius * 2, radius * 2.5)
@@ -42,12 +42,12 @@ public class CanopyFoliagePlacer extends FoliagePlacer {
 				.stream().filter(Validator.air((LevelReader) level))
 				.forEach(position -> {
 					BlockPos pos = position.toBlockPos();
-					setter.set(pos, config.foliageProvider.getState(level, random, pos));
+					setter.set(pos, tree.foliageProvider().value().getState(level, random, pos));
 				});
 	}
 
 	@Override
-	public int foliageHeight(RandomSource random, int trunkHeight, TreeConfiguration config) {
+	public int foliageHeight(RandomSource random, int trunkHeight, TreeFeature tree) {
 		return 0;
 	}
 

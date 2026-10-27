@@ -13,7 +13,6 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.TreeFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
@@ -37,7 +36,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 	}
 
 	@Override
-	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeConfiguration treeFeatureConfig) {
+	public List<FoliagePlacer.FoliageAttachment> placeTrunk(WorldGenLevel level, BiConsumer<BlockPos, BlockState> replacer, RandomSource random, int trunkHeight, BlockPos pos, TreeFeature tree) {
 
 		// Select a Direction for the log to be placed in
 		Direction direction = random.nextBoolean() ? Direction.NORTH : Direction.EAST;
@@ -62,7 +61,7 @@ public class FallenStraightTrunkPlacer extends StraightTrunkPlacer {
 
 		// Place the blocks
 		for (int i = 0; i < trunkHeight; ++i) {
-			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(direction), replacer, treeFeatureConfig.trunkProvider.getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
+			checkAndPlaceSpecificBlockState(level, random, currentPosition.move(direction), replacer, tree.trunkProvider().value().getState(level, random, currentPosition).setValue(RotatedPillarBlock.AXIS, direction.getAxis()));
 		}
 
 		// No foliage placer locations needed

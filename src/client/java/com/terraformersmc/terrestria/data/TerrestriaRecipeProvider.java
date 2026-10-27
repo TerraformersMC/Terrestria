@@ -10,12 +10,14 @@ import com.terraformersmc.terrestria.tag.TerrestriaBlockItemTags;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -25,6 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -39,8 +42,8 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 	}
 
 	@Override
-	public RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, RecipeOutput exporter) {
-		return new RecipeProvider(registryLookup, exporter) {
+	public RecipeProvider createRecipeProvider(HolderLookup.Provider registryLookup, BootstrapContext<Recipe<?>> recipes, BootstrapContext<Advancement> advancements) {
+		return new RecipeProvider(recipes, advancements) {
 			@Override
 			public void buildRecipes() {
 				// misc. recipes
@@ -70,13 +73,13 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 
 
 				// stacked log recipes
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_OAK_LOGS, TerrestriaItems.SMALL_OAK_LOG);
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_SAKURA_LOGS, TerrestriaItems.SAKURA.log);
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.log);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_OAK_LOGS, TerrestriaItems.SMALL_OAK_LOG);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_SAKURA_LOGS, TerrestriaItems.SAKURA.log);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.log);
 
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_OAK_LOGS, TerrestriaItems.STRIPPED_SMALL_OAK_LOG);
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_SAKURA_LOGS, TerrestriaItems.SAKURA.strippedLog);
-				bidiStackedLogsRecipe(exporter, TerrestriaItems.STACKED_STRIPPED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.strippedLog);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_STRIPPED_OAK_LOGS, TerrestriaItems.STRIPPED_SMALL_OAK_LOG);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_STRIPPED_SAKURA_LOGS, TerrestriaItems.SAKURA.strippedLog);
+				bidiStackedLogsRecipe(output, TerrestriaItems.STACKED_STRIPPED_YUCCA_PALM_LOGS, TerrestriaItems.YUCCA_PALM.strippedLog);
 
 
 				// wood building block recipes

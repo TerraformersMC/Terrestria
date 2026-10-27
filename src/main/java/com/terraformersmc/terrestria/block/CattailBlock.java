@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealSource;
 import net.minecraft.world.level.block.SeagrassBlock;
 import net.minecraft.world.level.block.TallSeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -21,7 +22,7 @@ public class CattailBlock extends SeagrassBlock {
 	}
 
 	@Override
-	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+	public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state, BonemealSource source) {
 		BlockState tallBottom = TerrestriaBlocks.TALL_CATTAIL.defaultBlockState();
 		BlockState tallTop = tallBottom.setValue(TallSeagrassBlock.HALF, DoubleBlockHalf.UPPER);
 		BlockPos upper = pos.above();
