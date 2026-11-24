@@ -84,6 +84,9 @@ public class TerrestriaItemTagsProvider extends FabricTagsProvider.ItemTagsProvi
 
 		copy(ConventionalBlockTags.COBBLESTONES, ConventionalItemTags.COBBLESTONES);
 
+		valueLookupBuilder(ConventionalItemTags.QUARTZ_GEMS)
+				.add(Items.QUARTZ);
+
 		copy(ConventionalBlockTags.STRIPPED_LOGS, ConventionalItemTags.STRIPPED_LOGS);
 
 		copy(ConventionalBlockTags.STRIPPED_WOODS, ConventionalItemTags.STRIPPED_WOODS);
@@ -114,7 +117,7 @@ public class TerrestriaItemTagsProvider extends FabricTagsProvider.ItemTagsProvi
 		 * Sand type tags
 		 */
 		copy(BlockTags.SAND, ItemTags.SAND);
-		copy(TerrestriaBlockTags.SANDS, TerrestriaItemTags.SANDS);
+		copy(ConventionalBlockTags.SANDS, ConventionalItemTags.SANDS);
 
 		/*
 		 * Stone type tags

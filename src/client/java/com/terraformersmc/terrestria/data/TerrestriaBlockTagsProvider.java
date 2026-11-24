@@ -114,6 +114,9 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		valueLookupBuilder(TerrestriaBlockTags.BLACK_SANDS)
 				.add(TerrestriaBlocks.VOLCANIC_SAND);
 
+		valueLookupBuilder(ConventionalBlockTags.COBBLESTONES)
+				.add(Blocks.COBBLESTONE);
+
 		valueLookupBuilder(ConventionalBlockTags.STRIPPED_LOGS)
 				.add(TerrestriaBlocks.STRIPPED_SMALL_OAK_LOG);
 
@@ -276,7 +279,7 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		valueLookupBuilder(BlockTags.SMELTS_TO_GLASS).add(sandBlock);
 		valueLookupBuilder(BlockTags.TRIGGERS_AMBIENT_DESERT_SAND_BLOCK_SOUNDS).add(sandBlock);
 
-		valueLookupBuilder(TerrestriaBlockTags.SANDS).add(sandBlock);
+		valueLookupBuilder(ConventionalBlockTags.SANDS).add(sandBlock);
 	}
 
 	@SuppressWarnings("SameParameterValue")

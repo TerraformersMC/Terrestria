@@ -9,6 +9,7 @@ import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -16,6 +17,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.Identifier;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
@@ -65,6 +67,51 @@ public class TerrestriaRecipeProvider extends FabricRecipeProvider {
 						.save(output);
 
 				oneToOneConversionRecipe(Items.RED_DYE, TerrestriaItems.INDIAN_PAINTBRUSH, "dyes");
+
+				// extend vanilla cobblestone recipes
+				shaped(RecipeCategory.REDSTONE, Items.DISPENSER, 1)
+						.group("dispenser")
+						.pattern("ccc")
+						.pattern("cbc")
+						.pattern("crc")
+						.define('c', ConventionalItemTags.COBBLESTONES)
+						.define('r', Items.REDSTONE)
+						.define('b', Items.BOW)
+						.unlockedBy("has_volcanic_cobble", this.has(ConventionalItemTags.COBBLESTONES))
+						.save(exporter);
+
+				shaped(RecipeCategory.REDSTONE, Items.DROPPER, 1)
+						.group("dropper")
+						.pattern("ccc")
+						.pattern("c c")
+						.pattern("crc")
+						.define('c', ConventionalItemTags.COBBLESTONES)
+						.define('r', Items.REDSTONE)
+						.unlockedBy("has_volcanic_cobble", this.has(ConventionalItemTags.COBBLESTONES))
+						.save(exporter);
+
+				shaped(RecipeCategory.REDSTONE, Items.OBSERVER, 1)
+						.group("observer")
+						.pattern("ccc")
+						.pattern("rrq")
+						.pattern("ccc")
+						.define('c', ConventionalItemTags.COBBLESTONES)
+						.define('r', Items.REDSTONE)
+						.define('q', ConventionalItemTags.QUARTZ_GEMS)
+						.unlockedBy("has_quartz_gems", this.has(ConventionalItemTags.QUARTZ_GEMS))
+						.save(exporter);
+
+				shaped(RecipeCategory.REDSTONE, Items.PISTON, 1)
+						.group("piston")
+						.pattern("ppp")
+						.pattern("cic")
+						.pattern("crc")
+						.define('c', ConventionalItemTags.COBBLESTONES)
+						.define('r', Items.REDSTONE)
+						.define('i', Items.IRON_INGOT)
+						.define('p', ItemTags.PLANKS)
+						.unlockedBy("has_volcanic_cobble", this.has(ConventionalItemTags.COBBLESTONES))
+						.save(exporter);
 
 
 				// wood building block recipes

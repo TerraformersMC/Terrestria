@@ -12,7 +12,6 @@ public final class TerrestriaItemTags {
 	public static final TagKey<Item> DIRTS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "dirts"));
 	public static final TagKey<Item> PLANKS_THAT_BURN = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "planks_that_burn"));
 	public static final TagKey<Item> PODZOLS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "podzols"));
-	public static final TagKey<Item> SANDS = TerrestriaItemTags.of(Identifier.fromNamespaceAndPath("c", "sands"));
 
 	public static final TagKey<Item> CYPRESS_LOGS = TerrestriaItemTags.of("cypress_logs");
 	public static final TagKey<Item> HEMLOCK_LOGS = TerrestriaItemTags.of("hemlock_logs");
