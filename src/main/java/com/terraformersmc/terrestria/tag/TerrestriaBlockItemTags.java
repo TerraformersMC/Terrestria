@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 public final class TerrestriaBlockItemTags {
 	// Conventional tags provided by Fabric (but we want them as BlockItemTags)
 	public static final BlockItemTagId COBBLESTONES = from(ConventionalBlockTags.COBBLESTONES);
+	public static final BlockItemTagId SANDS = from(ConventionalBlockTags.SANDS);
 	public static final BlockItemTagId STONES = from(ConventionalBlockTags.STONES);
 	public static final BlockItemTagId STRIPPED_LOGS = from(ConventionalBlockTags.STRIPPED_LOGS);
 	public static final BlockItemTagId STRIPPED_WOODS = from(ConventionalBlockTags.STRIPPED_WOODS);
@@ -19,7 +20,6 @@ public final class TerrestriaBlockItemTags {
 	public static final BlockItemTagId DIRTS = create(Identifier.fromNamespaceAndPath("c", "dirts"));
 	public static final BlockItemTagId PLANKS_THAT_BURN = create(Identifier.fromNamespaceAndPath("c", "planks_that_burn"));
 	public static final BlockItemTagId PODZOLS = create(Identifier.fromNamespaceAndPath("c", "podzols"));
-	public static final BlockItemTagId SANDS = create(Identifier.fromNamespaceAndPath("c", "sands"));
 
 	// Unconventional tags
 	public static final BlockItemTagId CYPRESS_LOGS = create("cypress_logs");

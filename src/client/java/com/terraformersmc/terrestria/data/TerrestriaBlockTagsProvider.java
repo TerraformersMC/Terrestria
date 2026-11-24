@@ -7,9 +7,12 @@ import com.terraformersmc.terrestria.init.helpers.StoneBlocks;
 import com.terraformersmc.terrestria.init.helpers.WoodBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.BlockItemTagsProvider;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NullMarked;
@@ -61,6 +64,9 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 
 		tag(BlockTags.MOSS_REPLACEABLE)
 				.add(TerrestriaBlockIds.VOLCANIC_ROCK.plain().full());
+
+		tag(ConventionalBlockTags.COBBLESTONES)
+			.add(BlockItemIds.COBBLESTONE.block());
 
 		tag(BlockTags.OVERWORLD_NATURAL_LOGS)
 				.add(TerrestriaBlockIds.SMALL_OAK_LOG);
@@ -202,8 +208,12 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		tag(BlockTags.LUSH_GROUND_REPLACEABLE).add(sandBlockId);
 		tag(BlockTags.MINEABLE_WITH_SHOVEL).add(sandBlockId);
 		tag(BlockTags.RABBITS_SPAWNABLE_ON).add(sandBlockId);
+		tag(BlockTags.SAND).add(sandBlockId);
 		tag(BlockTags.SCULK_REPLACEABLE).add(sandBlockId);
+		tag(BlockItemTags.SMELTS_TO_GLASS.block()).add(sandBlockId);
 		tag(BlockTags.TRIGGERS_AMBIENT_DESERT_SAND_BLOCK_SOUNDS).add(sandBlockId);
+
+		tag(ConventionalBlockTags.SANDS).add(sandBlockId);
 	}
 
 	@SuppressWarnings("SameParameterValue")
