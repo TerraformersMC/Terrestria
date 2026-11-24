@@ -8,9 +8,11 @@ import com.terraformersmc.terrestria.init.helpers.WoodItems;
 import com.terraformersmc.terrestria.tag.TerrestriaItemTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import org.jspecify.annotations.NullMarked;
@@ -31,6 +33,13 @@ public class TerrestriaItemTagsProvider extends FabricTagsProvider.ItemTagsProvi
 		copy(BlockTags.CEILING_HANGING_SIGNS, ItemTags.HANGING_SIGNS);
 
 		copy(BlockTags.STANDING_SIGNS, ItemTags.SIGNS);
+
+
+		/*
+		 * Conventional item tags
+		 */
+		tag(ConventionalItemTags.QUARTZ_GEMS)
+			.add(ItemIds.QUARTZ);
 
 
 		/*
