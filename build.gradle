@@ -1,3 +1,5 @@
+import groovy.xml.XmlSlurper
+
 plugins {
 	id 'java'
 	id 'maven-publish'
@@ -81,7 +83,12 @@ jar {
 	}
 }
 
-// configure the maven publication
+publish {
+	onlyIf {
+		checkVersion(project.base.archivesName.get(), version)
+	}
+}
+
 publishing {
 	publications {
 		create("mavenJava", MavenPublication) {
@@ -89,11 +96,44 @@ publishing {
 		}
 	}
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
+	setupRepositories(repositories)
+}
+
+idea {
+	module {
+		downloadSources = true
+		downloadJavadoc = true
+	}
+}
+
+static void setupRepositories(RepositoryHandler repositories) {
+	//repositories.mavenLocal() // uncomment for testing
+	def ENV = System.getenv()
+	if (ENV.MAVEN_URL) {
+		repositories.maven {
+			url ENV.MAVEN_URL
+			credentials {
+				username ENV.MAVEN_USERNAME
+				password ENV.MAVEN_PASSWORD
+			}
+		}
+	}
+}
+
+ext.checkVersion = { archivesBaseName, version ->
+	try {
+		def xml = new URI("https://maven.terraformersmc.com/com/terraformersmc/$archivesBaseName/maven-metadata.xml").toURL().text
+		def metadata = new XmlSlurper().parseText(xml)
+		def versions = metadata.versioning.versions.version*.text()
+		if (versions.contains(version)) {
+			println "$archivesBaseName version $version will not be published; already exists"
+			return false
+		} else {
+			println "$archivesBaseName version $version will be published"
+			return true
+		}
+	} catch (FileNotFoundException ignored) {
+		println "$archivesBaseName is not on maven yet"
+		return true
 	}
 }
