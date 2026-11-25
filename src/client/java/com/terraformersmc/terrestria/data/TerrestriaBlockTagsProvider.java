@@ -12,7 +12,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NullMarked;
@@ -215,12 +214,8 @@ public class TerrestriaBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		tag(BlockTags.LUSH_GROUND_REPLACEABLE).add(sandBlockId);
 		tag(BlockTags.MINEABLE_WITH_SHOVEL).add(sandBlockId);
 		tag(BlockTags.RABBITS_SPAWNABLE_ON).add(sandBlockId);
-		tag(BlockTags.SAND).add(sandBlockId);
 		tag(BlockTags.SCULK_REPLACEABLE).add(sandBlockId);
-		tag(BlockItemTags.SMELTS_TO_GLASS.block()).add(sandBlockId);
 		tag(BlockTags.TRIGGERS_AMBIENT_DESERT_SAND_BLOCK_SOUNDS).add(sandBlockId);
-
-		tag(ConventionalBlockTags.SANDS).add(sandBlockId);
 	}
 
 	@SuppressWarnings("SameParameterValue")
